@@ -2,19 +2,18 @@ package main
 
 import (
 	"log"
-	"os"
-	"strings"
 
 	"github.com/joho/godotenv"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
+	"github.com/pocketbase/pocketbase/tools/osutils"
 
 	_ "slph.de/backend/migrations"
 )
 
 func main() {
-	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
+	isGoRun := osutils.IsProbablyGoRun()
 
 	if isGoRun {
 		// load .env in dev mode
