@@ -5,6 +5,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/joho/godotenv"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
@@ -13,13 +14,18 @@ import (
 )
 
 func main() {
+	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
+
+	if isGoRun {
+		// load .env in dev mode
+		_ = godotenv.Load("../.env")
+	}
+
 	if err := validateSuperuserEnv(); err != nil {
 		log.Fatal(err)
 	}
 
 	app := pocketbase.New()
-
-	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
 
 	migratecmd.MustRegister(app, app.RootCmd, migratecmd.Config{
 		TemplateLang: migratecmd.TemplateLangGo,
