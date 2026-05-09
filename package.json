@@ -16,6 +16,7 @@
     "pb:build": "cd backend && go build -o ../bin/pocketbase ."
   },
   "dependencies": {
+    "@astrojs/node": "^10.1.0",
     "astro": "^6.3.1",
     "pocketbase": "^0.26.8"
   },
