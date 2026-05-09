@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# pocketbase runtime data (db, logs, uploaded files)
+backend/pb_data/
+
+# compiled go binary
+/bin/
