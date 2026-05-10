@@ -1,0 +1,120 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+
+const links = [
+  { href: '/', label: 'Inicio' },
+  { href: '/programa', label: 'Programa' },
+  { href: '/eventos', label: 'Eventos' },
+  { href: '/colabora', label: 'Colabora' },
+  { href: '/contacto', label: 'Contacto' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="border-b border-white/10 bg-azul">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+    <a href="/" class="flex items-center gap-3" aria-label="Si los peces hablaran — Inicio">
+      <Image src={logo} alt="Si los peces hablaran" widths={[80, 160]} sizes="80px" class="h-12 w-auto" />
+    </a>
+
+    <nav class="hidden items-center gap-6 md:flex" aria-label="Principal">
+      {
+        links.map(({ href, label }) => {
+          const active = href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+          return (
+            <a
+              href={href}
+              class:list={[
+                'text-base text-caparol/90 transition-colors hover:text-caparol',
+                active && 'text-caparol underline underline-offset-4 decoration-arena',
+              ]}
+            >
+              {label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href="/comprar"
+        class="rounded-lg bg-arena px-4 py-2 font-display text-lg text-negro transition hover:brightness-95 md:px-5 md:text-2xl"
+      >
+        Comprar libro
+      </a>
+
+      <button
+        type="button"
+        class="md:hidden rounded p-2 text-caparol"
+        aria-label="Abrir menú"
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+        data-nav-toggle
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-nav"
+    class="fixed inset-0 z-50 hidden bg-azul md:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menú principal"
+    data-nav-mobile
+  >
+    <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
+      <a href="/" class="flex items-center gap-3" aria-label="Si los peces hablaran — Inicio">
+        <Image src={logo} alt="Si los peces hablaran" widths={[80, 160]} sizes="80px" class="h-12 w-auto" />
+      </a>
+      <button
+        type="button"
+        class="rounded p-2 text-caparol"
+        aria-label="Cerrar menú"
+        data-nav-close
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+      </button>
+    </div>
+
+    <nav class="flex flex-col items-center gap-6 px-6 pt-16" aria-label="Principal móvil">
+      {
+        links.map(({ href, label }) => (
+          <a href={href} class="font-display text-4xl text-caparol hover:text-arena">
+            {label}
+          </a>
+        ))
+      }
+      <a
+        href="/comprar"
+        class="mt-6 rounded-lg bg-arena px-6 py-3 font-display text-3xl text-negro transition hover:brightness-95"
+      >
+        Comprar libro
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const close = document.querySelector<HTMLButtonElement>('[data-nav-close]');
+  const mobile = document.querySelector<HTMLElement>('[data-nav-mobile]');
+
+  const setOpen = (open: boolean) => {
+    if (!mobile || !toggle) return;
+    mobile.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('overflow-hidden', open);
+  };
+
+  toggle?.addEventListener('click', () => setOpen(mobile?.classList.contains('hidden') ?? false));
+  close?.addEventListener('click', () => setOpen(false));
+  mobile?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+</script>

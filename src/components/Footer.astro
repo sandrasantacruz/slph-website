@@ -1,0 +1,107 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const sections = [
+  {
+    title: 'Sobre el cuento',
+    links: [
+      { href: '/lee-un-fragmento', label: 'Lee un fragmento' },
+      { href: '/autor', label: 'Autor' },
+      { href: '/galeria', label: 'Galería' },
+    ],
+  },
+  {
+    title: 'Comunidad',
+    links: [
+      { href: '/videoteca', label: 'Videoteca' },
+      { href: '/colaboradores', label: 'Colaboradores' },
+      { href: '/noticias', label: 'Noticias' },
+    ],
+  },
+];
+
+const social = [
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/silospeceshablaran/',
+    icon: 'simple-icons:facebook',
+  },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/silospeceshablaran/',
+    icon: 'simple-icons:instagram',
+  },
+  {
+    label: 'YouTube',
+    href: 'https://youtube.com/channel/UCjGxWnleLDsYbm7rSkopmFw',
+    icon: 'simple-icons:youtube',
+  },
+];
+
+const legal = [
+  { href: '/aviso-legal', label: 'Aviso legal' },
+  { href: '/politica-de-privacidad', label: 'Política de privacidad' },
+  { href: '/politica-de-cookies', label: 'Política de cookies' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-16 border-t border-white/10 bg-azul">
+  <div class="mx-auto max-w-6xl px-4 py-12">
+    <div class="grid gap-10 md:grid-cols-3">
+      {
+        sections.map(({ title, links }) => (
+          <nav aria-label={title} class="flex flex-col gap-3">
+            <h2 class="font-display text-2xl text-caparol">{title}</h2>
+            <ul class="flex flex-col gap-2">
+              {links.map(({ href, label }) => (
+                <li>
+                  <a href={href} class="text-caparol/90 hover:text-arena">
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+
+      <div class="flex flex-col gap-4">
+        <h2 class="font-display text-2xl text-caparol">¡Síguenos!</h2>
+        <ul class="flex gap-3">
+          {
+            social.map(({ label, href, icon }) => (
+              <li>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-caparol/10 text-caparol transition hover:bg-arena hover:text-negro"
+                >
+                  <Icon name={icon} class="h-5 w-5" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-caparol/70 md:flex-row md:items-center md:justify-between">
+      <p>© Si los peces hablaran, 2014 - {year}.</p>
+      <ul class="flex flex-wrap gap-x-4 gap-y-2">
+        {
+          legal.map(({ href, label }) => (
+            <li>
+              <a href={href} class="hover:text-caparol">
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</footer>
