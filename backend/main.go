@@ -36,6 +36,9 @@ func main() {
 		if err := bootstrapSuperuserFromEnv(app); err != nil {
 			return err
 		}
+		if err := bootstrapUserFromEnv(app); err != nil {
+			return err
+		}
 		if err := bootstrapSettingsFromEnv(app); err != nil {
 			return err
 		}

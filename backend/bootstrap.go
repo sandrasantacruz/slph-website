@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -29,38 +28,80 @@ func installerFuncWithAppURL(app core.App, su *core.Record, baseURL string) erro
 //	PB_SUPERUSER_UPDATE    if "1"/"true", overwrite the password when the user
 //	                       already exists (default: leave existing untouched)
 func bootstrapSuperuserFromEnv(app core.App) error {
-	email := os.Getenv("PB_SUPERUSER_EMAIL")
-	password := os.Getenv("PB_SUPERUSER_PASSWORD")
+	return bootstrapAuthFromEnv(app, authBootstrapConfig{
+		label:          "superuser",
+		collection:     core.CollectionNameSuperusers,
+		emailEnv:       "PB_SUPERUSER_EMAIL",
+		passwordEnv:    "PB_SUPERUSER_PASSWORD",
+		updateEnv:      "PB_SUPERUSER_UPDATE",
+		markVerified:   false,
+	})
+}
+
+// bootstrapUserFromEnv ensures a regular user in the "users" collection exists
+// matching the credentials provided via env vars. Triggered on every serve
+// start.
+//
+//	PB_USER_EMAIL     required to enable bootstrap
+//	PB_USER_PASSWORD  required to enable bootstrap
+//	PB_USER_UPDATE    if "1"/"true", overwrite the password when the user
+//	                  already exists (default: leave existing untouched)
+func bootstrapUserFromEnv(app core.App) error {
+	return bootstrapAuthFromEnv(app, authBootstrapConfig{
+		label:        "user",
+		collection:   "users",
+		emailEnv:     "PB_USER_EMAIL",
+		passwordEnv:  "PB_USER_PASSWORD",
+		updateEnv:    "PB_USER_UPDATE",
+		markVerified: true,
+	})
+}
+
+type authBootstrapConfig struct {
+	label        string
+	collection   string
+	emailEnv     string
+	passwordEnv  string
+	updateEnv    string
+	markVerified bool
+}
+
+func bootstrapAuthFromEnv(app core.App, cfg authBootstrapConfig) error {
+	email := os.Getenv(cfg.emailEnv)
+	password := os.Getenv(cfg.passwordEnv)
 	if email == "" || password == "" {
 		return nil
 	}
 
-	existing, err := app.FindAuthRecordByEmail(core.CollectionNameSuperusers, email)
+	existing, err := app.FindAuthRecordByEmail(cfg.collection, email)
 	if err != nil {
 		// not found → create
-		collection, cerr := app.FindCollectionByNameOrId(core.CollectionNameSuperusers)
+		collection, cerr := app.FindCollectionByNameOrId(cfg.collection)
 		if cerr != nil {
-			return fmt.Errorf("superuser bootstrap: load collection: %w", cerr)
+			return fmt.Errorf("%s bootstrap: load collection: %w", cfg.label, cerr)
 		}
 		record := core.NewRecord(collection)
 		record.Set("email", email)
 		record.Set("password", password)
-		if serr := app.Save(record); serr != nil {
-			return fmt.Errorf("superuser bootstrap: create %q: %w", email, serr)
+		if cfg.markVerified {
+			record.Set("verified", true)
 		}
-		log.Printf("[bootstrap] created superuser %s from env", email)
+		if serr := app.Save(record); serr != nil {
+			return fmt.Errorf("%s bootstrap: create %q: %w", cfg.label, email, serr)
+		}
+		log.Printf("[bootstrap] created %s %s from env", cfg.label, email)
 		return nil
 	}
 
-	if !envFlag("PB_SUPERUSER_UPDATE") {
+	if !envFlag(cfg.updateEnv) {
 		return nil
 	}
 
 	existing.Set("password", password)
 	if err := app.Save(existing); err != nil {
-		return fmt.Errorf("superuser bootstrap: update %q: %w", email, err)
+		return fmt.Errorf("%s bootstrap: update %q: %w", cfg.label, email, err)
 	}
-	log.Printf("[bootstrap] updated superuser %s password from env", email)
+	log.Printf("[bootstrap] updated %s %s password from env", cfg.label, email)
 	return nil
 }
 
@@ -104,10 +145,17 @@ func envFlag(key string) bool {
 // validateSuperuserEnv fails fast if exactly one of email/password is set.
 // A common footgun: typo in one of the var names → silent no-op.
 func validateSuperuserEnv() error {
-	email := os.Getenv("PB_SUPERUSER_EMAIL")
-	password := os.Getenv("PB_SUPERUSER_PASSWORD")
+	if err := validateAuthEnvPair("PB_SUPERUSER_EMAIL", "PB_SUPERUSER_PASSWORD"); err != nil {
+		return err
+	}
+	return validateAuthEnvPair("PB_USER_EMAIL", "PB_USER_PASSWORD")
+}
+
+func validateAuthEnvPair(emailKey, passwordKey string) error {
+	email := os.Getenv(emailKey)
+	password := os.Getenv(passwordKey)
 	if (email == "") != (password == "") {
-		return errors.New("PB_SUPERUSER_EMAIL and PB_SUPERUSER_PASSWORD must both be set or both unset")
+		return fmt.Errorf("%s and %s must both be set or both unset", emailKey, passwordKey)
 	}
 	return nil
 }

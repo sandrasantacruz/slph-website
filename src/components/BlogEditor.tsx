@@ -108,6 +108,50 @@ function isoToDate(iso: string): Date | null {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
+const MAX_IMAGE_DIM = 1500;
+const WEBP_QUALITY = 0.85;
+
+function isHeic(file: File): boolean {
+  const mime = file.type.toLowerCase();
+  if (mime === 'image/heic' || mime === 'image/heif') return true;
+  const name = file.name.toLowerCase();
+  return name.endsWith('.heic') || name.endsWith('.heif');
+}
+
+async function decodeHeicToBitmap(file: File): Promise<ImageBitmap> {
+  // Lazy-load: only pull heic-to (libheif WASM) into the bundle when actually needed.
+  const { heicTo } = await import('heic-to');
+  return heicTo({ blob: file, type: 'bitmap', options: { imageOrientation: 'from-image' } });
+}
+
+async function processImage(file: File): Promise<File> {
+  const bitmap = isHeic(file)
+    ? await decodeHeicToBitmap(file)
+    : await createImageBitmap(file, { imageOrientation: 'from-image' });
+  try {
+    const ratio = Math.min(1, MAX_IMAGE_DIM / Math.max(bitmap.width, bitmap.height));
+    const width = Math.round(bitmap.width * ratio);
+    const height = Math.round(bitmap.height * ratio);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Canvas wird nicht unterstützt.');
+    ctx.drawImage(bitmap, 0, 0, width, height);
+
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, 'image/webp', WEBP_QUALITY),
+    );
+    if (!blob) throw new Error('Bild konnte nicht in WebP umgewandelt werden.');
+
+    const baseName = file.name.replace(/\.[^.]+$/, '') || 'image';
+    return new File([blob], `${baseName}.webp`, { type: 'image/webp' });
+  } finally {
+    bitmap.close();
+  }
+}
+
 export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Props) {
   const [title, setTitle] = useState(initial.title);
   const [slug, setSlug] = useState(initial.slug);
@@ -148,10 +192,12 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
     [pbUrl, collectionId, postId],
   );
 
-  // Defer: just stash the file and return a blob URL. Real upload happens on save.
+  // Defer: convert to WebP + downscale, stash and return a blob URL.
+  // Real upload to PocketBase happens on save.
   const uploadFile = useCallback(async (file: File): Promise<string> => {
-    const blobUrl = URL.createObjectURL(file);
-    pendingUploads.current.set(blobUrl, file);
+    const processed = await processImage(file);
+    const blobUrl = URL.createObjectURL(processed);
+    pendingUploads.current.set(blobUrl, processed);
     setPendingCount(pendingUploads.current.size);
     return blobUrl;
   }, []);
@@ -178,9 +224,10 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
       setCoverBusy(true);
       setError(null);
       try {
+        const processed = await processImage(file);
         const fd = new FormData();
         for (const old of cover) fd.append('cover-', old);
-        fd.append('cover+', file);
+        fd.append('cover+', processed);
         const updated = await pb.collection('posts').update(postId, fd);
         setCover(normalizeCover(updated.cover));
       } catch (err) {
