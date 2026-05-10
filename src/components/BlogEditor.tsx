@@ -2,6 +2,19 @@ import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import type { Block, PartialBlock } from '@blocknote/core';
 import { useCreateBlockNote } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
+import {
+  MantineProvider,
+  TextInput,
+  Textarea,
+  Select,
+  Button,
+  InputLabel,
+  InputError,
+} from '@mantine/core';
+import { DatePickerInput } from '@mantine/dates';
+import 'dayjs/locale/de';
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/mantine/style.css';
 import { pb } from '../lib/pocketbase';
@@ -33,11 +46,23 @@ interface Props {
   initial: Initial;
 }
 
-function dateInputValue(iso: string): string {
-  if (!iso) return '';
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return '';
-  return d.toISOString().slice(0, 10);
+interface Errors {
+  title?: string;
+  slug?: string;
+  publishedAt?: string;
+}
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/ß/g, 'ss')
+    .replace(/ä/g, 'ae')
+    .replace(/ö/g, 'oe')
+    .replace(/ü/g, 'ue')
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 function normalizeCover(value: unknown): string[] {
@@ -77,19 +102,31 @@ function collectReferencedFilenames(blocks: BlockLike[], prefix: string): Set<st
   return refs;
 }
 
+function isoToDate(iso: string): Date | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
 export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Props) {
   const [title, setTitle] = useState(initial.title);
   const [slug, setSlug] = useState(initial.slug);
   const [excerpt, setExcerpt] = useState(initial.excerpt);
   const [status, setStatus] = useState<Status>(initial.status);
-  const [publishedAt, setPublishedAt] = useState(dateInputValue(initial.published_at));
+  const [publishedAt, setPublishedAt] = useState<Date | null>(isoToDate(initial.published_at));
   const [cover, setCover] = useState<string[]>(initial.cover);
   const [images, setImages] = useState<string[]>(initial.images);
   const [coverBusy, setCoverBusy] = useState(false);
   const [saving, setSaving] = useState(false);
   const [savedAt, setSavedAt] = useState<Date | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Errors>({});
   const [pendingCount, setPendingCount] = useState(0);
+
+  // Auto-derive slug from title (decision: slug always follows title).
+  useEffect(() => {
+    setSlug(slugify(title));
+  }, [title]);
 
   // blob-URL → original File. Files only exist in memory until save.
   const pendingUploads = useRef<Map<string, File>>(new Map());
@@ -171,7 +208,21 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
     }
   }, [cover, postId]);
 
+  const validate = useCallback((): Errors => {
+    const e: Errors = {};
+    if (!title.trim()) e.title = 'Titel ist erforderlich.';
+    if (!slug) e.slug = 'Slug konnte nicht aus dem Titel generiert werden.';
+    if (status === 'published' && !publishedAt) {
+      e.publishedAt = 'Veröffentlichungsdatum ist erforderlich, wenn der Artikel veröffentlicht wird.';
+    }
+    return e;
+  }, [publishedAt, slug, status, title]);
+
   const save = useCallback(async () => {
+    const e = validate();
+    setErrors(e);
+    if (Object.keys(e).length > 0) return;
+
     setSaving(true);
     setError(null);
     try {
@@ -181,7 +232,7 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
 
       for (const { id, url } of docBlobs) {
         const file = pendingUploads.current.get(url);
-        if (!file) continue; // unknown blob (e.g. user pasted external blob URL)
+        if (!file) continue;
         const fd = new FormData();
         fd.append('images+', file);
         const updated = await pb.collection('posts').update(postId, fd);
@@ -193,12 +244,10 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
         URL.revokeObjectURL(url);
         pendingUploads.current.delete(url);
 
-        // Update the editor block in place.
         editor.updateBlock(id, { props: { url: permanentUrl } });
       }
 
-      // 2. Drop entries in the map that no longer appear in the document
-      //    (image was dropped, then deleted from editor before save).
+      // 2. Drop entries in the map that no longer appear in the document.
       const stillInDoc = new Set(docBlobs.map((b) => b.url));
       for (const url of Array.from(pendingUploads.current.keys())) {
         if (!stillInDoc.has(url)) {
@@ -208,8 +257,7 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
       }
       setPendingCount(pendingUploads.current.size);
 
-      // 3. Reconcile: any file in `images` that is no longer referenced in the
-      //    document (existing image was deleted from the editor) → remove.
+      // 3. Reconcile orphans.
       const blocks: Block[] = editor.document;
       const referenced = collectReferencedFilenames(blocks as unknown as BlockLike[], imageUrlPrefix);
       const orphans = latestImages.filter((f) => !referenced.has(f));
@@ -221,33 +269,33 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
       }
       setImages(latestImages);
 
-      // 4. Persist title/slug/excerpt/status/published_at/content.
+      // 4. Persist fields.
       const payload: Record<string, unknown> = {
-        title,
+        title: title.trim(),
         slug,
         excerpt,
         status,
         content: blocks,
+        published_at: publishedAt ? publishedAt.toISOString() : '',
       };
-      payload.published_at = publishedAt ? new Date(`${publishedAt}T00:00:00`).toISOString() : '';
       await pb.collection('posts').update(postId, payload);
 
       setSavedAt(new Date());
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : 'Speichern fehlgeschlagen.';
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Speichern fehlgeschlagen.';
       setError(msg);
     } finally {
       setSaving(false);
     }
-  }, [editor, excerpt, fileUrl, imageUrlPrefix, images, postId, publishedAt, slug, status, title]);
+  }, [editor, excerpt, fileUrl, imageUrlPrefix, images, postId, publishedAt, slug, status, title, validate]);
 
   const remove = useCallback(async () => {
     if (!confirm('Diesen Artikel wirklich löschen? Alle Bilder werden ebenfalls entfernt.')) return;
     try {
       await pb.collection('posts').delete(postId);
       window.location.href = '/admin/posts';
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : 'Löschen fehlgeschlagen.';
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Löschen fehlgeschlagen.';
       setError(msg);
     }
   }, [postId]);
@@ -255,157 +303,159 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
   const currentCover = cover[0];
 
   return (
-    <div className="space-y-6">
-      <div>
-        <span className="mb-1 block text-sm font-medium text-neutral-700">Cover-Bild</span>
-        {currentCover ? (
-          <div className="overflow-hidden rounded border border-neutral-300 bg-white">
-            <img
-              src={fileUrl(currentCover)}
-              alt="Cover"
-              className="block max-h-72 w-full object-cover"
-            />
-            <div className="flex items-center justify-between gap-2 border-t border-neutral-200 px-3 py-2 text-sm">
-              <span className="truncate text-neutral-500">{currentCover}</span>
-              <div className="flex gap-2">
-                <label className="cursor-pointer rounded border border-neutral-300 px-3 py-1 hover:bg-neutral-100">
-                  Ersetzen
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
+    <MantineProvider defaultColorScheme="light">
+      <div className="space-y-6">
+        <div>
+          <InputLabel mb={6}>Cover-Bild</InputLabel>
+          {currentCover ? (
+            <div className="overflow-hidden rounded border border-neutral-300 bg-white">
+              <img
+                src={fileUrl(currentCover)}
+                alt="Cover"
+                className="block max-h-72 w-full object-cover"
+              />
+              <div className="flex items-center justify-between gap-2 border-t border-neutral-200 px-3 py-2 text-sm">
+                <span className="truncate text-neutral-500">{currentCover}</span>
+                <div className="flex gap-2">
+                  <Button
+                    component="label"
+                    variant="default"
+                    size="xs"
                     disabled={coverBusy}
-                    onChange={onCoverChange}
-                  />
-                </label>
-                <button
-                  type="button"
-                  onClick={removeCover}
-                  disabled={coverBusy}
-                  className="rounded border border-neutral-300 px-3 py-1 text-red-600 hover:bg-red-50 disabled:opacity-50"
-                >
-                  Entfernen
-                </button>
+                  >
+                    Ersetzen
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      disabled={coverBusy}
+                      onChange={onCoverChange}
+                    />
+                  </Button>
+                  <Button
+                    variant="default"
+                    color="red"
+                    size="xs"
+                    onClick={removeCover}
+                    disabled={coverBusy}
+                  >
+                    Entfernen
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <label className="flex h-32 cursor-pointer flex-col items-center justify-center rounded border-2 border-dashed border-neutral-300 bg-white text-sm text-neutral-500 hover:border-neutral-400 hover:bg-neutral-50">
-            <span>{coverBusy ? 'Lädt …' : '+ Cover-Bild hochladen'}</span>
-            <span className="mt-1 text-xs text-neutral-400">PNG, JPG, WebP</span>
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              disabled={coverBusy}
-              onChange={onCoverChange}
+          ) : (
+            <label className="flex h-32 cursor-pointer flex-col items-center justify-center rounded border-2 border-dashed border-neutral-300 bg-white text-sm text-neutral-500 hover:border-neutral-400 hover:bg-neutral-50">
+              <span>{coverBusy ? 'Lädt …' : '+ Cover-Bild hochladen'}</span>
+              <span className="mt-1 text-xs text-neutral-400">PNG, JPG, WebP</span>
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                disabled={coverBusy}
+                onChange={onCoverChange}
+              />
+            </label>
+          )}
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="sm:col-span-2">
+            <TextInput
+              label="Titel"
+              value={title}
+              onChange={(e) => setTitle(e.currentTarget.value)}
+              placeholder="Titel des Artikels"
+              size="md"
+              error={errors.title}
+              withAsterisk
             />
-          </label>
-        )}
-      </div>
+          </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block sm:col-span-2">
-          <span className="mb-1 block text-sm font-medium text-neutral-700">Titel</span>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Titel des Artikels"
-            className="w-full rounded border border-neutral-300 bg-white px-3 py-2 text-lg focus:border-neutral-500 focus:outline-none"
-          />
-        </label>
+          <div className="sm:col-span-2">
+            <TextInput
+              label="URL-Slug"
+              value={slug}
+              disabled
+              placeholder="(wird aus dem Titel generiert)"
+              description="Wird automatisch aus dem Titel abgeleitet."
+              inputWrapperOrder={['label', 'input', 'description', 'error']}
+              classNames={{ input: 'font-mono' }}
+              error={errors.slug}
+            />
+          </div>
 
-        <label className="block">
-          <span className="mb-1 block text-sm font-medium text-neutral-700">URL-Slug</span>
-          <input
-            type="text"
-            value={slug}
-            onChange={(e) => setSlug(e.target.value)}
-            placeholder="mein-artikel"
-            pattern="^[a-z0-9-]+$"
-            className="w-full rounded border border-neutral-300 bg-white px-3 py-2 font-mono text-sm focus:border-neutral-500 focus:outline-none"
-          />
-        </label>
-
-        <label className="block">
-          <span className="mb-1 block text-sm font-medium text-neutral-700">Status</span>
-          <select
+          <Select
+            label="Status"
             value={status}
-            onChange={(e) => setStatus(e.target.value as Status)}
-            className="w-full rounded border border-neutral-300 bg-white px-3 py-2 focus:border-neutral-500 focus:outline-none"
-          >
-            <option value="draft">Entwurf</option>
-            <option value="published">Veröffentlicht</option>
-            <option value="archived">Archiviert</option>
-          </select>
-        </label>
-
-        <label className="block sm:col-span-2">
-          <span className="mb-1 block text-sm font-medium text-neutral-700">Kurzbeschreibung</span>
-          <textarea
-            value={excerpt}
-            onChange={(e) => setExcerpt(e.target.value)}
-            rows={2}
-            maxLength={300}
-            placeholder="Kurze Zusammenfassung für Listen und Vorschau (max. 300 Zeichen)"
-            className="w-full rounded border border-neutral-300 bg-white px-3 py-2 text-sm focus:border-neutral-500 focus:outline-none"
+            onChange={(v) => setStatus((v ?? 'draft') as Status)}
+            allowDeselect={false}
+            data={[
+              { value: 'draft', label: 'Entwurf' },
+              { value: 'published', label: 'Veröffentlicht' },
+              { value: 'archived', label: 'Archiviert' },
+            ]}
           />
-        </label>
 
-        <label className="block">
-          <span className="mb-1 block text-sm font-medium text-neutral-700">Veröffentlichungsdatum</span>
-          <input
-            type="date"
+          <DatePickerInput
+            label="Veröffentlichungsdatum"
             value={publishedAt}
-            onChange={(e) => setPublishedAt(e.target.value)}
-            className="w-full rounded border border-neutral-300 bg-white px-3 py-2 focus:border-neutral-500 focus:outline-none"
+            onChange={(v) => setPublishedAt(v ? new Date(v) : null)}
+            valueFormat="DD.MM.YYYY"
+            locale="de"
+            placeholder="Datum wählen"
+            clearable
+            error={errors.publishedAt}
+            withAsterisk={status === 'published'}
           />
-        </label>
-      </div>
 
-      <div>
-        <span className="mb-1 block text-sm font-medium text-neutral-700">Inhalt</span>
-        <div className="rounded border border-neutral-300 bg-white">
-          <BlockNoteView editor={editor} theme="light" />
+          <div className="sm:col-span-2">
+            <Textarea
+              label="Kurzbeschreibung"
+              value={excerpt}
+              onChange={(e) => setExcerpt(e.currentTarget.value)}
+              placeholder="Kurze Zusammenfassung für Listen und Vorschau (max. 300 Zeichen)"
+              autosize
+              minRows={2}
+              maxLength={300}
+            />
+          </div>
         </div>
-        <p className="mt-2 text-xs text-neutral-500">
-          Tipp: Bilder per Drag-and-Drop oder Copy-Paste einfügen. „/“ tippen für weitere Block-Typen.
-          Bilder werden erst beim Speichern wirklich hochgeladen.
-        </p>
-      </div>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+        <div>
+          <InputLabel mb={6}>Inhalt</InputLabel>
+          <div className="rounded border border-neutral-300 bg-white">
+            <BlockNoteView editor={editor} theme="light" />
+          </div>
+          <p className="mt-2 text-xs text-neutral-500">
+            Tipp: Bilder per Drag-and-Drop oder Copy-Paste einfügen. „/“ tippen für weitere Block-Typen.
+            Bilder werden erst beim Speichern wirklich hochgeladen.
+          </p>
+        </div>
 
-      <div className="flex items-center justify-between border-t border-neutral-200 pt-4">
-        <button
-          type="button"
-          onClick={remove}
-          className="text-sm text-red-600 hover:text-red-800"
-        >
-          Artikel löschen
-        </button>
-        <div className="flex items-center gap-3">
-          {pendingCount > 0 && (
-            <span className="rounded bg-amber-100 px-2 py-0.5 text-xs text-amber-900">
-              {pendingCount} ungespeicherte{pendingCount === 1 ? 's Bild' : ' Bilder'}
-            </span>
-          )}
-          {savedAt && pendingCount === 0 && (
-            <span className="text-xs text-neutral-500">
-              Gespeichert um {savedAt.toLocaleTimeString('de-DE')}
-            </span>
-          )}
-          <button
-            type="button"
-            onClick={save}
-            disabled={saving}
-            className="rounded bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800 disabled:opacity-50"
-          >
-            {saving ? 'Speichert …' : 'Speichern'}
-          </button>
+        {error && <InputError>{error}</InputError>}
+
+        <div className="flex items-center justify-between border-t border-neutral-200 pt-4">
+          <Button variant="subtle" color="red" onClick={remove}>
+            Artikel löschen
+          </Button>
+          <div className="flex items-center gap-3">
+            {pendingCount > 0 && (
+              <span className="rounded bg-amber-100 px-2 py-0.5 text-xs text-amber-900">
+                {pendingCount} ungespeicherte{pendingCount === 1 ? 's Bild' : ' Bilder'}
+              </span>
+            )}
+            {savedAt && pendingCount === 0 && (
+              <span className="text-xs text-neutral-500">
+                Gespeichert um {savedAt.toLocaleTimeString('de-DE')}
+              </span>
+            )}
+            <Button onClick={save} loading={saving} color="dark">
+              Speichern
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+    </MantineProvider>
   );
 }

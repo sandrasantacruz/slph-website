@@ -53,14 +53,16 @@ const statusColor: Record<string, string> = {
               <th class="px-4 py-2 font-medium">Titel</th>
               <th class="px-4 py-2 font-medium">Status</th>
               <th class="px-4 py-2 font-medium">Geändert</th>
-              <th class="px-4 py-2 font-medium" />
             </tr>
           </thead>
           <tbody class="divide-y divide-neutral-100">
             {posts.map((p) => (
-              <tr>
+              <tr class="relative cursor-pointer hover:bg-neutral-50 focus-within:bg-neutral-50">
                 <td class="px-4 py-2">
-                  <a href={`/admin/posts/${p.id}/edit`} class="font-medium hover:underline">
+                  <a
+                    href={`/admin/posts/${p.id}/edit`}
+                    class="font-medium hover:underline focus:outline-none after:absolute after:inset-0 after:content-['']"
+                  >
                     {p.title || <span class="text-neutral-400">(ohne Titel)</span>}
                   </a>
                   {p.slug && <div class="text-xs text-neutral-500">/{p.slug}</div>}
@@ -71,11 +73,6 @@ const statusColor: Record<string, string> = {
                   </span>
                 </td>
                 <td class="px-4 py-2 text-neutral-600">{fmt.format(new Date(p.updated))}</td>
-                <td class="px-4 py-2 text-right">
-                  <a href={`/admin/posts/${p.id}/edit`} class="text-sm text-neutral-600 hover:text-neutral-900">
-                    Bearbeiten →
-                  </a>
-                </td>
               </tr>
             ))}
           </tbody>
