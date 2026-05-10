@@ -1,7 +1,22 @@
 import PocketBase from 'pocketbase';
+import { AUTH_COOKIE, PB_URL } from './pb';
 
-const url = import.meta.env.PUBLIC_POCKETBASE_URL ?? 'http://127.0.0.1:8090';
+export const pb = new PocketBase(PB_URL);
 
-export const pb = new PocketBase(url);
+if (typeof document !== 'undefined') {
+  pb.authStore.loadFromCookie(document.cookie, AUTH_COOKIE);
+  pb.authStore.onChange(() => {
+    document.cookie = pb.authStore.exportToCookie(
+      {
+        httpOnly: false,
+        secure: location.protocol === 'https:',
+        sameSite: 'Lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 30,
+      },
+      AUTH_COOKIE,
+    );
+  }, true);
+}
 
 export type { RecordModel, ListResult } from 'pocketbase';

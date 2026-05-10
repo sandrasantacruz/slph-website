@@ -1,0 +1,40 @@
+---
+import AdminLayout from '../../../../layouts/AdminLayout.astro';
+import BlogEditor from '../../../../components/BlogEditor';
+import { PB_URL } from '../../../../lib/pb';
+
+const { id } = Astro.params;
+if (!id) return Astro.redirect('/admin/posts');
+
+let post;
+try {
+  post = await Astro.locals.pb.collection('posts').getOne(id);
+} catch {
+  return Astro.redirect('/admin/posts');
+}
+---
+
+<AdminLayout title={post.title || 'Neuer Artikel'}>
+  <div class="mb-4 flex items-center gap-4">
+    <a href="/admin/posts" class="text-sm text-neutral-500 hover:text-neutral-900">← Alle Artikel</a>
+  </div>
+
+  <BlogEditor
+    client:only="react"
+    postId={post.id}
+    collectionId={post.collectionId}
+    pbUrl={PB_URL}
+    initial={{
+      title: post.title ?? '',
+      slug: post.slug ?? '',
+      excerpt: post.excerpt ?? '',
+      status: post.status ?? 'draft',
+      published_at: post.published_at ?? '',
+      content: post.content ?? null,
+      cover: Array.isArray(post.cover) ? post.cover : post.cover ? [post.cover] : [],
+      images: Array.isArray(post.images) ? post.images : [],
+    }}
+  >
+    <p class="text-neutral-500">Editor lädt …</p>
+  </BlogEditor>
+</AdminLayout>

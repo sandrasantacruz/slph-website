@@ -1,0 +1,66 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { authCookie } from '../../lib/pb';
+
+let error: string | null = null;
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const email = String(form.get('email') ?? '').trim();
+  const password = String(form.get('password') ?? '');
+
+  if (!email || !password) {
+    error = 'Bitte E-Mail und Passwort eingeben.';
+  } else {
+    try {
+      await Astro.locals.pb.collection('users').authWithPassword(email, password);
+      const next = Astro.url.searchParams.get('next');
+      const target = next?.startsWith('/') ? next : '/admin/posts';
+      return new Response(null, {
+        status: 303,
+        headers: {
+          location: target,
+          'set-cookie': authCookie(Astro.locals.pb),
+        },
+      });
+    } catch {
+      error = 'Login fehlgeschlagen. E-Mail oder Passwort falsch.';
+    }
+  }
+}
+---
+
+<AdminLayout title="Login">
+  <div class="mx-auto max-w-sm">
+    <h1 class="mb-6 text-2xl font-semibold">Login</h1>
+    <form method="post" class="space-y-4">
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium">E-Mail</span>
+        <input
+          type="email"
+          name="email"
+          required
+          autocomplete="username"
+          class="w-full rounded border border-neutral-300 bg-white px-3 py-2 focus:border-neutral-500 focus:outline-none"
+        />
+      </label>
+      <label class="block">
+        <span class="mb-1 block text-sm font-medium">Passwort</span>
+        <input
+          type="password"
+          name="password"
+          required
+          autocomplete="current-password"
+          class="w-full rounded border border-neutral-300 bg-white px-3 py-2 focus:border-neutral-500 focus:outline-none"
+        />
+      </label>
+      {error && <p class="text-sm text-red-600">{error}</p>}
+      <button
+        type="submit"
+        class="w-full rounded bg-neutral-900 px-4 py-2 font-medium text-white hover:bg-neutral-800"
+      >
+        Einloggen
+      </button>
+    </form>
+  </div>
+</AdminLayout>
