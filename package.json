@@ -21,6 +21,8 @@
     "@blocknote/core": "^0.50.0",
     "@blocknote/mantine": "^0.50.0",
     "@blocknote/react": "^0.50.0",
+    "@fontsource/londrina-solid": "^5.2.7",
+    "@fontsource/varela-round": "^5.2.8",
     "@mantine/core": "^9.1.1",
     "@mantine/dates": "^9.1.1",
     "@mantine/hooks": "^9.1.1",
@@ -40,6 +42,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "concurrently": "^9.2.1",
+    "dotenv": "^17.4.2",
     "typescript": "^6.0.3"
   }
 }

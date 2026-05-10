@@ -1,1 +1,50 @@
 @import "tailwindcss";
+
+@import "@fontsource/varela-round/400.css";
+@import "@fontsource/londrina-solid/400.css";
+@import "@fontsource/londrina-solid/900.css";
+
+/*
+ * Theme tokens — mirroring the palette + typography of
+ * https://nueva.silospeceshablaran.com/ (WordPress theme: SLPH).
+ *
+ *   azul    – primary navy background
+ *   celeste – sky blue accent
+ *   caparol – off-white surface / text on azul
+ *   arena   – sand yellow CTA / highlight
+ *   gris    – muted text
+ *   negro   – body text on light surfaces
+ *
+ * Body type: Varela Round 18/27 — Display: Londrina Solid.
+ */
+@theme {
+  --color-azul: #0b2056;
+  --color-celeste: #64aad2;
+  --color-caparol: #f8f8fc;
+  --color-arena: #fadeaa;
+  --color-gris: #606060;
+  --color-negro: #000000;
+
+  --font-sans: "Varela Round", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Londrina Solid", ui-sans-serif, system-ui, sans-serif;
+
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.5;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-azul);
+    color: var(--color-caparol);
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.1;
+  }
+}
