@@ -1,0 +1,79 @@
+---
+import cuentoImg from './img/cuento.webp?url';
+import centrosImg from './img/centros.webp?url';
+import escenarioImg from './img/escenario.webp?url';
+
+const columnas = [
+  {
+    titulo: 'Un cuento',
+    imagen: cuentoImg,
+    alt: 'El cuento Si los peces hablaran',
+    texto:
+      'Un libro ilustrado lleno de personajes entrañables y aventuras en el litoral canario, pensado para emocionar a peques y no tan peques.',
+    tilt: 'tilt-l1',
+  },
+  {
+    titulo: 'Centros educativos',
+    imagen: centrosImg,
+    alt: 'Niñas y niños participando en un taller SLPH',
+    texto:
+      'Talleres y materiales didácticos diseñados con docentes para llevar la educación marina a las aulas de toda Canarias.',
+    tilt: 'tilt-r1',
+  },
+  {
+    titulo: 'En el escenario',
+    imagen: escenarioImg,
+    alt: 'Actuación del musical Si los peces hablaran',
+    texto:
+      'Musical, conciertos y performances que convierten la concienciación en una experiencia colectiva inolvidable.',
+    tilt: 'tilt-l2',
+  },
+];
+---
+
+<section class="relative">
+  <div class="mx-auto max-w-6xl px-6 py-20 sm:py-28">
+    <div class="reveal mx-auto max-w-3xl text-center">
+      <p class="font-hand text-3xl text-arena sm:text-4xl">tres maneras de bucear con nosotros…</p>
+      <h2 class="mt-3 font-display text-[clamp(2rem,5vw,3.75rem)] leading-tight">
+        Un programa diseñado para
+        <span class="hand-underline text-arena">la versatilidad</span>
+      </h2>
+      <p class="mx-auto mt-5 max-w-2xl text-base sm:text-lg">
+        Investigadores, biólogos, zoólogos, fotógrafos marinos, profesores,
+        psicopedagogos y artistas se han aliado con menores para diseñarlo
+        y llamar a la acción a toda la población.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-12 sm:gap-8 md:grid-cols-3 md:gap-6">
+      {
+        columnas.map(({ titulo, imagen, alt, texto, tilt }, i) => (
+          <article
+            class:list={[
+              'reveal group polaroid flex flex-col gap-3 transition duration-500 hover:rotate-0 hover:!scale-105 hover:shadow-2xl',
+              tilt,
+              `reveal-delay-${i + 1}`,
+            ]}
+          >
+            <div class="overflow-hidden rounded-sm">
+              <img
+                src={imagen}
+                alt={alt}
+                class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-110"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="px-1 pb-1 pt-2 text-azul">
+              <h3 class="font-display text-3xl leading-tight sm:text-4xl">
+                {titulo}
+              </h3>
+              <p class="mt-2 text-sm leading-relaxed text-azul/80 sm:text-base">{texto}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

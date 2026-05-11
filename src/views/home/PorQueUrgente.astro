@@ -1,0 +1,111 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="relative isolate overflow-hidden">
+  <!-- Deep-sea gradient -->
+  <div
+    class="absolute inset-0 -z-20 bg-gradient-to-b from-azul-deep/70 via-azul-deep/95 to-azul-deep"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Subtle radial "light from above" -->
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-1/2 bg-[radial-gradient(ellipse_at_top,_rgba(100,170,210,0.18),_transparent_70%)]"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Drifting kelp silhouettes on the left edge -->
+  <svg
+    class="anim-sway pointer-events-none absolute -left-6 bottom-0 -z-10 hidden h-3/4 w-40 text-arena/15 md:block"
+    viewBox="0 0 100 200"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.4"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <path d="M20 200 Q 30 150 22 100 Q 16 70 25 30 Q 30 10 22 0"/>
+    <path d="M40 200 Q 50 160 42 110 Q 38 80 50 40 Q 55 18 48 0"/>
+    <path d="M60 200 Q 70 150 60 100 Q 55 65 65 30 Q 70 12 62 0"/>
+    <path d="M82 200 Q 88 170 80 130 Q 76 100 86 70 Q 92 40 84 0"/>
+  </svg>
+
+  <!-- Tiny scattered bubbles -->
+  <svg
+    class="pointer-events-none absolute inset-0 -z-10 h-full w-full text-celeste/25"
+    viewBox="0 0 800 600"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+  >
+    <circle cx="120" cy="80"  r="4" fill="currentColor" opacity="0.6"/>
+    <circle cx="180" cy="140" r="2" fill="currentColor" opacity="0.5"/>
+    <circle cx="240" cy="40"  r="3" fill="currentColor" opacity="0.7"/>
+    <circle cx="430" cy="500" r="3" fill="currentColor" opacity="0.5"/>
+    <circle cx="380" cy="540" r="4" fill="currentColor" opacity="0.4"/>
+    <circle cx="80"  cy="480" r="2" fill="currentColor" opacity="0.6"/>
+  </svg>
+
+  <div class="mx-auto max-w-6xl px-6 py-24 sm:py-32">
+    <!-- Title row: text on the left, tentaculus on the right -->
+    <div class="grid items-center gap-8 md:grid-cols-[1fr_auto]">
+      <div class="reveal">
+        <p class="font-hand text-3xl text-coral sm:text-4xl">una llamada urgente</p>
+        <h2 class="mt-2 font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.95]">
+          ¿Por qué es
+          <span class="block text-arena">urgente?</span>
+        </h2>
+      </div>
+
+      <img
+        src="/assets/animals/tentaculus.webp"
+        alt=""
+        aria-hidden="true"
+        class="anim-drift pointer-events-none mx-auto hidden w-64 drop-shadow-2xl md:block lg:w-80"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="mt-14 grid gap-8 md:grid-cols-3">
+      <article class="reveal reveal-delay-1 group relative flex flex-col gap-4 rounded-3xl bg-azul/65 p-7 ring-1 ring-caparol/15 backdrop-blur-sm">
+        <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-arena/15 text-arena ring-1 ring-arena/30">
+          <Icon name="game-icons:fishbone" class="h-7 w-7" aria-hidden="true" />
+        </span>
+        <h3 class="font-display text-3xl text-arena sm:text-4xl">
+          La cadena trófica
+        </h3>
+        <p class="text-base leading-relaxed sm:text-lg">
+          La contaminación marina <strong class="text-arena">ya afecta al ser humano</strong>
+          — viaja por la cadena alimentaria hasta nuestro plato.
+        </p>
+      </article>
+
+      <article class="reveal reveal-delay-2 group relative flex flex-col gap-4 rounded-3xl bg-azul/65 p-7 ring-1 ring-caparol/15 backdrop-blur-sm">
+        <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-arena/15 text-arena ring-1 ring-arena/30">
+          <Icon name="game-icons:coral" class="h-7 w-7" aria-hidden="true" />
+        </span>
+        <h3 class="font-display text-3xl text-arena sm:text-4xl">
+          Los arrecifes
+        </h3>
+        <p class="text-base leading-relaxed sm:text-lg">
+          Ya hemos acabado con el <strong class="text-arena">50&nbsp;%</strong> de los
+          arrecifes de coral — los que nos protegen de las inclemencias
+          meteorológicas.
+        </p>
+      </article>
+
+      <article class="reveal reveal-delay-3 group relative flex flex-col gap-4 rounded-3xl bg-azul/65 p-7 ring-1 ring-caparol/15 backdrop-blur-sm">
+        <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-arena/15 text-arena ring-1 ring-arena/30">
+          <Icon name="game-icons:hourglass" class="h-7 w-7" aria-hidden="true" />
+        </span>
+        <h3 class="font-display text-3xl text-arena sm:text-4xl">
+          Pronóstico 2050
+        </h3>
+        <p class="text-base leading-relaxed sm:text-lg">
+          Desaparecerá el <strong class="text-arena">90&nbsp;%</strong> de los corales
+          y habrá <strong class="text-arena">más plástico que peces</strong> en el mar.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>

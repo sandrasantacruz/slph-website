@@ -1,36 +1,97 @@
 ---
+import { Icon } from 'astro-icon/components';
 ---
 
-<section class="relative isolate overflow-hidden">
-  <div class="mx-auto flex min-h-[calc(100svh-6rem)] max-w-6xl flex-col items-center justify-center gap-4 px-4 py-6 text-center sm:gap-8 sm:py-20">
-    <h1 class="font-display text-4xl leading-[0.95] sm:text-7xl md:text-8xl">
-      Si los peces hablaran
-      <span class="block text-arena">te dirían</span>
+<section class="relative isolate flex h-[calc(100svh-6rem)] flex-col overflow-hidden">
+  <!-- Sun rays filtering through water -->
+  <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <svg
+      class="absolute -top-10 left-1/2 h-[140%] w-[140%] -translate-x-1/2 opacity-50 mix-blend-screen"
+      viewBox="0 0 1200 900"
+      preserveAspectRatio="xMidYMin slice"
+    >
+      <defs>
+        <linearGradient id="ray" x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stop-color="#fadeaa" stop-opacity="0.55"/>
+          <stop offset="60%" stop-color="#64aad2" stop-opacity="0.12"/>
+          <stop offset="100%" stop-color="#0b2056" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <g style="transform-origin: 600px -50px;">
+        <polygon points="600,-50 360,900 480,900" fill="url(#ray)"/>
+        <polygon points="600,-50 540,900 620,900" fill="url(#ray)" opacity="0.7"/>
+        <polygon points="600,-50 680,900 760,900" fill="url(#ray)"/>
+        <polygon points="600,-50 820,900 940,900" fill="url(#ray)" opacity="0.6"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Floating character — drifts behind the headline -->
+  <img
+    src="/assets/animals/aletas.webp"
+    alt=""
+    aria-hidden="true"
+    class="anim-float pointer-events-none absolute -right-10 top-1/2 -z-10 hidden w-[22rem] -translate-y-1/2 opacity-30 md:block lg:w-[28rem] lg:opacity-40"
+    loading="eager"
+  />
+
+  <div class="mx-auto flex h-full w-full max-w-6xl flex-col justify-center gap-4 px-6 py-4 sm:gap-5 sm:py-6">
+    <!-- Headline -->
+    <h1 class="reveal reveal-delay-1 font-display text-[clamp(2.25rem,7vw,5rem)] leading-[0.92] tracking-tight">
+      <span class="block">Si los peces</span>
+      <span class="block">hablaran<span class="text-arena">…</span></span>
+      <span class="mt-1 block text-arena">
+        <span class="hand-underline">te dirían</span>
+      </span>
     </h1>
 
-    <p class="max-w-3xl font-display text-xl text-celeste sm:text-3xl md:text-4xl">
+    <!-- Subhead -->
+    <p class="reveal reveal-delay-2 max-w-2xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl">
       Que el mar te necesita para seguir latiendo.
     </p>
 
-    <p class="max-w-2xl text-sm text-caparol/90 sm:text-lg">
-      Hace años, un océano en peligro inspiró un musical… Hoy, ese grito es
-      una llamada a la acción porque salvar el mar ¡también nos salva a
-      nosotros!
+    <!-- Body — visible only when there is room -->
+    <p class="reveal reveal-delay-3 hidden max-w-2xl text-base text-caparol/90 lg:block">
+      Hace años, un océano en peligro inspiró un musical. Hoy, ese
+      grito es una llamada a la acción — porque salvar el mar
+      <em class="not-italic text-arena">también nos salva a nosotros.</em>
     </p>
 
-    <div class="mt-2 flex flex-col items-center gap-3 sm:mt-4 sm:flex-row sm:gap-4">
+    <!-- CTAs — always visible -->
+    <div class="reveal reveal-delay-4 mt-1 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:gap-4">
       <a
         href="/programa"
-        class="rounded-lg border-2 border-caparol px-5 py-2 font-display text-xl text-caparol transition hover:bg-caparol hover:text-azul sm:px-6 sm:py-3 sm:text-2xl"
+        class="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-caparol px-5 py-2.5 font-display text-lg text-caparol transition hover:bg-caparol hover:text-azul sm:px-6 sm:py-3 sm:text-xl"
       >
         Descubre el proyecto
+        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
       </a>
       <a
         href="/comprar"
-        class="rounded-lg bg-arena px-5 py-2 font-display text-xl text-negro transition hover:brightness-95 sm:px-6 sm:py-3 sm:text-2xl"
+        class="group inline-flex items-center justify-center gap-2 rounded-full bg-arena px-5 py-2.5 font-display text-lg text-negro transition hover:brightness-95 sm:px-6 sm:py-3 sm:text-xl"
       >
         Compra el cuento
+        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M3 7h2l2 11h11l2-8H6"/>
+          <circle cx="9" cy="21" r="1.4" fill="currentColor"/>
+          <circle cx="17" cy="21" r="1.4" fill="currentColor"/>
+        </svg>
       </a>
     </div>
   </div>
+
+  <!-- Scroll cue — absolutely positioned so it doesn't push CTAs -->
+  <a
+    href="#programa-slph"
+    aria-label="Bajar a la siguiente sección"
+    class="scroll-cue absolute bottom-3 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-caparol/70 transition hover:text-arena sm:flex"
+  >
+    <Icon name="game-icons:scuba-mask" class="h-7 w-7" aria-hidden="true" />
+    <span class="font-hand text-xl leading-none">bucea</span>
+    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </a>
 </section>

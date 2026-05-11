@@ -1,0 +1,73 @@
+---
+import logoGobierno from './img/logo-gobierno-canarias.webp?url';
+import logoSandra from './img/logo-sandra.webp?url';
+import logoPoema from './img/logo-poema.webp?url';
+import logoBelenMaria from './img/logo-belen-maria.webp?url';
+
+const logos = [
+  { src: logoGobierno, alt: 'Gobierno de Canarias' },
+  { src: logoSandra, alt: 'Sandra Santa Cruz' },
+  { src: logoPoema, alt: 'POEMA' },
+  { src: logoBelenMaria, alt: 'Belén María' },
+];
+---
+
+<section class="relative">
+  <!-- Wave divider above -->
+  <svg
+    class="absolute left-0 right-0 top-0 h-10 w-full text-arena/30"
+    viewBox="0 0 1440 40"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0 20 Q 120 0 240 20 T 480 20 T 720 20 T 960 20 T 1200 20 T 1440 20 V40 H0 Z"
+      fill="currentColor"
+    />
+  </svg>
+
+  <div class="mx-auto max-w-5xl px-6 pb-24 pt-16 sm:pb-32">
+    <div class="reveal relative">
+      <!-- Anchor SVG behind -->
+      <svg
+        class="pointer-events-none absolute left-1/2 top-0 h-32 w-32 -translate-x-1/2 -translate-y-12 text-arena/30 sm:h-40 sm:w-40"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="5" r="2"/>
+        <path d="M12 7v14"/>
+        <path d="M8 10h8"/>
+        <path d="M5 17a7 7 0 0 0 14 0"/>
+        <path d="M3 17h2"/>
+        <path d="M19 17h2"/>
+      </svg>
+
+      <div class="relative rounded-[2.5rem] bg-caparol/95 p-10 text-azul shadow-2xl sm:p-14">
+        <p class="text-center font-hand text-3xl text-azul/60 sm:text-4xl">anclamos con…</p>
+        <h3 class="mt-1 text-center font-display text-3xl uppercase tracking-[0.2em] sm:text-4xl">
+          Colaboran
+        </h3>
+
+        <div class="mt-8 grid grid-cols-2 items-center gap-8 sm:mt-10 sm:grid-cols-4 sm:gap-12">
+          {
+            logos.map(({ src, alt }) => (
+              <div class="group flex items-center justify-center">
+                <img
+                  src={src}
+                  alt={alt}
+                  class="h-16 w-auto object-contain grayscale transition duration-300 group-hover:scale-105 group-hover:grayscale-0 sm:h-20"
+                  loading="lazy"
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

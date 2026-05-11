@@ -1,0 +1,60 @@
+---
+import sandraRetrato from './img/sandra-retrato.webp?url';
+---
+
+<section class="relative">
+  <div class="mx-auto max-w-5xl px-6 py-20 sm:py-28">
+    <div class="reveal relative overflow-hidden rounded-[2.5rem] border border-arena/25 bg-azul/55 p-8 ring-1 ring-caparol/10 backdrop-blur-md sm:p-14">
+      <!-- Decorative corner stamp -->
+      <div class="absolute -right-4 -top-4 hidden h-32 w-32 rotate-12 items-center justify-center rounded-full border-4 border-dashed border-arena/40 font-display text-arena/40 sm:flex">
+        <span class="text-center text-sm uppercase leading-tight">
+          desde<br/>2016
+        </span>
+      </div>
+
+      <div class="grid items-center gap-10 md:grid-cols-[auto_1fr] md:gap-14">
+        <div class="relative mx-auto md:mx-0">
+          <!-- Decorative ring -->
+          <div class="absolute inset-0 -m-3 rounded-full border-2 border-dashed border-arena/40 anim-sway" aria-hidden="true"></div>
+          <img
+            src={sandraRetrato}
+            alt="Sandra Santa Cruz, creadora del programa"
+            class="relative h-48 w-48 rounded-full object-cover shadow-2xl ring-4 ring-arena/60 sm:h-60 sm:w-60"
+            loading="lazy"
+          />
+          <!-- Sticker -->
+          <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-arena px-4 py-1 font-display text-base text-azul shadow-md sm:text-lg">
+            la autora
+          </div>
+        </div>
+
+        <div>
+          <p class="font-hand text-3xl text-arena sm:text-4xl">conoce a…</p>
+          <h3 class="mt-1 font-display text-4xl leading-tight sm:text-6xl">
+            ¿Quién está
+            <span class="text-arena">detrás?</span>
+          </h3>
+
+          <p class="mt-5 text-base leading-relaxed sm:text-lg">
+            El Programa SLPH es mérito de muchos. Diseñado por
+            <strong class="font-display text-2xl text-arena">Sandra Santa Cruz</strong>
+            y estrenado como musical en 2016, nace en colaboración con
+            su padre <strong class="font-display text-arena">Juan Luis</strong>.
+            Lo que no imaginaban era la cantidad de personas que se
+            sumarían a su iniciativa en
+            <em class="not-italic text-arena">petición de auxilio</em>
+            tras su musical.
+          </p>
+
+          <a
+            href="/autor"
+            class="group mt-6 inline-flex items-center gap-2 font-display text-xl text-celeste underline decoration-arena decoration-2 underline-offset-4 hover:text-arena sm:text-2xl"
+          >
+            Más sobre Sandra Santa Cruz
+            <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

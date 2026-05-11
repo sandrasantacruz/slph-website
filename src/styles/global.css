@@ -3,6 +3,7 @@
 @import "@fontsource/varela-round/400.css";
 @import "@fontsource/londrina-solid/400.css";
 @import "@fontsource/londrina-solid/900.css";
+@import "@fontsource-variable/caveat";
 
 /*
  * Theme tokens — mirroring the palette + typography of
@@ -16,27 +17,36 @@
  *   negro   – body text on light surfaces
  *
  * Body type: Varela Round 18/27 — Display: Londrina Solid.
+ * Hand-script accent: Caveat (used sparingly for whimsy).
  */
 @theme {
   --color-azul: #0b2056;
+  --color-azul-deep: #060f2c;
   --color-celeste: #64aad2;
+  --color-celeste-deep: #2f6f9b;
   --color-caparol: #f8f8fc;
   --color-arena: #fadeaa;
+  --color-arena-deep: #e8b755;
+  --color-coral: #ff8a72;
   --color-gris: #606060;
   --color-negro: #000000;
 
   --font-sans: "Varela Round", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Londrina Solid", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat Variable", "Caveat", ui-sans-serif, cursive;
 
   --text-base: 1.125rem;
-  --text-base--line-height: 1.5;
+  --text-base--line-height: 1.55;
 }
 
 @layer base {
   html {
     background-color: var(--color-azul);
     background-image:
-      linear-gradient(rgba(11, 32, 86, 0.55), rgba(11, 32, 86, 0.55)),
+      linear-gradient(180deg,
+        rgba(11, 32, 86, 0.35) 0%,
+        rgba(11, 32, 86, 0.55) 35%,
+        rgba(6, 15, 44, 0.78) 100%),
       url("/assets/background.webp");
     background-position: right top;
     background-size: cover;
@@ -52,6 +62,182 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 400;
-    line-height: 1.1;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
   }
+  ::selection {
+    background: var(--color-arena);
+    color: var(--color-azul);
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+ * Ocean motion — keyframes that the home view leans on heavily.
+ * ──────────────────────────────────────────────────────────── */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+@keyframes float-y-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50%      { transform: rotate(2deg); }
+}
+@keyframes drift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(8px, -6px) rotate(2deg); }
+  66%  { transform: translate(-6px, -10px) rotate(-1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(250, 222, 170, 0.4); }
+  50%      { box-shadow: 0 0 0 24px rgba(250, 222, 170, 0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll-cue — wave-style descent, gentle and looping. */
+@keyframes scroll-cue-bob {
+  0%   { transform: translate(-50%, 0);     opacity: 0.55; }
+  50%  { transform: translate(-50%, 6px);   opacity: 1;    }
+  100% { transform: translate(-50%, 0);     opacity: 0.55; }
+}
+@keyframes scroll-cue-arrow {
+  0%, 100% { transform: translateY(0);   opacity: 0.7; }
+  50%      { transform: translateY(4px); opacity: 1;   }
+}
+
+.scroll-cue {
+  animation: scroll-cue-bob 2.4s ease-in-out infinite;
+}
+.scroll-cue svg {
+  animation: scroll-cue-arrow 2.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue, .scroll-cue svg { animation: none !important; }
+}
+
+/* Utilities applied via @apply-like manual classes
+ * (Tailwind v4 + @utility variants are awkward, so we use plain CSS). */
+
+.anim-float   { animation: float-y 7s ease-in-out infinite; }
+.anim-float-soft { animation: float-y-soft 5s ease-in-out infinite; }
+.anim-sway    { animation: sway 6s ease-in-out infinite; }
+.anim-drift   { animation: drift 10s ease-in-out infinite; }
+.anim-pulse   { animation: pulse-glow 2.4s ease-out infinite; }
+
+/* Reveal-on-scroll. JS toggles .is-visible. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.18s; }
+.reveal-delay-3 { transition-delay: 0.28s; }
+.reveal-delay-4 { transition-delay: 0.38s; }
+
+/* Decorative "stamp" — used for number badges (01 / 02 / 03). */
+.stamp {
+  font-family: var(--font-display);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  transform: rotate(-6deg);
+}
+
+/* "Polaroid" — image card with tape edge. */
+.polaroid {
+  position: relative;
+  background: var(--color-caparol);
+  padding: 0.625rem 0.625rem 3.25rem;
+  box-shadow:
+    0 18px 35px -10px rgba(6, 15, 44, 0.55),
+    0 6px 12px -4px rgba(6, 15, 44, 0.35);
+  border-radius: 6px;
+}
+.polaroid::before {
+  content: "";
+  position: absolute;
+  inset: -10px 28% auto 28%;
+  height: 22px;
+  background: rgba(250, 222, 170, 0.7);
+  border: 1px solid rgba(232, 183, 85, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transform: rotate(-2deg);
+}
+
+/* Hand-drawn underline using SVG-data-uri — applied as a background. */
+.hand-underline {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 30 -2 60 6 T 120 6 T 198 4' fill='none' stroke='%23fadeaa' stroke-width='4' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 0.45em;
+  padding-bottom: 0.15em;
+}
+
+/* Dotted "schoolbook" rule — for QueEs / page-margins feel. */
+.dotted-rule {
+  background-image: radial-gradient(circle, currentColor 1.5px, transparent 1.5px);
+  background-size: 12px 12px;
+  background-position: left center;
+  background-repeat: repeat-x;
+  height: 12px;
+  opacity: 0.5;
+}
+
+/* "Paper" surface used for cards on light backgrounds. */
+.paper {
+  background:
+    radial-gradient(
+      120% 80% at 20% 0%,
+      rgba(250, 222, 170, 0.18) 0%,
+      transparent 60%),
+    var(--color-caparol);
+  position: relative;
+}
+.paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  border-radius: inherit;
+}
+
+/* Slight tilts for storybook scatter. */
+.tilt-l1 { transform: rotate(-2deg); }
+.tilt-l2 { transform: rotate(-4deg); }
+.tilt-r1 { transform: rotate(2deg); }
+.tilt-r2 { transform: rotate(4deg); }
+
+/* Reduced motion respect. */
+@media (prefers-reduced-motion: reduce) {
+  .anim-float, .anim-float-soft, .anim-sway, .anim-drift, .anim-pulse {
+    animation: none !important;
+  }
+  .reveal { transition: none !important; opacity: 1; transform: none; }
 }

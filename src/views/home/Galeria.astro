@@ -1,0 +1,68 @@
+---
+import cueva from './img/galeria-cueva.webp?url';
+import obertura from './img/galeria-obertura.webp?url';
+import musical from './img/galeria-musical.webp?url';
+import delMusical from './img/galeria-del-musical.webp?url';
+
+const imagenes = [
+  { src: cueva, alt: 'SLPH en la Cueva Pintada', label: 'Cueva Pintada', tilt: 'tilt-l1' },
+  { src: obertura, alt: 'Obertura con la OFGC', label: 'Obertura · OFGC', tilt: 'tilt-r2' },
+  { src: musical, alt: 'Escena del musical SLPH', label: 'El musical', tilt: 'tilt-l2' },
+  { src: delMusical, alt: 'Del musical al cuento', label: 'Del musical al cuento', tilt: 'tilt-r1' },
+];
+---
+
+<section class="relative">
+  <div class="mx-auto max-w-6xl px-6 py-20 sm:py-28">
+    <div class="reveal flex flex-col items-center text-center">
+      <p class="font-hand text-3xl text-arena sm:text-4xl">recuerdos del fondo del mar</p>
+      <h3 class="mt-2 font-display text-[clamp(2rem,6vw,4.5rem)] leading-tight">
+        ¿Quieres
+        <span class="hand-underline text-arena">ver más</span>?
+      </h3>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-10 sm:gap-12 md:grid-cols-2 md:gap-10">
+      {
+        imagenes.map(({ src, alt, label, tilt }, i) => (
+          <figure
+            class:list={[
+              'reveal group relative mx-auto w-full max-w-md',
+              `reveal-delay-${(i % 4) + 1}`,
+            ]}
+          >
+            <div
+              class:list={[
+                'polaroid transition duration-500 hover:rotate-0 hover:!scale-[1.03] hover:shadow-2xl',
+                tilt,
+              ]}
+            >
+              <img
+                src={src}
+                alt={alt}
+                class="aspect-[3/2] w-full object-cover"
+                loading="lazy"
+              />
+              <figcaption class="mt-2 text-center font-hand text-2xl text-azul">
+                {label}
+              </figcaption>
+            </div>
+          </figure>
+        ))
+      }
+    </div>
+
+    <div class="reveal mt-14 flex flex-col items-center gap-3 text-center">
+      <p class="text-base sm:text-lg">No te pierdas nuestra</p>
+      <a
+        href="/eventos"
+        class="group inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95 sm:text-2xl"
+      >
+        Galería de eventos pasados
+        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

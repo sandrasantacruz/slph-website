@@ -23,12 +23,18 @@ importers:
       '@blocknote/react':
         specifier: ^0.50.0
         version: 0.50.0(@floating-ui/dom@1.7.6)(@types/hast@3.0.4)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@fontsource-variable/caveat':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@fontsource/londrina-solid':
         specifier: ^5.2.7
         version: 5.2.7
       '@fontsource/varela-round':
         specifier: ^5.2.8
         version: 5.2.8
+      '@iconify-json/game-icons':
+        specifier: ^1.2.4
+        version: 1.2.4
       '@iconify-json/simple-icons':
         specifier: ^1.2.81
         version: 1.2.81
@@ -473,6 +479,9 @@ packages:
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
 
+  '@fontsource-variable/caveat@5.2.8':
+    resolution: {integrity: sha512-Iv+G8xn0pKG7RtanBmYGMjIfkO819N13LXZBwmRVcgfJvJwKVom/v3KT9pwANXTSoUbPeRp228twRDK7hcabLw==}
+
   '@fontsource/londrina-solid@5.2.7':
     resolution: {integrity: sha512-jESt0e2k2MCjSttOYuhof05rr6THnI5MO+J4eYj0RcwblvI3NfZPfsUwfjDiYoOAZfIgnwOZVZd3F3ORgshtew==}
 
@@ -485,6 +494,9 @@ packages:
       prosemirror-model: ^1.0.0
       prosemirror-state: ^1.0.0
       prosemirror-view: ^1.0.0
+
+  '@iconify-json/game-icons@1.2.4':
+    resolution: {integrity: sha512-/HDDZxowXgDJcOEwPspUCq5RuDdl25OyZKdtxqqiPJQNTrWIym7r4StLzIVs77DyNzOWWhH5wDqwYR3WHeDfkg==}
 
   '@iconify-json/simple-icons@1.2.81':
     resolution: {integrity: sha512-Utjw4sPtoVdbpAQAkC4O0cYpt4ehQZYr6aFHhmvdeW8mQwkINyAe0ogTPqNptSSKogZ2lfgXM8zpuhO961Wnng==}
@@ -3419,6 +3431,8 @@ snapshots:
 
   '@floating-ui/utils@0.2.11': {}
 
+  '@fontsource-variable/caveat@5.2.8': {}
+
   '@fontsource/londrina-solid@5.2.7': {}
 
   '@fontsource/varela-round@5.2.8': {}
@@ -3430,6 +3444,10 @@ snapshots:
       prosemirror-state: 1.4.4
       prosemirror-transform: 1.12.0
       prosemirror-view: 1.41.8
+
+  '@iconify-json/game-icons@1.2.4':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify-json/simple-icons@1.2.81':
     dependencies:

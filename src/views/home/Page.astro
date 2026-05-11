@@ -1,8 +1,52 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
+import QueEs from './QueEs.astro';
+import Versatilidad from './Versatilidad.astro';
+import PorQueUrgente from './PorQueUrgente.astro';
+import SabiasQue from './SabiasQue.astro';
+import CuentoFascina from './CuentoFascina.astro';
+import QuienDetras from './QuienDetras.astro';
+import Galeria from './Galeria.astro';
+import NosEchasUnaAleta from './NosEchasUnaAleta.astro';
+import EquipoEntidad from './EquipoEntidad.astro';
+import Colaboran from './Colaboran.astro';
 ---
 
-<MainLayout description="Un cuento que conecta con el mar.">
+<MainLayout description="Si los peces hablaran… — un programa de concienciación medioambiental que protege los ecosistemas marinos a través de las artes, las ciencias y la educación.">
   <Hero />
+  <QueEs />
+  <Versatilidad />
+  <PorQueUrgente />
+  <SabiasQue />
+  <CuentoFascina />
+  <QuienDetras />
+  <Galeria />
+  <NosEchasUnaAleta />
+  <EquipoEntidad />
+  <Colaboran />
 </MainLayout>
+
+<script>
+  // Scroll-triggered reveal — toggles `.is-visible` on `.reveal` elements
+  // once they enter the viewport. CSS handles the transition.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (reduceMotion) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>

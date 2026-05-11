@@ -1,0 +1,89 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const socials = [
+  {
+    label: 'Facebook',
+    href: 'https://www.facebook.com/silospeceshablaran/',
+    icon: 'simple-icons:facebook',
+  },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/silospeceshablaran/',
+    icon: 'simple-icons:instagram',
+  },
+  {
+    label: 'YouTube',
+    href: 'https://youtube.com/channel/UCjGxWnleLDsYbm7rSkopmFw',
+    icon: 'simple-icons:youtube',
+  },
+];
+---
+
+<section class="relative isolate overflow-hidden">
+  <!-- Deeper gradient bleed -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-azul/0 via-azul-deep/40 to-azul-deep/60" aria-hidden="true"></div>
+
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 sm:py-28 md:grid-cols-[1.4fr_1fr]">
+    <div class="reveal">
+      <p class="font-hand text-3xl text-arena sm:text-4xl">¿y tú?</p>
+      <h2 class="mt-2 font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.92]">
+        ¿Nos echas
+        <span class="block">
+          <span class="hand-underline text-arena">una aleta</span>?
+        </span>
+      </h2>
+
+      <p class="mt-6 text-lg leading-relaxed sm:text-xl">
+        Preservar nuestros mares y sus ecosistemas no es solo un deber
+        moral — <strong class="text-arena">nuestra supervivencia depende de ello</strong>.
+      </p>
+
+      <p class="mt-4 text-base leading-relaxed text-caparol/90 sm:text-lg">
+        SLPH busca promover conciencia en la protección del medioambiente
+        en todas las edades, tanto de forma particular como de la mano
+        de instituciones y empresas. Si eres una persona particular,
+        puedes empezar con labores sencillas: reciclar y reutilizar.
+        En nuestro blog y redes proponemos ideas para reducir tu huella
+        ecológica — ¡no dejes de seguirnos!
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center gap-3">
+        <span class="font-hand text-2xl text-arena/80 sm:text-3xl">síguenos&nbsp;→</span>
+        {
+          socials.map(({ label, href, icon }) => (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener"
+              aria-label={label}
+              class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-caparol/40 text-caparol transition hover:scale-110 hover:border-arena hover:bg-arena hover:text-azul"
+            >
+              <Icon name={icon} class="h-6 w-6" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-1 relative flex justify-center md:justify-end">
+      <!-- Decorative spiral behind -->
+      <svg
+        class="absolute inset-0 m-auto h-72 w-72 -rotate-12 text-arena/20 sm:h-96 sm:w-96"
+        viewBox="0 0 100 100"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="0.5"
+        aria-hidden="true"
+      >
+        <path d="M50 50 m-30 0 a30 30 0 1 1 60 0 a25 25 0 1 1 -50 0 a20 20 0 1 1 40 0 a15 15 0 1 1 -30 0 a10 10 0 1 1 20 0"/>
+      </svg>
+      <img
+        src="/assets/animals/dona-paciencia.webp"
+        alt="Doña Paciencia, ilustración del cuento"
+        class="anim-float relative w-full max-w-xs drop-shadow-2xl sm:max-w-sm"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>

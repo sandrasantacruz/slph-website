@@ -1,0 +1,82 @@
+---
+import nenasLeyendo from './img/nenas-leyendo.webp?url';
+---
+
+<section id="la-historia" class="relative">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 sm:py-28 md:grid-cols-2 md:gap-16">
+    <!-- Polaroid image with sticker label -->
+    <div class="reveal relative mx-auto w-full max-w-md">
+      <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
+        <img
+          src={nenasLeyendo}
+          alt="Niñas leyendo el cuento Si los peces hablaran"
+          class="aspect-[4/5] w-full object-cover"
+          loading="lazy"
+        />
+        <p class="absolute bottom-2 left-0 right-0 text-center font-hand text-4xl leading-none text-azul">
+          ¡fascinadas!
+        </p>
+      </div>
+      <!-- Sticker -->
+      <div
+        class="absolute -right-6 -top-6 flex h-24 w-24 rotate-12 items-center justify-center rounded-full bg-arena font-display text-azul shadow-xl"
+        aria-hidden="true"
+      >
+        <span class="text-center text-sm leading-tight">
+          REALIDAD<br/>AUMENTADA
+        </span>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <p class="font-hand text-3xl text-arena sm:text-4xl">el cuento</p>
+      <h2 class="mt-2 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95]">
+        Un cuento que
+        <span class="block">
+          <span class="hand-underline text-arena">fascina</span>
+        </span>
+        a peques y no tan peques
+      </h2>
+
+      <p class="mt-6 text-lg leading-relaxed sm:text-xl">
+        <span class="float-left mr-3 font-display text-7xl leading-[0.7] text-arena">S</span>i
+        los peces hablaran… narra una historia cautivadora situada en el
+        litoral canario. Sus protagonistas —que nadan incluso fuera de
+        sus páginas gracias a la
+        <a
+          href="https://play.google.com/store/apps/details?id=com.Dom3D.SLPHSiLosPecesHablaran"
+          target="_blank"
+          rel="noopener"
+          class="font-display text-celeste underline decoration-arena decoration-2 underline-offset-4 hover:text-arena"
+        >tecnología de realidad aumentada</a>—
+        se embarcarán en una aventura para proteger su hogar.
+      </p>
+
+      <p class="mt-4 text-lg leading-relaxed sm:text-xl">
+        No te pierdas las aventuras de
+        <strong class="font-display text-2xl text-arena">Lorena</strong>,
+        <strong class="font-display text-2xl text-arena">Nela La Irritable</strong>,
+        <strong class="font-display text-2xl text-arena">Dina La Voladora</strong>,
+        <strong class="font-display text-2xl text-arena">Don Canino</strong>
+        y todos sus amigos.
+      </p>
+
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
+        <a
+          href="/lee-un-fragmento"
+          class="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-caparol px-6 py-3 font-display text-xl text-caparol transition hover:bg-caparol hover:text-azul sm:text-2xl"
+        >
+          Leer un fragmento
+          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a
+          href="/comprar"
+          class="group inline-flex items-center justify-center gap-2 rounded-full bg-arena px-6 py-3 font-display text-xl text-negro transition hover:brightness-95 sm:text-2xl"
+        >
+          Dónde comprarlo
+          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
