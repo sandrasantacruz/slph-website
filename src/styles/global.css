@@ -35,6 +35,11 @@
 @layer base {
   html {
     background-color: var(--color-azul);
+    background-image: url("/assets/background.webp");
+    background-position: right top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: var(--color-caparol);
   }
   body {

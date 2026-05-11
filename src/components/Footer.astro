@@ -47,8 +47,13 @@ const legal = [
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-16 border-t border-white/10 bg-azul">
-  <div class="mx-auto max-w-6xl px-4 py-12">
+<footer class="relative isolate mt-32 min-h-[36rem] overflow-hidden">
+  <div
+    class="absolute inset-0 -z-10 bg-[url('/assets/background-end.webp')] bg-[position:50%_100%] bg-cover bg-no-repeat [mask-image:linear-gradient(to_bottom,transparent_0%,black_40%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_40%)]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="mx-auto max-w-6xl px-4 pt-48 pb-12">
     <div class="grid gap-10 md:grid-cols-3">
       {
         sections.map(({ title, links }) => (
