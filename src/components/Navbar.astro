@@ -1,7 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/logo.png';
-
 const links = [
   { href: '/', label: 'Inicio' },
   { href: '/programa', label: 'Programa' },
@@ -16,7 +13,7 @@ const currentPath = Astro.url.pathname;
 <header class="border-b border-white/10 bg-azul">
   <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
     <a href="/" class="flex items-center gap-3" aria-label="Si los peces hablaran — Inicio">
-      <Image src={logo} alt="Si los peces hablaran" widths={[80, 160]} sizes="80px" class="h-12 w-auto" />
+      <img src="/assets/logo.png" alt="Si los peces hablaran" width="2072" height="1492" class="h-12 w-auto" />
     </a>
 
     <nav class="hidden items-center gap-6 md:flex" aria-label="Principal">
@@ -69,7 +66,7 @@ const currentPath = Astro.url.pathname;
   >
     <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
       <a href="/" class="flex items-center gap-3" aria-label="Si los peces hablaran — Inicio">
-        <Image src={logo} alt="Si los peces hablaran" widths={[80, 160]} sizes="80px" class="h-12 w-auto" />
+        <img src="/assets/logo.png" alt="Si los peces hablaran" width="2072" height="1492" class="h-12 w-auto" />
       </a>
       <button
         type="button"

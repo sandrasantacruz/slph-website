@@ -42,6 +42,11 @@ async function proxyAnalytics(request: Request, url: URL, clientIp: string | und
 }
 
 export const onRequest = defineMiddleware(async (context, next) => {
+
+  if (context.isPrerendered) {
+    return next();
+  }
+
   const { pathname } = context.url;
 
   if (pathname === ANALYTICS_PREFIX || pathname.startsWith(`${ANALYTICS_PREFIX}/`)) {

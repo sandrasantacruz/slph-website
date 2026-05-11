@@ -1,5 +1,7 @@
 import type { APIRoute } from 'astro';
 
+export const prerender = false;
+
 function draftSlug(): string {
   const rand = Math.random().toString(36).slice(2, 10);
   return `draft-${rand}`;

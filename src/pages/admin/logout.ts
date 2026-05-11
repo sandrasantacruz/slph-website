@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { clearAuthCookie } from '../../lib/pb';
 
+export const prerender = false;
+
 export const POST: APIRoute = () =>
   new Response(null, {
     status: 303,
