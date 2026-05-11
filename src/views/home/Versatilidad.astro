@@ -51,7 +51,7 @@ const columnas = [
         columnas.map(({ titulo, imagen, alt, texto, tilt }, i) => (
           <article
             class:list={[
-              'reveal group polaroid flex flex-col gap-3 transition duration-500 hover:rotate-0 hover:!scale-105 hover:shadow-2xl',
+              'reveal group polaroid flex flex-col gap-3 transition duration-500 hover:rotate-0 hover:shadow-2xl',
               tilt,
               `reveal-delay-${i + 1}`,
             ]}
@@ -60,7 +60,7 @@ const columnas = [
               <img
                 src={imagen}
                 alt={alt}
-                class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-110"
+                class="aspect-video w-full object-cover"
                 loading="lazy"
               />
             </div>
