@@ -10,7 +10,7 @@ const links = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed inset-x-0 top-0 z-40">
+<header class="relative">
   <div
     class="pointer-events-none absolute inset-x-0 top-0 h-40 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_45%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_45%,transparent)]"
     aria-hidden="true"
@@ -104,8 +104,6 @@ const currentPath = Astro.url.pathname;
     </nav>
   </div>
 </header>
-
-<div class="h-24" aria-hidden="true"></div>
 
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
