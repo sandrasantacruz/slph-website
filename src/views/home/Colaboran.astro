@@ -13,46 +13,126 @@ const logos = [
 ---
 
 <section class="relative">
-  <div class="mx-auto max-w-5xl px-6 pb-24 pt-16 sm:pb-32">
+  <div class="mx-auto max-w-5xl px-6 pb-24 pt-32 sm:pb-32 sm:pt-40">
     <div class="reveal relative">
-      <!-- Anchor SVG behind -->
-      <svg
-        class="pointer-events-none absolute left-1/2 top-0 h-32 w-32 -translate-x-1/2 -translate-y-12 text-arena/30 sm:h-40 sm:w-40"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="5" r="2"/>
-        <path d="M12 7v14"/>
-        <path d="M8 10h8"/>
-        <path d="M5 17a7 7 0 0 0 14 0"/>
-        <path d="M3 17h2"/>
-        <path d="M19 17h2"/>
-      </svg>
+      <!-- Anchor descending on a rope into the card -->
+      <div class="pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-[58%]">
+        <svg
+          class="anim-sway h-28 w-14 text-arena-deep drop-shadow-[0_4px_12px_rgba(6,15,44,0.45)] sm:h-32 sm:w-16"
+          viewBox="0 0 40 110"
+          fill="none"
+          aria-hidden="true"
+          style="transform-origin: 50% 5%;"
+        >
+          <!-- Twisted rope -->
+          <path
+            d="M20 0 Q 23 10 18 20 Q 23 30 18 40 Q 23 50 20 60"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            opacity="0.75"
+          />
+          <!-- Anchor ring -->
+          <circle cx="20" cy="66" r="3.5" stroke="currentColor" stroke-width="2" fill="none"/>
+          <!-- Shaft -->
+          <path d="M20 70 v24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Crossbar -->
+          <path d="M13 76 h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Flukes -->
+          <path
+            d="M8 92 a12 12 0 0 0 24 0"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            fill="none"
+          />
+          <path d="M6 92 l4 -4 M34 92 l-4 -4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
 
-      <div class="relative rounded-[2.5rem] bg-caparol/95 p-10 text-azul shadow-2xl sm:p-14">
-        <p class="text-center font-hand text-3xl text-azul/60 sm:text-4xl">anclamos con…</p>
-        <h3 class="mt-1 text-center font-display text-3xl uppercase tracking-[0.2em] sm:text-4xl">
-          Colaboran
+      <!-- Paper card -->
+      <div
+        class="paper relative overflow-hidden rounded-[2.5rem] p-10 text-azul ring-1 ring-arena/40 shadow-[0_30px_60px_-20px_rgba(6,15,44,0.55)] sm:p-14"
+      >
+        <!-- Wave pattern, bottom-left -->
+        <svg
+          class="pointer-events-none absolute -bottom-6 -left-6 h-36 w-36 text-azul/[0.07] sm:h-44 sm:w-44"
+          viewBox="0 0 100 100"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.4"
+          aria-hidden="true"
+        >
+          <path d="M0 30 Q 25 10 50 30 T 100 30 M0 50 Q 25 30 50 50 T 100 50 M0 70 Q 25 50 50 70 T 100 70" stroke-linecap="round"/>
+        </svg>
+        <!-- Wave pattern, top-right (mirrored) -->
+        <svg
+          class="pointer-events-none absolute -right-6 -top-6 h-36 w-36 -scale-x-100 text-azul/[0.07] sm:h-44 sm:w-44"
+          viewBox="0 0 100 100"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.4"
+          aria-hidden="true"
+        >
+          <path d="M0 30 Q 25 10 50 30 T 100 30 M0 50 Q 25 30 50 50 T 100 50 M0 70 Q 25 50 50 70 T 100 70" stroke-linecap="round"/>
+        </svg>
+
+        <p class="relative text-center font-hand text-3xl text-azul/55 sm:text-4xl">anclamos con…</p>
+        <h3 class="relative mt-2 text-center font-display text-4xl leading-tight sm:text-5xl">
+          <span class="relative inline-block">
+            <span
+              class="pointer-events-none absolute inset-x-0 bottom-1 h-3 rounded-full bg-arena-deep/55"
+              aria-hidden="true"
+            ></span>
+            <span class="relative">Colaboran</span>
+          </span>
         </h3>
 
-        <div class="mt-8 grid grid-cols-2 items-center gap-8 sm:mt-10 sm:grid-cols-4 sm:gap-12">
+        <!-- Dotted rule separator -->
+        <div class="dotted-rule relative mx-auto mt-10 w-32 text-azul/40 sm:mt-12"></div>
+
+        <div class="relative mt-10 grid grid-cols-2 items-center gap-x-8 gap-y-12 sm:mt-12 sm:grid-cols-4 sm:gap-x-12">
           {
-            logos.map(({ src, alt }) => (
-              <div class="group flex items-center justify-center">
+            logos.map(({ src, alt }, i) => (
+              <div class="group relative flex items-center justify-center">
+                {i > 0 && (
+                  <span
+                    class="pointer-events-none absolute -left-4 top-1/2 hidden h-12 w-px -translate-y-1/2 bg-gradient-to-b from-transparent via-azul/20 to-transparent sm:block"
+                    aria-hidden="true"
+                  />
+                )}
                 <img
                   src={src}
                   alt={alt}
-                  class="h-16 w-auto object-contain grayscale transition duration-300 group-hover:scale-105 group-hover:grayscale-0 sm:h-20"
+                  class="h-16 w-auto object-contain opacity-80 transition duration-300 ease-out group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:opacity-100 sm:h-20"
                   loading="lazy"
                 />
               </div>
             ))
           }
+        </div>
+
+        <!-- CTA -->
+        <div class="relative mt-12 flex flex-col items-center gap-3 sm:mt-14">
+          <p class="font-hand text-2xl text-azul/60 sm:text-3xl">¿quieres remar con nosotras?</p>
+          <a
+            href="/colabora"
+            class="group/cta inline-flex items-center gap-2 rounded-full bg-azul px-7 py-3 font-display text-lg text-caparol shadow-md transition hover:brightness-110 sm:text-xl"
+          >
+            Echa una aleta
+            <svg
+              viewBox="0 0 24 24"
+              class="h-5 w-5 transition-transform group-hover/cta:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6"/>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
