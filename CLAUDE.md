@@ -89,8 +89,8 @@ src/
 
 Für Full-Viewport-Abschnitte (Hero etc.) `svh` statt `vh` verwenden — sonst
 springt das Layout in mobilen Browsern, wenn die Adressleiste ein-/ausgeblendet
-wird. Die Navbar ist 4.5rem hoch, d.h. ein "voller" Hero unter der Navbar ist
-`min-h-[calc(100svh-4.5rem)]`.
+wird. Die Navbar ist 6rem hoch, d.h. ein "voller" Hero unter der Navbar ist
+`min-h-[calc(100svh-6rem)]`.
 
 ## Theme & Design-Tokens
 

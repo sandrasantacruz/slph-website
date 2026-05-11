@@ -10,58 +10,60 @@ const links = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="relative">
-  <div class="bg-azul/80 backdrop-blur-md">
-    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-      <a href="/" class="flex items-center gap-3" aria-label="Si los peces hablaran — Inicio">
-        <img src="/assets/logo.png" alt="Si los peces hablaran" width="2072" height="1492" class="h-12 w-auto" />
-      </a>
-
-      <nav class="hidden items-center gap-6 md:flex" aria-label="Principal">
-        {
-          links.map(({ href, label }) => {
-            const active = href === '/' ? currentPath === '/' : currentPath.startsWith(href);
-            return (
-              <a
-                href={href}
-                class:list={[
-                  'text-base text-caparol/90 transition-colors hover:text-caparol',
-                  active && 'text-caparol underline underline-offset-4 decoration-arena',
-                ]}
-              >
-                {label}
-              </a>
-            );
-          })
-        }
-      </nav>
-
-      <div class="flex items-center gap-2">
-        <a
-          href="/comprar"
-          class="rounded-lg bg-arena px-4 py-2 font-display text-lg text-negro transition hover:brightness-95 md:px-5 md:text-2xl"
-        >
-          Comprar libro
-        </a>
-
-        <button
-          type="button"
-          class="md:hidden rounded p-2 text-caparol"
-          aria-label="Abrir menú"
-          aria-controls="mobile-nav"
-          aria-expanded="false"
-          data-nav-toggle
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-
+<header class="fixed inset-x-0 top-0 z-40">
   <div
-    class="pointer-events-none absolute inset-x-0 top-full h-32 bg-gradient-to-b from-azul/70 to-transparent backdrop-blur-md [mask-image:linear-gradient(to_bottom,black,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]"
+    class="pointer-events-none absolute inset-x-0 top-0 h-40 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_45%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_45%,transparent)]"
     aria-hidden="true"
   ></div>
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-azul/85 via-azul/45 to-transparent"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2">
+    <a href="/" class="flex items-center gap-3" aria-label="Si los peces hablaran — Inicio">
+      <img src="/assets/logo.png" alt="Si los peces hablaran" width="2072" height="1492" class="h-20 w-auto" />
+    </a>
+
+    <nav class="hidden items-center gap-6 md:flex" aria-label="Principal">
+      {
+        links.map(({ href, label }) => {
+          const active = href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+          return (
+            <a
+              href={href}
+              class:list={[
+                'text-base text-caparol/90 transition-colors hover:text-caparol',
+                active && 'text-caparol underline underline-offset-4 decoration-arena',
+              ]}
+            >
+              {label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href="/comprar"
+        class="rounded-lg bg-arena px-4 py-2 font-display text-lg text-negro transition hover:brightness-95 md:px-5 md:text-2xl"
+      >
+        Comprar libro
+      </a>
+
+      <button
+        type="button"
+        class="md:hidden rounded p-2 text-caparol"
+        aria-label="Abrir menú"
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+        data-nav-toggle
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
 
   <div
     id="mobile-nav"
@@ -73,7 +75,7 @@ const currentPath = Astro.url.pathname;
   >
     <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
       <a href="/" class="flex items-center gap-3" aria-label="Si los peces hablaran — Inicio">
-        <img src="/assets/logo.png" alt="Si los peces hablaran" width="2072" height="1492" class="h-12 w-auto" />
+        <img src="/assets/logo.png" alt="Si los peces hablaran" width="2072" height="1492" class="h-20 w-auto" />
       </a>
       <button
         type="button"
@@ -102,6 +104,8 @@ const currentPath = Astro.url.pathname;
     </nav>
   </div>
 </header>
+
+<div class="h-24" aria-hidden="true"></div>
 
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');

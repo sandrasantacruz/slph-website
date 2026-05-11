@@ -35,7 +35,9 @@
 @layer base {
   html {
     background-color: var(--color-azul);
-    background-image: url("/assets/background.webp");
+    background-image:
+      linear-gradient(rgba(11, 32, 86, 0.55), rgba(11, 32, 86, 0.55)),
+      url("/assets/background.webp");
     background-position: right top;
     background-size: cover;
     background-repeat: no-repeat;
