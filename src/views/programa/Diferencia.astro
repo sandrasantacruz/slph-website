@@ -1,0 +1,31 @@
+---
+const puntos = [
+  'Ofrecemos un programa con dilatada y comprometida trayectoria, dirigido por una licenciada con amplia experiencia docente.',
+  'Somos un equipo heterogéneo de profesionales cualificados en diversas disciplinas artísticas para cubrir diferentes propuestas.',
+  'Realizamos eventos artísticos para sensibilizar y NO actividades de ocio llevadas a cabo por “monitores” buscando entretener.',
+  'Nuestro programa se empodera al aglutinar cultura, educación y medioambiente.',
+  'Ha demostrado que empatiza fácilmente tanto con menores como con adultos.',
+  'Tiene como fortaleza su versatilidad, en pro, de los mensajes de nuestra obra.',
+  'Nuestra información está supervisada por investigadoras marinas de la Facultad de Ciencias del Mar de la ULPGC.',
+];
+---
+
+<section class="mx-auto max-w-4xl px-4 py-12 pb-24 sm:py-16 sm:pb-32">
+  <h2 class="font-display text-3xl text-celeste sm:text-5xl">
+    ¿Qué nos diferencia?
+  </h2>
+
+  <ul class="mt-8 space-y-4">
+    {
+      puntos.map((p) => (
+        <li class="flex gap-3 text-base text-caparol/90 sm:text-lg">
+          <span
+            aria-hidden="true"
+            class="mt-2 inline-block h-2 w-2 shrink-0 rounded-full bg-arena"
+          />
+          <span>{p}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>

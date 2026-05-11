@@ -51,14 +51,39 @@ Stattdessen:
 
 `Navbar`/`Footer` werden **niemals** auf Admin-Seiten gerendert.
 
-## Page-Komposition
+## Page-Komposition & Views
 
-Seiten unter `src/pages/` bleiben dünn: sie importieren ein Layout und setzen
-die Section-Komponenten aus `src/components/` zusammen. Markup für einen
-konkreten Abschnitt (Hero, FeatureGrid, etc.) gehört **nicht** direkt in die
-Page-Datei, sondern in eine eigene `.astro`-Komponente — auch wenn sie nur
-einmal verwendet wird. Das hält die Pages lesbar als Inhaltsverzeichnis und
-macht spätere Wiederverwendung/Umstellung schmerzlos.
+Jede Seite hat einen eigenen Ordner unter `src/views/<route>/`. Darin liegt
+`Page.astro` (importiert das Layout und komponiert die Section-Komponenten)
+sowie die page-spezifischen Sections (Hero, FeatureGrid, etc.) als eigene
+`.astro`-Dateien daneben — auch wenn eine Section nur einmal verwendet wird.
+
+Die Datei unter `src/pages/<route>.astro` dient ausschließlich dem
+Astro-Routing und ist ein dünner Wrapper, der die View rendert:
+
+```astro
+---
+import Page from '../views/programa/Page.astro';
+---
+<Page />
+```
+
+`src/components/` ist **nur** für seitenübergreifend wiederverwendete
+Komponenten reserviert (Navbar, Footer, Bubbles, generische UI-Bausteine).
+Page-spezifische Sections gehören dort **nicht** hin.
+
+Resultierende Struktur:
+
+```
+src/
+  components/         # geteilte Bausteine
+  views/
+    <route>/
+      Page.astro      # Layout + Section-Komposition
+      <Section>.astro # page-spezifische Sections
+  pages/
+    <route>.astro     # 3-Zeiler, rendert <Page />
+```
 
 ## Viewport-Höhen
 

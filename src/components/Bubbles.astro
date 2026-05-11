@@ -1,0 +1,65 @@
+---
+const bubbles = Array.from({ length: 10 }, (_, i) => i + 1);
+---
+
+<div class="bubbles" aria-hidden="true">
+  {bubbles.map((n) => <div class={`bubble bubble-${n}`}></div>)}
+</div>
+
+<style is:global>
+  .bubbles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.5;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .bubble {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow:
+      0 20px 30px rgba(0, 0, 0, 0.2),
+      inset 0 10px 30px 5px rgba(255, 255, 255, 1);
+  }
+  .bubble::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0) 70%
+    );
+    box-shadow: inset 0 20px 30px rgba(255, 255, 255, 0.3);
+  }
+
+  .bubble-1  { left: -5%; top:  5%; transform: scale(0.6); animation: bubble-up 25s linear infinite, bubble-side 2s ease-in-out infinite alternate; }
+  .bubble-2  { left:  5%; top: 80%; transform: scale(0.4); animation: bubble-up 20s linear infinite, bubble-side 4s ease-in-out infinite alternate; }
+  .bubble-3  { left: 10%; top: 40%; transform: scale(0.7); animation: bubble-up 28s linear infinite, bubble-side 2s ease-in-out infinite alternate; }
+  .bubble-4  { left: 20%; top:  0;  transform: scale(0.3); animation: bubble-up 22s linear infinite, bubble-side 3s ease-in-out infinite alternate; }
+  .bubble-5  { left: 30%; top: 50%; transform: scale(0.5); animation: bubble-up 29s linear infinite, bubble-side 4s ease-in-out infinite alternate; }
+  .bubble-6  { left: 50%; top:  0;  transform: scale(0.8); animation: bubble-up 21s linear infinite, bubble-side 2s ease-in-out infinite alternate; }
+  .bubble-7  { left: 65%; top: 70%; transform: scale(0.4); animation: bubble-up 20s linear infinite, bubble-side 2s ease-in-out infinite alternate; }
+  .bubble-8  { left: 80%; top: 10%; transform: scale(0.3); animation: bubble-up 22s linear infinite, bubble-side 3s ease-in-out infinite alternate; }
+  .bubble-9  { left: 90%; top: 50%; transform: scale(0.6); animation: bubble-up 29s linear infinite, bubble-side 4s ease-in-out infinite alternate; }
+  .bubble-10 { left: 80%; top: 80%; transform: scale(0.3); animation: bubble-up 26s linear infinite, bubble-side 2s ease-in-out infinite alternate; }
+
+  @keyframes bubble-up {
+    0%   { margin-top: 1000px; }
+    100% { margin-top: -100%; }
+  }
+  @keyframes bubble-side {
+    0%   { margin-left: 0; }
+    100% { margin-left: 50px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bubble { animation: none !important; }
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+const principios = [
+  {
+    titulo: 'Nuestra misión',
+    texto:
+      'Concienciar sobre el riesgo de los vertidos marinos haciendo frente a actitudes irresponsables, e implicar a la sociedad en la reacción.',
+  },
+  {
+    titulo: 'Nuestra visión',
+    texto:
+      'Sensibilizar y despertar el amor por la fauna marina a través de la creatividad, evitando que se utilice el mar como un vertedero.',
+  },
+  {
+    titulo: 'Nuestro lema',
+    texto: '«No te quedes de aletas cruzadas»',
+  },
+];
+---
+
+<section class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
+  <div class="grid gap-6 md:grid-cols-3">
+    {
+      principios.map((p) => (
+        <article class="rounded-2xl border border-caparol/15 bg-caparol/5 p-6 sm:p-8">
+          <h2 class="font-display text-2xl text-arena sm:text-3xl">
+            {p.titulo}
+          </h2>
+          <p class="mt-4 text-base text-caparol/90 sm:text-lg">{p.texto}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
