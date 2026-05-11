@@ -53,11 +53,15 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: var(--color-caparol);
+    /* Prevent decorative absolute/rotated elements from creating
+       a horizontal scroll gutter on mobile. */
+    overflow-x: clip;
   }
   body {
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
+    overflow-x: clip;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
