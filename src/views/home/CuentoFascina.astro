@@ -1,34 +1,37 @@
 ---
+import { Icon } from 'astro-icon/components';
 import nenasLeyendo from './img/nenas-leyendo.webp?url';
 ---
 
 <section id="la-historia" class="relative">
-  <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 sm:py-28 md:grid-cols-2 md:gap-16">
+  <div class="mx-auto grid max-w-6xl gap-x-12 gap-y-12 px-6 py-20 sm:py-28 md:grid-cols-2 md:items-center md:gap-x-16 md:gap-y-8">
     <!-- Polaroid image with sticker label -->
-    <div class="reveal relative mx-auto w-full max-w-md">
-      <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
-        <img
-          src={nenasLeyendo}
-          alt="Niñas leyendo el cuento Si los peces hablaran"
-          class="aspect-[4/5] w-full object-cover"
-          loading="lazy"
-        />
-        <p class="absolute bottom-2 left-0 right-0 text-center font-hand text-4xl leading-none text-azul">
-          ¡fascinadas!
-        </p>
-      </div>
-      <!-- Sticker -->
-      <div
-        class="absolute -right-6 -top-6 flex h-24 w-24 rotate-12 items-center justify-center rounded-full bg-arena font-display text-azul shadow-xl"
-        aria-hidden="true"
-      >
-        <span class="text-center text-sm leading-tight">
-          REALIDAD<br/>AUMENTADA
-        </span>
+    <div class="reveal mx-auto w-full max-w-md md:col-start-1 md:row-start-1 md:self-end">
+      <div class="relative">
+        <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
+          <img
+            src={nenasLeyendo}
+            alt="Niñas leyendo el cuento Si los peces hablaran"
+            class="block h-auto w-full"
+            loading="lazy"
+          />
+          <p class="absolute bottom-2 left-0 right-0 text-center font-hand text-4xl leading-none text-azul">
+            ¡fascinadas!
+          </p>
+        </div>
+        <!-- Sticker -->
+        <div
+          class="absolute -right-6 -top-6 flex h-24 w-24 rotate-12 items-center justify-center rounded-full bg-arena font-display text-azul shadow-xl"
+          aria-hidden="true"
+        >
+          <span class="text-center text-sm leading-tight">
+            REALIDAD<br/>AUMENTADA
+          </span>
+        </div>
       </div>
     </div>
 
-    <div class="reveal reveal-delay-1">
+    <div class="reveal reveal-delay-1 md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
       <p class="font-hand text-3xl text-arena sm:text-4xl">el cuento</p>
       <h2 class="mt-2 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95]">
         Un cuento que
@@ -41,14 +44,8 @@ import nenasLeyendo from './img/nenas-leyendo.webp?url';
       <p class="mt-6 text-lg leading-relaxed sm:text-xl">
         <span class="float-left mr-3 font-display text-7xl leading-[0.7] text-arena">S</span>i
         los peces hablaran… narra una historia cautivadora situada en el
-        litoral canario. Sus protagonistas —que nadan incluso fuera de
-        sus páginas gracias a la
-        <a
-          href="https://play.google.com/store/apps/details?id=com.Dom3D.SLPHSiLosPecesHablaran"
-          target="_blank"
-          rel="noopener"
-          class="font-display text-celeste underline decoration-arena decoration-2 underline-offset-4 hover:text-arena"
-        >tecnología de realidad aumentada</a>—
+        litoral canario. Sus protagonistas, que nadan incluso fuera de
+        sus páginas gracias a la tecnología de realidad aumentada,
         se embarcarán en una aventura para proteger su hogar.
       </p>
 
@@ -76,6 +73,42 @@ import nenasLeyendo from './img/nenas-leyendo.webp?url';
           Dónde comprarlo
           <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
+      </div>
+    </div>
+
+    <!-- AR app callout -->
+    <div class="reveal mx-auto w-full max-w-md md:col-start-1 md:row-start-2 md:self-start">
+      <div class="rounded-2xl border border-celeste/30 bg-azul/40 p-5 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-6">
+        <p class="font-hand text-xl text-arena sm:text-2xl">¡salen del libro!</p>
+        <p class="mt-1 font-display text-lg leading-tight text-caparol sm:text-xl">
+          Descarga la app de realidad aumentada
+        </p>
+        <div class="mt-4 flex flex-col gap-3 sm:flex-row">
+          <a
+            href="https://play.google.com/store/apps/details?id=com.benknerit.slph"
+            target="_blank"
+            rel="noopener"
+            class="group/store flex items-center gap-3 rounded-xl bg-caparol px-4 py-2.5 text-azul shadow-md transition hover:brightness-95"
+          >
+            <Icon name="simple-icons:googleplay" class="h-7 w-7" aria-hidden="true" />
+            <span class="flex flex-col leading-tight">
+              <span class="text-[0.7rem] uppercase tracking-wider text-azul/70">disponible en</span>
+              <span class="font-display text-lg">Google Play</span>
+            </span>
+          </a>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener"
+            class="group/store flex items-center gap-3 rounded-xl bg-caparol px-4 py-2.5 text-azul shadow-md transition hover:brightness-95"
+          >
+            <Icon name="simple-icons:appstore" class="h-7 w-7" aria-hidden="true" />
+            <span class="flex flex-col leading-tight">
+              <span class="text-[0.7rem] uppercase tracking-wider text-azul/70">disponible en</span>
+              <span class="font-display text-lg">App Store</span>
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
