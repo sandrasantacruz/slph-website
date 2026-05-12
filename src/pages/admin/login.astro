@@ -16,7 +16,7 @@ if (Astro.request.method === 'POST') {
     try {
       await Astro.locals.pb.collection('users').authWithPassword(email, password);
       const next = Astro.url.searchParams.get('next');
-      const target = next?.startsWith('/') ? next : '/admin/posts';
+      const target = next?.startsWith('/') ? next : '/admin/news';
       return new Response(null, {
         status: 303,
         headers: {

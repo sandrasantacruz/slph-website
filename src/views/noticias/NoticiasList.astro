@@ -1,0 +1,80 @@
+---
+import type { RecordModel } from 'pocketbase';
+import { PB_URL } from '../../lib/pb';
+
+interface Props {
+  items: RecordModel[];
+}
+
+const { items } = Astro.props;
+
+const dateFmt = new Intl.DateTimeFormat('es-ES', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+function coverUrl(item: RecordModel, size: string): string | null {
+  const cover = Array.isArray(item.cover) ? item.cover[0] : item.cover;
+  if (!cover) return null;
+  return `${PB_URL}/api/files/${item.collectionId}/${item.id}/${cover}?thumb=${size}`;
+}
+
+function fmtDate(iso: string | undefined): string {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? '' : dateFmt.format(d);
+}
+---
+
+<section class="mx-auto max-w-6xl px-4 pb-24">
+  {items.length === 0 && (
+    <p class="text-caparol/60">Aún no hay noticias publicadas.</p>
+  )}
+
+  {items.length > 0 && (
+    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => {
+        const url = coverUrl(item, '800x500');
+        const href = `/noticias/${item.slug}`;
+        const date = fmtDate(item.published_at);
+        return (
+          <li class="group relative overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-arena/40">
+            <a href={href} class="block">
+              <div class="aspect-[16/10] overflow-hidden bg-azul/40">
+                {url ? (
+                  <img
+                    src={url}
+                    alt=""
+                    loading="lazy"
+                    class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div class="flex h-full items-center justify-center text-caparol/30 font-display text-3xl">
+                    SLPH
+                  </div>
+                )}
+              </div>
+              <div class="p-5">
+                {date && (
+                  <p class="text-xs uppercase tracking-wider text-arena">{date}</p>
+                )}
+                <h2 class="mt-2 font-display text-2xl text-caparol leading-tight group-hover:text-arena">
+                  {item.title || 'Sin título'}
+                </h2>
+                {item.excerpt && (
+                  <p class="mt-3 line-clamp-3 text-sm text-caparol/75">
+                    {item.excerpt}
+                  </p>
+                )}
+                <span class="mt-4 inline-block text-sm text-arena underline-offset-4 group-hover:underline">
+                  Leer más →
+                </span>
+              </div>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</section>

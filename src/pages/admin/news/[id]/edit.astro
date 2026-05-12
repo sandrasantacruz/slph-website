@@ -6,24 +6,25 @@ import BlogEditor from '../../../../components/BlogEditor';
 import { PB_URL } from '../../../../lib/pb';
 
 const { id } = Astro.params;
-if (!id) return Astro.redirect('/admin/posts');
+if (!id) return Astro.redirect('/admin/news');
 
 let post;
 try {
-  post = await Astro.locals.pb.collection('posts').getOne(id);
+  post = await Astro.locals.pb.collection('news').getOne(id);
 } catch {
-  return Astro.redirect('/admin/posts');
+  return Astro.redirect('/admin/news');
 }
 ---
 
-<AdminLayout title={post.title || 'Neuer Artikel'}>
+<AdminLayout title={post.title || 'Nueva noticia'}>
   <div class="mb-4 flex items-center gap-4">
-    <a href="/admin/posts" class="text-sm text-neutral-500 hover:text-neutral-900">← Alle Artikel</a>
+    <a href="/admin/news" class="text-sm text-neutral-500 hover:text-neutral-900">← Alle Noticias</a>
   </div>
 
   <BlogEditor
     client:only="react"
     postId={post.id}
+    collection="news"
     collectionId={post.collectionId}
     pbUrl={PB_URL}
     initial={{

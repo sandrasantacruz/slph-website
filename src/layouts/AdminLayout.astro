@@ -7,6 +7,11 @@ interface Props {
 
 const { title } = Astro.props;
 const user = Astro.locals.user;
+const currentPath = Astro.url.pathname;
+const navLinks = [
+  { href: '/admin/news', label: 'Noticias' },
+  { href: '/admin/events', label: 'Eventos' },
+];
 ---
 
 <html lang="es">
@@ -22,7 +27,25 @@ const user = Astro.locals.user;
       user && (
         <header class="border-b border-neutral-200 bg-white">
           <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-            <a href="/admin/posts" class="font-semibold">Admin</a>
+            <div class="flex items-center gap-6">
+              <a href="/admin/news" class="font-semibold">Admin</a>
+              <nav class="flex items-center gap-4 text-sm">
+                {navLinks.map(({ href, label }) => {
+                  const active = currentPath.startsWith(href);
+                  return (
+                    <a
+                      href={href}
+                      class:list={[
+                        'transition-colors',
+                        active ? 'font-medium text-neutral-900' : 'text-neutral-500 hover:text-neutral-900',
+                      ]}
+                    >
+                      {label}
+                    </a>
+                  );
+                })}
+              </nav>
+            </div>
             <div class="flex items-center gap-4 text-sm">
               <span class="text-neutral-500">{user.email}</span>
               <form method="post" action="/admin/logout">

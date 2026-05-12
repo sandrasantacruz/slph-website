@@ -1,0 +1,34 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from './Hero.astro';
+import NoticiasList from './NoticiasList.astro';
+import type { RecordModel } from 'pocketbase';
+
+const pb = Astro.locals.pb;
+
+let items: RecordModel[] = [];
+let loadError: string | null = null;
+try {
+  const result = await pb.collection('news').getList(1, 100, {
+    sort: '-published_at',
+    filter: 'status = "published" && published_at <= @now',
+  });
+  items = result.items;
+} catch (err) {
+  loadError = err instanceof Error ? err.message : 'No se pudieron cargar las noticias.';
+}
+---
+
+<MainLayout
+  title="Noticias"
+  description="Notas de prensa, novedades y momentos del proyecto Si los peces hablaran."
+>
+  <Hero />
+  {loadError ? (
+    <section class="mx-auto max-w-6xl px-4 pb-24">
+      <p class="text-arena">{loadError}</p>
+    </section>
+  ) : (
+    <NoticiasList items={items} />
+  )}
+</MainLayout>

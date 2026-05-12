@@ -8,12 +8,12 @@ function draftSlug(): string {
 }
 
 export const POST: APIRoute = async ({ locals, redirect }) => {
-  const record = await locals.pb.collection('posts').create({
+  const record = await locals.pb.collection('events').create({
     title: '',
     slug: draftSlug(),
     status: 'draft',
   });
-  return redirect(`/admin/posts/${record.id}/edit`);
+  return redirect(`/admin/events/${record.id}/edit`);
 };
 
-export const GET: APIRoute = ({ redirect }) => redirect('/admin/posts');
+export const GET: APIRoute = ({ redirect }) => redirect('/admin/events');

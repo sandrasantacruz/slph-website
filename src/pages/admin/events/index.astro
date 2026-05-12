@@ -6,38 +6,42 @@ import type { RecordModel } from 'pocketbase';
 
 const pb = Astro.locals.pb;
 
-let posts: RecordModel[] = [];
+let items: RecordModel[] = [];
 let loadError: string | null = null;
 try {
-  const result = await pb.collection('posts').getList(1, 100, {
-    sort: '-updated',
+  const result = await pb.collection('events').getList(1, 100, {
+    sort: '-event_date,-updated',
   });
-  posts = result.items;
+  items = result.items;
 } catch (err) {
-  loadError = err instanceof Error ? err.message : 'Posts konnten nicht geladen werden.';
+  loadError = err instanceof Error ? err.message : 'Eventos konnten nicht geladen werden.';
 }
 
-const fmt = new Intl.DateTimeFormat('de-DE', {
-  dateStyle: 'medium',
-  timeStyle: 'short',
-});
+const dateFmt = new Intl.DateTimeFormat('de-DE', { dateStyle: 'medium' });
+const updFmt = new Intl.DateTimeFormat('de-DE', { dateStyle: 'medium', timeStyle: 'short' });
 
 const statusColor: Record<string, string> = {
   draft: 'bg-amber-100 text-amber-900',
   published: 'bg-emerald-100 text-emerald-900',
   archived: 'bg-neutral-200 text-neutral-700',
 };
+
+function fmtEventDate(iso: string | undefined): string {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? '—' : dateFmt.format(d);
+}
 ---
 
-<AdminLayout title="Artikel">
+<AdminLayout title="Eventos">
   <div class="mb-6 flex items-center justify-between">
-    <h1 class="text-2xl font-semibold">Artikel</h1>
-    <form method="post" action="/admin/posts/new">
+    <h1 class="text-2xl font-semibold">Eventos</h1>
+    <form method="post" action="/admin/events/new">
       <button
         type="submit"
         class="rounded bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
       >
-        + Neuer Artikel
+        + Neues Evento
       </button>
     </form>
   </div>
@@ -45,36 +49,38 @@ const statusColor: Record<string, string> = {
   {loadError && <p class="mb-4 text-sm text-red-600">{loadError}</p>}
 
   {
-    posts.length === 0 && !loadError ? (
-      <p class="text-neutral-500">Noch keine Artikel.</p>
+    items.length === 0 && !loadError ? (
+      <p class="text-neutral-500">Noch keine Eventos.</p>
     ) : (
       <div class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
         <table class="w-full text-sm">
           <thead class="bg-neutral-50 text-left text-neutral-600">
             <tr>
               <th class="px-4 py-2 font-medium">Titel</th>
+              <th class="px-4 py-2 font-medium">Veranstaltungsdatum</th>
               <th class="px-4 py-2 font-medium">Status</th>
               <th class="px-4 py-2 font-medium">Geändert</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-neutral-100">
-            {posts.map((p) => (
+            {items.map((p) => (
               <tr class="relative cursor-pointer hover:bg-neutral-50 focus-within:bg-neutral-50">
                 <td class="px-4 py-2">
                   <a
-                    href={`/admin/posts/${p.id}/edit`}
+                    href={`/admin/events/${p.id}/edit`}
                     class="font-medium hover:underline focus:outline-none after:absolute after:inset-0 after:content-['']"
                   >
                     {p.title || <span class="text-neutral-400">(ohne Titel)</span>}
                   </a>
                   {p.slug && <div class="text-xs text-neutral-500">/{p.slug}</div>}
                 </td>
+                <td class="px-4 py-2 text-neutral-700">{fmtEventDate(p.event_date)}</td>
                 <td class="px-4 py-2">
                   <span class={`inline-block rounded px-2 py-0.5 text-xs ${statusColor[p.status] ?? 'bg-neutral-100'}`}>
                     {p.status || 'draft'}
                   </span>
                 </td>
-                <td class="px-4 py-2 text-neutral-600">{fmt.format(new Date(p.updated))}</td>
+                <td class="px-4 py-2 text-neutral-600">{updFmt.format(new Date(p.updated))}</td>
               </tr>
             ))}
           </tbody>

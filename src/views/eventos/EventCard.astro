@@ -1,0 +1,104 @@
+---
+import type { RecordModel } from 'pocketbase';
+import { PB_URL } from '../../lib/pb';
+
+interface Props {
+  item: RecordModel;
+  past?: boolean;
+}
+
+const { item, past = false } = Astro.props;
+
+const dayFmt = new Intl.DateTimeFormat('es-ES', { day: 'numeric' });
+const monthFmt = new Intl.DateTimeFormat('es-ES', { month: 'short' });
+const fullFmt = new Intl.DateTimeFormat('es-ES', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const cover = Array.isArray(item.cover) ? item.cover[0] : item.cover;
+const coverUrl = cover
+  ? `${PB_URL}/api/files/${item.collectionId}/${item.id}/${cover}?thumb=800x600`
+  : null;
+
+const start = item.event_date ? new Date(item.event_date) : null;
+const end = item.event_end ? new Date(item.event_end) : null;
+const validStart = start && !Number.isNaN(start.getTime()) ? start : null;
+const validEnd = end && !Number.isNaN(end.getTime()) ? end : null;
+
+const day = validStart ? dayFmt.format(validStart) : '';
+const month = validStart ? monthFmt.format(validStart).replace('.', '') : '';
+const rangeLabel = validEnd && validStart
+  ? `${fullFmt.format(validStart)} – ${fullFmt.format(validEnd)}`
+  : validStart
+    ? fullFmt.format(validStart)
+    : '';
+
+const href = `/eventos/${item.slug}`;
+---
+
+<li class:list={[
+  'group relative overflow-hidden rounded-2xl ring-1 transition',
+  past
+    ? 'bg-white/[0.03] ring-white/10 hover:ring-arena/30'
+    : 'bg-white/5 ring-white/15 hover:ring-arena/50',
+]}>
+  <a href={href} class="grid gap-0 sm:grid-cols-[200px_1fr]">
+    <div class:list={[
+      'relative aspect-[4/3] overflow-hidden sm:aspect-auto sm:h-full',
+      past ? 'opacity-80 group-hover:opacity-100' : '',
+    ]}>
+      {coverUrl ? (
+        <img
+          src={coverUrl}
+          alt=""
+          loading="lazy"
+          class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div class="flex h-full items-center justify-center bg-azul/40 font-display text-3xl text-caparol/30">
+          SLPH
+        </div>
+      )}
+
+      {validStart && !past && (
+        <div class="absolute left-3 top-3 flex flex-col items-center rounded-lg bg-arena px-3 py-2 text-negro shadow-lg">
+          <span class="font-display text-3xl leading-none">{day}</span>
+          <span class="text-xs font-medium uppercase tracking-wider">{month}</span>
+        </div>
+      )}
+    </div>
+
+    <div class="flex flex-col gap-2 p-5">
+      {validStart && (
+        <p class:list={[
+          'text-xs uppercase tracking-wider',
+          past ? 'text-caparol/50' : 'text-arena',
+        ]}>
+          {rangeLabel}
+          {past && <span class="ml-2 rounded bg-white/10 px-1.5 py-0.5 text-[10px]">Pasado</span>}
+        </p>
+      )}
+      <h3 class:list={[
+        'font-display text-2xl leading-tight text-caparol group-hover:text-arena',
+        past && 'text-caparol/85',
+      ]}>
+        {item.title || 'Sin título'}
+      </h3>
+      {item.location && (
+        <p class="flex items-center gap-1.5 text-sm text-caparol/70">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          {item.location}
+        </p>
+      )}
+      {item.excerpt && (
+        <p class="mt-1 line-clamp-2 text-sm text-caparol/75">{item.excerpt}</p>
+      )}
+      <span class="mt-auto pt-3 text-sm text-arena group-hover:underline">Más info →</span>
+    </div>
+  </a>
+</li>

@@ -20,6 +20,7 @@ import '@blocknote/mantine/style.css';
 import { pb } from '../lib/pocketbase';
 
 type Status = 'draft' | 'published' | 'archived';
+type Collection = 'news' | 'events';
 
 interface Initial {
   title: string;
@@ -30,6 +31,10 @@ interface Initial {
   content: PartialBlock[] | null;
   cover: string[];
   images: string[];
+  event_date?: string;
+  event_end?: string;
+  location?: string;
+  address_url?: string;
 }
 
 interface BlockLike {
@@ -41,6 +46,7 @@ interface BlockLike {
 
 interface Props {
   postId: string;
+  collection: Collection;
   collectionId: string;
   pbUrl: string;
   initial: Initial;
@@ -49,7 +55,20 @@ interface Props {
 interface Errors {
   title?: string;
   slug?: string;
+  excerpt?: string;
   publishedAt?: string;
+  eventDate?: string;
+  eventEnd?: string;
+  addressUrl?: string;
+}
+
+function isValidHttpUrl(value: string): boolean {
+  try {
+    const u = new URL(value);
+    return u.protocol === 'http:' || u.protocol === 'https:';
+  } catch {
+    return false;
+  }
 }
 
 function slugify(input: string): string {
@@ -152,12 +171,20 @@ async function processImage(file: File): Promise<File> {
   }
 }
 
-export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Props) {
+export default function BlogEditor({ postId, collection, collectionId, pbUrl, initial }: Props) {
+  const isEvent = collection === 'events';
+  const adminListPath = `/admin/${collection}`;
+  const entityLabel = isEvent ? 'Evento' : 'Noticia';
+
   const [title, setTitle] = useState(initial.title);
   const [slug, setSlug] = useState(initial.slug);
   const [excerpt, setExcerpt] = useState(initial.excerpt);
   const [status, setStatus] = useState<Status>(initial.status);
   const [publishedAt, setPublishedAt] = useState<Date | null>(isoToDate(initial.published_at));
+  const [eventDate, setEventDate] = useState<Date | null>(isoToDate(initial.event_date ?? ''));
+  const [eventEnd, setEventEnd] = useState<Date | null>(isoToDate(initial.event_end ?? ''));
+  const [location, setLocation] = useState(initial.location ?? '');
+  const [addressUrl, setAddressUrl] = useState(initial.address_url ?? '');
   const [cover, setCover] = useState<string[]>(initial.cover);
   const [images, setImages] = useState<string[]>(initial.images);
   const [coverBusy, setCoverBusy] = useState(false);
@@ -228,7 +255,7 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
         const fd = new FormData();
         for (const old of cover) fd.append('cover-', old);
         fd.append('cover+', processed);
-        const updated = await pb.collection('posts').update(postId, fd);
+        const updated = await pb.collection(collection).update(postId, fd);
         setCover(normalizeCover(updated.cover));
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Cover-Upload fehlgeschlagen.');
@@ -236,7 +263,7 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
         setCoverBusy(false);
       }
     },
-    [cover, postId],
+    [collection, cover, postId],
   );
 
   const removeCover = useCallback(async () => {
@@ -246,29 +273,46 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
     try {
       const fd = new FormData();
       for (const old of cover) fd.append('cover-', old);
-      const updated = await pb.collection('posts').update(postId, fd);
+      const updated = await pb.collection(collection).update(postId, fd);
       setCover(normalizeCover(updated.cover));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Cover entfernen fehlgeschlagen.');
     } finally {
       setCoverBusy(false);
     }
-  }, [cover, postId]);
+  }, [collection, cover, postId]);
 
   const validate = useCallback((): Errors => {
     const e: Errors = {};
     if (!title.trim()) e.title = 'Titel ist erforderlich.';
     if (!slug) e.slug = 'Slug konnte nicht aus dem Titel generiert werden.';
+    if (excerpt.length > 300) {
+      e.excerpt = `Kurzbeschreibung ist zu lang (${excerpt.length}/300 Zeichen).`;
+    }
     if (status === 'published' && !publishedAt) {
-      e.publishedAt = 'Veröffentlichungsdatum ist erforderlich, wenn der Artikel veröffentlicht wird.';
+      e.publishedAt = `Veröffentlichungsdatum ist erforderlich, wenn ${entityLabel} veröffentlicht wird.`;
+    }
+    if (isEvent) {
+      if (status === 'published' && !eventDate) {
+        e.eventDate = 'Veranstaltungsdatum ist erforderlich.';
+      }
+      if (eventDate && eventEnd && eventEnd.getTime() < eventDate.getTime()) {
+        e.eventEnd = 'Enddatum darf nicht vor dem Startdatum liegen.';
+      }
+      if (addressUrl.trim() && !isValidHttpUrl(addressUrl.trim())) {
+        e.addressUrl = 'Bitte eine gültige URL eingeben (https://…).';
+      }
     }
     return e;
-  }, [publishedAt, slug, status, title]);
+  }, [addressUrl, entityLabel, eventDate, eventEnd, excerpt, isEvent, publishedAt, slug, status, title]);
 
   const save = useCallback(async () => {
     const e = validate();
     setErrors(e);
-    if (Object.keys(e).length > 0) return;
+    if (Object.keys(e).length > 0) {
+      setError('Bitte die markierten Felder korrigieren.');
+      return;
+    }
 
     setSaving(true);
     setError(null);
@@ -282,7 +326,7 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
         if (!file) continue;
         const fd = new FormData();
         fd.append('images+', file);
-        const updated = await pb.collection('posts').update(postId, fd);
+        const updated = await pb.collection(collection).update(postId, fd);
         latestImages = Array.isArray(updated.images) ? (updated.images as string[]) : [];
         const newName = latestImages[latestImages.length - 1];
         if (!newName) throw new Error('Upload fehlgeschlagen.');
@@ -311,7 +355,7 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
       if (orphans.length > 0) {
         const fd = new FormData();
         for (const f of orphans) fd.append('images-', f);
-        const updated = await pb.collection('posts').update(postId, fd);
+        const updated = await pb.collection(collection).update(postId, fd);
         latestImages = Array.isArray(updated.images) ? (updated.images as string[]) : [];
       }
       setImages(latestImages);
@@ -325,7 +369,13 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
         content: blocks,
         published_at: publishedAt ? publishedAt.toISOString() : '',
       };
-      await pb.collection('posts').update(postId, payload);
+      if (isEvent) {
+        payload.event_date = eventDate ? eventDate.toISOString() : '';
+        payload.event_end = eventEnd ? eventEnd.toISOString() : '';
+        payload.location = location;
+        payload.address_url = addressUrl;
+      }
+      await pb.collection(collection).update(postId, payload);
 
       setSavedAt(new Date());
     } catch (err) {
@@ -334,18 +384,18 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
     } finally {
       setSaving(false);
     }
-  }, [editor, excerpt, fileUrl, imageUrlPrefix, images, postId, publishedAt, slug, status, title, validate]);
+  }, [addressUrl, collection, editor, eventDate, eventEnd, excerpt, fileUrl, imageUrlPrefix, images, isEvent, location, postId, publishedAt, slug, status, title, validate]);
 
   const remove = useCallback(async () => {
-    if (!confirm('Diesen Artikel wirklich löschen? Alle Bilder werden ebenfalls entfernt.')) return;
+    if (!confirm(`${entityLabel} wirklich löschen? Alle Bilder werden ebenfalls entfernt.`)) return;
     try {
-      await pb.collection('posts').delete(postId);
-      window.location.href = '/admin/posts';
+      await pb.collection(collection).delete(postId);
+      window.location.href = adminListPath;
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Löschen fehlgeschlagen.';
       setError(msg);
     }
-  }, [postId]);
+  }, [adminListPath, collection, entityLabel, postId]);
 
   const currentCover = cover[0];
 
@@ -412,7 +462,7 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
               label="Titel"
               value={title}
               onChange={(e) => setTitle(e.currentTarget.value)}
-              placeholder="Titel des Artikels"
+              placeholder={`Titel ${isEvent ? 'des Events' : 'der Noticia'}`}
               size="md"
               error={errors.title}
               withAsterisk
@@ -456,6 +506,50 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
             withAsterisk={status === 'published'}
           />
 
+          {isEvent && (
+            <>
+              <DatePickerInput
+                label="Veranstaltungsdatum"
+                value={eventDate}
+                onChange={(v) => setEventDate(v ? new Date(v) : null)}
+                valueFormat="DD.MM.YYYY"
+                locale="de"
+                placeholder="Datum wählen"
+                clearable
+                error={errors.eventDate}
+                withAsterisk={status === 'published'}
+              />
+
+              <DatePickerInput
+                label="Enddatum (optional)"
+                value={eventEnd}
+                onChange={(v) => setEventEnd(v ? new Date(v) : null)}
+                valueFormat="DD.MM.YYYY"
+                locale="de"
+                placeholder="Nur bei mehrtägigen Events"
+                clearable
+                error={errors.eventEnd}
+                minDate={eventDate ?? undefined}
+              />
+
+              <TextInput
+                label="Ort"
+                value={location}
+                onChange={(e) => setLocation(e.currentTarget.value)}
+                placeholder="z.B. Casa Colón, Las Palmas de Gran Canaria"
+              />
+
+              <TextInput
+                label="Map-Link (optional)"
+                value={addressUrl}
+                onChange={(e) => setAddressUrl(e.currentTarget.value)}
+                placeholder="https://maps.google.com/…"
+                type="url"
+                error={errors.addressUrl}
+              />
+            </>
+          )}
+
           <div className="sm:col-span-2">
             <Textarea
               label="Kurzbeschreibung"
@@ -465,6 +559,9 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
               autosize
               minRows={2}
               maxLength={300}
+              description={`${excerpt.length}/300 Zeichen`}
+              inputWrapperOrder={['label', 'input', 'description', 'error']}
+              error={errors.excerpt}
             />
           </div>
         </div>
@@ -484,7 +581,7 @@ export default function BlogEditor({ postId, collectionId, pbUrl, initial }: Pro
 
         <div className="flex items-center justify-between border-t border-neutral-200 pt-4">
           <Button variant="subtle" color="red" onClick={remove}>
-            Artikel löschen
+            {entityLabel} löschen
           </Button>
           <div className="flex items-center gap-3">
             {pendingCount > 0 && (
