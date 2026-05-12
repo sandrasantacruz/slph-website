@@ -31,7 +31,28 @@ const columnas = [
 ];
 ---
 
-<section class="relative">
+<section class="relative isolate overflow-x-clip">
+  <!-- Bridge character — Doña Paciencia descends from QueEs into Versatilidad -->
+  <img
+    src="/assets/animals/dona-paciencia.webp"
+    alt=""
+    aria-hidden="true"
+    class="bridge-creature pointer-events-none absolute -top-20 right-4 z-10 hidden w-40 drop-shadow-[0_18px_28px_rgba(6,15,44,0.55)] sm:-top-24 sm:right-10 sm:block sm:w-48 lg:w-56"
+    loading="lazy"
+  />
+
+  <!-- Soft light filtering down — slightly cooler than QueEs, we're deeper now -->
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-2/3 bg-[radial-gradient(ellipse_at_top,_rgba(100,170,210,0.12),_transparent_75%)]"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Subtle sand-warmth from below -->
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-[radial-gradient(ellipse_at_bottom,_rgba(250,222,170,0.06),_transparent_75%)]"
+    aria-hidden="true"
+  ></div>
+
   <div class="mx-auto max-w-6xl px-6 py-20 sm:py-28">
     <div class="reveal mx-auto max-w-3xl text-center">
       <p class="font-hand text-3xl text-arena sm:text-4xl">tres maneras de bucear con nosotros…</p>
@@ -77,3 +98,19 @@ const columnas = [
     </div>
   </div>
 </section>
+
+<style>
+  /* The float keyframe rotates the creature around its tilted resting pose
+     so it bobs in place instead of un-rotating mid-cycle. */
+  .bridge-creature {
+    animation: bridge-bob 7s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes bridge-bob {
+    0%, 100% { transform: translateY(0)    rotate(-12deg); }
+    50%      { transform: translateY(-8px) rotate(-9deg);  }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bridge-creature { animation: none !important; }
+  }
+</style>

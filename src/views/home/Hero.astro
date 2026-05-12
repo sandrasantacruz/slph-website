@@ -72,3 +72,42 @@ import { Icon } from 'astro-icon/components';
     </svg>
   </a>
 </section>
+
+<style>
+  .hero-wave svg { animation: hw-drift 18s ease-in-out infinite alternate; }
+  .hw-back  { animation: hw-bob 9s ease-in-out infinite; }
+  .hw-mid   { animation: hw-bob 7s ease-in-out -1.2s infinite; }
+  .hw-front { animation: hw-bob 6s ease-in-out -2.4s infinite; }
+  .hw-crest { animation: hw-bob 6s ease-in-out -2.4s infinite; }
+
+  .hw-sparks circle {
+    fill: #fadeaa;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: hw-spark 3.8s ease-in-out infinite;
+  }
+  .hw-sparks circle:nth-child(1) { animation-delay: 0s;    }
+  .hw-sparks circle:nth-child(2) { animation-delay: 0.7s;  }
+  .hw-sparks circle:nth-child(3) { animation-delay: 1.4s;  }
+  .hw-sparks circle:nth-child(4) { animation-delay: 2.1s;  }
+  .hw-sparks circle:nth-child(5) { animation-delay: 2.8s;  }
+
+  @keyframes hw-drift {
+    0%   { transform: translate3d(-0.8%, 0, 0); }
+    100% { transform: translate3d(0.8%, 0, 0); }
+  }
+  @keyframes hw-bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-1.8px); }
+  }
+  @keyframes hw-spark {
+    0%, 100% { opacity: 0.2; transform: scale(0.55); }
+    50%      { opacity: 1;   transform: scale(1.3);  }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-wave svg, .hw-back, .hw-mid, .hw-front, .hw-crest, .hw-sparks circle {
+      animation: none !important;
+    }
+  }
+</style>
