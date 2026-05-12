@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import Bubbles from '../components/Bubbles.astro';
+import WaterLine from '../components/WaterLine.astro';
 
 interface Props {
   title?: string;
@@ -34,9 +35,10 @@ const fullTitle = title ? `${title} · ${SITE}` : SITE;
       )
     }
   </head>
-  <body class="flex min-h-screen flex-col">
+  <body class="relative flex min-h-screen flex-col">
     <Bubbles />
     <Navbar />
+    <WaterLine />
     <main class="flex-1">
       <slot />
     </main>
