@@ -3,9 +3,9 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <section class="relative isolate overflow-hidden">
-  <!-- Deep-sea gradient -->
+  <!-- Deep-sea gradient — fades in from the page bg so there's no hard edge at the top -->
   <div
-    class="absolute inset-0 -z-20 bg-gradient-to-b from-azul-deep/70 via-azul-deep/95 to-azul-deep"
+    class="absolute inset-0 -z-20 bg-[linear-gradient(to_bottom,_transparent_0%,_color-mix(in_srgb,_var(--color-azul-deep)_60%,_transparent)_18%,_var(--color-azul-deep)_45%,_var(--color-azul-deep)_100%)]"
     aria-hidden="true"
   ></div>
 
