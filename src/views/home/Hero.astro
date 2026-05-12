@@ -1,14 +1,26 @@
 ---
 import { Icon } from 'astro-icon/components';
+import fishes from './img/fishes.webp?url';
+import dreizack from './img/dreizack.webp?url';
 ---
 
 <section class="relative isolate flex h-[calc(100svh-6rem)] flex-col overflow-hidden">
   <!-- Floating character — drifts behind the headline -->
   <img
-    src="/assets/animals/aletas.webp"
+    src={fishes}
     alt=""
     aria-hidden="true"
-    class="anim-float pointer-events-none absolute -right-10 top-1/2 -z-10 hidden w-[22rem] -translate-y-1/2 opacity-30 md:block lg:w-[28rem] lg:opacity-40"
+    class="anim-float pointer-events-none absolute right-4 top-10 -z-10 w-[14rem] opacity-25 sm:w-[18rem] md:w-[22rem] md:opacity-30 lg:w-[28rem] lg:opacity-40"
+    loading="eager"
+  />
+
+  <!-- Dreizack — zentral, gespiegelt -->
+  <img
+    src={dreizack}
+    alt=""
+    aria-hidden="true"
+    class="anim-float pointer-events-none absolute left-1/2 top-10 -z-10 hidden w-[14rem] -translate-x-1/2 -scale-x-100 opacity-30 lg:block"
+    style="animation-delay: -2.5s;"
     loading="eager"
   />
 
