@@ -241,3 +241,90 @@
   }
   .reveal { transition: none !important; opacity: 1; transform: none; }
 }
+
+/* ────────────────────────────────────────────────────────────
+ * Long-form content rendered from BlockNote JSON.
+ * Used on /noticias/[slug] and /eventos/[slug].
+ * ──────────────────────────────────────────────────────────── */
+.prose-slph {
+  color: var(--color-caparol);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+.prose-slph p { margin: 0 0 1.25em; }
+.prose-slph h1,
+.prose-slph h2,
+.prose-slph h3 {
+  font-family: var(--font-display);
+  color: var(--color-arena);
+  margin: 2em 0 0.6em;
+  line-height: 1.15;
+}
+.prose-slph h1 { font-size: 2.4rem; }
+.prose-slph h2 { font-size: 1.9rem; }
+.prose-slph h3 { font-size: 1.5rem; }
+.prose-slph a {
+  color: var(--color-arena);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.prose-slph ul,
+.prose-slph ol {
+  margin: 0 0 1.25em 1.25em;
+  padding: 0;
+}
+.prose-slph li { margin: 0.4em 0; }
+.prose-slph ul { list-style: disc; }
+.prose-slph ol { list-style: decimal; }
+.prose-slph figure { margin: 2em 0; }
+.prose-slph figure img,
+.prose-slph figure video {
+  border-radius: 1rem;
+  max-width: 100%;
+  height: auto;
+}
+.prose-slph figcaption {
+  margin-top: 0.5em;
+  font-size: 0.875rem;
+  color: rgb(from var(--color-caparol) r g b / 0.65);
+  text-align: center;
+}
+.prose-slph code {
+  background: rgb(255 255 255 / 0.08);
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.95em;
+}
+.prose-slph pre {
+  background: rgb(0 0 0 / 0.3);
+  padding: 1em;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+.prose-slph pre code {
+  background: transparent;
+  padding: 0;
+}
+.prose-slph blockquote {
+  border-left: 3px solid var(--color-arena);
+  padding-left: 1em;
+  margin: 1.5em 0;
+  color: rgb(from var(--color-caparol) r g b / 0.8);
+  font-style: italic;
+}
+.prose-slph .video-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: rgb(0 0 0 / 0.4);
+}
+.prose-slph .video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

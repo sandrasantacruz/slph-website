@@ -10,6 +10,9 @@ import {
   Button,
   InputLabel,
   InputError,
+  Modal,
+  Group,
+  Text,
 } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import 'dayjs/locale/de';
@@ -193,6 +196,8 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
   const [error, setError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Errors>({});
   const [pendingCount, setPendingCount] = useState(0);
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   // Auto-derive slug from title (decision: slug always follows title).
   useEffect(() => {
@@ -386,16 +391,19 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
     }
   }, [addressUrl, collection, editor, eventDate, eventEnd, excerpt, fileUrl, imageUrlPrefix, images, isEvent, location, postId, publishedAt, slug, status, title, validate]);
 
-  const remove = useCallback(async () => {
-    if (!confirm(`${entityLabel} wirklich löschen? Alle Bilder werden ebenfalls entfernt.`)) return;
+  const performDelete = useCallback(async () => {
+    setDeleting(true);
+    setError(null);
     try {
       await pb.collection(collection).delete(postId);
       window.location.href = adminListPath;
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Löschen fehlgeschlagen.';
       setError(msg);
+      setDeleting(false);
+      setConfirmDeleteOpen(false);
     }
-  }, [adminListPath, collection, entityLabel, postId]);
+  }, [adminListPath, collection, postId]);
 
   const currentCover = cover[0];
 
@@ -580,7 +588,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
         {error && <InputError>{error}</InputError>}
 
         <div className="flex items-center justify-between border-t border-neutral-200 pt-4">
-          <Button variant="subtle" color="red" onClick={remove}>
+          <Button variant="subtle" color="red" onClick={() => setConfirmDeleteOpen(true)}>
             {entityLabel} löschen
           </Button>
           <div className="flex items-center gap-3">
@@ -599,6 +607,34 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
             </Button>
           </div>
         </div>
+
+        <Modal
+          opened={confirmDeleteOpen}
+          onClose={() => !deleting && setConfirmDeleteOpen(false)}
+          title={`${entityLabel} löschen?`}
+          centered
+          closeOnClickOutside={!deleting}
+          closeOnEscape={!deleting}
+          withCloseButton={!deleting}
+        >
+          <Text size="sm" mb="lg">
+            {entityLabel === 'Evento'
+              ? 'Dieses Evento wird endgültig gelöscht. Alle Bilder werden ebenfalls entfernt.'
+              : 'Diese Noticia wird endgültig gelöscht. Alle Bilder werden ebenfalls entfernt.'}
+          </Text>
+          <Group justify="flex-end">
+            <Button
+              variant="default"
+              onClick={() => setConfirmDeleteOpen(false)}
+              disabled={deleting}
+            >
+              Abbrechen
+            </Button>
+            <Button color="red" onClick={performDelete} loading={deleting}>
+              Endgültig löschen
+            </Button>
+          </Group>
+        </Modal>
       </div>
     </MantineProvider>
   );

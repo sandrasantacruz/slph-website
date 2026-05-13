@@ -13,7 +13,9 @@
     "astro": "astro",
     "pb:serve": "cd backend && go run . serve --http=127.0.0.1:8090",
     "pb:migrate": "cd backend && go run . migrate",
-    "pb:build": "cd backend && go build -o ../bin/pocketbase ."
+    "pb:build": "cd backend && go build -o ../bin/pocketbase .",
+    "import:wp": "node scripts/import-wordpress.mjs",
+    "import:wp-events": "node scripts/import-wp-events.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^10.1.0",
@@ -45,8 +47,10 @@
     "@types/node": "^25.6.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "cheerio": "^1.2.0",
     "concurrently": "^9.2.1",
     "dotenv": "^17.4.2",
+    "sharp": "^0.34.5",
     "typescript": "^6.0.3"
   },
   "pnpm": {

@@ -70,6 +70,22 @@ function classes(...arr: (string | false | undefined)[]): string {
   return xs.length ? ` class="${xs.join(' ')}"` : '';
 }
 
+function youtubeId(url: string): string | null {
+  try {
+    const u = new URL(url);
+    const host = u.hostname.replace(/^www\./, '');
+    if (host === 'youtu.be') return u.pathname.slice(1).split('/')[0] || null;
+    if (host === 'youtube.com' || host === 'youtube-nocookie.com' || host === 'm.youtube.com') {
+      const m = u.pathname.match(/^\/(?:embed|v|shorts)\/([^/?#]+)/);
+      if (m) return m[1];
+      return u.searchParams.get('v');
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 function alignClass(props: Record<string, unknown> | undefined): string {
   const a = props?.textAlignment;
   if (a === 'center') return 'text-center';
@@ -117,6 +133,11 @@ function renderBlock(b: Block): string {
     case 'video': {
       const url = String(props.url ?? '');
       if (!url) return '';
+      const yt = youtubeId(url);
+      if (yt) {
+        const embed = `https://www.youtube-nocookie.com/embed/${yt}`;
+        return `<figure${classes('video-embed', align)}><iframe src="${escapeAttr(embed)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" title="YouTube video"></iframe></figure>`;
+      }
       return `<figure${classes(align)}><video src="${escapeAttr(url)}" controls preload="metadata"></video></figure>`;
     }
 
