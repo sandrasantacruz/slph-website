@@ -12,6 +12,11 @@ export default defineConfig({
   adapter: node({ mode: 'standalone' }),
   integrations: [react(), icon()],
 
+  // CSRF-Check abschalten: Caddy macht TLS-Termination und proxied per HTTP,
+  // der Node-Adapter rekonstruiert die Request-URL ohne https-Scheme, wodurch
+  // Astros Origin-Vergleich (Origin: https://… vs. URL: http://…) fehlschlägt.
+  security: { checkOrigin: false },
+
   server: {
     host: '127.0.0.1',
     port: 4321,
