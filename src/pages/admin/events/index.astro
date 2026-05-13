@@ -14,16 +14,22 @@ try {
   });
   items = result.items;
 } catch (err) {
-  loadError = err instanceof Error ? err.message : 'Eventos konnten nicht geladen werden.';
+  loadError = err instanceof Error ? err.message : 'No se pudieron cargar los eventos.';
 }
 
-const dateFmt = new Intl.DateTimeFormat('de-DE', { dateStyle: 'medium' });
-const updFmt = new Intl.DateTimeFormat('de-DE', { dateStyle: 'medium', timeStyle: 'short' });
+const dateFmt = new Intl.DateTimeFormat('es-ES', { dateStyle: 'medium' });
+const updFmt = new Intl.DateTimeFormat('es-ES', { dateStyle: 'medium', timeStyle: 'short' });
 
 const statusColor: Record<string, string> = {
   draft: 'bg-amber-100 text-amber-900',
   published: 'bg-emerald-100 text-emerald-900',
   archived: 'bg-neutral-200 text-neutral-700',
+};
+
+const statusLabel: Record<string, string> = {
+  draft: 'borrador',
+  published: 'publicado',
+  archived: 'archivado',
 };
 
 function fmtEventDate(iso: string | undefined): string {
@@ -41,7 +47,7 @@ function fmtEventDate(iso: string | undefined): string {
         type="submit"
         class="rounded bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
       >
-        + Neues Evento
+        + Nuevo evento
       </button>
     </form>
   </div>
@@ -50,16 +56,16 @@ function fmtEventDate(iso: string | undefined): string {
 
   {
     items.length === 0 && !loadError ? (
-      <p class="text-neutral-500">Noch keine Eventos.</p>
+      <p class="text-neutral-500">Aún no hay eventos.</p>
     ) : (
       <div class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
         <table class="w-full text-sm">
           <thead class="bg-neutral-50 text-left text-neutral-600">
             <tr>
-              <th class="px-4 py-2 font-medium">Titel</th>
-              <th class="px-4 py-2 font-medium">Veranstaltungsdatum</th>
-              <th class="px-4 py-2 font-medium">Status</th>
-              <th class="px-4 py-2 font-medium">Geändert</th>
+              <th class="px-4 py-2 font-medium">Título</th>
+              <th class="px-4 py-2 font-medium">Fecha del evento</th>
+              <th class="px-4 py-2 font-medium">Estado</th>
+              <th class="px-4 py-2 font-medium">Modificado</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-neutral-100">
@@ -70,14 +76,14 @@ function fmtEventDate(iso: string | undefined): string {
                     href={`/admin/events/${p.id}/edit`}
                     class="font-medium hover:underline focus:outline-none after:absolute after:inset-0 after:content-['']"
                   >
-                    {p.title || <span class="text-neutral-400">(ohne Titel)</span>}
+                    {p.title || <span class="text-neutral-400">(sin título)</span>}
                   </a>
                   {p.slug && <div class="text-xs text-neutral-500">/{p.slug}</div>}
                 </td>
                 <td class="px-4 py-2 text-neutral-700">{fmtEventDate(p.event_date)}</td>
                 <td class="px-4 py-2">
                   <span class={`inline-block rounded px-2 py-0.5 text-xs ${statusColor[p.status] ?? 'bg-neutral-100'}`}>
-                    {p.status || 'draft'}
+                    {statusLabel[p.status] ?? 'borrador'}
                   </span>
                 </td>
                 <td class="px-4 py-2 text-neutral-600">{updFmt.format(new Date(p.updated))}</td>

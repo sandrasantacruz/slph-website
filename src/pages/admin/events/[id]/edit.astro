@@ -18,7 +18,7 @@ try {
 
 <AdminLayout title={event.title || 'Nuevo evento'}>
   <div class="mb-4 flex items-center gap-4">
-    <a href="/admin/events" class="text-sm text-neutral-500 hover:text-neutral-900">← Alle Eventos</a>
+    <a href="/admin/events" class="text-sm text-neutral-500 hover:text-neutral-900">← Todos los eventos</a>
   </div>
 
   <BlogEditor
@@ -42,6 +42,6 @@ try {
       address_url: event.address_url ?? '',
     }}
   >
-    <p class="text-neutral-500">Editor lädt …</p>
+    <p class="text-neutral-500">Cargando editor …</p>
   </BlogEditor>
 </AdminLayout>

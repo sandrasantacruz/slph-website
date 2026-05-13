@@ -18,7 +18,7 @@ try {
 
 <AdminLayout title={post.title || 'Nueva noticia'}>
   <div class="mb-4 flex items-center gap-4">
-    <a href="/admin/news" class="text-sm text-neutral-500 hover:text-neutral-900">← Alle Noticias</a>
+    <a href="/admin/news" class="text-sm text-neutral-500 hover:text-neutral-900">← Todas las noticias</a>
   </div>
 
   <BlogEditor
@@ -38,6 +38,6 @@ try {
       images: Array.isArray(post.images) ? post.images : [],
     }}
   >
-    <p class="text-neutral-500">Editor lädt …</p>
+    <p class="text-neutral-500">Cargando editor …</p>
   </BlogEditor>
 </AdminLayout>

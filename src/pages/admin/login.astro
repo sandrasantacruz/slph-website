@@ -11,7 +11,7 @@ if (Astro.request.method === 'POST') {
   const password = String(form.get('password') ?? '');
 
   if (!email || !password) {
-    error = 'Bitte E-Mail und Passwort eingeben.';
+    error = 'Introduce correo y contraseña.';
   } else {
     try {
       await Astro.locals.pb.collection('users').authWithPassword(email, password);
@@ -25,18 +25,18 @@ if (Astro.request.method === 'POST') {
         },
       });
     } catch {
-      error = 'Login fehlgeschlagen. E-Mail oder Passwort falsch.';
+      error = 'Inicio de sesión fallido. Correo o contraseña incorrectos.';
     }
   }
 }
 ---
 
-<AdminLayout title="Login">
+<AdminLayout title="Iniciar sesión">
   <div class="mx-auto max-w-sm">
-    <h1 class="mb-6 text-2xl font-semibold">Login</h1>
+    <h1 class="mb-6 text-2xl font-semibold">Iniciar sesión</h1>
     <form method="post" class="space-y-4">
       <label class="block">
-        <span class="mb-1 block text-sm font-medium">E-Mail</span>
+        <span class="mb-1 block text-sm font-medium">Correo</span>
         <input
           type="email"
           name="email"
@@ -46,7 +46,7 @@ if (Astro.request.method === 'POST') {
         />
       </label>
       <label class="block">
-        <span class="mb-1 block text-sm font-medium">Passwort</span>
+        <span class="mb-1 block text-sm font-medium">Contraseña</span>
         <input
           type="password"
           name="password"
@@ -60,7 +60,7 @@ if (Astro.request.method === 'POST') {
         type="submit"
         class="w-full rounded bg-neutral-900 px-4 py-2 font-medium text-white hover:bg-neutral-800"
       >
-        Einloggen
+        Entrar
       </button>
     </form>
   </div>

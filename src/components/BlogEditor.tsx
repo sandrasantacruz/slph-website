@@ -15,7 +15,7 @@ import {
   Text,
 } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
-import 'dayjs/locale/de';
+import 'dayjs/locale/es';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@blocknote/core/fonts/inter.css';
@@ -177,7 +177,9 @@ async function processImage(file: File): Promise<File> {
 export default function BlogEditor({ postId, collection, collectionId, pbUrl, initial }: Props) {
   const isEvent = collection === 'events';
   const adminListPath = `/admin/${collection}`;
-  const entityLabel = isEvent ? 'Evento' : 'Noticia';
+  const entityLabel = isEvent ? 'evento' : 'noticia';
+  const entityArticle = isEvent ? 'el' : 'la';
+  const entityArticleCap = isEvent ? 'El' : 'La';
 
   const [title, setTitle] = useState(initial.title);
   const [slug, setSlug] = useState(initial.slug);
@@ -263,7 +265,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
         const updated = await pb.collection(collection).update(postId, fd);
         setCover(normalizeCover(updated.cover));
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Cover-Upload fehlgeschlagen.');
+        setError(err instanceof Error ? err.message : 'Error al subir la portada.');
       } finally {
         setCoverBusy(false);
       }
@@ -281,7 +283,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
       const updated = await pb.collection(collection).update(postId, fd);
       setCover(normalizeCover(updated.cover));
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Cover entfernen fehlgeschlagen.');
+      setError(err instanceof Error ? err.message : 'Error al quitar la portada.');
     } finally {
       setCoverBusy(false);
     }
@@ -289,33 +291,33 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
 
   const validate = useCallback((): Errors => {
     const e: Errors = {};
-    if (!title.trim()) e.title = 'Titel ist erforderlich.';
-    if (!slug) e.slug = 'Slug konnte nicht aus dem Titel generiert werden.';
+    if (!title.trim()) e.title = 'El título es obligatorio.';
+    if (!slug) e.slug = 'No se pudo generar el slug a partir del título.';
     if (excerpt.length > 300) {
-      e.excerpt = `Kurzbeschreibung ist zu lang (${excerpt.length}/300 Zeichen).`;
+      e.excerpt = `Resumen demasiado largo (${excerpt.length}/300 caracteres).`;
     }
     if (status === 'published' && !publishedAt) {
-      e.publishedAt = `Veröffentlichungsdatum ist erforderlich, wenn ${entityLabel} veröffentlicht wird.`;
+      e.publishedAt = `La fecha de publicación es obligatoria al publicar ${entityArticle} ${entityLabel}.`;
     }
     if (isEvent) {
       if (status === 'published' && !eventDate) {
-        e.eventDate = 'Veranstaltungsdatum ist erforderlich.';
+        e.eventDate = 'La fecha del evento es obligatoria.';
       }
       if (eventDate && eventEnd && eventEnd.getTime() < eventDate.getTime()) {
-        e.eventEnd = 'Enddatum darf nicht vor dem Startdatum liegen.';
+        e.eventEnd = 'La fecha de fin no puede ser anterior a la de inicio.';
       }
       if (addressUrl.trim() && !isValidHttpUrl(addressUrl.trim())) {
-        e.addressUrl = 'Bitte eine gültige URL eingeben (https://…).';
+        e.addressUrl = 'Introduce una URL válida (https://…).';
       }
     }
     return e;
-  }, [addressUrl, entityLabel, eventDate, eventEnd, excerpt, isEvent, publishedAt, slug, status, title]);
+  }, [addressUrl, entityArticle, entityLabel, eventDate, eventEnd, excerpt, isEvent, publishedAt, slug, status, title]);
 
   const save = useCallback(async () => {
     const e = validate();
     setErrors(e);
     if (Object.keys(e).length > 0) {
-      setError('Bitte die markierten Felder korrigieren.');
+      setError('Corrige los campos marcados.');
       return;
     }
 
@@ -384,7 +386,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
 
       setSavedAt(new Date());
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Speichern fehlgeschlagen.';
+      const msg = err instanceof Error ? err.message : 'Error al guardar.';
       setError(msg);
     } finally {
       setSaving(false);
@@ -398,7 +400,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
       await pb.collection(collection).delete(postId);
       window.location.href = adminListPath;
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Löschen fehlgeschlagen.';
+      const msg = err instanceof Error ? err.message : 'Error al eliminar.';
       setError(msg);
       setDeleting(false);
       setConfirmDeleteOpen(false);
@@ -411,12 +413,12 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
     <MantineProvider defaultColorScheme="light">
       <div className="space-y-6">
         <div>
-          <InputLabel mb={6}>Cover-Bild</InputLabel>
+          <InputLabel mb={6}>Imagen de portada</InputLabel>
           {currentCover ? (
             <div className="overflow-hidden rounded border border-neutral-300 bg-white">
               <img
                 src={fileUrl(currentCover)}
-                alt="Cover"
+                alt="Portada"
                 className="block max-h-72 w-full object-cover"
               />
               <div className="flex items-center justify-between gap-2 border-t border-neutral-200 px-3 py-2 text-sm">
@@ -428,7 +430,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
                     size="xs"
                     disabled={coverBusy}
                   >
-                    Ersetzen
+                    Reemplazar
                     <input
                       type="file"
                       accept="image/*"
@@ -444,14 +446,14 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
                     onClick={removeCover}
                     disabled={coverBusy}
                   >
-                    Entfernen
+                    Quitar
                   </Button>
                 </div>
               </div>
             </div>
           ) : (
             <label className="flex h-32 cursor-pointer flex-col items-center justify-center rounded border-2 border-dashed border-neutral-300 bg-white text-sm text-neutral-500 hover:border-neutral-400 hover:bg-neutral-50">
-              <span>{coverBusy ? 'Lädt …' : '+ Cover-Bild hochladen'}</span>
+              <span>{coverBusy ? 'Cargando …' : '+ Subir imagen de portada'}</span>
               <span className="mt-1 text-xs text-neutral-400">PNG, JPG, WebP</span>
               <input
                 type="file"
@@ -467,10 +469,10 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <TextInput
-              label="Titel"
+              label="Título"
               value={title}
               onChange={(e) => setTitle(e.currentTarget.value)}
-              placeholder={`Titel ${isEvent ? 'des Events' : 'der Noticia'}`}
+              placeholder={`Título ${isEvent ? 'del evento' : 'de la noticia'}`}
               size="md"
               error={errors.title}
               withAsterisk
@@ -479,11 +481,11 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
 
           <div className="sm:col-span-2">
             <TextInput
-              label="URL-Slug"
+              label="URL (slug)"
               value={slug}
               disabled
-              placeholder="(wird aus dem Titel generiert)"
-              description="Wird automatisch aus dem Titel abgeleitet."
+              placeholder="(se genera a partir del título)"
+              description="Se genera automáticamente del título."
               inputWrapperOrder={['label', 'input', 'description', 'error']}
               classNames={{ input: 'font-mono' }}
               error={errors.slug}
@@ -491,24 +493,24 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
           </div>
 
           <Select
-            label="Status"
+            label="Estado"
             value={status}
             onChange={(v) => setStatus((v ?? 'draft') as Status)}
             allowDeselect={false}
             data={[
-              { value: 'draft', label: 'Entwurf' },
-              { value: 'published', label: 'Veröffentlicht' },
-              { value: 'archived', label: 'Archiviert' },
+              { value: 'draft', label: 'Borrador' },
+              { value: 'published', label: 'Publicado' },
+              { value: 'archived', label: 'Archivado' },
             ]}
           />
 
           <DatePickerInput
-            label="Veröffentlichungsdatum"
+            label="Fecha de publicación"
             value={publishedAt}
             onChange={(v) => setPublishedAt(v ? new Date(v) : null)}
-            valueFormat="DD.MM.YYYY"
-            locale="de"
-            placeholder="Datum wählen"
+            valueFormat="DD/MM/YYYY"
+            locale="es"
+            placeholder="Selecciona una fecha"
             clearable
             error={errors.publishedAt}
             withAsterisk={status === 'published'}
@@ -517,38 +519,38 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
           {isEvent && (
             <>
               <DatePickerInput
-                label="Veranstaltungsdatum"
+                label="Fecha del evento"
                 value={eventDate}
                 onChange={(v) => setEventDate(v ? new Date(v) : null)}
-                valueFormat="DD.MM.YYYY"
-                locale="de"
-                placeholder="Datum wählen"
+                valueFormat="DD/MM/YYYY"
+                locale="es"
+                placeholder="Selecciona una fecha"
                 clearable
                 error={errors.eventDate}
                 withAsterisk={status === 'published'}
               />
 
               <DatePickerInput
-                label="Enddatum (optional)"
+                label="Fecha de fin (opcional)"
                 value={eventEnd}
                 onChange={(v) => setEventEnd(v ? new Date(v) : null)}
-                valueFormat="DD.MM.YYYY"
-                locale="de"
-                placeholder="Nur bei mehrtägigen Events"
+                valueFormat="DD/MM/YYYY"
+                locale="es"
+                placeholder="Sólo para eventos de varios días"
                 clearable
                 error={errors.eventEnd}
                 minDate={eventDate ?? undefined}
               />
 
               <TextInput
-                label="Ort"
+                label="Lugar"
                 value={location}
                 onChange={(e) => setLocation(e.currentTarget.value)}
-                placeholder="z.B. Casa Colón, Las Palmas de Gran Canaria"
+                placeholder="p. ej. Casa Colón, Las Palmas de Gran Canaria"
               />
 
               <TextInput
-                label="Map-Link (optional)"
+                label="Enlace al mapa (opcional)"
                 value={addressUrl}
                 onChange={(e) => setAddressUrl(e.currentTarget.value)}
                 placeholder="https://maps.google.com/…"
@@ -560,14 +562,14 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
 
           <div className="sm:col-span-2">
             <Textarea
-              label="Kurzbeschreibung"
+              label="Resumen"
               value={excerpt}
               onChange={(e) => setExcerpt(e.currentTarget.value)}
-              placeholder="Kurze Zusammenfassung für Listen und Vorschau (max. 300 Zeichen)"
+              placeholder="Resumen breve para listados y vista previa (máx. 300 caracteres)"
               autosize
               minRows={2}
               maxLength={300}
-              description={`${excerpt.length}/300 Zeichen`}
+              description={`${excerpt.length}/300 caracteres`}
               inputWrapperOrder={['label', 'input', 'description', 'error']}
               error={errors.excerpt}
             />
@@ -575,13 +577,13 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
         </div>
 
         <div>
-          <InputLabel mb={6}>Inhalt</InputLabel>
+          <InputLabel mb={6}>Contenido</InputLabel>
           <div className="rounded border border-neutral-300 bg-white">
             <BlockNoteView editor={editor} theme="light" />
           </div>
           <p className="mt-2 text-xs text-neutral-500">
-            Tipp: Bilder per Drag-and-Drop oder Copy-Paste einfügen. „/“ tippen für weitere Block-Typen.
-            Bilder werden erst beim Speichern wirklich hochgeladen.
+            Consejo: arrastra y suelta o pega imágenes para insertarlas. Escribe «/» para más tipos de bloque.
+            Las imágenes se suben al guardar.
           </p>
         </div>
 
@@ -589,21 +591,21 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
 
         <div className="flex items-center justify-between border-t border-neutral-200 pt-4">
           <Button variant="subtle" color="red" onClick={() => setConfirmDeleteOpen(true)}>
-            {entityLabel} löschen
+            Eliminar {entityLabel}
           </Button>
           <div className="flex items-center gap-3">
             {pendingCount > 0 && (
               <span className="rounded bg-amber-100 px-2 py-0.5 text-xs text-amber-900">
-                {pendingCount} ungespeicherte{pendingCount === 1 ? 's Bild' : ' Bilder'}
+                {pendingCount} {pendingCount === 1 ? 'imagen sin guardar' : 'imágenes sin guardar'}
               </span>
             )}
             {savedAt && pendingCount === 0 && (
               <span className="text-xs text-neutral-500">
-                Gespeichert um {savedAt.toLocaleTimeString('de-DE')}
+                Guardado a las {savedAt.toLocaleTimeString('es-ES')}
               </span>
             )}
             <Button onClick={save} loading={saving} color="dark">
-              Speichern
+              Guardar
             </Button>
           </div>
         </div>
@@ -611,16 +613,14 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
         <Modal
           opened={confirmDeleteOpen}
           onClose={() => !deleting && setConfirmDeleteOpen(false)}
-          title={`${entityLabel} löschen?`}
+          title={`¿Eliminar ${entityArticle} ${entityLabel}?`}
           centered
           closeOnClickOutside={!deleting}
           closeOnEscape={!deleting}
           withCloseButton={!deleting}
         >
           <Text size="sm" mb="lg">
-            {entityLabel === 'Evento'
-              ? 'Dieses Evento wird endgültig gelöscht. Alle Bilder werden ebenfalls entfernt.'
-              : 'Diese Noticia wird endgültig gelöscht. Alle Bilder werden ebenfalls entfernt.'}
+            {entityArticleCap} {entityLabel} se eliminará de forma definitiva. Las imágenes también se borrarán.
           </Text>
           <Group justify="flex-end">
             <Button
@@ -628,10 +628,10 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
               onClick={() => setConfirmDeleteOpen(false)}
               disabled={deleting}
             >
-              Abbrechen
+              Cancelar
             </Button>
             <Button color="red" onClick={performDelete} loading={deleting}>
-              Endgültig löschen
+              Eliminar
             </Button>
           </Group>
         </Modal>
