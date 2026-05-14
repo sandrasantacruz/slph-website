@@ -7,14 +7,47 @@ interface Props {
 }
 
 const { items } = Astro.props;
+const BATCH = 12;
 ---
 
 <section class="mx-auto max-w-6xl px-4 pb-24">
   {items.length === 0 ? (
     <p class="text-caparol/60">Aún no hay nada publicado.</p>
   ) : (
-    <ul class="grid gap-6 md:grid-cols-2">
-      {items.map((item) => <NovedadCard item={item} />)}
-    </ul>
+    <>
+      <ul id="novedades-list" class="grid gap-6 md:grid-cols-2">
+        {items.map((item, i) => <NovedadCard item={item} hidden={i >= BATCH} />)}
+      </ul>
+      {items.length > BATCH && (
+        <div
+          id="novedades-sentinel"
+          data-batch={BATCH}
+          class="mt-12 flex h-1 items-center justify-center"
+          aria-hidden="true"
+        ></div>
+      )}
+    </>
   )}
 </section>
+
+<script>
+  const sentinel = document.getElementById('novedades-sentinel');
+  const list = document.getElementById('novedades-list');
+  if (sentinel && list) {
+    const batch = Number(sentinel.dataset.batch) || 12;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        const hidden = Array.from(list.querySelectorAll<HTMLLIElement>('li[hidden]'));
+        if (hidden.length === 0) {
+          sentinel.remove();
+          observer.disconnect();
+          return;
+        }
+        hidden.slice(0, batch).forEach((el) => el.removeAttribute('hidden'));
+      },
+      { rootMargin: '600px' },
+    );
+    observer.observe(sentinel);
+  }
+</script>

@@ -1,8 +1,8 @@
 // scripts/sync-to-prod.mjs
 //
-// Kopiert die `news`- und `events`-Records inkl. Cover- und Gallery-Files
-// vom lokalen PocketBase auf Prod. Re-uploaded Dateien (PB vergibt neue
-// Filenames) und re-mapped die Bild-URLs im BlockNote-`content`.
+// Kopiert die `posts`-Records (events + news, unified) inkl. Cover- und
+// Gallery-Files vom lokalen PocketBase auf Prod. Re-uploaded Dateien (PB
+// vergibt neue Filenames) und re-mapped die Bild-URLs im BlockNote-`content`.
 //
 // Bricht ab, wenn auf Prod bereits Records existieren — zum erneuten Lauf
 // die Collection vorher leeren.
@@ -108,24 +108,16 @@ async function main() {
   await prod.collection('users').authWithPassword(PROD_USER_EMAIL, PROD_USER_PASS);
   console.log(`Auth ok on prod as ${PROD_USER_EMAIL}`);
 
-  for (const coll of ['news', 'events']) {
-    const existing = await prod.collection(coll).getList(1, 1);
-    if (existing.totalItems > 0) {
-      console.error(
-        `Prod ${coll} hat bereits ${existing.totalItems} Records. Abbruch — vorher leeren.`,
-      );
-      process.exit(1);
-    }
+  const existing = await prod.collection('posts').getList(1, 1);
+  if (existing.totalItems > 0) {
+    console.error(
+      `Prod posts hat bereits ${existing.totalItems} Records. Abbruch — vorher leeren.`,
+    );
+    process.exit(1);
   }
 
-  await syncCollection('news', [
-    'title',
-    'slug',
-    'excerpt',
-    'status',
-    'published_at',
-  ]);
-  await syncCollection('events', [
+  await syncCollection('posts', [
+    'typ',
     'title',
     'slug',
     'excerpt',

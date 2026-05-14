@@ -4,9 +4,10 @@ import { PB_PUBLIC_URL } from '../../lib/pb';
 
 interface Props {
   item: RecordModel;
+  hidden?: boolean;
 }
 
-const { item } = Astro.props;
+const { item, hidden = false } = Astro.props;
 
 const dayFmt = new Intl.DateTimeFormat('es-ES', { day: 'numeric' });
 const monthFmt = new Intl.DateTimeFormat('es-ES', { month: 'short' });
@@ -52,7 +53,7 @@ const month = start ? monthFmt.format(start).replace('.', '') : '';
 const href = `/novedades/${item.slug}`;
 ---
 
-<li class:list={[
+<li hidden={hidden} class:list={[
   'group relative overflow-hidden rounded-2xl ring-1 transition',
   past
     ? 'bg-white/[0.03] ring-white/10 hover:ring-arena/30'
