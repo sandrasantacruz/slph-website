@@ -1,6 +1,6 @@
 ---
 import type { RecordModel } from 'pocketbase';
-import { PB_URL } from '../../lib/pb';
+import { PB_PUBLIC_URL } from '../../lib/pb';
 
 interface Props {
   item: RecordModel;
@@ -19,7 +19,7 @@ const fullFmt = new Intl.DateTimeFormat('es-ES', {
 
 const cover = Array.isArray(item.cover) ? item.cover[0] : item.cover;
 const coverUrl = cover
-  ? `${PB_URL}/api/files/${item.collectionId}/${item.id}/${cover}?thumb=800x600`
+  ? `${PB_PUBLIC_URL}/api/files/${item.collectionId}/${item.id}/${cover}?thumb=800x600`
   : null;
 
 const start = item.event_date ? new Date(item.event_date) : null;

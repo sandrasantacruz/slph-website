@@ -20,7 +20,7 @@ import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/mantine/style.css';
-import { pb } from '../lib/pocketbase';
+import { createBrowserPb } from '../lib/pocketbase';
 
 type Status = 'draft' | 'published' | 'archived';
 type Collection = 'news' | 'events';
@@ -206,6 +206,8 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
     setSlug(slugify(title));
   }, [title]);
 
+  const pb = useMemo(() => createBrowserPb(pbUrl), [pbUrl]);
+
   // blob-URL → original File. Files only exist in memory until save.
   const pendingUploads = useRef<Map<string, File>>(new Map());
 
@@ -270,7 +272,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
         setCoverBusy(false);
       }
     },
-    [collection, cover, postId],
+    [collection, cover, pb, postId],
   );
 
   const removeCover = useCallback(async () => {
@@ -287,7 +289,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
     } finally {
       setCoverBusy(false);
     }
-  }, [collection, cover, postId]);
+  }, [collection, cover, pb, postId]);
 
   const validate = useCallback((): Errors => {
     const e: Errors = {};
@@ -391,7 +393,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
     } finally {
       setSaving(false);
     }
-  }, [addressUrl, collection, editor, eventDate, eventEnd, excerpt, fileUrl, imageUrlPrefix, images, isEvent, location, postId, publishedAt, slug, status, title, validate]);
+  }, [addressUrl, collection, editor, eventDate, eventEnd, excerpt, fileUrl, imageUrlPrefix, images, isEvent, location, pb, postId, publishedAt, slug, status, title, validate]);
 
   const performDelete = useCallback(async () => {
     setDeleting(true);
@@ -405,7 +407,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
       setDeleting(false);
       setConfirmDeleteOpen(false);
     }
-  }, [adminListPath, collection, postId]);
+  }, [adminListPath, collection, pb, postId]);
 
   const currentCover = cover[0];
 

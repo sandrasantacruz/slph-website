@@ -158,4 +158,4 @@ docker pull ghcr.io/sandrasantacruz/slph-website:latest
 cp .env.example .env
 ```
 
-`PUBLIC_POCKETBASE_URL` wird vom JS-SDK Wrapper gelesen (`src/lib/pocketbase.ts`), die `PB_*`-Variablen vom Go-Backend.
+`PUBLIC_POCKETBASE_URL` wird vom Node SSR für interne PB-API-Calls genutzt (defaults auf `http://127.0.0.1:8090`). `PB_APP_URL` setzt zusätzlich PocketBases Application-URL **und** ist die Browser-facing URL für File-Links (`<img src>`, Admin-Uploads) — wird zur Laufzeit gelesen, also pro Environment in der Compose-`environment` setzen. Die übrigen `PB_*`-Variablen liest das Go-Backend.

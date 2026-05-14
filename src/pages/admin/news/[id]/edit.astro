@@ -3,7 +3,7 @@ export const prerender = false;
 
 import AdminLayout from '../../../../layouts/AdminLayout.astro';
 import BlogEditor from '../../../../components/BlogEditor';
-import { PB_URL } from '../../../../lib/pb';
+import { PB_PUBLIC_URL } from '../../../../lib/pb';
 
 const { id } = Astro.params;
 if (!id) return Astro.redirect('/admin/news');
@@ -26,7 +26,7 @@ try {
     postId={post.id}
     collection="news"
     collectionId={post.collectionId}
-    pbUrl={PB_URL}
+    pbUrl={PB_PUBLIC_URL}
     initial={{
       title: post.title ?? '',
       slug: post.slug ?? '',

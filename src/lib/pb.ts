@@ -2,6 +2,10 @@ import PocketBase from 'pocketbase';
 
 const PB_URL = import.meta.env.PUBLIC_POCKETBASE_URL ?? 'http://127.0.0.1:8090';
 
+const PB_PUBLIC_URL =
+  (typeof process !== 'undefined' ? process.env.PB_APP_URL : undefined) ||
+  PB_URL;
+
 export const AUTH_COOKIE = 'pb_auth';
 
 export function createPb(): PocketBase {
@@ -44,4 +48,4 @@ export function clearAuthCookie(): string {
   );
 }
 
-export { PB_URL };
+export { PB_URL, PB_PUBLIC_URL };
