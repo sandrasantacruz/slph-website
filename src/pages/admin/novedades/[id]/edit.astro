@@ -6,25 +6,27 @@ import BlogEditor from '../../../../components/BlogEditor';
 import { PB_PUBLIC_URL } from '../../../../lib/pb';
 
 const { id } = Astro.params;
-if (!id) return Astro.redirect('/admin/news');
+if (!id) return Astro.redirect('/admin/novedades');
 
 let post;
 try {
-  post = await Astro.locals.pb.collection('news').getOne(id);
+  post = await Astro.locals.pb.collection('posts').getOne(id);
 } catch {
-  return Astro.redirect('/admin/news');
+  return Astro.redirect('/admin/novedades');
 }
+
+const typ: 'event' | 'news' = post.typ === 'event' ? 'event' : 'news';
 ---
 
-<AdminLayout title={post.title || 'Nueva noticia'}>
+<AdminLayout title={post.title || 'Nueva entrada'}>
   <div class="mb-4 flex items-center gap-4">
-    <a href="/admin/news" class="text-sm text-neutral-500 hover:text-neutral-900">← Todas las noticias</a>
+    <a href="/admin/novedades" class="text-sm text-neutral-500 hover:text-neutral-900">← Todas las novedades</a>
   </div>
 
   <BlogEditor
     client:only="react"
     postId={post.id}
-    collection="news"
+    typ={typ}
     collectionId={post.collectionId}
     pbUrl={PB_PUBLIC_URL}
     initial={{
@@ -36,6 +38,10 @@ try {
       content: post.content ?? null,
       cover: Array.isArray(post.cover) ? post.cover : post.cover ? [post.cover] : [],
       images: Array.isArray(post.images) ? post.images : [],
+      event_date: post.event_date ?? '',
+      event_end: post.event_end ?? '',
+      location: post.location ?? '',
+      address_url: post.address_url ?? '',
     }}
   >
     <p class="text-neutral-500">Cargando editor …</p>

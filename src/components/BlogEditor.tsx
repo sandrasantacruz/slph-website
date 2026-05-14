@@ -23,7 +23,8 @@ import '@blocknote/mantine/style.css';
 import { createBrowserPb } from '../lib/pocketbase';
 
 type Status = 'draft' | 'published' | 'archived';
-type Collection = 'news' | 'events';
+type PostTyp = 'event' | 'news';
+const COLLECTION = 'posts';
 
 interface Initial {
   title: string;
@@ -49,7 +50,7 @@ interface BlockLike {
 
 interface Props {
   postId: string;
-  collection: Collection;
+  typ: PostTyp;
   collectionId: string;
   pbUrl: string;
   initial: Initial;
@@ -174,9 +175,11 @@ async function processImage(file: File): Promise<File> {
   }
 }
 
-export default function BlogEditor({ postId, collection, collectionId, pbUrl, initial }: Props) {
-  const isEvent = collection === 'events';
-  const adminListPath = `/admin/${collection}`;
+export default function BlogEditor({ postId, typ: initialTyp, collectionId, pbUrl, initial }: Props) {
+  const adminListPath = '/admin/novedades';
+
+  const [typ, setTyp] = useState<PostTyp>(initialTyp);
+  const isEvent = typ === 'event';
   const entityLabel = isEvent ? 'evento' : 'noticia';
   const entityArticle = isEvent ? 'el' : 'la';
   const entityArticleCap = isEvent ? 'El' : 'La';
@@ -264,7 +267,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
         const fd = new FormData();
         for (const old of cover) fd.append('cover-', old);
         fd.append('cover+', processed);
-        const updated = await pb.collection(collection).update(postId, fd);
+        const updated = await pb.collection(COLLECTION).update(postId, fd);
         setCover(normalizeCover(updated.cover));
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error al subir la portada.');
@@ -272,7 +275,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
         setCoverBusy(false);
       }
     },
-    [collection, cover, pb, postId],
+    [cover, pb, postId],
   );
 
   const removeCover = useCallback(async () => {
@@ -282,14 +285,14 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
     try {
       const fd = new FormData();
       for (const old of cover) fd.append('cover-', old);
-      const updated = await pb.collection(collection).update(postId, fd);
+      const updated = await pb.collection(COLLECTION).update(postId, fd);
       setCover(normalizeCover(updated.cover));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error al quitar la portada.');
     } finally {
       setCoverBusy(false);
     }
-  }, [collection, cover, pb, postId]);
+  }, [cover, pb, postId]);
 
   const validate = useCallback((): Errors => {
     const e: Errors = {};
@@ -335,7 +338,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
         if (!file) continue;
         const fd = new FormData();
         fd.append('images+', file);
-        const updated = await pb.collection(collection).update(postId, fd);
+        const updated = await pb.collection(COLLECTION).update(postId, fd);
         latestImages = Array.isArray(updated.images) ? (updated.images as string[]) : [];
         const newName = latestImages[latestImages.length - 1];
         if (!newName) throw new Error('Upload fehlgeschlagen.');
@@ -364,27 +367,27 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
       if (orphans.length > 0) {
         const fd = new FormData();
         for (const f of orphans) fd.append('images-', f);
-        const updated = await pb.collection(collection).update(postId, fd);
+        const updated = await pb.collection(COLLECTION).update(postId, fd);
         latestImages = Array.isArray(updated.images) ? (updated.images as string[]) : [];
       }
       setImages(latestImages);
 
-      // 4. Persist fields.
+      // 4. Persist fields. Bei typ-Wechsel werden die jeweils irrelevanten
+      // Felder leer geschrieben, damit kein Geisterzustand übrig bleibt.
       const payload: Record<string, unknown> = {
         title: title.trim(),
         slug,
         excerpt,
         status,
+        typ,
         content: blocks,
         published_at: publishedAt ? publishedAt.toISOString() : '',
+        event_date: isEvent && eventDate ? eventDate.toISOString() : '',
+        event_end: isEvent && eventEnd ? eventEnd.toISOString() : '',
+        location: isEvent ? location : '',
+        address_url: isEvent ? addressUrl : '',
       };
-      if (isEvent) {
-        payload.event_date = eventDate ? eventDate.toISOString() : '';
-        payload.event_end = eventEnd ? eventEnd.toISOString() : '';
-        payload.location = location;
-        payload.address_url = addressUrl;
-      }
-      await pb.collection(collection).update(postId, payload);
+      await pb.collection(COLLECTION).update(postId, payload);
 
       setSavedAt(new Date());
     } catch (err) {
@@ -393,13 +396,13 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
     } finally {
       setSaving(false);
     }
-  }, [addressUrl, collection, editor, eventDate, eventEnd, excerpt, fileUrl, imageUrlPrefix, images, isEvent, location, pb, postId, publishedAt, slug, status, title, validate]);
+  }, [addressUrl, editor, eventDate, eventEnd, excerpt, fileUrl, imageUrlPrefix, images, isEvent, location, pb, postId, publishedAt, slug, status, title, typ, validate]);
 
   const performDelete = useCallback(async () => {
     setDeleting(true);
     setError(null);
     try {
-      await pb.collection(collection).delete(postId);
+      await pb.collection(COLLECTION).delete(postId);
       window.location.href = adminListPath;
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Error al eliminar.';
@@ -407,7 +410,7 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
       setDeleting(false);
       setConfirmDeleteOpen(false);
     }
-  }, [adminListPath, collection, pb, postId]);
+  }, [adminListPath, pb, postId]);
 
   const currentCover = cover[0];
 
@@ -493,6 +496,19 @@ export default function BlogEditor({ postId, collection, collectionId, pbUrl, in
               error={errors.slug}
             />
           </div>
+
+          <Select
+            label="Tipo"
+            value={typ}
+            onChange={(v) => setTyp((v ?? 'news') as PostTyp)}
+            allowDeselect={false}
+            data={[
+              { value: 'news', label: 'Noticia' },
+              { value: 'event', label: 'Evento' },
+            ]}
+            description="Define los campos disponibles abajo."
+            inputWrapperOrder={['label', 'input', 'description', 'error']}
+          />
 
           <Select
             label="Estado"

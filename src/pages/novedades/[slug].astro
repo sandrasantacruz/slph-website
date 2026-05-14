@@ -1,0 +1,17 @@
+---
+export const prerender = false;
+import Detail from '../../views/novedades/Detail.astro';
+
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/novedades');
+
+let item;
+try {
+  item = await Astro.locals.pb.collection('posts').getFirstListItem(
+    `slug = "${slug.replace(/"/g, '\\"')}"`,
+  );
+} catch {
+  return Astro.redirect('/novedades');
+}
+---
+<Detail item={item} />

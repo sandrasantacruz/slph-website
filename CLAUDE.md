@@ -42,6 +42,45 @@ Stattdessen:
   <img src={`${PB_URL}/api/files/${record.collectionId}/${record.id}/${record.cover}?thumb=400x300`} />
   ```
 
+## Datenmodell (PocketBase)
+
+Eine einzige Inhalts-Collection **`posts`** für sowohl Veranstaltungen als auch
+Pressemeldungen. Der Diskriminator ist das Feld `typ`.
+
+| Feld           | Typ                          | Pflicht | Hinweis                                                       |
+| -------------- | ---------------------------- | ------- | ------------------------------------------------------------- |
+| `id`           | text (15 chars autogen)      | ja      | Primary key, system.                                          |
+| `typ`          | select single                | **ja**  | Werte: `event`, `news`. Steuert UI und Pflichtfeld-Logik.     |
+| `title`        | text                         | nein    |                                                               |
+| `slug`         | text (`^[a-z0-9-]+$`)        | nein    | **Unique über die ganze Collection** — events und news teilen den slug-Namespace. |
+| `excerpt`      | text                         | nein    |                                                               |
+| `content`      | json                         | nein    | BlockNote-Blöcke (siehe `lib/blocknote-render`).              |
+| `cover`        | file (single)                | nein    |                                                               |
+| `images`       | file (max 10)                | nein    | Inline-Bilder im BlockNote-Editor.                            |
+| `status`       | select                       | nein    | `draft` / `published` / `archived`.                           |
+| `published_at` | date                         | nein    | Listen-Sortierung. Public-Sichtbarkeit: nur wenn `<= @now`.   |
+| `event_date`   | text (ISO-Datum als String)  | nein    | **Nur bei `typ='event'` befüllt.**                             |
+| `event_end`    | text                         | nein    | dito, optional.                                               |
+| `location`     | text                         | nein    | dito.                                                         |
+| `address_url`  | text                         | nein    | dito.                                                         |
+| `created`      | autodate                     | —       |                                                               |
+| `updated`      | autodate                     | —       |                                                               |
+
+Indexes: `UNIQUE(slug)`, `(status, published_at)`.
+
+Rules:
+- `listRule` / `viewRule`: `@request.auth.id != "" || (status = "published" && published_at <= @now)`
+- `createRule` / `updateRule` / `deleteRule`: `@request.auth.id != ""`
+
+Konventionen:
+- **Event-Felder** (`event_date`/`event_end`/`location`/`address_url`) im
+  Editor und in der Validierung **nur konditional** anzeigen/prüfen, wenn
+  `typ='event'`. Bei `typ='news'` bleiben sie leer.
+- **Datumsfelder** für Events sind im Schema `text`, werden aber als
+  ISO-Strings (`Date.toISOString()`) gespeichert. Beim Lesen `new Date(value)`.
+- Public-Listings filtern immer mit
+  `status = "published" && published_at <= @now`.
+
 ## Layouts
 
 | Layout            | Wann                       | Brand-Elemente               |

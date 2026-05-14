@@ -2,4 +2,4 @@ import type { APIRoute } from 'astro';
 
 export const prerender = false;
 
-export const GET: APIRoute = ({ redirect }) => redirect('/admin/news');
+export const GET: APIRoute = ({ redirect }) => redirect('/admin/novedades');

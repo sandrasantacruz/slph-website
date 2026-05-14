@@ -9,6 +9,7 @@ interface Props {
 }
 
 const { item } = Astro.props;
+const isEvent = item.typ === 'event';
 
 const fullFmt = new Intl.DateTimeFormat('es-ES', {
   day: 'numeric',
@@ -27,37 +28,55 @@ function parseDate(iso: string | undefined): Date | null {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
-const start = parseDate(item.event_date);
-const end = parseDate(item.event_end);
-const dateLabel = end && start
+const start = isEvent ? parseDate(item.event_date) : null;
+const end = isEvent ? parseDate(item.event_end) : null;
+
+const eventDateLabel = end && start
   ? `${fullFmt.format(start)} – ${fullFmt.format(end)}`
   : start
     ? fullFmt.format(start)
     : '';
 
+const newsDate = !isEvent && item.published_at ? fullFmt.format(new Date(item.published_at)) : '';
+
 const today = new Date();
 today.setHours(0, 0, 0, 0);
-const past = !!(end && end < today) || !!(!end && start && start < today);
+const past = isEvent && ((end && end < today) || (!end && start && start < today));
 
 const html = renderBlocks(item.content);
+
+const fallbackTitle = isEvent ? 'Evento' : 'Noticia';
+const typLabel = isEvent ? 'Evento' : 'Noticia';
 ---
 
-<MainLayout title={item.title || 'Evento'} description={item.excerpt}>
+<MainLayout title={item.title || fallbackTitle} description={item.excerpt}>
   <article class="pb-24">
     <header class="mx-auto max-w-3xl px-4 pt-12 sm:pt-20">
-      <a href="/eventos" class="inline-block text-sm text-arena hover:underline">
-        ← Volver a eventos
+      <a href="/novedades" class="inline-block text-sm text-arena hover:underline">
+        ← Volver a novedades
       </a>
-      {dateLabel && (
-        <p class="mt-6 text-xs uppercase tracking-wider text-arena">
-          {dateLabel}
-          {past && <span class="ml-2 rounded bg-white/10 px-1.5 py-0.5 text-[10px]">Pasado</span>}
-        </p>
-      )}
+
+      <div class="mt-6 flex items-center gap-2 text-xs uppercase tracking-wider">
+        <span class:list={[
+          'rounded-full px-2 py-0.5 font-medium',
+          isEvent ? 'bg-arena/20 text-arena' : 'bg-celeste/25 text-celeste',
+        ]}>
+          {typLabel}
+        </span>
+        {isEvent && eventDateLabel && (
+          <span class="text-arena">{eventDateLabel}</span>
+        )}
+        {!isEvent && newsDate && (
+          <span class="text-arena">{newsDate}</span>
+        )}
+        {past && <span class="rounded bg-white/10 px-1.5 py-0.5 text-[10px] text-caparol/70">Pasado</span>}
+      </div>
+
       <h1 class="mt-3 font-display text-4xl leading-[1.05] text-caparol sm:text-6xl">
         {item.title}
       </h1>
-      {item.location && (
+
+      {isEvent && item.location && (
         <p class="mt-4 flex items-center gap-2 text-base text-caparol/85">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/>
@@ -77,6 +96,7 @@ const html = renderBlocks(item.content);
           )}
         </p>
       )}
+
       {item.excerpt && (
         <p class="mt-6 text-lg text-caparol/85">{item.excerpt}</p>
       )}

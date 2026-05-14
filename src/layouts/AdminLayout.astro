@@ -9,8 +9,7 @@ const { title } = Astro.props;
 const user = Astro.locals.user;
 const currentPath = Astro.url.pathname;
 const navLinks = [
-  { href: '/admin/news', label: 'Noticias' },
-  { href: '/admin/events', label: 'Eventos' },
+  { href: '/admin/novedades', label: 'Novedades' },
 ];
 ---
 
@@ -28,7 +27,7 @@ const navLinks = [
         <header class="border-b border-neutral-200 bg-white">
           <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
             <div class="flex items-center gap-6">
-              <a href="/admin/news" class="font-semibold">Administración</a>
+              <a href="/admin/novedades" class="font-semibold">Administración</a>
               <nav class="flex items-center gap-4 text-sm">
                 {navLinks.map(({ href, label }) => {
                   const active = currentPath.startsWith(href);

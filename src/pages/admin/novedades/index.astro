@@ -9,12 +9,12 @@ const pb = Astro.locals.pb;
 let items: RecordModel[] = [];
 let loadError: string | null = null;
 try {
-  const result = await pb.collection('events').getList(1, 100, {
-    sort: '-event_date,-updated',
+  const result = await pb.collection('posts').getList(1, 200, {
+    sort: '-updated',
   });
   items = result.items;
 } catch (err) {
-  loadError = err instanceof Error ? err.message : 'No se pudieron cargar los eventos.';
+  loadError = err instanceof Error ? err.message : 'No se pudieron cargar las novedades.';
 }
 
 const dateFmt = new Intl.DateTimeFormat('es-ES', { dateStyle: 'medium' });
@@ -32,22 +32,39 @@ const statusLabel: Record<string, string> = {
   archived: 'archivado',
 };
 
-function fmtEventDate(iso: string | undefined): string {
+const typLabel: Record<string, string> = {
+  event: 'Evento',
+  news: 'Noticia',
+};
+
+const typColor: Record<string, string> = {
+  event: 'bg-orange-100 text-orange-900',
+  news: 'bg-sky-100 text-sky-900',
+};
+
+function fmtDate(iso: string | undefined): string {
   if (!iso) return '—';
   const d = new Date(iso);
   return Number.isNaN(d.getTime()) ? '—' : dateFmt.format(d);
 }
+
+function refDate(item: RecordModel): string {
+  // Bei Events das Eventdatum, sonst die Veröffentlichung.
+  return item.typ === 'event'
+    ? (item.event_date || item.published_at)
+    : item.published_at;
+}
 ---
 
-<AdminLayout title="Eventos">
+<AdminLayout title="Novedades">
   <div class="mb-6 flex items-center justify-between">
-    <h1 class="text-2xl font-semibold">Eventos</h1>
-    <form method="post" action="/admin/events/new">
+    <h1 class="text-2xl font-semibold">Novedades</h1>
+    <form method="post" action="/admin/novedades/new">
       <button
         type="submit"
         class="rounded bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
       >
-        + Nuevo evento
+        + Nueva entrada
       </button>
     </form>
   </div>
@@ -56,14 +73,15 @@ function fmtEventDate(iso: string | undefined): string {
 
   {
     items.length === 0 && !loadError ? (
-      <p class="text-neutral-500">Aún no hay eventos.</p>
+      <p class="text-neutral-500">Aún no hay nada.</p>
     ) : (
       <div class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
         <table class="w-full text-sm">
           <thead class="bg-neutral-50 text-left text-neutral-600">
             <tr>
               <th class="px-4 py-2 font-medium">Título</th>
-              <th class="px-4 py-2 font-medium">Fecha del evento</th>
+              <th class="px-4 py-2 font-medium">Tipo</th>
+              <th class="px-4 py-2 font-medium">Fecha</th>
               <th class="px-4 py-2 font-medium">Estado</th>
               <th class="px-4 py-2 font-medium">Modificado</th>
             </tr>
@@ -73,14 +91,19 @@ function fmtEventDate(iso: string | undefined): string {
               <tr class="relative cursor-pointer hover:bg-neutral-50 focus-within:bg-neutral-50">
                 <td class="px-4 py-2">
                   <a
-                    href={`/admin/events/${p.id}/edit`}
+                    href={`/admin/novedades/${p.id}/edit`}
                     class="font-medium hover:underline focus:outline-none after:absolute after:inset-0 after:content-['']"
                   >
                     {p.title || <span class="text-neutral-400">(sin título)</span>}
                   </a>
                   {p.slug && <div class="text-xs text-neutral-500">/{p.slug}</div>}
                 </td>
-                <td class="px-4 py-2 text-neutral-700">{fmtEventDate(p.event_date)}</td>
+                <td class="px-4 py-2">
+                  <span class={`inline-block rounded px-2 py-0.5 text-xs ${typColor[p.typ] ?? 'bg-neutral-100'}`}>
+                    {typLabel[p.typ] ?? p.typ}
+                  </span>
+                </td>
+                <td class="px-4 py-2 text-neutral-700">{fmtDate(refDate(p))}</td>
                 <td class="px-4 py-2">
                   <span class={`inline-block rounded px-2 py-0.5 text-xs ${statusColor[p.status] ?? 'bg-neutral-100'}`}>
                     {statusLabel[p.status] ?? 'borrador'}

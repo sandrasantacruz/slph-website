@@ -244,7 +244,7 @@
 
 /* ────────────────────────────────────────────────────────────
  * Long-form content rendered from BlockNote JSON.
- * Used on /noticias/[slug] and /eventos/[slug].
+ * Used on /novedades/[slug].
  * ──────────────────────────────────────────────────────────── */
 .prose-slph {
   color: var(--color-caparol);

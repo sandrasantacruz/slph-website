@@ -4,10 +4,9 @@ import { PB_PUBLIC_URL } from '../../lib/pb';
 
 interface Props {
   item: RecordModel;
-  past?: boolean;
 }
 
-const { item, past = false } = Astro.props;
+const { item } = Astro.props;
 
 const dayFmt = new Intl.DateTimeFormat('es-ES', { day: 'numeric' });
 const monthFmt = new Intl.DateTimeFormat('es-ES', { month: 'short' });
@@ -22,20 +21,35 @@ const coverUrl = cover
   ? `${PB_PUBLIC_URL}/api/files/${item.collectionId}/${item.id}/${cover}?thumb=800x600`
   : null;
 
-const start = item.event_date ? new Date(item.event_date) : null;
-const end = item.event_end ? new Date(item.event_end) : null;
-const validStart = start && !Number.isNaN(start.getTime()) ? start : null;
-const validEnd = end && !Number.isNaN(end.getTime()) ? end : null;
+function parseDate(raw: string | undefined): Date | null {
+  if (!raw) return null;
+  const d = new Date(raw);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
 
-const day = validStart ? dayFmt.format(validStart) : '';
-const month = validStart ? monthFmt.format(validStart).replace('.', '') : '';
-const rangeLabel = validEnd && validStart
-  ? `${fullFmt.format(validStart)} – ${fullFmt.format(validEnd)}`
-  : validStart
-    ? fullFmt.format(validStart)
-    : '';
+const isEvent = item.typ === 'event';
+const start = isEvent ? parseDate(item.event_date) : null;
+const end = isEvent ? parseDate(item.event_end) : null;
 
-const href = `/eventos/${item.slug}`;
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const past = isEvent && ((end && end < today) || (!end && start && start < today));
+
+const dateLabel = isEvent
+  ? end && start
+    ? `${fullFmt.format(start)} – ${fullFmt.format(end)}`
+    : start
+      ? fullFmt.format(start)
+      : ''
+  : (() => {
+      const d = parseDate(item.published_at);
+      return d ? fullFmt.format(d) : '';
+    })();
+
+const day = start ? dayFmt.format(start) : '';
+const month = start ? monthFmt.format(start).replace('.', '') : '';
+
+const href = `/novedades/${item.slug}`;
 ---
 
 <li class:list={[
@@ -62,7 +76,7 @@ const href = `/eventos/${item.slug}`;
         </div>
       )}
 
-      {validStart && !past && (
+      {isEvent && start && !past && (
         <div class="absolute left-3 top-3 flex flex-col items-center rounded-lg bg-arena px-3 py-2 text-negro shadow-lg">
           <span class="font-display text-3xl leading-none">{day}</span>
           <span class="text-xs font-medium uppercase tracking-wider">{month}</span>
@@ -71,22 +85,31 @@ const href = `/eventos/${item.slug}`;
     </div>
 
     <div class="flex flex-col gap-2 p-5">
-      {validStart && (
-        <p class:list={[
-          'text-xs uppercase tracking-wider',
-          past ? 'text-caparol/50' : 'text-arena',
+      <div class="flex items-center gap-2 text-xs uppercase tracking-wider">
+        <span class:list={[
+          'rounded-full px-2 py-0.5 font-medium',
+          isEvent
+            ? 'bg-arena/20 text-arena'
+            : 'bg-celeste/25 text-celeste',
         ]}>
-          {rangeLabel}
-          {past && <span class="ml-2 rounded bg-white/10 px-1.5 py-0.5 text-[10px]">Pasado</span>}
-        </p>
-      )}
+          {isEvent ? 'Evento' : 'Noticia'}
+        </span>
+        {dateLabel && (
+          <span class={past ? 'text-caparol/50' : 'text-caparol/70'}>
+            {dateLabel}
+          </span>
+        )}
+        {past && <span class="rounded bg-white/10 px-1.5 py-0.5 text-[10px] text-caparol/70">Pasado</span>}
+      </div>
+
       <h3 class:list={[
         'font-display text-2xl leading-tight text-caparol group-hover:text-arena',
         past && 'text-caparol/85',
       ]}>
         {item.title || 'Sin título'}
       </h3>
-      {item.location && (
+
+      {isEvent && item.location && (
         <p class="flex items-center gap-1.5 text-sm text-caparol/70">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/>
@@ -95,10 +118,14 @@ const href = `/eventos/${item.slug}`;
           {item.location}
         </p>
       )}
+
       {item.excerpt && (
         <p class="mt-1 line-clamp-2 text-sm text-caparol/75">{item.excerpt}</p>
       )}
-      <span class="mt-auto pt-3 text-sm text-arena group-hover:underline">Más info →</span>
+
+      <span class="mt-auto pt-3 text-sm text-arena group-hover:underline">
+        {isEvent ? 'Más info →' : 'Leer más →'}
+      </span>
     </div>
   </a>
 </li>
