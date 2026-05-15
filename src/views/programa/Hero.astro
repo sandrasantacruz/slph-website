@@ -1,27 +1,64 @@
 ---
+import { Icon } from 'astro-icon/components';
 ---
 
-<section class="mx-auto max-w-4xl px-4 pt-16 pb-12 sm:pt-24 sm:pb-16">
-  <h1 class="font-display text-5xl leading-[0.95] text-arena sm:text-7xl">
-    El programa SLPH
-  </h1>
+<section class="relative isolate flex h-[calc(100svh-6rem)] flex-col overflow-hidden">
+  <!-- Drifting kelp on the right edge -->
+  <svg
+    class="anim-sway pointer-events-none absolute -right-4 bottom-0 -z-10 hidden h-2/3 w-28 text-celeste/15 md:block"
+    viewBox="0 0 80 200"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <path d="M18 200 Q 28 150 20 100 Q 14 70 24 30 Q 28 10 20 0"/>
+    <path d="M38 200 Q 48 160 40 110 Q 36 80 48 40 Q 52 18 44 0"/>
+    <path d="M62 200 Q 70 160 62 120 Q 56 90 66 60 Q 70 30 64 0"/>
+  </svg>
 
-  <div class="mt-8 space-y-5 text-base text-caparol/90 sm:text-lg">
-    <p>
-      El Programa SLPH se ha diseñado para proteger los masacrados ecosistemas
-      marinos provocando una reflexión sobre comportamientos irresponsables.
+  <div class="mx-auto flex h-full w-full max-w-6xl flex-col justify-center gap-5 px-6 py-6 sm:gap-6">
+    <!-- Eyebrow -->
+    <div class="reveal flex items-center gap-3 sm:gap-4">
+      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+        Programa SLPH · el manifiesto
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="reveal reveal-delay-1 font-display text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.9] tracking-tight text-caparol">
+      El programa
+      <span class="block text-arena italic">que el mar</span>
+      <span class="block"><span class="hand-underline">esperaba</span>.</span>
+    </h1>
+
+    <!-- Display tagline -->
+    <p class="reveal reveal-delay-2 max-w-3xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl">
+      Artes plásticas <span class="text-caparol">+</span>
+      escénicas <span class="text-caparol">+</span>
+      ciencia del mar.
     </p>
-    <p>
-      Combina artes plásticas y escénicas para concienciar sobre un medio tan
-      vulnerable. Unimos creatividad con valores para lograr esta misión.
-      Información actualizada de la Facultad de Ciencias del Mar para que cada
-      evento obtenga la mayor repercusión.
-    </p>
-    <p>
-      ¡Urge actuar! Por eso, los Eventos SLPH pueden adaptarse a objetivos
-      concretos en base a necesidades específicas, buscamos la complicidad. La
-      meta del programa es cautivar a niños y adultos para que nuestros
-      mensajes calen en todas las edades.
+
+    <!-- Single concise body -->
+    <p class="reveal reveal-delay-3 max-w-2xl text-sm leading-snug text-caparol/90 sm:text-base">
+      Diseñado para proteger los masacrados ecosistemas marinos y
+      <span class="text-arena">cautivar a niños y adultos</span> con información
+      supervisada por la <em class="not-italic text-arena">Facultad de Ciencias del Mar</em>.
     </p>
   </div>
+
+  <!-- Scroll cue, absolutely positioned at the bottom -->
+  <a
+    href="#talleres"
+    aria-label="Bajar a la siguiente sección"
+    class="scroll-cue absolute bottom-2 left-1/2 flex -translate-x-1/2 flex-col items-center gap-0.5 text-caparol/70 transition hover:text-arena sm:bottom-3 sm:gap-1"
+  >
+    <Icon name="game-icons:scuba-mask" class="h-8 w-8 sm:h-10 sm:w-10" aria-hidden="true" />
+    <span class="font-hand text-lg leading-none sm:text-xl">sigue buceando</span>
+    <svg viewBox="0 0 24 24" class="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </a>
 </section>

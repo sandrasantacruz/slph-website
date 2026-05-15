@@ -10,22 +10,74 @@ const puntos = [
 ];
 ---
 
-<section class="mx-auto max-w-4xl px-4 py-12 pb-24 sm:py-16 sm:pb-32">
-  <h2 class="font-display text-3xl text-celeste sm:text-5xl">
-    ¿Qué nos diferencia?
-  </h2>
+<section class="relative isolate overflow-hidden py-20 pb-32 sm:py-28 sm:pb-40">
+  <!-- Decorative fish silhouettes drifting in the gutters -->
+  <img
+    src="/assets/animals/bogavante.webp"
+    alt=""
+    aria-hidden="true"
+    class="anim-float-soft pointer-events-none absolute -right-8 top-10 -z-10 hidden w-40 opacity-15 md:block lg:w-52"
+    loading="lazy"
+  />
+  <img
+    src="/assets/animals/don-erizo.webp"
+    alt=""
+    aria-hidden="true"
+    class="anim-sway pointer-events-none absolute -left-10 bottom-32 -z-10 hidden w-32 opacity-15 md:block lg:w-40"
+    loading="lazy"
+  />
 
-  <ul class="mt-8 space-y-4">
-    {
-      puntos.map((p) => (
-        <li class="flex gap-3 text-base text-caparol/90 sm:text-lg">
-          <span
-            aria-hidden="true"
-            class="mt-2 inline-block h-2 w-2 shrink-0 rounded-full bg-arena"
-          />
-          <span>{p}</span>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="mx-auto max-w-5xl px-6">
+    <!-- Header -->
+    <div class="reveal flex items-end justify-between gap-6">
+      <div>
+        <p class="font-hand text-3xl leading-none text-celeste sm:text-4xl">
+          el plus
+        </p>
+        <h2 class="mt-3 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] text-arena">
+          ¿Qué nos
+          <span class="text-caparol">diferencia?</span>
+        </h2>
+      </div>
+      <span aria-hidden="true" class="mb-3 hidden h-[2px] flex-1 bg-arena/40 sm:block"></span>
+    </div>
+
+    <!-- Manifesto list — each point on its own ruled line, marked by a tiny swimming fish -->
+    <ul class="mt-14 divide-y divide-caparol/10 border-y border-caparol/15 sm:mt-20">
+      {
+        puntos.map((p, i) => (
+          <li
+            class={`reveal group relative grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-2 py-6 sm:grid-cols-[3.5rem_1fr] sm:gap-x-8 sm:py-8 ${i % 2 === 1 ? 'sm:pl-10' : ''}`}
+            style={`transition-delay:${Math.min(i * 60, 360)}ms`}
+          >
+            <!-- Tiny fish marker (SVG), points right, drifts on hover -->
+            <svg
+              viewBox="0 0 64 32"
+              class="mt-2 h-6 w-10 shrink-0 text-arena transition-transform duration-500 group-hover:translate-x-1 sm:h-7 sm:w-12"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 16 Q 12 6 26 6 Q 44 6 52 16 Q 44 26 26 26 Q 12 26 4 16 Z" />
+              <path d="M52 16 L 62 8 L 60 16 L 62 24 Z" fill="currentColor" />
+              <circle cx="16" cy="14" r="1.4" fill="currentColor" />
+            </svg>
+            <p
+              class={`text-base text-caparol/90 transition-colors group-hover:text-caparol sm:text-lg ${i === puntos.length - 1 ? 'font-display text-xl text-arena sm:text-2xl' : ''}`}
+            >
+              {p}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Sign-off -->
+    <p class="reveal mt-12 text-center font-hand text-3xl leading-none text-celeste sm:text-4xl">
+      … y siempre con aletas a la obra.
+    </p>
+  </div>
 </section>

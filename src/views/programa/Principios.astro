@@ -1,33 +1,116 @@
 ---
 const principios = [
   {
-    titulo: 'Nuestra misión',
+    eyebrow: 'nuestra',
+    titulo: 'Misión',
     texto:
       'Concienciar sobre el riesgo de los vertidos marinos haciendo frente a actitudes irresponsables, e implicar a la sociedad en la reacción.',
   },
   {
-    titulo: 'Nuestra visión',
+    eyebrow: 'nuestra',
+    titulo: 'Visión',
     texto:
       'Sensibilizar y despertar el amor por la fauna marina a través de la creatividad, evitando que se utilice el mar como un vertedero.',
-  },
-  {
-    titulo: 'Nuestro lema',
-    texto: '«No te quedes de aletas cruzadas»',
   },
 ];
 ---
 
-<section class="mx-auto max-w-6xl px-4 py-12 sm:py-16">
-  <div class="grid gap-6 md:grid-cols-3">
-    {
-      principios.map((p) => (
-        <article class="rounded-2xl border border-caparol/15 bg-caparol/5 p-6 sm:p-8">
-          <h2 class="font-display text-2xl text-arena sm:text-3xl">
-            {p.titulo}
-          </h2>
-          <p class="mt-4 text-base text-caparol/90 sm:text-lg">{p.texto}</p>
-        </article>
-      ))
-    }
+<section class="relative isolate overflow-hidden py-20 sm:py-28">
+  <!-- Tinted seabed band behind this whole block -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 inset-y-10 -z-20 overflow-hidden">
+    <img
+      src="/assets/programa/fondo-mar.webp"
+      alt=""
+      class="h-full w-full object-cover opacity-20"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-azul/80 via-azul/60 to-azul/85"></div>
+  </div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <!-- Section header — bold marker bar -->
+    <div class="reveal flex items-center gap-5">
+      <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+      <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
+        Quiénes somos
+      </span>
+    </div>
+
+    <!-- Misión / Visión — two large editorial blocks -->
+    <div class="mt-12 grid gap-x-10 gap-y-14 md:grid-cols-2 md:gap-y-0">
+      {
+        principios.map((p, i) => (
+          <article
+            class={`reveal reveal-delay-${i + 1} relative`}
+          >
+            <div class="absolute -top-6 left-0 font-hand text-3xl leading-none text-celeste sm:text-4xl">
+              {p.eyebrow}
+            </div>
+            <h2 class="font-display text-[clamp(3rem,6vw,5rem)] leading-[0.92] text-caparol">
+              {p.titulo}
+              <span class="text-arena">.</span>
+            </h2>
+            <div class="mt-5 flex gap-4">
+              <span aria-hidden="true" class="mt-2 inline-block h-[3px] w-10 shrink-0 bg-arena"></span>
+              <p class="text-base text-caparol/90 sm:text-lg">{p.texto}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Lema — handwritten call to action -->
+    <div class="reveal reveal-delay-3 mt-20 sm:mt-28">
+      <div class="flex items-center gap-5">
+        <span aria-hidden="true" class="h-[2px] w-10 bg-celeste"></span>
+        <span class="font-display text-sm tracking-[0.4em] text-celeste uppercase">
+          Nuestra llamada
+        </span>
+        <span aria-hidden="true" class="h-[2px] flex-1 bg-celeste/30"></span>
+      </div>
+
+      <blockquote class="relative mt-8 text-center sm:mt-12">
+        <!-- Pez con megáfono — un grito desde el mar -->
+        <svg
+          viewBox="0 0 220 110"
+          class="anim-float-soft mx-auto h-20 w-auto text-arena sm:h-28"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- Tail -->
+          <polygon points="15,40 38,55 15,70 25,55" fill="currentColor" />
+          <!-- Body -->
+          <ellipse cx="70" cy="55" rx="38" ry="24" fill="currentColor" />
+          <!-- Fin on top -->
+          <path d="M55 33 Q 65 22 80 32 Z" fill="currentColor" />
+          <!-- Eye -->
+          <circle cx="92" cy="48" r="3" fill="#0b2056" />
+          <!-- Tiny smile / mouth hint where megaphone attaches -->
+          <!-- Megaphone horn — outline only so it reads distinctly from the fish body -->
+          <path
+            d="M108 43 L 108 67 L 168 78 L 168 32 Z"
+            fill="rgba(11,32,86,0.35)"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linejoin="round"
+          />
+          <!-- Megaphone grip strap -->
+          <line x1="110" y1="55" x2="125" y2="55" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+          <!-- Sound waves -->
+          <path d="M180 28 Q 196 55 180 82" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+          <path d="M194 18 Q 214 55 194 92" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+        </svg>
+
+        <p class="mt-4 font-hand text-[clamp(2.5rem,8vw,6.5rem)] leading-[0.95] text-arena sm:mt-6">
+          ¡No te quedes
+          <span class="block text-caparol">de aletas cruzadas!</span>
+        </p>
+      </blockquote>
+
+      <p class="mt-6 text-center font-display text-sm tracking-[0.4em] text-caparol/60 uppercase">
+        — SLPH
+      </p>
+    </div>
   </div>
 </section>
