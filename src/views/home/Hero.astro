@@ -78,7 +78,7 @@ import dreizack from './img/dreizack.webp?url';
     class="scroll-cue absolute bottom-2 left-1/2 flex -translate-x-1/2 flex-col items-center gap-0.5 text-caparol/70 transition hover:text-arena sm:bottom-3 sm:gap-1"
   >
     <Icon name="game-icons:scuba-mask" class="h-8 w-8 sm:h-10 sm:w-10" aria-hidden="true" />
-    <span class="font-hand text-lg leading-none sm:text-xl">bucea</span>
+    <span class="hand-underline hand-underline--bucea font-hand text-lg leading-none sm:text-xl">bucea</span>
     <svg viewBox="0 0 24 24" class="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M6 9l6 6 6-6"/>
     </svg>
@@ -86,6 +86,13 @@ import dreizack from './img/dreizack.webp?url';
 </section>
 
 <style>
+  /* Bucea: white wave, thinner stroke, sits slightly lower than the default. */
+  .hand-underline--bucea {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 30 -2 60 6 T 120 6 T 198 4' fill='none' stroke='%23f8f8fc' stroke-width='2.5' stroke-linecap='round'/></svg>");
+    background-size: 100% 0.3em;
+    padding-bottom: 0.3em;
+  }
+
   .hero-wave svg { animation: hw-drift 18s ease-in-out infinite alternate; }
   .hw-back  { animation: hw-bob 9s ease-in-out infinite; }
   .hw-mid   { animation: hw-bob 7s ease-in-out -1.2s infinite; }
