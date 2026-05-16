@@ -180,11 +180,11 @@
 
 /* Hand-drawn underline using SVG-data-uri — applied as a background. */
 .hand-underline {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 30 -2 60 6 T 120 6 T 198 4' fill='none' stroke='%23fadeaa' stroke-width='4' stroke-linecap='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 30 -2 60 6 T 120 6 T 198 4' fill='none' stroke='%23fadeaa' stroke-width='2.5' stroke-linecap='round'/></svg>");
   background-repeat: no-repeat;
   background-position: 0 100%;
-  background-size: 100% 0.45em;
-  padding-bottom: 0.15em;
+  background-size: 100% 0.35em;
+  padding-bottom: 0.2em;
 }
 
 /* Dotted "schoolbook" rule — for QueEs / page-margins feel. */
