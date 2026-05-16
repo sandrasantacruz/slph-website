@@ -1,0 +1,71 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="relative isolate flex min-h-[calc(100svh-6rem)] flex-col overflow-hidden">
+  <!-- Drifting kelp on the right edge -->
+  <svg
+    class="anim-sway pointer-events-none absolute -right-4 bottom-0 -z-10 hidden h-2/3 w-28 text-celeste/15 md:block"
+    viewBox="0 0 80 200"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <path d="M18 200 Q 28 150 20 100 Q 14 70 24 30 Q 28 10 20 0"/>
+    <path d="M38 200 Q 48 160 40 110 Q 36 80 48 40 Q 52 18 44 0"/>
+    <path d="M62 200 Q 70 160 62 120 Q 56 90 66 60 Q 70 30 64 0"/>
+  </svg>
+
+  <!-- Bubble cluster, mirrored on the left -->
+  <div class="pointer-events-none absolute -left-6 top-24 -z-10 hidden md:block" aria-hidden="true">
+    <span class="anim-float-soft absolute block h-3 w-3 rounded-full bg-celeste/35"></span>
+    <span class="anim-float absolute left-6 top-10 block h-2 w-2 rounded-full bg-arena/40"></span>
+    <span class="anim-float-soft absolute left-2 top-20 block h-4 w-4 rounded-full bg-celeste/25"></span>
+  </div>
+
+  <div class="mx-auto flex h-full w-full max-w-6xl flex-col justify-center gap-5 px-6 py-16 sm:gap-6 sm:py-20">
+    <!-- Eyebrow -->
+    <div class="reveal flex items-center gap-3 sm:gap-4">
+      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+        Galería SLPH · imágenes del proyecto
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="reveal reveal-delay-1 font-display text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.9] tracking-tight text-caparol">
+      Lo que ya
+      <span class="block text-arena italic">vivimos</span>
+      <span class="block">con el <span class="hand-underline">mar</span>.</span>
+    </h1>
+
+    <!-- Display tagline -->
+    <p class="reveal reveal-delay-2 max-w-3xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl">
+      Musical <span class="text-caparol">·</span>
+      cuento <span class="text-caparol">·</span>
+      eventos <span class="text-caparol">·</span>
+      momentos.
+    </p>
+
+    <!-- Body -->
+    <p class="reveal reveal-delay-3 max-w-2xl text-sm leading-snug text-caparol/90 sm:text-base">
+      Cada imagen, una historia: funciones, presentaciones, encuentros y la realidad
+      que nos recuerda <span class="text-arena">por qué empezamos</span>.
+    </p>
+  </div>
+
+  <!-- Scroll cue -->
+  <a
+    href="#musical"
+    aria-label="Bajar a la galería"
+    class="scroll-cue absolute bottom-2 left-1/2 flex -translate-x-1/2 flex-col items-center gap-0.5 text-caparol/70 transition hover:text-arena sm:bottom-3 sm:gap-1"
+  >
+    <Icon name="game-icons:scuba-mask" class="h-8 w-8 sm:h-10 sm:w-10" aria-hidden="true" />
+    <span class="font-hand text-lg leading-none sm:text-xl">sigue buceando</span>
+    <svg viewBox="0 0 24 24" class="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </a>
+</section>

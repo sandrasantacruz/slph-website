@@ -1,0 +1,251 @@
+---
+// Self-contained lightbox: any <a data-lightbox> on the page opens it.
+// Grouped navigation via data-gallery (only triggers sharing the same key
+// participate in the prev/next loop). Caption text comes from data-caption.
+---
+
+<dialog id="galeria-lightbox" class="gx-lightbox" aria-label="Imagen ampliada">
+  <button type="button" class="gx-lightbox-close" aria-label="Cerrar">
+    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  </button>
+  <button type="button" class="gx-lightbox-nav gx-lightbox-prev" aria-label="Anterior">
+    <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M15 18l-6-6 6-6"/>
+    </svg>
+  </button>
+  <button type="button" class="gx-lightbox-nav gx-lightbox-next" aria-label="Siguiente">
+    <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M9 6l6 6-6 6"/>
+    </svg>
+  </button>
+  <figure class="gx-lightbox-figure">
+    <img class="gx-lightbox-image" alt="" />
+    <figcaption class="gx-lightbox-caption font-hand"></figcaption>
+  </figure>
+</dialog>
+
+<style>
+  .gx-lightbox {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
+    max-width: 100dvw;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #060f2c;
+    color: var(--color-caparol);
+    overflow: hidden;
+  }
+  .gx-lightbox::backdrop {
+    background: #060f2c;
+  }
+  .gx-lightbox[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gx-lightbox-figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100dvw;
+    height: 100dvh;
+  }
+  .gx-lightbox-image {
+    display: block;
+    max-width: 96vw;
+    max-height: calc(92dvh - 3.5rem);
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    box-shadow:
+      0 30px 60px -20px rgba(0, 0, 0, 0.7),
+      0 12px 24px -8px rgba(0, 0, 0, 0.5);
+    background: var(--color-azul-deep);
+    object-fit: contain;
+    transition: opacity 0.18s ease;
+  }
+  .gx-lightbox.is-loading .gx-lightbox-image { opacity: 0.4; }
+  .gx-lightbox-caption {
+    color: var(--color-arena);
+    font-size: 1.25rem;
+    line-height: 1.2;
+    text-align: center;
+    max-width: 80vw;
+  }
+  .gx-lightbox-close,
+  .gx-lightbox-nav {
+    position: fixed;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(248, 248, 252, 0.1);
+    color: var(--color-caparol);
+    border: 1px solid rgba(248, 248, 252, 0.2);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+    backdrop-filter: blur(6px);
+  }
+  .gx-lightbox-close:hover,
+  .gx-lightbox-close:focus-visible,
+  .gx-lightbox-nav:hover,
+  .gx-lightbox-nav:focus-visible {
+    background: var(--color-arena);
+    color: var(--color-azul);
+    border-color: var(--color-arena);
+    outline: none;
+  }
+  .gx-lightbox-close {
+    top: 1rem;
+    right: 1rem;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .gx-lightbox-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 3rem;
+  }
+  .gx-lightbox-nav:hover { transform: translateY(-50%) scale(1.05); }
+  .gx-lightbox-prev { left: 1rem; }
+  .gx-lightbox-next { right: 1rem; }
+  @media (min-width: 768px) {
+    .gx-lightbox-close { top: 1.5rem; right: 1.5rem; width: 3rem; height: 3rem; }
+    .gx-lightbox-nav { width: 3.5rem; height: 3.5rem; }
+    .gx-lightbox-prev { left: 1.5rem; }
+    .gx-lightbox-next { right: 1.5rem; }
+  }
+  html:has(.gx-lightbox[open]) { overflow: hidden; }
+</style>
+
+<script>
+  const dialog = document.getElementById('galeria-lightbox') as HTMLDialogElement | null;
+  if (dialog) {
+    const dlg = dialog;
+    const img = dlg.querySelector<HTMLImageElement>('.gx-lightbox-image');
+    const caption = dlg.querySelector<HTMLElement>('.gx-lightbox-caption');
+    const closeBtn = dlg.querySelector<HTMLButtonElement>('.gx-lightbox-close');
+    const prevBtn = dlg.querySelector<HTMLButtonElement>('.gx-lightbox-prev');
+    const nextBtn = dlg.querySelector<HTMLButtonElement>('.gx-lightbox-next');
+
+    const allTriggers = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]'),
+    );
+    let activeSet: HTMLAnchorElement[] = [];
+    let currentIndex = -1;
+
+    function applySizing() {
+      if (!img || !img.naturalWidth || !img.naturalHeight) return;
+      const nw = img.naturalWidth;
+      const nh = img.naturalHeight;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const maxW = Math.min(vw * 0.92, nw * 2);
+      const maxH = Math.min(vh - 96, nh * 2);
+      const scale = Math.min(maxW / nw, maxH / nh, 2);
+      img.style.width = `${Math.round(nw * scale)}px`;
+      img.style.height = `${Math.round(nh * scale)}px`;
+    }
+
+    function show(index: number) {
+      if (!img || !caption || activeSet.length === 0) return;
+      const len = activeSet.length;
+      currentIndex = ((index % len) + len) % len;
+      const trigger = activeSet[currentIndex];
+      const label = trigger.dataset.caption ?? '';
+
+      img.style.visibility = 'hidden';
+      img.style.width = '';
+      img.style.height = '';
+      dlg.classList.add('is-loading');
+
+      img.onload = () => {
+        applySizing();
+        img.style.visibility = 'visible';
+        dlg.classList.remove('is-loading');
+      };
+      img.onerror = () => {
+        img.style.visibility = 'visible';
+        dlg.classList.remove('is-loading');
+      };
+      img.src = trigger.href;
+      img.alt = label;
+      caption.textContent = label;
+
+      const preload = (i: number) => {
+        const next = activeSet[((i % len) + len) % len];
+        if (next) {
+          const p = new Image();
+          p.src = next.href;
+        }
+      };
+      preload(currentIndex + 1);
+      preload(currentIndex - 1);
+    }
+
+    window.addEventListener('resize', () => {
+      if (dlg.open) applySizing();
+    });
+
+    function open(trigger: HTMLAnchorElement) {
+      const groupKey = trigger.dataset.gallery ?? '';
+      activeSet = groupKey
+        ? allTriggers.filter((t) => t.dataset.gallery === groupKey)
+        : [trigger];
+      const startIdx = activeSet.indexOf(trigger);
+      show(startIdx === -1 ? 0 : startIdx);
+      if (!dlg.open) dlg.showModal();
+
+      const hasMultiple = activeSet.length > 1;
+      prevBtn?.toggleAttribute('hidden', !hasMultiple);
+      nextBtn?.toggleAttribute('hidden', !hasMultiple);
+    }
+
+    allTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', (event) => {
+        const e = event as MouseEvent;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+        event.preventDefault();
+        open(trigger);
+      });
+    });
+
+    closeBtn?.addEventListener('click', () => dialog.close());
+    prevBtn?.addEventListener('click', () => show(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => show(currentIndex + 1));
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        show(currentIndex + 1);
+      } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        show(currentIndex - 1);
+      }
+    });
+
+    dialog.addEventListener('close', () => {
+      if (img) img.src = '';
+      if (caption) caption.textContent = '';
+      currentIndex = -1;
+      activeSet = [];
+    });
+  }
+</script>

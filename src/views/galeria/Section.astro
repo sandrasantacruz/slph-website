@@ -1,0 +1,73 @@
+---
+type Image = { src: string; alt: string; caption: string };
+
+interface Props {
+  id: string;
+  title: string;
+  eyebrow: string;
+  intro: string;
+  images: Image[];
+}
+
+const { id, title, eyebrow, intro, images } = Astro.props;
+---
+
+<section id={id} class="relative scroll-mt-24 py-16 sm:py-24">
+  <div class="mx-auto w-full max-w-6xl px-6">
+    <header class="reveal max-w-3xl">
+      <div class="flex items-center gap-3 sm:gap-4">
+        <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+        <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+          {eyebrow}
+        </span>
+      </div>
+      <h2 class="mt-4 font-display text-[clamp(2rem,6vw,4rem)] leading-tight">
+        {title}
+      </h2>
+      <p class="mt-4 max-w-2xl text-base text-caparol/85 sm:text-lg">
+        {intro}
+      </p>
+    </header>
+
+    <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-5 lg:grid-cols-4">
+      {
+        images.map((img, i) => (
+          <a
+            href={img.src}
+            data-lightbox
+            data-gallery={id}
+            data-caption={img.caption}
+            class:list={[
+              'reveal group relative block aspect-square overflow-hidden rounded-xl bg-azul-deep ring-1 ring-caparol/10 transition duration-300',
+              'hover:-translate-y-1 hover:ring-arena/70 hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)]',
+              'focus:outline-none focus-visible:ring-2 focus-visible:ring-arena',
+              `reveal-delay-${(i % 4) + 1}`,
+            ]}
+          >
+            <img
+              src={img.src}
+              alt={img.alt}
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.05]"
+            />
+            <span
+              aria-hidden="true"
+              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-azul/55 via-transparent to-transparent opacity-0 transition group-hover:opacity-100"
+            />
+            <span
+              aria-hidden="true"
+              class="pointer-events-none absolute right-2 bottom-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-arena text-azul opacity-0 shadow-md transition group-hover:opacity-100 sm:right-3 sm:bottom-3"
+            >
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="M16.5 16.5 21 21" />
+                <path d="M11 8v6 M8 11h6" />
+              </svg>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

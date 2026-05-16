@@ -1,0 +1,107 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from './Hero.astro';
+import Section from './Section.astro';
+import Lightbox from './Lightbox.astro';
+
+type SectionDef = {
+  id: string;
+  title: string;
+  eyebrow: string;
+  intro: string;
+};
+
+const sectionDefs: SectionDef[] = [
+  {
+    id: 'musical',
+    title: 'El musical',
+    eyebrow: 'En escena',
+    intro: 'El proyecto nació como musical: funciones, danzas y personajes que dieron voz al mar.',
+  },
+  {
+    id: 'cuento',
+    title: 'El cuento',
+    eyebrow: 'Presentación oficial',
+    intro: 'La presentación del libro Si los peces hablaran… — palabras, ilustraciones y los rostros que lo acompañaron.',
+  },
+  {
+    id: 'eventos',
+    title: 'Eventos',
+    eyebrow: 'Donde el mar nos lleva',
+    intro: 'Charlas, ferias, colegios y bibliotecas: el cuento sale al encuentro de su público.',
+  },
+  {
+    id: 'momentos',
+    title: 'Momentos entrañables',
+    eyebrow: 'Lo que no olvidamos',
+    intro: 'Voces, miradas y gestos que dejaron huella a lo largo del camino.',
+  },
+  {
+    id: 'contaminacion',
+    title: 'Contaminación',
+    eyebrow: 'La realidad que nos empuja',
+    intro: 'Lo que ocurre cuando los peces ya no hablan — la urgencia que justifica todo lo demás.',
+  },
+];
+
+// Read available webp files at build time, one folder per section.
+const BASE = path.resolve(process.cwd(), 'public/assets/galeria');
+
+const sections = sectionDefs.map((def) => {
+  const dir = path.join(BASE, def.id);
+  const files = fs
+    .readdirSync(dir)
+    .filter((f) => /\.webp$/i.test(f))
+    .sort();
+  const images = files.map((file, i) => ({
+    src: `/assets/galeria/${def.id}/${file}`,
+    alt: `${def.title} — imagen ${i + 1}`,
+    caption: `${def.title} · ${i + 1} de ${files.length}`,
+  }));
+  return { ...def, images };
+});
+---
+
+<MainLayout
+  title="Galería"
+  description="Imágenes del musical, el cuento, eventos y momentos del proyecto Si los peces hablaran."
+>
+  <Hero />
+  {
+    sections.map((section) => (
+      <Section
+        id={section.id}
+        title={section.title}
+        eyebrow={section.eyebrow}
+        intro={section.intro}
+        images={section.images}
+      />
+    ))
+  }
+  <Lightbox />
+</MainLayout>
+
+<script>
+  // Scroll-triggered reveal — same pattern as the home/programa pages.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (reduceMotion) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>
