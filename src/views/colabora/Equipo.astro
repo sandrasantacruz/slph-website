@@ -506,13 +506,15 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
     margin: 0;
     padding: 0;
     border: 0;
-    background: rgba(6, 15, 44, 0.94);
+    /* Solid, fully opaque — otherwise gallery thumbnails behind bleed through */
+    background: #060f2c;
     color: var(--color-caparol);
     overflow: hidden;
   }
   .lightbox::backdrop {
-    background: rgba(6, 15, 44, 0.6);
-    backdrop-filter: blur(4px);
+    /* The dialog itself fills the viewport, so the ::backdrop usually has
+       zero visible area. Keep it solid as a safety net. */
+    background: #060f2c;
   }
   .lightbox[open] {
     display: flex;
@@ -526,13 +528,15 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    max-width: 96vw;
-    max-height: 96dvh;
+    width: 100dvw;
+    height: 100dvh;
   }
   .lightbox-image {
     display: block;
+    /* width/height are set inline by JS to 2x natural size,
+       capped by viewport. Defaults below are a safety fallback. */
     max-width: 96vw;
-    max-height: calc(96dvh - 3.5rem); /* leave room for caption */
+    max-height: calc(92dvh - 3.5rem);
     width: auto;
     height: auto;
     border-radius: 10px;
@@ -542,11 +546,6 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
     background: var(--color-azul-deep);
     object-fit: contain;
     transition: opacity 0.18s ease;
-  }
-  @media (min-width: 768px) {
-    /* Tablet+: leave a bit of breathing room for nav buttons at edges */
-    .lightbox-figure { max-width: min(92vw, 1800px); }
-    .lightbox-image { max-width: min(92vw, 1800px); max-height: calc(92dvh - 3.5rem); }
   }
   .lightbox.is-loading .lightbox-image { opacity: 0.4; }
   .lightbox-caption {
@@ -624,6 +623,21 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
     let activeSet: HTMLAnchorElement[] = [];
     let currentIndex = -1;
 
+    function applySizing() {
+      if (!img || !img.naturalWidth || !img.naturalHeight) return;
+      const nw = img.naturalWidth;
+      const nh = img.naturalHeight;
+      // Cap at 2× natural size, but never overflow the viewport
+      // (leave room for caption (~3.5rem) and nav buttons).
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const maxW = Math.min(vw * 0.92, nw * 2);
+      const maxH = Math.min(vh - 96, nh * 2); // 96px reserved for caption + margins
+      const scale = Math.min(maxW / nw, maxH / nh, 2);
+      img.style.width = `${Math.round(nw * scale)}px`;
+      img.style.height = `${Math.round(nh * scale)}px`;
+    }
+
     function show(index: number) {
       if (!img || !caption || activeSet.length === 0) return;
       const len = activeSet.length;
@@ -631,9 +645,24 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
       const trigger = activeSet[currentIndex];
       const label = trigger.dataset.caption ?? '';
 
+      // Hide the <img> entirely while the new src loads. Otherwise the browser
+      // briefly stretches the previous bitmap to whatever bounds the freshly
+      // assigned src reports, producing ghost/wave artefacts before applySizing
+      // runs.
+      img.style.visibility = 'hidden';
+      img.style.width = '';
+      img.style.height = '';
       dlg.classList.add('is-loading');
-      img.onload = () => dlg.classList.remove('is-loading');
-      img.onerror = () => dlg.classList.remove('is-loading');
+
+      img.onload = () => {
+        applySizing();
+        img.style.visibility = 'visible';
+        dlg.classList.remove('is-loading');
+      };
+      img.onerror = () => {
+        img.style.visibility = 'visible';
+        dlg.classList.remove('is-loading');
+      };
       img.src = trigger.href;
       img.alt = label;
       caption.textContent = label;
@@ -649,6 +678,11 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
       preload(currentIndex + 1);
       preload(currentIndex - 1);
     }
+
+    // Recompute sizing when the viewport changes while the lightbox is open
+    window.addEventListener('resize', () => {
+      if (dlg.open) applySizing();
+    });
 
     function open(trigger: HTMLAnchorElement) {
       const groupKey = trigger.dataset.gallery ?? '';
