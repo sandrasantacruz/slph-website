@@ -1,0 +1,37 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from './Hero.astro';
+import Librerias from './Librerias.astro';
+import CTA from './CTA.astro';
+---
+
+<MainLayout
+  title="Dónde comprar"
+  description="Encuentra ejemplares de Si los peces hablaran en librerías y tiendas de Canarias, y online en Entintadas Editorial."
+>
+  <Hero />
+  <Librerias />
+  <CTA />
+</MainLayout>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (reduceMotion) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>

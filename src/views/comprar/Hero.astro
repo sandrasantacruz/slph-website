@@ -1,0 +1,111 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="relative isolate overflow-hidden pt-14 pb-12 sm:pt-20 sm:pb-16">
+  <!-- Soft radial glow, top-right -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_85%_25%,rgba(100,170,210,0.09),transparent_70%)]"
+  ></div>
+
+  <!-- Decorative compass — drifts slowly, hidden on small screens -->
+  <svg
+    class="anim-drift pointer-events-none absolute top-16 -left-6 -z-10 hidden h-44 w-44 text-arena/15 md:block lg:h-56 lg:w-56"
+    viewBox="0 0 120 120"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="60" cy="60" r="48" />
+    <circle cx="60" cy="60" r="36" />
+    <path d="M60 14 L66 60 L60 106 L54 60 Z" />
+    <path d="M14 60 L60 54 L106 60 L60 66 Z" />
+    <circle cx="60" cy="60" r="3.5" fill="currentColor" />
+  </svg>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <!-- Eyebrow -->
+    <div class="reveal flex items-center gap-3 sm:gap-4">
+      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+        Dónde comprar
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="reveal reveal-delay-1 mt-6 max-w-4xl font-display text-[clamp(2.5rem,7.5vw,5rem)] leading-[0.95] tracking-tight text-caparol">
+      Navega hasta
+      <span class="whitespace-nowrap">
+        tu
+        <span class="relative inline-block hand-underline text-arena">
+          librería
+          <svg
+            class="anim-float-soft pointer-events-none absolute -top-6 -right-5 h-6 w-6 text-celeste sm:-top-8 sm:-right-7 sm:h-8 sm:w-8"
+            viewBox="0 0 40 40"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 4 L24 14 L34 14 L26 21 L29 31 L20 25 L11 31 L14 21 L6 14 L16 14 Z" />
+          </svg>
+        </span>
+      </span>
+      más cercana
+    </h1>
+
+    <!-- Lead -->
+    <p class="reveal reveal-delay-2 mt-8 max-w-3xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl">
+      Puedes encontrar ejemplares de
+      <em class="not-italic text-arena">Si los peces hablaran…</em>
+      <span class="text-caparol">online</span> y en estas librerías y tiendas
+      <span class="hand-underline">repartidas por Canarias</span>.
+    </p>
+
+    <!-- Quick anchors / counts -->
+    <div class="reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+      <a
+        href="#online"
+        class="group inline-flex items-center gap-2 font-display tracking-wide text-celeste uppercase transition hover:text-caparol"
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path d="M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18" />
+        </svg>
+        Online
+        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 5v14M6 13l6 6 6-6"/>
+        </svg>
+      </a>
+      <span aria-hidden="true" class="hidden h-4 w-px bg-caparol/25 sm:inline-block"></span>
+      <a
+        href="#gran-canaria"
+        class="group inline-flex items-center gap-2 font-display tracking-wide text-arena uppercase transition hover:text-caparol"
+      >
+        <Icon name="game-icons:treasure-map" class="h-5 w-5" aria-hidden="true" />
+        Gran Canaria
+        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 5v14M6 13l6 6 6-6"/>
+        </svg>
+      </a>
+      <span aria-hidden="true" class="hidden h-4 w-px bg-caparol/25 sm:inline-block"></span>
+      <a
+        href="#tenerife"
+        class="group inline-flex items-center gap-2 font-display tracking-wide text-arena uppercase transition hover:text-caparol"
+      >
+        <Icon name="game-icons:treasure-map" class="h-5 w-5" aria-hidden="true" />
+        Tenerife
+        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 5v14M6 13l6 6 6-6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

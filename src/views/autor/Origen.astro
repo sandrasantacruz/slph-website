@@ -1,0 +1,95 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const musicalImg = '/assets/galeria/musical/Musical_Rey-Neptuno_CAMBIARLA-POR-ESTA-TIENE-MAS-CALIDAD.webp';
+---
+
+<section class="relative isolate overflow-hidden py-20 sm:py-28">
+  <!-- Background gradient suggestion of seabed -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(60%_50%_at_75%_30%,rgba(100,170,210,0.10),transparent_70%)]"></div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+      <!-- Text column -->
+      <div class="lg:col-span-7">
+        <div class="reveal flex items-center gap-5">
+          <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+          <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
+            El origen
+          </span>
+        </div>
+
+        <h2 class="reveal reveal-delay-1 mt-8 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] text-caparol">
+          De los ensayos a
+          <span class="block">
+            <span class="hand-underline text-arena">una causa</span>.
+          </span>
+        </h2>
+
+        <div class="reveal reveal-delay-2 mt-8 space-y-5 text-lg leading-relaxed text-caparol/90 sm:text-xl">
+          <p>
+            En 2016 Sandra estrenó un musical infantil escrito en
+            colaboración con su padre, <strong class="font-display text-2xl text-arena">Juan Luis</strong>.
+            Se llamaba <em class="not-italic text-arena">Si los peces hablaran…</em>
+            y, sobre el papel, no era más que la función de fin de
+            temporada del centro de danza.
+          </p>
+          <p>
+            Lo que ocurrió después no estaba previsto. Familias, escuelas,
+            colaboradores y científicos del mar empezaron a sumarse, cada
+            uno a su modo, a una idea que crecía sola: usar el escenario
+            como aula y los peces como excusa para decir lo que hace
+            falta decir.
+          </p>
+          <p>
+            De aquel musical salió el cuento ilustrado, el cuadernillo de
+            actividades, la app de realidad aumentada, el concierto
+            sinfónico de 2021 y el programa educativo que hoy recorre
+            centros del archipiélago.
+          </p>
+        </div>
+
+        <!-- Mensaje / manifesto -->
+        <div class="reveal reveal-delay-3 mt-12 rounded-2xl border border-arena/30 bg-azul-deep/40 p-6 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-8">
+          <p class="font-hand text-2xl text-celeste sm:text-3xl">su mensaje</p>
+          <p class="mt-2 font-display text-3xl leading-tight text-caparol sm:text-4xl">
+            ¡<span class="text-arena">NO</span> a la basura!
+            <span class="block">¡El mar <span class="text-arena">NO</span> se contamina!</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Image column -->
+      <div class="reveal reveal-delay-2 lg:col-span-5">
+        <div class="relative">
+          <!-- Dashed frame -->
+          <div
+            aria-hidden="true"
+            class="anim-sway absolute -inset-3 -z-10 rounded-[1.5rem] border-2 border-dashed border-celeste/30"
+          ></div>
+
+          <div class="polaroid tilt-r1 transition duration-500 hover:rotate-0">
+            <img
+              src={musicalImg}
+              alt="Escena del musical Si los peces hablaran"
+              class="block aspect-[4/5] w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <p class="absolute bottom-2 left-0 right-0 text-center font-hand text-3xl leading-none text-azul sm:text-4xl">
+              el musical, 2016
+            </p>
+          </div>
+
+          <!-- Decorative seashell sticker -->
+          <div
+            aria-hidden="true"
+            class="anim-float-soft absolute -left-6 -bottom-6 hidden h-20 w-20 items-center justify-center rounded-full bg-celeste/95 text-azul shadow-xl sm:flex"
+          >
+            <Icon name="game-icons:scallop" class="h-10 w-10" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

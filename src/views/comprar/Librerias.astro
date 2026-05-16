@@ -1,0 +1,247 @@
+---
+import { Icon } from 'astro-icon/components';
+
+type Shop = {
+  name: string;
+  city: string;
+  address: string;
+  /** Optional override; otherwise the address is used for the maps query. */
+  mapQuery?: string;
+};
+
+type Region = {
+  id: string;
+  label: string;
+  shops: Shop[];
+};
+
+const regions: Region[] = [
+  {
+    id: 'gran-canaria',
+    label: 'Gran Canaria',
+    shops: [
+      {
+        name: 'Librería Canaima',
+        city: 'Las Palmas de Gran Canaria',
+        address: 'C. Senador Castillo Olivares, 7, 35003',
+      },
+      {
+        name: 'El Libro Técnico — Casa del Lector',
+        city: 'Las Palmas de Gran Canaria',
+        address: 'P.º de Tomás Morales, 44, 35003',
+      },
+      {
+        name: 'Librería Trébol',
+        city: 'Teror',
+        address: 'C. Real de la Pl., 7, 35330',
+      },
+      {
+        name: 'AYOMA',
+        city: 'Tamaraceite',
+        address: 'C. San Borondón, 31, 35018',
+      },
+      {
+        name: 'La Librería del Cabildo',
+        city: 'Las Palmas de Gran Canaria',
+        address: 'C. Cano, 24, 35002',
+      },
+      {
+        name: 'Librería Greda Canarias',
+        city: 'Teror',
+        address: 'Plaza del Pino, 1, 35330',
+      },
+      {
+        name: 'La Tienda del CAAM',
+        city: 'Las Palmas de Gran Canaria',
+        address: 'C. los Balcones, 11, 35001',
+      },
+      {
+        name: 'Museo Casa de Colón',
+        city: 'Las Palmas de Gran Canaria',
+        address: 'C. Colón, 1, 35001',
+      },
+      {
+        name: 'Librería El Rincón de Arminda',
+        city: 'Gáldar',
+        address: 'C. Audiencia, 2, 35460',
+      },
+      {
+        name: 'Poema del Mar',
+        city: 'Las Palmas de Gran Canaria',
+        address: 'Av. de los Consignatarios, s/n, 35008',
+      },
+    ],
+  },
+  {
+    id: 'tenerife',
+    label: 'Tenerife',
+    shops: [
+      {
+        name: 'Loro Parque',
+        city: 'Puerto de la Cruz',
+        address: 'Av. Loro Parque, s/n, 38400',
+      },
+      {
+        name: 'Siam Park',
+        city: 'Costa Adeje',
+        address: 'Av. Siam, s/n, 38660',
+      },
+    ],
+  },
+];
+
+const onlineShops = [
+  {
+    name: 'Entintadas Editorial',
+    description: 'Pídelo online y te llega a casa.',
+    href: 'https://www.entintadas.com/tienda/si-los-peces-hablaran/',
+  },
+];
+
+const mapsHref = (s: Shop) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    s.mapQuery ?? `${s.name}, ${s.address}, ${s.city}`,
+  )}`;
+---
+
+<section class="relative isolate overflow-hidden pt-4 pb-20 sm:pb-28">
+  <!-- Ambient glow -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_45%_at_20%_20%,rgba(250,222,170,0.07),transparent_70%),radial-gradient(50%_40%_at_85%_75%,rgba(100,170,210,0.08),transparent_70%)]"
+  ></div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="space-y-20 sm:space-y-28">
+      <!-- Online / resto de España — pinned to the top -->
+      <section id="online" aria-labelledby="region-online" class="scroll-mt-28">
+        <div class="reveal flex items-center gap-4 sm:gap-6">
+          <svg class="hidden h-3 flex-1 text-celeste/40 sm:block" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M2 6 Q 25 -2 50 6 T 100 6 T 150 6 T 198 6" />
+          </svg>
+          <h2
+            id="region-online"
+            class="shrink-0 font-display text-base tracking-[0.3em] text-celeste uppercase sm:text-lg"
+          >
+            Online
+          </h2>
+          <span class="shrink-0 rounded-full border border-celeste/30 px-2.5 py-0.5 font-display text-[10px] tracking-widest text-celeste/85 uppercase sm:text-xs">
+            Envío a casa
+          </span>
+          <svg class="h-3 flex-1 text-celeste/40" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M2 6 Q 25 -2 50 6 T 100 6 T 150 6 T 198 6" />
+          </svg>
+        </div>
+
+        <ul class="mt-10 grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {onlineShops.map((shop) => (
+            <li class="reveal">
+              <a
+                href={shop.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group relative flex h-full flex-col gap-4 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-6 transition hover:-translate-y-0.5 hover:border-celeste hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)] focus:outline-none focus-visible:border-celeste"
+              >
+                <header class="flex items-start gap-4">
+                  <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-celeste/15 text-celeste transition group-hover:bg-celeste group-hover:text-azul">
+                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M3 12h18" />
+                      <path d="M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18" />
+                    </svg>
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <h3 class="font-display text-xl leading-tight text-caparol sm:text-2xl">
+                      {shop.name}
+                    </h3>
+                    <p class="mt-1 font-display text-[10px] tracking-[0.25em] text-celeste uppercase sm:text-xs">
+                      Tienda online
+                    </p>
+                  </div>
+                </header>
+
+                <p class="text-sm leading-relaxed text-caparol/85 sm:text-base">
+                  {shop.description}
+                </p>
+
+                <span
+                  class="mt-auto inline-flex items-center gap-2 self-start rounded-full border border-caparol/20 px-3 py-1.5 font-display text-xs tracking-[0.2em] text-caparol/85 uppercase transition group-hover:border-celeste group-hover:text-celeste"
+                >
+                  Visitar tienda
+                  <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {regions.map((region) => (
+        <section id={region.id} aria-labelledby={`region-${region.id}`} class="scroll-mt-28">
+          <!-- Region divider: wavy SVG + label + count -->
+          <div class="reveal flex items-center gap-4 sm:gap-6">
+            <svg class="hidden h-3 flex-1 text-arena/40 sm:block" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M2 6 Q 25 -2 50 6 T 100 6 T 150 6 T 198 6" />
+            </svg>
+            <h2
+              id={`region-${region.id}`}
+              class="shrink-0 font-display text-base tracking-[0.3em] text-arena uppercase sm:text-lg"
+            >
+              {region.label}
+            </h2>
+            <span class="shrink-0 rounded-full border border-arena/30 px-2.5 py-0.5 font-display text-[10px] tracking-widest text-arena/85 uppercase sm:text-xs">
+              {region.shops.length} {region.shops.length === 1 ? 'punto' : 'puntos'}
+            </span>
+            <svg class="h-3 flex-1 text-arena/40" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M2 6 Q 25 -2 50 6 T 100 6 T 150 6 T 198 6" />
+            </svg>
+          </div>
+
+          <!-- Shop grid -->
+          <ul class="mt-10 grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {region.shops.map((shop) => (
+              <li class="reveal">
+                <article class="group relative flex h-full flex-col gap-4 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-6 transition hover:-translate-y-0.5 hover:border-arena hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)]">
+                  <header class="flex items-start gap-4">
+                    <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-arena/10 text-arena transition group-hover:bg-arena group-hover:text-azul">
+                      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12z" />
+                        <circle cx="12" cy="9" r="2.5" />
+                      </svg>
+                    </span>
+                    <div class="min-w-0 flex-1">
+                      <h3 class="font-display text-xl leading-tight text-caparol sm:text-2xl">
+                        {shop.name}
+                      </h3>
+                      <p class="mt-1 font-display text-[10px] tracking-[0.25em] text-celeste uppercase sm:text-xs">
+                        {shop.city}
+                      </p>
+                    </div>
+                  </header>
+
+                  <p class="text-sm leading-relaxed text-caparol/85 sm:text-base">
+                    {shop.address}
+                  </p>
+
+                  <a
+                    href={mapsHref(shop)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-auto inline-flex items-center gap-2 self-start rounded-full border border-caparol/20 px-3 py-1.5 font-display text-xs tracking-[0.2em] text-caparol/85 uppercase transition group-hover:border-arena group-hover:text-arena focus:outline-none focus-visible:border-arena focus-visible:text-arena"
+                  >
+                    Cómo llegar
+                    <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                      <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                  </a>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </div>
+</section>

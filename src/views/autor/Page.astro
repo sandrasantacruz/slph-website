@@ -1,0 +1,43 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from './Hero.astro';
+import Biografia from './Biografia.astro';
+import Hitos from './Hitos.astro';
+import Origen from './Origen.astro';
+import Manifest from './Manifest.astro';
+import CTA from './CTA.astro';
+---
+
+<MainLayout
+  title="Sandra Santa Cruz · La autora"
+  description="Bailarina, coreógrafa y autora canaria. Más de tres décadas al frente del Centro de Danza Sandra Santa Cruz y creadora del programa Si los peces hablaran."
+>
+  <Hero />
+  <Biografia />
+  <Hitos />
+  <Origen />
+  <Manifest />
+  <CTA />
+</MainLayout>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (reduceMotion) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>

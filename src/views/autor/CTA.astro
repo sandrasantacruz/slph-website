@@ -1,0 +1,70 @@
+---
+const links = [
+  {
+    eyebrow: 'el programa',
+    title: 'Conoce SLPH',
+    body: 'Artes plásticas, escénicas y ciencia del mar. El marco completo del proyecto.',
+    href: '/programa',
+  },
+  {
+    eyebrow: 'el cuento',
+    title: 'Lee un fragmento',
+    body: 'Asoma la cabeza al libro ilustrado y conoce a Lorena, Nela, Dina y compañía.',
+    href: '/lee-un-fragmento',
+  },
+  {
+    eyebrow: 'la galería',
+    title: 'Mira el musical',
+    body: 'Fotografías de la función que dio inicio a todo lo demás.',
+    href: '/galeria#musical',
+  },
+];
+---
+
+<section class="relative isolate overflow-hidden py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal flex items-center gap-5">
+      <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+      <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
+        Sigue buceando
+      </span>
+    </div>
+
+    <h2 class="reveal reveal-delay-1 mt-8 max-w-3xl font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] text-caparol">
+      Lo que <span class="text-arena italic">nació de aquí</span>.
+    </h2>
+
+    <div class="mt-14 grid gap-6 md:grid-cols-3 md:gap-8">
+      {links.map((l, i) => (
+        <a
+          href={l.href}
+          class={`reveal reveal-delay-${i + 1} group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-arena/25 bg-azul/50 p-7 ring-1 ring-caparol/10 backdrop-blur-sm transition hover:border-arena/60 hover:bg-azul/70`}
+        >
+          <p class="font-hand text-2xl text-celeste sm:text-3xl">{l.eyebrow}</p>
+          <h3 class="font-display text-3xl leading-tight text-caparol sm:text-4xl">
+            {l.title}
+          </h3>
+          <p class="text-base leading-relaxed text-caparol/80">{l.body}</p>
+          <span class="mt-auto inline-flex items-center gap-2 pt-2 font-display text-sm uppercase tracking-[0.25em] text-arena">
+            Entrar
+            <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+
+          <!-- Decorative corner waves on hover -->
+          <svg
+            aria-hidden="true"
+            class="pointer-events-none absolute -bottom-2 -right-2 h-20 w-20 text-arena/0 transition group-hover:text-arena/20"
+            viewBox="0 0 80 80"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          >
+            <path d="M0 56 Q 16 44 32 56 T 64 56 T 96 56" />
+            <path d="M0 68 Q 16 56 32 68 T 64 68 T 96 68" />
+          </svg>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

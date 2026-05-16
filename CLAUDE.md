@@ -36,8 +36,16 @@ Stattdessen:
 
 - **Statische Marketing-Bilder** (Logo, Hero etc.) → optimiert in `public/assets/`
   ablegen, plain `<img src="/assets/...">`.
-- **PocketBase-Uploads** (Post-Cover, Galería-Fotos) → PocketBase liefert eigene
-  Thumbnails per `?thumb=400x300` an der File-URL. Direkt einbinden:
+- **Galería-Bilder** (`/galeria`) → liegen als WebP statisch unter
+  `public/assets/galeria/<sección>/`. Konvention: max. 1500×1500 px, Q85
+  (`magick … -resize '1500x1500>' -strip -quality 85 out.webp`). Werden in
+  `src/views/galeria/Page.astro` zur Build-Zeit via `fs.readdirSync`
+  eingelesen — neue Bilder einfach in den jeweiligen Section-Ordner kopieren,
+  kein Code-Edit nötig. Sektion-IDs: `musical`, `cuento`, `eventos`,
+  `momentos`, `contaminacion`.
+- **PocketBase-Uploads** (Post-Cover und Inline-Bilder in `posts`) →
+  PocketBase liefert eigene Thumbnails per `?thumb=400x300` an der File-URL.
+  Direkt einbinden:
   ```astro
   <img src={`${PB_URL}/api/files/${record.collectionId}/${record.id}/${record.cover}?thumb=400x300`} />
   ```
