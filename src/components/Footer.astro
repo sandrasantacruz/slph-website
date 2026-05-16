@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { socials } from '../lib/social';
 
 const sections = [
   {
@@ -17,24 +18,6 @@ const sections = [
       { href: '/colaboradores', label: 'Colaboradores' },
       { href: '/novedades', label: 'Novedades' },
     ],
-  },
-];
-
-const social = [
-  {
-    label: 'Facebook',
-    href: 'https://www.facebook.com/silospeceshablaran/',
-    icon: 'simple-icons:facebook',
-  },
-  {
-    label: 'Instagram',
-    href: 'https://www.instagram.com/silospeceshablaran/',
-    icon: 'simple-icons:instagram',
-  },
-  {
-    label: 'YouTube',
-    href: 'https://youtube.com/channel/UCjGxWnleLDsYbm7rSkopmFw',
-    icon: 'simple-icons:youtube',
   },
 ];
 
@@ -76,7 +59,7 @@ const year = new Date().getFullYear();
         <h2 class="font-display text-2xl text-caparol">¡Síguenos!</h2>
         <ul class="flex gap-3">
           {
-            social.map(({ label, href, icon }) => (
+            socials.map(({ label, href, icon }) => (
               <li>
                 <a
                   href={href}

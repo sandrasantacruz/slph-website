@@ -81,6 +81,35 @@ Konventionen:
 - Public-Listings filtern immer mit
   `status = "published" && published_at <= @now`.
 
+### Settings (Singleton)
+
+Zweite Collection **`settings`** hält site-weite Kontaktdaten als Einzelrecord.
+Wird im Frontend von `src/lib/settings.ts:getSettings` gelesen und im Backend
+über `/admin/ajustes` editiert.
+
+| Feld       | Typ      | Pflicht | Hinweis                                                           |
+| ---------- | -------- | ------- | ----------------------------------------------------------------- |
+| `id`       | text     | ja      | Fester Wert `defaultsettings` (per Seed-Migration angelegt).      |
+| `whatsapp` | text     | nein    | Telefonnummer mit/ohne `+`-Prefix.                                |
+| `phone`    | text     | nein    | Festnetz/Mobile, frei formatiert.                                 |
+| `email`    | text     | nein    | E-Mail.                                                           |
+| `created`  | autodate | —       |                                                                   |
+| `updated`  | autodate | —       |                                                                   |
+
+Rules:
+- `listRule` / `viewRule`: leer (= public read; die öffentliche `/contacto`-Seite
+  liest ohne Auth).
+- `createRule` / `deleteRule`: `null` — **bewusst gesperrt.** Nur die
+  Seed-Migration (`backend/migrations/*_seed_settings_singleton.go`) legt den
+  Record an; nichts kann ihn über die API löschen.
+- `updateRule`: `@request.auth.id != ""` (Admin-Form aktualisiert nur).
+
+Konventionen:
+- **Strict-Singleton:** Es existiert genau ein Record mit ID `defaultsettings`.
+  Migrationen sind der einzige Ort, an dem Records entstehen oder gelöscht
+  werden. Das Frontend macht daher nur `update`, keine `create`-Fallback.
+- **Leerer String** pro Feld blendet im Frontend den jeweiligen CTA aus.
+
 ## Layouts
 
 | Layout            | Wann                       | Brand-Elemente               |
