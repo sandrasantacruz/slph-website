@@ -70,5 +70,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return context.redirect(`/admin/login?next=${target}`);
   }
 
-  return next();
+  const response = await next();
+  if (pathname.startsWith('/admin')) {
+    response.headers.set('Cache-Control', 'no-store');
+  }
+  return response;
 });
