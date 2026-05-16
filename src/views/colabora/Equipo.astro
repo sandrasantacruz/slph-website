@@ -1,0 +1,709 @@
+---
+import { Icon } from 'astro-icon/components';
+
+type Link = {
+  url: string;
+  label: string;
+  icon: 'linkedin' | 'web' | 'video' | 'facebook' | 'lab';
+};
+
+type Person = {
+  name: string;
+  role: string;
+  image: string;
+  alt: string;
+  bio: string[];
+  links?: Link[];
+  gallery?: string[];
+};
+
+type Group = {
+  label: string;
+  people: Person[];
+};
+
+const groups: Group[] = [
+  {
+    label: 'Ciencia & investigación marina',
+    people: [
+      {
+        name: 'May Gómez Cabrera',
+        role: 'Catedrática de Zoología · ULPGC',
+        image: '/assets/colaboradores/may-gomez/portrait.png',
+        alt: 'Retrato de May Gómez Cabrera',
+        bio: [
+          'Catedrática de Zoología. Licenciada en Biología Marina por la ULL (1986). Doctora en Oceanografía por la ULPGC (1991). Directora del grupo de Investigación EOMAR: Ecofisiología de los Organismos Marinos del Instituto de Acuicultura Sostenible y Ecosistemas Marinos (Iu-ECOAQUA) de la Universidad de Las Palmas de Gran Canaria.',
+          'Sus áreas de investigación son la Ecología, Fisiología y Bioquímica del Zooplancton. Estudios de la transferencia de Microplásticos en la cadena trófica marina. Oceanografía Biológica y Biogeoquímica. Metabolismo, respiración, excreción de amonio, crecimiento y producción de las comunidades zooplanctónica. Experta en producción secundaria y en el desarrollo de nuevas metodologías para su estudio.',
+          'Es autora de 87 trabajos de investigación y varios libros docentes, ha participado en 45 proyectos de investigación nacionales y europeos, siendo investigadora principal en 10 de ellos. Ha dirigido 5 tesis doctorales (y 4 más en fase de preparación) y 15 tesis de máster. Ha participado en 20 campañas oceanográficas, 3 de ellas como jefa de campaña. Ha presentado 180 comunicaciones a congresos y 20 ponencias invitadas en reuniones científicas nacionales e internacionales.',
+          'Organizadora de varios congresos internacionales, moderadora de sesiones científicas y presidenta de la sesión de Avances en la Respiración Oceánica en el Ocean Science Meeting en San Diego 2018 entre otros.',
+        ],
+        links: [
+          { url: 'https://www.linkedin.com/in/may-g%C3%B3mez-bb50025b/', label: 'LinkedIn', icon: 'linkedin' },
+          { url: 'https://microtrofic.wordpress.com/may-gomez/', label: 'Microtrofic', icon: 'lab' },
+          { url: 'http://ecoaqua.ulpgc.es/en/about-us', label: 'EcoAqua', icon: 'lab' },
+        ],
+        gallery: [
+          '/assets/colaboradores/may-gomez/gallery-1.jpg',
+          '/assets/colaboradores/may-gomez/gallery-2.jpg',
+          '/assets/colaboradores/may-gomez/gallery-3.jpg',
+          '/assets/colaboradores/may-gomez/gallery-4.png',
+        ],
+      },
+      {
+        name: 'Dra. Gercende Courtois de Viçose',
+        role: 'Investigadora · Ciencias Marinas y Acuicultura',
+        image: '/assets/colaboradores/gercende-courtois/portrait.png',
+        alt: 'Retrato de Gercende Courtois de Viçose',
+        bio: [
+          'Investigadora en Ciencias Marinas y Acuicultura.',
+          'El asombro suscitado por una primera inmersión en un arrecife de coral en su infancia, le reveló la evidencia del papel clave que desempeña el medio marino en el mantenimiento del equilibrio medioambiental del planeta. Con el fin de comprender mejor su funcionamiento y responder a las demandas asociadas al uso del medio marino, decidió orientar su carrera científica hacia ciencias marinas y el desarrollo de prácticas acuícolas sostenibles.',
+          'La iniciativa del cuento «Si los peces hablaran…» fomentó una colaboración encantadora con Sandra Santa Cruz, en total concordancia con su interés en difundir información relativa al medio marino.',
+        ],
+        links: [
+          { url: 'https://www.linkedin.com/in/gercende-courtois-de-vi%C3%A7ose-18209b17/', label: 'LinkedIn', icon: 'linkedin' },
+        ],
+        gallery: [
+          '/assets/colaboradores/gercende-courtois/gallery-1.jpg',
+          '/assets/colaboradores/gercende-courtois/gallery-2.jpg',
+          '/assets/colaboradores/gercende-courtois/gallery-3.png',
+          '/assets/colaboradores/gercende-courtois/gallery-4.jpg',
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Diseño & ilustración',
+    people: [
+      {
+        name: 'Pablo Tribiño',
+        role: 'Ilustrador y diseñador gráfico',
+        image: '/assets/colaboradores/pablo-tribino/portrait.jpg',
+        alt: 'Retrato de Pablo Tribiño',
+        bio: [
+          'Ilustrador y diseñador gráfico, nace en Caba, Argentina, en 1977. Especializado en el desarrollo de ilustración, y, de viñetas, para ser aplicada en packaging de diversos formatos (en principio para la industria alimenticia), así como, en el retoque digital fotográfico, y la ilustración de personajes de todo tipo, clasificación y rubros, con el objetivo de responder a diferentes temáticas dirigidas a públicos de diversas características. Trabaja también el armado de originales en grafito.',
+          'Lleva años trabajando para editoriales infantiles, como ediciones infantil.com, de editorial Sin Fin, Nova Rhoman y Duendes del Sur entre otras. Un mundo que le apasiona, y en el que se vuelca día a día poniendo todo sus empeño en perfeccionarse y ampliar conocimientos. Su estilo propio y su gran versatilidad para combinar diversos estilos ilustrativos, le afianzan como un ilustrador más amplio, para el público más pequeño.',
+          'En diseño ha trabajado en el armado de originales de diferentes formatos y soportes para diversas marcas. Imagen institucional y corporativa, desarrollo de marca, catálogos, infografías, avisos, eventos, renders, gráficas de stand (en ferias como expo Presentes, expo Juguetería y expo Papelería).',
+        ],
+        links: [
+          { url: 'https://www.linkedin.com/in/pablo-tribi%C3%B1o-805396b/', label: 'LinkedIn', icon: 'linkedin' },
+        ],
+        gallery: [
+          '/assets/colaboradores/pablo-tribino/gallery-1.jpg',
+          '/assets/colaboradores/pablo-tribino/gallery-2.jpg',
+          '/assets/colaboradores/pablo-tribino/gallery-3.jpg',
+          '/assets/colaboradores/pablo-tribino/gallery-4.jpg',
+        ],
+      },
+      {
+        name: 'Carlos García',
+        role: 'Dirección técnica · audiovisuales · QR y AR',
+        image: '/assets/colaboradores/carlos-garcia/portrait.jpg',
+        alt: 'Retrato de Carlos García',
+        bio: [
+          'Polifacético y creativo, le apasionan los retos. Es el técnico de la Compañía y del Centro de Danza Sandra Santa Cruz, y autor de los audiovisuales y mapping de sus espectáculos.',
+          'Gracias a los QR y los AR que ha creado, nuestro cuento es el único que sumerge al lector dentro de un Musical. A través del teléfono los QR os llevan a partes del espectáculo para que personas invidentes y los más pequeños disfruten también de nuestra historia. Hay incluso fragmentos de animación, dotando a protagonistas de movimiento. La realidad aumentada (AR) combina personaje con hábitat, ligando el cuento con el mundo marino.',
+        ],
+        gallery: [
+          '/assets/colaboradores/carlos-garcia/gallery-1.jpg',
+          '/assets/colaboradores/carlos-garcia/gallery-2.jpg',
+          '/assets/colaboradores/carlos-garcia/gallery-3.jpg',
+          '/assets/colaboradores/carlos-garcia/gallery-4.jpg',
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Música & escena',
+    people: [
+      {
+        name: 'Nauzet Valerón',
+        role: 'Tenor y artista audiovisual',
+        image: '/assets/colaboradores/nauzet-valeron/portrait.jpg',
+        alt: 'Retrato de Nauzet Valerón',
+        bio: [
+          'Nauzet Valerón Brito, es Tenor y artista multidisciplinar en las artes audiovisuales. Nace en Las Palmas de Gran Canaria en 1984 y realiza sus estudios en el conservatorio de música profesional. Cumple uno de sus sueños al entrar en Los Gofiones, grupo emblemático de Gran Canaria.',
+          'Licenciado en Canto en La Escuela Superior de Canto de Madrid, tiene como profesor a Juan Lomba. Perfeccionamiento vocal con Francisco Ortiz. Postgrado en la Universidad Mozarteum de Salzburgo con Siegfried Jérusalem. Numerosas masterclass con destacados profesores como Isabel Álvarez, María Oran, Isabel Rey, Suso Mariategui, Poul Farrington, Ettore Papadia, Dalton Baldwin et Giulio Zappa, entre otros. Ha intervenido en numerosas producciones, destacando los roles de Roméo et Juliette de Gounod, Don Ottavio de Don Giovanni de Mozart, Florville de Signor Bruschino de Rossini, Nemorino d’Élixire d’Amore de Donizetti, Ferrando de Così fan tutte de Mozart, Fenton de Falstaff de Verdi entre otros. En 2010 entra a formar parte del coro del Teatro Real de Madrid y en 2014 del coro del Grand Théâtre de Genève donde continúa actualmente.',
+          'Las artes audiovisuales son su otra pasión, actividad que desarrolla en paralelo a su carrera de canto. Estudia con diferentes profesionales buscando unir sus conocimientos musicales con audiovisuales, y crea un proyecto para dotar a cantantes líricos de grabaciones adaptadas a las características del canto lírico, lo que le lleva a realizar un sinfín de proyectos como: video books para cantantes, videoclips, producciones de ópera, zarzuela, teatro, book fotográficos y artísticos. Actualmente compagina las facetas del mundo de la música y del audiovisual.',
+        ],
+        gallery: [
+          '/assets/colaboradores/nauzet-valeron/gallery-1.jpg',
+          '/assets/colaboradores/nauzet-valeron/gallery-2.jpg',
+          '/assets/colaboradores/nauzet-valeron/gallery-3.jpg',
+          '/assets/colaboradores/nauzet-valeron/gallery-4.jpg',
+        ],
+      },
+      {
+        name: 'Ohiane Viñaspre',
+        role: 'Soprano de ópera',
+        image: '/assets/colaboradores/ohiane-vinaspre/portrait.jpg',
+        alt: 'Retrato de Ohiane Viñaspre',
+        bio: [
+          'Nace en Vitoria-Gasteiz en 1987, desde muy pequeña descubre su pasión por la música. Licenciada en la Escuela Superior de Canto de Madrid con las máximas calificaciones. Premio fin de carrera Lola Rodríguez de Aragón (2013). Amplia su formación con: Nathalie Stutzmann, Juan Lomba, Nicola Beller Carbone, Dolora Zajick, Montserrat Caballé, Raina Kabaivanska o Giulio Zappa entre otros. Reside en Ginebra, y recibe consejos del maestro Carlos Aragón.',
+          'Galardones: Tercer premio en el Concurso Internacional de Canto Luis Mariano (2016); Mención de honor del jurado en el Concurso Internacional de Canto «Un futuro de arte» (2015); Concurso Internacional de Canto de Colmenar Viejo a la «Joven promesa» (2013); segundo premio «Jóvenes Intérpretes de Euskadi» en la modalidad de canto (2008). En 2010 gana la beca «Angel Vegas» otorgado por Juventudes Musicales de España para ampliación de estudios en el extranjero. Finalista del prestigioso Concurso Internacional A.S.L.I.C.O celebrado en la ciudad italiana de Como (2013).',
+          'Auditorio Nacional de Madrid: recital de canción española y americana a cargo de la Fundación «Piú mosso». Viaja a San José de Costa Rica y a Santiago de Chile con la zarzuela Dos enredos Domésticos. Teatro Principal de Vitoria-Gasteiz: Carmina Burana (2016). Recital con la Fundación Juan March (2015). Solista en el Teatro Real de Madrid con Muerte en Venecia de Britten, bajo la batuta de Alejo Pérez (2014). Participa en el Ciclo de Jóvenes Cantantes que ofrece la Asociación de Amigos de la Ópera de Madrid y realiza numerosos recitales de ópera y zarzuela por la geografía española. Destaca en su faceta de oratorio Exultate Jubilate, con orquestas de cámara en numerosas ocasiones.',
+          'Actuará en el Teatro Calderón de Valladolid en la ópera Partenope de Vinci como Arsace. Actualmente forma parte de la agencia «artists.bcn».',
+        ],
+        gallery: [
+          '/assets/colaboradores/ohiane-vinaspre/gallery-1.png',
+          '/assets/colaboradores/ohiane-vinaspre/gallery-2.jpg',
+          '/assets/colaboradores/ohiane-vinaspre/gallery-3.jpg',
+          '/assets/colaboradores/ohiane-vinaspre/gallery-4.jpg',
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Letras & educación',
+    people: [
+      {
+        name: 'Dunia Santana',
+        role: 'Filóloga · docente',
+        image: '/assets/colaboradores/dunia-santana/portrait.jpg',
+        alt: 'Retrato de Dunia Santana',
+        bio: [
+          'Licenciada en Filología Hispánica por la Universidad de la Laguna. Por lo que siempre se ha dedicado a lo mucho que ama: su lengua y su literatura. Su profesión es la docencia y procura transmitir a su alumnado el interés por la cultura canaria.',
+          'Dunia Santana Hernández ha colaborado en el programa SLPH compartiendo la ilusión con su autora. Como filóloga se ha encargado de la expresión y el vocabulario. Comparte con Sandra el interés, la ilusión y el compromiso puestos en «Si los peces hablaran…»',
+        ],
+        gallery: [
+          '/assets/colaboradores/dunia-santana/gallery-1.jpg',
+          '/assets/colaboradores/dunia-santana/gallery-2.png',
+          '/assets/colaboradores/dunia-santana/gallery-3.jpg',
+          '/assets/colaboradores/dunia-santana/gallery-4.jpeg',
+        ],
+      },
+      {
+        name: 'Lorena Santa Cruz',
+        role: 'Colaboradora más joven · perspectiva infantil',
+        image: '/assets/colaboradores/lorena-santa-cruz/portrait.jpg',
+        alt: 'Retrato de Lorena Santa Cruz',
+        bio: [
+          'Lorena Santa Cruz es nuestra colaboradora más joven, no por ello la menos importante. Estudia 5º de Primaria que compagina con su gran pasión, «las artes escénicas». Estudia piano, canto y teatro, después de hacer ballet. Tras participar en nuestro Musical en 2016, se compromete rápidamente para transmitir su mensaje. ¡Su energía se contagia!',
+          'Su responsabilidad supera su edad, y su preocupación por la situación de los ecosistemas marinos hace que, al igual que Greta Thunberg, ¡decida actuar! Lorena nos ha regalado su perspectiva de las ilustraciones del cuento y su visión para conectar con público infantil; eso sí, dejando vocablos para aprender: «para eso está el diccionario, tía».',
+        ],
+        gallery: [
+          '/assets/colaboradores/lorena-santa-cruz/gallery-1.jpg',
+          '/assets/colaboradores/lorena-santa-cruz/gallery-2.jpg',
+          '/assets/colaboradores/lorena-santa-cruz/gallery-3.png',
+          '/assets/colaboradores/lorena-santa-cruz/gallery-4.jpg',
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Producción & vestuario',
+    people: [
+      {
+        name: 'Juani Santana',
+        role: 'Producción · vestuario · «doña Paciencia»',
+        image: '/assets/colaboradores/juani-santana/portrait.jpg',
+        alt: 'Retrato de Juani Santana',
+        bio: [
+          '¡Nuestra querida doña Paciencia! Es la mano derecha del Centro de Danza Sandra Santa Cruz, ¿quién diría que empezó como alumna de bailes de salón? Obviando su edad, su inquietud por bailar la lleva a tomar clases de danza moderna, danza clásica y de slim ballet.',
+          'De Reina de Corazones, a chica alocada de Cabaret; de panadero, a tabernero en la Bella y la Bestia; de anciana en taca-taca, a la Sra. Stahlbaun en Cascanueces, pero es sin duda Dña. Paciencia, su papel más emotivo, por el mensaje que transmite y por su conexión con los niños.',
+          'De manera autodidacta da rienda suelta a su creatividad. Responsable, introvertida, trabajadora, y muy perfeccionista, es quien materializó los maravillosos personajes para nuestro Musical.',
+        ],
+        gallery: [
+          '/assets/colaboradores/juani-santana/gallery-1.jpg',
+          '/assets/colaboradores/juani-santana/gallery-2.jpg',
+          '/assets/colaboradores/juani-santana/gallery-3.jpg',
+          '/assets/colaboradores/juani-santana/gallery-4.png',
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Fotografía & artes visuales',
+    people: [
+      {
+        name: 'Ethel Bartrán',
+        role: 'Fotógrafa · «Vigilia al Océano»',
+        image: '/assets/colaboradores/ethel-bartran/portrait.png',
+        alt: 'Retrato de Ethel Bartrán',
+        bio: [
+          'Ethel Bartrán, nacida en Uruguay y desde hace 18 años enamorada de las islas. Apenas han pasado 3 años que inició sus pasos en el mundo de la fotografía, en el que sin cesar re-descubre y se involucra día a día marcando su propio camino. Tras cursar un taller de proyecto personal y mantener una conversación con Sandra Santa Cruz, siente la profundidad y labor educativa que conlleva «Si los peces hablaran…» e inmediatamente decide ponerse en la piel del mundo marino. Así nace Vigilia al Océano, una manera de agradecer y aportar a la vez su granito de arena por mejorar nuestro planeta.',
+          'El Proyecto «Vigilia al Océano» se expuso el 21/09/2018 en la Casa de la Cultura de Arucas, bajo el patrocinio del Gobierno de Canarias, el Ayuntamiento de Arucas, SAO (Sociedad Atlántica de Oceanógrafos) y Arucas y el Mar.',
+        ],
+        links: [
+          { url: 'http://ethelbartran.com/', label: 'Web', icon: 'web' },
+          { url: 'https://www.youtube.com/watch?v=eO0kWotjs_0', label: 'Vigilia al Océano', icon: 'video' },
+        ],
+        gallery: [
+          '/assets/colaboradores/ethel-bartran/gallery-1.png',
+          '/assets/colaboradores/ethel-bartran/gallery-2.jpg',
+          '/assets/colaboradores/ethel-bartran/gallery-3.jpg',
+          '/assets/colaboradores/ethel-bartran/gallery-4.jpg',
+        ],
+      },
+      {
+        name: 'Francis Pérez',
+        role: 'Fotógrafo submarino · World Press Photo 2017',
+        image: '/assets/colaboradores/francis-perez/portrait.png',
+        alt: 'Retrato de Francis Pérez',
+        bio: [
+          'Francis Pérez nació en las Islas Canarias y comenzó a tomar fotografías submarinas de los fondos marinos en Tenerife. Como amante de los océanos y buceador entusiasta, enfoca el mundo submarino con un estilo único. Sus fotografías muestran su propio punto de vista en lugares como Indonesia, el Mar Rojo, Malasia, Sudáfrica, Mozambique, Filipinas, Micronesia, Galápagos, Chile, México, Cuba y las Islas Canarias.',
+          'En los últimos años ha colaborado con muchas revistas y libros como National Geographic España y ha sido galardonado con numerosos concursos de fotografía internacionales en todo el mundo, incluso con el prestigioso premio WORLD PRESS PHOTO 2017, 1ST, cuya foto, ha sido además, la portada del informe «Una trampa de plástico. Liberando de plástico el Mediterráneo» de WWF España en junio de 2018.',
+        ],
+        links: [
+          { url: 'https://francisperez.es/', label: 'Web', icon: 'web' },
+          { url: 'https://www.facebook.com/FrancisPerezUnderwaterPhotography', label: 'Facebook', icon: 'facebook' },
+        ],
+        gallery: [
+          '/assets/colaboradores/francis-perez/gallery-1.jpg',
+          '/assets/colaboradores/francis-perez/gallery-2.png',
+          '/assets/colaboradores/francis-perez/gallery-3.png',
+          '/assets/colaboradores/francis-perez/gallery-4.png',
+        ],
+      },
+    ],
+  },
+];
+
+const brandIcon: Record<Exclude<Link['icon'], 'web' | 'lab'>, string> = {
+  linkedin: 'simple-icons:linkedin',
+  video: 'simple-icons:youtube',
+  facebook: 'simple-icons:facebook',
+};
+
+// Flat counter to alternate L/R layout across the entire register
+let flatIndex = 0;
+// Pre-compute parity per person so each card knows whether image goes left or right
+const peopleParity: boolean[][] = groups.map((g) =>
+  g.people.map(() => {
+    const left = flatIndex % 2 === 0;
+    flatIndex++;
+    return left;
+  }),
+);
+
+// Slight tilt for polaroids, alternating
+const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
+---
+
+<section id="equipo" class="relative isolate overflow-hidden pt-8 pb-24 sm:pt-12 sm:pb-32">
+  <!-- Atmosphere: soft glow + faint horizontal wave -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_45%_at_15%_15%,rgba(250,222,170,0.07),transparent_70%),radial-gradient(50%_40%_at_85%_75%,rgba(100,170,210,0.08),transparent_70%)]"
+  ></div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <!-- Section header — picks up the WP page voice: ¡TODOS CON EL MAR! -->
+    <header class="reveal max-w-3xl">
+      <div class="flex items-center gap-3 sm:gap-4">
+        <span aria-hidden="true" class="h-px w-10 bg-celeste sm:w-16"></span>
+        <span class="font-display text-xs tracking-[0.4em] text-celeste uppercase sm:text-sm">
+          ¡Todos con el mar!
+        </span>
+      </div>
+      <h2 class="mt-5 font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] tracking-tight text-caparol">
+        Quienes nos echan
+        <span class="hand-underline text-arena">una aleta</span>
+      </h2>
+      <p class="mt-5 max-w-2xl text-base text-caparol/85 sm:text-lg">
+        En este apartado encontrarás a las personas que trabajan en sintonía con los
+        objetivos de <em class="not-italic font-display text-arena">Si los peces hablaran…</em>
+        — científicas, ilustradores, cantantes, fotógrafos, docentes y una colaboradora
+        de quinto de primaria.
+      </p>
+    </header>
+
+    <!-- Groups -->
+    <div class="mt-16 space-y-20 sm:mt-20 sm:space-y-28">
+      {groups.map((group, gIdx) => (
+        <section aria-labelledby={`grp-${gIdx}`} class="space-y-12 sm:space-y-16">
+          <!-- Group divider: wavy SVG + label centered -->
+          <div class="reveal flex items-center gap-4 sm:gap-6">
+            <svg class="hidden h-3 flex-1 text-arena/40 sm:block" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M2 6 Q 25 -2 50 6 T 100 6 T 150 6 T 198 6" />
+            </svg>
+            <h3 id={`grp-${gIdx}`} class="shrink-0 font-display text-base tracking-[0.3em] text-arena uppercase sm:text-lg">
+              {group.label}
+            </h3>
+            <svg class="h-3 flex-1 text-arena/40" viewBox="0 0 200 12" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M2 6 Q 25 -2 50 6 T 100 6 T 150 6 T 198 6" />
+            </svg>
+          </div>
+
+          <!-- People in this group -->
+          <div class="space-y-16 sm:space-y-24">
+            {group.people.map((person, pIdx) => {
+              const imageLeft = peopleParity[gIdx][pIdx];
+              const tilt = tiltClass[(gIdx + pIdx) % tiltClass.length];
+              const visibleBio = person.bio[0];
+              const rest = person.bio.slice(1);
+              const detailsId = `bio-${gIdx}-${pIdx}`;
+              return (
+                <article class="reveal">
+                  <div class="grid gap-8 md:grid-cols-12 md:gap-12">
+                    <!-- Portrait column: polaroid with handwritten name -->
+                    <div class:list={[
+                      'order-1 md:col-span-5 flex justify-center',
+                      imageLeft ? 'md:order-1' : 'md:order-2',
+                    ]}>
+                      <figure class:list={[
+                        'polaroid w-full max-w-[280px] sm:max-w-[340px]',
+                        tilt,
+                      ]}>
+                        <img
+                          src={person.image}
+                          alt={person.alt}
+                          loading="lazy"
+                          width="600"
+                          height="600"
+                          class="block aspect-[4/5] w-full rounded-sm object-cover bg-azul/20"
+                        />
+                        <figcaption class="absolute inset-x-0 bottom-0 flex items-end justify-center px-3 pb-2 text-center font-hand text-xl leading-tight text-azul/85 sm:text-2xl" style="min-height: 3.25rem;">
+                          <span class="line-clamp-2">{person.name}</span>
+                        </figcaption>
+                      </figure>
+                    </div>
+
+                    <!-- Bio column -->
+                    <div class:list={[
+                      'order-2 md:col-span-7 flex flex-col justify-center',
+                      imageLeft ? 'md:order-2' : 'md:order-1',
+                    ]}>
+                      <p class="font-display text-xs tracking-[0.3em] text-celeste uppercase sm:text-sm">
+                        {person.role}
+                      </p>
+                      <h4 class="mt-2 font-display text-3xl leading-[1] tracking-tight text-caparol sm:text-4xl">
+                        {person.name}
+                      </h4>
+
+                      <p class="mt-5 text-base leading-relaxed text-caparol/90 sm:text-lg">
+                        {visibleBio}
+                      </p>
+
+                      {rest.length > 0 && (
+                        <details class="bio-details group mt-4">
+                          <summary class="bio-summary inline-flex cursor-pointer list-none items-center gap-2 font-display text-xs tracking-[0.3em] text-arena uppercase transition hover:text-caparol focus-visible:text-caparol sm:text-sm">
+                            <span class="bio-summary-open">Leer más</span>
+                            <span class="bio-summary-close">Cerrar</span>
+                            <svg viewBox="0 0 24 24" class="bio-chevron h-4 w-4 transition-transform" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                              <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                          </summary>
+                          <div class="mt-4 space-y-4 text-base leading-relaxed text-caparol/85 sm:text-lg">
+                            {rest.map((p) => <p>{p}</p>)}
+                          </div>
+                        </details>
+                      )}
+
+                      {person.links && person.links.length > 0 && (
+                        <div class="mt-6 flex flex-wrap items-center gap-2">
+                          {person.links.map((link) => (
+                            <a
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="inline-flex items-center gap-1.5 rounded-full border border-caparol/20 px-3 py-1 text-xs tracking-wide text-caparol/85 transition hover:border-arena hover:text-arena focus-visible:border-arena focus-visible:text-arena focus:outline-none"
+                            >
+                              {link.icon === 'web' ? (
+                                <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                  <circle cx="12" cy="12" r="9" />
+                                  <path d="M3 12h18" />
+                                  <path d="M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18" />
+                                </svg>
+                              ) : link.icon === 'lab' ? (
+                                <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                  <path d="M9 3v6L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L15 9V3" />
+                                  <path d="M9 3h6" />
+                                </svg>
+                              ) : (
+                                <Icon name={brandIcon[link.icon]} class="h-3.5 w-3.5" aria-hidden="true" />
+                              )}
+                              {link.label}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {person.gallery && person.gallery.length > 0 && (
+                    <div class="mt-10 sm:mt-12">
+                      <div class="mb-4 flex items-center gap-3 sm:gap-4">
+                        <span class="font-display text-[10px] tracking-[0.4em] text-arena/85 uppercase sm:text-xs">
+                          De su mano
+                        </span>
+                        <span class="dotted-rule flex-1 text-arena/40"></span>
+                      </div>
+                      <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+                        {person.gallery.map((src, i) => (
+                          <a
+                            href={src}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-lightbox
+                            data-gallery={`${gIdx}-${pIdx}`}
+                            data-caption={`${person.name} — imagen ${i + 1} de ${person.gallery!.length}`}
+                            class="gallery-item group relative block aspect-square overflow-hidden rounded-xl bg-azul/30 ring-1 ring-caparol/10 transition duration-300 hover:-translate-y-1 hover:ring-arena/70 hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-arena"
+                          >
+                            <img
+                              src={src}
+                              alt={`${person.name} — imagen ${i + 1}`}
+                              loading="lazy"
+                              class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.06]"
+                            />
+                            <span aria-hidden="true" class="pointer-events-none absolute inset-0 bg-gradient-to-t from-azul/40 via-transparent to-transparent opacity-0 transition group-hover:opacity-100"></span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+
+  <!-- Shared lightbox: opened by clicks on any [data-lightbox] link in this section -->
+  <dialog id="colabora-lightbox" class="lightbox" aria-label="Imagen ampliada">
+    <button type="button" class="lightbox-close" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+    <button type="button" class="lightbox-nav lightbox-prev" aria-label="Anterior">
+      <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+    <button type="button" class="lightbox-nav lightbox-next" aria-label="Siguiente">
+      <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 6l6 6-6 6"/>
+      </svg>
+    </button>
+    <figure class="lightbox-figure">
+      <img class="lightbox-image" alt="" />
+      <figcaption class="lightbox-caption font-hand"></figcaption>
+    </figure>
+  </dialog>
+</section>
+
+<style>
+  /* Polished open/close UI for native <details> bio expanders */
+  .bio-details > .bio-summary::-webkit-details-marker { display: none; }
+  .bio-details .bio-summary-close { display: none; }
+  .bio-details[open] .bio-summary-open { display: none; }
+  .bio-details[open] .bio-summary-close { display: inline; }
+  .bio-details[open] .bio-chevron { transform: rotate(180deg); }
+
+  /* Lightbox dialog — true viewport fill, underwater ambience */
+  .lightbox {
+    /* fall back, then prefer dvw/dvh for mobile address-bar correctness */
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
+    max-width: 100dvw;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgba(6, 15, 44, 0.94);
+    color: var(--color-caparol);
+    overflow: hidden;
+  }
+  .lightbox::backdrop {
+    background: rgba(6, 15, 44, 0.6);
+    backdrop-filter: blur(4px);
+  }
+  .lightbox[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    max-width: 96vw;
+    max-height: 96dvh;
+  }
+  .lightbox-image {
+    display: block;
+    max-width: 96vw;
+    max-height: calc(96dvh - 3.5rem); /* leave room for caption */
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    box-shadow:
+      0 30px 60px -20px rgba(0, 0, 0, 0.7),
+      0 12px 24px -8px rgba(0, 0, 0, 0.5);
+    background: var(--color-azul-deep);
+    object-fit: contain;
+    transition: opacity 0.18s ease;
+  }
+  @media (min-width: 768px) {
+    /* Tablet+: leave a bit of breathing room for nav buttons at edges */
+    .lightbox-figure { max-width: min(92vw, 1800px); }
+    .lightbox-image { max-width: min(92vw, 1800px); max-height: calc(92dvh - 3.5rem); }
+  }
+  .lightbox.is-loading .lightbox-image { opacity: 0.4; }
+  .lightbox-caption {
+    color: var(--color-arena);
+    font-size: 1.25rem;
+    line-height: 1.2;
+    text-align: center;
+    max-width: 80vw;
+  }
+  .lightbox-close,
+  .lightbox-nav {
+    position: fixed;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(248, 248, 252, 0.1);
+    color: var(--color-caparol);
+    border: 1px solid rgba(248, 248, 252, 0.2);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+    backdrop-filter: blur(6px);
+  }
+  .lightbox-close:hover,
+  .lightbox-close:focus-visible,
+  .lightbox-nav:hover,
+  .lightbox-nav:focus-visible {
+    background: var(--color-arena);
+    color: var(--color-azul);
+    border-color: var(--color-arena);
+    outline: none;
+  }
+  .lightbox-close {
+    top: 1rem;
+    right: 1rem;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .lightbox-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 3rem;
+  }
+  .lightbox-nav:hover { transform: translateY(-50%) scale(1.05); }
+  .lightbox-prev { left: 1rem; }
+  .lightbox-next { right: 1rem; }
+  @media (min-width: 768px) {
+    .lightbox-close { top: 1.5rem; right: 1.5rem; width: 3rem; height: 3rem; }
+    .lightbox-nav { width: 3.5rem; height: 3.5rem; }
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+  }
+  /* Body scroll lock when lightbox is open */
+  html:has(.lightbox[open]) { overflow: hidden; }
+</style>
+
+<script>
+  const dialog = document.getElementById('colabora-lightbox') as HTMLDialogElement | null;
+  if (dialog) {
+    // Alias to a non-null local so closures keep the narrowed type.
+    const dlg = dialog;
+    const img = dlg.querySelector<HTMLImageElement>('.lightbox-image');
+    const caption = dlg.querySelector<HTMLElement>('.lightbox-caption');
+    const closeBtn = dlg.querySelector<HTMLButtonElement>('.lightbox-close');
+    const prevBtn = dlg.querySelector<HTMLButtonElement>('.lightbox-prev');
+    const nextBtn = dlg.querySelector<HTMLButtonElement>('.lightbox-next');
+
+    const allTriggers = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]'),
+    );
+    // The current navigation set — only the triggers in the gallery
+    // the user actually opened. Repopulated on every open().
+    let activeSet: HTMLAnchorElement[] = [];
+    let currentIndex = -1;
+
+    function show(index: number) {
+      if (!img || !caption || activeSet.length === 0) return;
+      const len = activeSet.length;
+      currentIndex = ((index % len) + len) % len; // loop both ways
+      const trigger = activeSet[currentIndex];
+      const label = trigger.dataset.caption ?? '';
+
+      dlg.classList.add('is-loading');
+      img.onload = () => dlg.classList.remove('is-loading');
+      img.onerror = () => dlg.classList.remove('is-loading');
+      img.src = trigger.href;
+      img.alt = label;
+      caption.textContent = label;
+
+      // Preload neighbours for snappy navigation
+      const preload = (i: number) => {
+        const next = activeSet[((i % len) + len) % len];
+        if (next) {
+          const p = new Image();
+          p.src = next.href;
+        }
+      };
+      preload(currentIndex + 1);
+      preload(currentIndex - 1);
+    }
+
+    function open(trigger: HTMLAnchorElement) {
+      const groupKey = trigger.dataset.gallery ?? '';
+      // Build the navigation set from triggers sharing the same data-gallery.
+      // Falls back to a singleton set if no group key is set.
+      activeSet = groupKey
+        ? allTriggers.filter((t) => t.dataset.gallery === groupKey)
+        : [trigger];
+      const startIdx = activeSet.indexOf(trigger);
+      show(startIdx === -1 ? 0 : startIdx);
+      if (!dlg.open) dlg.showModal();
+
+      // Hide nav buttons if there's nothing to navigate to
+      const hasMultiple = activeSet.length > 1;
+      prevBtn?.toggleAttribute('hidden', !hasMultiple);
+      nextBtn?.toggleAttribute('hidden', !hasMultiple);
+    }
+
+    allTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', (event) => {
+        const e = event as MouseEvent;
+        // Honour modifier-clicks so users can still open in a new tab
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+        event.preventDefault();
+        open(trigger);
+      });
+    });
+
+    closeBtn?.addEventListener('click', () => dialog.close());
+    prevBtn?.addEventListener('click', () => show(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => show(currentIndex + 1));
+
+    // Close on backdrop click — when user taps the dialog surface itself
+    // (not the figure or any of the buttons inside).
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    // Keyboard navigation while open (ESC is handled natively by <dialog>)
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        show(currentIndex + 1);
+      } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        show(currentIndex - 1);
+      }
+    });
+
+    // Clear image src on close so it stops loading / frees memory
+    dialog.addEventListener('close', () => {
+      if (img) img.src = '';
+      if (caption) caption.textContent = '';
+      currentIndex = -1;
+      activeSet = [];
+    });
+  }
+</script>

@@ -1,0 +1,109 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="relative isolate overflow-hidden pt-14 pb-16 sm:pt-20 sm:pb-24">
+  <!-- Subtle radial glow, top-left, like contacto -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_15%_25%,rgba(250,222,170,0.08),transparent_70%)]"
+  ></div>
+
+  <!-- Decorative dorsal fin — sways slowly, hidden on small screens -->
+  <svg
+    class="anim-sway pointer-events-none absolute top-24 -right-8 -z-10 hidden h-48 w-48 text-celeste/15 md:block lg:h-64 lg:w-64"
+    viewBox="0 0 120 120"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <!-- Stylised dorsal fin -->
+    <path d="M20 100 Q 35 70 60 30 Q 78 8 96 6 Q 102 38 90 70 Q 78 92 60 100 Z" />
+    <path d="M40 88 Q 56 64 74 42" />
+    <path d="M52 96 Q 70 76 88 52" />
+  </svg>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <!-- Eyebrow -->
+    <div class="reveal flex items-center gap-3 sm:gap-4">
+      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+        Colabora con SLPH
+      </span>
+    </div>
+
+    <!-- Headline: question with playful "aleta" highlight -->
+    <h1 class="reveal reveal-delay-1 mt-6 max-w-4xl font-display text-[clamp(2.5rem,7.5vw,5rem)] leading-[0.95] tracking-tight text-caparol">
+      ¿Nos echas
+      <span class="whitespace-nowrap">
+        una
+        <span class="relative inline-block text-arena italic">
+          aleta
+          <!-- Tiny fin doodle riding above the word -->
+          <svg
+            class="anim-float-soft pointer-events-none absolute -top-7 -right-5 h-6 w-6 text-arena sm:-top-9 sm:-right-7 sm:h-8 sm:w-8"
+            viewBox="0 0 40 40"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M6 34 Q 12 18 24 8 Q 34 2 36 6 Q 34 22 24 30 Q 14 36 6 34 Z" />
+          </svg>
+        </span>
+      </span>?
+    </h1>
+
+    <!-- Lead — the "deber moral / supervivencia" punch -->
+    <p class="reveal reveal-delay-2 mt-8 max-w-3xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl">
+      Preservar nuestros mares y sus ecosistemas
+      <span class="text-caparol">no es solo un deber moral</span>:
+      <span class="hand-underline text-arena">¡nuestra supervivencia depende de ello!</span>
+    </p>
+
+    <!-- Body paragraphs -->
+    <div class="reveal reveal-delay-3 mt-10 grid max-w-3xl gap-5 text-base leading-relaxed text-caparol/90 sm:text-lg">
+      <p>
+        Por esa razón <em class="not-italic font-display text-arena">Si los peces hablaran…</em>
+        busca promover conciencia en la protección del medioambiente
+        en <span class="text-celeste">todas las edades</span>, tanto de forma particular
+        como de la mano de instituciones y empresas.
+      </p>
+      <p>
+        Si quieres ayudar a nuestros mares y eres una persona particular,
+        puedes empezar con labores sencillas:
+        <span class="font-display text-arena">reciclar y reutilizar</span>.
+        En nuestro blog y redes sociales solemos proponer ideas para reducir tu huella ecológica,
+        <span class="hand-underline">¡así que no dejes de seguirnos!</span>
+      </p>
+    </div>
+
+    <!-- Quick CTA strip toward socials / blog -->
+    <div class="reveal reveal-delay-4 mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-caparol/80">
+      <a
+        href="/novedades"
+        class="group inline-flex items-center gap-2 font-display tracking-wide text-arena uppercase transition hover:text-caparol"
+      >
+        <Icon name="game-icons:newspaper" class="h-5 w-5" aria-hidden="true" />
+        Lee el blog
+        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+      <span aria-hidden="true" class="hidden h-4 w-px bg-caparol/25 sm:inline-block"></span>
+      <a
+        href="https://www.instagram.com/silospeceshablaran"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group inline-flex items-center gap-2 font-display tracking-wide text-celeste uppercase transition hover:text-caparol"
+      >
+        <Icon name="simple-icons:instagram" class="h-5 w-5" aria-hidden="true" />
+        Síguenos en Instagram
+        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
