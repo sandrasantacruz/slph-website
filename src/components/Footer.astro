@@ -12,11 +12,13 @@ const sections = [
     ],
   },
   {
-    title: 'Comunidad',
+    title: 'Menú',
     links: [
-      { href: '/videoteca', label: 'Videoteca' },
-      { href: '/colaboradores', label: 'Colaboradores' },
+      { href: '/', label: 'Inicio' },
+      { href: '/programa', label: 'Programa' },
       { href: '/novedades', label: 'Novedades' },
+      { href: '/colabora', label: 'Colabora' },
+      { href: '/contacto', label: 'Contacto' },
     ],
   },
 ];
@@ -66,9 +68,9 @@ const year = new Date().getFullYear();
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  class="flex h-10 w-10 items-center justify-center rounded-full bg-caparol/10 text-caparol transition hover:bg-arena hover:text-negro"
+                  class="flex h-14 w-14 items-center justify-center rounded-full bg-caparol/10 text-caparol transition hover:bg-arena hover:text-negro"
                 >
-                  <Icon name={icon} class="h-5 w-5" />
+                  <Icon name={icon} class="h-7 w-7" />
                 </a>
               </li>
             ))
