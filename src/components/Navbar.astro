@@ -1,6 +1,9 @@
 ---
+const cuentoPaths = ['/sobre-el-cuento', '/lee-un-fragmento', '/autor', '/galeria'];
+
 const links = [
   { href: '/', label: 'Inicio' },
+  { href: '/sobre-el-cuento', label: 'El cuento', match: cuentoPaths },
   { href: '/programa', label: 'Programa' },
   { href: '/novedades', label: 'Novedades' },
   { href: '/colabora', label: 'Colabora' },
@@ -27,8 +30,13 @@ const currentPath = Astro.url.pathname;
 
     <nav class="hidden items-center gap-6 md:flex" aria-label="Principal">
       {
-        links.map(({ href, label }) => {
-          const active = href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+        links.map(({ href, label, match }) => {
+          const active =
+            href === '/'
+              ? currentPath === '/'
+              : match
+                ? match.some((p) => currentPath.startsWith(p))
+                : currentPath.startsWith(href);
           return (
             <a
               href={href}

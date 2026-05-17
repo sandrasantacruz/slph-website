@@ -5,6 +5,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Section from './Section.astro';
 import Lightbox from './Lightbox.astro';
+import SubNavCuento from '../../components/SubNavCuento.astro';
 
 type SectionDef = {
   id: string;
@@ -67,7 +68,9 @@ const sections = sectionDefs.map((def) => {
 <MainLayout
   title="Galería"
   description="Imágenes del musical, el cuento, eventos y momentos del proyecto Si los peces hablaran."
+  hideWaterLine
 >
+  <SubNavCuento current="galeria" />
   <Hero />
   {
     sections.map((section) => (

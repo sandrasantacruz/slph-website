@@ -1,22 +1,15 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
-import Sumergete from './Sumergete.astro';
-import Flipbook from './Flipbook.astro';
-import CTA from './CTA.astro';
-import SubNavCuento from '../../components/SubNavCuento.astro';
+import Tarjetas from './Tarjetas.astro';
 ---
 
 <MainLayout
-  title="Lee un fragmento"
-  description="Un esbozo del mundo submarino de Si los peces hablaran. Asómate al cuento antes de decidirte a comprarlo."
-  hideWaterLine
+  title="Sobre el cuento"
+  description="Tres puertas para asomarte a Si los peces hablaran: lee un fragmento, conoce a la autora Sandra Santa Cruz y recorre la galería del proyecto."
 >
-  <SubNavCuento current="fragmento" />
   <Hero />
-  <Sumergete />
-  <Flipbook />
-  <CTA />
+  <Tarjetas />
 </MainLayout>
 
 <script>

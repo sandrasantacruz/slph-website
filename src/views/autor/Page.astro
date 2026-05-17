@@ -5,19 +5,20 @@ import Biografia from './Biografia.astro';
 import Hitos from './Hitos.astro';
 import Origen from './Origen.astro';
 import Manifest from './Manifest.astro';
-import CTA from './CTA.astro';
+import SubNavCuento from '../../components/SubNavCuento.astro';
 ---
 
 <MainLayout
   title="Sandra Santa Cruz · La autora"
   description="Bailarina, coreógrafa y autora canaria. Más de tres décadas al frente del Centro de Danza Sandra Santa Cruz y creadora del programa Si los peces hablaran."
+  hideWaterLine
 >
+  <SubNavCuento current="autor" />
   <Hero />
   <Biografia />
   <Hitos />
   <Origen />
   <Manifest />
-  <CTA />
 </MainLayout>
 
 <script>

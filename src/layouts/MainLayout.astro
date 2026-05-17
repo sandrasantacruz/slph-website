@@ -4,14 +4,16 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import Bubbles from '../components/Bubbles.astro';
 import WaterLine from '../components/WaterLine.astro';
+import BackToTop from '../components/BackToTop.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  hideWaterLine?: boolean;
 }
 
 const SITE = 'Si los peces hablaran';
-const { title, description } = Astro.props;
+const { title, description, hideWaterLine = false } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE}` : SITE;
 ---
 
@@ -38,10 +40,11 @@ const fullTitle = title ? `${title} · ${SITE}` : SITE;
   <body class="relative flex min-h-screen flex-col">
     <Bubbles />
     <Navbar />
-    <WaterLine />
+    {!hideWaterLine && <WaterLine />}
     <main class="flex-1">
       <slot />
     </main>
     <Footer />
+    <BackToTop />
   </body>
 </html>
