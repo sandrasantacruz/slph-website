@@ -201,14 +201,11 @@ UI-Icons). Astro inlined beim Build nur die tatsächlich benutzten Icons.
 
 ## Middleware
 
-`src/middleware.ts` macht drei Dinge zur Laufzeit:
+`src/middleware.ts` macht zwei Dinge zur Laufzeit:
 
 1. **Build-Time-Short-Circuit** via `context.isPrerendered` — kein Request-Zugriff,
    kein PB-Setup beim Prerender.
-2. **Analytics-Reverse-Proxy** für `/analytics/*` → `analytics.pulpo.cloud`.
-   Cookies und Host werden gestripped, X-Forwarded-For wird gesetzt. Der Provider
-   ist im Browser-Devtools nicht erkennbar.
-3. **PocketBase-Session** aus dem Cookie ableiten, in `context.locals.pb` und
+2. **PocketBase-Session** aus dem Cookie ableiten, in `context.locals.pb` und
    `context.locals.user` ablegen, und `/admin/*` ohne User auf `/admin/login`
    umleiten.
 
@@ -216,12 +213,9 @@ UI-Icons). Astro inlined beim Build nur die tatsächlich benutzten Icons.
 
 Script-Tag in `MainLayout.astro`, nur in **Production** (`import.meta.env.PROD`):
 ```html
-<script defer src="/analytics/script.js"
-  data-website-id="..."
-  data-host-url="/analytics"></script>
+<script defer src="https://analytics.pulpo.cloud/script.js"
+  data-website-id="..."></script>
 ```
-`data-host-url="/analytics"` ist wichtig — sonst würde der Tracker direkt an
-`analytics.pulpo.cloud` posten und unsere Tarnung wäre nutzlos.
 
 ## Auth (Admin)
 
