@@ -1,5 +1,6 @@
 ---
 import coverCuento from '../home/img/cover-cuento.webp?url';
+import galeriaCueva from '../home/img/galeria-cueva.webp?url';
 
 const cards = [
   {
@@ -17,7 +18,7 @@ const cards = [
     eyebrow: 'la autora',
     title: 'Sandra Santa Cruz',
     body: 'Bailarina, coreógrafa y autora canaria. Más de tres décadas poniendo el mar en escena, y la persona detrás del programa.',
-    image: '/assets/sandra.jpg',
+    image: '/assets/sandra-2.webp',
     alt: 'Retrato de Sandra Santa Cruz',
     cta: 'Conoce a Sandra',
     accent: 'celeste',
@@ -27,43 +28,44 @@ const cards = [
     eyebrow: 'imágenes',
     title: 'Galería',
     body: 'El musical, el cuento, eventos, momentos entrañables y la contaminación que nos empuja. Lo que ya vivimos con el mar.',
-    image: '/assets/galeria/musical/SLPH_Centro-de-Danza-Sandra-Santa-Cruz_Danza-de-las-Aletas.webp',
-    alt: 'Escena del musical Si los peces hablaran',
+    image: galeriaCueva,
+    alt: 'Escena del musical Si los peces hablaran con pancarta «No a la basura, el mar no se contamina»',
     cta: 'Recorrer la galería',
     accent: 'arena',
   },
 ] as const;
 ---
 
-<section class="relative isolate overflow-hidden pb-24 sm:pb-32">
+<section class="relative isolate overflow-hidden pt-14 pb-24 sm:pt-20 sm:pb-32">
   <div class="mx-auto max-w-6xl px-6">
     <div class="reveal flex items-center gap-5">
       <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
       <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
-        Tres puertas
+        Sobre el cuento
       </span>
     </div>
 
-    <h2 class="reveal reveal-delay-1 mt-8 max-w-3xl font-display text-[clamp(2rem,5vw,3.75rem)] leading-[0.95] text-caparol">
+    <h1 class="reveal reveal-delay-1 mt-8 max-w-3xl font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] text-caparol">
       Elige por dónde
       <span class="hand-underline text-arena">empezar</span>
-    </h2>
+    </h1>
 
-    <ul class="mt-14 grid gap-7 md:grid-cols-3 md:gap-8">
+    <ul class="mt-12 grid gap-7 md:grid-cols-3 md:gap-8">
       {cards.map((card, i) => (
         <li>
           <a
             href={card.href}
             class={`reveal reveal-delay-${i + 1} group relative flex h-full flex-col overflow-hidden rounded-2xl border border-caparol/15 bg-azul/45 ring-1 ring-caparol/10 transition hover:border-arena/60 hover:bg-azul/65`}
           >
-            <div class="relative aspect-[5/4] overflow-hidden">
-              <img
-                src={card.image}
-                alt={card.alt}
-                class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.05]"
-                loading={i === 0 ? 'eager' : 'lazy'}
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-azul/80 via-azul/15 to-transparent"></div>
+            <div class="relative p-3 sm:p-4">
+              <div class="aspect-square overflow-hidden rounded-xl">
+                <img
+                  src={card.image}
+                  alt={card.alt}
+                  class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+              </div>
             </div>
 
             <div class="flex flex-1 flex-col gap-3 p-7 sm:p-8">
