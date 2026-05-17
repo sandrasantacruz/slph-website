@@ -2,13 +2,19 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Contenido from './Contenido.astro';
 import { getSettings } from '../../lib/settings';
+import { breadcrumbSchema } from '../../lib/seo';
 
 const settings = await getSettings(Astro.locals.pb);
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Aviso legal', url: '/aviso-legal' },
+]);
 ---
 
 <MainLayout
   title="Aviso legal"
   description="Información legal del sitio Si los peces hablaran: titular, domicilio, NIF y condiciones de uso."
+  jsonLd={[breadcrumb]}
 >
   <Contenido settings={settings} />
 </MainLayout>

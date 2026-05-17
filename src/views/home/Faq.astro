@@ -1,0 +1,55 @@
+---
+import { HOME_FAQ } from './faq-data';
+---
+
+<section id="preguntas" class="relative isolate overflow-hidden py-24 sm:py-32">
+  <!-- Subtle deep glow -->
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_20%_20%,rgba(100,170,210,0.08),transparent_70%),radial-gradient(45%_40%_at_85%_85%,rgba(250,222,170,0.06),transparent_70%)]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="mx-auto max-w-4xl px-6">
+    <!-- Eyebrow -->
+    <div class="reveal flex items-center gap-3 sm:gap-4">
+      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+        Preguntas frecuentes
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h2 class="reveal reveal-delay-1 mt-6 max-w-3xl font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] text-caparol">
+      Lo que más nos
+      <span class="block text-arena">preguntáis</span>
+    </h2>
+
+    <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-base leading-relaxed text-caparol/85 sm:text-lg">
+      Respuestas rápidas a las dudas habituales sobre el cuento, la autora y el programa.
+    </p>
+
+    <!-- Q&A list -->
+    <div class="mt-12 divide-y divide-caparol/15 border-y border-caparol/15">
+      {HOME_FAQ.map((entry, idx) => (
+        <details class="group py-5 reveal" open={idx === 0}>
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 text-left">
+            <h3 class="font-display text-xl leading-snug text-caparol transition group-hover:text-arena sm:text-2xl">
+              {entry.question}
+            </h3>
+            <span
+              aria-hidden="true"
+              class="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-caparol/30 text-arena transition group-open:rotate-45 group-hover:border-arena"
+            >
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </span>
+          </summary>
+          <p class="mt-4 max-w-3xl text-base leading-relaxed text-caparol/85 sm:text-lg">
+            {entry.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

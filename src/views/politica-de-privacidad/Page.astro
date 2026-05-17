@@ -2,13 +2,19 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Contenido from './Contenido.astro';
 import { getSettings } from '../../lib/settings';
+import { breadcrumbSchema } from '../../lib/seo';
 
 const settings = await getSettings(Astro.locals.pb);
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Política de privacidad', url: '/politica-de-privacidad' },
+]);
 ---
 
 <MainLayout
   title="Política de privacidad"
   description="Cómo tratamos los datos personales en silospeceshablaran.com conforme al RGPD y la LOPDGDD."
+  jsonLd={[breadcrumb]}
 >
   <Contenido settings={settings} />
 </MainLayout>

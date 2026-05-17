@@ -1,0 +1,211 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import NovedadCard from '../novedades/NovedadCard.astro';
+import type { RecordModel } from 'pocketbase';
+import { breadcrumbSchema } from '../../lib/seo';
+
+interface Props {
+  query: string;
+}
+
+const { query } = Astro.props;
+const q = query.trim();
+
+// Statische Seiten — Suchindex direkt im Code, da sie nicht in PB liegen.
+// Reicht für eine kleine Site; wenn das wächst, in eine eigene Datei ziehen.
+interface StaticEntry {
+  title: string;
+  url: string;
+  description: string;
+  keywords: string;
+}
+
+const STATIC_PAGES: StaticEntry[] = [
+  {
+    title: 'Inicio',
+    url: '/',
+    description:
+      'Programa de concienciación medioambiental que protege los ecosistemas marinos a través de las artes, las ciencias y la educación.',
+    keywords: 'inicio home slph programa medio ambiente mar océano arte ciencia educación',
+  },
+  {
+    title: 'El programa SLPH',
+    url: '/programa',
+    description:
+      'Talleres, principios y diferenciadores del programa educativo SLPH, supervisado por la Facultad de Ciencias del Mar.',
+    keywords: 'programa talleres ciencia mar educación principios facultad universidad',
+  },
+  {
+    title: 'Sobre el cuento',
+    url: '/sobre-el-cuento',
+    description:
+      'Tres puertas para asomarte al cuento: fragmento, autora y galería del proyecto.',
+    keywords: 'cuento libro fragmento autora galería ilustraciones',
+  },
+  {
+    title: 'Lee un fragmento',
+    url: '/lee-un-fragmento',
+    description: 'Lee un fragmento del cuento Si los peces hablaran online.',
+    keywords: 'fragmento extracto preview cuento libro leer online',
+  },
+  {
+    title: 'Sandra Santa Cruz · La autora',
+    url: '/autor',
+    description:
+      'Bailarina, coreógrafa y autora canaria. Más de tres décadas al frente del Centro de Danza Sandra Santa Cruz.',
+    keywords: 'sandra santa cruz autora bailarina coreógrafa danza centro biografía',
+  },
+  {
+    title: 'Galería',
+    url: '/galeria',
+    description:
+      'Imágenes del musical, el cuento, los eventos y los momentos del proyecto.',
+    keywords: 'galería fotos imágenes musical eventos momentos contaminación',
+  },
+  {
+    title: 'Dónde comprar',
+    url: '/comprar',
+    description:
+      'Tienda online de Entintadas y librerías asociadas en Gran Canaria y Tenerife.',
+    keywords: 'comprar tienda librería online entintadas gran canaria tenerife libro',
+  },
+  {
+    title: 'Novedades',
+    url: '/novedades',
+    description:
+      'Eventos, encuentros y notas de prensa del proyecto Si los peces hablaran.',
+    keywords: 'novedades eventos noticias prensa actividades',
+  },
+  {
+    title: 'Colabora',
+    url: '/colabora',
+    description:
+      'Voluntariado, donaciones puntuales o mecenazgo institucional para el proyecto.',
+    keywords: 'colaborar voluntariado donaciones mecenazgo donar ayuda',
+  },
+  {
+    title: 'Contacto',
+    url: '/contacto',
+    description: 'WhatsApp, correo electrónico y teléfono. Sin formularios.',
+    keywords: 'contacto whatsapp email correo teléfono',
+  },
+];
+
+let postResults: RecordModel[] = [];
+let staticResults: StaticEntry[] = [];
+
+if (q) {
+  // Statische Seiten lokal filtern.
+  const needle = q.toLowerCase();
+  staticResults = STATIC_PAGES.filter((p) =>
+    `${p.title} ${p.description} ${p.keywords}`.toLowerCase().includes(needle),
+  );
+
+  // PB-Filter: ~"…" ist Substring-Match. Doppelte Anführungszeichen escapen.
+  const escaped = q.replace(/"/g, '\\"');
+  try {
+    postResults = await Astro.locals.pb.collection('posts').getFullList({
+      filter: `status = "published" && published_at <= @now && (title ~ "${escaped}" || excerpt ~ "${escaped}")`,
+      sort: '-published_at',
+    });
+  } catch {
+    // PB unerreichbar — wir zeigen trotzdem die statischen Treffer.
+  }
+}
+
+const totalCount = staticResults.length + postResults.length;
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Buscar', url: '/buscar' },
+]);
+
+const pageTitle = q ? `Buscar: ${q}` : 'Buscar';
+const pageDescription = q
+  ? `Resultados de la búsqueda "${q}" en silospeceshablaran.com.`
+  : 'Busca contenido en la web del proyecto Si los peces hablaran.';
+---
+
+<MainLayout title={pageTitle} description={pageDescription} noindex jsonLd={[breadcrumb]}>
+  <section class="mx-auto max-w-4xl px-6 py-20 sm:py-28">
+    <p class="font-hand text-3xl text-celeste sm:text-4xl">a la deriva</p>
+    <h1 class="mt-4 font-display text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] text-caparol">
+      Buscar en la web
+    </h1>
+
+    <form
+      action="/buscar"
+      method="get"
+      role="search"
+      class="mt-10 flex flex-col gap-3 sm:flex-row"
+    >
+      <label class="sr-only" for="search-q">Términos de búsqueda</label>
+      <input
+        id="search-q"
+        name="q"
+        type="search"
+        value={q}
+        placeholder="¿Qué quieres encontrar?"
+        autocomplete="off"
+        autofocus
+        class="flex-1 rounded-full border-2 border-caparol/30 bg-azul/40 px-5 py-3 font-display text-lg text-caparol placeholder:text-caparol/40 focus:border-arena focus:outline-none"
+      />
+      <button
+        type="submit"
+        class="rounded-full bg-arena px-6 py-3 font-display text-lg text-negro transition hover:brightness-95"
+      >
+        Buscar
+      </button>
+    </form>
+
+    {q && (
+      <p class="mt-6 text-sm text-caparol/70">
+        {totalCount === 0
+          ? <>Sin resultados para <strong class="text-caparol">"{q}"</strong>.</>
+          : <>{totalCount} {totalCount === 1 ? 'resultado' : 'resultados'} para <strong class="text-caparol">"{q}"</strong></>}
+      </p>
+    )}
+
+    {staticResults.length > 0 && (
+      <section class="mt-12">
+        <h2 class="font-display text-xs uppercase tracking-[0.3em] text-arena">
+          Páginas
+        </h2>
+        <ul class="mt-6 divide-y divide-caparol/15 border-y border-caparol/15">
+          {staticResults.map((page) => (
+            <li class="py-5">
+              <a href={page.url} class="group block">
+                <h3 class="font-display text-2xl text-caparol transition group-hover:text-arena">
+                  {page.title}
+                </h3>
+                <p class="mt-1 text-sm text-caparol/75 sm:text-base">{page.description}</p>
+                <p class="mt-1 font-mono text-xs text-celeste/80">
+                  silospeceshablaran.com{page.url}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {postResults.length > 0 && (
+      <section class="mt-16">
+        <h2 class="font-display text-xs uppercase tracking-[0.3em] text-arena">
+          Novedades
+        </h2>
+        <ul class="mt-6 grid gap-5 sm:gap-6">
+          {postResults.map((item) => <NovedadCard item={item} />)}
+        </ul>
+      </section>
+    )}
+
+    {q && totalCount === 0 && (
+      <div class="mt-12 rounded-2xl border border-caparol/15 bg-azul/40 p-6">
+        <p class="text-base text-caparol/85">
+          No hemos encontrado nada con ese término. Prueba con palabras más
+          generales o vuelve al <a href="/" class="text-arena hover:underline">inicio</a>.
+        </p>
+      </div>
+    )}
+  </section>
+</MainLayout>

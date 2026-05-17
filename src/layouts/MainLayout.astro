@@ -5,26 +5,76 @@ import Footer from '../components/Footer.astro';
 import Bubbles from '../components/Bubbles.astro';
 import WaterLine from '../components/WaterLine.astro';
 import BackToTop from '../components/BackToTop.astro';
+import Seo from '../components/Seo.astro';
+import {
+  SITE_NAME,
+  SITE_LANG,
+  organizationSchema,
+  websiteSchema,
+  siteNavigationSchema,
+  type JsonLd,
+} from '../lib/seo';
 
 interface Props {
   title?: string;
   description?: string;
   hideWaterLine?: boolean;
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article' | 'book' | 'profile';
+  noindex?: boolean;
+  canonical?: string;
+  jsonLd?: JsonLd[];
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
-const SITE = 'Si los peces hablaran';
-const { title, description, hideWaterLine = false } = Astro.props;
-const fullTitle = title ? `${title} · ${SITE}` : SITE;
+const {
+  title,
+  description,
+  hideWaterLine = false,
+  image,
+  imageAlt,
+  type = 'website',
+  noindex = false,
+  canonical,
+  jsonLd = [],
+  publishedTime,
+  modifiedTime,
+} = Astro.props;
+
+// Organization und WebSite werden auf jeder Seite mitgeliefert. So findet
+// jeder Crawler/LLM unabhängig vom Einstiegspunkt das Marken-Stammdaten-Paar.
+const allJsonLd: JsonLd[] = [
+  organizationSchema(),
+  websiteSchema(),
+  siteNavigationSchema(),
+  ...jsonLd,
+];
+
+const seoTitle = title ?? SITE_NAME;
 ---
 
-<html lang="es">
+<html lang={SITE_LANG}>
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width" />
-    {description && <meta name="description" content={description} />}
-    <title>{fullTitle}</title>
+    <Seo
+      title={seoTitle}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      type={type}
+      noindex={noindex}
+      canonical={canonical}
+      jsonLd={allJsonLd}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+    />
     {
       import.meta.env.PROD && (
         <script

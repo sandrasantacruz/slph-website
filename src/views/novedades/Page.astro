@@ -3,6 +3,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import NovedadesList from './NovedadesList.astro';
 import type { RecordModel } from 'pocketbase';
+import { breadcrumbSchema, SITE_URL, absoluteUrl } from '../../lib/seo';
 
 const pb = Astro.locals.pb;
 
@@ -28,11 +29,38 @@ function sortKey(item: RecordModel): number {
 }
 
 items.sort((a, b) => sortKey(b) - sortKey(a));
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Novedades', url: '/novedades' },
+]);
+
+const collectionPage = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${SITE_URL}/novedades`,
+  url: `${SITE_URL}/novedades`,
+  name: 'Novedades · Si los peces hablaran',
+  description:
+    'Eventos, encuentros y notas de prensa del proyecto Si los peces hablaran.',
+  isPartOf: { '@id': `${SITE_URL}/#website` },
+  about: { '@id': `${SITE_URL}/#organization` },
+  hasPart: items.slice(0, 20).map((it) => ({
+    '@type': it.typ === 'event' ? 'Event' : 'NewsArticle',
+    name: it.title,
+    url: absoluteUrl(`/novedades/${it.slug}`),
+    ...(it.published_at ? { datePublished: it.published_at } : {}),
+    ...(it.typ === 'event' && it.event_date ? { startDate: it.event_date } : {}),
+    ...(it.typ === 'event' && it.event_end ? { endDate: it.event_end } : {}),
+    ...(it.excerpt ? { description: it.excerpt } : {}),
+  })),
+};
 ---
 
 <MainLayout
   title="Novedades"
-  description="Eventos, encuentros y notas de prensa del proyecto Si los peces hablaran."
+  description="Eventos, encuentros y notas de prensa del proyecto Si los peces hablaran. Listado cronológico con las próximas actividades y las publicaciones recientes."
+  jsonLd={[collectionPage, breadcrumb]}
 >
   <Hero />
   {loadError ? (

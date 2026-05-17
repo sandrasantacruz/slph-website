@@ -5,12 +5,21 @@ import Sumergete from './Sumergete.astro';
 import Flipbook from './Flipbook.astro';
 import CTA from './CTA.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
+import { bookSchema, breadcrumbSchema } from '../../lib/seo';
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Sobre el cuento', url: '/sobre-el-cuento' },
+  { name: 'Lee un fragmento', url: '/lee-un-fragmento' },
+]);
 ---
 
 <MainLayout
   title="Lee un fragmento"
-  description="Un esbozo del mundo submarino de Si los peces hablaran. Asómate al cuento antes de decidirte a comprarlo."
+  description="Lee un fragmento del cuento Si los peces hablaran de Sandra Santa Cruz: asómate al mundo submarino del libro antes de comprarlo."
+  type="book"
   hideWaterLine
+  jsonLd={[bookSchema(), breadcrumb]}
 >
   <SubNavCuento current="fragmento" />
   <Hero />

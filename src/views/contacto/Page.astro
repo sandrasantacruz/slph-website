@@ -3,13 +3,43 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Canales from './Canales.astro';
 import Sigue from './Sigue.astro';
 import { getSettings } from '../../lib/settings';
+import { breadcrumbSchema, SITE_URL } from '../../lib/seo';
 
 const settings = await getSettings(Astro.locals.pb);
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Contacto', url: '/contacto' },
+]);
+
+const contactPoints = [
+  ...(settings.whatsapp
+    ? [{ '@type': 'ContactPoint', contactType: 'customer support', telephone: settings.whatsapp, contactOption: 'TollFree', availableLanguage: ['Spanish'] }]
+    : []),
+  ...(settings.phone
+    ? [{ '@type': 'ContactPoint', contactType: 'customer service', telephone: settings.phone, availableLanguage: ['Spanish'] }]
+    : []),
+  ...(settings.email
+    ? [{ '@type': 'ContactPoint', contactType: 'customer service', email: settings.email, availableLanguage: ['Spanish'] }]
+    : []),
+];
+
+const contactPage = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  url: `${SITE_URL}/contacto`,
+  name: 'Contacto · Si los peces hablaran',
+  description:
+    'Canales directos de contacto del proyecto Si los peces hablaran: WhatsApp, correo electrónico y teléfono.',
+  about: { '@id': `${SITE_URL}/#organization` },
+  ...(contactPoints.length ? { mainEntity: { '@id': `${SITE_URL}/#organization`, contactPoint: contactPoints } } : {}),
+};
 ---
 
 <MainLayout
   title="Contacto"
-  description="Escríbenos por WhatsApp, correo o teléfono. Sin formularios — respondemos enseguida."
+  description="Contacta con Si los peces hablaran por WhatsApp, correo electrónico o teléfono. Sin formularios intermedios. Respondemos en horario habitual desde Gran Canaria."
+  jsonLd={[contactPage, breadcrumb]}
 >
   <Canales settings={settings} />
   <Sigue />

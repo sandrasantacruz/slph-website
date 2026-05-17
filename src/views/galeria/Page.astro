@@ -67,8 +67,33 @@ const sections = sectionDefs.map((def) => {
 
 <MainLayout
   title="Galería"
-  description="Imágenes del musical, el cuento, eventos y momentos del proyecto Si los peces hablaran."
+  description="Imágenes del musical, el cuento, los eventos y los momentos del proyecto Si los peces hablaran. Material visual organizado por secciones: musical, cuento, eventos, momentos y contaminación marina."
   hideWaterLine
+  jsonLd={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ImageGallery',
+      name: 'Galería · Si los peces hablaran',
+      description:
+        'Imágenes del musical, el cuento, los eventos y los momentos del proyecto Si los peces hablaran.',
+      url: 'https://silospeceshablaran.com/galeria',
+      hasPart: sections.map((s) => ({
+        '@type': 'ImageGallery',
+        name: s.title,
+        about: s.intro,
+        numberOfItems: s.images.length,
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://silospeceshablaran.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Sobre el cuento', item: 'https://silospeceshablaran.com/sobre-el-cuento' },
+        { '@type': 'ListItem', position: 3, name: 'Galería', item: 'https://silospeceshablaran.com/galeria' },
+      ],
+    },
+  ]}
 >
   <SubNavCuento current="galeria" />
   <Hero />

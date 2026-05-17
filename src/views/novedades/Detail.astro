@@ -3,6 +3,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import type { RecordModel } from 'pocketbase';
 import { PB_PUBLIC_URL } from '../../lib/pb';
 import { renderBlocks } from '../../lib/blocknote-render';
+import {
+  articleSchema,
+  eventSchema,
+  breadcrumbSchema,
+} from '../../lib/seo';
 
 interface Props {
   item: RecordModel;
@@ -47,9 +52,44 @@ const html = renderBlocks(item.content);
 
 const fallbackTitle = isEvent ? 'Evento' : 'Noticia';
 const typLabel = isEvent ? 'Evento' : 'Noticia';
+
+const path = `/novedades/${item.slug}`;
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Novedades', url: '/novedades' },
+  { name: item.title || fallbackTitle, url: path },
+]);
+
+const itemSchema = isEvent
+  ? eventSchema({
+      title: item.title || fallbackTitle,
+      description: item.excerpt,
+      url: path,
+      image: coverUrl ?? undefined,
+      startDate: item.event_date,
+      endDate: item.event_end,
+      location: item.location,
+      locationUrl: item.address_url,
+    })
+  : articleSchema({
+      title: item.title || fallbackTitle,
+      description: item.excerpt,
+      url: path,
+      image: coverUrl ?? undefined,
+      datePublished: item.published_at,
+      dateModified: item.updated,
+    });
 ---
 
-<MainLayout title={item.title || fallbackTitle} description={item.excerpt}>
+<MainLayout
+  title={item.title || fallbackTitle}
+  description={item.excerpt}
+  type="article"
+  image={coverUrl ?? undefined}
+  publishedTime={item.published_at}
+  modifiedTime={item.updated}
+  jsonLd={[itemSchema, breadcrumb]}
+>
   <article class="pb-24">
     <header class="mx-auto max-w-3xl px-4 pt-12 sm:pt-20">
       <a href="/novedades" class="inline-block text-sm text-arena hover:underline">

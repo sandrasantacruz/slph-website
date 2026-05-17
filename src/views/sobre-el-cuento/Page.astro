@@ -1,11 +1,19 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Tarjetas from './Tarjetas.astro';
+import { bookSchema, breadcrumbSchema } from '../../lib/seo';
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Sobre el cuento', url: '/sobre-el-cuento' },
+]);
 ---
 
 <MainLayout
   title="Sobre el cuento"
-  description="Tres puertas para asomarte a Si los peces hablaran: lee un fragmento, conoce a la autora Sandra Santa Cruz y recorre la galería del proyecto."
+  description="Tres puertas para asomarte a Si los peces hablaran: lee un fragmento del cuento de Sandra Santa Cruz, conoce a la autora y recorre la galería del proyecto."
+  type="book"
+  jsonLd={[bookSchema(), breadcrumb]}
 >
   <Tarjetas />
 </MainLayout>

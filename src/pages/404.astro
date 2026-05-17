@@ -1,0 +1,58 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="Página no encontrada"
+  description="La página que buscas se ha ido nadando. Vuelve al inicio o explora el programa."
+  noindex
+>
+  <section class="mx-auto flex min-h-[calc(100svh-12rem)] max-w-3xl flex-col items-center justify-center px-6 py-24 text-center">
+    <p class="font-hand text-3xl text-celeste sm:text-4xl">se nos ha escapado</p>
+    <h1 class="mt-4 font-display text-[clamp(3rem,10vw,7rem)] leading-[0.9] text-arena">
+      404
+    </h1>
+    <p class="mt-6 max-w-xl font-display text-2xl leading-tight text-caparol sm:text-3xl">
+      La página que buscas <span class="hand-underline text-arena">se ha ido nadando</span>.
+    </p>
+    <p class="mt-4 max-w-xl text-base leading-relaxed text-caparol/85 sm:text-lg">
+      Puede que el enlace esté roto o que la página ya no exista. Bucea de vuelta
+      desde uno de estos puntos.
+    </p>
+
+    <ul class="mt-10 flex flex-wrap justify-center gap-3 sm:gap-4">
+      <li>
+        <a
+          href="/"
+          class="inline-flex items-center justify-center rounded-full bg-arena px-5 py-2.5 font-display text-lg text-negro transition hover:brightness-95"
+        >
+          Volver al inicio
+        </a>
+      </li>
+      <li>
+        <a
+          href="/programa"
+          class="inline-flex items-center justify-center rounded-full border-2 border-caparol px-5 py-2.5 font-display text-lg text-caparol transition hover:bg-caparol hover:text-azul"
+        >
+          El programa
+        </a>
+      </li>
+      <li>
+        <a
+          href="/novedades"
+          class="inline-flex items-center justify-center rounded-full border-2 border-caparol px-5 py-2.5 font-display text-lg text-caparol transition hover:bg-caparol hover:text-azul"
+        >
+          Novedades
+        </a>
+      </li>
+      <li>
+        <a
+          href="/contacto"
+          class="inline-flex items-center justify-center rounded-full border-2 border-caparol px-5 py-2.5 font-display text-lg text-caparol transition hover:bg-caparol hover:text-azul"
+        >
+          Contacto
+        </a>
+      </li>
+    </ul>
+  </section>
+</MainLayout>

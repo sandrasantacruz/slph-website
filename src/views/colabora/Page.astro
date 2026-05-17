@@ -2,11 +2,18 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Equipo from './Equipo.astro';
+import { breadcrumbSchema } from '../../lib/seo';
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Colabora', url: '/colabora' },
+]);
 ---
 
 <MainLayout
   title="Colabora"
-  description="Echa una aleta: voluntariado, donaciones y mecenazgo para Si los peces hablaran."
+  description="Colabora con Si los peces hablaran: voluntariado, donaciones puntuales o mecenazgo institucional para proteger los ecosistemas marinos a través de las artes y la educación."
+  jsonLd={[breadcrumb]}
 >
   <Hero />
   <Equipo />

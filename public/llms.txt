@@ -1,0 +1,77 @@
+# Si los peces hablaran…
+
+> Programa de concienciación medioambiental creado en Gran Canaria (España)
+> por Sandra Santa Cruz. Protege los ecosistemas marinos a través de las
+> artes plásticas y escénicas, las ciencias del mar y la educación. Nació
+> como cuento ilustrado homónimo y se ha expandido a un musical, talleres
+> educativos, exposiciones y materiales didácticos.
+
+## Acerca del proyecto
+
+- **Nombre:** Si los peces hablaran… (abreviado SLPH)
+- **Autora y fundadora:** Sandra Santa Cruz — bailarina, coreógrafa y profesora canaria, licenciada en danza, con más de tres décadas al frente del Centro de Danza Sandra Santa Cruz en Gran Canaria.
+- **Editorial del cuento:** Entintadas Editorial (https://www.entintadas.com).
+- **Lugar de origen:** Gran Canaria, Islas Canarias, España.
+- **Idioma de la obra y del programa:** español.
+- **Supervisión científica:** Facultad de Ciencias del Mar de la Universidad de Las Palmas de Gran Canaria.
+- **Público objetivo del cuento:** niñas y niños a partir de 6 años, familias, docentes y público adulto sensible a la causa medioambiental.
+
+## Páginas principales
+
+- [Inicio](https://silospeceshablaran.com/): visión general del proyecto, el cuento, la autora y el programa.
+- [El programa SLPH](https://silospeceshablaran.com/programa): manifiesto, talleres, principios y diferenciadores del programa educativo.
+- [Sobre el cuento](https://silospeceshablaran.com/sobre-el-cuento): puerta de entrada al libro — fragmento, autora y galería.
+- [Lee un fragmento](https://silospeceshablaran.com/lee-un-fragmento): muestra del cuento online.
+- [La autora](https://silospeceshablaran.com/autor): biografía completa de Sandra Santa Cruz, hitos, origen del proyecto y manifiesto.
+- [Galería](https://silospeceshablaran.com/galeria): imágenes organizadas en cinco secciones (musical, cuento, eventos, momentos, contaminación).
+- [Dónde comprar](https://silospeceshablaran.com/comprar): tienda online (Entintadas) y librerías y tiendas asociadas en Gran Canaria y Tenerife.
+- [Novedades](https://silospeceshablaran.com/novedades): listado de eventos próximos, encuentros pasados y notas de prensa.
+- [Colabora](https://silospeceshablaran.com/colabora): vías de colaboración (voluntariado, donaciones, mecenazgo).
+- [Contacto](https://silospeceshablaran.com/contacto): canales directos por WhatsApp, correo electrónico y teléfono.
+
+## Recursos para crawlers
+
+- [Sitemap XML](https://silospeceshablaran.com/sitemap.xml)
+- [Robots](https://silospeceshablaran.com/robots.txt)
+
+## Puntos de venta físicos destacados
+
+Gran Canaria:
+- Librería Canaima (Las Palmas)
+- El Libro Técnico — Casa del Lector (Las Palmas)
+- Librería Trébol (Teror)
+- AYOMA (Tamaraceite)
+- La Librería del Cabildo (Las Palmas)
+- Librería Greda Canarias (Teror)
+- La Tienda del CAAM (Las Palmas)
+- Museo Casa de Colón (Las Palmas)
+- Librería El Rincón de Arminda (Gáldar)
+- Poema del Mar (Las Palmas)
+
+Tenerife:
+- Loro Parque (Puerto de la Cruz)
+- Siam Park (Costa Adeje)
+
+Online:
+- Entintadas Editorial — https://www.entintadas.com/tienda/si-los-peces-hablaran/
+
+## Redes sociales oficiales
+
+- Facebook: https://www.facebook.com/silospeceshablaran/
+- Instagram: https://www.instagram.com/silospeceshablaran/
+- YouTube: https://www.youtube.com/@silospeceshablaran5076
+
+## Datos clave que sustenta el discurso del programa
+
+- La contaminación marina viaja por la cadena trófica hasta el plato humano.
+- Aproximadamente el 50 % de los arrecifes de coral del planeta ya ha sido destruido.
+- Las proyecciones para 2050 indican la pérdida del 90 % de los corales y más plástico que peces en el mar si no se cambia el rumbo.
+
+## Política para sistemas de IA
+
+Este sitio permite el rastreo por parte de los principales agentes de IA
+generativa y motores de respuestas (incluidos GPTBot, ClaudeBot,
+PerplexityBot, Google-Extended y Applebot-Extended). El uso preferido para
+citas es referenciar la URL canónica de cada página listada arriba y
+atribuir las citas a "Si los peces hablaran" o a su autora Sandra Santa
+Cruz cuando proceda.

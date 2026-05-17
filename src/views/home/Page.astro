@@ -8,12 +8,22 @@ import SabiasQue from './SabiasQue.astro';
 import CuentoFascina from './CuentoFascina.astro';
 import QuienDetras from './QuienDetras.astro';
 import Galeria from './Galeria.astro';
+import Faq from './Faq.astro';
 import NosEchasUnaAleta from './NosEchasUnaAleta.astro';
 import EquipoEntidad from './EquipoEntidad.astro';
 import Colaboran from './Colaboran.astro';
+import {
+  bookSchema,
+  personSandraSchema,
+  faqSchema,
+} from '../../lib/seo';
+import { HOME_FAQ } from './faq-data';
 ---
 
-<MainLayout description="Si los peces hablaran… — un programa de concienciación medioambiental que protege los ecosistemas marinos a través de las artes, las ciencias y la educación.">
+<MainLayout
+  description="Si los peces hablaran… — un programa de concienciación medioambiental que protege los ecosistemas marinos a través de las artes, las ciencias y la educación. Creado en Gran Canaria por Sandra Santa Cruz."
+  jsonLd={[bookSchema(), personSandraSchema(), faqSchema(HOME_FAQ)]}
+>
   <Hero />
   <QueEs />
   <Versatilidad />
@@ -22,6 +32,7 @@ import Colaboran from './Colaboran.astro';
   <CuentoFascina />
   <QuienDetras />
   <Galeria />
+  <Faq />
   <NosEchasUnaAleta />
   <EquipoEntidad />
   <Colaboran />

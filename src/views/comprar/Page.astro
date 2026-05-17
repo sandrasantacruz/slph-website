@@ -3,11 +3,19 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Librerias from './Librerias.astro';
 import CTA from './CTA.astro';
+import { bookSchema, breadcrumbSchema } from '../../lib/seo';
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Dónde comprar', url: '/comprar' },
+]);
 ---
 
 <MainLayout
   title="Dónde comprar"
-  description="Encuentra ejemplares de Si los peces hablaran en librerías y tiendas de Canarias, y online en Entintadas Editorial."
+  description="Encuentra ejemplares del cuento Si los peces hablaran online en Entintadas Editorial (con envío a domicilio) y en una decena de librerías y tiendas de Canarias: Gran Canaria y Tenerife."
+  type="book"
+  jsonLd={[bookSchema(), breadcrumb]}
 >
   <Hero />
   <Librerias />

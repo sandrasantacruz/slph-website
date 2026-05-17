@@ -5,11 +5,18 @@ import Talleres from './Talleres.astro';
 import Principios from './Principios.astro';
 import Destacan from './Destacan.astro';
 import Diferencia from './Diferencia.astro';
+import { breadcrumbSchema } from '../../lib/seo';
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'El programa SLPH', url: '/programa' },
+]);
 ---
 
 <MainLayout
   title="El programa SLPH"
-  description="El Programa SLPH combina artes plásticas y escénicas para concienciar sobre los ecosistemas marinos."
+  description="El Programa SLPH combina artes plásticas, artes escénicas y ciencia del mar para concienciar sobre los ecosistemas marinos. Talleres, exposiciones y materiales educativos supervisados por la Facultad de Ciencias del Mar."
+  jsonLd={[breadcrumb]}
 >
   <Hero />
   <Talleres />

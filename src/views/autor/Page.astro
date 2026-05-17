@@ -6,12 +6,21 @@ import Hitos from './Hitos.astro';
 import Origen from './Origen.astro';
 import Manifest from './Manifest.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
+import { personSandraSchema, breadcrumbSchema } from '../../lib/seo';
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Sobre el cuento', url: '/sobre-el-cuento' },
+  { name: 'La autora', url: '/autor' },
+]);
 ---
 
 <MainLayout
   title="Sandra Santa Cruz · La autora"
-  description="Bailarina, coreógrafa y autora canaria. Más de tres décadas al frente del Centro de Danza Sandra Santa Cruz y creadora del programa Si los peces hablaran."
+  description="Sandra Santa Cruz es bailarina, coreógrafa y autora canaria, licenciada en danza. Lleva más de tres décadas al frente del Centro de Danza Sandra Santa Cruz en Gran Canaria y es la creadora del cuento y del programa Si los peces hablaran."
+  type="profile"
   hideWaterLine
+  jsonLd={[personSandraSchema(), breadcrumb]}
 >
   <SubNavCuento current="autor" />
   <Hero />
