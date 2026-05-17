@@ -1,0 +1,39 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from './Hero.astro';
+import Sumergete from './Sumergete.astro';
+import Flipbook from './Flipbook.astro';
+import CTA from './CTA.astro';
+---
+
+<MainLayout
+  title="Lee un fragmento"
+  description="Un esbozo del mundo submarino de Si los peces hablaran. Asómate al cuento antes de decidirte a comprarlo."
+>
+  <Hero />
+  <Sumergete />
+  <Flipbook />
+  <CTA />
+</MainLayout>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (reduceMotion) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>
