@@ -2,29 +2,39 @@
 type Char = {
   name: string;
   role: string;
+  species: string;
   hint: string;
+  img: string;
 };
 
 const characters: Char[] = [
   {
     name: 'Lorena',
     role: 'la protagonista',
-    hint: 'Nada con los ojos bien abiertos.',
+    species: 'niña',
+    hint: 'La nieta de Dña. Teresa. Escucha el cuento con los ojos bien abiertos.',
+    img: '/assets/animals/lorena.webp',
   },
   {
     name: 'Nela',
     role: 'la irritable',
-    hint: 'Se enfada cuando algo no le cuadra.',
+    species: 'pez tropical',
+    hint: 'Se enfada cuando algo no le cuadra en el arrecife.',
+    img: '/assets/animals/nela.webp',
   },
   {
     name: 'Dina',
     role: 'la voladora',
-    hint: 'Aletea más alto que nadie.',
+    species: 'pez volador',
+    hint: 'Sale del agua con sus aletas-alas y aletea más alto que nadie.',
+    img: '/assets/animals/dina.webp',
   },
   {
     name: 'Don Canino',
     role: 'el sabio del arrecife',
-    hint: 'Lo ha visto todo. Y se acuerda.',
+    species: 'tiburón',
+    hint: 'Lo ha visto todo bajo el agua. Y se acuerda.',
+    img: '/assets/animals/don-canino.webp',
   },
 ];
 ---
@@ -65,11 +75,10 @@ const characters: Char[] = [
       </h2>
 
       <p class="reveal reveal-delay-2 mt-8 text-lg leading-relaxed sm:text-xl">
-        La historia transcurre en el litoral canario, allí donde el azul se
-        pone hondo. Cuatro criaturas que han crecido oyendo el mismo mar
-        descubren que ya no suena igual. Lo que arranca como un día
-        cualquiera bajo el agua se convierte, página a página, en
-        <strong class="text-arena">una aventura para defender su hogar</strong>.
+        Lorena, sentada junto a su abuela Dña. Teresa, escucha el cuento del
+        litoral canario. Allí, tres habitantes del mar descubren que su hogar
+        ya no suena igual y se embarcan en
+        <strong class="text-arena">una aventura para defenderlo</strong>.
       </p>
 
       <p class="reveal reveal-delay-3 mt-4 text-lg leading-relaxed sm:text-xl">
@@ -79,16 +88,30 @@ const characters: Char[] = [
     </div>
 
     <!-- Characters strip -->
-    <ul class="reveal reveal-delay-3 mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="reveal reveal-delay-3 mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {characters.map((c) => (
-        <li class="group relative rounded-2xl border border-caparol/15 bg-azul/30 p-5 transition hover:border-arena/60">
-          <p class="font-hand text-xl leading-none text-celeste sm:text-2xl">
-            {c.role}
-          </p>
-          <p class="mt-2 font-display text-2xl leading-tight text-arena sm:text-3xl">
+        <li class="group relative flex flex-col rounded-2xl border border-caparol/15 bg-azul/30 p-5 transition hover:border-arena/60">
+          <!-- Portrait -->
+          <div class="relative mx-auto flex aspect-square w-28 items-center justify-center overflow-hidden rounded-full bg-celeste/10 ring-1 ring-caparol/10 sm:w-32">
+            <img
+              src={c.img}
+              alt={`${c.name}, ${c.species}`}
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+              class="block h-full w-full object-contain p-1.5 transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
+          <p class="mt-4 text-center font-display text-2xl leading-tight text-arena sm:text-3xl">
             {c.name}
           </p>
-          <p class="mt-3 text-sm leading-snug text-caparol/85">
+          <p class="mt-1 text-center font-hand text-lg leading-none text-celeste sm:text-xl">
+            {c.role}
+          </p>
+          <p class="mt-2 text-center font-display text-[0.7rem] tracking-[0.2em] text-arena/85 uppercase">
+            {c.species}
+          </p>
+          <p class="mt-3 text-center text-sm leading-snug text-caparol/85">
             {c.hint}
           </p>
         </li>
