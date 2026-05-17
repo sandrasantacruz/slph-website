@@ -1,10 +1,7 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
+export const prerender = false;
+
+import Page from '../views/politica-de-privacidad/Page.astro';
 ---
 
-<MainLayout title="Política de privacidad" description="Política de privacidad y protección de datos del sitio Si los peces hablaran.">
-  <section class="mx-auto max-w-3xl px-4 py-20">
-    <h1 class="text-5xl">Política de privacidad</h1>
-    <p class="mt-12 text-caparol/60">Pendiente de redacción y revisión legal.</p>
-  </section>
-</MainLayout>
+<Page />

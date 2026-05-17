@@ -1,0 +1,211 @@
+---
+import type { Settings } from '../../lib/settings';
+
+interface Props {
+  settings: Settings;
+}
+
+const { settings } = Astro.props;
+const email = settings.email || '[correo de contacto por definir]';
+---
+
+<section class="relative isolate overflow-hidden py-20 sm:py-28">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 inset-y-10 -z-20 bg-[radial-gradient(65%_55%_at_30%_45%,rgba(250,222,170,0.06),transparent_70%)]"
+  ></div>
+
+  <div class="mx-auto max-w-3xl px-6">
+    <div class="reveal flex items-center gap-5">
+      <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+      <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
+        Información legal
+      </span>
+    </div>
+
+    <h1
+      class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] text-caparol"
+    >
+      Aviso legal.
+    </h1>
+
+    <p class="reveal reveal-delay-2 mt-6 text-base leading-relaxed text-caparol/80 sm:text-lg">
+      En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de
+      Servicios de la Sociedad de la Información y de Comercio Electrónico
+      (LSSI-CE), se ponen a disposición de las personas usuarias los datos
+      identificativos del titular de este sitio web.
+    </p>
+
+    <div class="reveal reveal-delay-3 mt-16 space-y-12 text-base leading-relaxed text-caparol/85 sm:text-lg">
+      <article>
+        <h2 class="font-display text-2xl text-arena sm:text-3xl">
+          Titular del sitio
+        </h2>
+        <dl class="mt-4 grid gap-y-2 text-caparol/90 sm:grid-cols-[10rem_1fr] sm:gap-x-6">
+          <dt class="text-caparol/60">Razón</dt>
+          <dd>
+            CENTRO DE DANZA SANDRA SANTA CRUZ
+            <span class="block text-caparol/70">
+              (Teresa Sandra Santa Cruz Santana)
+            </span>
+          </dd>
+
+          <dt class="mt-2 text-caparol/60 sm:mt-0">NIF</dt>
+          <dd>42839881-H</dd>
+
+          <dt class="mt-2 text-caparol/60 sm:mt-0">Domicilio</dt>
+          <dd>
+            Avda. Escaleritas nº 56,<br />
+            C.P. 35011, Las Palmas de Gran Canaria,<br />
+            España.
+          </dd>
+
+          <dt class="mt-2 text-caparol/60 sm:mt-0">Correo</dt>
+          <dd>
+            <a
+              href={`mailto:${email}`}
+              class="text-arena hover:underline underline-offset-4"
+            >
+              {email}
+            </a>
+          </dd>
+
+          <dt class="mt-2 text-caparol/60 sm:mt-0">Sitio web</dt>
+          <dd>silospeceshablaran.com</dd>
+        </dl>
+      </article>
+
+      <article>
+        <h2 class="font-display text-2xl text-arena sm:text-3xl">Objeto</h2>
+        <p class="mt-4">
+          Este sitio presenta el proyecto cultural y el cuento ilustrado
+          <em class="not-italic text-celeste">Si los peces hablaran…</em>,
+          informa sobre actividades, espectáculos y novedades vinculadas al
+          proyecto, y facilita el contacto con el equipo responsable.
+        </p>
+      </article>
+
+      <article>
+        <h2 class="font-display text-2xl text-arena sm:text-3xl">
+          Condiciones de uso
+        </h2>
+        <p class="mt-4">
+          El acceso y la navegación por este sitio son gratuitos y no
+          requieren registro previo. La persona usuaria se compromete a
+          utilizar el sitio y sus contenidos conforme a la ley, a la moral, al
+          orden público y a las presentes condiciones, evitando cualquier
+          actuación que pueda dañar la imagen, los intereses o los derechos
+          del titular o de terceros.
+        </p>
+      </article>
+
+      <article>
+        <h2 class="font-display text-2xl text-arena sm:text-3xl">
+          Propiedad intelectual e industrial
+        </h2>
+        <p class="mt-4">
+          Todos los contenidos del sitio (textos, imágenes, ilustraciones,
+          vídeos, logotipos, marcas, código fuente y demás elementos) son
+          propiedad del titular o se utilizan con autorización de sus
+          respectivos propietarios, y están protegidos por las leyes españolas
+          e internacionales sobre propiedad intelectual e industrial.
+        </p>
+        <p class="mt-4">
+          Queda prohibida la reproducción, distribución, comunicación pública,
+          transformación o cualquier otra forma de explotación, total o
+          parcial, de los contenidos sin autorización expresa y por escrito
+          del titular, salvo los usos permitidos por la ley.
+        </p>
+        <p class="mt-4">
+          El nombre
+          <em class="not-italic text-arena">Si los peces hablaran</em> y los
+          elementos gráficos asociados al cuento son creación original del
+          Centro de Danza Sandra Santa Cruz.
+        </p>
+      </article>
+
+      <article>
+        <h2 class="font-display text-2xl text-arena sm:text-3xl">
+          Enlaces a sitios de terceros
+        </h2>
+        <p class="mt-4">
+          Este sitio puede incluir enlaces a páginas externas (redes sociales,
+          plataformas de venta del cuento, espacios colaboradores). El titular
+          no se responsabiliza de los contenidos ni de las prácticas de
+          privacidad de dichos sitios, cuya consulta es responsabilidad
+          exclusiva de la persona usuaria.
+        </p>
+      </article>
+
+      <article>
+        <h2 class="font-display text-2xl text-arena sm:text-3xl">
+          Limitación de responsabilidad
+        </h2>
+        <p class="mt-4">
+          El titular hace todo lo posible por mantener la información del
+          sitio actualizada y libre de errores, pero no garantiza la ausencia
+          de inexactitudes ni la disponibilidad ininterrumpida del servicio.
+          No se asume responsabilidad por los daños derivados del uso del
+          sitio, ni por la presencia de virus u otros elementos lesivos.
+        </p>
+      </article>
+
+      <article>
+        <h2 class="font-display text-2xl text-arena sm:text-3xl">
+          Protección de datos
+        </h2>
+        <p class="mt-4">
+          El tratamiento de los datos personales que pudieran recogerse a
+          través de este sitio se rige por nuestra
+          <a
+            href="/politica-de-privacidad"
+            class="text-arena hover:underline underline-offset-4"
+          >
+            Política de privacidad
+          </a>.
+          El uso de cookies se describe en la
+          <a
+            href="/politica-de-cookies"
+            class="text-arena hover:underline underline-offset-4"
+          >
+            Política de cookies
+          </a>.
+        </p>
+      </article>
+
+      <article>
+        <h2 class="font-display text-2xl text-arena sm:text-3xl">
+          Alojamiento
+        </h2>
+        <p class="mt-4">
+          El sitio web está alojado en los servidores de
+          <strong class="text-caparol">netcup GmbH</strong>, con domicilio en
+          Daimlerstraße 25, 76185 Karlsruhe, Alemania
+          (<a
+            href="https://www.netcup.de"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-arena hover:underline underline-offset-4"
+          >www.netcup.de</a>).
+        </p>
+      </article>
+
+      <article>
+        <h2 class="font-display text-2xl text-arena sm:text-3xl">
+          Legislación aplicable y jurisdicción
+        </h2>
+        <p class="mt-4">
+          Las presentes condiciones se rigen por la legislación española. Para
+          la resolución de cualquier controversia derivada del acceso o uso de
+          este sitio web, las partes se someten a los Juzgados y Tribunales
+          del domicilio del titular, salvo que la normativa aplicable disponga
+          otra cosa.
+        </p>
+      </article>
+    </div>
+
+    <p class="reveal mt-20 text-sm text-caparol/55">
+      Última actualización: mayo de 2026.
+    </p>
+  </div>
+</section>
