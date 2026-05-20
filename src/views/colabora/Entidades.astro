@@ -1,0 +1,123 @@
+---
+const aliados = [
+  'Consejería de Cultura del Cabildo de Gran Canaria',
+  'Consejería de Educación del Cabildo de Gran Canaria',
+  'Concejalía de Cultura de Maspalomas',
+  'Concejalía de Cultura de Mogán',
+  'Concejalía de Medioambiente de Arucas',
+  'Ayuntamiento de Puntallana, La Palma',
+  'Ayuntamiento de Corralejo, Fuerteventura',
+  'Facultad de Ciencias del Mar de la ULPGC',
+  'Orquesta Filarmónica de Gran Canaria',
+  'Hospital Materno Infantil, área de oncología',
+  'Candidatura de Las Palmas de Gran Canaria como Capital Cultural Europea 2031',
+  'Suma Festival de Tenerife',
+  'Instituto del Patrimonio Mundial de la Reserva de la Biosfera de Gran Canaria',
+  'Proyecto Barrios del CAAM',
+  'Fundación Belén María',
+  'Turiscan',
+];
+
+const museos = [
+  'Casa de Colón',
+  'Casa-Museo Pérez Galdós',
+  'Museo y Parque Arqueológico Cueva Pintada',
+  'Casa-Museo Tomás Morales',
+  'Casa-Museo León y Castillo',
+];
+
+const bibliotecas = [
+  'Biblioteca Insular',
+  'Biblioteca Pública del Estado en Las Palmas',
+  'Biblioteca Municipal de Teror',
+  'Biblioteca Pública Municipal de Arucas',
+  'Biblioteca Pública Municipal de Mogán',
+  'Biblioteca Municipal Dolores Campos-Herrero',
+];
+
+const centros = [
+  'CEIP Príncipe de Asturias',
+  'CEIP del Museo Pérez Galdós',
+  'CEO de Tejeda',
+  'Colegio Claret de Tamaraceite',
+  'Colegio Bilingüe Brains L.P.',
+  'Colegio Bilingüe La Higuerita',
+  'CEIP César Manrique',
+  'CEIP Cataluña',
+  'CEIP Buena Vista I',
+  'CEIP Siete Palmas',
+  'CEIP Las Torres',
+  'CEIP La Garita',
+  'CEIP Pepe Dámaso',
+  'CEIP Santa Bárbara',
+  'CEIP Las Rehoyas',
+  'CEIP San Rafael',
+  'CEIP Gran Canaria',
+  'CEIP Federico García Lorca',
+  'CEIP Isabel La Católica',
+  'CEIP Timplista José Antonio Ramos',
+  'CEIP Poeta Francisco Tarajano',
+  'CEIP Alfredo Kraus',
+  'CEIP Monseñor Socorro Lantigua',
+  'CEIP Santa Catalina',
+  'CEIP Huertas del Palmar',
+];
+---
+
+<section class="relative isolate overflow-hidden py-20 sm:py-28">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_20%_30%,rgba(100,170,210,0.07),transparent_70%)]"
+  ></div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal max-w-3xl">
+      <p class="font-hand text-3xl leading-none text-celeste sm:text-4xl">
+        red de aliados
+      </p>
+      <h2 class="mt-3 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+        Organismos y entidades que ven en SLPH
+        <span class="block text-arena italic">un aliado para proteger el mar.</span>
+      </h2>
+    </div>
+
+    <div class="reveal reveal-delay-1 mt-14 grid gap-10 lg:grid-cols-3 lg:gap-12">
+      <div class="lg:col-span-1">
+        <h3 class="font-display text-xl tracking-wide text-arena uppercase">
+          Administraciones, cultura y patrimonio
+        </h3>
+        <ul class="mt-5 space-y-2.5 text-base leading-relaxed text-caparol/85">
+          {aliados.map((a) => <li class="flex gap-2"><span aria-hidden="true" class="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-arena/70"></span>{a}</li>)}
+        </ul>
+      </div>
+
+      <div class="lg:col-span-1">
+        <h3 class="font-display text-xl tracking-wide text-celeste uppercase">
+          Museos
+        </h3>
+        <ul class="mt-5 space-y-2.5 text-base leading-relaxed text-caparol/85">
+          {museos.map((m) => <li class="flex gap-2"><span aria-hidden="true" class="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-celeste/70"></span>{m}</li>)}
+        </ul>
+
+        <h3 class="mt-10 font-display text-xl tracking-wide text-celeste uppercase">
+          Bibliotecas
+        </h3>
+        <ul class="mt-5 space-y-2.5 text-base leading-relaxed text-caparol/85">
+          {bibliotecas.map((b) => <li class="flex gap-2"><span aria-hidden="true" class="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-celeste/70"></span>{b}</li>)}
+        </ul>
+      </div>
+
+      <div class="lg:col-span-1">
+        <h3 class="font-display text-xl tracking-wide text-arena uppercase">
+          Centros escolares
+        </h3>
+        <p class="mt-3 text-sm leading-relaxed text-caparol/70">
+          Aulas en las que hemos navegado para sensibilizar a su alumnado sobre el mundo marino.
+        </p>
+        <ul class="mt-5 grid grid-cols-1 gap-x-6 gap-y-2.5 text-sm leading-relaxed text-caparol/85 sm:grid-cols-2 lg:grid-cols-1">
+          {centros.map((c) => <li class="flex gap-2"><span aria-hidden="true" class="mt-1.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-arena/70"></span>{c}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
