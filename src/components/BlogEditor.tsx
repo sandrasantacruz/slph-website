@@ -570,9 +570,16 @@ export default function BlogEditor({ postId, typ: initialTyp, collectionId, pbUr
               <TextInput
                 label="Enlace al mapa (opcional)"
                 value={addressUrl}
-                onChange={(e) => setAddressUrl(e.currentTarget.value)}
-                placeholder="https://maps.google.com/…"
-                type="url"
+                onChange={(e) => {
+                  const v = e.currentTarget.value;
+                  // Wenn jemand das komplette <iframe>-Embed kopiert, nur den
+                  // src-Wert speichern. Sonst Eingabe unverändert lassen.
+                  const m = v.match(/<iframe[^>]*\ssrc=["']([^"']+)["']/i);
+                  setAddressUrl(m ? m[1] : v);
+                }}
+                placeholder="Pega la URL o el <iframe> de Google Maps"
+                description="Si pegas el código <iframe>, se extrae sólo la URL."
+                inputWrapperOrder={['label', 'input', 'description', 'error']}
                 error={errors.addressUrl}
               />
             </>

@@ -6,12 +6,18 @@ interface Props {
 
 const { location, addressUrl } = Astro.props;
 
-// Embed-URL ohne API-Key — die "öffentliche" Maps-Search-URL,
-// die in einem iframe geladen werden kann.
-const embedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(location)}&hl=es&output=embed`;
-// Fallback-Link um direkt in Maps zu öffnen, falls kein address_url gesetzt ist.
-const fallbackLink = addressUrl
-  || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+// Wenn das gespeicherte addressUrl bereits eine echte Maps-Embed-URL ist
+// (kommt aus dem iframe-Embed, das Sandra im Admin einfügt), nutzen wir die
+// direkt im iframe. Sonst bauen wir einen Search-Embed über den Lugar-Text.
+const isEmbedUrl = !!addressUrl && /^https:\/\/(?:www\.)?google\.[^/]+\/maps\/embed\?/i.test(addressUrl);
+const embedSrc = isEmbedUrl
+  ? addressUrl!
+  : `https://maps.google.com/maps?q=${encodeURIComponent(location)}&hl=es&output=embed`;
+// "Abrir en Maps"-Link führt immer zu einer offenen Suche (nicht zum
+// Embed-Frame), damit der Nutzer eine vollwertige Maps-Ansicht sieht.
+const fallbackLink = addressUrl && !isEmbedUrl
+  ? addressUrl
+  : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
 ---
 
 <div

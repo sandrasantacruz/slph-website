@@ -45,6 +45,19 @@ const eventDateLabel = end && start
 
 const newsDate = !isEvent && item.published_at ? fullFmt.format(new Date(item.published_at)) : '';
 
+// address_url kann zwei Formen haben:
+// - ein normaler Maps-Link (https://maps.app.goo.gl/… oder https://www.google.com/maps/…)
+// - eine reine Embed-URL (https://www.google.com/maps/embed?pb=…), die Sandra
+//   aus dem <iframe>-Snippet einfügt. Für den Header-Link wollen wir aber
+//   eine "normale" Maps-Ansicht — daher Search-Fallback wenn embed-URL.
+const isEmbedUrl = !!item.address_url
+  && /^https:\/\/(?:www\.)?google\.[^/]+\/maps\/embed\?/i.test(item.address_url);
+const addressLink = item.address_url && !isEmbedUrl
+  ? item.address_url
+  : item.location
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.location)}`
+    : null;
+
 const html = renderBlocks(item.content);
 
 const fallbackTitle = isEvent ? 'Evento' : 'Noticia';
@@ -138,9 +151,9 @@ const itemSchema = isEvent
             <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/>
             <circle cx="12" cy="10" r="3"/>
           </svg>
-          {item.address_url ? (
+          {addressLink ? (
             <a
-              href={item.address_url}
+              href={addressLink}
               class="hover:text-arena hover:underline"
               target="_blank"
               rel="noopener noreferrer"
