@@ -3,6 +3,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import type { RecordModel } from 'pocketbase';
 import { PB_PUBLIC_URL } from '../../lib/pb';
 import { renderBlocks } from '../../lib/blocknote-render';
+import MapEmbed from '../../components/MapEmbed.astro';
 import {
   articleSchema,
   eventSchema,
@@ -154,5 +155,14 @@ const itemSchema = isEvent
     </header>
 
     <div class="prose-slph mx-auto mt-10 max-w-3xl px-4" set:html={html} />
+
+    {isEvent && item.location && (
+      <section class="mx-auto mt-16 max-w-3xl px-4">
+        <h2 class="mb-4 font-display text-2xl text-arena sm:text-3xl">
+          Cómo llegar
+        </h2>
+        <MapEmbed location={item.location} addressUrl={item.address_url} />
+      </section>
+    )}
   </article>
 </MainLayout>

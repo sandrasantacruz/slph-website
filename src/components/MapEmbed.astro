@@ -1,0 +1,116 @@
+---
+interface Props {
+  location: string;
+  addressUrl?: string;
+}
+
+const { location, addressUrl } = Astro.props;
+
+// Embed-URL ohne API-Key — die "öffentliche" Maps-Search-URL,
+// die in einem iframe geladen werden kann.
+const embedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(location)}&hl=es&output=embed`;
+// Fallback-Link um direkt in Maps zu öffnen, falls kein address_url gesetzt ist.
+const fallbackLink = addressUrl
+  || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+---
+
+<div
+  class="map-embed group relative overflow-hidden rounded-2xl ring-1 ring-white/15"
+  data-map
+  data-map-src={embedSrc}
+>
+  <!-- Placeholder: wird per JS ausgeblendet, wenn Consent erteilt ist. -->
+  <div class="map-placeholder relative aspect-[16/10] bg-azul/40" data-map-placeholder>
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 bg-[radial-gradient(circle_at_50%_60%,rgba(100,170,210,0.18),transparent_70%)]"
+    ></div>
+    <div class="relative flex h-full flex-col items-center justify-center gap-4 px-6 text-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="40"
+        height="40"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="text-arena/80"
+        aria-hidden="true"
+      >
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+      <p class="max-w-md text-sm leading-relaxed text-caparol/85 sm:text-base">
+        Para mostrar el mapa cargamos contenido de
+        <strong class="text-caparol">Google Maps</strong>. Al activarlo,
+        Google podrá recibir datos sobre tu visita y podría instalar cookies
+        en tu navegador.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <button
+          type="button"
+          data-map-activate
+          class="rounded-full bg-arena px-5 py-2 font-display text-sm tracking-wide text-negro shadow-lg transition hover:brightness-110"
+        >
+          Activar el mapa
+        </button>
+        <a
+          href={fallbackLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-arena underline-offset-4 hover:underline"
+        >
+          O abrir en Google Maps ↗
+        </a>
+      </div>
+      <p class="text-xs text-caparol/55">
+        Puedes cambiar tu decisión en
+        <a
+          href="/politica-de-cookies#preferencias"
+          class="text-arena underline-offset-4 hover:underline"
+        >
+          Preferencias de privacidad
+        </a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const CONSENT_KEY = 'slph:consent:maps';
+
+  function activate(container: HTMLElement) {
+    const src = container.dataset.mapSrc;
+    const placeholder = container.querySelector<HTMLElement>('[data-map-placeholder]');
+    if (!src || !placeholder) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = 'Mapa de Google Maps';
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    iframe.allowFullscreen = true;
+    iframe.className = 'block aspect-[16/10] w-full border-0';
+    placeholder.replaceWith(iframe);
+  }
+
+  function wire() {
+    const granted = localStorage.getItem(CONSENT_KEY) === 'granted';
+    document.querySelectorAll<HTMLElement>('[data-map]').forEach((container) => {
+      if (granted) {
+        activate(container);
+        return;
+      }
+      const btn = container.querySelector<HTMLButtonElement>('[data-map-activate]');
+      btn?.addEventListener('click', () => {
+        localStorage.setItem(CONSENT_KEY, 'granted');
+        document.querySelectorAll<HTMLElement>('[data-map]').forEach(activate);
+      });
+    });
+  }
+
+  wire();
+  // Re-wire on consent reset from preferences UI
+  window.addEventListener('slph:consent-changed', wire);
+</script>

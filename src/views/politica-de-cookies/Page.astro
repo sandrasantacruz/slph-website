@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Contenido from './Contenido.astro';
+import Preferencias from './Preferencias.astro';
 import { breadcrumbSchema } from '../../lib/seo';
 
 const breadcrumb = breadcrumbSchema([
@@ -15,6 +16,7 @@ const breadcrumb = breadcrumbSchema([
   jsonLd={[breadcrumb]}
 >
   <Contenido />
+  <Preferencias />
 </MainLayout>
 
 <script>
