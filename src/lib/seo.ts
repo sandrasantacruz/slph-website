@@ -94,7 +94,7 @@ export function siteNavigationSchema(): JsonLd {
     { name: 'Inicio', url: '/' },
     { name: 'El cuento', url: '/sobre-el-cuento' },
     { name: 'Programa', url: '/programa' },
-    { name: 'Novedades', url: '/novedades' },
+    { name: 'Noticias', url: '/noticias' },
     { name: 'Comprar libro', url: '/comprar' },
     { name: 'Colabora', url: '/colabora' },
     { name: 'Contacto', url: '/contacto' },

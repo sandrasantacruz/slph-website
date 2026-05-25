@@ -3,7 +3,7 @@ export const prerender = false;
 import Detail from '../../views/novedades/Detail.astro';
 
 const { slug } = Astro.params;
-if (!slug) return Astro.redirect('/novedades');
+if (!slug) return Astro.redirect('/noticias');
 
 let item;
 try {
@@ -11,7 +11,7 @@ try {
     `slug = "${slug.replace(/"/g, '\\"')}"`,
   );
 } catch {
-  return Astro.redirect('/novedades');
+  return Astro.redirect('/noticias');
 }
 ---
 <Detail item={item} />

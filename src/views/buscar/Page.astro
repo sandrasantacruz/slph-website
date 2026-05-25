@@ -70,11 +70,11 @@ const STATIC_PAGES: StaticEntry[] = [
     keywords: 'comprar tienda librería online entintadas gran canaria tenerife libro',
   },
   {
-    title: 'Novedades',
-    url: '/novedades',
+    title: 'Noticias',
+    url: '/noticias',
     description:
       'Eventos, encuentros y notas de prensa del proyecto Si los peces hablaran.',
-    keywords: 'novedades eventos noticias prensa actividades',
+    keywords: 'noticias novedades eventos prensa actividades',
   },
   {
     title: 'Colabora',
@@ -191,7 +191,7 @@ const pageDescription = q
     {postResults.length > 0 && (
       <section class="mt-16">
         <h2 class="font-display text-xs uppercase tracking-[0.3em] text-arena">
-          Novedades
+          Noticias
         </h2>
         <ul class="mt-6 grid gap-5 sm:gap-6">
           {postResults.map((item) => <NovedadCard item={item} />)}

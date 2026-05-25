@@ -1,4 +1,6 @@
 ---
+const fundacion = 1989;
+const anios = new Date().getFullYear() - fundacion;
 ---
 
 <section id="biografia" class="relative isolate overflow-hidden py-20 sm:py-28">
@@ -32,10 +34,13 @@
         <div class="sticky top-28">
           <p class="font-hand text-2xl text-celeste sm:text-3xl">en una sola cifra</p>
           <p class="mt-1 font-display text-[clamp(5rem,15vw,9rem)] leading-none text-arena">
-            +30
+            {anios}
           </p>
           <p class="mt-2 font-display text-xl uppercase tracking-[0.18em] text-caparol/90">
             años al frente del<br/>Centro de Danza<br/>Sandra Santa Cruz
+          </p>
+          <p class="mt-3 font-hand text-2xl text-celeste sm:text-3xl">
+            desde {fundacion}
           </p>
           <p class="mt-6 max-w-xs text-sm leading-relaxed text-caparol/70">
             El primer estudio que abrió sus puertas en Gran Canaria

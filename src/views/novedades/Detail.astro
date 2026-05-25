@@ -63,10 +63,10 @@ const html = renderBlocks(item.content);
 const fallbackTitle = isEvent ? 'Evento' : 'Noticia';
 const typLabel = isEvent ? 'Evento' : 'Noticia';
 
-const path = `/novedades/${item.slug}`;
+const path = `/noticias/${item.slug}`;
 const breadcrumb = breadcrumbSchema([
   { name: 'Inicio', url: '/' },
-  { name: 'Novedades', url: '/novedades' },
+  { name: 'Noticias', url: '/noticias' },
   { name: item.title || fallbackTitle, url: path },
 ]);
 
@@ -102,8 +102,8 @@ const itemSchema = isEvent
 >
   <article class="pb-24">
     <div class="mx-auto max-w-3xl px-4 pt-12 sm:pt-16">
-      <a href="/novedades" class="inline-block text-sm text-arena hover:underline">
-        ← Volver a novedades
+      <a href="/noticias" class="inline-block text-sm text-arena hover:underline">
+        ← Volver a noticias
       </a>
     </div>
 

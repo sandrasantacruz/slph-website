@@ -1,24 +1,28 @@
 ---
-import cuentoImg from './img/cuento.webp?url';
-import centrosImg from './img/centros.webp?url';
-import escenarioImg from './img/escenario.webp?url';
+import cuentoImg from './img/cover-1.webp?url';
+import centrosImg from './img/cover-2.webp?url';
+import escenarioImg from './img/cover-3.webp?url';
 
 const columnas = [
   {
-    titulo: 'Un cuento',
+    titulo: 'Librupeces',
     imagen: cuentoImg,
     alt: 'El cuento Si los peces hablaran',
     texto:
-      'Un libro ilustrado lleno de personajes entrañables y aventuras en el litoral canario, pensado para emocionar a peques y no tan peques.',
+      'Cuento ilustrado lleno de personajes entrañables y aventuras emocionantes + cuaderno de activades para conectar con todas las edades.',
     tilt: 'tilt-l1',
+    ctaTexto: 'Descubre el cuento',
+    ctaHref: '/sobre-el-cuento',
   },
   {
     titulo: 'Centros educativos',
     imagen: centrosImg,
     alt: 'Niñas y niños participando en un taller SLPH',
     texto:
-      'Talleres y materiales didácticos diseñados con docentes para llevar la educación marina a las aulas de toda Canarias.',
+      'Talleres y materiales didácticos diseñados con docentes para llevar la educación marina a todas las aulas.',
     tilt: 'tilt-r1',
+    ctaTexto: 'Ver el programa',
+    ctaHref: '/programa',
   },
   {
     titulo: 'En el escenario',
@@ -27,6 +31,8 @@ const columnas = [
     texto:
       'Musical, conciertos y performances que convierten la concienciación en una experiencia colectiva inolvidable.',
     tilt: 'tilt-l2',
+    ctaTexto: 'Ver la galería',
+    ctaHref: '/galeria',
   },
 ];
 ---
@@ -69,7 +75,7 @@ const columnas = [
 
     <div class="mt-16 grid gap-12 sm:gap-8 md:grid-cols-3 md:gap-6">
       {
-        columnas.map(({ titulo, imagen, alt, texto, tilt }, i) => (
+        columnas.map(({ titulo, imagen, alt, texto, tilt, ctaTexto, ctaHref }, i) => (
           <article
             class:list={[
               'reveal group polaroid flex flex-col gap-3 transition duration-500 hover:rotate-0 hover:shadow-2xl',
@@ -86,11 +92,29 @@ const columnas = [
               />
             </div>
 
-            <div class="px-1 pb-1 pt-2 text-azul">
+            <div class="flex flex-1 flex-col px-1 pb-1 pt-2 text-azul">
               <h3 class="font-display text-3xl leading-tight sm:text-4xl">
                 {titulo}
               </h3>
               <p class="mt-2 text-sm leading-relaxed text-azul/80 sm:text-base">{texto}</p>
+              <a
+                href={ctaHref}
+                class="mt-auto inline-flex items-center gap-2 pt-4 font-display text-sm tracking-[0.2em] uppercase text-azul transition hover:text-arena"
+              >
+                {ctaTexto}
+                <svg
+                  viewBox="0 0 24 24"
+                  class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
             </div>
           </article>
         ))

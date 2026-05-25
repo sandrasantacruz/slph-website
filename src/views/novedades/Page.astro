@@ -15,20 +15,20 @@ try {
   });
 } catch (err) {
   loadError =
-    err instanceof Error ? err.message : "No se pudieron cargar las novedades.";
+    err instanceof Error ? err.message : "No se pudieron cargar las noticias.";
 }
 
 const breadcrumb = breadcrumbSchema([
   { name: "Inicio", url: "/" },
-  { name: "Novedades", url: "/novedades" },
+  { name: "Noticias", url: "/noticias" },
 ]);
 
 const collectionPage = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "@id": `${SITE_URL}/novedades`,
-  url: `${SITE_URL}/novedades`,
-  name: "Novedades · Si los peces hablaran",
+  "@id": `${SITE_URL}/noticias`,
+  url: `${SITE_URL}/noticias`,
+  name: "Noticias · Si los peces hablaran",
   description:
     "Eventos, encuentros y notas de prensa del proyecto Si los peces hablaran.",
   isPartOf: { "@id": `${SITE_URL}/#website` },
@@ -36,7 +36,7 @@ const collectionPage = {
   hasPart: items.slice(0, 20).map((it) => ({
     "@type": it.typ === "event" ? "Event" : "NewsArticle",
     name: it.title,
-    url: absoluteUrl(`/novedades/${it.slug}`),
+    url: absoluteUrl(`/noticias/${it.slug}`),
     ...(it.published_at ? { datePublished: it.published_at } : {}),
     ...(it.typ === "event" && it.event_date
       ? { startDate: it.event_date }
@@ -48,7 +48,7 @@ const collectionPage = {
 ---
 
 <MainLayout
-  title="Novedades"
+  title="Noticias"
   description="Eventos, encuentros y notas de prensa del proyecto Si los peces hablaran. Listado cronológico con las próximas actividades y las publicaciones recientes."
   jsonLd={[collectionPage, breadcrumb]}
 >

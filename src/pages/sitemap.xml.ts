@@ -21,7 +21,7 @@ const STATIC_URLS: UrlEntry[] = [
   { loc: '/autor', changefreq: 'monthly', priority: 0.8 },
   { loc: '/galeria', changefreq: 'monthly', priority: 0.7 },
   { loc: '/comprar', changefreq: 'monthly', priority: 0.9 },
-  { loc: '/novedades', changefreq: 'weekly', priority: 0.8 },
+  { loc: '/noticias', changefreq: 'weekly', priority: 0.8 },
   { loc: '/colabora', changefreq: 'monthly', priority: 0.7 },
   { loc: '/contacto', changefreq: 'yearly', priority: 0.6 },
   { loc: '/aviso-legal', changefreq: 'yearly', priority: 0.2 },
@@ -63,7 +63,7 @@ export const GET: APIRoute = async ({ locals }) => {
       if (!p.slug) continue;
       const lastmod = p.updated || p.published_at;
       entries.push({
-        loc: `/novedades/${p.slug}`,
+        loc: `/noticias/${p.slug}`,
         lastmod: lastmod ? new Date(lastmod).toISOString() : undefined,
         changefreq: 'monthly',
         priority: 0.6,

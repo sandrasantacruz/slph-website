@@ -39,6 +39,6 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: '¿Dónde se desarrolla el proyecto?',
     answer:
-      'El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en Tenerife y proyección al resto de Canarias y al territorio nacional. Las actividades, eventos y notas de prensa se publican en la sección /novedades de la web.',
+      'El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en Tenerife y proyección al resto de Canarias y al territorio nacional. Las actividades, eventos y notas de prensa se publican en la sección /noticias de la web.',
   },
 ];

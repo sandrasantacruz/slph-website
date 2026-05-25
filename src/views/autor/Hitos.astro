@@ -1,10 +1,13 @@
 ---
+const fundacionCentro = 1989;
+const aniosCentro = new Date().getFullYear() - fundacionCentro;
+
 const hitos = [
   {
-    year: '+30',
+    year: String(aniosCentro),
     yearSuffix: 'años',
     title: 'Centro de Danza Sandra Santa Cruz',
-    body: 'Al frente del primer estudio que abrió sus puertas en Gran Canaria dirigido por una titulada en danza. Diecisiete espectáculos propios, más coreografías por encargo de instituciones como el Teatro Pérez Galdós.',
+    body: `Al frente del primer estudio que abrió sus puertas en Gran Canaria dirigido por una titulada en danza, desde ${fundacionCentro}. Diecisiete espectáculos propios, más coreografías por encargo de instituciones como el Teatro Pérez Galdós.`,
   },
   {
     year: '2016',
