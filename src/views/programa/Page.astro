@@ -1,15 +1,16 @@
 ---
-import MainLayout from '../../layouts/MainLayout.astro';
-import Hero from './Hero.astro';
-import Talleres from './Talleres.astro';
-import Principios from './Principios.astro';
-import Destacan from './Destacan.astro';
-import Diferencia from './Diferencia.astro';
-import { breadcrumbSchema } from '../../lib/seo';
+import MainLayout from "../../layouts/MainLayout.astro";
+import Hero from "./Hero.astro";
+import Talleres from "./Talleres.astro";
+import Principios from "./Principios.astro";
+import Video from "./Video.astro";
+import Destacan from "./Destacan.astro";
+import Diferencia from "./Diferencia.astro";
+import { breadcrumbSchema } from "../../lib/seo";
 
 const breadcrumb = breadcrumbSchema([
-  { name: 'Inicio', url: '/' },
-  { name: 'El programa SLPH', url: '/programa' },
+  { name: "Inicio", url: "/" },
+  { name: "El programa SLPH", url: "/programa" },
 ]);
 ---
 
@@ -19,29 +20,32 @@ const breadcrumb = breadcrumbSchema([
   jsonLd={[breadcrumb]}
 >
   <Hero />
-  <Talleres />
   <Principios />
+  <Video />
+  <Talleres />
   <Destacan />
   <Diferencia />
 </MainLayout>
 
 <script>
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const targets = document.querySelectorAll<HTMLElement>('.reveal');
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const targets = document.querySelectorAll<HTMLElement>(".reveal");
 
   if (reduceMotion) {
-    targets.forEach((el) => el.classList.add('is-visible'));
+    targets.forEach((el) => el.classList.add("is-visible"));
   } else {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
+            entry.target.classList.add("is-visible");
             observer.unobserve(entry.target);
           }
         });
       },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.05 },
     );
     targets.forEach((el) => observer.observe(el));
   }
