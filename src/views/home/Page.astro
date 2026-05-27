@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
+import Trailer from './Trailer.astro';
 import QueEs from './QueEs.astro';
 import Versatilidad from './Versatilidad.astro';
 import PorQueUrgente from './PorQueUrgente.astro';
@@ -25,6 +26,7 @@ import { HOME_FAQ } from './faq-data';
   jsonLd={[bookSchema(), personSandraSchema(), faqSchema(HOME_FAQ)]}
 >
   <Hero />
+  <Trailer />
   <QueEs />
   <Versatilidad />
   <PorQueUrgente />

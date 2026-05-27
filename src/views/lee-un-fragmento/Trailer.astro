@@ -1,29 +1,287 @@
 ---
 ---
 
-<section id="trailer" class="relative isolate">
-  <div class="mx-auto max-w-4xl px-6 pb-12 sm:pb-16">
-    <div class="reveal max-w-2xl">
-      <p class="font-hand text-3xl leading-none text-arena sm:text-4xl">
-        en vídeo
-      </p>
-      <h2 class="reveal reveal-delay-1 mt-3 font-display text-[clamp(2rem,5vw,3.25rem)] leading-[0.95]">
-        Un vistazo
-        <span class="block">
-          <span class="hand-underline text-arena">al cuento en movimiento</span>
-        </span>
-      </h2>
-    </div>
+<section id="trailer" class="relative isolate overflow-hidden py-20 sm:py-28">
+  <!-- Subtle ink-doodles drifting in the periphery (md+ only) -->
+  <svg
+    aria-hidden="true"
+    class="anim-drift pointer-events-none absolute top-16 left-6 -z-10 hidden h-12 w-12 text-celeste/20 md:block"
+    viewBox="0 0 40 40"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.2"
+  >
+    <circle cx="20" cy="20" r="14" />
+    <circle cx="14" cy="15" r="2.5" />
+  </svg>
+  <svg
+    aria-hidden="true"
+    class="anim-float-soft pointer-events-none absolute right-8 bottom-24 -z-10 hidden h-10 w-10 text-arena/20 md:block"
+    viewBox="0 0 40 40"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.2"
+  >
+    <circle cx="20" cy="20" r="14" />
+  </svg>
 
-    <figure class="reveal reveal-delay-2 mt-10 overflow-hidden rounded-2xl border border-caparol/15 bg-azul/30">
-      <video
-        class="block aspect-video w-full"
-        src="/assets/trailer.mp4"
-        poster="/assets/trailer-poster.webp"
-        controls
-        preload="metadata"
-        playsinline
-      ></video>
-    </figure>
+  <div class="mx-auto max-w-6xl px-6">
+    <h2
+      class="reveal mx-auto max-w-3xl text-center font-display text-[clamp(2rem,5vw,3.25rem)] leading-[0.95] text-caparol"
+    >
+      Un vistazo
+      <span class="block">
+        <span class="hand-underline text-arena">al cuento en movimiento</span>
+      </span>
+    </h2>
+  </div>
+
+  <!-- Book card — sits outside px-6 so it can go edge-to-edge on mobile -->
+  <div class="reveal reveal-delay-1 relative mt-12 md:mt-16">
+    <article class="book mx-auto md:max-w-5xl">
+      <!-- Arena silk ribbon dangling from the top of the spine -->
+      <div aria-hidden="true" class="ribbon"></div>
+
+      <div class="book-spread relative grid md:grid-cols-12">
+        <!-- LEFT VERSO — pull-quote page (desktop only) -->
+        <aside
+          class="left-page hidden md:col-span-5 md:flex md:flex-col md:justify-between md:p-10 md:pt-14 md:pr-8 md:pl-12"
+        >
+          <p
+            class="font-display text-xs tracking-[0.45em] text-azul/55 uppercase"
+          >
+            Capítulo I
+          </p>
+
+          <blockquote class="my-auto pt-10">
+            <p
+              class="font-display text-[clamp(2.25rem,3.6vw,3.25rem)] leading-[0.95] text-azul"
+            >
+              El mar
+              <span class="block">
+                tiene
+                <span class="hand-underline-azul">voz</span>.
+              </span>
+            </p>
+            <p class="mt-5 font-hand text-xl text-azul/70 sm:text-2xl">
+              para quien sabe escuchar.
+            </p>
+          </blockquote>
+
+          <!-- Hand-inked fish silhouette -->
+          <svg
+            aria-hidden="true"
+            class="mt-8 h-10 w-24 text-azul/35"
+            viewBox="0 0 120 50"
+            fill="currentColor"
+          >
+            <path
+              d="M8 25 Q 28 4 70 25 Q 28 46 8 25 Z"
+              fill-rule="evenodd"
+            ></path>
+            <polygon points="68 25, 112 7, 112 43"></polygon>
+            <circle cx="28" cy="22" r="2" fill="#f8f8fc"></circle>
+          </svg>
+
+          <div
+            class="mt-8 flex items-center gap-2 font-display text-[0.65rem] tracking-[0.4em] text-azul/45 uppercase"
+          >
+            <span aria-hidden="true" class="h-px w-6 bg-azul/30"></span>
+            página 22
+          </div>
+        </aside>
+
+        <!-- RIGHT RECTO — video page -->
+        <div
+          class="right-page md:col-span-7 md:p-10 md:pt-14 md:pr-12 md:pl-8"
+        >
+          <div
+            class="player-wrap relative overflow-hidden bg-azul-deep md:rounded-[2px] md:shadow-[0_18px_40px_-12px_rgba(6,15,44,0.55)] md:ring-1 md:ring-azul-deep/40"
+          >
+            <media-player
+              data-player
+              title="Un vistazo al cuento Si los peces hablaran"
+              src="/videos/book.mp4"
+              poster="/videos/book-poster.webp"
+              aspect-ratio="16/9"
+              crossorigin
+              playsinline
+            >
+              <media-provider></media-provider>
+              <media-video-layout></media-video-layout>
+            </media-player>
+
+            <span
+              aria-hidden="true"
+              class="play-hint pointer-events-none absolute right-5 bottom-12 z-10 -rotate-3 font-hand text-2xl text-arena/95 transition-opacity duration-300 select-none sm:right-8 sm:bottom-14 sm:text-3xl"
+            >
+              dale al play…
+            </span>
+          </div>
+
+          <!-- Inline caption row (desktop only) -->
+          <div
+            class="mt-6 hidden items-end justify-between gap-4 md:flex"
+          >
+            <p class="font-hand text-2xl text-azul sm:text-3xl">
+              una página animada del cuento.
+            </p>
+            <div
+              class="flex items-center gap-2 font-display text-[0.65rem] tracking-[0.4em] text-azul/45 uppercase"
+            >
+              página 23
+              <span aria-hidden="true" class="h-px w-6 bg-azul/30"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
   </div>
 </section>
+
+<style is:global>
+  .player-wrap media-player {
+    --video-brand: var(--color-arena);
+    --media-brand: var(--color-arena);
+    --media-focus-ring-color: var(--color-arena-deep);
+    --media-controls-color: var(--color-caparol);
+    --video-controls-color: var(--color-caparol);
+    --media-tooltip-bg: rgb(11 32 86 / 0.95);
+    --media-menu-bg: rgb(11 32 86 / 0.95);
+    border-radius: 0;
+    background: var(--color-azul-deep);
+  }
+
+  .player-wrap:has(media-player[data-started]) .play-hint {
+    opacity: 0;
+  }
+</style>
+
+<style>
+  /* Azul-ink variant of the existing arena hand-underline */
+  .hand-underline-azul {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 30 -2 60 6 T 120 6 T 198 4' fill='none' stroke='%230b2056' stroke-width='2.5' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0.35em;
+    padding-bottom: 0.2em;
+  }
+
+  /* Mobile-first: no paper card, video edge-to-edge */
+  .book {
+    position: relative;
+  }
+  .ribbon {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    /* The book opens — cream paper, soft warm rim of light from upper-left,
+       a felt-shadow lift, slight tilt to feel hand-placed. */
+    .book {
+      background:
+        radial-gradient(
+          110% 70% at 18% 0%,
+          rgba(250, 222, 170, 0.22) 0%,
+          transparent 60%
+        ),
+        radial-gradient(
+          110% 70% at 82% 100%,
+          rgba(100, 170, 210, 0.08) 0%,
+          transparent 60%
+        ),
+        var(--color-caparol);
+      border-radius: 5px;
+      box-shadow:
+        0 36px 70px -22px rgba(6, 15, 44, 0.55),
+        0 14px 28px -10px rgba(6, 15, 44, 0.35),
+        inset 0 0 0 1px rgba(6, 15, 44, 0.07);
+      transform: rotate(-0.4deg);
+      transform-origin: 50% 50%;
+    }
+
+    /* Paper grain — subtle multiply noise over the entire spread */
+    .book::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      opacity: 0.55;
+      mix-blend-mode: multiply;
+      z-index: 2;
+    }
+
+    /* The binding fold — soft vertical shadow gully down the middle */
+    .book-spread::before {
+      content: "";
+      position: absolute;
+      top: 4%;
+      bottom: 4%;
+      left: 50%;
+      width: 36px;
+      margin-left: -18px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(11, 32, 86, 0.04) 25%,
+        rgba(11, 32, 86, 0.14) 50%,
+        rgba(11, 32, 86, 0.04) 75%,
+        transparent
+      );
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Arena silk ribbon — dangles from the top of the spine, right page */
+    .ribbon {
+      display: block;
+      position: absolute;
+      top: -6px;
+      right: 16%;
+      width: 30px;
+      height: 118px;
+      background: linear-gradient(
+        180deg,
+        var(--color-arena-deep) 0%,
+        var(--color-arena-deep) 55%,
+        var(--color-arena) 100%
+      );
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+      box-shadow: -4px 5px 12px rgba(6, 15, 44, 0.28);
+      transform: rotate(1.5deg);
+      transform-origin: top center;
+      z-index: 5;
+    }
+    /* Subtle inner crease on the ribbon to suggest a fold */
+    .ribbon::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.18) 0%,
+        transparent 18%,
+        transparent 82%,
+        rgba(255, 255, 255, 0.18) 100%
+      );
+      clip-path: inherit;
+    }
+
+    /* Both page-content blocks sit above the noise & fold layers */
+    .left-page,
+    .right-page {
+      position: relative;
+      z-index: 4;
+    }
+  }
+</style>
+
+<script>
+  import "vidstack/player";
+  import "vidstack/player/ui";
+  import "vidstack/player/layouts/default";
+  import "vidstack/player/styles/default/theme.css";
+  import "vidstack/player/styles/default/layouts/video.css";
+</script>

@@ -1,0 +1,144 @@
+---
+---
+
+<section id="trailer" class="relative isolate overflow-hidden py-20 sm:py-28">
+  <!-- Drifting bubbles -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+  >
+    <span class="anim-float-soft absolute top-[18%] left-[6%] block h-3 w-3 rounded-full bg-celeste/40"></span>
+    <span class="anim-float absolute bottom-[16%] left-[9%] block h-2 w-2 rounded-full bg-arena/50"></span>
+    <span class="anim-float-soft absolute top-[28%] right-[7%] block h-2.5 w-2.5 rounded-full bg-caparol/30"></span>
+    <span class="anim-float absolute right-[11%] bottom-[22%] block h-4 w-4 rounded-full bg-celeste/30"></span>
+  </div>
+
+  <div class="mx-auto max-w-5xl px-6">
+    <h2
+      class="reveal mx-auto max-w-3xl text-center font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.95] text-caparol"
+    >
+      Empieza por
+      <span class="hand-underline text-arena">aquí.</span>
+    </h2>
+
+    <p
+      class="reveal reveal-delay-1 mx-auto mt-6 max-w-xl text-center text-base text-caparol/80 sm:text-lg"
+    >
+      Un primer vistazo a Si los peces hablaran.
+    </p>
+  </div>
+
+  <!-- Stage area: edge-to-edge on mobile, polaroid frame from md+ -->
+  <div class="reveal reveal-delay-2 relative mt-12 md:mt-16">
+    <figure class="video-frame relative">
+      <div
+        aria-hidden="true"
+        class="absolute -top-5 right-3 z-20 rotate-3 select-none sm:right-6 md:right-10"
+      >
+        <div
+          class="ticket-stub bg-arena px-5 py-2 font-display text-sm tracking-[0.25em] text-azul uppercase shadow-lg sm:px-6 sm:text-base"
+        >
+          Tráiler
+        </div>
+      </div>
+
+      <div class="player-wrap relative overflow-hidden bg-azul-deep">
+        <media-player
+          data-player
+          title="Tráiler · Si los peces hablaran"
+          src="/videos/trailer.mp4"
+          poster="/videos/trailer-poster.webp"
+          aspect-ratio="16/9"
+          crossorigin
+          playsinline
+        >
+          <media-provider></media-provider>
+          <media-video-layout></media-video-layout>
+        </media-player>
+
+        <span
+          aria-hidden="true"
+          class="play-hint pointer-events-none absolute right-5 bottom-12 z-10 -rotate-3 font-hand text-2xl text-arena/95 transition-opacity duration-300 select-none sm:right-8 sm:bottom-16 sm:text-3xl"
+        >
+          dale al play…
+        </span>
+      </div>
+
+      <figcaption
+        class="video-caption absolute right-0 bottom-2 left-0 px-6 text-center font-hand text-2xl text-azul sm:text-3xl"
+      >
+        el primer vistazo.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style is:global>
+  .player-wrap media-player {
+    --video-brand: var(--color-arena);
+    --media-brand: var(--color-arena);
+    --media-focus-ring-color: var(--color-arena-deep);
+    --media-controls-color: var(--color-caparol);
+    --video-controls-color: var(--color-caparol);
+    --media-tooltip-bg: rgb(11 32 86 / 0.95);
+    --media-menu-bg: rgb(11 32 86 / 0.95);
+    border-radius: 0;
+    background: var(--color-azul-deep);
+  }
+
+  .player-wrap:has(media-player[data-started]) .play-hint {
+    opacity: 0;
+  }
+</style>
+
+<style>
+  .video-frame {
+    width: 100%;
+  }
+  .video-frame .player-wrap {
+    border-radius: 0;
+  }
+  .video-caption {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .video-frame {
+      position: relative;
+      background: var(--color-caparol);
+      padding: 0.875rem 0.875rem 3.75rem;
+      box-shadow:
+        0 18px 35px -10px rgba(6, 15, 44, 0.55),
+        0 6px 12px -4px rgba(6, 15, 44, 0.35);
+      border-radius: 6px;
+      max-width: 56rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .video-frame .player-wrap {
+      border-radius: 2px;
+    }
+    .video-caption {
+      display: block;
+    }
+  }
+
+  .ticket-stub {
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      96% 50%,
+      100% 100%,
+      0% 100%,
+      4% 50%
+    );
+  }
+</style>
+
+<script>
+  import "vidstack/player";
+  import "vidstack/player/ui";
+  import "vidstack/player/layouts/default";
+  import "vidstack/player/styles/default/theme.css";
+  import "vidstack/player/styles/default/layouts/video.css";
+</script>
