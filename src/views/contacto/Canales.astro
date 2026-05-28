@@ -23,17 +23,6 @@ const channels = [
     hint: 'Respuesta más rápida',
     external: true,
   },
-  settings.email && {
-    key: 'email',
-    label: 'Correo',
-    verb: 'Mándanos un',
-    value: settings.email,
-    href: mailHref(settings.email),
-    icon: 'mail' as IconKind,
-    accent: 'celeste',
-    hint: 'Para textos más largos',
-    external: false,
-  },
   settings.phone && {
     key: 'phone',
     label: 'Teléfono',
@@ -43,6 +32,17 @@ const channels = [
     icon: 'phone' as IconKind,
     accent: 'caparol',
     hint: 'Cuando lo necesites a voz',
+    external: false,
+  },
+  settings.email && {
+    key: 'email',
+    label: 'Correo',
+    verb: 'Mándanos un',
+    value: settings.email,
+    href: mailHref(settings.email),
+    icon: 'mail' as IconKind,
+    accent: 'celeste',
+    hint: 'Para textos más largos',
     external: false,
   },
 ].filter(Boolean) as Array<{
@@ -103,17 +103,17 @@ const accentClasses: Record<'arena' | 'celeste' | 'caparol', { ring: string; tex
         Estamos preparando los canales de contacto. Vuelve en unos días.
       </p>
     ) : (
-      <ul class="reveal reveal-delay-1 mt-10 grid gap-5 sm:gap-6 md:grid-cols-3">
+      <ul class="reveal reveal-delay-1 mt-10 grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
         {channels.map((ch) => {
           const cls = accentClasses[ch.accent];
           return (
-            <li>
+            <li class:list={[ch.icon === 'mail' && 'md:col-span-2 lg:col-span-1']}>
               <a
                 href={ch.href}
                 target={ch.external ? '_blank' : undefined}
                 rel={ch.external ? 'noopener noreferrer' : undefined}
                 class:list={[
-                  'group relative flex h-full flex-col gap-5 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-6 transition focus:outline-none',
+                  'group relative flex h-full flex-col gap-5 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-6 transition focus:outline-none @container',
                   cls.ring,
                 ]}
               >
@@ -141,8 +141,12 @@ const accentClasses: Record<'arena' | 'celeste' | 'caparol', { ring: string; tex
 
                 <div class="flex flex-col gap-1">
                   <span class="text-sm text-caparol/70">{ch.verb}</span>
-                  <span class={`font-display text-2xl leading-tight ${cls.text} sm:text-3xl`}>
-                    {ch.value}
+                  <span class={`font-display leading-tight break-words ${ch.icon === 'mail' ? 'text-[clamp(1rem,6cqi,1.875rem)] lg:text-3xl' : 'text-2xl sm:text-3xl'} ${cls.text}`}>
+                    {ch.icon === 'mail' && ch.value.includes('@') ? (
+                      <Fragment>{ch.value.split('@')[0]}@<wbr />{ch.value.split('@').slice(1).join('@')}</Fragment>
+                    ) : (
+                      ch.value
+                    )}
                   </span>
                 </div>
 
