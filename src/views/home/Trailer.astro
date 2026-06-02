@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 ---
 
 <section id="trailer" class="relative isolate overflow-hidden py-20 sm:py-28">
@@ -44,6 +45,7 @@
 
       <div class="player-wrap relative overflow-hidden bg-azul-deep">
         <media-player
+          class="trailer-player"
           data-player
           title="Tráiler · Si los peces hablaran"
           src="/videos/trailer.mp4"
@@ -52,8 +54,15 @@
           crossorigin
           playsinline
         >
-          <media-provider></media-provider>
+          <media-provider>
+            <media-poster class="vds-poster" />
+          </media-provider>
           <media-video-layout></media-video-layout>
+          <media-play-button class="trailer-play-overlay" aria-label="Reproducir tráiler">
+            <span class="trailer-play-circle">
+              <Icon name="game-icons:play-button" aria-hidden="true" />
+            </span>
+          </media-play-button>
         </media-player>
 
         <span
@@ -88,6 +97,54 @@
 
   .player-wrap:has(media-player[data-started]) .play-hint {
     opacity: 0;
+  }
+
+  /* Hide vidstack's own centered play/pause button — we provide our own. */
+  .trailer-player .vds-play-button {
+    display: none !important;
+  }
+
+  /* Custom centered play overlay */
+  .player-wrap .trailer-play-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .player-wrap media-player[data-paused] .trailer-play-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .player-wrap .trailer-play-circle {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 9999px;
+    background: var(--color-arena);
+    color: var(--color-azul);
+    box-shadow: 0 10px 30px -8px rgba(6, 15, 44, 0.7);
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      background 0.3s ease;
+  }
+  .player-wrap .trailer-play-circle svg {
+    width: 50%;
+    height: 50%;
+  }
+  .player-wrap .trailer-play-overlay:hover .trailer-play-circle,
+  .player-wrap .trailer-play-overlay:focus-visible .trailer-play-circle {
+    transform: scale(1.08);
+    background: var(--color-caparol);
   }
 </style>
 
@@ -140,5 +197,6 @@
   import "vidstack/player/ui";
   import "vidstack/player/layouts/default";
   import "vidstack/player/styles/default/theme.css";
+  import "vidstack/player/styles/default/poster.css";
   import "vidstack/player/styles/default/layouts/video.css";
 </script>
