@@ -1,0 +1,100 @@
+---
+import { Icon } from "astro-icon/components";
+
+const presentacion =
+  "/assets/galeria/cuento/Presentación-Ofical-de-Si-los-peces-hablaran....webp";
+---
+
+<section class="relative isolate overflow-hidden py-20 sm:py-28">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(55%_45%_at_80%_40%,rgba(100,170,210,0.10),transparent_70%)]"
+  >
+  </div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+      <!-- Image column -->
+      <div
+        class="reveal reveal-delay-1 order-last lg:order-first lg:col-span-5"
+      >
+        <div class="relative">
+          <div
+            aria-hidden="true"
+            class="anim-sway absolute -inset-3 -z-10 rounded-[1.5rem] border-2 border-dashed border-celeste/30"
+          >
+          </div>
+
+          <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
+            <img
+              src={presentacion}
+              alt="Presentación oficial del cuento Si los peces hablaran en el Acuario Poema del Mar"
+              class="block aspect-[4/5] w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <p
+              class="absolute bottom-2 left-0 right-0 text-center font-hand text-3xl leading-none text-azul sm:text-4xl"
+            >
+              en el Poema del Mar
+            </p>
+          </div>
+
+          <div
+            aria-hidden="true"
+            class="anim-float-soft absolute -right-6 -bottom-6 hidden h-20 w-20 items-center justify-center rounded-full bg-arena/95 text-azul shadow-xl sm:flex"
+          >
+            <Icon name="game-icons:clownfish" class="h-10 w-10" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Text column -->
+      <div class="lg:col-span-7">
+        <div class="reveal flex items-center gap-5">
+          <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+          <span
+            class="font-display text-sm tracking-[0.4em] text-arena uppercase"
+          >
+            ¿Sabías que…?
+          </span>
+        </div>
+
+        <h2
+          class="reveal reveal-delay-1 mt-8 font-display text-[clamp(2rem,5vw,3.75rem)] leading-[0.98] text-caparol"
+        >
+          Se presentó en el
+          <span class="hand-underline text-celeste">Poema del Mar</span>.
+        </h2>
+
+        <div
+          class="reveal reveal-delay-2 mt-8 space-y-5 text-lg leading-relaxed text-caparol/90 sm:text-xl"
+        >
+          <p>
+            Nuestro cuento se presentó en el Acuario Poema del Mar para que los
+            menores pudiesen descubrir la maravilla de las profundidades
+            marinas.
+          </p>
+        </div>
+
+        <!-- El dato -->
+        <div
+          class="reveal reveal-delay-3 mt-10 flex items-center gap-6 rounded-2xl border border-arena/30 bg-azul-deep/40 p-6 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-8"
+        >
+          <div class="shrink-0 text-center">
+            <p
+              class="font-display text-5xl leading-none text-arena sm:text-6xl"
+            >
+              36
+            </p>
+            <p class="mt-1 font-hand text-xl text-celeste">metros</p>
+          </div>
+          <p class="text-base leading-relaxed text-caparol/85 sm:text-lg">
+            Su tanque <em class="not-italic text-arena">Deep Sea</em> tiene la ventana
+            curva más grande que se conoce.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,6 +1,9 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Tarjetas from './Tarjetas.astro';
+import Origen from './Origen.astro';
+import Curiosidad from './Curiosidad.astro';
+import Cierre from './Cierre.astro';
 import { bookSchema, breadcrumbSchema } from '../../lib/seo';
 
 const breadcrumb = breadcrumbSchema([
@@ -16,6 +19,9 @@ const breadcrumb = breadcrumbSchema([
   jsonLd={[bookSchema(), breadcrumb]}
 >
   <Tarjetas />
+  <Origen />
+  <Curiosidad />
+  <Cierre />
 </MainLayout>
 
 <script>

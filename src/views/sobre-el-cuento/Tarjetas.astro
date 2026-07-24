@@ -36,12 +36,12 @@ const cards = [
 ] as const;
 ---
 
-<section class="relative isolate overflow-hidden pt-14 pb-24 sm:pt-20 sm:pb-32">
+<section class="relative isolate overflow-hidden pt-14 pb-12 sm:pt-20 sm:pb-16">
   <div class="mx-auto max-w-6xl px-6">
     <div class="reveal flex items-center gap-5">
       <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
       <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
-        Sobre el cuento
+        Nuestros Librupeces
       </span>
     </div>
 
@@ -101,19 +101,5 @@ const cards = [
         </li>
       ))}
     </ul>
-
-    <!-- Secondary CTA: comprar -->
-    <div class="reveal reveal-delay-3 mt-16 flex flex-col items-center gap-3 text-center">
-      <p class="font-hand text-2xl text-celeste sm:text-3xl">¿ya te conquistó?</p>
-      <a
-        href="/comprar"
-        class="group inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95 sm:text-2xl"
-      >
-        Llévate el cuento a casa
-        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-      </a>
-    </div>
   </div>
 </section>
