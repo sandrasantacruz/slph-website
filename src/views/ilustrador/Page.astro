@@ -4,6 +4,7 @@ import Hero from './Hero.astro';
 import Biografia from './Biografia.astro';
 import Galeria from './Galeria.astro';
 import Lightbox from '../galeria/Lightbox.astro';
+import SubNavCuento from '../../components/SubNavCuento.astro';
 import { breadcrumbSchema } from '../../lib/seo';
 
 const breadcrumb = breadcrumbSchema([
@@ -20,6 +21,7 @@ const breadcrumb = breadcrumbSchema([
   hideWaterLine
   jsonLd={[breadcrumb]}
 >
+  <SubNavCuento current="ilustrador" />
   <Hero />
   <Biografia />
   <Galeria />

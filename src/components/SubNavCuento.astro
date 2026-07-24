@@ -1,13 +1,16 @@
 ---
 interface Props {
-  current: 'fragmento' | 'autor' | 'galeria';
+  current: 'fragmento' | 'cuadernillo' | 'autor' | 'ilustrador' | 'repercusion' | 'galeria';
 }
 
 const { current } = Astro.props;
 
 const items = [
   { id: 'fragmento', href: '/lee-un-fragmento', label: 'Lee un fragmento' },
+  { id: 'cuadernillo', href: '/cuadernillo', label: 'Cuadernillo' },
   { id: 'autor', href: '/autor', label: 'La autora' },
+  { id: 'ilustrador', href: '/ilustrador', label: 'Ilustrador' },
+  { id: 'repercusion', href: '/repercusion', label: 'Repercusión' },
   { id: 'galeria', href: '/galeria', label: 'Galería' },
 ] as const;
 ---

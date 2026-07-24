@@ -3,6 +3,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Contenido from './Contenido.astro';
 import Homenaje from './Homenaje.astro';
+import SubNavCuento from '../../components/SubNavCuento.astro';
 import { breadcrumbSchema } from '../../lib/seo';
 
 const breadcrumb = breadcrumbSchema([
@@ -19,6 +20,7 @@ const breadcrumb = breadcrumbSchema([
   hideWaterLine
   jsonLd={[breadcrumb]}
 >
+  <SubNavCuento current="cuadernillo" />
   <Hero />
   <Contenido />
   <Homenaje />
