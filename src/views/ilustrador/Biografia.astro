@@ -1,0 +1,62 @@
+---
+const parrafos = [
+  'Ilustrador y diseñador gráfico, nace en Buenos Aires, Argentina, en 1977. Especializado en el desarrollo de ilustración y de viñetas para aplicar en packaging de diversos formatos (en principio para la industria alimenticia), así como en el retoque digital fotográfico y la ilustración de personajes de todo tipo, clasificación y rubros, con el objetivo de responder a diferentes temáticas dirigidas a públicos de diversas características. Trabaja también el armado de originales en grafito.',
+  'Lleva años trabajando para editoriales infantiles, como ediciones infantil.com, de editorial Sin Fin, Nova Rhoman y Duendes del Sur entre otras. Un mundo que le apasiona, y en el que se vuelca día a día poniendo todo su empeño en perfeccionarse y ampliar conocimientos. Su estilo propio y su gran versatilidad para combinar diversos estilos ilustrativos le afianzan como un ilustrador más amplio, para el público más pequeño.',
+  'En diseño ha trabajado en el armado de originales de diferentes formatos y soportes para diversas marcas. Imagen institucional y corporativa, desarrollo de marca, catálogos, infografías, avisos, eventos, renders, gráficas de stand (en ferias como expo Presentes, expo Juguetería y expo Papelería).',
+];
+---
+
+<section id="biografia" class="relative isolate overflow-hidden py-20 sm:py-28">
+  <!-- Subtle seabed glow -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 inset-y-10 -z-20 bg-[radial-gradient(65%_55%_at_70%_50%,rgba(100,170,210,0.08),transparent_70%)]"
+  >
+  </div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <!-- Section eyebrow -->
+    <div class="reveal flex items-center gap-5">
+      <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+      <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
+        Su recorrido
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h2
+      class="reveal reveal-delay-1 mt-8 max-w-4xl font-display text-[clamp(2.5rem,7vw,5.25rem)] leading-[0.92] text-caparol"
+    >
+      Dar rostro a
+      <span class="block">
+        <span class="hand-underline text-arena">cada personaje</span>.
+      </span>
+    </h2>
+
+    <!-- Two-column editorial body -->
+    <div class="mt-14 grid gap-x-12 gap-y-8 md:grid-cols-12 md:gap-y-0">
+      <!-- Left side: pull quote -->
+      <aside class="reveal reveal-delay-2 md:col-span-4">
+        <div class="sticky top-28">
+          <p class="font-hand text-2xl text-celeste sm:text-3xl">
+            su especialidad
+          </p>
+          <p class="mt-2 font-display text-2xl leading-tight text-arena sm:text-3xl">
+            Ilustración infantil
+          </p>
+          <p class="mt-4 max-w-xs text-sm leading-relaxed text-caparol/70">
+            Un estilo propio y una gran versatilidad para combinar registros
+            ilustrativos, siempre pensando en el público más pequeño.
+          </p>
+        </div>
+      </aside>
+
+      <!-- Right side: narrative -->
+      <div
+        class="reveal reveal-delay-3 space-y-6 text-lg leading-relaxed text-caparol/90 sm:text-xl md:col-span-8"
+      >
+        {parrafos.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </div>
+</section>

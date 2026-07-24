@@ -1,0 +1,49 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from './Hero.astro';
+import Biografia from './Biografia.astro';
+import Galeria from './Galeria.astro';
+import Lightbox from '../galeria/Lightbox.astro';
+import { breadcrumbSchema } from '../../lib/seo';
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Sobre el cuento', url: '/sobre-el-cuento' },
+  { name: 'El ilustrador', url: '/ilustrador' },
+]);
+---
+
+<MainLayout
+  title="Pablo Tribiño · El ilustrador"
+  description="Pablo Tribiño es ilustrador y diseñador gráfico argentino. Suyos son los personajes, las viñetas y el color que dan vida al mundo marino del cuento Si los peces hablaran."
+  type="profile"
+  hideWaterLine
+  jsonLd={[breadcrumb]}
+>
+  <Hero />
+  <Biografia />
+  <Galeria />
+  <Lightbox />
+</MainLayout>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (reduceMotion) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>

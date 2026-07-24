@@ -1,0 +1,68 @@
+---
+const features = [
+  {
+    title: 'Juegos y pasatiempos',
+    body: 'Actividades para resolver, colorear y descubrir que llevan la historia del cuento más allá de sus páginas.',
+    accent: 'arena',
+  },
+  {
+    title: 'Para todas las edades',
+    body: 'Propuestas pensadas para conectar tanto con los más pequeños como con quienes leen en familia o en el aula.',
+    accent: 'celeste',
+  },
+  {
+    title: 'Con nuestros personajes',
+    body: 'Lorena, Nela la Irritable, Dina la Voladora, Don Canino y sus amigos acompañan cada actividad.',
+    accent: 'arena',
+  },
+];
+---
+
+<section id="contenido" class="relative isolate overflow-hidden py-20 sm:py-28">
+  <!-- Subtle seabed glow -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 inset-y-10 -z-20 bg-[radial-gradient(65%_55%_at_30%_50%,rgba(100,170,210,0.08),transparent_70%)]"
+  >
+  </div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <!-- Section eyebrow -->
+    <div class="reveal flex items-center gap-5">
+      <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+      <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
+        Qué encontrarás
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h2
+      class="reveal reveal-delay-1 mt-8 max-w-4xl font-display text-[clamp(2.5rem,7vw,5.25rem)] leading-[0.92] text-caparol"
+    >
+      La aventura
+      <span class="block">
+        <span class="hand-underline text-arena">continúa</span>.
+      </span>
+    </h2>
+
+    <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-lg leading-relaxed text-caparol/90 sm:text-xl">
+      El cuaderno de actividades acompaña al cuento y convierte la lectura en
+      una experiencia para hacer, jugar y compartir.
+    </p>
+
+    <!-- Feature cards -->
+    <ul class="mt-12 grid gap-6 sm:mt-16 sm:grid-cols-3 sm:gap-7">
+      {features.map((f, i) => (
+        <li class={`reveal reveal-delay-${Math.min(i + 1, 4)} flex h-full flex-col gap-3 rounded-2xl border border-caparol/15 bg-azul/40 p-7 ring-1 ring-caparol/10 sm:p-8`}>
+          <span aria-hidden="true" class={`h-[3px] w-12 ${f.accent === 'arena' ? 'bg-arena' : 'bg-celeste'}`}></span>
+          <h3 class="mt-2 font-display text-2xl leading-tight text-caparol sm:text-3xl">
+            {f.title}
+          </h3>
+          <p class="text-base leading-relaxed text-caparol/85">
+            {f.body}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

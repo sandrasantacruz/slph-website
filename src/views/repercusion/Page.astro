@@ -1,0 +1,47 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from './Hero.astro';
+import Medios from './Medios.astro';
+import Origen from './Origen.astro';
+import { breadcrumbSchema } from '../../lib/seo';
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Sobre el cuento', url: '/sobre-el-cuento' },
+  { name: 'Repercusión', url: '/repercusion' },
+]);
+---
+
+<MainLayout
+  title="Repercusión · En los medios"
+  description="La repercusión de Si los peces hablaran: del papel al escenario y a Televisión Canaria. Un cuento que nace por la repercusión de su propio musical, supervisado por la Facultad de Ciencias del Mar de la ULPGC."
+  type="article"
+  hideWaterLine
+  jsonLd={[breadcrumb]}
+>
+  <Hero />
+  <Medios />
+  <Origen />
+</MainLayout>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = document.querySelectorAll<HTMLElement>('.reveal');
+
+  if (reduceMotion) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>

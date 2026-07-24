@@ -1,0 +1,112 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="relative isolate flex min-h-[calc(100svh-6rem)] flex-col overflow-hidden">
+  <!-- Soft radial glow, top-left -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_45%_at_20%_25%,rgba(250,222,170,0.10),transparent_70%)]"
+  ></div>
+
+  <!-- Drifting kelp on the right edge -->
+  <svg
+    class="anim-sway pointer-events-none absolute -right-4 bottom-0 -z-10 hidden h-2/3 w-24 text-celeste/12 lg:block"
+    viewBox="0 0 80 200"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <path d="M18 200 Q 28 150 20 100 Q 14 70 24 30 Q 28 10 20 0"/>
+    <path d="M38 200 Q 48 160 40 110 Q 36 80 48 40 Q 52 18 44 0"/>
+    <path d="M62 200 Q 70 160 62 120 Q 56 90 66 60 Q 70 30 64 0"/>
+  </svg>
+
+  <div class="mx-auto flex h-full w-full max-w-7xl flex-1 flex-col justify-center px-6 py-8 sm:py-10">
+    <!-- Eyebrow -->
+    <div class="reveal flex items-center gap-3 sm:gap-4">
+      <span aria-hidden="true" class="h-px w-8 bg-arena sm:w-16"></span>
+      <span class="font-display text-[0.7rem] tracking-[0.35em] text-arena uppercase sm:text-sm sm:tracking-[0.4em]">
+        El ilustrador
+      </span>
+    </div>
+
+    <!-- Hero grid: name + portrait -->
+    <div class="mt-6 grid grid-cols-12 items-center gap-x-5 gap-y-6 sm:mt-8 sm:gap-x-10 lg:gap-x-14">
+      <!-- Left column: name + tags + lead -->
+      <div class="reveal reveal-delay-1 order-2 col-span-12 flex flex-col justify-center lg:order-1 lg:col-span-7">
+        <p class="font-hand text-xl text-celeste sm:text-3xl lg:text-4xl">conoce a…</p>
+
+        <h1 class="mt-0.5 font-display text-[clamp(2.5rem,9vw,7.5rem)] leading-[0.85] tracking-tight text-caparol sm:mt-1">
+          Pablo
+          <span class="mt-0.5 block text-arena italic sm:mt-1">Tribiño</span>
+        </h1>
+
+        <!-- Role chips -->
+        <ul class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 font-display text-[0.65rem] uppercase tracking-[0.18em] text-celeste sm:mt-6 sm:gap-x-3 sm:text-base lg:gap-x-4 lg:text-lg">
+          <li>Ilustrador</li>
+          <li aria-hidden="true" class="text-arena/70">·</li>
+          <li>Diseñador gráfico</li>
+          <li aria-hidden="true" class="text-arena/70">·</li>
+          <li>Argentina, 1977</li>
+        </ul>
+
+        <p class="mt-5 max-w-xl text-sm leading-relaxed text-caparol/90 sm:mt-6 sm:text-lg sm:leading-relaxed lg:text-xl">
+          Los personajes, las viñetas y el color del mundo marino de
+          <em class="not-italic text-arena">Si los peces hablaran…</em>
+          salieron de su mano. Años ilustrando para editoriales infantiles
+          puestos al servicio de nuestro cuento.
+        </p>
+
+        <div class="mt-7 flex flex-wrap items-center gap-3 sm:mt-8">
+          <a
+            href="https://www.linkedin.com/in/pablo-tribi%C3%B1o-805396b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full border border-caparol/25 px-4 py-2 font-display text-xs tracking-[0.18em] text-caparol/85 uppercase transition hover:border-arena hover:text-arena focus-visible:border-arena focus-visible:text-arena focus:outline-none"
+          >
+            <Icon name="simple-icons:linkedin" class="h-4 w-4" aria-hidden="true" />
+            LinkedIn
+          </a>
+          <a
+            href="#trabajo"
+            class="inline-flex items-center gap-2 font-display text-xs tracking-[0.18em] text-arena uppercase transition hover:text-caparol"
+          >
+            Ver su trabajo
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Portrait, right side -->
+      <div class="reveal reveal-delay-2 order-1 col-span-12 flex items-center justify-center lg:order-2 lg:col-span-5">
+        <div class="relative w-full max-w-[min(100%,42vh)]">
+          <!-- Decorative dashed frame behind portrait -->
+          <div
+            aria-hidden="true"
+            class="anim-sway absolute -inset-2 -z-10 rounded-[1.25rem] border-2 border-dashed border-arena/40 sm:-inset-3 sm:rounded-[1.5rem]"
+          ></div>
+
+          <div class="polaroid tilt-r1 w-full transition duration-500 hover:rotate-0" style="padding-bottom:3.25rem">
+            <img
+              src="/assets/colaboradores/pablo-tribino/portrait.jpg"
+              alt="Retrato de Pablo Tribiño"
+              class="block w-full"
+              style="aspect-ratio:4/5"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <p class="absolute bottom-1.5 left-0 right-0 px-2 text-center font-hand text-lg leading-tight text-azul sm:bottom-2 sm:px-3 sm:text-2xl">
+              Pablo Tribiño
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
