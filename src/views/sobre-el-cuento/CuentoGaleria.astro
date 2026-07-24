@@ -1,0 +1,50 @@
+---
+const imagenes = [
+  {
+    src: '/assets/galeria/cuento/E_B0044.webp',
+    alt: 'Del cuento Si los peces hablaran',
+  },
+  {
+    src: '/assets/galeria/cuento/E_B0371-2.webp',
+    alt: 'Del cuento Si los peces hablaran',
+  },
+  {
+    src: '/assets/galeria/cuento/Sin-lo-metálico.webp',
+    alt: 'Del cuento Si los peces hablaran',
+  },
+] as const;
+---
+
+<section class="relative isolate overflow-hidden pt-6 pb-16 sm:pt-8 sm:pb-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal flex items-center gap-5">
+      <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+      <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
+        El cuento por dentro
+      </span>
+    </div>
+
+    <div class="mt-8 grid items-start gap-6 mx-auto max-w-xl lg:max-w-none lg:grid-cols-3">
+      {
+        imagenes.map((img, i) => (
+          <a
+            href={img.src}
+            data-lightbox
+            data-gallery="cuento-imagenes"
+            data-caption={img.alt}
+            aria-label="Ampliar imagen del cuento"
+            class={`reveal reveal-delay-${i + 1} group block cursor-zoom-in overflow-hidden rounded-xl border border-caparol/15 bg-azul-deep/50 ring-1 ring-caparol/10 transition hover:border-arena/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arena`}
+          >
+            <img
+              src={img.src}
+              alt={img.alt}
+              class="block h-auto w-full object-contain transition duration-500 group-hover:brightness-110"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
