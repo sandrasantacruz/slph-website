@@ -2,8 +2,10 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Tarjetas from './Tarjetas.astro';
 import Origen from './Origen.astro';
+import MusicalGaleria from './MusicalGaleria.astro';
 import Curiosidad from './Curiosidad.astro';
 import Cierre from './Cierre.astro';
+import Lightbox from '../galeria/Lightbox.astro';
 import { bookSchema, breadcrumbSchema } from '../../lib/seo';
 
 const breadcrumb = breadcrumbSchema([
@@ -20,8 +22,10 @@ const breadcrumb = breadcrumbSchema([
 >
   <Tarjetas />
   <Origen />
+  <MusicalGaleria />
   <Curiosidad />
   <Cierre />
+  <Lightbox />
 </MainLayout>
 
 <script>
