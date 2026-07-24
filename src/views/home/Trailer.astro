@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 ---
 
 <section id="trailer" class="relative isolate overflow-hidden py-20 sm:py-28">
@@ -8,10 +8,18 @@ import { Icon } from 'astro-icon/components';
     aria-hidden="true"
     class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
   >
-    <span class="anim-float-soft absolute top-[18%] left-[6%] block h-3 w-3 rounded-full bg-celeste/40"></span>
-    <span class="anim-float absolute bottom-[16%] left-[9%] block h-2 w-2 rounded-full bg-arena/50"></span>
-    <span class="anim-float-soft absolute top-[28%] right-[7%] block h-2.5 w-2.5 rounded-full bg-caparol/30"></span>
-    <span class="anim-float absolute right-[11%] bottom-[22%] block h-4 w-4 rounded-full bg-celeste/30"></span>
+    <span
+      class="anim-float-soft absolute top-[18%] left-[6%] block h-3 w-3 rounded-full bg-celeste/40"
+    ></span>
+    <span
+      class="anim-float absolute bottom-[16%] left-[9%] block h-2 w-2 rounded-full bg-arena/50"
+    ></span>
+    <span
+      class="anim-float-soft absolute top-[28%] right-[7%] block h-2.5 w-2.5 rounded-full bg-caparol/30"
+    ></span>
+    <span
+      class="anim-float absolute right-[11%] bottom-[22%] block h-4 w-4 rounded-full bg-celeste/30"
+    ></span>
   </div>
 
   <div class="mx-auto max-w-5xl px-6">
@@ -25,24 +33,13 @@ import { Icon } from 'astro-icon/components';
     <p
       class="reveal reveal-delay-1 mx-auto mt-6 max-w-xl text-center text-base text-caparol/80 sm:text-lg"
     >
-      Un primer vistazo a Si los peces hablaran.
+      Un primer vistazo a través del trailer del cuento.
     </p>
   </div>
 
   <!-- Stage area: edge-to-edge on mobile, polaroid frame from md+ -->
   <div class="reveal reveal-delay-2 relative mt-12 md:mt-16">
     <figure class="video-frame relative">
-      <div
-        aria-hidden="true"
-        class="absolute -top-5 right-3 z-20 rotate-3 select-none sm:right-6 md:right-10"
-      >
-        <div
-          class="ticket-stub bg-arena px-5 py-2 font-display text-sm tracking-[0.25em] text-azul uppercase shadow-lg sm:px-6 sm:text-base"
-        >
-          Tráiler
-        </div>
-      </div>
-
       <div class="player-wrap relative overflow-hidden bg-azul-deep">
         <media-player
           class="trailer-player"
@@ -55,10 +52,13 @@ import { Icon } from 'astro-icon/components';
           playsinline
         >
           <media-provider>
-            <media-poster class="vds-poster" />
+            <media-poster class="vds-poster"></media-poster>
           </media-provider>
           <media-video-layout></media-video-layout>
-          <media-play-button class="trailer-play-overlay" aria-label="Reproducir tráiler">
+          <media-play-button
+            class="trailer-play-overlay"
+            aria-label="Reproducir tráiler"
+          >
             <span class="trailer-play-circle">
               <Icon name="game-icons:play-button" aria-hidden="true" />
             </span>
@@ -76,7 +76,7 @@ import { Icon } from 'astro-icon/components';
       <figcaption
         class="video-caption absolute right-0 bottom-2 left-0 px-6 text-center font-hand text-2xl text-azul sm:text-3xl"
       >
-        el primer vistazo.
+        La inquietud de Si los peces hablaran
       </figcaption>
     </figure>
   </div>
@@ -178,17 +178,6 @@ import { Icon } from 'astro-icon/components';
     .video-caption {
       display: block;
     }
-  }
-
-  .ticket-stub {
-    clip-path: polygon(
-      0% 0%,
-      100% 0%,
-      96% 50%,
-      100% 100%,
-      0% 100%,
-      4% 50%
-    );
   }
 </style>
 

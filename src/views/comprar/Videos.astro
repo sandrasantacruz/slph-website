@@ -6,7 +6,6 @@ const videos = [
     src: '/videos/comprar-1.mp4',
     poster: '/videos/comprar-1-poster.webp',
     title: 'Si los peces hablaran · Televisión Canaria',
-    badge: 'En TV',
     caption: 'el musical, en directo.',
     tilt: '-rotate-1',
   },
@@ -14,7 +13,6 @@ const videos = [
     src: '/videos/comprar-2.mp4',
     poster: '/videos/comprar-2-poster.webp',
     title: 'Un fragmento del musical · Televisión Canaria',
-    badge: 'En escena',
     caption: 'y los peces… hablaron.',
     tilt: 'rotate-1',
   },
@@ -64,13 +62,6 @@ const videos = [
       {
         videos.map((video, i) => (
           <figure class={`clip-frame reveal reveal-delay-${i + 1} ${video.tilt}`}>
-            <!-- Broadcast badge -->
-            <div aria-hidden="true" class="absolute -top-4 left-5 z-20 -rotate-2 select-none">
-              <div class="ticket-stub bg-arena px-4 py-1.5 font-display text-xs tracking-[0.25em] text-azul uppercase shadow-lg sm:text-sm">
-                {video.badge}
-              </div>
-            </div>
-
             <div class="player-wrap relative overflow-hidden bg-azul-deep">
               <media-player
                 class="comprar-player"
@@ -201,10 +192,6 @@ const videos = [
     bottom: 0.75rem;
     left: 0;
     text-align: center;
-  }
-
-  .ticket-stub {
-    clip-path: polygon(0% 0%, 100% 0%, 96% 50%, 100% 100%, 0% 100%, 4% 50%);
   }
 
   @media (prefers-reduced-motion: reduce) {

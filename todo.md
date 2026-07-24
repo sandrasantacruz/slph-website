@@ -10,3 +10,6 @@
     - https://www.youtube.com/watch?v=GkmiiCa8qCU
 
 - contact email zu lang
+- buch: eine seite vor prologo - 27
+
+magick -density 200 "book.pdf[0,9-25,146]" -resize '1500x1500>' -strip -quality 85 +adjoin -scene 1 %02d.webp
