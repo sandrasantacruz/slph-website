@@ -1,26 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
 
-const estreno = [
-  {
-    src: "/assets/galeria/musical/SLPH_Centro-de-Danza-Sandra-Santa-Cruz_Danza-de-las-Espadas.webp",
-    alt: "Danza de las espadas en el estreno del musical Si los peces hablaran",
-    tilt: "tilt-l1",
-    caption: "la danza de las espadas",
-  },
-  {
-    src: "/assets/galeria/musical/SLPH_Centro-de-Danza-Sandra-Santa-Cruz_Arrecife.webp",
-    alt: "Escena del arrecife en el musical Si los peces hablaran",
-    tilt: "tilt-r1",
-    caption: "el arrecife",
-  },
-  {
-    src: "/assets/galeria/musical/SLPH_Centro-de-Danza-Sandra-Santa-Cruz_D.-Canino.webp",
-    alt: "Escena del estreno del musical Si los peces hablaran",
-    tilt: "tilt-l2",
-    caption: "julio de 2016",
-  },
-] as const;
+const estrenoImg =
+  "/assets/galeria/musical/SLPH_Centro-de-Danza-Sandra-Santa-Cruz_Danza-de-las-Espadas.webp";
 ---
 
 <section class="relative isolate overflow-hidden py-20 sm:py-28">
@@ -31,85 +13,105 @@ const estreno = [
   </div>
 
   <div class="mx-auto max-w-6xl px-6">
-    <div class="reveal flex items-center gap-5">
-      <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
-      <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
-        El origen
-      </span>
-    </div>
-
-    <h2
-      class="reveal reveal-delay-1 mt-8 max-w-3xl font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] text-caparol"
-    >
-      Un cuento que nació de
-      <span class="hand-underline text-arena">un musical</span>.
-    </h2>
-
-    <div
-      class="reveal reveal-delay-2 mt-8 max-w-3xl space-y-5 text-lg leading-relaxed text-caparol/90 sm:text-xl"
-    >
-      <p>
-        Que sepamos, es la <strong class="font-display text-2xl text-arena"
-          >primera vez</strong
-        > que un cuento se escribe por la repercusión de un musical.
-      </p>
-      <p>
-        La reacción fue tal entre el alumnado del Centro de Danza de nuestra
-        autora, que Sandra decidió escribir la historia para que sus mensajes
-        perduren y pasen de una generación a otra.
-      </p>
-    </div>
-
-    <!-- Ficha del estreno -->
-    <div
-      class="reveal reveal-delay-2 mt-10 flex max-w-3xl flex-wrap items-center gap-x-8 gap-y-3 rounded-2xl border border-celeste/25 bg-azul-deep/40 p-6 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-7"
-    >
-      <div class="flex items-center gap-3">
-        <Icon name="game-icons:musical-notes" class="h-6 w-6 text-celeste" />
-        <span class="text-base text-caparol/85">
-          Música de <strong class="font-display text-lg text-caparol"
-            >Juan Ramos</strong
+    <div class="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+      <!-- Text column -->
+      <div class="lg:col-span-7">
+        <div class="reveal flex items-center gap-5">
+          <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+          <span
+            class="font-display text-sm tracking-[0.4em] text-arena uppercase"
           >
-        </span>
-      </div>
-      <div class="flex items-center gap-3">
-        <Icon name="game-icons:quill-ink" class="h-6 w-6 text-celeste" />
-        <span class="text-base text-caparol/85">
-          Letras de <strong class="font-display text-lg text-caparol"
-            >Juan Luis Santa Cruz</strong
-          >
-        </span>
-      </div>
-      <p class="w-full text-base text-caparol/75">
-        Un formato totalmente original, estrenado por el Centro de Danza Sandra
-        Santa Cruz en <strong class="text-arena">julio de 2016</strong>. La
-        Provincia, El Diario y El Espejo Canario se hicieron eco de aquel
-        estreno.
-      </p>
-    </div>
+            El origen
+          </span>
+        </div>
 
-    <!-- Fotos del estreno -->
-    <div class="mt-14 grid gap-8 sm:grid-cols-3 sm:gap-6">
-      {
-        estreno.map((foto, i) => (
-          <div class={`reveal reveal-delay-${i + 1} flex justify-center`}>
-            <div
-              class={`polaroid ${foto.tilt} transition duration-500 hover:rotate-0`}
-            >
-              <img
-                src={foto.src}
-                alt={foto.alt}
-                class="block aspect-[4/5] w-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-              <p class="absolute bottom-2 left-0 right-0 text-center font-hand text-2xl leading-none text-azul sm:text-3xl">
-                {foto.caption}
-              </p>
-            </div>
+        <h2
+          class="reveal reveal-delay-1 mt-8 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] text-caparol"
+        >
+          Un cuento que nació de
+          <span class="hand-underline text-arena">un musical</span>.
+        </h2>
+
+        <div
+          class="reveal reveal-delay-2 mt-8 space-y-5 text-lg leading-relaxed text-caparol/90 sm:text-xl"
+        >
+          <p>
+            Que sepamos, es la <strong class="font-display text-2xl text-arena"
+              >primera vez</strong
+            > que un cuento se escribe por la repercusión de un musical.
+          </p>
+          <p>
+            La reacción fue tal entre el alumnado del Centro de Danza de nuestra
+            autora, que Sandra decidió escribir la historia para que sus
+            mensajes perduren y pasen de una generación a otra.
+          </p>
+        </div>
+
+        <!-- Ficha del estreno -->
+        <div
+          class="reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 rounded-2xl border border-celeste/25 bg-azul-deep/40 p-6 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-7"
+        >
+          <div class="flex items-center gap-3">
+            <Icon
+              name="game-icons:musical-notes"
+              class="h-6 w-6 text-celeste"
+            />
+            <span class="text-base text-caparol/85">
+              Música de <strong class="font-display text-lg text-caparol"
+                >Juan Ramos</strong
+              >
+            </span>
           </div>
-        ))
-      }
+          <div class="flex items-center gap-3">
+            <Icon name="game-icons:quill-ink" class="h-6 w-6 text-celeste" />
+            <span class="text-base text-caparol/85">
+              Letras de <strong class="font-display text-lg text-caparol"
+                >Juan Luis Santa Cruz</strong
+              >
+            </span>
+          </div>
+          <p class="w-full text-base text-caparol/75">
+            Un formato totalmente original, estrenado por el Centro de Danza
+            Sandra Santa Cruz en <strong class="text-arena"
+              >julio de 2016</strong
+            >. La Provincia, El Diario y El Espejo Canario se hicieron eco de
+            aquel estreno.
+          </p>
+        </div>
+      </div>
+
+      <!-- Image column -->
+      <div class="reveal reveal-delay-2 lg:col-span-5">
+        <div class="relative mx-auto max-w-xs sm:max-w-sm lg:max-w-none">
+          <div
+            aria-hidden="true"
+            class="anim-sway absolute -inset-3 -z-10 rounded-[1.5rem] border-2 border-dashed border-celeste/30"
+          >
+          </div>
+
+          <div class="polaroid tilt-r1 transition duration-500 hover:rotate-0">
+            <img
+              src={estrenoImg}
+              alt="Danza de las espadas en el estreno del musical Si los peces hablaran"
+              class="block aspect-[4/5] w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <p
+              class="absolute bottom-2 left-0 right-0 text-center font-hand text-3xl leading-none text-azul sm:text-4xl"
+            >
+              el estreno, 2016
+            </p>
+          </div>
+
+          <div
+            aria-hidden="true"
+            class="anim-float-soft absolute -left-6 -bottom-6 hidden h-20 w-20 items-center justify-center rounded-full bg-celeste/95 text-azul shadow-xl sm:flex"
+          >
+            <Icon name="game-icons:scallop" class="h-10 w-10" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
