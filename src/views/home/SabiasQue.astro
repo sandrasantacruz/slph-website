@@ -4,7 +4,7 @@ import coverCuento from './img/cover-cuento.webp?url';
 
 <section class="relative">
   <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 sm:py-28 md:grid-cols-[auto_1fr] md:gap-16">
-    <div class="reveal relative flex justify-center md:justify-start">
+    <div class="reveal relative flex flex-col items-center gap-10">
       <div class="book anim-float-soft">
         <div class="book__pages" aria-hidden="true"></div>
         <img
@@ -15,6 +15,14 @@ import coverCuento from './img/cover-cuento.webp?url';
         />
         <div class="book__spine" aria-hidden="true"></div>
         <div class="book__gloss" aria-hidden="true"></div>
+      </div>
+
+      <!-- "Sealed" badge -->
+      <div class="inline-flex items-center gap-3 rounded-full border-2 border-dashed border-arena/40 px-5 py-2 font-display text-base uppercase tracking-widest text-arena/90 sm:text-lg">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Avalado por la ciencia
       </div>
     </div>
 
@@ -37,14 +45,6 @@ import coverCuento from './img/cover-cuento.webp?url';
           Dra.&nbsp;Dña.&nbsp;Gercende Courtois, investigadora en Ciencias
           Marinas y Acuicultura.
         </p>
-
-        <!-- "Sealed" badge -->
-        <div class="mt-8 inline-flex items-center gap-3 rounded-full border-2 border-dashed border-azul/30 px-5 py-2 font-display text-base uppercase tracking-widest text-azul/70 sm:text-lg">
-          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Avalado por la ciencia
-        </div>
       </div>
     </div>
   </div>
