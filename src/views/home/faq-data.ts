@@ -5,6 +5,11 @@
 
 import type { FaqEntry } from "../../lib/seo";
 
+// Inline-Link für hervorgehobene Verweise in den sichtbaren Antworten.
+// Nur für `answerHtml` (Rendering) - der Klartext-`answer` bleibt fürs JSON-LD.
+const link = (href: string, label: string): string =>
+  `<a href="${href}" class="font-semibold text-arena underline decoration-2 decoration-arena/40 underline-offset-2 transition hover:text-caparol hover:decoration-arena">${label}</a>`;
+
 export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿Qué es Si los peces hablaran…?",
@@ -20,6 +25,8 @@ export const HOME_FAQ: FaqEntry[] = [
     question: "¿Dónde se puede comprar el cuento?",
     answer:
       "El cuento está disponible de forma presencial en librerías de Gran Canaria, entre ellas, Librería Canaima, La Librería del Cabildo, Poema del Mar y El Libro Técnico, donde lo encontrarás también de forma online con envío a domicilio. La página comprar lista los puntos de venta con su dirección.",
+    answerHtml:
+      `El cuento está disponible de forma presencial en librerías de Gran Canaria, entre ellas, Librería Canaima, La Librería del Cabildo, Poema del Mar y El Libro Técnico, donde lo encontrarás también de forma online con envío a domicilio. La página ${link("/comprar", "comprar")} lista los puntos de venta con su dirección.`,
   },
   {
     question: "¿A qué edad va dirigido el cuento?",
@@ -34,11 +41,15 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿Cómo se puede colaborar?",
     answer:
-      "Se puede colaborar de tres formas: como voluntario, como donante puntual o a través de mecenazgo institucional. La página /colabora explica los detalles y la /contacto recoge los canales directos (WhatsApp, correo y teléfono) para ponerse en contacto sin formularios intermedios.",
+      "Se puede colaborar de tres formas: como voluntario, como donante puntual o a través de mecenazgo institucional. La página colabora explica los detalles y la página de contacto recoge los canales directos (WhatsApp, correo y teléfono) para ponerse en contacto sin formularios intermedios.",
+    answerHtml:
+      `Se puede colaborar de tres formas: como voluntario, como donante puntual o a través de mecenazgo institucional. La página ${link("/colabora", "colabora")} explica los detalles y la página de contacto recoge los canales directos (WhatsApp, correo y teléfono) para ponerse en contacto sin formularios intermedios.`,
   },
   {
     question: "¿Dónde se desarrolla el proyecto?",
     answer:
-      "El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en el archipiélago canario y con proyección al territorio nacional. Las actividades, eventos y notas de prensa se publican en la sección /noticias de la web.",
+      "El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en el archipiélago canario y con proyección al territorio nacional. Las actividades, eventos y notas de prensa se publican en la sección noticias de la web.",
+    answerHtml:
+      `El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en el archipiélago canario y con proyección al territorio nacional. Las actividades, eventos y notas de prensa se publican en la sección ${link("/noticias", "noticias")} de la web.`,
   },
 ];

@@ -192,7 +192,13 @@ export function breadcrumbSchema(items: BreadcrumbItem[]): JsonLd {
 
 export interface FaqEntry {
   question: string;
+  /** Klartext-Antwort. Wird 1:1 ins FAQPage-JSON-LD übernommen (kein HTML). */
   answer: string;
+  /**
+   * Optionale HTML-Variante für die sichtbare Section (z.B. mit Inline-Links).
+   * Nur fürs Rendering, nicht fürs JSON-LD. Fällt auf `answer` zurück.
+   */
+  answerHtml?: string;
 }
 
 export function faqSchema(entries: FaqEntry[]): JsonLd {

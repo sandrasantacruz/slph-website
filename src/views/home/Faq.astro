@@ -46,7 +46,7 @@ import { HOME_FAQ } from './faq-data';
             </span>
           </summary>
           <p class="mt-4 max-w-3xl text-base leading-relaxed text-caparol/85 sm:text-lg">
-            {entry.answer}
+            {entry.answerHtml ? <Fragment set:html={entry.answerHtml} /> : entry.answer}
           </p>
         </details>
       ))}
