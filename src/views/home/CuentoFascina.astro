@@ -1,12 +1,16 @@
 ---
-import { Icon } from 'astro-icon/components';
-import nenasLeyendo from './img/nenas-leyendo.webp?url';
+import { Icon } from "astro-icon/components";
+import nenasLeyendo from "./img/nenas-leyendo.webp?url";
 ---
 
 <section id="la-historia" class="relative">
-  <div class="mx-auto grid max-w-6xl gap-x-12 gap-y-12 px-6 py-20 sm:py-28 md:grid-cols-2 md:items-center md:gap-x-16 md:gap-y-8">
+  <div
+    class="mx-auto grid max-w-6xl gap-x-12 gap-y-12 px-6 py-20 sm:py-28 md:grid-cols-2 md:items-center md:gap-x-16 md:gap-y-8"
+  >
     <!-- Polaroid image with sticker label -->
-    <div class="reveal mx-auto w-full max-w-md md:col-start-1 md:row-start-1 md:self-end">
+    <div
+      class="reveal mx-auto w-full max-w-md md:col-start-1 md:row-start-1 md:self-end"
+    >
       <div class="relative">
         <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
           <img
@@ -15,7 +19,9 @@ import nenasLeyendo from './img/nenas-leyendo.webp?url';
             class="block h-auto w-full"
             loading="lazy"
           />
-          <p class="absolute bottom-2 left-0 right-0 text-center font-hand text-4xl leading-none text-azul">
+          <p
+            class="absolute bottom-2 left-0 right-0 text-center font-hand text-4xl leading-none text-azul"
+          >
             ¡fascinadas!
           </p>
         </div>
@@ -25,15 +31,21 @@ import nenasLeyendo from './img/nenas-leyendo.webp?url';
           aria-hidden="true"
         >
           <span class="text-center text-sm leading-tight">
-            REALIDAD<br/>AUMENTADA
+            REALIDAD<br />AUMENTADA
           </span>
         </div>
       </div>
     </div>
 
-    <div class="reveal reveal-delay-1 md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
-      <p class="font-hand text-3xl text-arena sm:text-4xl">Para peques y no tan peques</p>
-      <h2 class="mt-2 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95]">
+    <div
+      class="reveal reveal-delay-1 md:col-start-2 md:row-span-2 md:row-start-1 md:self-center"
+    >
+      <p class="font-hand text-3xl text-arena sm:text-4xl">
+        Para peques y no tan peques
+      </p>
+      <h2
+        class="mt-2 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95]"
+      >
         Un cuento que
         <span class="block">
           <span class="hand-underline text-arena">enamora</span>
@@ -44,19 +56,24 @@ import nenasLeyendo from './img/nenas-leyendo.webp?url';
       </h2>
 
       <p class="mt-6 text-lg leading-relaxed sm:text-xl">
-        Si los peces hablaran… narra una historia cautivadora situada en el
-        litoral canario, acompañada de un <strong class="text-arena">cuadernillo de actividades</strong>
-        pensado para conectar con todas las edades. Sus protagonistas,
-        que nadan incluso fuera de sus páginas gracias a la tecnología
-        de realidad aumentada, se embarcarán en una aventura para
-        proteger su hogar.
+        Si los peces hablaran… narra una historia cautivadora donde el océano
+        encuentra su voz y nos descubre el poder de protegerlo.
+      </p>
+
+      <p class="mt-6 text-lg leading-relaxed sm:text-xl">
+        Y ahora también un <strong class="text-arena">cuadernillo de actividades</strong> pensado para conectar con
+        diferentes las edades.
       </p>
 
       <p class="mt-4 text-lg leading-relaxed sm:text-xl">
         No te pierdas las aventuras de
         <strong class="font-display text-2xl text-arena">Lorena</strong>,
-        <strong class="font-display text-2xl text-arena">Nela la Irritable</strong>,
-        <strong class="font-display text-2xl text-arena">Dina la Voladora</strong>,
+        <strong class="font-display text-2xl text-arena"
+          >Nela la Irritable</strong
+        >,
+        <strong class="font-display text-2xl text-arena"
+          >Dina la Voladora</strong
+        >,
         <strong class="font-display text-2xl text-arena">Don Canino</strong>
         y todos sus amigos.
       </p>
@@ -67,23 +84,45 @@ import nenasLeyendo from './img/nenas-leyendo.webp?url';
           class="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-caparol px-6 py-3 font-display text-xl text-caparol transition hover:bg-caparol hover:text-azul sm:text-2xl"
         >
           Leer un fragmento
-          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg
+            viewBox="0 0 24 24"
+            class="h-5 w-5 transition-transform group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+          >
         </a>
         <a
           href="/comprar"
           class="group inline-flex items-center justify-center gap-2 rounded-full bg-arena px-6 py-3 font-display text-xl text-negro transition hover:brightness-95 sm:text-2xl"
         >
           Dónde comprarlo
-          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg
+            viewBox="0 0 24 24"
+            class="h-5 w-5 transition-transform group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+          >
         </a>
       </div>
     </div>
 
     <!-- AR app callout -->
-    <div class="reveal mx-auto w-full max-w-md md:col-start-1 md:row-start-2 md:self-start">
-      <div class="rounded-2xl border border-celeste/30 bg-azul/40 p-5 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-6">
-        <p class="font-hand text-xl text-arena sm:text-2xl">¡salen del libro!</p>
-        <p class="mt-1 font-display text-lg leading-tight text-caparol sm:text-xl">
+    <div
+      class="reveal mx-auto w-full max-w-md md:col-start-1 md:row-start-2 md:self-start"
+    >
+      <div
+        class="rounded-2xl border border-celeste/30 bg-azul/40 p-5 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-6"
+      >
+        <p class="font-hand text-xl text-arena sm:text-2xl">
+          ¡salen del libro!
+        </p>
+        <p
+          class="mt-1 font-display text-lg leading-tight text-caparol sm:text-xl"
+        >
           Descarga la app de realidad aumentada
         </p>
         <div class="mt-4 flex flex-col gap-3 sm:flex-row">
@@ -93,9 +132,15 @@ import nenasLeyendo from './img/nenas-leyendo.webp?url';
             rel="noopener"
             class="group/store flex items-center gap-3 rounded-xl bg-caparol px-4 py-2.5 text-azul shadow-md transition hover:brightness-95"
           >
-            <Icon name="simple-icons:googleplay" class="h-7 w-7" aria-hidden="true" />
+            <Icon
+              name="simple-icons:googleplay"
+              class="h-7 w-7"
+              aria-hidden="true"
+            />
             <span class="flex flex-col leading-tight">
-              <span class="text-[0.7rem] uppercase tracking-wider text-azul/70">disponible en</span>
+              <span class="text-[0.7rem] uppercase tracking-wider text-azul/70"
+                >disponible en</span
+              >
               <span class="font-display text-lg">Google Play</span>
             </span>
           </a>
@@ -105,9 +150,15 @@ import nenasLeyendo from './img/nenas-leyendo.webp?url';
             rel="noopener"
             class="group/store flex items-center gap-3 rounded-xl bg-caparol px-4 py-2.5 text-azul shadow-md transition hover:brightness-95"
           >
-            <Icon name="simple-icons:appstore" class="h-7 w-7" aria-hidden="true" />
+            <Icon
+              name="simple-icons:appstore"
+              class="h-7 w-7"
+              aria-hidden="true"
+            />
             <span class="flex flex-col leading-tight">
-              <span class="text-[0.7rem] uppercase tracking-wider text-azul/70">disponible en</span>
+              <span class="text-[0.7rem] uppercase tracking-wider text-azul/70"
+                >disponible en</span
+              >
               <span class="font-display text-lg">App Store</span>
             </span>
           </a>
