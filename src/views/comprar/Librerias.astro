@@ -7,6 +7,8 @@ type Shop = {
   mapQuery?: string;
   /** Optional website of the shop. */
   href?: string;
+  /** true = href points straight at the book's product page, not just the shop. */
+  direct?: boolean;
 };
 
 type Region = {
@@ -24,13 +26,15 @@ const regions: Region[] = [
         name: 'Librería Canaima',
         city: 'Las Palmas de Gran Canaria',
         address: 'C. Senador Castillo Olivares, 7, 35003',
-        href: 'https://www.libreriacanaima.com/',
+        href: 'https://www.libreriacanaima.com/libro/si-los-peces-hablaran_592328',
+        direct: true,
       },
       {
         name: 'El Libro Técnico — Casa del Lector',
         city: 'Las Palmas de Gran Canaria',
         address: 'P.º de Tomás Morales, 44, 35003',
-        href: 'https://www.ellibrotecnico.com/',
+        href: 'https://www.ellibrotecnico.com/libro/si-los-peces-hablaran-2-edicion_588987',
+        direct: true,
       },
       {
         name: 'Librería Trébol',
@@ -42,7 +46,8 @@ const regions: Region[] = [
         name: 'La Librería del Cabildo',
         city: 'Las Palmas de Gran Canaria',
         address: 'C. Cano, 24, 35002',
-        href: 'https://libroscanarios.org/',
+        href: 'https://libroscanarios.org/titulo/si-los-peces-hablaran/',
+        direct: true,
       },
       {
         name: 'Librería Greda Canarias',
@@ -237,7 +242,7 @@ const mapsHref = (s: Shop) =>
                         rel="noopener noreferrer"
                         class="inline-flex items-center gap-2 rounded-full border border-caparol/20 px-3 py-1.5 font-display text-xs tracking-[0.2em] text-caparol/85 uppercase transition group-hover:border-celeste group-hover:text-celeste focus:outline-none focus-visible:border-celeste focus-visible:text-celeste"
                       >
-                        Web
+                        {shop.direct ? 'Comprar online' : 'Web'}
                         <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                           <circle cx="12" cy="12" r="9" />
                           <path d="M3 12h18" />
