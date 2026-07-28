@@ -5,9 +5,9 @@
 - foto sandra http://localhost:4321/autor
 - http://localhost:4321/repercusion die zwei youtube videos setzen
   https://youtu.be/sLhA88EUVDU?si=q9s0A3HTsnxWMybX
-  el musical, en directo por: centros escolares
+  centros escolares
   https://youtu.be/GkmiiCa8qCU?si=GEwIMve37QbstajJ
-  y los peces… hablaron por: investigadoras marinas
+  investigadoras marinas
 
 
 
