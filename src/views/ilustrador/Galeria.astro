@@ -1,10 +1,22 @@
 ---
 const nombre = 'Pablo Tribiño';
 const imagenes = [
-  '/assets/colaboradores/pablo-tribino/gallery-1.jpg',
-  '/assets/colaboradores/pablo-tribino/gallery-2.jpg',
-  '/assets/colaboradores/pablo-tribino/gallery-3.jpg',
-  '/assets/colaboradores/pablo-tribino/gallery-4.jpg',
+  {
+    src: '/assets/colaboradores/pablo-tribino/el-coronel-espada-afilada-si-los-peces-hablaran.jpg',
+    nombre: 'El coronel Espada Afilada',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/gusshy-si-los-peces-hablaran.jpg',
+    nombre: 'Gusshy',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/el-sr-tentaculus-si-los-peces-hablaran.jpg',
+    nombre: 'El Sr. Tentáculus',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/don-canino-si-los-peces-hablaran.jpg',
+    nombre: 'Don Canino',
+  },
 ];
 ---
 
@@ -19,19 +31,19 @@ const imagenes = [
     </div>
 
     <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-      {imagenes.map((src, i) => (
+      {imagenes.map((imagen) => (
         <a
-          href={src}
+          href={imagen.src}
           target="_blank"
           rel="noopener noreferrer"
           data-lightbox
           data-gallery="pablo-tribino"
-          data-caption={`${nombre} — imagen ${i + 1} de ${imagenes.length}`}
+          data-caption={`${imagen.nombre}, de Si los peces hablaran`}
           class="reveal gallery-item group relative block aspect-square overflow-hidden rounded-xl bg-azul/30 ring-1 ring-caparol/10 transition duration-300 hover:-translate-y-1 hover:ring-arena/70 hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-arena"
         >
           <img
-            src={src}
-            alt={`${nombre} — imagen ${i + 1}`}
+            src={imagen.src}
+            alt={`${imagen.nombre}, personaje de Si los peces hablaran ilustrado por ${nombre}`}
             loading="lazy"
             class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.06]"
           />
