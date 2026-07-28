@@ -1,16 +1,16 @@
 ---
 const imagenes = [
   {
-    src: '/assets/galeria/musical/Musical-elegir2_Captura-de-pantalla-2016-10-08-a-las-18.47.52.webp',
-    alt: 'Escena del musical Si los peces hablaran',
+    src: "/assets/galeria/musical/Musical-elegir2_Captura-de-pantalla-2016-10-08-a-las-18.47.52.webp",
+    alt: "Escena del musical Si los peces hablaran",
   },
   {
-    src: '/assets/galeria/musical/SLPH_Centro-de-Danza-Sandra-Santa-Cruz_D.-Canino.webp',
-    alt: 'Escena del musical Si los peces hablaran, Centro de Danza Sandra Santa Cruz',
+    src: "/assets/galeria/musical/SLPH_Centro-de-Danza-Sandra-Santa-Cruz_D.-Canino.webp",
+    alt: "Escena del musical Si los peces hablaran, Centro de Danza Sandra Santa Cruz",
   },
   {
-    src: '/assets/galeria/musical/Musical-elegir2_COMPROBAR-LA-QUE-ESTA-TIENE-MAS-Captura-de-pantalla-2016-10-08-a-las-19.51.13.webp',
-    alt: 'Escena del musical Si los peces hablaran',
+    src: "/assets/galeria/musical/Musical-elegir2_COMPROBAR-LA-QUE-ESTA-TIENE-MAS-Captura-de-pantalla-2016-10-08-a-las-19.51.13.webp",
+    alt: "Escena del musical Si los peces hablaran",
   },
 ] as const;
 ---
@@ -20,11 +20,13 @@ const imagenes = [
     <div class="reveal flex items-center gap-5">
       <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
       <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
-        El musical en escena
+        EL MUSICAL DEL CENTRO DE DANZA
       </span>
     </div>
 
-    <div class="mt-8 grid items-start gap-6 mx-auto max-w-xl lg:max-w-none lg:grid-cols-3">
+    <div
+      class="mt-8 grid items-start gap-6 mx-auto max-w-xl lg:max-w-none lg:grid-cols-3"
+    >
       {
         imagenes.map((img, i) => (
           <a
