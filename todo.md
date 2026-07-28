@@ -9,6 +9,8 @@
   https://youtu.be/GkmiiCa8qCU?si=GEwIMve37QbstajJ
   investigadoras marinas
 - http://localhost:4321/programa fische austauschen durch mit brille
+- http://localhost:4321/noticias Foto format
+- pulpo.cloud für blog artikel und fokus für bilder
 
 
 

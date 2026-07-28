@@ -1,12 +1,12 @@
 ---
-import { Icon } from 'astro-icon/components';
-
 type Shop = {
   name: string;
   city: string;
   address: string;
   /** Optional override; otherwise the address is used for the maps query. */
   mapQuery?: string;
+  /** Optional website of the shop. */
+  href?: string;
 };
 
 type Region = {
@@ -24,41 +24,55 @@ const regions: Region[] = [
         name: 'Librería Canaima',
         city: 'Las Palmas de Gran Canaria',
         address: 'C. Senador Castillo Olivares, 7, 35003',
+        href: 'https://www.libreriacanaima.com/',
       },
       {
         name: 'El Libro Técnico — Casa del Lector',
         city: 'Las Palmas de Gran Canaria',
         address: 'P.º de Tomás Morales, 44, 35003',
+        href: 'https://www.ellibrotecnico.com/',
       },
       {
         name: 'Librería Trébol',
         city: 'Teror',
         address: 'C. Real de la Pl., 7, 35330',
+        href: 'https://trebol.shop/',
       },
       {
         name: 'La Librería del Cabildo',
         city: 'Las Palmas de Gran Canaria',
         address: 'C. Cano, 24, 35002',
+        href: 'https://libroscanarios.org/',
       },
       {
         name: 'Librería Greda Canarias',
         city: 'Teror',
         address: 'Plaza del Pino, 1, 35330',
+        href: 'https://www.facebook.com/libreriagredacanarias/',
       },
       {
         name: 'Museo Casa de Colón',
         city: 'Las Palmas de Gran Canaria',
         address: 'C. Colón, 1, 35001',
+        href: 'https://casadecolon.grancanaria.com/',
       },
       {
         name: 'Librería El Rincón de Arminda',
         city: 'Gáldar',
         address: 'C. Audiencia, 2, 35460',
+        href: 'https://cuevapintada.grancanaria.com/tienda',
       },
       {
         name: 'Poema del Mar',
         city: 'Las Palmas de Gran Canaria',
         address: 'Av. de los Consignatarios, s/n, 35008',
+        href: 'https://www.poema-del-mar.com/',
+      },
+      {
+        name: 'Librería Primicia',
+        city: 'Maspalomas',
+        address: 'C. Plácido Domingo, 12, local 3, 35100',
+        href: 'https://www.libreriaprimicia.com/es/',
       },
     ],
   }
@@ -204,17 +218,34 @@ const mapsHref = (s: Shop) =>
                     {shop.address}
                   </p>
 
-                  <a
-                    href={mapsHref(shop)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="mt-auto inline-flex items-center gap-2 self-start rounded-full border border-caparol/20 px-3 py-1.5 font-display text-xs tracking-[0.2em] text-caparol/85 uppercase transition group-hover:border-arena group-hover:text-arena focus:outline-none focus-visible:border-arena focus-visible:text-arena"
-                  >
-                    Cómo llegar
-                    <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                      <path d="M5 12h14M13 6l6 6-6 6"/>
-                    </svg>
-                  </a>
+                  <div class="mt-auto flex flex-wrap items-center gap-2">
+                    <a
+                      href={mapsHref(shop)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 rounded-full border border-caparol/20 px-3 py-1.5 font-display text-xs tracking-[0.2em] text-caparol/85 uppercase transition group-hover:border-arena group-hover:text-arena focus:outline-none focus-visible:border-arena focus-visible:text-arena"
+                    >
+                      Cómo llegar
+                      <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                      </svg>
+                    </a>
+                    {shop.href && (
+                      <a
+                        href={shop.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 rounded-full border border-caparol/20 px-3 py-1.5 font-display text-xs tracking-[0.2em] text-caparol/85 uppercase transition group-hover:border-celeste group-hover:text-celeste focus:outline-none focus-visible:border-celeste focus-visible:text-celeste"
+                      >
+                        Web
+                        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <circle cx="12" cy="12" r="9" />
+                          <path d="M3 12h18" />
+                          <path d="M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
                 </article>
               </li>
             ))}
