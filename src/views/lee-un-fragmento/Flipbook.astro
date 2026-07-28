@@ -1,9 +1,16 @@
 ---
-const totalPages = 19;
-const pages = Array.from({ length: totalPages }, (_, i) => {
-  const n = String(i + 1).padStart(2, "0");
-  return { n: i + 1, src: `/assets/fragmento/${n}.webp` };
-});
+import fs from "node:fs";
+import path from "node:path";
+
+// Seiten zur Build-Zeit aus dem Ordner lesen, damit die Anzahl nicht
+// auseinanderläuft, wenn das Fragment neu aus dem PDF generiert wird.
+const BASE = path.resolve(process.cwd(), "public/assets/fragmento");
+const pages = fs
+  .readdirSync(BASE)
+  .filter((f) => /\.webp$/i.test(f))
+  .sort()
+  .map((file, i) => ({ n: i + 1, src: `/assets/fragmento/${file}` }));
+const totalPages = pages.length;
 ---
 
 <section id="fragmento" class="relative isolate overflow-hidden pb-20 sm:pb-28">
