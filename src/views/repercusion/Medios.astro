@@ -1,59 +1,79 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
 const videos = [
   {
-    src: '/videos/comprar-1.mp4',
-    poster: '/videos/comprar-1-poster.webp',
-    title: 'Si los peces hablaran · Televisión Canaria',
-    caption: 'el musical, en directo.',
-    tilt: '-rotate-1',
+    src: "/videos/comprar-1.mp4",
+    poster: "/videos/comprar-1-poster.webp",
+    title: "Si los peces hablaran · Televisión Canaria",
+    caption: "el musical, en directo.",
+    tilt: "-rotate-1",
   },
   {
-    src: '/videos/comprar-2.mp4',
-    poster: '/videos/comprar-2-poster.webp',
-    title: 'Un fragmento del musical · Televisión Canaria',
-    caption: 'y los peces… hablaron.',
-    tilt: 'rotate-1',
+    src: "/videos/comprar-2.mp4",
+    poster: "/videos/comprar-2-poster.webp",
+    title: "Un fragmento del musical · Televisión Canaria",
+    caption: "y los peces… hablaron.",
+    tilt: "rotate-1",
   },
 ];
 ---
 
 <section id="medios" class="relative isolate overflow-hidden py-20 sm:py-28">
   <!-- Drifting bubbles -->
-  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-    <span class="anim-float-soft absolute top-[14%] left-[7%] block h-3 w-3 rounded-full bg-celeste/40"></span>
-    <span class="anim-float absolute bottom-[18%] left-[12%] block h-2 w-2 rounded-full bg-arena/50"></span>
-    <span class="anim-float-soft absolute top-[24%] right-[8%] block h-2.5 w-2.5 rounded-full bg-caparol/30"></span>
-    <span class="anim-float absolute right-[14%] bottom-[20%] block h-4 w-4 rounded-full bg-celeste/30"></span>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+  >
+    <span
+      class="anim-float-soft absolute top-[14%] left-[7%] block h-3 w-3 rounded-full bg-celeste/40"
+    ></span>
+    <span
+      class="anim-float absolute bottom-[18%] left-[12%] block h-2 w-2 rounded-full bg-arena/50"
+    ></span>
+    <span
+      class="anim-float-soft absolute top-[24%] right-[8%] block h-2.5 w-2.5 rounded-full bg-caparol/30"
+    ></span>
+    <span
+      class="anim-float absolute right-[14%] bottom-[20%] block h-4 w-4 rounded-full bg-celeste/30"
+    ></span>
   </div>
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_45%_at_85%_15%,rgba(250,222,170,0.07),transparent_70%)]"
-  ></div>
+  >
+  </div>
 
   <div class="mx-auto max-w-6xl px-6">
     <!-- Header -->
     <div class="reveal mx-auto max-w-3xl text-center">
       <div class="flex items-center justify-center gap-3 sm:gap-4">
         <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
-        <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+        <span
+          class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm"
+        >
           En los medios
         </span>
         <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
       </div>
 
-      <h2 class="mt-6 font-display text-[clamp(2rem,5.5vw,4rem)] leading-[0.95] text-caparol">
+      <h2
+        class="mt-6 font-display text-[clamp(2rem,5.5vw,4rem)] leading-[0.95] text-caparol"
+      >
         Emitido en
         <span class="whitespace-nowrap">
           <span class="hand-underline text-arena">Televisión Canaria</span>
         </span>
       </h2>
 
-      <p class="reveal reveal-delay-1 mx-auto mt-6 max-w-xl text-base text-caparol/80 sm:text-lg">
-        El cuento saltó del papel al escenario, y el escenario llegó a la
-        pantalla. Estos fragmentos del musical, emitidos por Televisión
-        Canaria, son parte de la huella que SLPH va dejando.
+      <p
+        class="reveal reveal-delay-1 mx-auto mt-6 max-w-xl text-base text-caparol/80 sm:text-lg"
+      >
+        Si los peces hablaran saltó del escenario al cuento, de ahí a talleres y
+        performances y volvió nuevamente a los escenarios para llegar a la
+        pantalla. Estos fragmentos emitidos por la Televisión Canaria, de la
+        entrevista del programa “Canarias es Cultura”, son parte de la huella
+        que SLPH va dejando.
       </p>
     </div>
 
@@ -61,7 +81,9 @@ const videos = [
     <div class="mt-14 grid gap-12 sm:mt-20 sm:gap-10 lg:grid-cols-2 lg:gap-12">
       {
         videos.map((video, i) => (
-          <figure class={`clip-frame reveal reveal-delay-${i + 1} ${video.tilt}`}>
+          <figure
+            class={`clip-frame reveal reveal-delay-${i + 1} ${video.tilt}`}
+          >
             <div class="player-wrap relative overflow-hidden bg-azul-deep">
               <media-player
                 class="medios-player"
@@ -76,7 +98,10 @@ const videos = [
                   <media-poster class="vds-poster" />
                 </media-provider>
                 <media-video-layout />
-                <media-play-button class="medios-play-overlay" aria-label="Reproducir vídeo">
+                <media-play-button
+                  class="medios-play-overlay"
+                  aria-label="Reproducir vídeo"
+                >
                   <span class="medios-play-circle">
                     <Icon name="game-icons:play-button" aria-hidden="true" />
                   </span>
@@ -204,10 +229,10 @@ const videos = [
 </style>
 
 <script>
-  import 'vidstack/player';
-  import 'vidstack/player/ui';
-  import 'vidstack/player/layouts/default';
-  import 'vidstack/player/styles/default/theme.css';
-  import 'vidstack/player/styles/default/poster.css';
-  import 'vidstack/player/styles/default/layouts/video.css';
+  import "vidstack/player";
+  import "vidstack/player/ui";
+  import "vidstack/player/layouts/default";
+  import "vidstack/player/styles/default/theme.css";
+  import "vidstack/player/styles/default/poster.css";
+  import "vidstack/player/styles/default/layouts/video.css";
 </script>
