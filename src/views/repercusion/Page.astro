@@ -2,6 +2,9 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Medios from './Medios.astro';
+import Menores from './Menores.astro';
+import Anecdota from './Anecdota.astro';
+import Prensa from './Prensa.astro';
 import Origen from './Origen.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
 import { breadcrumbSchema } from '../../lib/seo';
@@ -23,6 +26,9 @@ const breadcrumb = breadcrumbSchema([
   <SubNavCuento current="repercusion" />
   <Hero />
   <Medios />
+  <Menores />
+  <Anecdota />
+  <Prensa />
   <Origen />
 </MainLayout>
 

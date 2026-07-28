@@ -1,0 +1,100 @@
+---
+const articulos = [
+  {
+    medio: "La Provincia",
+    titular:
+      "«Si los peces hablaran» denuncia la contaminación del medio marino",
+    accion: "Leer el artículo",
+    url: "https://www.laprovincia.es/cultura/2016/07/14/peces-hablaran-denuncia-contaminacion-medio-9881951.html",
+  },
+  {
+    medio: "El Diario",
+    titular:
+      "«Si los peces hablaran…», un espectáculo multidisciplinar en defensa del mar",
+    accion: "Leer el artículo",
+    url: "https://www.eldiario.es/canariasahora/cultura/hablaran-espectaculo-multidisciplinar-defensa-mar_1_3921160.html",
+  },
+  {
+    medio: "El Espejo Canario",
+    titular: "«Si los peces hablaran…» en El Espejo Canario",
+    accion: "Escuchar la entrevista",
+    url: "https://www.ivoox.com/noticia-sabrosa-si-peces-hablaran-audios-mp3_rf_12196242_1.html",
+  },
+];
+---
+
+<section id="prensa" class="relative isolate overflow-hidden pb-20 sm:pb-28">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_45%_at_20%_20%,rgba(100,170,210,0.10),transparent_70%)]"
+  >
+  </div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal mx-auto max-w-3xl text-center">
+      <div class="flex items-center justify-center gap-3 sm:gap-4">
+        <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+        <span
+          class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm"
+        >
+          Repercusión en prensa
+        </span>
+        <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+      </div>
+
+      <h2
+        class="mt-6 font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] text-caparol"
+      >
+        La prensa dio voz
+        <span class="hand-underline text-arena">al estreno</span>
+      </h2>
+
+      <p
+        class="reveal reveal-delay-1 mx-auto mt-6 max-w-xl text-base text-caparol/80 sm:text-lg"
+      >
+        ¿Quieres conocer cómo la prensa contó el estreno de
+        <em class="text-arena not-italic">Si los peces hablaran…</em>?
+        ¡Puedes leerlo!
+      </p>
+    </div>
+
+    <ul class="mt-12 grid gap-6 sm:mt-16 lg:grid-cols-3">
+      {
+        articulos.map((articulo, i) => (
+          <li class={`reveal reveal-delay-${i + 1}`}>
+            <a
+              href={articulo.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex h-full flex-col rounded-2xl border border-arena/25 bg-azul/50 p-7 ring-1 ring-caparol/10 transition duration-300 hover:-translate-y-1 hover:border-arena/60 hover:bg-azul/70 sm:p-8"
+            >
+              <span class="font-display text-sm tracking-[0.3em] text-celeste uppercase">
+                {articulo.medio}
+              </span>
+
+              <span class="mt-4 flex-1 text-lg leading-snug text-caparol sm:text-xl">
+                {articulo.titular}
+              </span>
+
+              <span class="mt-6 inline-flex items-center gap-2 font-display text-xs tracking-[0.2em] text-arena uppercase transition group-hover:text-caparol">
+                {articulo.accion}
+                <svg
+                  viewBox="0 0 24 24"
+                  class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17L17 7M9 7h8v8" />
+                </svg>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

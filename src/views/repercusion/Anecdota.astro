@@ -1,0 +1,98 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section class="relative isolate overflow-hidden pb-20 sm:pb-28">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_50%_at_80%_30%,rgba(250,222,170,0.08),transparent_70%)]"
+  >
+  </div>
+
+  <div class="mx-auto max-w-5xl px-6">
+    <div class="reveal flex items-center justify-center gap-4">
+      <span aria-hidden="true" class="h-px w-10 bg-celeste/60 sm:w-16"></span>
+      <p class="font-hand text-2xl text-celeste sm:text-3xl">anécdota…</p>
+      <span aria-hidden="true" class="h-px w-10 bg-celeste/60 sm:w-16"></span>
+    </div>
+
+    <h2
+      class="reveal reveal-delay-1 mx-auto mt-5 max-w-2xl text-center font-display text-[clamp(1.6rem,4vw,2.75rem)] leading-[1.05] text-caparol"
+    >
+      Un emocionante reencuentro
+      <span class="text-arena">tras la pandemia</span>
+    </h2>
+
+    <!-- Paper note with the quote -->
+    <div class="reveal reveal-delay-2 relative mt-12">
+      <div
+        aria-hidden="true"
+        class="anim-float-soft absolute -bottom-6 -left-4 z-10 hidden h-24 w-24 items-center justify-center rounded-full bg-azul text-arena shadow-xl ring-1 ring-arena/30 sm:flex"
+      >
+        <Icon name="game-icons:clownfish" class="h-12 w-12" />
+      </div>
+
+      <figure
+        class="paper tilt-l1 relative overflow-hidden rounded-[2rem] p-8 text-azul ring-1 ring-arena/40 transition duration-500 hover:rotate-0 sm:p-12"
+      >
+        <!-- Decorative wave pattern -->
+        <svg
+          class="pointer-events-none absolute -top-6 -right-6 h-40 w-40 text-azul/10"
+          viewBox="0 0 100 100"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 30 Q 25 10 50 30 T 100 30 M0 50 Q 25 30 50 50 T 100 50 M0 70 Q 25 50 50 70 T 100 70"
+            stroke-linecap="round"></path>
+        </svg>
+
+        <blockquote class="relative text-center">
+          <p
+            class="font-display text-[clamp(1.75rem,5.5vw,3.5rem)] leading-[1.02] text-azul"
+          >
+            “Mamá tenemos que
+            <span class="text-arena-deep">cambiar el mundo”</span>
+          </p>
+        </blockquote>
+
+        <figcaption
+          class="relative mx-auto mt-8 max-w-2xl space-y-4 text-base leading-relaxed text-azul/85 sm:text-lg"
+        >
+          <p>
+            Así de contundente fue la frase de un niño de cuatro años del CEIP
+            Capitán General Julio Coloma Gallegos, en Sevilla, tras descubrir el
+            cuento en su colegio.
+          </p>
+          <p>
+            En plena pandemia, su profesora se interesó por nuestro cuento y
+            quedó en compartir con nosotros la reacción de su alumnado. Se nos
+            saltaron las lágrimas al escuchar las palabras de este “pequeño gran
+            hombre”, que comprendió, con tan solo cuatro años, la necesidad de
+            actuar para proteger el planeta. Y cuanto antes.
+          </p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <p
+      class="reveal reveal-delay-3 mx-auto mt-12 max-w-3xl text-center text-lg leading-relaxed text-caparol/90 sm:text-xl"
+    >
+      Los menores son nuestro motor y la razón de que
+      <em class="text-arena not-italic">Si los peces hablaran…</em>
+      siga creciendo y diversificándose para llegar cada vez a más personas.
+    </p>
+  </div>
+</section>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .paper,
+    .paper:hover {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+import Clip from "./Clip.astro";
+---
+
+<section id="menores" class="relative isolate overflow-hidden py-20 sm:py-28">
+  <!-- Drifting bubbles -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+  >
+    <span
+      class="anim-float absolute top-[12%] left-[10%] block h-2.5 w-2.5 rounded-full bg-arena/45"
+    ></span>
+    <span
+      class="anim-float-soft absolute bottom-[22%] left-[6%] block h-4 w-4 rounded-full bg-celeste/30"
+    ></span>
+    <span
+      class="anim-float absolute top-[30%] right-[9%] block h-2 w-2 rounded-full bg-caparol/30"
+    ></span>
+  </div>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_45%_at_15%_25%,rgba(100,170,210,0.10),transparent_70%)]"
+  >
+  </div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
+      <!-- Text column -->
+      <div class="lg:col-span-6">
+        <div class="reveal flex items-center gap-4">
+          <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+          <span
+            class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm"
+          >
+            En los menores
+          </span>
+        </div>
+
+        <h2
+          class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] text-caparol"
+        >
+          Una verdadera
+          <span class="hand-underline text-arena">hazaña</span>
+        </h2>
+
+        <div
+          class="reveal reveal-delay-2 mt-6 space-y-5 text-base leading-relaxed text-caparol/90 sm:text-lg"
+        >
+          <p>
+            Uno de nuestros baluartes es conquistar al público menudo. Educar, y
+            reeducar conductas nocivas para el planeta es un objetivo y hacer
+            que los menores se conviertan en motores de cambio en adultos,
+            ¡otra de nuestras metas!
+          </p>
+          <p>
+            Es imposible documentar toda nuestra trayectoria, pero ejemplos como
+            estos, sirven para apreciar el alcance de nuestro trabajo, sobre
+            todo, cuando se trata de edades tan tempranas.
+          </p>
+        </div>
+      </div>
+
+      <!-- Interview clip -->
+      <div class="lg:col-span-6">
+        <Clip
+          class="reveal reveal-delay-2 -rotate-1"
+          src="/videos/menores-noa.mp4"
+          poster="/videos/menores-noa-poster.webp"
+          title="La entrevista de Noa · Si los peces hablaran"
+          caption="la entrevista de Noa"
+        />
+      </div>
+    </div>
+
+    <!-- Beach clip + closing claim -->
+    <div
+      class="mt-16 grid items-center gap-10 sm:mt-24 lg:grid-cols-12 lg:gap-14"
+    >
+      <div class="flex justify-center lg:col-span-5">
+        <Clip
+          class="reveal reveal-delay-1 w-full max-w-[16rem] rotate-2 sm:max-w-[18rem]"
+          src="/videos/menores-noa-playa.mp4"
+          poster="/videos/menores-noa-playa-poster.webp"
+          title="Noa en la playa · Si los peces hablaran"
+          caption="predicando con el ejemplo"
+          aspect="9/16"
+        />
+      </div>
+
+      <div class="reveal reveal-delay-2 lg:col-span-7">
+        <span
+          aria-hidden="true"
+          class="mx-auto block h-px w-20 bg-arena/50 lg:mx-0"></span>
+        <p
+          class="mt-6 text-center font-display text-[clamp(1.5rem,3.5vw,2.5rem)] leading-tight text-caparol lg:text-left"
+        >
+          Más allá de la edad, <span class="text-arena"
+            >¡todos entienden la problemática y pueden ayudar!</span
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
