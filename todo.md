@@ -17,6 +17,9 @@
 
 - contact email zu lang
 - buch: eine seite vor prologo - 27
+- foto sandra http://localhost:4321/autor
+
+
 
 ```bash
 magick -density 200 "book.pdf[0,9-25,146]" \
