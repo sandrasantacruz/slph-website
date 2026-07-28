@@ -1,5 +1,6 @@
 - fotos einen namen geben
 - fotos auch eine bildbeschreibung geben
+- http://localhost:4321/lee-un-fragmento - video mit dem buch anders machen
 
 
 
