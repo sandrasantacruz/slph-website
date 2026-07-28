@@ -159,3 +159,13 @@ cp .env.example .env
 ```
 
 `PUBLIC_POCKETBASE_URL` wird vom Node SSR für interne PB-API-Calls genutzt (defaults auf `http://127.0.0.1:8090`). `PB_APP_URL` setzt zusätzlich PocketBases Application-URL **und** ist die Browser-facing URL für File-Links (`<img src>`, Admin-Uploads) — wird zur Laufzeit gelesen, also pro Environment in der Compose-`environment` setzen. Die übrigen `PB_*`-Variablen liest das Go-Backend.
+
+```bash
+magick -density 200 "book.pdf[0,9-25,146]" \
+  -profile "/System/Library/ColorSync/Profiles/Generic CMYK Profile.icc" \
+  -profile "/System/Library/ColorSync/Profiles/sRGB Profile.icc" \
+  -colorspace sRGB \
+  -resize '1500x1500>' -strip -quality 85 \
+  +adjoin -scene 1 '%d.webp'
+for f in [0-9].webp; do mv "$f" "0$f"; done
+```
