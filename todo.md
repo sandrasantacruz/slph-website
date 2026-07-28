@@ -1,3 +1,8 @@
+- fotos einen namen geben
+- fotos auch eine bildbeschreibung geben
+
+
+
 - backend: datenüberarbeiten datum, etc.
 - backend: wenn archivo auch mit über detail seite anzeigen
 
