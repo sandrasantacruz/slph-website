@@ -13,6 +13,14 @@ const principios = [
       'Sensibilizar y despertar el amor por la fauna marina a través de la creatividad, evitando que se utilice el mar como un vertedero.',
   },
 ];
+
+// Die vier Buchstaben von SLPH als zweite Lesart des Namens.
+const siglas = [
+  { letra: 'S', palabra: 'Sostenibilidad' },
+  { letra: 'L', palabra: 'Legado' },
+  { letra: 'P', palabra: 'Paciencia' },
+  { letra: 'H', palabra: 'Herencia' },
+];
 ---
 
 <section class="relative isolate overflow-hidden py-20 sm:py-28">
@@ -110,6 +118,27 @@ const principios = [
       <p class="mt-6 text-center font-display text-sm tracking-[0.4em] text-caparol/60 uppercase">
         — SLPH
       </p>
+
+      <!-- Las siglas, leídas de otra manera -->
+      <div class="reveal mt-16 sm:mt-20">
+        <p class="mx-auto max-w-2xl text-center text-base text-caparol/90 sm:text-lg">
+          Nuestras siglas, además de <em class="not-italic font-hand text-2xl text-celeste sm:text-3xl">si los peces hablaran</em>, significan mucho más:
+        </p>
+
+        <dl class="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 sm:gap-x-4">
+          {
+            siglas.map((s, i) => (
+              <div class={`reveal reveal-delay-${i + 1} text-center`}>
+                <dt class="font-display text-[clamp(3rem,9vw,5rem)] leading-[0.9] text-arena">
+                  {s.letra}
+                </dt>
+                <span aria-hidden="true" class="mx-auto mt-3 block h-[2px] w-8 bg-celeste/50" />
+                <dd class="mt-3 text-base text-caparol sm:text-lg">{s.palabra}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
     </div>
   </div>
 </section>
