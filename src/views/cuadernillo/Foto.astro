@@ -1,0 +1,58 @@
+---
+const fotos = [
+  {
+    src: '/assets/cuento/oncologia-infantil-slph.webp',
+    alt: 'Los personajes de Si los peces hablaran visitando la planta de Oncología Infantil de un hospital',
+    caption: 'visitando Oncología Infantil',
+    tilt: 'tilt-l1',
+  },
+  {
+    src: '/assets/cuento/oncologia-infantil-slph-2.webp',
+    alt: 'Niñas de la compañía leyendo el cuento con una pequeña paciente en la sala de juegos del hospital',
+    caption: 'compartiendo buenos momentos',
+    tilt: 'tilt-r1',
+  },
+];
+---
+
+<section class="relative isolate overflow-hidden pt-4 pb-16 sm:pt-8 sm:pb-24">
+  <!-- Soft glow behind the photos -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_55%_at_50%_45%,rgba(250,222,170,0.09),transparent_70%)]"
+  >
+  </div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <ul
+      class="mx-auto grid max-w-4xl grid-cols-1 justify-items-center gap-y-12 sm:grid-cols-2 sm:items-start sm:gap-x-10 lg:gap-x-14"
+    >
+      {
+        fotos.map((foto, i) => (
+          <li
+            class={`reveal reveal-delay-${i + 1} w-full max-w-[20rem] sm:max-w-none`}
+          >
+            <div
+              class={`polaroid ${foto.tilt} w-full transition duration-500 hover:rotate-0`}
+            >
+              {/* Beide Fotos auf 3:4 beschnitten, damit die Polaroids gleich hoch sind */}
+              <img
+                src={foto.src}
+                alt={foto.alt}
+                class="block w-full object-cover"
+                style="aspect-ratio:3/4"
+                width="750"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+              />
+              <p class="absolute right-0 bottom-2 left-0 px-3 text-center font-hand text-xl leading-tight text-azul sm:text-2xl">
+                {foto.caption}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
