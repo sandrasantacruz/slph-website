@@ -49,7 +49,7 @@ const pages = Array.from({ length: totalPages }, (_, i) => {
       <!-- Decorative dashed frame -->
       <div
         aria-hidden="true"
-        class="anim-sway absolute -inset-2 -z-10 rounded-[1.5rem] border-2 border-dashed border-arena/35 sm:-inset-3"
+        class="anim-sway absolute -inset-2 -z-10 rounded-3xl border-2 border-dashed border-arena/35 sm:-inset-3"
       >
       </div>
 
@@ -68,10 +68,14 @@ const pages = Array.from({ length: totalPages }, (_, i) => {
           {
             pages.map((p, idx) => (
               <div class="page" data-density="soft">
+                {/* Alle Seiten werden eager geladen, damit beim Blättern nichts
+                    nachgeladen wird. Nur die ersten beiden konkurrieren mit dem
+                    initialen Rendering, der Rest läuft mit low priority. */}
                 <img
                   src={p.src}
                   alt={`Página ${p.n} del fragmento`}
-                  loading={idx < 4 ? "eager" : "lazy"}
+                  loading="eager"
+                  fetchpriority={idx < 2 ? "high" : "low"}
                   decoding="async"
                   draggable="false"
                   class="block h-full w-full object-contain"

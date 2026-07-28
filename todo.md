@@ -18,4 +18,12 @@
 - contact email zu lang
 - buch: eine seite vor prologo - 27
 
-magick -density 200 "book.pdf[0,9-25,146]" -resize '1500x1500>' -strip -quality 85 +adjoin -scene 1 %02d.webp
+```bash
+magick -density 200 "book.pdf[0,9-25,146]" \
+  -profile "/System/Library/ColorSync/Profiles/Generic CMYK Profile.icc" \
+  -profile "/System/Library/ColorSync/Profiles/sRGB Profile.icc" \
+  -colorspace sRGB \
+  -resize '1500x1500>' -strip -quality 85 \
+  +adjoin -scene 1 '%d.webp'
+for f in [0-9].webp; do mv "$f" "0$f"; done
+```
