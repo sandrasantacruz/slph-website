@@ -1,16 +1,16 @@
 ---
 const imagenes = [
   {
-    src: '/assets/galeria/cuento/E_B0044.webp',
-    alt: 'Del cuento Si los peces hablaran',
+    src: "/assets/galeria/cuento/E_B0044.webp",
+    alt: "Del cuento Si los peces hablaran",
   },
   {
-    src: '/assets/galeria/cuento/E_B0371-2.webp',
-    alt: 'Del cuento Si los peces hablaran',
+    src: "/assets/galeria/cuento/E_B0371-2.webp",
+    alt: "Del cuento Si los peces hablaran",
   },
   {
-    src: '/assets/galeria/cuento/Sin-lo-metálico.webp',
-    alt: 'Del cuento Si los peces hablaran',
+    src: "/assets/galeria/cuento/Sin-lo-metálico.webp",
+    alt: "Del cuento Si los peces hablaran",
   },
 ] as const;
 ---
@@ -18,13 +18,15 @@ const imagenes = [
 <section class="relative isolate overflow-hidden pt-6 pb-16 sm:pt-8 sm:pb-20">
   <div class="mx-auto max-w-6xl px-6">
     <div class="reveal flex items-center gap-5">
-      <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+      <span aria-hidden="true" class="h-0.5 w-16 bg-arena sm:w-24"></span>
       <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
-        El cuento por dentro
+        NOVEDOSA Y EXITOSA PRESENTACIÓN
       </span>
     </div>
 
-    <div class="mt-8 grid items-start gap-6 mx-auto max-w-xl lg:max-w-none lg:grid-cols-3">
+    <div
+      class="mt-8 grid items-start gap-6 mx-auto max-w-xl lg:max-w-none lg:grid-cols-3"
+    >
       {
         imagenes.map((img, i) => (
           <a
