@@ -1,0 +1,27 @@
+---
+const ods = ['3', '4', '8', '12', '13', '14', '17'];
+---
+
+<section class="relative isolate py-10 sm:py-14">
+  <div class="reveal mx-auto max-w-3xl px-6 text-center">
+    <p class="font-hand text-3xl leading-none text-celeste sm:text-4xl">
+      Trabajamos en favor de los ODS:
+    </p>
+
+    <p class="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-display text-2xl leading-none text-arena sm:gap-x-4 sm:text-3xl">
+      <span aria-hidden="true" class="text-[1.15em] leading-none">🌍</span>
+      {
+        ods.map((n, i) => (
+          <>
+            {i > 0 && (
+              <span aria-hidden="true" class="text-caparol/40">
+                ·
+              </span>
+            )}
+            <span>{n}</span>
+          </>
+        ))
+      }
+    </p>
+  </div>
+</section>
