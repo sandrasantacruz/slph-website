@@ -5,6 +5,8 @@ import {
   SITE_LOCALE,
   DEFAULT_OG_IMAGE,
   DEFAULT_OG_IMAGE_ALT,
+  DEFAULT_OG_IMAGE_WIDTH,
+  DEFAULT_OG_IMAGE_HEIGHT,
   absoluteUrl,
   type JsonLd,
 } from '../lib/seo';
@@ -14,6 +16,14 @@ interface Props {
   description?: string;
   image?: string;
   imageAlt?: string;
+  /**
+   * Maße des über `image` gesetzten Bildes. Nur angeben, wenn sie wirklich
+   * bekannt sind — Scraper reservieren damit das Vorschau-Layout, falsche
+   * Werte erzeugen eine verzerrte Vorschau. Ohne `image` gelten automatisch
+   * die Maße von DEFAULT_OG_IMAGE.
+   */
+  imageWidth?: number;
+  imageHeight?: number;
   /** Open-Graph `og:type`. Default 'website'; für News/Detail-Seiten 'article'. */
   type?: 'website' | 'article' | 'book' | 'profile';
   /** Wenn true, wird `<meta name="robots" content="noindex,nofollow">` ausgespielt. */
@@ -32,6 +42,8 @@ const {
   description,
   image,
   imageAlt,
+  imageWidth,
+  imageHeight,
   type = 'website',
   noindex = false,
   canonical,
@@ -49,6 +61,11 @@ const canonicalUrl =
 
 const ogImage = image ? absoluteUrl(image) : DEFAULT_OG_IMAGE;
 const ogImageAlt = imageAlt ?? DEFAULT_OG_IMAGE_ALT;
+
+// Maße nur ausspielen, wenn sie stimmen. Beim Default-Bild wissen wir sie,
+// bei PB-Covern nicht (PocketBase speichert keine Bilddimensionen).
+const ogImageWidth = image ? imageWidth : DEFAULT_OG_IMAGE_WIDTH;
+const ogImageHeight = image ? imageHeight : DEFAULT_OG_IMAGE_HEIGHT;
 ---
 
 <title>{fullTitle}</title>
@@ -68,8 +85,8 @@ const ogImageAlt = imageAlt ?? DEFAULT_OG_IMAGE_ALT;
 <meta property="og:locale" content={SITE_LOCALE} />
 <meta property="og:image" content={ogImage} />
 <meta property="og:image:alt" content={ogImageAlt} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+{ogImageWidth && <meta property="og:image:width" content={String(ogImageWidth)} />}
+{ogImageHeight && <meta property="og:image:height" content={String(ogImageHeight)} />}
 
 {type === 'article' && publishedTime && (
   <meta property="article:published_time" content={publishedTime} />

@@ -11,6 +11,9 @@ export const SITE_LOCALE = 'es_ES';
 export const SITE_LANG = 'es';
 
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/og-default.jpg`;
+// Maße von public/assets/og-default.jpg. Bei Austausch der Datei mit anpassen.
+export const DEFAULT_OG_IMAGE_WIDTH = 1200;
+export const DEFAULT_OG_IMAGE_HEIGHT = 630;
 export const DEFAULT_OG_IMAGE_ALT =
   'Si los peces hablaran… — programa de concienciación marina';
 

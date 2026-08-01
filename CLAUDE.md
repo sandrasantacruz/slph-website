@@ -43,12 +43,32 @@ Stattdessen:
   eingelesen — neue Bilder einfach in den jeweiligen Section-Ordner kopieren,
   kein Code-Edit nötig. Sektion-IDs: `musical`, `cuento`, `eventos`,
   `momentos`, `contaminacion`.
-- **PocketBase-Uploads** (Post-Cover und Inline-Bilder in `posts`) →
-  PocketBase liefert eigene Thumbnails per `?thumb=400x300` an der File-URL.
-  Direkt einbinden:
+- **PocketBase-Uploads** (Post-Cover und Inline-Bilder in `posts`) → **ohne**
+  `?thumb=`-Parameter direkt einbinden:
   ```astro
-  <img src={`${PB_URL}/api/files/${record.collectionId}/${record.id}/${record.cover}?thumb=400x300`} />
+  <img src={`${PB_URL}/api/files/${record.collectionId}/${record.id}/${record.cover}`} />
   ```
+  ⚠️ **`?thumb=` funktioniert hier nicht.** Die `cover`- und `images`-Felder
+  haben `thumbs: null` in den Feld-Optionen, und PocketBase liefert nur die
+  dort deklarierten Größen aus. Jede andere Größe fällt **still** auf das
+  Original zurück — man merkt es nicht, der Parameter ist wirkungslos.
+  Zweiter Grund, es so zu lassen: PB re-encodiert Thumbs von WebP-Quellen als
+  **PNG**. Für Fotos ist das Ergebnis rund 5× größer als das WebP-Original
+  (gemessen: 100×100 als PNG = 21.9 kB, dasselbe als WebP Q85 = 4.1 kB).
+  Wer echte Größenvarianten braucht, baut sie beim Upload, nicht über `?thumb=`.
+
+**Cover-Format-Konvention:** Post-Cover werden als **3:2 quer, 1500×1000 px,
+WebP Q85** hochgeladen. Listing (`NovedadCard`) und Detail-Hero rendern beide
+`aspect-[3/2]` + `object-cover`, das Bild wird also mittig auf 3:2 beschnitten.
+Da das Upload gleichzeitig als `og:image` dient und Social-Plattformen
+zusätzlich eigene Zuschnitte fahren (Facebook 1.91:1, Twitter 2:1, WhatsApp
+fast quadratisch), gilt: **Wesentliches in die mittleren ~80% der Höhe**, nicht
+an Ober- oder Unterkante.
+
+```sh
+magick input.jpg -resize '1500x1000^' -gravity center -extent 1500x1000 \
+  -strip -quality 85 out.webp
+```
 
 ## Datenmodell (PocketBase)
 

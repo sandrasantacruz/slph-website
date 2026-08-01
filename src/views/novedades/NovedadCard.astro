@@ -18,8 +18,10 @@ const fullFmt = new Intl.DateTimeFormat('es-ES', {
 });
 
 const cover = Array.isArray(item.cover) ? item.cover[0] : item.cover;
+// Kein ?thumb= — das cover-Feld hat keine thumbs-Sizes definiert, PocketBase
+// liefert dann still das Original aus. Siehe CLAUDE.md, Image-Strategie.
 const coverUrl = cover
-  ? `${PB_PUBLIC_URL}/api/files/${item.collectionId}/${item.id}/${cover}?thumb=0x600`
+  ? `${PB_PUBLIC_URL}/api/files/${item.collectionId}/${item.id}/${cover}`
   : null;
 
 function parseDate(raw: string | undefined): Date | null {
@@ -61,25 +63,16 @@ const href = `/noticias/${item.slug}`;
 ]}>
   <a href={href} class="flex h-full flex-col">
     <div class:list={[
-      'relative aspect-[4/3] overflow-hidden bg-azul/40',
+      'relative aspect-[3/2] overflow-hidden bg-azul/40',
       past ? 'opacity-80 group-hover:opacity-100' : '',
     ]}>
       {coverUrl ? (
-        <>
-          <img
-            src={coverUrl}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            class="absolute inset-0 h-full w-full scale-110 object-cover opacity-50 blur-xl"
-          />
-          <img
-            src={coverUrl}
-            alt=""
-            loading="lazy"
-            class="relative h-full w-full object-contain transition duration-500 group-hover:scale-105"
-          />
-        </>
+        <img
+          src={coverUrl}
+          alt=""
+          loading="lazy"
+          class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        />
       ) : (
         <div class="flex h-full items-center justify-center font-display text-3xl text-caparol/30">
           SLPH
