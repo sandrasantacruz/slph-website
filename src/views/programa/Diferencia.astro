@@ -47,24 +47,17 @@ const puntos = [
       {
         puntos.map((p, i) => (
           <li
-            class={`reveal group relative grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-2 py-6 sm:grid-cols-[3.5rem_1fr] sm:gap-x-8 sm:py-8 ${i % 2 === 1 ? 'sm:pl-10' : ''}`}
+            class={`reveal group relative grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-2 py-6 sm:grid-cols-[4rem_1fr] sm:gap-x-8 sm:py-8 ${i % 2 === 1 ? 'sm:pl-10' : ''}`}
             style={`transition-delay:${Math.min(i * 60, 360)}ms`}
           >
-            <!-- Tiny fish marker (SVG), points right, drifts on hover -->
-            <svg
-              viewBox="0 0 64 32"
-              class="mt-2 h-6 w-10 shrink-0 text-arena transition-transform duration-500 group-hover:translate-x-1 sm:h-7 sm:w-12"
+            <!-- Fish marker, points right, drifts on hover -->
+            <img
+              src="/assets/animals/pes.webp"
+              alt=""
               aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M4 16 Q 12 6 26 6 Q 44 6 52 16 Q 44 26 26 26 Q 12 26 4 16 Z" />
-              <path d="M52 16 L 62 8 L 60 16 L 62 24 Z" fill="currentColor" />
-              <circle cx="16" cy="14" r="1.4" fill="currentColor" />
-            </svg>
+              class="mt-1 w-12 shrink-0 transition-transform duration-500 group-hover:translate-x-1 sm:w-16"
+              loading="lazy"
+            />
             <p
               class={`text-base text-caparol/90 transition-colors group-hover:text-caparol sm:text-lg ${i === puntos.length - 1 ? 'font-display text-xl text-arena sm:text-2xl' : ''}`}
             >
