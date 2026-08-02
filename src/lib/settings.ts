@@ -1,29 +1,24 @@
-import type PocketBase from 'pocketbase';
-
 export interface Settings {
   whatsapp: string;
   phone: string;
   email: string;
 }
 
-const EMPTY: Settings = { whatsapp: '', phone: '', email: '' };
-
-// Singleton-Record: per Migration angelegt, daher gibt es genau einen.
-// Falls die Collection (noch) leer ist — z.B. unmittelbar nach Deploy ohne
-// Migration —, fallen wir auf leere Werte zurück, damit die öffentliche
-// Seite nicht crasht.
-export async function getSettings(pb: PocketBase): Promise<Settings> {
-  try {
-    const rec = await pb.collection('settings').getFirstListItem('');
-    return {
-      whatsapp: typeof rec.whatsapp === 'string' ? rec.whatsapp : '',
-      phone: typeof rec.phone === 'string' ? rec.phone : '',
-      email: typeof rec.email === 'string' ? rec.email : '',
-    };
-  } catch {
-    return EMPTY;
-  }
-}
+/**
+ * Kontaktdaten der Seite. Lagen bis zum Frontend-Umbau in der
+ * `settings`-Collection des alten PocketBase und wurden pro Request gelesen.
+ * Ohne Backend gibt es keine Laufzeitquelle mehr, deshalb stehen sie hier —
+ * eine Änderung ist ein Commit, kein Formular.
+ *
+ * Wenn sie wieder aus dem CMS kommen sollen: paula hat dafür
+ * `site_settings.contactEmail` / `contactPhone` / `contacts` (SCHEMA.md §5).
+ * Für diesen Tenant sind die Felder aktuell leer.
+ */
+export const SETTINGS: Settings = {
+  whatsapp: '651 80 37 99',
+  phone: '651 80 37 99',
+  email: 'info@silospeceshablaran.com',
+};
 
 // Liefert immer eine internationale tel:-URL mit +34, sofern kein anderer Prefix
 // schon gesetzt ist. Trennzeichen werden entfernt.

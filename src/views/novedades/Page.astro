@@ -1,22 +1,15 @@
 ---
+import { getCollection } from "astro:content";
+
 import MainLayout from "../../layouts/MainLayout.astro";
 import Hero from "./Hero.astro";
 import NovedadesList from "./NovedadesList.astro";
-import type { RecordModel } from "pocketbase";
+import { byDateDesc, postPath } from "../../lib/posts";
 import { breadcrumbSchema, SITE_URL, absoluteUrl } from "../../lib/seo";
 
-const pb = Astro.locals.pb;
-
-let items: RecordModel[] = [];
-let loadError: string | null = null;
-try {
-  items = await pb.collection("posts").getFullList({
-    filter: 'status = "published" && published_at <= @now',
-  });
-} catch (err) {
-  loadError =
-    err instanceof Error ? err.message : "No se pudieron cargar las noticias.";
-}
+// Zur Build-Zeit aus paula geladen (src/lib/paula-loader.ts). Fällt die Quelle
+// aus, bricht der Build ab — besser als eine still leere Liste im Deploy.
+const items = (await getCollection("posts")).sort(byDateDesc);
 
 const breadcrumb = breadcrumbSchema([
   { name: "Inicio", url: "/" },
@@ -34,15 +27,15 @@ const collectionPage = {
   isPartOf: { "@id": `${SITE_URL}/#website` },
   about: { "@id": `${SITE_URL}/#organization` },
   hasPart: items.slice(0, 20).map((it) => ({
-    "@type": it.typ === "event" ? "Event" : "NewsArticle",
-    name: it.title,
-    url: absoluteUrl(`/noticias/${it.slug}`),
-    ...(it.published_at ? { datePublished: it.published_at } : {}),
-    ...(it.typ === "event" && it.event_date
-      ? { startDate: it.event_date }
+    "@type": it.data.kind === "event" ? "Event" : "NewsArticle",
+    name: it.data.title,
+    url: absoluteUrl(postPath(it)),
+    ...(it.data.publishedAt
+      ? { datePublished: it.data.publishedAt.toISOString() }
       : {}),
-    ...(it.typ === "event" && it.event_end ? { endDate: it.event_end } : {}),
-    ...(it.excerpt ? { description: it.excerpt } : {}),
+    ...(it.data.startsAt ? { startDate: it.data.startsAt.toISOString() } : {}),
+    ...(it.data.endsAt ? { endDate: it.data.endsAt.toISOString() } : {}),
+    ...(it.data.teaser ? { description: it.data.teaser } : {}),
   })),
 };
 ---
@@ -53,13 +46,5 @@ const collectionPage = {
   jsonLd={[collectionPage, breadcrumb]}
 >
   <Hero />
-  {
-    loadError ? (
-      <section class="mx-auto max-w-6xl px-4 pb-24">
-        <p class="text-arena">{loadError}</p>
-      </section>
-    ) : (
-      <NovedadesList items={items} />
-    )
-  }
+  <NovedadesList items={items} />
 </MainLayout>

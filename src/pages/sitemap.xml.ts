@@ -1,10 +1,13 @@
 import type { APIRoute } from 'astro';
+import { getCollection } from 'astro:content';
+
+import { postPath } from '../lib/posts';
 import { SITE_URL } from '../lib/seo';
 
-// Dynamische Sitemap. Wir ziehen die Posts zur Request-Zeit aus PocketBase
-// (deshalb prerender=false): so spiegelt /sitemap.xml den aktuellen
-// publication-Status wider und erfasst neue Novedades ohne Rebuild.
-export const prerender = false;
+// Zur Build-Zeit erzeugt: die Artikel kommen aus der Content-Collection, die
+// beim Build aus paula geladen wird. Ein neuer Beitrag steht also mit dem
+// nächsten Deploy in der Sitemap, nicht in dem Moment, in dem er im Back
+// Office erscheint.
 
 interface UrlEntry {
   loc: string;
@@ -53,27 +56,17 @@ function urlNode(entry: UrlEntry): string {
   return `  <url>\n${parts.join('\n')}\n  </url>`;
 }
 
-export const GET: APIRoute = async ({ locals }) => {
+export const GET: APIRoute = async () => {
   const entries: UrlEntry[] = [...STATIC_URLS];
 
-  try {
-    const posts = await locals.pb.collection('posts').getFullList({
-      filter: 'status = "published" && published_at <= @now',
-      fields: 'slug,published_at,updated,event_date,event_end',
+  for (const post of await getCollection('posts')) {
+    const lastmod = post.data.updated ?? post.data.publishedAt;
+    entries.push({
+      loc: postPath(post),
+      lastmod: lastmod?.toISOString(),
+      changefreq: 'monthly',
+      priority: 0.6,
     });
-
-    for (const p of posts) {
-      if (!p.slug) continue;
-      const lastmod = p.updated || p.published_at;
-      entries.push({
-        loc: `/noticias/${p.slug}`,
-        lastmod: lastmod ? new Date(lastmod).toISOString() : undefined,
-        changefreq: 'monthly',
-        priority: 0.6,
-      });
-    }
-  } catch {
-    // PB nicht erreichbar — wir liefern trotzdem die statischen URLs aus.
   }
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>

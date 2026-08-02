@@ -1,8 +1,4 @@
 ---
-export const prerender = false;
 import Page from '../views/buscar/Page.astro';
-
-const query = Astro.url.searchParams.get('q') ?? '';
 ---
-
-<Page query={query} />
+<Page />

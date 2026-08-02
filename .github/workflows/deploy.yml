@@ -1,0 +1,60 @@
+name: cloudflare
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Ein Deploy pro Branch zur Zeit; laufende Deploys eines aelteren Commits abbrechen.
+concurrency:
+  group: cloudflare-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  CF_PROJECT_NAME: silospeceshablaran
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+        env:
+          # Nur relevant, solange Seiten zur Build-Zeit PocketBase lesen.
+          # Als Repository-Variable setzen, sonst schlicht leer.
+          PUBLIC_POCKETBASE_URL: ${{ vars.PUBLIC_POCKETBASE_URL }}
+          # Quelle der Content-Collection (src/lib/paula-loader.ts). Ohne diese
+          # beiden bricht der Build ab, der Loader liest sonst ins Leere.
+          PAULA_URL: ${{ vars.PAULA_URL }}
+          PAULA_RESTAURANT: ${{ vars.PAULA_RESTAURANT }}
+          PAULA_PUBLIC_URL: ${{ vars.PAULA_PUBLIC_URL }}
+          PAULA_LANG: ${{ vars.PAULA_LANG }}
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: >-
+            pages deploy dist
+            --project-name=${{ env.CF_PROJECT_NAME }}
+            --branch=${{ github.head_ref || github.ref_name }}

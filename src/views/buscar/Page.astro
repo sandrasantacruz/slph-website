@@ -1,15 +1,11 @@
 ---
+import { getCollection } from 'astro:content';
+
 import MainLayout from '../../layouts/MainLayout.astro';
 import NovedadCard from '../novedades/NovedadCard.astro';
-import type { RecordModel } from 'pocketbase';
+import { byDateDesc } from '../../lib/posts';
+import { normalize } from '../../lib/search';
 import { breadcrumbSchema } from '../../lib/seo';
-
-interface Props {
-  query: string;
-}
-
-const { query } = Astro.props;
-const q = query.trim();
 
 // Statische Seiten — Suchindex direkt im Code, da sie nicht in PB liegen.
 // Reicht für eine kleine Site; wenn das wächst, in eine eigene Datei ziehen.
@@ -112,42 +108,27 @@ const STATIC_PAGES: StaticEntry[] = [
   },
 ];
 
-let postResults: RecordModel[] = [];
-let staticResults: StaticEntry[] = [];
+// Die Seite ist prerendered, `?q=` gibt es zur Build-Zeit also nicht. Deshalb
+// wird alles Durchsuchbare einmal ausgeliefert und im Browser gefiltert: die
+// Seiten oben, die Artikel als fertige Karten. Das spart eine zweite
+// Kartenimplementierung in JavaScript und macht die Suche sofort reaktiv.
+const posts = (await getCollection('posts')).sort(byDateDesc);
 
-if (q) {
-  // Statische Seiten lokal filtern.
-  const needle = q.toLowerCase();
-  staticResults = STATIC_PAGES.filter((p) =>
-    `${p.title} ${p.description} ${p.keywords}`.toLowerCase().includes(needle),
-  );
+const haystack = (...parts: (string | undefined)[]) =>
+  normalize(parts.filter(Boolean).join(' '));
 
-  // PB-Filter: ~"…" ist Substring-Match. Doppelte Anführungszeichen escapen.
-  const escaped = q.replace(/"/g, '\\"');
-  try {
-    postResults = await Astro.locals.pb.collection('posts').getFullList({
-      filter: `status = "published" && published_at <= @now && (title ~ "${escaped}" || excerpt ~ "${escaped}")`,
-      sort: '-published_at',
-    });
-  } catch {
-    // PB unerreichbar — wir zeigen trotzdem die statischen Treffer.
-  }
-}
-
-const totalCount = staticResults.length + postResults.length;
 const breadcrumb = breadcrumbSchema([
   { name: 'Inicio', url: '/' },
   { name: 'Buscar', url: '/buscar' },
 ]);
 
-const pageTitle = q ? `Buscar: ${q}` : 'Buscar';
-const pageDescription = q
-  ? `Resultados de la búsqueda "${q}" en silospeceshablaran.com.`
-  : 'Busca contenido en la web del proyecto Si los peces hablaran.';
+const pageTitle = 'Buscar';
+const pageDescription =
+  'Busca contenido en la web del proyecto Si los peces hablaran.';
 ---
 
 <MainLayout title={pageTitle} description={pageDescription} noindex jsonLd={[breadcrumb]}>
-  <section class="mx-auto max-w-4xl px-6 py-20 sm:py-28">
+  <section class="mx-auto max-w-4xl px-6 py-20 sm:py-28" data-search-root>
     <p class="font-hand text-3xl text-celeste sm:text-4xl">a la deriva</p>
     <h1 class="mt-4 font-display text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] text-caparol">
       Buscar en la web
@@ -164,7 +145,6 @@ const pageDescription = q
         id="search-q"
         name="q"
         type="search"
-        value={q}
         placeholder="¿Qué quieres encontrar?"
         autocomplete="off"
         autofocus
@@ -178,55 +158,109 @@ const pageDescription = q
       </button>
     </form>
 
-    {q && (
-      <p class="mt-6 text-sm text-caparol/70">
-        {totalCount === 0
-          ? <>Sin resultados para <strong class="text-caparol">"{q}"</strong>.</>
-          : <>{totalCount} {totalCount === 1 ? 'resultado' : 'resultados'} para <strong class="text-caparol">"{q}"</strong></>}
+    <p class="mt-6 text-sm text-caparol/70" data-search-count hidden></p>
+
+    <section class="mt-12" data-search-section="paginas" hidden>
+      <h2 class="font-display text-xs uppercase tracking-[0.3em] text-arena">
+        Páginas
+      </h2>
+      <ul class="mt-6 divide-y divide-caparol/15 border-y border-caparol/15">
+        {STATIC_PAGES.map((page) => (
+          <li
+            class="py-5"
+            hidden
+            data-search={haystack(page.title, page.description, page.keywords)}
+          >
+            <a href={page.url} class="group block">
+              <h3 class="font-display text-2xl text-caparol transition group-hover:text-arena">
+                {page.title}
+              </h3>
+              <p class="mt-1 text-sm text-caparol/75 sm:text-base">{page.description}</p>
+              <p class="mt-1 font-mono text-xs text-celeste/80">
+                silospeceshablaran.com{page.url}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mt-16" data-search-section="noticias" hidden>
+      <h2 class="font-display text-xs uppercase tracking-[0.3em] text-arena">
+        Noticias
+      </h2>
+      <ul class="mt-6 grid gap-5 sm:gap-6">
+        {posts.map((item) => (
+          <NovedadCard
+            item={item}
+            hidden
+            search={haystack(item.data.title, item.data.teaser, item.data.location)}
+          />
+        ))}
+      </ul>
+    </section>
+
+    <div class="mt-12 rounded-2xl border border-caparol/15 bg-azul/40 p-6" data-search-empty hidden>
+      <p class="text-base text-caparol/85">
+        No hemos encontrado nada con ese término. Prueba con palabras más
+        generales o vuelve al <a href="/" class="text-arena hover:underline">inicio</a>.
       </p>
-    )}
-
-    {staticResults.length > 0 && (
-      <section class="mt-12">
-        <h2 class="font-display text-xs uppercase tracking-[0.3em] text-arena">
-          Páginas
-        </h2>
-        <ul class="mt-6 divide-y divide-caparol/15 border-y border-caparol/15">
-          {staticResults.map((page) => (
-            <li class="py-5">
-              <a href={page.url} class="group block">
-                <h3 class="font-display text-2xl text-caparol transition group-hover:text-arena">
-                  {page.title}
-                </h3>
-                <p class="mt-1 text-sm text-caparol/75 sm:text-base">{page.description}</p>
-                <p class="mt-1 font-mono text-xs text-celeste/80">
-                  silospeceshablaran.com{page.url}
-                </p>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
-
-    {postResults.length > 0 && (
-      <section class="mt-16">
-        <h2 class="font-display text-xs uppercase tracking-[0.3em] text-arena">
-          Noticias
-        </h2>
-        <ul class="mt-6 grid gap-5 sm:gap-6">
-          {postResults.map((item) => <NovedadCard item={item} />)}
-        </ul>
-      </section>
-    )}
-
-    {q && totalCount === 0 && (
-      <div class="mt-12 rounded-2xl border border-caparol/15 bg-azul/40 p-6">
-        <p class="text-base text-caparol/85">
-          No hemos encontrado nada con ese término. Prueba con palabras más
-          generales o vuelve al <a href="/" class="text-arena hover:underline">inicio</a>.
-        </p>
-      </div>
-    )}
+    </div>
   </section>
 </MainLayout>
+
+<script>
+  import { normalize } from '../../lib/search';
+
+  const root = document.querySelector<HTMLElement>('[data-search-root]');
+  const input = document.getElementById('search-q') as HTMLInputElement | null;
+  if (root && input) {
+    const count = root.querySelector<HTMLElement>('[data-search-count]')!;
+    const empty = root.querySelector<HTMLElement>('[data-search-empty]')!;
+    const sections = [...root.querySelectorAll<HTMLElement>('[data-search-section]')];
+    const items = sections.map((section) => ({
+      section,
+      entries: [...section.querySelectorAll<HTMLElement>('[data-search]')],
+    }));
+
+    function apply(raw: string) {
+      const q = normalize(raw);
+      let total = 0;
+
+      for (const { section, entries } of items) {
+        let visible = 0;
+        for (const el of entries) {
+          const hit = q !== '' && (el.dataset.search ?? '').includes(q);
+          el.hidden = !hit;
+          if (hit) visible += 1;
+        }
+        section.hidden = visible === 0;
+        total += visible;
+      }
+
+      const term = raw.trim();
+      count.hidden = term === '';
+      count.textContent =
+        total === 0
+          ? `Sin resultados para «${term}».`
+          : `${total} ${total === 1 ? 'resultado' : 'resultados'} para «${term}»`;
+      empty.hidden = term === '' || total > 0;
+
+      // Die URL mitführen, damit ein Treffer teilbar bleibt.
+      const url = new URL(location.href);
+      if (term) url.searchParams.set('q', term);
+      else url.searchParams.delete('q');
+      history.replaceState(null, '', url);
+    }
+
+    input.value = new URL(location.href).searchParams.get('q') ?? '';
+    apply(input.value);
+
+    input.addEventListener('input', () => apply(input.value));
+    // Kein Neuladen: die Seite ist statisch, gefiltert wird ohnehin hier.
+    root.querySelector('form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      apply(input.value);
+    });
+  }
+</script>

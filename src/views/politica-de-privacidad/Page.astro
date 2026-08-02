@@ -1,10 +1,8 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Contenido from './Contenido.astro';
-import { getSettings } from '../../lib/settings';
+import { SETTINGS as settings } from '../../lib/settings';
 import { breadcrumbSchema } from '../../lib/seo';
-
-const settings = await getSettings(Astro.locals.pb);
 const breadcrumb = breadcrumbSchema([
   { name: 'Inicio', url: '/' },
   { name: 'Política de privacidad', url: '/politica-de-privacidad' },

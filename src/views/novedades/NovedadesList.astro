@@ -1,22 +1,15 @@
 ---
-import type { RecordModel } from 'pocketbase';
 import NovedadCard from './NovedadCard.astro';
+import { byDateDesc, type Post } from '../../lib/posts';
 
 interface Props {
-  items: RecordModel[];
+  items: Post[];
 }
 
 const { items } = Astro.props;
 const BATCH = 12;
 
-function sortMs(item: RecordModel): number {
-  const raw = item.typ === 'event' ? item.event_date : item.published_at;
-  if (!raw) return 0;
-  const d = new Date(raw);
-  return Number.isNaN(d.getTime()) ? 0 : d.getTime();
-}
-
-const sorted = [...items].sort((a, b) => sortMs(b) - sortMs(a));
+const sorted = [...items].sort(byDateDesc);
 ---
 
 <section class="mx-auto max-w-6xl px-4 pb-24">

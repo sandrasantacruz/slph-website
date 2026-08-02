@@ -1,13 +1,21 @@
 # slph-website
 
-Website + Backend für Sandra Santacruz. Astro-Frontend (SSR via Node-Adapter) und ein eigenes PocketBase-Backend, gebaut als ein Go-Binary. Im Produktiv-Image liegen beide Prozesse plus Caddy als Reverse-Proxy unter s6-overlay in einem einzigen Container.
+Website für Sandra Santacruz. **Reines Astro-Frontend**, komplett statisch
+gebaut: kein Adapter, kein SSR, kein Laufzeit-Backend. Die Artikel und
+Veranstaltungen kommen zur Build-Zeit aus dem Multi-Tenant-CMS paula (siehe
+„Content-Collection aus paula"), alles andere steht im Repo.
+
+> Der Abschnitt zum Omnibus-Container (PocketBase, Caddy, s6-overlay) unten
+> beschreibt den **alten** Betrieb. Das `backend/`-Verzeichnis und die
+> `pb:*`-Skripte sind noch da, für die neue Auslieferung aber nicht mehr nötig.
 
 ## Stack
 
 | Komponente   | Wofür                                            | Port (intern) |
 | ------------ | ------------------------------------------------ | ------------- |
-| Astro 6 SSR  | Web-Frontend, gerendert via `@astrojs/node`      | `3000`        |
-| PocketBase   | DB, Auth, Admin-UI, REST-API – als eigenes Go-Binary aus `backend/` | `8090`        |
+| Astro 6      | Web-Frontend, **statisch** gebaut nach `dist/`   | –             |
+| paula        | CMS für Artikel und Veranstaltungen, nur zur Build-Zeit gelesen | – |
+| PocketBase   | Altbestand: DB und Admin-UI aus `backend/`, für die Auslieferung nicht mehr nötig | `8090` |
 | Caddy        | Reverse-Proxy: `/api/*` + `/_/*` → PocketBase, Rest → Astro | `8080`        |
 | s6-overlay   | Supervisor für die drei Prozesse im Omnibus-Container | –             |
 
@@ -15,10 +23,11 @@ Website + Backend für Sandra Santacruz. Astro-Frontend (SSR via Node-Adapter) u
 
 ```
 .
-├── astro.config.mjs        # output: server, adapter @astrojs/node standalone
+├── astro.config.mjs        # output: 'static', kein Adapter
 ├── src/
 │   ├── pages/              # Astro-Routen
-│   └── lib/pocketbase.ts   # JS-SDK Wrapper
+│   ├── content.config.ts   # Collection `posts` (Loader: lib/paula-loader.ts)
+│   └── lib/                # posts, search, seo, settings
 ├── backend/                # Go-Modul: slph.de/backend
 │   ├── main.go             # PocketBase-Entrypoint, Hooks, migratecmd
 │   ├── bootstrap.go        # Env-basierter Superuser- & Settings-Bootstrap
@@ -43,7 +52,8 @@ Website + Backend für Sandra Santacruz. Astro-Frontend (SSR via Node-Adapter) u
 
 ```bash
 pnpm install
-pnpm dev          # startet Astro (:4321) + PocketBase (:8090) parallel
+pnpm dev:web      # Astro allein (:4321) — reicht für die Seite
+pnpm dev          # zusätzlich das alte PocketBase (:8090)
 ```
 
 Erste Schritte zum Anlegen eines Superusers, ohne env zu setzen:
@@ -71,6 +81,7 @@ Nützliche URLs im Dev-Modus:
 | `pnpm pb:build`    | Standalone-Binary bauen → `bin/pocketbase`             |
 | `pnpm build`       | Astro Production-Build (`dist/`)                       |
 | `pnpm preview`     | Astro Production-Preview                               |
+| `pnpm migrate:paula` | Artikel ins neue System migrieren (siehe unten)       |
 
 ## Backend (PocketBase als Go-Binary)
 
@@ -149,6 +160,162 @@ Image pullen:
 ```bash
 docker pull ghcr.io/sandrasantacruz/slph-website:latest
 ```
+
+### Cloudflare Pages
+
+`.github/workflows/deploy.yml` baut auf Push nach `main` und deployed `dist/`
+per `wrangler pages deploy` in das Pages-Projekt **`silospeceshablaran`**.
+Pull Requests landen als Preview-Deployment unter dem Branch-Namen.
+
+Voraussetzungen (einmalig):
+
+1. Pages-Projekt `silospeceshablaran` im Cloudflare-Dashboard anlegen
+   (Typ „Direct Upload“, kein Git-Connect, sonst deployt Cloudflare parallel selbst).
+2. Repository-Secrets setzen:
+   - `CLOUDFLARE_API_TOKEN` (Permission „Cloudflare Pages: Edit“)
+   - `CLOUDFLARE_ACCOUNT_ID`
+3. Optional Repository-Variable `PUBLIC_POCKETBASE_URL`, solange Seiten zur
+   Build-Zeit PocketBase lesen.
+
+Der Workflow erwartet den Build-Output in `dist/`. Das passt: ohne Adapter
+schreibt Astro direkt dorthin, `dist/client` und `dist/server` gibt es nicht
+mehr.
+
+## Migration in das neue System (paula)
+
+`scripts/migrate-to-paula.mjs` übernimmt die Artikel dieser Seite in das
+Multi-Tenant-System (`SCHEMA.md` §13/§14):
+
+| Hier                       | Dort                                                  |
+| -------------------------- | ----------------------------------------------------- |
+| `posts.content` (BlockNote)| `posts.body` + `publishedBody` (`{es: "<p>…"}` HTML)  |
+| `posts.cover`              | `media`-Record (WebP ≤1500 px) + `posts.coverImage`   |
+| `posts.typ`                | `posts.kind` (`article`/`event`) + Tag `noticia`/`evento` |
+| `posts.event_date`/`_end`  | `posts.startsAt` / `endsAt`                           |
+| `posts.location`           | `posts.location` (lokalisiert)                        |
+| `posts.address_url`        | `posts.mapEmbed` (nur echte `/maps/embed`-URLs)       |
+| `posts.slug`               | `posts.postKey` + `routes.slug` = `noticias/<slug>`   |
+| `posts.excerpt`            | `posts.teaser`                                        |
+| `posts.published_at`       | `posts.publishedAt` (Fallback `event_date`)           |
+
+`visibleFrom` bleibt leer, migriert werden ausschließlich bereits
+veröffentlichte Beiträge. **Rubriken (`post_categories`) vergibt das Skript
+nicht**: es legt keine an und schreibt `category` leer. Artikel und
+Veranstaltung trennt `kind`. Achtung bei `--force`: der Lauf setzt `category`
+auch an bestehenden Artikeln zurück, eine im Admin von Hand gesetzte Rubrik
+geht dabei verloren.
+
+Das Skript ist **idempotent**: ein zweiter Lauf überspringt vorhandene Artikel
+(Erkennung über `postKey`, Bilder über `media.label`). `--force` aktualisiert
+sie stattdessen.
+
+```bash
+# Ziel-Zugang in .env eintragen (PAULA_URL, PAULA_EMAIL, PAULA_PASSWORD)
+pnpm migrate:paula --dry-run          # zeigt nur, was passieren würde
+pnpm migrate:paula                    # schreibt
+pnpm migrate:paula --only=news --limit=5
+pnpm migrate:paula --force            # bestehende Artikel überschreiben
+pnpm migrate:paula --prefix=blog      # anderes URL-Schema statt noticias/
+```
+
+Voraussetzungen im Ziel, die das Skript **nicht** anlegt:
+
+- das Restaurant selbst und ein `users`-Login mit `website`-Berechtigung
+  (daraus leitet das Skript den Tenant ab; alternativ `PAULA_SUPERUSER=1` plus
+  `PAULA_RESTAURANT`)
+- eine `pages`-Zeile mit Route-Slug `noticias` als Übersichtsseite
+  (`postList`-Block). Ohne sie sind die Artikel nur einzeln erreichbar.
+
+Drei Eigenheiten des Ziels, an die sich das Skript hält:
+
+- **Veranstaltungen:** `startsAt` ist für `kind=event` Pflicht (Go-Hook
+  `validateEvent`), deshalb bricht das Skript bei einem Event ohne Datum mit
+  Meldung ab, statt eine kaputte Zeile anzulegen. Und Events **verfallen**: die
+  „Demnächst"-Liste filtert `startsAt >= @now`. Alle 69 Bestands-Events liegen
+  in der Vergangenheit, landen also im Rückblick, nicht in der Vorschau. Über
+  ihre URL bleiben sie erreichbar.
+
+- **Bilder:** `media.file` muss WebP mit höchstens 1500 px Kantenlänge sein
+  (Go-Riegel `MaxImageEdge`), sonst lehnt das Backend den Upload ab. Bereits
+  passende Dateien werden unverändert durchgereicht, alles andere konvertiert
+  sharp. Die aktuellen Cover erfüllen die Grenze bereits.
+- **HTML:** der Artikelkörper läuft serverseitig durch bluemonday. Erlaubt sind
+  `p`, `h2`–`h4`, Listen, `a[href]`, `blockquote`, `pre/code`, `figure`,
+  Tabellen. Keine `class`-Attribute, kein `iframe`, und `<img>` **nur** mit
+  `data-media-id`. Das Skript erzeugt deshalb eigenes Markup und nutzt
+  `src/lib/blocknote-render.ts` (Tailwind-Klassen, YouTube-Embeds) bewusst nicht.
+
+### Content-Collection aus paula
+
+`src/content.config.ts` definiert **eine** Collection `posts` mit Artikeln und
+Veranstaltungen zusammen, gefüllt vom Loader `src/lib/paula-loader.ts`. Der
+läuft zur Build-Zeit und liest anonym: die List-Regel im Ziel gibt nur
+veröffentlichte und bereits sichtbare Beiträge heraus. Nach dem Build braucht
+die Seite kein PocketBase mehr, was die Voraussetzung für Cloudflare Pages ist.
+
+```astro
+---
+import { getCollection, render } from 'astro:content';
+
+const all = await getCollection('posts');
+const articulos = all.filter((p) => p.data.kind === 'article');
+const eventos = all.filter((p) => p.data.kind === 'event');
+
+const ahora = new Date();
+const proximos = eventos
+  .filter((p) => (p.data.endsAt ?? p.data.startsAt)! >= ahora)
+  .sort((a, b) => +a.data.startsAt! - +b.data.startsAt!);
+
+const { Content } = await render(all[0]);
+---
+```
+
+Was der Loader liefert:
+
+- `id` ist der `postKey` des Ziels, also stabil über Umbenennungen der URL.
+- `path` ist die **verbindliche** URL aus `routes` (z.B. `/noticias/tal-cual`),
+  `slug` nur deren letztes Segment für eine Seite wie `/noticias/[slug]`.
+  Im Ziel darf ein Slug beliebig aussehen und wird im Back Office geändert,
+  deshalb setzt der Loader kein Präfix voraus. Hat ein Beitrag mehrere Routen,
+  gewinnt die zuletzt angelegte, und der Build sagt welche.
+- Der Körper steht als fertiges HTML unter `rendered`, nicht in den Daten:
+  gesäubert hat ihn schon das Ziel, hier wird nichts mehr gerendert.
+- `<img data-media-id="…">` im HTML löst der Loader in echte Datei-URLs auf
+  (ohne `?thumb=`, siehe `CLAUDE.md`). Zeigt ein Bild ins Leere, fliegt es mit
+  einer Warnung raus, statt einen kaputten `<img>` auszuliefern.
+- Daten kommen entlokalisiert an: `title` ist ein String, nicht `{es: "…"}`.
+  Welche Sprache, sagt `PAULA_LANG` (Default `es`); fehlt sie an einem Beitrag,
+  nimmt der Loader die erste belegte.
+
+Aus dieser Collection lesen und damit **prerendered** sind: `/noticias`,
+`/noticias/<slug>`, `/sitemap.xml` und `/buscar`. Der URL-Parameter der
+Artikelseite ist die Entry-ID (`postKey`), nicht `data.path`: so bleiben die
+bestehenden Artikel-URLs stabil, auch wenn im Back Office ein Route-Slug
+umbenannt wird.
+
+Zwei Verhaltensänderungen, die daraus folgen:
+
+- **`/sitemap.xml` entsteht beim Build.** Ein neuer Beitrag steht mit dem
+  nächsten Deploy drin, nicht in dem Moment, in dem er im Back Office
+  erscheint.
+- **`/buscar` filtert im Browser.** Statisch gibt es kein `?q=` zur Build-Zeit,
+  also liefert die Seite alle durchsuchbaren Einträge einmal aus (13 Seiten und
+  alle Artikel als fertige Karten, versteckt) und blendet passende ein. Das
+  spart eine zweite Kartenimplementierung in JavaScript, macht die Suche
+  sofort reaktiv und kostet rund 44 kB gzip, etwa so viel wie `/noticias`.
+  Gesucht wird akzentunabhängig (`src/lib/search.ts`), „oceanos" findet also
+  auch „Océanos". Die URL wird per `history.replaceState` mitgeführt, ein
+  Treffer bleibt teilbar.
+
+Es gibt keine serverseitigen Routen mehr. `/admin`, die Middleware und die
+PocketBase-Helfer sind entfernt; die Kontaktdaten für `/contacto`,
+`/aviso-legal` und `/politica-de-privacidad` stehen als `SETTINGS` in
+`src/lib/settings.ts` statt in einer Collection.
+
+Nötige Env-Variablen: `PAULA_URL` und `PAULA_RESTAURANT`, optional
+`PAULA_LANG` und `PAULA_PUBLIC_URL` (Bild-Basis-URL, falls der Build eine
+andere Adresse erreicht als der Browser). In CI sind das Repository-Variablen,
+siehe `.github/workflows/deploy.yml`.
 
 ## .env
 

@@ -1,4 +1,0 @@
-#!/command/with-contenv sh
-exec /usr/local/bin/pocketbase serve \
-	--dir=/data/pb_data \
-	--http=127.0.0.1:8090

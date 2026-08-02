@@ -1,17 +1,16 @@
 ---
-export const prerender = false;
+import { getCollection } from 'astro:content';
+
 import Detail from '../../views/novedades/Detail.astro';
 
-const { slug } = Astro.params;
-if (!slug) return Astro.redirect('/noticias');
-
-let item;
-try {
-  item = await Astro.locals.pb.collection('posts').getFirstListItem(
-    `slug = "${slug.replace(/"/g, '\\"')}"`,
-  );
-} catch {
-  return Astro.redirect('/noticias');
+// Eine Seite je Beitrag zur Build-Zeit. Der Parameter ist die Entry-ID
+// (`postKey` im Ziel), nicht der Route-Slug aus dem CMS — siehe lib/posts.ts.
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
+
+const { post } = Astro.props;
 ---
-<Detail item={item} />
+
+<Detail post={post} />
