@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 import { postPath, type Post } from '../../lib/posts';
 
 interface Props {
@@ -54,11 +56,15 @@ const href = postPath(item);
       past ? 'opacity-80 group-hover:opacity-100' : '',
     ]}>
       {cover ? (
-        <img
+        <Image
           src={cover.src}
           alt={cover.alt ?? ""}
-          width={cover.width}
-          height={cover.height}
+          width={900}
+          height={600}
+          widths={[400, 800]}
+          fit="cover"
+          position="center"
+          sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
           loading="lazy"
           class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />

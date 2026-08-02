@@ -8,6 +8,14 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   output: 'static',
   integrations: [icon()],
+  image: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'pulpo.cloud' },
+      // lokale pulpo-Instanz (PULPO_URL in .env)
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'http', hostname: '127.0.0.1' },
+    ],
+  },
 
   server: {
     host: '127.0.0.1',

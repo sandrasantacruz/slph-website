@@ -12,30 +12,47 @@ ableiten kann.
 
 ## Rendering-Modell
 
-`astro.config.mjs` ist auf **`output: 'static'`**. Das heißt:
+`astro.config.mjs` steht auf **`output: 'static'` ohne Adapter**. Es gibt keine
+serverseitigen Routen mehr:
 
-- **Default ist Prerender** — neue Seiten unter `src/pages/` werden zur Build-Zeit
-  als statisches HTML in `dist/client/` ausgegeben.
-- **Opt-out** für serverseitig gerenderte Seiten via `export const prerender = false;`
-  ganz oben im Frontmatter (oder in `.ts`-Endpoints).
-- Aktuell SSR: alles unter `/admin/*` (Auth-geschützt, dynamische PB-Queries).
-- Aktuell prerendered: alle 15 öffentlichen Seiten.
-
-**Wenn du eine Seite mit Live-PB-Daten baust** (z.B. dynamisches `/noticias`-Listing),
-**nicht vergessen** `export const prerender = false`, sonst wird die Liste beim Build
-eingefroren.
+- Jede Seite unter `src/pages/` wird zur Build-Zeit gerendert und landet als
+  statisches HTML direkt in `dist/`.
+- `export const prerender = false` ist **kein gültiges Mittel mehr** — ohne
+  Adapter scheitert der Build daran.
+- Dynamische Inhalte kommen über die Content-Collection `posts`
+  (`src/content.config.ts`, Loader `src/lib/pulpo-loader.ts`), die beim Build
+  einmal aus dem CMS liest. Ein neuer Beitrag erscheint mit dem nächsten
+  Deploy, nicht sofort.
+- Was zur Laufzeit passieren muss, passiert im Browser. Beispiel: `/buscar`
+  liefert alle durchsuchbaren Einträge aus und filtert clientseitig.
 
 ## Image-Strategie
 
-**Wir verwenden Astros `<Image>` aus `astro:assets` bewusst NICHT.** Sharp ist keine
-Dependency, der `/_image`-Endpoint wird nie aufgerufen. Grund: in SSR-Modus hält das
-Image-Service-Cache jede Variante im RAM (~1,5–17 MB pro Variante), was bei mehr als
-einer Handvoll Bilder den Speicher gnadenlos auffrisst.
+Die Seite ist vollständig statisch. Bilder aus dem CMS laufen deshalb beim
+Build durch Astros `<Image />` aus `astro:assets`: sie werden heruntergeladen,
+skaliert, als WebP nach `dist/_astro/` geschrieben und im Markup lokal
+verlinkt. Die ausgelieferte Seite braucht das CMS zur Laufzeit nicht.
 
-Stattdessen:
+> Frühere Fassung dieser Datei verbot `astro:assets` samt `sharp`. Der Grund
+> war der SSR-Betrieb: der Image-Service hielt dort jede Variante im RAM
+> (~1,5–17 MB pro Variante). Ohne Adapter und ohne SSR gibt es diesen Cache
+> nicht mehr, die Verarbeitung passiert einmal beim Build. `sharp` ist deshalb
+> jetzt eine reguläre Dependency.
 
-- **Statische Marketing-Bilder** (Logo, Hero etc.) → optimiert in `public/assets/`
-  ablegen, plain `<img src="/assets/...">`.
+- **Entfernte Quellen freigeben:** `astro.config.mjs` listet unter
+  `image.remotePatterns` die erlaubten Hosts. Ohne Eintrag lehnt Astro das
+  Bild ab, statt es zu laden.
+- **Maße mitgeben:** `<Image>` braucht bei entfernten Quellen `width` und
+  `height`. Die stehen im `media`-Record und liefert der Loader in
+  `data.cover` mit. Kein `inferSize`, das lädt jedes Bild ein zweites Mal.
+- **Nicht hochskalieren:** Astro vergrößert nicht. Eine geforderte Breite über
+  der Quelle liefert die Quellbreite zurück; wer daneben `og:image:width`
+  setzt, schreibt sonst eine Lüge ins Markup. Für Vorschaubilder deshalb die
+  Maße aus `data.cover` nehmen (siehe `views/novedades/Detail.astro`).
+- **Vorschaubilder** über `getImage()` erzeugen und mit `absoluteUrl()`
+  ausgeben, damit auch `og:image` auf die eigene Domain zeigt.
+- **Statische Marketing-Bilder** (Logo, Hero etc.) → weiterhin optimiert in
+  `public/assets/` ablegen, plain `<img src="/assets/...">`.
 - **Galería-Bilder** (`/galeria`) → liegen als WebP statisch unter
   `public/assets/galeria/<sección>/`. Konvention: max. 1500×1500 px, Q85
   (`magick … -resize '1500x1500>' -strip -quality 85 out.webp`). Werden in
@@ -43,19 +60,9 @@ Stattdessen:
   eingelesen — neue Bilder einfach in den jeweiligen Section-Ordner kopieren,
   kein Code-Edit nötig. Sektion-IDs: `musical`, `cuento`, `eventos`,
   `momentos`, `contaminacion`.
-- **PocketBase-Uploads** (Post-Cover und Inline-Bilder in `posts`) → **ohne**
-  `?thumb=`-Parameter direkt einbinden:
-  ```astro
-  <img src={`${PB_URL}/api/files/${record.collectionId}/${record.id}/${record.cover}`} />
-  ```
-  ⚠️ **`?thumb=` funktioniert hier nicht.** Die `cover`- und `images`-Felder
-  haben `thumbs: null` in den Feld-Optionen, und PocketBase liefert nur die
-  dort deklarierten Größen aus. Jede andere Größe fällt **still** auf das
-  Original zurück — man merkt es nicht, der Parameter ist wirkungslos.
-  Zweiter Grund, es so zu lassen: PB re-encodiert Thumbs von WebP-Quellen als
-  **PNG**. Für Fotos ist das Ergebnis rund 5× größer als das WebP-Original
-  (gemessen: 100×100 als PNG = 21.9 kB, dasselbe als WebP Q85 = 4.1 kB).
-  Wer echte Größenvarianten braucht, baut sie beim Upload, nicht über `?thumb=`.
+- **Inline-Bilder im Artikelkörper** stehen als `<img data-media-id="…">` im
+  gespeicherten HTML und werden im Loader zu CMS-URLs aufgelöst, nicht von
+  `<Image>` angefasst. Aktuell gibt es keine.
 
 **Cover-Format-Konvention:** Post-Cover werden als **3:2 quer, 1500×1000 px,
 WebP Q85** hochgeladen. Listing (`NovedadCard`) und Detail-Hero rendern beide
@@ -269,11 +276,10 @@ pnpm build        # Astro-Build (static + server für /admin)
 
 ## Anti-Patterns
 
-- ❌ Kein `import { Image } from 'astro:assets'`. Wenn du verleitet bist, lies
-  oben den Abschnitt „Image-Strategie".
-- ❌ Kein `sharp` als Dependency hinzufügen.
-- ❌ Keine User-State-abhängige Logik in `MainLayout`/`Navbar`/`Footer`, sonst
-  bricht die Prerender-Annahme der Public-Pages.
-- ❌ Keine Server-only-Logik (PB-Queries, `Astro.locals.user`-Reads) in einer
-  prerendered Seite — fügt entweder `prerender = false` hinzu, oder verschiebt
-  die Logik in einen Client-Fetch.
+- ❌ Kein `<Image>` ohne `width`/`height` bei entfernten Quellen.
+- ❌ Keine geforderte Zielbreite über der Quellbreite (Astro skaliert nicht hoch).
+- ❌ Kein `export const prerender = false`. Es gibt keinen Adapter mehr, die
+  Seite ist vollständig statisch — eine serverseitige Route lässt den Build
+  scheitern.
+- ❌ Keine Laufzeit-Abfragen gegen das CMS. Inhalte kommen über die
+  Content-Collection zur Build-Zeit.

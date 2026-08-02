@@ -1,10 +1,12 @@
 ---
+import { getImage, Image } from 'astro:assets';
 import { render } from 'astro:content';
 
 import MainLayout from '../../layouts/MainLayout.astro';
 import MapEmbed from '../../components/MapEmbed.astro';
 import { postPath, type Post } from '../../lib/posts';
 import {
+  absoluteUrl,
   articleSchema,
   eventSchema,
   breadcrumbSchema,
@@ -54,6 +56,22 @@ const addressLink = location
 // Der Körper kommt fertig und serverseitig gesäubert aus pulpo.
 const { Content } = await render(post);
 
+// Vorschaubild für Social und JSON-LD. Auch das wird beim Build erzeugt und
+// mitausgeliefert, damit eine geteilte URL nicht vom CMS abhängt.
+//
+// Keine eigene Zielbreite: Astro skaliert nicht hoch, eine geforderte Breite
+// über der Quelle landete sonst als falsches `og:image:width` im Markup. Die
+// Cover sind ohnehin höchstens 1500 px breit, das reicht jeder Plattform.
+const og = cover
+  ? await getImage({
+      src: cover.src,
+      width: cover.width,
+      height: cover.height,
+      format: 'webp',
+    })
+  : undefined;
+const ogUrl = og ? absoluteUrl(og.src) : undefined;
+
 const fallbackTitle = isEvent ? 'Evento' : 'Noticia';
 const typLabel = isEvent ? 'Evento' : 'Noticia';
 
@@ -69,7 +87,7 @@ const itemSchema = isEvent
       title: title || fallbackTitle,
       description: teaser,
       url: path,
-      image: cover?.src,
+      image: ogUrl,
       startDate: startsAt?.toISOString(),
       endDate: endsAt?.toISOString(),
       location,
@@ -79,7 +97,7 @@ const itemSchema = isEvent
       title: title || fallbackTitle,
       description: teaser,
       url: path,
-      image: cover?.src,
+      image: ogUrl,
       datePublished: publishedAt?.toISOString(),
       dateModified: updated?.toISOString(),
     });
@@ -89,8 +107,10 @@ const itemSchema = isEvent
   title={title || fallbackTitle}
   description={teaser}
   type="article"
-  image={cover?.src}
+  image={ogUrl}
   imageAlt={cover ? cover.alt ?? title : undefined}
+  imageWidth={cover?.width}
+  imageHeight={cover?.height}
   publishedTime={publishedAt?.toISOString()}
   modifiedTime={updated?.toISOString()}
   jsonLd={[itemSchema, breadcrumb]}
@@ -105,11 +125,17 @@ const itemSchema = isEvent
     {cover && (
       <div class="mx-auto mt-6 max-w-3xl px-4">
         <div class="aspect-[3/2] overflow-hidden rounded-2xl bg-azul/40">
-          <img
+          <Image
             src={cover.src}
             alt={cover.alt ?? title}
-            width={cover.width}
-            height={cover.height}
+            width={1500}
+            height={1000}
+            widths={[768, 1500]}
+            fit="cover"
+            position="center"
+            sizes="(min-width: 768px) 768px, 100vw"
+            loading="eager"
+            fetchpriority="high"
             class="h-full w-full object-cover"
           />
         </div>
