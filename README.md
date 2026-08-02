@@ -2,8 +2,8 @@
 
 Website für Sandra Santacruz. **Reines Astro-Frontend**, komplett statisch
 gebaut: kein Adapter, kein SSR, kein Laufzeit-Backend. Die Artikel und
-Veranstaltungen kommen zur Build-Zeit aus dem Multi-Tenant-CMS paula (siehe
-„Content-Collection aus paula"), alles andere steht im Repo.
+Veranstaltungen kommen zur Build-Zeit aus dem Multi-Tenant-CMS pulpo (siehe
+„Content-Collection aus pulpo"), alles andere steht im Repo.
 
 > Der Abschnitt zum Omnibus-Container (PocketBase, Caddy, s6-overlay) unten
 > beschreibt den **alten** Betrieb. Das `backend/`-Verzeichnis und die
@@ -14,7 +14,7 @@ Veranstaltungen kommen zur Build-Zeit aus dem Multi-Tenant-CMS paula (siehe
 | Komponente   | Wofür                                            | Port (intern) |
 | ------------ | ------------------------------------------------ | ------------- |
 | Astro 6      | Web-Frontend, **statisch** gebaut nach `dist/`   | –             |
-| paula        | CMS für Artikel und Veranstaltungen, nur zur Build-Zeit gelesen | – |
+| pulpo        | CMS für Artikel und Veranstaltungen, nur zur Build-Zeit gelesen | – |
 | PocketBase   | Altbestand: DB und Admin-UI aus `backend/`, für die Auslieferung nicht mehr nötig | `8090` |
 | Caddy        | Reverse-Proxy: `/api/*` + `/_/*` → PocketBase, Rest → Astro | `8080`        |
 | s6-overlay   | Supervisor für die drei Prozesse im Omnibus-Container | –             |
@@ -26,7 +26,7 @@ Veranstaltungen kommen zur Build-Zeit aus dem Multi-Tenant-CMS paula (siehe
 ├── astro.config.mjs        # output: 'static', kein Adapter
 ├── src/
 │   ├── pages/              # Astro-Routen
-│   ├── content.config.ts   # Collection `posts` (Loader: lib/paula-loader.ts)
+│   ├── content.config.ts   # Collection `posts` (Loader: lib/pulpo-loader.ts)
 │   └── lib/                # posts, search, seo, settings
 ├── backend/                # Go-Modul: slph.de/backend
 │   ├── main.go             # PocketBase-Entrypoint, Hooks, migratecmd
@@ -81,7 +81,7 @@ Nützliche URLs im Dev-Modus:
 | `pnpm pb:build`    | Standalone-Binary bauen → `bin/pocketbase`             |
 | `pnpm build`       | Astro Production-Build (`dist/`)                       |
 | `pnpm preview`     | Astro Production-Preview                               |
-| `pnpm migrate:paula` | Artikel ins neue System migrieren (siehe unten)       |
+| `pnpm migrate:pulpo` | Artikel ins neue System migrieren (siehe unten)       |
 
 ## Backend (PocketBase als Go-Binary)
 
@@ -174,16 +174,14 @@ Voraussetzungen (einmalig):
 2. Repository-Secrets setzen:
    - `CLOUDFLARE_API_TOKEN` (Permission „Cloudflare Pages: Edit“)
    - `CLOUDFLARE_ACCOUNT_ID`
-3. Optional Repository-Variable `PUBLIC_POCKETBASE_URL`, solange Seiten zur
-   Build-Zeit PocketBase lesen.
 
 Der Workflow erwartet den Build-Output in `dist/`. Das passt: ohne Adapter
 schreibt Astro direkt dorthin, `dist/client` und `dist/server` gibt es nicht
 mehr.
 
-## Migration in das neue System (paula)
+## Migration in das neue System (pulpo)
 
-`scripts/migrate-to-paula.mjs` übernimmt die Artikel dieser Seite in das
+`scripts/migrate-to-pulpo.mjs` übernimmt die Artikel dieser Seite in das
 Multi-Tenant-System (`SCHEMA.md` §13/§14):
 
 | Hier                       | Dort                                                  |
@@ -210,19 +208,19 @@ Das Skript ist **idempotent**: ein zweiter Lauf überspringt vorhandene Artikel
 sie stattdessen.
 
 ```bash
-# Ziel-Zugang in .env eintragen (PAULA_URL, PAULA_EMAIL, PAULA_PASSWORD)
-pnpm migrate:paula --dry-run          # zeigt nur, was passieren würde
-pnpm migrate:paula                    # schreibt
-pnpm migrate:paula --only=news --limit=5
-pnpm migrate:paula --force            # bestehende Artikel überschreiben
-pnpm migrate:paula --prefix=blog      # anderes URL-Schema statt noticias/
+# Ziel-Zugang in .env eintragen (PULPO_URL, PULPO_EMAIL, PULPO_PASSWORD)
+pnpm migrate:pulpo --dry-run          # zeigt nur, was passieren würde
+pnpm migrate:pulpo                    # schreibt
+pnpm migrate:pulpo --only=news --limit=5
+pnpm migrate:pulpo --force            # bestehende Artikel überschreiben
+pnpm migrate:pulpo --prefix=blog      # anderes URL-Schema statt noticias/
 ```
 
 Voraussetzungen im Ziel, die das Skript **nicht** anlegt:
 
 - das Restaurant selbst und ein `users`-Login mit `website`-Berechtigung
-  (daraus leitet das Skript den Tenant ab; alternativ `PAULA_SUPERUSER=1` plus
-  `PAULA_RESTAURANT`)
+  (daraus leitet das Skript den Tenant ab; alternativ `PULPO_SUPERUSER=1` plus
+  `PULPO_RESTAURANT`)
 - eine `pages`-Zeile mit Route-Slug `noticias` als Übersichtsseite
   (`postList`-Block). Ohne sie sind die Artikel nur einzeln erreichbar.
 
@@ -245,10 +243,10 @@ Drei Eigenheiten des Ziels, an die sich das Skript hält:
   `data-media-id`. Das Skript erzeugt deshalb eigenes Markup und nutzt
   `src/lib/blocknote-render.ts` (Tailwind-Klassen, YouTube-Embeds) bewusst nicht.
 
-### Content-Collection aus paula
+### Content-Collection aus pulpo
 
 `src/content.config.ts` definiert **eine** Collection `posts` mit Artikeln und
-Veranstaltungen zusammen, gefüllt vom Loader `src/lib/paula-loader.ts`. Der
+Veranstaltungen zusammen, gefüllt vom Loader `src/lib/pulpo-loader.ts`. Der
 läuft zur Build-Zeit und liest anonym: die List-Regel im Ziel gibt nur
 veröffentlichte und bereits sichtbare Beiträge heraus. Nach dem Build braucht
 die Seite kein PocketBase mehr, was die Voraussetzung für Cloudflare Pages ist.
@@ -284,7 +282,7 @@ Was der Loader liefert:
   (ohne `?thumb=`, siehe `CLAUDE.md`). Zeigt ein Bild ins Leere, fliegt es mit
   einer Warnung raus, statt einen kaputten `<img>` auszuliefern.
 - Daten kommen entlokalisiert an: `title` ist ein String, nicht `{es: "…"}`.
-  Welche Sprache, sagt `PAULA_LANG` (Default `es`); fehlt sie an einem Beitrag,
+  Welche Sprache, sagt `PULPO_LANG` (Default `es`); fehlt sie an einem Beitrag,
   nimmt der Loader die erste belegte.
 
 Aus dieser Collection lesen und damit **prerendered** sind: `/noticias`,
@@ -312,10 +310,19 @@ PocketBase-Helfer sind entfernt; die Kontaktdaten für `/contacto`,
 `/aviso-legal` und `/politica-de-privacidad` stehen als `SETTINGS` in
 `src/lib/settings.ts` statt in einer Collection.
 
-Nötige Env-Variablen: `PAULA_URL` und `PAULA_RESTAURANT`, optional
-`PAULA_LANG` und `PAULA_PUBLIC_URL` (Bild-Basis-URL, falls der Build eine
-andere Adresse erreicht als der Browser). In CI sind das Repository-Variablen,
-siehe `.github/workflows/deploy.yml`.
+Konfiguriert wird das in **`src/config.ts`** (CMS-URL, Tenant-ID, Sprache und
+optional eine abweichende Bild-Basis-URL). Die Werte liegen bewusst im Repo
+statt in Repository-Variablen: es sind keine Geheimnisse, sie ändern sich
+nicht pro Umgebung, und ein Build mit vergessener Variable würde still eine
+leere Seite deployen. Der CI-Workflow braucht dadurch keinen `env`-Block.
+
+Für lokale Arbeit gegen eine andere Instanz überschreiben gleichnamige
+Variablen aus `.env` die Werte:
+
+```bash
+PULPO_URL=http://localhost:8081
+PULPO_RESTAURANT=<lokale Tenant-ID>
+```
 
 ## .env
 

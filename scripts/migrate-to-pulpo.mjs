@@ -1,7 +1,7 @@
-// scripts/migrate-to-paula.mjs
+// scripts/migrate-to-pulpo.mjs
 //
 // Migriert Artikel UND Veranstaltungen dieser Seite (Collection `posts`,
-// BlockNote-JSON) in das neue Multi-Tenant-System (paula, SCHEMA.md §13/§14):
+// BlockNote-JSON) in das neue Multi-Tenant-System (pulpo, SCHEMA.md §13/§14):
 //
 //   posts.content (BlockNote) ─→ posts.body/publishedBody  ({es: "<p>…"} HTML)
 //   posts.cover               ─→ media (WebP ≤1500px) + posts.coverImage
@@ -26,18 +26,18 @@
 //     (postList-Block) — die Artikel-Routen liegen darunter
 //
 // Usage:
-//   node scripts/migrate-to-paula.mjs --dry-run
-//   node scripts/migrate-to-paula.mjs
-//   node scripts/migrate-to-paula.mjs --only=news --limit=3
-//   node scripts/migrate-to-paula.mjs --force
+//   node scripts/migrate-to-pulpo.mjs --dry-run
+//   node scripts/migrate-to-pulpo.mjs
+//   node scripts/migrate-to-pulpo.mjs --only=news --limit=3
+//   node scripts/migrate-to-pulpo.mjs --force
 //
 // Env (siehe .env.example):
-//   PAULA_URL            Ziel-PocketBase, z.B. http://127.0.0.1:8090
-//   PAULA_EMAIL/_PASSWORD  Login in der `users`-Collection (Recht `website`)
-//   PAULA_SUPERUSER=1    stattdessen als _superuser einloggen
-//                        (dann ist PAULA_RESTAURANT Pflicht)
-//   PAULA_RESTAURANT     Restaurant-ID (Default: aus dem Auth-Record)
-//   PAULA_LANG           Sprachcode (Default: site_settings.defaultLang, sonst es)
+//   PULPO_URL            Ziel-PocketBase, z.B. http://127.0.0.1:8090
+//   PULPO_EMAIL/_PASSWORD  Login in der `users`-Collection (Recht `website`)
+//   PULPO_SUPERUSER=1    stattdessen als _superuser einloggen
+//                        (dann ist PULPO_RESTAURANT Pflicht)
+//   PULPO_RESTAURANT     Restaurant-ID (Default: aus dem Auth-Record)
+//   PULPO_LANG           Sprachcode (Default: site_settings.defaultLang, sonst es)
 //   SRC_URL              Quell-PocketBase (Default https://slph.pulpo.cloud)
 //   SRC_EMAIL/_PASSWORD  optionaler Quell-Login (nur nötig für Entwürfe)
 
@@ -70,13 +70,13 @@ const SRC_URL = process.env.SRC_URL ?? 'https://slph.pulpo.cloud';
 const SRC_EMAIL = process.env.SRC_EMAIL ?? '';
 const SRC_PASSWORD = process.env.SRC_PASSWORD ?? '';
 
-const DST_URL = process.env.PAULA_URL ?? '';
-const DST_EMAIL = process.env.PAULA_EMAIL ?? '';
-const DST_PASSWORD = process.env.PAULA_PASSWORD ?? '';
+const DST_URL = process.env.PULPO_URL ?? '';
+const DST_EMAIL = process.env.PULPO_EMAIL ?? '';
+const DST_PASSWORD = process.env.PULPO_PASSWORD ?? '';
 const DST_SUPERUSER = ['1', 'true', 'yes'].includes(
-  (process.env.PAULA_SUPERUSER ?? '').toLowerCase(),
+  (process.env.PULPO_SUPERUSER ?? '').toLowerCase(),
 );
-const DST_RESTAURANT = process.env.PAULA_RESTAURANT ?? '';
+const DST_RESTAURANT = process.env.PULPO_RESTAURANT ?? '';
 
 // Muss zu MaxImageEdge in apps/backend/internal/website/media.go passen —
 // größere Bilder lehnt das Ziel-Backend ab.
@@ -516,9 +516,9 @@ async function migratePost(dst, source, ctx) {
 // ──────────────────────────────────────────────────────────────────────────────
 
 async function main() {
-  if (!DST_URL) bail('PAULA_URL ist nicht gesetzt.');
-  if (!DST_EMAIL || !DST_PASSWORD) bail('PAULA_EMAIL und PAULA_PASSWORD müssen gesetzt sein.');
-  if (DST_SUPERUSER && !DST_RESTAURANT) bail('Mit PAULA_SUPERUSER=1 ist PAULA_RESTAURANT Pflicht.');
+  if (!DST_URL) bail('PULPO_URL ist nicht gesetzt.');
+  if (!DST_EMAIL || !DST_PASSWORD) bail('PULPO_EMAIL und PULPO_PASSWORD müssen gesetzt sein.');
+  if (DST_SUPERUSER && !DST_RESTAURANT) bail('Mit PULPO_SUPERUSER=1 ist PULPO_RESTAURANT Pflicht.');
 
   const src = new PocketBase(SRC_URL);
   const dst = new PocketBase(DST_URL);
@@ -533,13 +533,13 @@ async function main() {
   const auth = await dst.collection(authCollection).authWithPassword(DST_EMAIL, DST_PASSWORD);
 
   const restaurant = DST_RESTAURANT || auth.record.restaurant;
-  if (!restaurant) bail(`Der Login ${DST_EMAIL} hat kein Restaurant — PAULA_RESTAURANT setzen.`);
+  if (!restaurant) bail(`Der Login ${DST_EMAIL} hat kein Restaurant — PULPO_RESTAURANT setzen.`);
   if (!DST_SUPERUSER && !(auth.record.permissions ?? []).includes('website')) {
     bail(`Der Login ${DST_EMAIL} hat keine "website"-Berechtigung — Schreiben endet in 404.`);
   }
 
   // Sprache: bevorzugt die Standardsprache des Tenants.
-  let lang = process.env.PAULA_LANG ?? '';
+  let lang = process.env.PULPO_LANG ?? '';
   if (!lang) {
     try {
       const settings = await dst
@@ -594,7 +594,7 @@ async function main() {
     restaurant,
     lang,
     state,
-    author: process.env.PAULA_AUTHOR ?? '',
+    author: process.env.PULPO_AUTHOR ?? '',
     now: new Date().toISOString(),
   };
   const tally = { created: 0, updated: 0, skipped: 0, failed: 0 };

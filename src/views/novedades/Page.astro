@@ -7,7 +7,7 @@ import NovedadesList from "./NovedadesList.astro";
 import { byDateDesc, postPath } from "../../lib/posts";
 import { breadcrumbSchema, SITE_URL, absoluteUrl } from "../../lib/seo";
 
-// Zur Build-Zeit aus paula geladen (src/lib/paula-loader.ts). Fällt die Quelle
+// Zur Build-Zeit aus pulpo geladen (src/lib/pulpo-loader.ts). Fällt die Quelle
 // aus, bricht der Build ab — besser als eine still leere Liste im Deploy.
 const items = (await getCollection("posts")).sort(byDateDesc);
 

@@ -2,7 +2,7 @@ import { defineCollection } from 'astro:content';
 // `z` aus `astro:content` ist in Astro 6 deprecated (fliegt in 7 raus).
 import { z } from 'astro/zod';
 
-import { paulaPosts } from './lib/paula-loader';
+import { pulpoPosts } from './lib/pulpo-loader';
 
 /**
  * Artikel UND Veranstaltungen in einer Collection — im Ziel sind sie eine
@@ -13,13 +13,13 @@ import { paulaPosts } from './lib/paula-loader';
  *   const proximos  = all.filter((p) => p.data.kind === 'event'
  *     && (p.data.endsAt ?? p.data.startsAt)! >= new Date());
  *
- * Der Body kommt als fertiges, serverseitig gesäubertes HTML aus paula und
+ * Der Body kommt als fertiges, serverseitig gesäubertes HTML aus pulpo und
  * steht deshalb nicht in den Daten, sondern unter `rendered`:
  *
  *   const { Content } = await render(entry);
  */
 const posts = defineCollection({
-  loader: paulaPosts(),
+  loader: pulpoPosts(),
   schema: z.object({
     title: z.string(),
     teaser: z.string().optional(),

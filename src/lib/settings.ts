@@ -10,7 +10,7 @@ export interface Settings {
  * Ohne Backend gibt es keine Laufzeitquelle mehr, deshalb stehen sie hier —
  * eine Änderung ist ein Commit, kein Formular.
  *
- * Wenn sie wieder aus dem CMS kommen sollen: paula hat dafür
+ * Wenn sie wieder aus dem CMS kommen sollen: pulpo hat dafür
  * `site_settings.contactEmail` / `contactPhone` / `contacts` (SCHEMA.md §5).
  * Für diesen Tenant sind die Felder aktuell leer.
  */

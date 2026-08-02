@@ -1,4 +1,4 @@
-// Astro-Content-Loader für die Artikel und Veranstaltungen aus paula.
+// Astro-Content-Loader für die Artikel und Veranstaltungen aus pulpo.
 //
 // Läuft zur Build-Zeit: die Collection wird einmal gefüllt, danach braucht die
 // Seite kein PocketBase mehr. Genau das, was der Umbau auf reines Frontend
@@ -14,18 +14,16 @@
 //
 //   const { Content } = await render(entry);
 //
-// Env (siehe .env.example):
-//   PAULA_URL         PocketBase des Ziels, z.B. https://cms.example.com
-//   PAULA_PUBLIC_URL  optional: Basis für Bild-URLs, falls der Build intern
-//                     auf eine andere Adresse zugreift als der Browser
-//   PAULA_RESTAURANT  Tenant-ID
-//   PAULA_LANG        Sprachcode der lokalisierten Felder (Default `es`)
+// Quelle und Tenant stehen in `src/config.ts`; `.env` kann sie für lokale
+// Arbeit überschreiben. Die Optionen unten sind nur für Tests gedacht.
 
 import type { Loader, LoaderContext } from 'astro/loaders';
 
+import { pulpo } from '../config';
+
 const PER_PAGE = 200;
 
-export interface PaulaPostsOptions {
+export interface PulpoPostsOptions {
   url?: string;
   publicUrl?: string;
   restaurant?: string;
@@ -43,11 +41,6 @@ interface PbList {
   totalPages: number;
 }
 
-function env(name: string): string {
-  const meta = (import.meta as unknown as { env?: Record<string, string> }).env;
-  return meta?.[name] ?? process.env[name] ?? '';
-}
-
 async function fetchAll(
   base: string,
   collection: string,
@@ -61,7 +54,7 @@ async function fetchAll(
     const qs = new URLSearchParams({ ...params, page: String(page), perPage: String(PER_PAGE) });
     const res = await fetch(`${base}/api/collections/${collection}/records?${qs}`);
     if (!res.ok) {
-      throw new Error(`paula: ${collection} → HTTP ${res.status} ${await res.text()}`);
+      throw new Error(`pulpo: ${collection} → HTTP ${res.status} ${await res.text()}`);
     }
     const json = (await res.json()) as PbList;
     items.push(...json.items);
@@ -138,18 +131,18 @@ function resolveInlineImages(
   });
 }
 
-export function paulaPosts(options: PaulaPostsOptions = {}): Loader {
-  const url = (options.url ?? env('PAULA_URL')).replace(/\/+$/, '');
-  const publicUrl = (options.publicUrl ?? env('PAULA_PUBLIC_URL') ?? '').replace(/\/+$/, '') || url;
-  const restaurant = options.restaurant ?? env('PAULA_RESTAURANT');
-  const lang = options.lang ?? env('PAULA_LANG') ?? '';
+export function pulpoPosts(options: PulpoPostsOptions = {}): Loader {
+  const url = (options.url ?? pulpo.url).replace(/\/+$/, '');
+  const publicUrl = (options.publicUrl ?? pulpo.publicUrl).replace(/\/+$/, '') || url;
+  const restaurant = options.restaurant ?? pulpo.restaurant;
+  const lang = options.lang ?? pulpo.lang;
 
   return {
-    name: 'paula-posts',
+    name: 'pulpo-posts',
 
     async load({ store, logger, parseData, generateDigest }: LoaderContext) {
-      if (!url) throw new Error('paula-loader: PAULA_URL ist nicht gesetzt.');
-      if (!restaurant) throw new Error('paula-loader: PAULA_RESTAURANT ist nicht gesetzt.');
+      if (!url) throw new Error('pulpo-loader: keine CMS-URL (src/config.ts).');
+      if (!restaurant) throw new Error('pulpo-loader: kein Tenant (src/config.ts).');
 
       const tenant = `restaurant="${restaurant}"`;
       const [records, routes, mediaRecords] = await Promise.all([

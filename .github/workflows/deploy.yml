@@ -36,18 +36,11 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # CMS-URL und Tenant stehen in src/config.ts, nicht in
+      # Repository-Variablen: keine Geheimnisse, und ein vergessener Wert
+      # würde hier still eine leere Seite deployen.
       - name: Build
         run: pnpm build
-        env:
-          # Nur relevant, solange Seiten zur Build-Zeit PocketBase lesen.
-          # Als Repository-Variable setzen, sonst schlicht leer.
-          PUBLIC_POCKETBASE_URL: ${{ vars.PUBLIC_POCKETBASE_URL }}
-          # Quelle der Content-Collection (src/lib/paula-loader.ts). Ohne diese
-          # beiden bricht der Build ab, der Loader liest sonst ins Leere.
-          PAULA_URL: ${{ vars.PAULA_URL }}
-          PAULA_RESTAURANT: ${{ vars.PAULA_RESTAURANT }}
-          PAULA_PUBLIC_URL: ${{ vars.PAULA_PUBLIC_URL }}
-          PAULA_LANG: ${{ vars.PAULA_LANG }}
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

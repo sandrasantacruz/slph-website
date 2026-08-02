@@ -5,7 +5,7 @@ import { postPath } from '../lib/posts';
 import { SITE_URL } from '../lib/seo';
 
 // Zur Build-Zeit erzeugt: die Artikel kommen aus der Content-Collection, die
-// beim Build aus paula geladen wird. Ein neuer Beitrag steht also mit dem
+// beim Build aus pulpo geladen wird. Ein neuer Beitrag steht also mit dem
 // nächsten Deploy in der Sitemap, nicht in dem Moment, in dem er im Back
 // Office erscheint.
 
