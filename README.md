@@ -52,8 +52,7 @@ Veranstaltungen kommen zur Build-Zeit aus dem Multi-Tenant-CMS pulpo (siehe
 
 ```bash
 pnpm install
-pnpm dev:web      # Astro allein (:4321) — reicht für die Seite
-pnpm dev          # zusätzlich das alte PocketBase (:8090)
+pnpm dev          # Astro auf :4321
 ```
 
 Erste Schritte zum Anlegen eines Superusers, ohne env zu setzen:
@@ -74,11 +73,7 @@ Nützliche URLs im Dev-Modus:
 
 | Script             | Wirkung                                                |
 | ------------------ | ------------------------------------------------------ |
-| `pnpm dev`         | Astro + PocketBase parallel (`concurrently`)           |
-| `pnpm dev:web`     | Nur Astro                                              |
-| `pnpm pb:serve`    | Nur PocketBase (`go run . serve`)                      |
-| `pnpm pb:migrate`  | Migrations ausführen (`go run . migrate`)              |
-| `pnpm pb:build`    | Standalone-Binary bauen → `bin/pocketbase`             |
+| `pnpm dev`         | Astro Dev-Server (:4321)                               |
 | `pnpm build`       | Astro Production-Build (`dist/`)                       |
 | `pnpm preview`     | Astro Production-Preview                               |
 | `pnpm migrate:pulpo` | Artikel ins neue System migrieren (siehe unten)       |
