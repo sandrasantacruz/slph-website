@@ -1,14 +1,14 @@
 # CLAUDE.md
 
-Kurzbriefing für AI-Agenten in diesem Repo. Allgemeines (Stack, Deployment, Docker)
-steht in `README.md` — hier nur die Konventionen, die man aus dem Code nicht direkt
-ableiten kann.
+Kurzbriefing für AI-Agenten in diesem Repo. Allgemeines (Stack, Deployment)
+steht in `README.md` — hier nur die Konventionen, die man aus dem Code nicht
+direkt ableiten kann.
 
 ## Sprachen
 
 - **User-facing Strings**: Spanisch (Seite ist für ein spanisches Publikum).
 - **Code-Kommentare / Commit-Messages**: Deutsch oder Englisch, beides OK.
-- **`<html lang="es">`** ist fix in beiden Layouts.
+- **`<html lang="es">`** ist fix in `MainLayout`.
 
 ## Rendering-Modell
 
@@ -64,95 +64,53 @@ verlinkt. Die ausgelieferte Seite braucht das CMS zur Laufzeit nicht.
   gespeicherten HTML und werden im Loader zu CMS-URLs aufgelöst, nicht von
   `<Image>` angefasst. Aktuell gibt es keine.
 
-**Cover-Format-Konvention:** Post-Cover werden als **3:2 quer, 1500×1000 px,
-WebP Q85** hochgeladen. Listing (`NovedadCard`) und Detail-Hero rendern beide
-`aspect-[3/2]` + `object-cover`, das Bild wird also mittig auf 3:2 beschnitten.
-Da das Upload gleichzeitig als `og:image` dient und Social-Plattformen
-zusätzlich eigene Zuschnitte fahren (Facebook 1.91:1, Twitter 2:1, WhatsApp
-fast quadratisch), gilt: **Wesentliches in die mittleren ~80% der Höhe**, nicht
-an Ober- oder Unterkante.
+**Cover-Format-Konvention:** Post-Cover als **3:2 quer, 1500×1000 px, WebP
+Q85** hochladen. Die Karten in der Übersicht schneiden beim Build auf 3:2
+(`coverBox()` in `lib/posts.ts`, Anker aus dem Fokuspunkt), der Detail-Kopf
+zeigt das Bild **ungeschnitten** in seinem eigenen Format. Das Vorschaubild
+für Social ist wieder 3:2, und da die Plattformen zusätzlich eigene Zuschnitte
+fahren (Facebook 1.91:1, Twitter 2:1, WhatsApp fast quadratisch), gilt:
+**Wesentliches in die mittleren ~80 % der Höhe**, nicht an Ober- oder
+Unterkante.
 
 ```sh
 magick input.jpg -resize '1500x1000^' -gravity center -extent 1500x1000 \
   -strip -quality 85 out.webp
 ```
 
-## Datenmodell (PocketBase)
+## Datenmodell
 
-Eine einzige Inhalts-Collection **`posts`** für sowohl Veranstaltungen als auch
-Pressemeldungen. Der Diskriminator ist das Feld `typ`.
+Inhalte liegen im Multi-Tenant-CMS **pulpo** und werden ausschließlich zur
+Build-Zeit gelesen. Das Repo hat keine eigene Datenbank mehr.
 
-| Feld           | Typ                          | Pflicht | Hinweis                                                       |
-| -------------- | ---------------------------- | ------- | ------------------------------------------------------------- |
-| `id`           | text (15 chars autogen)      | ja      | Primary key, system.                                          |
-| `typ`          | select single                | **ja**  | Werte: `event`, `news`. Steuert UI und Pflichtfeld-Logik.     |
-| `title`        | text                         | nein    |                                                               |
-| `slug`         | text (`^[a-z0-9-]+$`)        | nein    | **Unique über die ganze Collection** — events und news teilen den slug-Namespace. |
-| `excerpt`      | text                         | nein    |                                                               |
-| `content`      | json                         | nein    | BlockNote-Blöcke (siehe `lib/blocknote-render`).              |
-| `cover`        | file (single)                | nein    |                                                               |
-| `images`       | file (max 10)                | nein    | Inline-Bilder im BlockNote-Editor.                            |
-| `status`       | select                       | nein    | `draft` / `published` / `archived`.                           |
-| `published_at` | date                         | nein    | Listen-Sortierung. Public-Sichtbarkeit: nur wenn `<= @now`.   |
-| `event_date`   | text (ISO-Datum als String)  | nein    | **Nur bei `typ='event'` befüllt.**                             |
-| `event_end`    | text                         | nein    | dito, optional.                                               |
-| `location`     | text                         | nein    | dito.                                                         |
-| `address_url`  | text                         | nein    | dito.                                                         |
-| `created`      | autodate                     | —       |                                                               |
-| `updated`      | autodate                     | —       |                                                               |
+Eine Collection **`posts`** trägt Artikel und Veranstaltungen zusammen, `kind`
+(`article` / `event`) unterscheidet sie. Der Loader `src/lib/pulpo-loader.ts`
+verflacht die CMS-Sicht in die Astro-Collection:
 
-Indexes: `UNIQUE(slug)`, `(status, published_at)`.
+| Astro (`data.…`)     | pulpo                             | Hinweis                                                    |
+| -------------------- | --------------------------------- | ---------------------------------------------------------- |
+| `id` (Entry-Key)     | `posts.postKey`                   | stabil, Unique-Index; bildet die URL dieser Seite           |
+| `title` / `teaser`   | lokalisierte JSON-Maps            | Sprache aus `src/config.ts`                                 |
+| `rendered.html`      | `publishedBody` (Fallback `body`) | fertiges, im CMS gesäubertes HTML                           |
+| `kind`               | `kind`                            | leer im CMS zählt als `article`                             |
+| `startsAt`/`endsAt`  | dito                              | nur bei Veranstaltungen; Pflichtfeld `startsAt`             |
+| `location`/`mapEmbed`| dito                              | `mapEmbed` ist immer eine geprüfte Maps-Embed-URL           |
+| `cover`              | `coverImage` → `media`            | `src`, `width`, `height`, `alt`, `focalX`/`focalY`          |
+| `path` / `slug`      | `routes.slug`                     | die URL **dieser** Seite baut `postPath()`, nicht `path`    |
 
-Rules:
-- `listRule` / `viewRule`: `@request.auth.id != "" || (status = "published" && published_at <= @now)`
-- `createRule` / `updateRule` / `deleteRule`: `@request.auth.id != ""`
+Fallen, die im CMS begründet sind:
 
-Konventionen:
-- **Event-Felder** (`event_date`/`event_end`/`location`/`address_url`) im
-  Editor und in der Validierung **nur konditional** anzeigen/prüfen, wenn
-  `typ='event'`. Bei `typ='news'` bleiben sie leer.
-- **Datumsfelder** für Events sind im Schema `text`, werden aber als
-  ISO-Strings (`Date.toISOString()`) gespeichert. Beim Lesen `new Date(value)`.
-- Public-Listings filtern immer mit
-  `status = "published" && published_at <= @now`.
-
-### Settings (Singleton)
-
-Zweite Collection **`settings`** hält site-weite Kontaktdaten als Einzelrecord.
-Wird im Frontend von `src/lib/settings.ts:getSettings` gelesen und im Backend
-über `/admin/ajustes` editiert.
-
-| Feld       | Typ      | Pflicht | Hinweis                                                           |
-| ---------- | -------- | ------- | ----------------------------------------------------------------- |
-| `id`       | text     | ja      | Fester Wert `defaultsettings` (per Seed-Migration angelegt).      |
-| `whatsapp` | text     | nein    | Telefonnummer mit/ohne `+`-Prefix.                                |
-| `phone`    | text     | nein    | Festnetz/Mobile, frei formatiert.                                 |
-| `email`    | text     | nein    | E-Mail.                                                           |
-| `created`  | autodate | —       |                                                                   |
-| `updated`  | autodate | —       |                                                                   |
-
-Rules:
-- `listRule` / `viewRule`: leer (= public read; die öffentliche `/contacto`-Seite
-  liest ohne Auth).
-- `createRule` / `deleteRule`: `null` — **bewusst gesperrt.** Nur die
-  Seed-Migration (`backend/migrations/*_seed_settings_singleton.go`) legt den
-  Record an; nichts kann ihn über die API löschen.
-- `updateRule`: `@request.auth.id != ""` (Admin-Form aktualisiert nur).
-
-Konventionen:
-- **Strict-Singleton:** Es existiert genau ein Record mit ID `defaultsettings`.
-  Migrationen sind der einzige Ort, an dem Records entstehen oder gelöscht
-  werden. Das Frontend macht daher nur `update`, keine `create`-Fallback.
-- **Leerer String** pro Feld blendet im Frontend den jeweiligen CTA aus.
+- **`(focalX, focalY) === (0, 0)` heißt „nicht gesetzt"**, nicht „links oben".
+  PocketBase liefert für ein ungesetztes optionales Zahlenfeld `0`.
+- **Ein Beitrag kann mehrere Routen haben.** Es gibt kein „kanonisch"-Flag; der
+  Loader nimmt die zuletzt angelegte und protokolliert die Wahl.
+- **Nur veröffentlichte Beiträge sind anonym lesbar.** Entwürfe und geplante
+  Beiträge liefert die API gar nicht erst aus.
 
 ## Layouts
 
-| Layout            | Wann                       | Brand-Elemente               |
-| ----------------- | -------------------------- | ---------------------------- |
-| `MainLayout`      | Alle öffentlichen Seiten   | Navbar + Footer mit Logo     |
-| `AdminLayout`     | Alle `/admin/*`-Seiten     | Schlichter Admin-Header      |
-
-`Navbar`/`Footer` werden **niemals** auf Admin-Seiten gerendert.
+`MainLayout` ist das einzige Layout: Navbar und Footer mit Logo, dazu die
+SEO-Tags aus `components/Seo.astro`.
 
 ## Page-Komposition & Views
 
@@ -226,16 +184,6 @@ import { Icon } from 'astro-icon/components';
 Bei Bedarf weitere Iconify-Sets dazu installieren (z.B. `@iconify-json/lucide` für
 UI-Icons). Astro inlined beim Build nur die tatsächlich benutzten Icons.
 
-## Middleware
-
-`src/middleware.ts` macht zwei Dinge zur Laufzeit:
-
-1. **Build-Time-Short-Circuit** via `context.isPrerendered` — kein Request-Zugriff,
-   kein PB-Setup beim Prerender.
-2. **PocketBase-Session** aus dem Cookie ableiten, in `context.locals.pb` und
-   `context.locals.user` ablegen, und `/admin/*` ohne User auf `/admin/login`
-   umleiten.
-
 ## Analytics
 
 Script-Tag in `MainLayout.astro`, nur in **Production** (`import.meta.env.PROD`):
@@ -244,34 +192,21 @@ Script-Tag in `MainLayout.astro`, nur in **Production** (`import.meta.env.PROD`)
   data-website-id="..."></script>
 ```
 
-## Auth (Admin)
-
-- PocketBase-Cookie-Session, gesetzt von `/admin/login` (POST-Handler).
-- `src/lib/pb.ts` exportiert `pbFromCookie`, `authCookie`, `clearAuthCookie`.
-- Middleware liest den Cookie, baut die PB-Instanz, und gated `/admin/*`.
-- Logout via `/admin/logout` POST.
-
 ## Env Vars
 
-Siehe `.env.example`. Wichtigste:
-
-| Var                                  | Wofür                                                          |
-| ------------------------------------ | -------------------------------------------------------------- |
-| `PUBLIC_POCKETBASE_URL`              | PB-Basis-URL für Client und Server                             |
-| `PB_SUPERUSER_EMAIL` / `_PASSWORD`   | Auto-Bootstrap eines Superusers beim ersten Serve-Start        |
-| `PB_USER_EMAIL` / `_PASSWORD`        | Auto-Bootstrap eines regulären Users in der `users`-Collection |
-| `PB_APP_URL` / `PB_APP_NAME`         | Überschreiben der Admin-Settings beim Boot                     |
-
-`PB_*_UPDATE=1` erzwingt jeweils, dass das Passwort bei Existenz überschrieben wird.
+Für einen normalen Build braucht es keine: CMS-URL, Tenant und Sprache stehen
+in `src/config.ts`. `.env` überschreibt sie nur für lokale Arbeit gegen eine
+andere Instanz (`PULPO_URL`, `PULPO_RESTAURANT`, `PULPO_LANG`,
+`PULPO_PUBLIC_URL`). Die übrigen Einträge in `.env.example` gehören zum
+Migrationsskript.
 
 ## Kommandos
 
 ```sh
-pnpm dev          # Astro + PocketBase parallel (concurrently)
-pnpm dev:web      # nur Astro
-pnpm pb:serve     # nur PocketBase
-pnpm pb:migrate   # PB-Migrationen ausführen
-pnpm build        # Astro-Build (static + server für /admin)
+pnpm dev            # Astro Dev-Server (:4321)
+pnpm build          # statischer Build nach dist/
+pnpm preview        # Build lokal ausliefern
+pnpm migrate:pulpo  # einmaliges Migrationsskript (Quelle existiert nicht mehr)
 ```
 
 ## Anti-Patterns

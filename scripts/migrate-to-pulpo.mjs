@@ -9,7 +9,7 @@
 //   posts.event_date/_end     ─→ posts.startsAt / endsAt
 //   posts.location            ─→ posts.location (lokalisiert)
 //   posts.address_url         ─→ posts.mapEmbed (nur echte /maps/embed-URLs)
-//   posts.slug                ─→ posts.postKey + routes.slug ("noticias/<slug>")
+//   posts.slug                ─→ posts.postKey + routes.slug
 //
 // `visibleFrom` bleibt leer: migriert werden bereits veröffentlichte Beiträge,
 // die sofort sichtbar sein sollen. `category` bleibt ebenfalls leer — Rubriken
@@ -22,13 +22,14 @@
 //
 // Voraussetzungen im Ziel (legt das Skript NICHT an):
 //   - das Restaurant selbst + ein `users`-Login mit `website`-Berechtigung
-//   - eine `pages`-Zeile mit Route-Slug "noticias" als Übersichtsseite
-//     (postList-Block) — die Artikel-Routen liegen darunter
+//   - falls im CMS eine Übersichtsseite gerendert werden soll: eine
+//     `pages`-Zeile mit postList-Block
 //
 // Usage:
 //   node scripts/migrate-to-pulpo.mjs --dry-run
 //   node scripts/migrate-to-pulpo.mjs
 //   node scripts/migrate-to-pulpo.mjs --only=news --limit=3
+//   node scripts/migrate-to-pulpo.mjs --prefix=blog   # Routen unter blog/
 //   node scripts/migrate-to-pulpo.mjs --force
 //
 // Env (siehe .env.example):
@@ -64,7 +65,9 @@ const DRY_RUN = flag('dry-run');
 const FORCE = flag('force');
 const ONLY = opt('only', ''); // '' | 'news' | 'event'
 const LIMIT = Number(opt('limit', '0')) || 0;
-const SLUG_PREFIX = opt('prefix', 'noticias').replace(/^\/+|\/+$/g, '');
+// Kein Präfix: die Route im CMS ist der blanke Slug. Die Adressen dieser
+// Seite (`/noticias/<slug>`) bildet das Frontend selbst, unabhängig davon.
+const SLUG_PREFIX = opt('prefix', '').replace(/^\/+|\/+$/g, '');
 
 const SRC_URL = process.env.SRC_URL ?? 'https://slph.pulpo.cloud';
 const SRC_EMAIL = process.env.SRC_EMAIL ?? '';
