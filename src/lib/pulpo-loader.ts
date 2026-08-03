@@ -89,6 +89,21 @@ function isoDate(value: unknown): string | undefined {
   return Number.isNaN(d.getTime()) ? undefined : d.toISOString();
 }
 
+/**
+ * Fokuspunkt eines Media-Records als Bruchteile (0..1), sonst nichts.
+ *
+ * PocketBase liefert für ein ungesetztes optionales Zahlenfeld `0` statt
+ * `null`. `(0, 0)` heißt deshalb „nicht gesetzt" und nicht „links oben" —
+ * genau diese Verwechslung schickte im CMS schon einmal den ganzen Bestand in
+ * die obere linke Ecke (`resolveFocal` in dessen `packages/site/helpers.ts`).
+ */
+function focalPoint(media: PbRecord): { focalX?: number; focalY?: number } {
+  const x = typeof media.focalX === 'number' ? media.focalX : 0;
+  const y = typeof media.focalY === 'number' ? media.focalY : 0;
+  if (x === 0 && y === 0) return {};
+  return { focalX: x, focalY: y };
+}
+
 function fileUrl(base: string, media: PbRecord): string {
   return `${base}/api/files/${media.collectionId}/${media.id}/${media.file as string}`;
 }
@@ -240,6 +255,7 @@ export function pulpoPosts(options: PulpoPostsOptions = {}): Loader {
                   width: typeof cover.width === 'number' ? cover.width : undefined,
                   height: typeof cover.height === 'number' ? cover.height : undefined,
                   alt: localized(cover.alt, contentLang) || title,
+                  ...focalPoint(cover),
                 }
               : undefined,
             tags: Array.isArray(rec.tags) ? (rec.tags as string[]) : [],

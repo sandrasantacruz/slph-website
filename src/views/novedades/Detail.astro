@@ -4,7 +4,7 @@ import { render } from 'astro:content';
 
 import MainLayout from '../../layouts/MainLayout.astro';
 import MapEmbed from '../../components/MapEmbed.astro';
-import { postPath, type Post } from '../../lib/posts';
+import { coverBox, postPath, type Post } from '../../lib/posts';
 import {
   absoluteUrl,
   articleSchema,
@@ -31,6 +31,27 @@ const {
 } = post.data;
 
 const isEvent = kind === 'event';
+
+// Der Seitenkopf zeigt das Cover **vollständig**, in seinem eigenen Format:
+// keine feste 3:2-Box, kein object-cover. Begrenzt wird nur die Breite, und
+// auch die nicht über die Quelle hinaus (Astro skaliert nicht hoch).
+const full = cover
+  ? (() => {
+      const sw = cover.width ?? 1500;
+      const sh = cover.height ?? Math.round(sw / (3 / 2));
+      const width = Math.min(sw, 1500);
+      return {
+        width,
+        height: Math.round((width / sw) * sh),
+        widths: [...[768].filter((w) => w < width), width],
+      };
+    })()
+  : null;
+
+// Das Social-Vorschaubild bleibt 3:2. Facebook, Twitter und WhatsApp
+// beschneiden ohnehin auf ihre eigenen Formate, ein hochkantes Original
+// käme dort schlechter weg als ein querer Ausschnitt.
+const box = cover ? coverBox(cover, 1500, [768]) : null;
 
 const fullFmt = new Intl.DateTimeFormat('es-ES', {
   day: 'numeric',
@@ -59,14 +80,17 @@ const { Content } = await render(post);
 // Vorschaubild für Social und JSON-LD. Auch das wird beim Build erzeugt und
 // mitausgeliefert, damit eine geteilte URL nicht vom CMS abhängt.
 //
-// Keine eigene Zielbreite: Astro skaliert nicht hoch, eine geforderte Breite
-// über der Quelle landete sonst als falsches `og:image:width` im Markup. Die
-// Cover sind ohnehin höchstens 1500 px breit, das reicht jeder Plattform.
-const og = cover
+// Dieselbe 3:2-Box wie der Kopf, damit die Vorschau nicht anders zugeschnitten
+// ist als die Seite. Die Maße kommen aus `coverBox`, nicht aus einem festen
+// Wunschwert: Astro skaliert nicht hoch, eine zu große Anforderung landete
+// sonst als falsches `og:image:width` im Markup.
+const og = box
   ? await getImage({
-      src: cover.src,
-      width: cover.width,
-      height: cover.height,
+      src: cover!.src,
+      width: box.width,
+      height: box.height,
+      fit: 'cover',
+      position: box.position,
       format: 'webp',
     })
   : undefined;
@@ -109,8 +133,8 @@ const itemSchema = isEvent
   type="article"
   image={ogUrl}
   imageAlt={cover ? cover.alt ?? title : undefined}
-  imageWidth={cover?.width}
-  imageHeight={cover?.height}
+  imageWidth={box?.width}
+  imageHeight={box?.height}
   publishedTime={publishedAt?.toISOString()}
   modifiedTime={updated?.toISOString()}
   jsonLd={[itemSchema, breadcrumb]}
@@ -124,19 +148,17 @@ const itemSchema = isEvent
 
     {cover && (
       <div class="mx-auto mt-6 max-w-3xl px-4">
-        <div class="aspect-[3/2] overflow-hidden rounded-2xl bg-azul/40">
+        <div class="overflow-hidden rounded-2xl bg-azul/40">
           <Image
             src={cover.src}
             alt={cover.alt ?? title}
-            width={1500}
-            height={1000}
-            widths={[768, 1500]}
-            fit="cover"
-            position="center"
+            width={full!.width}
+            height={full!.height}
+            widths={full!.widths}
             sizes="(min-width: 768px) 768px, 100vw"
             loading="eager"
             fetchpriority="high"
-            class="h-full w-full object-cover"
+            class="block h-auto w-full"
           />
         </div>
       </div>

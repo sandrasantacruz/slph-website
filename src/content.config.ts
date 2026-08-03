@@ -1,8 +1,8 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection } from "astro:content";
 // `z` aus `astro:content` ist in Astro 6 deprecated (fliegt in 7 raus).
-import { z } from 'astro/zod';
+import { z } from "astro/zod";
 
-import { pulpoPosts } from './lib/pulpo-loader';
+import { pulpoPosts } from "./lib/pulpo-loader";
 
 /**
  * Artikel UND Veranstaltungen in einer Collection — im Ziel sind sie eine
@@ -23,7 +23,7 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     teaser: z.string().optional(),
-    kind: z.enum(['article', 'event']),
+    kind: z.enum(["article", "event"]),
     /** Letztes Segment der Route, passt zu `/noticias/[slug]`. */
     slug: z.string(),
     /** Vollständiger Pfad im Ziel, z.B. `/noticias/desplastificate`. */
@@ -41,6 +41,8 @@ const posts = defineCollection({
         width: z.number().optional(),
         height: z.number().optional(),
         alt: z.string().optional(),
+        focalX: z.number().optional(),
+        focalY: z.number().optional(),
       })
       .optional(),
     tags: z.array(z.string()).default([]),

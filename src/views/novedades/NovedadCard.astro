@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 
-import { postPath, type Post } from '../../lib/posts';
+import { coverBox, postPath, type Post } from '../../lib/posts';
 
 interface Props {
   item: Post;
@@ -42,6 +42,9 @@ const day = startsAt ? dayFmt.format(startsAt) : '';
 const month = startsAt ? monthFmt.format(startsAt).replace('.', '') : '';
 
 const href = postPath(item);
+
+// Zuschnitt auf 3:2 passiert beim Build, nicht erst per object-cover.
+const box = cover ? coverBox(cover, 900, [400, 800]) : null;
 ---
 
 <li hidden={hidden} data-search={search} class:list={[
@@ -59,11 +62,11 @@ const href = postPath(item);
         <Image
           src={cover.src}
           alt={cover.alt ?? ""}
-          width={900}
-          height={600}
-          widths={[400, 800]}
+          width={box!.width}
+          height={box!.height}
+          widths={box!.widths}
           fit="cover"
-          position="center"
+          position={box!.position}
           sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 90vw"
           loading="lazy"
           class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
