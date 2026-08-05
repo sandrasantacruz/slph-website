@@ -1,4 +1,5 @@
 ---
+
 ---
 
 <section id="trailer" class="relative isolate overflow-x-clip py-20 sm:py-28">
@@ -6,21 +7,23 @@
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-x-0 top-1/4 -z-10 h-2/3 bg-[radial-gradient(70%_60%_at_50%_40%,rgba(100,170,210,0.16),transparent_72%)]"
-  ></div>
+  >
+  </div>
 
   <!-- Rays of surface light falling into the section -->
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-x-0 top-0 -z-10 hidden h-1/2 opacity-40 md:block bg-[linear-gradient(100deg,transparent_18%,rgba(100,170,210,0.14)_24%,transparent_31%,transparent_62%,rgba(248,248,252,0.08)_68%,transparent_74%)]"
-  ></div>
+  >
+  </div>
 
   <div class="mx-auto max-w-6xl px-6">
     <h2
       class="reveal mx-auto max-w-3xl text-center font-display text-[clamp(2rem,5vw,3.25rem)] leading-[0.95] text-caparol"
     >
-      Un vistazo
+      El mar tiene voz
       <span class="block">
-        <span class="hand-underline text-arena">al cuento en movimiento</span>
+        <span class="hand-underline text-arena">para quien sabe escuchar</span>
       </span>
     </h2>
   </div>
@@ -28,38 +31,24 @@
   <!-- Window on the sea — full-bleed on mobile, framed from md up -->
   <div class="mt-12 sm:mt-16 md:mt-24">
     <div class="relative mx-auto max-w-6xl md:px-6">
-      <!-- Quote sits above and dips over the top edge of the window -->
-      <div
-        class="reveal relative z-20 px-6 md:absolute md:top-24 md:left-6 md:max-w-md md:-translate-y-[62%] md:px-0 lg:left-10"
-      >
-        <p
-          class="font-display text-[clamp(2.5rem,7vw,4.5rem)] leading-[0.88] text-caparol drop-shadow-[0_6px_24px_rgba(6,15,44,0.9)]"
-        >
-          El mar
-          <span class="block">
-            tiene <span class="hand-underline text-arena">voz</span>.
-          </span>
-        </p>
-        <p
-          class="mt-4 font-hand text-2xl text-celeste drop-shadow-[0_4px_18px_rgba(6,15,44,0.9)] sm:text-3xl"
-        >
-          para quien sabe escuchar.
-        </p>
-      </div>
-
       <!-- The window itself -->
       <div class="window reveal reveal-delay-1 relative mt-8 md:mt-0 md:pt-24">
         <div
           class="window-frame relative overflow-hidden bg-azul-deep md:rounded-[2.5rem]"
         >
           <!-- Caustic light falling in from the surface -->
-          <div aria-hidden="true" class="caustics pointer-events-none absolute inset-0 z-10"></div>
+          <div
+            aria-hidden="true"
+            class="caustics pointer-events-none absolute inset-0 z-10"
+          >
+          </div>
 
           <!-- Scrim so the quote stays legible over the poster; clears on play -->
           <div
             aria-hidden="true"
             class="scrim pointer-events-none absolute inset-0 z-10 hidden md:block"
-          ></div>
+          >
+          </div>
 
           <media-player
             data-player
@@ -84,9 +73,9 @@
 
         <!-- Caption under the window -->
         <p
-          class="reveal reveal-delay-2 mt-6 px-6 text-center font-hand text-2xl text-caparol sm:text-3xl md:px-0 md:text-left"
+          class="reveal reveal-delay-2 mt-6 px-6 text-center font-hand text-2xl text-caparol sm:text-3xl md:px-0"
         >
-          una página animada del cuento.
+          ¡Noa es quien interpreta a la pequeña Betta!
         </p>
       </div>
     </div>
@@ -153,19 +142,18 @@
 
   /* Shafts of surface light drifting across the glass */
   .caustics {
-    background:
-      linear-gradient(
-        104deg,
-        transparent 8%,
-        rgba(100, 170, 210, 0.16) 14%,
-        transparent 22%,
-        transparent 46%,
-        rgba(248, 248, 252, 0.1) 52%,
-        transparent 60%,
-        transparent 76%,
-        rgba(100, 170, 210, 0.13) 82%,
-        transparent 90%
-      );
+    background: linear-gradient(
+      104deg,
+      transparent 8%,
+      rgba(100, 170, 210, 0.16) 14%,
+      transparent 22%,
+      transparent 46%,
+      rgba(248, 248, 252, 0.1) 52%,
+      transparent 60%,
+      transparent 76%,
+      rgba(100, 170, 210, 0.13) 82%,
+      transparent 90%
+    );
     mix-blend-mode: screen;
     opacity: 0.85;
     transition: opacity 0.4s ease;

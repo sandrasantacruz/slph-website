@@ -1,4 +1,5 @@
 ---
+
 ---
 
 <section class="relative isolate overflow-hidden pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -6,13 +7,15 @@
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_85%_25%,rgba(100,170,210,0.10),transparent_70%)]"
-  ></div>
+  >
+  </div>
 
   <!-- Hint of arena from below -->
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-[radial-gradient(ellipse_at_bottom,_rgba(250,222,170,0.05),_transparent_75%)]"
-  ></div>
+  >
+  </div>
 
   <!-- Floating bubbles, decorative, hidden on mobile -->
   <svg
@@ -23,8 +26,8 @@
     stroke-width="1.4"
     aria-hidden="true"
   >
-    <circle cx="20" cy="20" r="14" />
-    <circle cx="14" cy="15" r="2.5" />
+    <circle cx="20" cy="20" r="14"></circle>
+    <circle cx="14" cy="15" r="2.5"></circle>
   </svg>
   <svg
     class="anim-drift pointer-events-none absolute top-40 right-[18%] -z-10 hidden h-6 w-6 text-arena/35 md:block"
@@ -34,7 +37,7 @@
     stroke-width="1.4"
     aria-hidden="true"
   >
-    <circle cx="20" cy="20" r="14" />
+    <circle cx="20" cy="20" r="14"></circle>
   </svg>
 
   <!-- Drifting fish on the left edge -->
@@ -48,22 +51,26 @@
     stroke-linejoin="round"
     aria-hidden="true"
   >
-    <path d="M10 30 Q 40 8 70 30 Q 40 52 10 30 Z" />
-    <path d="M70 30 L 110 14 L 110 46 Z" />
-    <circle cx="28" cy="26" r="1.8" fill="currentColor" />
+    <path d="M10 30 Q 40 8 70 30 Q 40 52 10 30 Z"></path>
+    <path d="M70 30 L 110 14 L 110 46 Z"></path>
+    <circle cx="28" cy="26" r="1.8" fill="currentColor"></circle>
   </svg>
 
   <div class="mx-auto max-w-6xl px-6">
     <!-- Eyebrow -->
     <div class="reveal flex items-center gap-3 sm:gap-4">
       <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
-      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+      <span
+        class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm"
+      >
         Lee un fragmento
       </span>
     </div>
 
     <!-- Headline -->
-    <h1 class="reveal reveal-delay-1 mt-6 max-w-4xl font-display text-[clamp(2.5rem,7.5vw,5rem)] leading-[0.95] tracking-tight text-caparol">
+    <h1
+      class="reveal reveal-delay-1 mt-6 max-w-4xl font-display text-[clamp(2.5rem,7.5vw,5rem)] leading-[0.95] tracking-tight text-caparol"
+    >
       Asómate
       <span class="block">
         a la
@@ -79,48 +86,87 @@
             stroke-linejoin="round"
             aria-hidden="true"
           >
-            <circle cx="20" cy="20" r="14" />
-            <circle cx="14" cy="15" r="2.5" />
+            <circle cx="20" cy="20" r="14"></circle>
+            <circle cx="14" cy="15" r="2.5"></circle>
           </svg>
         </span>
       </span>
     </h1>
 
     <!-- Lead -->
-    <p class="reveal reveal-delay-2 mt-8 max-w-3xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl">
-      Un pequeño esbozo del mundo submarino donde se desarrolla
-      <em class="not-italic text-arena">Si los peces hablaran…</em>,
-      para que <span class="hand-underline text-caparol">te sumerjas en la aventura</span>
-      antes de decidirte a comprar el libro.
+    <p
+      class="reveal reveal-delay-2 mt-8 max-w-3xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl"
+    >
+      Un pequeño esbozo del mundo marino donde se desarrolla
+      <em class="not-italic text-arena">Si los peces hablaran…</em>, Sumérgete
+      en la aventura antes de decidirte a comprar el libro.
     </p>
 
     <!-- Quick anchors -->
-    <div class="reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+    <div
+      class="reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm"
+    >
       <a
         href="#fragmento"
         class="group inline-flex items-center gap-2 font-display tracking-wide text-celeste uppercase transition hover:text-caparol"
       >
-        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 4h7a4 4 0 0 1 4 4v12" />
-          <path d="M20 4h-7a4 4 0 0 0-4 4v12" />
+        <svg
+          viewBox="0 0 24 24"
+          class="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+          <path d="M20 4h-7a4 4 0 0 0-4 4v12"></path>
         </svg>
         Abrir el fragmento
-        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M12 5v14M6 13l6 6 6-6"/>
+        <svg
+          viewBox="0 0 24 24"
+          class="h-4 w-4 transition-transform group-hover:translate-y-0.5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14M6 13l6 6 6-6"></path>
         </svg>
       </a>
-      <span aria-hidden="true" class="hidden h-4 w-px bg-caparol/25 sm:inline-block"></span>
+      <span
+        aria-hidden="true"
+        class="hidden h-4 w-px bg-caparol/25 sm:inline-block"></span>
       <a
         href="/comprar"
         class="group inline-flex items-center gap-2 font-display tracking-wide text-arena uppercase transition hover:text-caparol"
       >
-        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M3 7h18l-2 13H5z" />
-          <path d="M8 7V5a4 4 0 0 1 8 0v2" />
+        <svg
+          viewBox="0 0 24 24"
+          class="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M3 7h18l-2 13H5z"></path>
+          <path d="M8 7V5a4 4 0 0 1 8 0v2"></path>
         </svg>
         Dónde comprarlo
-        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
+        <svg
+          viewBox="0 0 24 24"
+          class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6"></path>
         </svg>
       </a>
     </div>
