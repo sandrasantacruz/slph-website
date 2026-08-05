@@ -1,40 +1,40 @@
 ---
 type Char = {
   name: string;
-  role: string;
-  species: string;
+  claim: string;
   hint: string;
   img: string;
+  alt: string;
 };
 
 const characters: Char[] = [
   {
+    name: 'Dña. Teresa',
+    claim: 'Su experiencia es clave',
+    hint: 'La abuela de Lorena es quien escribe Si los peces hablaran',
+    img: '/assets/animals/abuela.webp',
+    alt: 'Dña. Teresa, la abuela de Lorena',
+  },
+  {
+    name: 'Dña. Paciencia',
+    claim: 'Su veteranía es crucial',
+    hint: 'Es la tortuga maaás sabia de nuestro arrecife',
+    img: '/assets/animals/dona.webp',
+    alt: 'Dña. Paciencia, la tortuga',
+  },
+  {
+    name: 'La Bella Azul',
+    claim: 'Su creatividad es vital',
+    hint: 'A esta ingeniosa sirena le encanta ayudar',
+    img: '/assets/animals/bella.webp',
+    alt: 'La Bella Azul, la sirena',
+  },
+  {
     name: 'Lorena',
-    role: 'la protagonista',
-    species: 'niña',
-    hint: 'La nieta de Dña. Teresa. Escucha el cuento con los ojos bien abiertos.',
+    claim: 'Su valentía es admirable',
+    hint: 'La nieta de Dña. Teresa es la fundadora del Club',
     img: '/assets/animals/lorena.webp',
-  },
-  {
-    name: 'Nela',
-    role: 'la Irritable',
-    species: 'pez tropical',
-    hint: 'Se enfada cuando algo no le cuadra en el arrecife.',
-    img: '/assets/animals/nela.webp',
-  },
-  {
-    name: 'Dina',
-    role: 'la Voladora',
-    species: 'pez volador',
-    hint: 'Sale del agua con sus aletas-alas y aletea más alto que nadie.',
-    img: '/assets/animals/dina.webp',
-  },
-  {
-    name: 'Don Canino',
-    role: 'el más fuerte',
-    species: 'tiburón',
-    hint: 'Utiliza su fuerza para proteger el mundo marino.',
-    img: '/assets/animals/don-canino.webp',
+    alt: 'Lorena, la nieta de Dña. Teresa',
   },
 ];
 ---
@@ -89,30 +89,24 @@ acción cuenta para salvar nuestro planeta.</p>
     <!-- Characters strip -->
     <ul class="reveal reveal-delay-3 mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {characters.map((c) => (
-        <li class="group relative flex flex-col rounded-2xl border border-caparol/15 bg-azul/30 p-5 transition hover:border-arena/60">
-          <!-- Portrait -->
-          <div class="relative mx-auto flex aspect-square w-28 items-center justify-center overflow-hidden rounded-full bg-celeste/10 ring-1 ring-caparol/10 sm:w-32">
-            <img
-              src={c.img}
-              alt={`${c.name}, ${c.species}`}
-              loading="lazy"
-              decoding="async"
-              draggable="false"
-              class="block h-full w-full object-contain p-1.5 transition-transform duration-500 group-hover:scale-105"
-            />
+        <li class="group relative flex flex-col overflow-hidden rounded-2xl border border-caparol/15 bg-azul/30 transition hover:border-arena/60">
+          <!-- Character card, name is part of the artwork -->
+          <img
+            src={c.img}
+            alt={c.alt}
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+            class="block aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+          <div class="flex flex-1 flex-col p-5">
+            <p class="text-center font-display text-sm tracking-[0.18em] text-arena uppercase sm:text-base">
+              {c.claim}
+            </p>
+            <p class="mt-3 text-center text-sm leading-snug text-caparol/85">
+              {c.hint}
+            </p>
           </div>
-          <p class="mt-4 text-center font-display text-2xl leading-tight text-arena sm:text-3xl">
-            {c.name}
-          </p>
-          <p class="mt-1 text-center font-hand text-lg leading-none text-celeste sm:text-xl">
-            {c.role}
-          </p>
-          <p class="mt-2 text-center font-display text-[0.7rem] tracking-[0.2em] text-arena/85 uppercase">
-            {c.species}
-          </p>
-          <p class="mt-3 text-center text-sm leading-snug text-caparol/85">
-            {c.hint}
-          </p>
         </li>
       ))}
     </ul>
