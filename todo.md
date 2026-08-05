@@ -1,8 +1,18 @@
+- http://localhost:4321/lee-un-fragmento
+  - video kein schwarz am ende
+  - video mit dem buch anders machen, styling
+- kleine schrift schwer zu lesen
+
+
+
+
+
 - fotos einen namen geben
 - fotos auch eine bildbeschreibung geben
 
 
-- http://localhost:4321/lee-un-fragmento - video mit dem buch anders machen
+
+
 - foto sandra http://localhost:4321/autor
 - http://localhost:4321/repercusion die zwei youtube videos setzen
   https://youtu.be/sLhA88EUVDU?si=q9s0A3HTsnxWMybX
