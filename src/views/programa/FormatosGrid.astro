@@ -1,0 +1,92 @@
+---
+// Die neun Formate aus Sandras Übersicht. Bilder liegen als fertige WebPs
+// unter public/assets/programa/formatos/ — Austausch = nur Datei ersetzen.
+const formatos = [
+  {
+    titulo: 'Espectáculos',
+    nota: 'con diferentes formatos',
+    img: '/assets/programa/formatos/espectaculos.webp',
+    alt: 'Doña Paciencia y una princesita del mar sobre el escenario del musical',
+  },
+  {
+    titulo: 'Eventos de concienciación',
+    nota: 'en diversidad de espacios',
+    img: '/assets/programa/formatos/eventos-concienciacion.webp',
+    alt: 'Los personajes del programa en un evento al aire libre junto al mar',
+  },
+  {
+    titulo: 'Experiencias artísticas',
+    nota: 'emotivas e inmersivas',
+    img: '/assets/programa/formatos/experiencias.webp',
+    alt: 'Bailarinas actuando delante del gran acuario, rodeadas de peces',
+  },
+  {
+    titulo: 'Talleres SLPH',
+    nota: 'reciclamos materiales',
+    img: '/assets/programa/formatos/talleres.webp',
+    alt: 'Niñas y niños creando personajes marinos con material reciclado en un taller',
+  },
+  {
+    titulo: 'Cuento',
+    nota: 'en tapa dura y blanda',
+    img: '/assets/programa/formatos/cuento.webp',
+    alt: 'Sandra Santa Cruz firmando ejemplares del cuento en su presentación oficial',
+  },
+  {
+    titulo: 'Cuadernillo',
+    nota: 'de actividades',
+    img: '/assets/programa/formatos/cuadernillo.webp',
+    alt: 'Portada del cuaderno de actividades y personajes para colorear',
+  },
+  {
+    titulo: 'Conferencias',
+    nota: 'con investigadoras marinas',
+    img: '/assets/programa/formatos/conferencias.webp',
+    alt: 'Mesa redonda con investigadoras marinas delante del acuario',
+  },
+  {
+    titulo: 'Eventos a medida',
+    nota: 'interdisciplinares',
+    img: '/assets/programa/formatos/eventos-medida.webp',
+    alt: 'El título Si los peces hablaran escrito sobre la arena de la playa',
+  },
+  {
+    titulo: 'Centros escolares',
+    nota: 'infantil y primaria',
+    img: '/assets/programa/formatos/centros-escolares.webp',
+    alt: 'Alumnado de un centro escolar durante una sesión del programa',
+  },
+];
+---
+
+<section class="relative isolate overflow-hidden pb-24 sm:pb-32">
+  <div class="mx-auto max-w-6xl px-6">
+    <ul class="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
+      {
+        formatos.map((f, i) => (
+          <li
+            class="reveal group"
+            style={`transition-delay:${Math.min(i * 60, 480)}ms`}
+          >
+            <div class="overflow-hidden rounded-sm shadow-[0_20px_40px_-16px_rgba(6,15,44,0.65)] ring-1 ring-caparol/10">
+              <img
+                src={f.img}
+                alt={f.alt}
+                class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            <h3 class="mt-5 font-display text-lg tracking-[0.18em] text-caparol uppercase sm:text-xl">
+              {f.titulo}
+            </h3>
+            <p class="mt-1 font-hand text-xl leading-tight text-celeste sm:text-2xl">
+              {f.nota}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

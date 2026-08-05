@@ -6,6 +6,7 @@
   - video kein schwarz am ende
   - video mit dem buch anders machen, styling
 - kleine schrift schwer zu lesen
+- http://localhost:4321/programa bilder tauschen
 
 
 
