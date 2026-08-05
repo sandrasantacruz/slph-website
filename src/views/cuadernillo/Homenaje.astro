@@ -28,6 +28,60 @@
           alegrar con nuestros personajes.
         </p>
       </div>
+
+      <!-- Weiterführende Links zum Oncología-Projekt -->
+      <div class="mt-10 max-w-3xl">
+        <p class="font-display text-sm uppercase tracking-[0.25em] text-celeste">
+          Sigue el proyecto
+        </p>
+
+        <ul class="mt-4 divide-y divide-caparol/10 border-y border-caparol/10">
+          {
+            [
+              {
+                kicker: 'Artículo',
+                title: 'Por qué queremos llegar a Oncología Infantil',
+                href: 'https://www.muchomasquedanza.com/hospitales-de-oncologia-infantil/',
+              },
+              {
+                kicker: 'Entrevista',
+                title: 'Hablamos del proyecto en Radio Las Palmas',
+                href: 'https://www.instagram.com/reel/DJr03ePMxx3/',
+              },
+            ].map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center justify-between gap-6 py-4 transition hover:text-arena"
+                >
+                  <span>
+                    <span class="block font-hand text-lg text-celeste sm:text-xl">
+                      {link.kicker}
+                    </span>
+                    <span class="block text-lg leading-snug text-caparol group-hover:text-arena sm:text-xl">
+                      {link.title}
+                    </span>
+                  </span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="h-5 w-5 shrink-0 text-arena transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
 
     <!-- Closing CTA -->
