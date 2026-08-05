@@ -2,7 +2,7 @@
 import { Icon } from 'astro-icon/components';
 ---
 
-<section class="relative isolate flex h-[calc(100svh-6rem)] flex-col overflow-hidden">
+<section class="relative isolate flex min-h-[calc(100svh-6rem)] flex-col overflow-hidden">
   <!-- Drifting kelp on the right edge -->
   <svg
     class="anim-sway pointer-events-none absolute -right-4 bottom-0 -z-10 hidden h-2/3 w-28 text-celeste/15 md:block"
@@ -18,35 +18,55 @@ import { Icon } from 'astro-icon/components';
     <path d="M62 200 Q 70 160 62 120 Q 56 90 66 60 Q 70 30 64 0"/>
   </svg>
 
-  <div class="mx-auto flex h-full w-full max-w-6xl flex-col justify-center gap-5 px-6 py-6 sm:gap-6">
-    <!-- Eyebrow -->
-    <div class="reveal flex items-center gap-3 sm:gap-4">
-      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
-      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
-        Programa SLPH · el manifiesto
-      </span>
+  <div class="mx-auto grid w-full max-w-6xl flex-1 items-center gap-10 px-6 py-10 pb-24 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:py-6">
+    <div class="flex flex-col gap-5 sm:gap-6">
+      <!-- Eyebrow -->
+      <div class="reveal flex items-center gap-3 sm:gap-4">
+        <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+        <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+          Programa SLPH · el manifiesto
+        </span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="reveal reveal-delay-1 font-display text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.9] tracking-tight text-caparol">
+        El programa
+        <span class="block text-arena italic">que el mar</span>
+        <span class="block"><span class="hand-underline">esperaba</span></span>
+      </h1>
+
+      <!-- Display tagline -->
+      <p class="reveal reveal-delay-2 max-w-3xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl">
+        Artes plásticas <span class="text-caparol">+</span>
+        escénicas <span class="text-caparol">+</span>
+        Ciencias del Mar
+      </p>
+
+      <!-- Single concise body -->
+      <p class="reveal reveal-delay-3 max-w-2xl text-sm leading-snug text-caparol/90 sm:text-base">
+        Diseñado para proteger los masacrados ecosistemas marinos y
+        <span class="text-arena">cautivar a menores y adultos</span> con información
+        supervisada por la <em class="not-italic text-arena">Facultad de Ciencias del Mar de ULPGC</em>.
+      </p>
     </div>
 
-    <!-- Headline -->
-    <h1 class="reveal reveal-delay-1 font-display text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.9] tracking-tight text-caparol">
-      El programa
-      <span class="block text-arena italic">que el mar</span>
-      <span class="block"><span class="hand-underline">esperaba</span></span>
-    </h1>
-
-    <!-- Display tagline -->
-    <p class="reveal reveal-delay-2 max-w-3xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl">
-      Artes plásticas <span class="text-caparol">+</span>
-      escénicas <span class="text-caparol">+</span>
-      Ciencias del Mar
-    </p>
-
-    <!-- Single concise body -->
-    <p class="reveal reveal-delay-3 max-w-2xl text-sm leading-snug text-caparol/90 sm:text-base">
-      Diseñado para proteger los masacrados ecosistemas marinos y
-      <span class="text-arena">cautivar a menores y adultos</span> con información
-      supervisada por la <em class="not-italic text-arena">Facultad de Ciencias del Mar de ULPGC</em>.
-    </p>
+    <!-- Polaroid: Doña Paciencia ante el acuario -->
+    <figure class="reveal reveal-delay-2 mx-auto w-full max-w-[19rem] sm:max-w-sm lg:max-w-none">
+      <div class="polaroid tilt-r1 transition duration-500 hover:rotate-0">
+        <img
+          src="/assets/programa/tortuga.webp"
+          alt="Doña Paciencia, la tortuga, ante un gran acuario mientras dos niños la observan"
+          class="block w-full object-cover"
+          style="aspect-ratio:3/2"
+          width="1000"
+          height="667"
+          decoding="async"
+        />
+        <figcaption class="absolute right-0 bottom-2 left-0 px-3 text-center font-hand text-xl leading-tight text-azul sm:text-2xl">
+          y que el planeta necesita
+        </figcaption>
+      </div>
+    </figure>
   </div>
 
   <!-- Scroll cue, absolutely positioned at the bottom -->
