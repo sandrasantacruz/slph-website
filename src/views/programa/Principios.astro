@@ -12,6 +12,12 @@ const principios = [
     texto:
       'Sensibilizar y despertar el amor por la fauna marina a través de la creatividad, evitando que se utilice el mar como un vertedero.',
   },
+  {
+    eyebrow: 'Aval',
+    titulo: 'Científico',
+    texto:
+      'Todos los contenidos están supervisados por investigadoras marinas, que garantizan el rigor científico de cada propuesta.',
+  },
 ];
 
 // Die vier Buchstaben von SLPH als zweite Lesart des Namens.
@@ -46,7 +52,7 @@ const siglas = [
     </div>
 
     <!-- Misión / Visión — two large editorial blocks -->
-    <div class="mt-12 grid gap-x-10 gap-y-14 md:grid-cols-2 md:gap-y-0">
+    <div class="mt-12 grid gap-x-8 gap-y-14 md:grid-cols-3 md:gap-y-0 lg:gap-x-10">
       {
         principios.map((p, i) => (
           <article
@@ -55,7 +61,7 @@ const siglas = [
             <div class="absolute -top-6 left-0 font-hand text-3xl leading-none text-celeste sm:text-4xl">
               {p.eyebrow}
             </div>
-            <h2 class="font-display text-[clamp(3rem,6vw,5rem)] leading-[0.92] text-caparol">
+            <h2 class="font-display text-[clamp(2.75rem,5vw,4.25rem)] leading-[0.92] text-caparol">
               {p.titulo}
             </h2>
             <div class="mt-5 flex gap-4">
