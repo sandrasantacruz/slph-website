@@ -15,7 +15,7 @@ const estrenoImg =
   <div class="mx-auto max-w-6xl px-6">
     <div class="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
       <!-- Text column -->
-      <div class="lg:col-span-7">
+      <div class="lg:col-span-7 lg:col-start-1 lg:row-start-1">
         <div class="reveal flex items-center gap-5">
           <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
           <span
@@ -46,41 +46,38 @@ const estrenoImg =
             mensajes perduren y pasen de una generación a otra.
           </p>
         </div>
+      </div>
 
-        <!-- Ficha del estreno -->
-        <div
-          class="reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 rounded-2xl border border-celeste/25 bg-azul-deep/40 p-6 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-7"
-        >
-          <div class="flex items-center gap-3">
-            <Icon
-              name="game-icons:musical-notes"
-              class="h-6 w-6 text-celeste"
-            />
-            <span class="text-base text-caparol/85">
-              Música de <strong class="font-display text-lg text-caparol"
-                >Juan Ramos</strong
-              >
-            </span>
-          </div>
-          <div class="flex items-center gap-3">
-            <Icon name="game-icons:quill-ink" class="h-6 w-6 text-celeste" />
-            <span class="text-base text-caparol/85">
-              Letras de <strong class="font-display text-lg text-caparol"
-                >Juan Luis Santa Cruz</strong
-              >
-            </span>
-          </div>
-          <p class="w-full text-base text-caparol/75">
-            Un formato totalmente original, estrenado en julio de 2016, por el
-            Centro de Danza Sandra Santa Cruz. Debido a la relevancia de este
-            musical se sumaron a él artistas de la talla de Lili Quintana,
-            Nauzet Valerón y Ohiane Viñaspre.
-          </p>
+      <!-- Ficha del estreno, full width under both columns on desktop -->
+      <div
+        class="reveal reveal-delay-3 flex flex-wrap items-center gap-x-8 gap-y-3 rounded-2xl border border-celeste/25 bg-azul-deep/40 p-6 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-7 lg:col-span-12 lg:col-start-1 lg:row-start-2"
+      >
+        <div class="flex items-center gap-3">
+          <Icon name="game-icons:musical-notes" class="h-6 w-6 text-celeste" />
+          <span class="text-base text-caparol/85">
+            Música de <strong class="font-display text-lg text-caparol"
+              >Juan Ramos</strong
+            >
+          </span>
         </div>
+        <div class="flex items-center gap-3">
+          <Icon name="game-icons:quill-ink" class="h-6 w-6 text-celeste" />
+          <span class="text-base text-caparol/85">
+            Letras de <strong class="font-display text-lg text-caparol"
+              >Juan Luis Santa Cruz</strong
+            >
+          </span>
+        </div>
+        <p class="w-full text-base text-caparol/75">
+          Un formato totalmente original, estrenado en julio de 2016, por el
+          Centro de Danza Sandra Santa Cruz. Debido a la relevancia de este
+          musical se sumaron a él artistas de la talla de Lili Quintana, Nauzet
+          Valerón y Ohiane Viñaspre.
+        </p>
       </div>
 
       <!-- Image column -->
-      <div class="reveal reveal-delay-2 lg:col-span-5">
+      <div class="reveal reveal-delay-2 lg:col-span-5 lg:col-start-8 lg:row-start-1">
         <div class="relative mx-auto max-w-xs sm:max-w-sm lg:max-w-none">
           <div
             aria-hidden="true"
