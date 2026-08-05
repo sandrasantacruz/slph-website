@@ -5,6 +5,9 @@ const items = [
     cuerpo:
       'Reciclar y reutilizar forman parte de la esencia de nuestros talleres. Contamos con material audiovisual para visibilizar el problema de la contaminación marina. Nuestros contenidos se alinean con diferentes Objetivos de Desarrollo Sostenible (ODS) de la Agenda 2030 de las Naciones Unidas y contemplan los principios de la LOMLOE y el Diseño Universal para el Aprendizaje (DUA), favoreciendo un aprendizaje significativo e inclusivo. Y, por supuesto, ¡también contamos con talleres para disfrutar en familia!',
     img: '/assets/programa/pancarta.webp',
+    // Querformat: 4:3-Crop schneidet seitlich. Anker nach rechts, sonst
+    // fehlt der rechte Rand der Pancarta.
+    pos: 'object-[85%_50%]',
     nota: 'para colegios y para familias',
     tilt: 'tilt-l1',
   },
@@ -13,6 +16,9 @@ const items = [
     cuerpo:
       'Diseñamos eventos y performances a medida para dar respuesta a objetivos específicos. La experiencia adquirida en nuestros proyectos con organismos oficiales nos permite crear propuestas creativas, versátiles y comprometidas, adaptadas a las necesidades de cada organización. Porque proteger el planeta exige actuar, este equipo está siempre «aletas a la obra».\n¿Qué necesitas?',
     img: '/assets/programa/casa-colon.webp',
+    // Hochformat: 4:3-Crop zeigt nur ~56 % der Höhe. Anker nach oben, damit
+    // die Schilder «NO SE CONTAMINA» komplett im Bild bleiben.
+    pos: 'object-[50%_30%]',
     nota: 'a medida para instituciones y organizaciones',
     tilt: 'tilt-r1',
   },
@@ -42,7 +48,7 @@ const items = [
               <img
                 src={it.img}
                 alt=""
-                class="aspect-[4/3] w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+                class={`aspect-[4/3] w-full object-cover ${it.pos} transition-transform duration-700 group-hover:scale-[1.04]`}
                 loading="lazy"
                 decoding="async"
               />
