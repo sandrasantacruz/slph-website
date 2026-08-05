@@ -74,7 +74,11 @@ const centros = [
   ></div>
 
   <div class="mx-auto max-w-6xl px-6">
-    <div class="reveal max-w-3xl">
+    <!-- Sprungziel sitzt am Überschriftenblock, nicht an der Section: sonst
+         landet man oberhalb deren py-28 und es bleibt viel Luft übrig.
+         Die Navbar ist `relative` und scrollt mit weg, daher nur ein kleiner
+         Atem-Abstand. -->
+    <div id="aliados" class="reveal max-w-3xl scroll-mt-8">
       <p class="font-hand text-3xl leading-none text-celeste sm:text-4xl">
         red de aliados
       </p>
