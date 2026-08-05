@@ -1,27 +1,11 @@
-- http://localhost:4321/lee-un-fragmento
-  - video kein schwarz am ende
-  - video mit dem buch anders machen, styling
-- kleine schrift schwer zu lesen
-
-
-
-
-
 - fotos einen namen geben
 - fotos auch eine bildbeschreibung geben
 
 
-
-
-- foto sandra http://localhost:4321/autor
-- http://localhost:4321/repercusion die zwei youtube videos setzen
-  https://youtu.be/sLhA88EUVDU?si=q9s0A3HTsnxWMybX
-  centros escolares
-  https://youtu.be/GkmiiCa8qCU?si=GEwIMve37QbstajJ
-  investigadoras marinas
-- http://localhost:4321/programa fische austauschen durch mit brille
-- http://localhost:4321/noticias Foto format
-- pulpo.cloud für blog artikel und fokus für bilder
+- http://localhost:4321/lee-un-fragmento
+  - video kein schwarz am ende
+  - video mit dem buch anders machen, styling
+- kleine schrift schwer zu lesen
 
 
 
