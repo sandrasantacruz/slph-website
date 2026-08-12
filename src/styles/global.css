@@ -197,6 +197,16 @@
   opacity: 0.5;
 }
 
+/* Senkrechtes Pendant zu .dotted-rule: aufsteigende Blasenspur.
+   Breite des Elements = 12px (eine Kachel), sonst schneidet der Punkt ab. */
+.bubble-trail {
+  background-image: radial-gradient(circle, currentColor 1.5px, transparent 1.5px);
+  background-size: 12px 12px;
+  background-position: center top;
+  background-repeat: repeat-y;
+  opacity: 0.5;
+}
+
 /* "Paper" surface used for cards on light backgrounds. */
 .paper {
   background:

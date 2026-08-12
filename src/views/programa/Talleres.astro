@@ -1,5 +1,11 @@
 ---
-
+// Die vier Marker des Programms, abwechselnd celeste/caparol wie im Entwurf.
+const enfoques = [
+  { label: 'Material audiovisual', color: 'text-celeste' },
+  { label: 'LOMLOE', color: 'text-caparol' },
+  { label: 'DUA', color: 'text-celeste' },
+  { label: 'ODS 2030', color: 'text-caparol' },
+];
 ---
 
 <section id="talleres" class="relative isolate overflow-hidden py-20 sm:py-28">
@@ -48,21 +54,6 @@
           </span>
         </div>
       </div>
-
-      <div
-        class="mt-10 flex flex-wrap justify-center gap-3 md:justify-start md:pl-4"
-      >
-        <span
-          class="rounded-full border border-celeste/60 px-4 py-1.5 font-display text-sm tracking-wider text-celeste uppercase"
-        >
-          Material audiovisual
-        </span>
-        <span
-          class="rounded-full border border-caparol/40 px-4 py-1.5 font-display text-sm tracking-wider text-caparol uppercase"
-        >
-          LOMLOE · DUA · ODS 2030
-        </span>
-      </div>
     </div>
 
     <!-- Text column -->
@@ -95,6 +86,34 @@
           cautivadores personajes.
         </p>
       </div>
+
+      <!-- Marker-Liste: Caracolas als Aufzählungszeichen, die Blasenspur
+           läuft senkrecht hinter ihnen durch. -->
+      <ul class="reveal reveal-delay-3 relative mt-10 space-y-5 sm:mt-12">
+        <span
+          aria-hidden="true"
+          class="bubble-trail absolute inset-y-0 left-3 w-3 text-celeste"></span>
+        {
+          enfoques.map((enfoque) => (
+            <li class="flex items-center gap-4">
+              <img
+                src="/assets/programa/caracola.webp"
+                alt=""
+                width="266"
+                height="171"
+                class="relative w-9 shrink-0 drop-shadow-[0_6px_12px_rgba(6,15,44,0.5)]"
+                loading="lazy"
+                decoding="async"
+              />
+              <span
+                class={`font-display text-lg tracking-[0.12em] uppercase sm:text-xl ${enfoque.color}`}
+              >
+                {enfoque.label}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
 </section>
