@@ -38,12 +38,15 @@ const columnas = [
 ---
 
 <section class="relative isolate overflow-x-clip">
-  <!-- Bridge character — Doña Paciencia descends from QueEs into Versatilidad -->
+  <!-- Bridge character — die Schildkröte schwimmt von QueEs herunter nach
+       Versatilidad. Sie ist deutlich breiter als hoch (1000x543), deshalb
+       größere Breiten und flachere Top-Offsets als bei den hochformatigen
+       Tieren. -->
   <img
-    src="/assets/animals/dona-paciencia.webp"
+    src="/assets/animals/dona-basura.webp"
     alt=""
     aria-hidden="true"
-    class="bridge-creature pointer-events-none absolute -top-14 right-2 z-10 w-28 drop-shadow-[0_18px_28px_rgba(6,15,44,0.55)] sm:-top-24 sm:right-10 sm:w-48 lg:w-56"
+    class="bridge-creature pointer-events-none absolute -top-14 right-2 z-10 w-48 drop-shadow-[0_18px_28px_rgba(6,15,44,0.55)] sm:-top-24 sm:right-10 sm:w-80 lg:w-[26rem]"
     loading="lazy"
   />
 
@@ -131,8 +134,8 @@ const columnas = [
     transform-origin: center;
   }
   @keyframes bridge-bob {
-    0%, 100% { transform: translateY(0)    rotate(-12deg); }
-    50%      { transform: translateY(-8px) rotate(-9deg);  }
+    0%, 100% { transform: translateY(0)    rotate(-8deg); }
+    50%      { transform: translateY(-8px) rotate(-5deg); }
   }
   @media (prefers-reduced-motion: reduce) {
     .bridge-creature { animation: none !important; }
