@@ -195,7 +195,10 @@ export function breadcrumbSchema(items: BreadcrumbItem[]): JsonLd {
 
 export interface FaqEntry {
   question: string;
-  /** Klartext-Antwort. Wird 1:1 ins FAQPage-JSON-LD übernommen (kein HTML). */
+  /**
+   * Klartext-Antwort fürs FAQPage-JSON-LD (kein HTML). `\n` trennt Absätze und
+   * wird fürs Schema zu `<br>` (das erlaubt Google im Answer-Text).
+   */
   answer: string;
   /**
    * Optionale HTML-Variante für die sichtbare Section (z.B. mit Inline-Links).
@@ -213,7 +216,7 @@ export function faqSchema(entries: FaqEntry[]): JsonLd {
       name: e.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: e.answer,
+        text: e.answer.replaceAll('\n', '<br>'),
       },
     })),
   };

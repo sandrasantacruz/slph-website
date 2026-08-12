@@ -14,42 +14,42 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿Qué es Si los peces hablaran…?",
     answer:
-      "Si los peces hablaran… (SLPH) es un programa de concienciación medioambiental creado en Gran Canaria por Sandra Santa Cruz. Protege los ecosistemas marinos a través de tres lenguajes complementarios: las artes plásticas y escénicas, las ciencias del mar y la educación. Nació como musical y se ha expandido a un cuento, talleres educativos, performances y eventos de concienciación.",
+      "Si los peces hablaran… (SLPH) es un programa de concienciación medioambiental creado en Gran Canaria por Sandra Santa Cruz. Su misión es promover la protección y conservación de los ecosistemas marinos a través de la unión de tres ámbitos complementarios: las artes plásticas y escénicas, las ciencias del mar y la educación.\nEl proyecto nació como un musical y, con el paso del tiempo, ha evolucionado hasta convertirse en un programa multidisciplinar que incluye un cuento ilustrado, talleres educativos, performances, acciones culturales y eventos de sensibilización dirigidos a todos los públicos.",
   },
   {
     question: "¿Quién es la autora?",
     answer:
-      "Sandra Santa Cruz es bailarina, coreógrafa y profesora canaria, licenciada en danza. Lleva más de tres décadas al frente del Centro de Danza Sandra Santa Cruz en Gran Canaria, donde fomenta la danza como herramienta educativa. Es la autora del cuento Si los peces hablaran… y la impulsora del programa homónimo.",
+      "Sandra Santa Cruz es bailarina, coreógrafa, profesora y licenciada en danza. Desde hace casi cuatro décadas dirige el Centro de Danza Sandra Santa Cruz, en Gran Canaria, donde promueve la danza como herramienta educativa, artística y de desarrollo personal.\nEs la autora del cuento Si los peces hablaran… y la creadora e impulsora del Programa SLPH, un programa que une artes escénicas, educación y ciencia del mar para fomentar el respeto y la conservación del mundo marino.",
   },
   {
     question: "¿Dónde se puede comprar el cuento?",
     answer:
-      "El cuento está disponible de forma presencial en librerías de Gran Canaria, entre ellas, Librería Canaima, La Librería del Cabildo, Poema del Mar y El Libro Técnico, donde lo encontrarás también de forma online con envío a domicilio. La página comprar lista los puntos de venta con su dirección.",
+      "El cuento Si los peces hablaran… está disponible en diferentes puntos de venta de Gran Canaria, entre ellos Librería Canaima, La Librería del Cabildo, Poema del Mar y El Libro Técnico.\nTambién puedes adquirirlo online con envío a domicilio a través de El Libro Técnico.\nEn la página Comprar de nuestra web encontrarás el listado actualizado de todos los puntos de venta, junto con su ubicación y la información necesaria para realizar tu compra.",
     answerHtml:
-      `El cuento está disponible de forma presencial en librerías de Gran Canaria, entre ellas, Librería Canaima, La Librería del Cabildo, Poema del Mar y El Libro Técnico, donde lo encontrarás también de forma online con envío a domicilio. La página ${link("/comprar", "comprar")} lista los puntos de venta con su dirección.`,
+      `El cuento Si los peces hablaran… está disponible en diferentes puntos de venta de Gran Canaria, entre ellos Librería Canaima, La Librería del Cabildo, Poema del Mar y El Libro Técnico.\nTambién puedes adquirirlo online con envío a domicilio a través de El Libro Técnico.\nEn la página ${link("/comprar", "Comprar")} de nuestra web encontrarás el listado actualizado de todos los puntos de venta, junto con su ubicación y la información necesaria para realizar tu compra.`,
   },
   {
     question: "¿A qué edad va dirigido el cuento?",
     answer:
-      "El relato de Si los peces hablaran… va dirigido a todas las edades. Está pensado como cuento ilustrado de lectura a partir de 6 años, y como herramienta de sensibilización para familias, docentes y público adulto. Su lenguaje emotivo y sus ilustraciones permiten una lectura por capas según la edad.",
+      "El cuento Si los peces hablaran… está dirigido a todas las edades. Puede leerse de forma autónoma a partir de los 6 años, aunque también es una excelente herramienta de sensibilización para familias, centros educativos y público adulto.\nSu lenguaje emotivo y sus ilustraciones permiten que cada lector descubra la historia desde una perspectiva diferente, adaptándose a su edad y nivel de comprensión.",
   },
   {
     question: "¿En qué consiste el programa SLPH?",
     answer:
-      "El programa SLPH combina artes plásticas, artes escénicas y ciencia del mar para concienciar sobre los ecosistemas marinos. Los contenidos están supervisados por la Facultad de Ciencias del Mar de la Universidad de Las Palmas de Gran Canaria. Incluye talleres educativos, exposiciones, un musical y materiales didácticos para centros escolares.",
+      "El programa Si los peces hablaran… (SLPH) utiliza las artes plásticas, las artes escénicas, la educación y las ciencias del mar como herramientas para fomentar la protección y conservación de los ecosistemas marinos.\nTodos sus contenidos cuentan con la supervisión científica de investigadoras de la Facultad de Ciencias del Mar de la Universidad de Las Palmas de Gran Canaria, garantizando el rigor de los mensajes que transmite.\nEl programa incluye talleres educativos, exposiciones, espectáculos, materiales didácticos y otras acciones de sensibilización dirigidas a centros escolares, familias e instituciones.",
   },
   {
     question: "¿Cómo se puede colaborar?",
     answer:
-      "Se puede colaborar de tres formas: como voluntario, como donante puntual o a través de mecenazgo institucional. La página colabora explica los detalles y la página de contacto recoge los canales directos (WhatsApp, correo y teléfono) para ponerse en contacto sin formularios intermedios.",
+      "Puedes colaborar con Si los peces hablaran… de diferentes maneras: como voluntario, realizando una donación puntual o mediante acciones de mecenazgo y colaboración institucional.\nEn la página Colabora encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página Contacto.",
     answerHtml:
-      `Se puede colaborar de tres formas: como voluntario, como donante puntual o a través de mecenazgo institucional. La página ${link("/colabora", "colabora")} explica los detalles y la página de contacto recoge los canales directos (WhatsApp, correo y teléfono) para ponerse en contacto sin formularios intermedios.`,
+      `Puedes colaborar con Si los peces hablaran… de diferentes maneras: como voluntario, realizando una donación puntual o mediante acciones de mecenazgo y colaboración institucional.\nEn la página ${link("/colabora", "Colabora")} encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página ${link("/contacto", "Contacto")}.`,
   },
   {
     question: "¿Dónde se desarrolla el proyecto?",
     answer:
-      "El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en el archipiélago canario y con proyección al territorio nacional. Las actividades, eventos y notas de prensa se publican en la sección noticias de la web.",
+      "El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en el archipiélago canario y con proyección al territorio nacional.\nTodas las actividades, eventos, colaboraciones y apariciones en los medios de comunicación se publican en la sección Noticias de nuestra web.",
     answerHtml:
-      `El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en el archipiélago canario y con proyección al territorio nacional. Las actividades, eventos y notas de prensa se publican en la sección ${link("/noticias", "noticias")} de la web.`,
+      `El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en el archipiélago canario y con proyección al territorio nacional.\nTodas las actividades, eventos, colaboraciones y apariciones en los medios de comunicación se publican en la sección ${link("/noticias", "Noticias")} de nuestra web.`,
   },
 ];

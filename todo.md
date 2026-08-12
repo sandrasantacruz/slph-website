@@ -1,3 +1,7 @@
+news
+- standort nach unten
+- pulpo: datum freie auswahl auch in die vergangenheit
+
 - fotos einen namen geben
 - fotos auch eine bildbeschreibung geben
 
