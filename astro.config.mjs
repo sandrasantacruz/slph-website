@@ -6,6 +6,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  // Kanonische Domain. Einzige Quelle für alle absoluten URLs der Seite:
+  // `src/lib/seo.ts` liest sie als `import.meta.env.SITE` wieder aus und baut
+  // daraus canonical, og:image, JSON-LD und die Sitemap.
+  site: 'https://silospeceshablaran.com',
   output: 'static',
   integrations: [icon()],
   image: {

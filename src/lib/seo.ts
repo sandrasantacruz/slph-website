@@ -5,7 +5,16 @@
 
 import { socials } from './social';
 
-export const SITE_URL = 'https://silospeceshablaran.com';
+/**
+ * Kanonische Domain, ohne Slash am Ende (die Helper hängen ihn selbst an).
+ *
+ * Gepflegt wird sie als `site` in `astro.config.mjs`; Astro reicht den Wert als
+ * `import.meta.env.SITE` durch. Der Fallback greift nur, wenn diese Datei
+ * außerhalb des Astro-Builds geladen wird (z.B. aus einem Node-Skript).
+ */
+export const SITE_URL = (
+  import.meta.env.SITE || 'https://silospeceshablaran.com'
+).replace(/\/+$/, '');
 export const SITE_NAME = 'Si los peces hablaran';
 export const SITE_LOCALE = 'es_ES';
 export const SITE_LANG = 'es';
