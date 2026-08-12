@@ -5,7 +5,24 @@ import coverCuento from './img/cover-cuento.webp?url';
 <section class="relative">
   <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 sm:py-28 md:grid-cols-[auto_1fr] md:gap-16">
     <div class="reveal relative flex flex-col items-center gap-10">
-      <div class="book anim-float-soft">
+      <!-- "Sealed" badge, mit der Möwe darüber -->
+      <div class="relative flex flex-col items-start">
+        <img
+          src="/assets/inicio/gaviota.webp"
+          alt=""
+          aria-hidden="true"
+          class="anim-float-soft pointer-events-none -mb-10 -ml-4 w-52 max-w-none drop-shadow-2xl sm:-ml-8 sm:w-64"
+          loading="lazy"
+        />
+        <div class="relative z-10 inline-flex items-center gap-3 rounded-full border-2 border-dashed border-arena/40 bg-azul/95 px-5 py-2 font-display text-base uppercase tracking-widest text-arena/90 shadow-lg shadow-azul-deep/40 backdrop-blur-sm sm:text-lg">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Avalado por la ciencia
+        </div>
+      </div>
+
+      <div class="book">
         <div class="book__pages" aria-hidden="true"></div>
         <img
           src={coverCuento}
@@ -15,14 +32,6 @@ import coverCuento from './img/cover-cuento.webp?url';
         />
         <div class="book__spine" aria-hidden="true"></div>
         <div class="book__gloss" aria-hidden="true"></div>
-      </div>
-
-      <!-- "Sealed" badge -->
-      <div class="inline-flex items-center gap-3 rounded-full border-2 border-dashed border-arena/40 px-5 py-2 font-display text-base uppercase tracking-widest text-arena/90 sm:text-lg">
-        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2l3 7 7 .5-5.5 4.5L18 21l-6-4-6 4 1.5-7L2 9.5 9 9z" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Avalado por la ciencia
       </div>
     </div>
 
