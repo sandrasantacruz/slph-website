@@ -13,15 +13,9 @@ const presentacion = "/assets/cuento/presentacion-oficial-poema-del-mar.webp";
     <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
       <!-- Image column -->
       <div
-        class="reveal reveal-delay-1 order-last lg:order-first lg:col-span-5"
+        class="reveal reveal-delay-1 relative z-10 order-last lg:order-first lg:col-span-5"
       >
         <div class="relative mx-auto max-w-xs sm:max-w-sm lg:max-w-none">
-          <div
-            aria-hidden="true"
-            class="anim-sway absolute -inset-3 -z-10 rounded-[1.5rem] border-2 border-dashed border-celeste/30"
-          >
-          </div>
-
           <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
             <img
               src={presentacion}
@@ -31,10 +25,28 @@ const presentacion = "/assets/cuento/presentacion-oficial-poema-del-mar.webp";
               decoding="async"
             />
             <p
-              class="absolute bottom-2 left-0 right-0 text-center font-hand text-3xl leading-none text-azul sm:text-4xl"
+              class="absolute bottom-2 left-0 right-[30%] text-center font-hand text-2xl leading-none text-azul sm:text-3xl"
             >
               firma en el Deep Sea
             </p>
+
+            <!-- Caracolas y algas — ancladas al borde inferior del marco -->
+            <div
+              aria-hidden="true"
+              class="pointer-events-none absolute -right-[6%] -bottom-[5%] w-[44%] sm:-right-[18%]"
+            >
+              <div
+                class="absolute -bottom-[2%] left-1/2 h-[18%] w-[120%] -translate-x-1/2 rounded-[100%] bg-celeste/25 blur-xl"
+              >
+              </div>
+              <img
+                src="/assets/cuento/caracola.webp"
+                alt=""
+                class="relative block w-full drop-shadow-[0_12px_20px_rgba(6,15,44,0.45)]"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
       </div>
