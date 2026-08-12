@@ -29,7 +29,7 @@ const { id, title, eyebrow, intro, images } = Astro.props;
       </p>
     </header>
 
-    <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-5 lg:grid-cols-4">
+    <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-5">
       {
         images.map((img, i) => (
           <a
@@ -41,7 +41,7 @@ const { id, title, eyebrow, intro, images } = Astro.props;
               'reveal group relative block aspect-square overflow-hidden rounded-xl bg-azul-deep ring-1 ring-caparol/10 transition duration-300',
               'hover:-translate-y-1 hover:ring-arena/70 hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)]',
               'focus:outline-none focus-visible:ring-2 focus-visible:ring-arena',
-              `reveal-delay-${(i % 4) + 1}`,
+              `reveal-delay-${(i % 3) + 1}`,
             ]}
           >
             <img
