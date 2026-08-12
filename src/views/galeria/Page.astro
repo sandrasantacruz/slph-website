@@ -1,11 +1,11 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
-import MainLayout from '../../layouts/MainLayout.astro';
-import Hero from './Hero.astro';
-import Section from './Section.astro';
-import Lightbox from './Lightbox.astro';
-import SubNavCuento from '../../components/SubNavCuento.astro';
+import fs from "node:fs";
+import path from "node:path";
+import MainLayout from "../../layouts/MainLayout.astro";
+import Hero from "./Hero.astro";
+import Section from "./Section.astro";
+import Lightbox from "./Lightbox.astro";
+import SubNavCuento from "../../components/SubNavCuento.astro";
 
 type SectionDef = {
   id: string;
@@ -16,46 +16,98 @@ type SectionDef = {
 
 const sectionDefs: SectionDef[] = [
   {
-    id: 'musical',
-    title: 'Origen del proyecto',
-    eyebrow: '10 Años moviendo las aletas',
-    intro: 'Un musical del Centro de Danza Sandra Santa Cruz, que continúa comprometido con Si los peces hablaran... desde 2016.',
+    id: "musical",
+    title: "Origen del proyecto",
+    eyebrow: "10 Años moviendo las aletas",
+    intro:
+      "Un musical del Centro de Danza Sandra Santa Cruz, que continúa comprometido con Si los peces hablaran... desde 2016.",
   },
   {
-    id: 'cuento',
-    title: 'El cuento',
-    eyebrow: 'Presentación oficial',
-    intro: 'La presentación del libro Si los peces hablaran... —conferencia con investigadoras marinas, danza y los rostros que lo acompañaron.',
+    id: "transformacion",
+    title: "Transformación",
+    eyebrow: "El camino recorrido",
+    intro:
+      "De un musical a un referente de sensibilización medioambiental respaldado por instituciones y la comunidad científica.",
   },
   {
-    id: 'eventos',
-    title: 'Eventos',
-    eyebrow: 'Donde el mar nos lleva',
-    intro: 'Charlas, ferias, colegios y bibliotecas: el cuento sale al encuentro de su público.',
+    id: "librupeces",
+    title: "Nuestros librupeces",
+    eyebrow: "Fuera de la estantería",
+    intro:
+      "Cuento y cuadernillo que salen a tu encuentro. Presentaciones escenificadas del cuento, firma de libros y encuentros de autores en ferias, bibliotecas y museos.",
   },
   {
-    id: 'momentos',
-    title: 'Momentos entrañables',
-    eyebrow: 'Lo que no olvidamos',
-    intro: 'Voces, miradas y gestos que dejan huella a lo largo del camino también, en nuestros corazones.',
+    id: "cuento",
+    title: "El cuento",
+    eyebrow: "Presentación oficial",
+    intro:
+      "La presentación del libro Si los peces hablaran... —conferencia con investigadoras marinas, danza y los rostros que lo acompañaron.",
   },
   {
-    id: 'contaminacion',
-    title: 'Contaminación',
-    eyebrow: 'La realidad que nos empuja',
-    intro: 'Lo que ocurre cuando los peces ya no hablan — la urgencia que justifica todo lo demás.',
+    id: "espectaculos",
+    title: "Espectáculos",
+    eyebrow: "En cualquier escenario",
+    intro:
+      "De gran, mediano y pequeño formato, incluso sinfónico (diseñado para la OFGC), para poder llevar los mensajes de nuestra obra allá donde se necesite.",
+  },
+
+  {
+    id: "eventos",
+    title: "Eventos de concienciación",
+    eyebrow: "Donde el mar nos lleva",
+    intro:
+      "En este apartado encontrarás tanto experiencias artísticas como eventos a medida.",
+  },
+  {
+    id: "talleres",
+    title: "Talleres SLPH",
+    eyebrow: "Manos a la obra",
+    intro:
+      "Con identidad propia, basados en nuestro relato. Se desarrollan mayoritariamente con material reutilizado y se enriquecen con material audiovisual.",
+  },
+  {
+    id: "centros-escolares",
+    title: "Centros escolares",
+    eyebrow: "El aula se hace mar",
+    intro:
+      "Independientemente del formato, emocionantes encuentros con escolares que hacen suya, nuestra preocupación por proteger el mundo marino.",
+  },
+  {
+    id: "conferencias",
+    title: "Conferencias",
+    eyebrow: "La ciencia toma la palabra",
+    intro:
+      "Bien sean junto a científicos marinos para un público más adulto o charlas para menores en ferias, bibliotecas, museos y colegios.",
+  },
+  {
+    id: "momentos",
+    title: "Momentos entrañables",
+    eyebrow: "Lo que no olvidamos",
+    intro:
+      "Voces, miradas y gestos que dejan huella a lo largo del camino también, en nuestros corazones.",
+  },
+  {
+    id: "contaminacion",
+    title: "Contaminación",
+    eyebrow: "La realidad que nos empuja",
+    intro:
+      "Lo que ocurre cuando los peces ya no hablan — la urgencia que justifica todo lo demás.",
   },
 ];
 
 // Read available webp files at build time, one folder per section.
-const BASE = path.resolve(process.cwd(), 'public/assets/galeria');
+const BASE = path.resolve(process.cwd(), "public/assets/galeria");
 
 const sections = sectionDefs.map((def) => {
   const dir = path.join(BASE, def.id);
-  const files = fs
-    .readdirSync(dir)
-    .filter((f) => /\.webp$/i.test(f))
-    .sort();
+  // Ordner darf (noch) fehlen oder leer sein: die Section rendert dann nur
+  // den Kopf, Bilder erscheinen sobald WebPs im Ordner liegen.
+  const files = fs.existsSync(dir)
+    ? fs
+        .readdirSync(dir)
+        .filter((f) => /\.webp$/i.test(f))
+        .sort()
+    : [];
   const images = files.map((file, i) => ({
     src: `/assets/galeria/${def.id}/${file}`,
     alt: `${def.title} — imagen ${i + 1}`,
@@ -67,30 +119,45 @@ const sections = sectionDefs.map((def) => {
 
 <MainLayout
   title="Galería"
-  description="Imágenes del musical, el cuento, los eventos y los momentos del proyecto Si los peces hablaran. Material visual organizado por secciones: musical, cuento, eventos, momentos y contaminación marina."
+  description="Imágenes del musical, el cuento, los eventos y los momentos del proyecto Si los peces hablaran. Material visual organizado por secciones: musical, transformación, cuento, espectáculos, librupeces, eventos de concienciación, talleres, centros escolares, conferencias, momentos y contaminación marina."
   hideWaterLine
   jsonLd={[
     {
-      '@context': 'https://schema.org',
-      '@type': 'ImageGallery',
-      name: 'Galería · Si los peces hablaran',
+      "@context": "https://schema.org",
+      "@type": "ImageGallery",
+      name: "Galería · Si los peces hablaran",
       description:
-        'Imágenes del musical, el cuento, los eventos y los momentos del proyecto Si los peces hablaran.',
-      url: 'https://silospeceshablaran.com/galeria',
+        "Imágenes del musical, el cuento, los eventos y los momentos del proyecto Si los peces hablaran.",
+      url: "https://silospeceshablaran.com/galeria",
       hasPart: sections.map((s) => ({
-        '@type': 'ImageGallery',
+        "@type": "ImageGallery",
         name: s.title,
         about: s.intro,
         numberOfItems: s.images.length,
       })),
     },
     {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://silospeceshablaran.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Sobre el cuento', item: 'https://silospeceshablaran.com/sobre-el-cuento' },
-        { '@type': 'ListItem', position: 3, name: 'Galería', item: 'https://silospeceshablaran.com/galeria' },
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Inicio",
+          item: "https://silospeceshablaran.com/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Sobre el cuento",
+          item: "https://silospeceshablaran.com/sobre-el-cuento",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Galería",
+          item: "https://silospeceshablaran.com/galeria",
+        },
       ],
     },
   ]}
@@ -113,22 +180,24 @@ const sections = sectionDefs.map((def) => {
 
 <script>
   // Scroll-triggered reveal — same pattern as the home/programa pages.
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const targets = document.querySelectorAll<HTMLElement>('.reveal');
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const targets = document.querySelectorAll<HTMLElement>(".reveal");
 
   if (reduceMotion) {
-    targets.forEach((el) => el.classList.add('is-visible'));
+    targets.forEach((el) => el.classList.add("is-visible"));
   } else {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
+            entry.target.classList.add("is-visible");
             observer.unobserve(entry.target);
           }
         });
       },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.05 },
     );
     targets.forEach((el) => observer.observe(el));
   }
