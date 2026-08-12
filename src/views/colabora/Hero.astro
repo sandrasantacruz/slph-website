@@ -9,23 +9,6 @@ import { Icon } from 'astro-icon/components';
     class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_15%_25%,rgba(250,222,170,0.08),transparent_70%)]"
   ></div>
 
-  <!-- Decorative dorsal fin — sways slowly, hidden on small screens -->
-  <svg
-    class="anim-sway pointer-events-none absolute top-24 -right-8 -z-10 hidden h-48 w-48 text-celeste/15 md:block lg:h-64 lg:w-64"
-    viewBox="0 0 120 120"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    aria-hidden="true"
-  >
-    <!-- Stylised dorsal fin -->
-    <path d="M20 100 Q 35 70 60 30 Q 78 8 96 6 Q 102 38 90 70 Q 78 92 60 100 Z" />
-    <path d="M40 88 Q 56 64 74 42" />
-    <path d="M52 96 Q 70 76 88 52" />
-  </svg>
-
   <div class="mx-auto max-w-6xl px-6">
     <!-- Eyebrow -->
     <div class="reveal flex items-center gap-3 sm:gap-4">
@@ -105,5 +88,23 @@ import { Icon } from 'astro-icon/components';
         </svg>
       </a>
     </div>
+
+    <!-- Delfín. Das Asset ist hochformatig (604x1000): die Blasenspur nimmt die
+         obere Hälfte ein, der Körper die untere.
+         Mobil steht er im Fluss unter dem CTA-Strip, rechtsbündig bis an den
+         Viewport-Rand (-mr-6 hebt das px-6 des Containers auf) und ragt unten
+         ins Section-Padding.
+         Ab lg verlässt er den Fluss und sitzt rechts neben dem Text; der Anker
+         liegt weit oben, damit der Delfín selbst auf Höhe des Leads landet und
+         die Blasen an der Headline vorbeisteigen. -->
+    <img
+      src="/assets/animals/dolphin.webp"
+      alt=""
+      aria-hidden="true"
+      class="anim-float-soft pointer-events-none -mt-2 -mr-6 -mb-10 ml-auto block w-40 drop-shadow-[0_18px_28px_rgba(6,15,44,0.45)] sm:-mb-16 sm:w-52 md:w-64 lg:absolute lg:top-6 lg:right-2 lg:-z-10 lg:m-0 lg:w-52 xl:right-4 xl:w-72"
+      width="604"
+      height="1000"
+      loading="lazy"
+    />
   </div>
 </section>
