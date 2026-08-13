@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Ola from '../../components/Ola.astro';
 ---
 
 <section class="relative isolate overflow-hidden pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -41,7 +42,7 @@ import { Icon } from 'astro-icon/components';
       Navega hasta
       <span class="whitespace-nowrap">
         tu
-        <span class="relative inline-block hand-underline text-arena">
+        <Ola class="relative inline-block text-arena">
           librería
           <svg
             class="anim-float-soft pointer-events-none absolute -top-6 -right-5 h-6 w-6 text-celeste sm:-top-8 sm:-right-7 sm:h-8 sm:w-8"
@@ -55,7 +56,7 @@ import { Icon } from 'astro-icon/components';
           >
             <path d="M20 4 L24 14 L34 14 L26 21 L29 31 L20 25 L11 31 L14 21 L6 14 L16 14 Z" />
           </svg>
-        </span>
+        </Ola>
       </span>
       más cercana
     </h1>
@@ -65,7 +66,7 @@ import { Icon } from 'astro-icon/components';
       Puedes encontrar ejemplares de
       <em class="not-italic text-arena">Si los peces hablaran…</em>
       <span class="text-caparol">online</span> y en estas librerías y tiendas
-      <span class="hand-underline">repartidas por Canarias</span>.
+      <Ola>repartidas por Canarias</Ola>.
     </p>
 
     <!-- Quick anchors / counts -->

@@ -1,0 +1,53 @@
+---
+/**
+ * Ola — unterstreicht Text mit einer handgezeichneten Welle.
+ *
+ *   <Ola>te dirían</Ola>
+ *   <Ola variant={2} color="celeste">marina</Ola>
+ *   <Ola class="text-arena">una aleta</Ola>
+ *
+ * Die Welle liegt als Hintergrundbild unter dem Text (Regeln in
+ * `src/styles/global.css`, nachgezeichnet aus `scripts/ola/ola*.png`) und
+ * wird pro Zeilenfragment neu gezeichnet — umbrechender Text bekommt also in
+ * jeder Zeile eine eigene Welle.
+ *
+ * `color` färbt die Welle, nicht den Text. Die Textfarbe kommt wie gehabt
+ * über `class` (z.B. `text-arena`).
+ */
+interface Props {
+  /** 1 = kräftiger Doppelschwung (ola.png), 2 = flacher und ruhiger (ola2.png) */
+  variant?: 1 | 2;
+  /** Farbe der Welle */
+  color?: 'arena' | 'celeste' | 'blanco';
+  /** Höhe der Welle, relativ zur Schriftgröße (Default `0.42em`) */
+  height?: string;
+  /** Abstand zwischen Text und Welle (Default `0.14em`) */
+  gap?: string;
+  class?: string;
+}
+
+const {
+  variant = 1,
+  color = 'arena',
+  height,
+  gap,
+  class: className,
+} = Astro.props;
+
+const style = [
+  height && `--ola-height: ${height}`,
+  gap && `--ola-gap: ${gap}`,
+]
+  .filter(Boolean)
+  .join('; ');
+---
+
+<span
+  class:list={[
+    'ola-underline',
+    variant === 2 && 'ola-underline--2',
+    color !== 'arena' && `ola-underline--${color}`,
+    className,
+  ]}
+  style={style || undefined}
+><slot /></span>

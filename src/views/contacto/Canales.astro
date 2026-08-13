@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import type { Settings } from '../../lib/settings';
 import { whatsappHref, telHref, mailHref } from '../../lib/settings';
+import Ola from '../../components/Ola.astro';
 
 interface Props {
   settings: Settings;
@@ -90,7 +91,7 @@ const accentClasses: Record<'arena' | 'celeste' | 'caparol', { ring: string; tex
     <div class="reveal max-w-3xl">
       <h1 class="font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] tracking-tight text-caparol">
         ¡No te quedes
-        <span class="hand-underline text-arena">con la duda</span>!
+        <Ola class="text-arena">con la duda</Ola>!
       </h1>
       <p class="mt-4 max-w-2xl text-base text-caparol/90 sm:text-lg">
         Dinos qué necesitas o qué quieres saber y
