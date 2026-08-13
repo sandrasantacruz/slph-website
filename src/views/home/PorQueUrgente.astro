@@ -84,11 +84,14 @@
       </article>
 
       <article class="reveal reveal-delay-2 group relative flex flex-col gap-4 rounded-3xl bg-azul/65 p-7 ring-1 ring-caparol/15 backdrop-blur-sm">
+        <!-- Größer als die Nachbarbilder, das negative Margin hält den
+             Platzbedarf trotzdem bei h-20 — sonst rutscht die Überschrift
+             dieser Karte gegenüber den anderen beiden nach unten. -->
         <img
           src="/assets/inicio/coral.webp"
           alt=""
           aria-hidden="true"
-          class="h-20 w-20 self-center object-contain drop-shadow-xl"
+          class="-my-3 h-26 w-26 self-center object-contain drop-shadow-xl"
           loading="lazy"
         />
         <h3 class="font-display text-3xl text-arena sm:text-4xl">
