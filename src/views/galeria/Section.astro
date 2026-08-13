@@ -31,7 +31,10 @@ const { id, title, eyebrow, intro, images } = Astro.props;
 
     <div
       class:list={[
-        'mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-5',
+        // Eine Spalte auf dem Handy, zwei auf dem Tablet, drei erst ab Desktop.
+        // Drei ab `sm` (640px) waeren nur ~195px breite Kacheln, also schmaler
+        // als die gestapelte Handy-Ansicht.
+        'mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5',
         images.length === 0 && 'hidden',
       ]}
     >
