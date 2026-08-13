@@ -12,6 +12,12 @@ type SectionDef = {
   title: string;
   eyebrow: string;
   intro: string;
+  /**
+   * Bildunterschriften, gekeyed auf den Dateinamen ohne `.webp`. Fehlt ein
+   * Eintrag, wird die Unterschrift aus dem Dateinamen abgeleitet — ein neues
+   * Bild erscheint also auch ohne Code-Edit, nur eben mit gröberem Text.
+   */
+  captions?: Record<string, string>;
 };
 
 const sectionDefs: SectionDef[] = [
@@ -21,6 +27,11 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "10 Años moviendo las aletas",
     intro:
       "Un musical del Centro de Danza Sandra Santa Cruz, que continúa comprometido con Si los peces hablaran... desde 2016.",
+    captions: {
+      "01-los-peces-del-arrecife": "Los peces del arrecife",
+      "02-danza-del-oxigeno": "Danza del Oxígeno",
+      "03-el-rey-neptuno": "El rey Neptuno",
+    },
   },
   {
     id: "transformacion",
@@ -28,6 +39,14 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "El camino recorrido",
     intro:
       "De un musical a un referente de sensibilización medioambiental respaldado por instituciones y la comunidad científica.",
+    captions: {
+      "01-olaia-moran-cabildo":
+        "Olaia Morán, consejera de Educación del Cabildo de Gran Canaria",
+      "02-may-gomez-alicia-herrera-ulpgc":
+        "May Gómez y Alicia Herrera, Facultad de Ciencias del Mar (ULPGC)",
+      "03-guacimara-medina-cabildo":
+        "Guacimara Medina, consejera de Educación del Cabildo de Gran Canaria",
+    },
   },
   {
     id: "librupeces",
@@ -35,13 +54,24 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "Fuera de la estantería",
     intro:
       "Cuento y cuadernillo que salen a tu encuentro. Presentaciones escenificadas del cuento, firma de libros y encuentros de autores en ferias, bibliotecas y museos.",
+    captions: {
+      "01-nuestros-librupeces": "Nuestros librupeces",
+      "02-el-cuento": "El cuento",
+      "03-cuadernillo-de-actividades": "El cuadernillo de actividades",
+    },
   },
   {
     id: "cuento",
     title: "El cuento",
     eyebrow: "Presentación oficial",
     intro:
-      "La presentación del libro Si los peces hablaran... —conferencia con investigadoras marinas, danza y los rostros que lo acompañaron.",
+      "La presentación del libro Si los peces hablaran... en Poema del Mar: conferencia con investigadoras marinas, danza y los rostros que lo acompañaron.",
+    captions: {
+      "01-danza-de-las-aletas": "Danza de las Aletas, en Poema del Mar",
+      "02-presentacion-del-cuento": "Presentación del cuento en Poema del Mar",
+      "03-guacimara-medina-poema-del-mar":
+        "Guacimara Medina, consejera de Cultura del Cabildo de Gran Canaria",
+    },
   },
   {
     id: "espectaculos",
@@ -49,6 +79,11 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "En cualquier escenario",
     intro:
       "De gran, mediano y pequeño formato, incluso sinfónico (diseñado para la OFGC), para poder llevar los mensajes de nuestra obra allá donde se necesite.",
+    captions: {
+      "01-ofgc-2020": "Con la OFGC, 2020",
+      "02-suma-festival-tenerife-2025": "Suma Festival, Tenerife 2025",
+      "03-dmo-2024": "DMO, 2024",
+    },
   },
 
   {
@@ -57,6 +92,11 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "Donde el mar nos lleva",
     intro:
       "En este apartado encontrarás tanto experiencias artísticas como eventos a medida.",
+    captions: {
+      "01-museo-perez-galdos": "Casa Museo Pérez Galdós",
+      "02-ayuntamiento-de-arucas": "Ayuntamiento de Arucas",
+      "03-museo-cueva-pintada": "Museo y Parque Arqueológico Cueva Pintada",
+    },
   },
   {
     id: "talleres",
@@ -64,6 +104,11 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "Manos a la obra",
     intro:
       "Con identidad propia, basados en nuestro relato. Se desarrollan mayoritariamente con material reutilizado y se enriquecen con material audiovisual.",
+    captions: {
+      "01-museo-perez-galdos": "Casa Museo Pérez Galdós",
+      "02-biblioteca-insular": "Biblioteca Insular",
+      "03-casa-de-colon": "Casa de Colón",
+    },
   },
   {
     id: "centros-escolares",
@@ -71,6 +116,11 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "El aula se hace mar",
     intro:
       "Independientemente del formato, emocionantes encuentros con escolares que hacen suya, nuestra preocupación por proteger el mundo marino.",
+    captions: {
+      "01-ceip-alfredo-kraus": "CEIP Alfredo Kraus",
+      "02-ceip-huertas-del-palmar": "CEIP Huertas del Palmar",
+      "03-colegio-dominicas-las-palmas": "Colegio Dominicas Las Palmas",
+    },
   },
   {
     id: "conferencias",
@@ -78,6 +128,11 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "La ciencia toma la palabra",
     intro:
       "Bien sean junto a científicos marinos para un público más adulto o charlas para menores en ferias, bibliotecas, museos y colegios.",
+    captions: {
+      "01-facultad-de-ciencias-del-mar": "Facultad de Ciencias del Mar",
+      "02-cc-el-muelle": "C.C. El Muelle",
+      "03-poema-del-mar": "Poema del Mar",
+    },
   },
   {
     id: "momentos",
@@ -85,34 +140,61 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "Lo que no olvidamos",
     intro:
       "Voces, miradas y gestos que dejan huella a lo largo del camino también, en nuestros corazones.",
+    captions: {
+      "01-presentacion-del-musical":
+        "Juan Luis Santa Cruz en la presentación del musical",
+      "02-doblaje-con-lili-quintana": "Doblaje con Lili Quintana",
+      "03-presentacion-del-cuento":
+        "Juan Luis Santa Cruz en la presentación del cuento",
+    },
   },
   {
     id: "contaminacion",
     title: "Contaminación",
     eyebrow: "La realidad que nos empuja",
     intro:
-      "Lo que ocurre cuando los peces ya no hablan — la urgencia que justifica todo lo demás.",
+      "Lo que ocurre cuando los peces ya no hablan: la urgencia que justifica todo lo demás.",
+    captions: {
+      "01-cristales-en-la-orilla": "Cristales rotos entre las rocas de la orilla",
+      "02-redes-varadas-en-la-playa": "Redes y cabos varados en la playa",
+      "03-neumatico-en-la-costa": "Un neumático abandonado en la costa",
+    },
   },
 ];
 
 // Read available webp files at build time, one folder per section.
 const BASE = path.resolve(process.cwd(), "public/assets/galeria");
 
+/**
+ * Notlösung für Dateien ohne Eintrag in `captions`: "02-museo-perez-galdos"
+ * wird zu "Museo perez galdos". Akzente fehlen, deshalb ist der Map-Eintrag
+ * immer die bessere Wahl.
+ */
+function captionFromFilename(stem: string): string {
+  const words = stem.replace(/^\d+[-_]?/, "").replace(/[-_]+/g, " ").trim();
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
 const sections = sectionDefs.map((def) => {
   const dir = path.join(BASE, def.id);
   // Ordner darf (noch) fehlen oder leer sein: die Section rendert dann nur
-  // den Kopf, Bilder erscheinen sobald WebPs im Ordner liegen.
+  // den Kopf, Bilder erscheinen sobald WebPs im Ordner liegen. Die führende
+  // Nummer im Dateinamen bestimmt die Reihenfolge.
   const files = fs.existsSync(dir)
     ? fs
         .readdirSync(dir)
         .filter((f) => /\.webp$/i.test(f))
         .sort()
     : [];
-  const images = files.map((file, i) => ({
-    src: `/assets/galeria/${def.id}/${file}`,
-    alt: `${def.title} — imagen ${i + 1}`,
-    caption: `${def.title} · ${i + 1} de ${files.length}`,
-  }));
+  const images = files.map((file) => {
+    const stem = file.replace(/\.webp$/i, "");
+    const caption = def.captions?.[stem] ?? captionFromFilename(stem);
+    return {
+      src: `/assets/galeria/${def.id}/${file}`,
+      alt: `${def.title}: ${caption}`,
+      caption,
+    };
+  });
   return { ...def, images };
 });
 ---

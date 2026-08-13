@@ -54,12 +54,37 @@ verlinkt. Die ausgelieferte Seite braucht das CMS zur Laufzeit nicht.
 - **Statische Marketing-Bilder** (Logo, Hero etc.) → weiterhin optimiert in
   `public/assets/` ablegen, plain `<img src="/assets/...">`.
 - **Galería-Bilder** (`/galeria`) → liegen als WebP statisch unter
-  `public/assets/galeria/<sección>/`. Konvention: max. 1500×1500 px, Q85
-  (`magick … -resize '1500x1500>' -strip -quality 85 out.webp`). Werden in
+  `public/assets/galeria/<sección>/`. Konvention: max. 1500×1500 px, Q92:
+
+  ```sh
+  magick input.png -auto-orient \
+    -profile "/System/Library/ColorSync/Profiles/sRGB Profile.icc" \
+    -filter Lanczos -resize '1500x1500>' -strip \
+    -define webp:method=6 -define webp:use-sharp-yuv=1 -quality 92 out.webp
+  ```
+
+  Das `-profile` **vor** dem `-strip` ist kein Detail: die Kamera-JPEGs tragen
+  ein Adobe-RGB-Profil, und wer es nur wegwirft, liefert flaue Farben aus
+  (Browser lesen profillose Bilder als sRGB). Q92 liegt am Knick der Kurve,
+  darüber kostet jedes Prozent spürbar Bytes ohne sichtbaren Gewinn.
+
+  Die unkomprimierten Originale liegen gitignored unter `_originals/galeria/`
+  — gleiche Ordner- und Dateinamen wie das erzeugte WebP, nur mit
+  Original-Endung. Bewusst außerhalb von `public/`, sonst wandern sie in den
+  Build. Ein Umkodieren (andere Kantenlänge, andere Qualität) braucht damit
+  kein erneutes Kopieren.
+
+  Dateiname
+  `NN-sprechender-slug.webp` — die führende Nummer bestimmt die Reihenfolge
+  (alphabetische Sortierung), der Slug ist ASCII-kleingeschrieben. Werden in
   `src/views/galeria/Page.astro` zur Build-Zeit via `fs.readdirSync`
   eingelesen — neue Bilder einfach in den jeweiligen Section-Ordner kopieren,
-  kein Code-Edit nötig. Sektion-IDs: `musical`, `cuento`, `eventos`,
-  `momentos`, `contaminacion`.
+  kein Code-Edit nötig. Die Bildunterschrift kommt aus der `captions`-Map der
+  Section (Key = Dateiname ohne `.webp`); ohne Eintrag wird sie aus dem
+  Dateinamen abgeleitet, dann aber ohne Akzente. Sektion-IDs: `musical`,
+  `transformacion`, `librupeces`, `cuento`, `espectaculos`, `eventos`,
+  `talleres`, `centros-escolares`, `conferencias`, `momentos`,
+  `contaminacion`.
 - **Inline-Bilder im Artikelkörper** stehen als `<img data-media-id="…">` im
   gespeicherten HTML und werden im Loader zu CMS-URLs aufgelöst, nicht von
   `<Image>` angefasst. Aktuell gibt es keine.

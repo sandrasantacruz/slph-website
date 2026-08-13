@@ -1,5 +1,10 @@
 # build output
 dist/
+
+# unkomprimierte Galería-Originale (PNG/JPG aus der Kamera). Liegen bewusst
+# ausserhalb von public/, damit sie nicht in den Build wandern, und bleiben
+# lokal, damit ein erneutes Umkodieren kein Neukopieren braucht.
+_originals/
 test-results
 .playwright-mcp
 # generated types
