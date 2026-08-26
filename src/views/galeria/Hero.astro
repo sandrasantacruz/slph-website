@@ -1,6 +1,5 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Ola from '../../components/Ola.astro';
 ---
 
 <section class="relative isolate flex min-h-[calc(100svh-6rem)] flex-col overflow-hidden">
@@ -19,11 +18,23 @@ import Ola from '../../components/Ola.astro';
     <path d="M62 200 Q 70 160 62 120 Q 56 90 66 60 Q 70 30 64 0"/>
   </svg>
 
-  <!-- Bubble cluster, mirrored on the left -->
-  <div class="pointer-events-none absolute -left-6 top-24 -z-10 hidden md:block" aria-hidden="true">
-    <span class="anim-float-soft absolute block h-3 w-3 rounded-full bg-celeste/35"></span>
-    <span class="anim-float absolute left-6 top-10 block h-2 w-2 rounded-full bg-arena/40"></span>
-    <span class="anim-float-soft absolute left-2 top-20 block h-4 w-4 rounded-full bg-celeste/25"></span>
+  <!-- Nela rechts neben dem Text; das Asset ist hochformatig (449x600),
+       die Blasenspur nimmt das obere Drittel ein, der Fisch das untere.
+       Der Flip liegt auf dem Wrapper, weil die Float-Keyframes das
+       transform des animierten Elements überschreiben würden. -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute top-[18%] right-8 -z-10 hidden -scale-x-100 md:block lg:right-16 xl:right-24"
+  >
+    <img
+      src="/assets/animals/nela.webp"
+      alt=""
+      class="anim-float-soft w-44 drop-shadow-[0_18px_28px_rgba(6,15,44,0.45)] lg:w-56"
+      width="449"
+      height="600"
+      loading="lazy"
+      decoding="async"
+    />
   </div>
 
   <div class="mx-auto flex h-full w-full max-w-6xl flex-col justify-center gap-5 px-6 py-16 sm:gap-6 sm:py-20">
@@ -31,15 +42,15 @@ import Ola from '../../components/Ola.astro';
     <div class="reveal flex items-center gap-3 sm:gap-4">
       <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
       <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
-        Galería SLPH · imágenes del proyecto
+        Galería SLPH · imágenes del programa SLPH
       </span>
     </div>
 
     <!-- Headline -->
     <h1 class="reveal reveal-delay-1 font-display text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.9] tracking-tight text-caparol">
-      Lo que ya
-      <span class="block text-arena italic">vivimos</span>
-      <span class="block">con el <Ola>mar</Ola></span>
+      Lo vivido con el mar
+      <span class="block"><span class="text-arena italic">forma parte ya</span> de</span>
+      <span class="block">nuestra historia</span>
     </h1>
 
     <!-- Display tagline -->
