@@ -26,26 +26,36 @@ const sectionDefs: SectionDef[] = [
     title: "Origen del proyecto",
     eyebrow: "10 Años moviendo las aletas",
     intro:
-      "Un musical del Centro de Danza Sandra Santa Cruz, que continúa comprometido con Si los peces hablaran... desde 2016.",
+      "Un musical nacido en el Centro de Danza Sandra Santa Cruz que, desde 2016, mantiene vivo su compromiso con la divulgación y la protección del medio marino a través de Si los peces hablaran....",
     captions: {
       "01-los-peces-del-arrecife": "Los peces del arrecife",
       "02-danza-del-oxigeno": "Danza del Oxígeno",
       "03-el-rey-neptuno": "El rey Neptuno",
+      "04-arucas-y-el-mar": "Arucas y el mar, 2018",
+      "05-concejalia-de-cultura-distrito-v":
+        "Concejalía de Cultura del Distrito V, Ayuntamiento de LPGC, 2024",
+      "06-dia-mundial-de-las-tortugas":
+        "Día Mundial de las Tortugas 2021, Casa de Colón",
     },
   },
   {
     id: "transformacion",
-    title: "Transformación",
+    title: "Evolución",
     eyebrow: "El camino recorrido",
     intro:
-      "De un musical a un referente de sensibilización medioambiental respaldado por instituciones y la comunidad científica.",
+      "De un musical a un proyecto de referencia en sensibilización medioambiental, con el respaldo de instituciones y de la comunidad científica.",
     captions: {
       "01-olaia-moran-cabildo":
         "Olaia Morán, consejera de Educación del Cabildo de Gran Canaria",
-      "02-may-gomez-alicia-herrera-ulpgc":
-        "May Gómez y Alicia Herrera, Facultad de Ciencias del Mar (ULPGC)",
+      "02-may-gomez-eomar":
+        "May Gómez, Catedrática de Zoología y directora de Eomar",
       "03-guacimara-medina-cabildo":
         "Guacimara Medina, consejera de Educación del Cabildo de Gran Canaria",
+      "04-josue-iniguez-ayuntamiento":
+        "Josué Íñiguez, concejal de Cultura del Ayuntamiento de G.C.",
+      "05-victoria-galvan-perez-galdos":
+        "Victoria Galván, directora de la Casa Museo Pérez Galdós",
+      "06-alicia-herrera-microtropic": "Alicia Herrera, Proyecto Microtropic",
     },
   },
   {
@@ -155,7 +165,8 @@ const sectionDefs: SectionDef[] = [
     intro:
       "Lo que ocurre cuando los peces ya no hablan: la urgencia que justifica todo lo demás.",
     captions: {
-      "01-cristales-en-la-orilla": "Cristales rotos entre las rocas de la orilla",
+      "01-cristales-en-la-orilla":
+        "Cristales rotos entre las rocas de la orilla",
       "02-redes-varadas-en-la-playa": "Redes y cabos varados en la playa",
       "03-neumatico-en-la-costa": "Un neumático abandonado en la costa",
     },
@@ -171,7 +182,10 @@ const BASE = path.resolve(process.cwd(), "public/assets/galeria");
  * immer die bessere Wahl.
  */
 function captionFromFilename(stem: string): string {
-  const words = stem.replace(/^\d+[-_]?/, "").replace(/[-_]+/g, " ").trim();
+  const words = stem
+    .replace(/^\d+[-_]?/, "")
+    .replace(/[-_]+/g, " ")
+    .trim();
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
