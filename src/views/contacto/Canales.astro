@@ -99,12 +99,29 @@ const accentClasses: Record<'arena' | 'celeste' | 'caparol', { ring: string; tex
       </p>
     </div>
 
+    <!-- Dina la Voladora, die im Intro versprochene Antwortgeberin. Asset ist
+         fast quadratisch (965x881) und schaut nach links, zum Text hin.
+         Mobil steht sie im Fluss zwischen Intro und Karten, rechtsbündig bis
+         an den Viewport-Rand (-mr-6 hebt das px-6 des Containers auf);
+         ab lg fliegt sie absolut rechts neben dem Header und liegt per -z-10
+         hinter den Karten, falls sie in deren Zeile hineinragt. -->
+    <img
+      src="/assets/animals/dina.webp"
+      alt=""
+      aria-hidden="true"
+      class="anim-float-soft pointer-events-none -mt-2 -mr-6 -mb-6 ml-auto block w-36 drop-shadow-[0_18px_28px_rgba(6,15,44,0.45)] sm:w-44 lg:absolute lg:top-8 lg:right-4 lg:-z-10 lg:m-0 lg:w-52 xl:right-10 xl:w-60"
+      width="965"
+      height="881"
+      loading="lazy"
+      decoding="async"
+    />
+
     {channels.length === 0 ? (
       <p class="reveal mt-10 max-w-2xl rounded-2xl border border-caparol/20 bg-caparol/5 p-6 text-caparol/80">
         Estamos preparando los canales de contacto. Vuelve en unos días.
       </p>
     ) : (
-      <ul class="reveal reveal-delay-1 mt-10 grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <ul class="reveal reveal-delay-1 mt-10 grid gap-5 sm:gap-6 md:grid-cols-2 lg:mt-28 lg:grid-cols-3">
         {channels.map((ch) => {
           const cls = accentClasses[ch.accent];
           return (
