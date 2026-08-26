@@ -4,25 +4,6 @@ import Ola from '../../components/Ola.astro';
 ---
 
 <section id="video" class="relative isolate overflow-hidden py-24 sm:py-32">
-  <!-- Drifting bubbles -->
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-  >
-    <span
-      class="anim-float-soft absolute top-[18%] left-[6%] block h-3 w-3 rounded-full bg-celeste/40"
-    ></span>
-    <span
-      class="anim-float absolute bottom-[16%] left-[9%] block h-2 w-2 rounded-full bg-arena/50"
-    ></span>
-    <span
-      class="anim-float-soft absolute top-[28%] right-[7%] block h-2.5 w-2.5 rounded-full bg-caparol/30"
-    ></span>
-    <span
-      class="anim-float absolute right-[11%] bottom-[22%] block h-4 w-4 rounded-full bg-celeste/30"
-    ></span>
-  </div>
-
   <div class="mx-auto max-w-5xl px-6">
     <h2
       class="reveal mx-auto max-w-3xl text-center font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.95] text-caparol"
@@ -43,19 +24,8 @@ import Ola from '../../components/Ola.astro';
 
   <!-- Stage area — sits OUTSIDE the px-6 container so we can go
        edge-to-edge on mobile without negative-margin tricks.
-       Film strips + polaroid framing return at md+. -->
+       Polaroid framing returns at md+. -->
   <div class="reveal reveal-delay-2 relative mt-16">
-    <div
-      aria-hidden="true"
-      class="film-strip absolute top-1/2 -left-2 hidden h-[26rem] w-9 -translate-y-1/2 -rotate-6 rounded-[3px] shadow-xl ring-1 ring-caparol/10 lg:block xl:-left-14"
-    >
-    </div>
-    <div
-      aria-hidden="true"
-      class="film-strip absolute top-1/2 -right-2 hidden h-[26rem] w-9 -translate-y-1/2 rotate-6 rounded-[3px] shadow-xl ring-1 ring-caparol/10 lg:block xl:-right-14"
-    >
-    </div>
-
     <figure class="video-frame relative">
       <div class="player-wrap relative overflow-hidden bg-azul-deep">
         <media-player
@@ -156,17 +126,6 @@ import Ola from '../../components/Ola.astro';
     .video-caption {
       display: block;
     }
-  }
-
-  .film-strip {
-    background:
-      radial-gradient(
-          circle at 50% 14px,
-          var(--color-azul) 5px,
-          transparent 5.5px
-        )
-        0 0 / 100% 28px repeat-y,
-      var(--color-azul-deep);
   }
 </style>
 
