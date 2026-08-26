@@ -1,15 +1,16 @@
 name: cloudflare
 
+# Jeder Push deployt: main als Production, alle anderen Branches als
+# Cloudflare-Preview unter <branch>.<projekt>.pages.dev. Ein zusaetzlicher
+# pull_request-Trigger wuerde PR-Branches nur doppelt deployen.
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches: ['**']
   workflow_dispatch:
 
 # Ein Deploy pro Branch zur Zeit; laufende Deploys eines aelteren Commits abbrechen.
 concurrency:
-  group: cloudflare-${{ github.head_ref || github.ref_name }}
+  group: cloudflare-${{ github.ref_name }}
   cancel-in-progress: true
 
 env:
@@ -50,4 +51,4 @@ jobs:
           command: >-
             pages deploy dist
             --project-name=${{ env.CF_PROJECT_NAME }}
-            --branch=${{ github.head_ref || github.ref_name }}
+            --branch=${{ github.ref_name }}

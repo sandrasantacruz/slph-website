@@ -1,15 +1,22 @@
-olas
+pulpo: 
+- news -> Videos
+- gallery
 
+alle bilder und videos prefix _slph.type
 
 landing page
 section: ¿Quieres ver más?
 
 EVENTOS DE CONCIENCIACIÓN Si los peces hablaran_Cueva Pintada (3 para elegir) 
 OFGC  https://youtu.be/P46l0TgWoKE?si=0MnLNn5RB05850eY  
+
 Talleres SLPH Instagram 
-Elegir resto de vídeos:
-Eventos de concienciación https://youtu.be/dNusQsBeKo4?si=vc9X3wAcRZPMqoin
+Elegir resto de vídeos: link schickt mir sandra
+
+Eventos de concienciación 
+https://youtu.be/dNusQsBeKo4?si=vc9X3wAcRZPMqoin
 https://youtu.be/60S74Z6OhIE?si=nWznAOkGywgcMzFa
+
 Musical https://youtu.be/p_265qoTLRY?si=s5gqf4_nw7sx4_tZ
 https://youtu.be/8-HxDQAu7Ss?si=uQQ1TvLK9O-wdhyt
 
