@@ -1,0 +1,67 @@
+name: cleanup-deployments
+
+# Raeumt taeglich alte Branch-Previews weg: jedes Preview-Deployment, das
+# aelter als MAX_AGE_DAYS ist, wird ueber die Cloudflare-API geloescht.
+# Production-Deployments (main) bleiben unberuehrt. Wrangler kann keine
+# Deployments loeschen, deshalb direkt gegen die API.
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+env:
+  CF_PROJECT_NAME: silospeceshablaran
+  MAX_AGE_DAYS: 30
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions: {}
+
+    steps:
+      - name: Delete old preview deployments
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+
+          base="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${CF_PROJECT_NAME}/deployments"
+          auth=(-H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}")
+          cutoff=$(date -u -d "${MAX_AGE_DAYS} days ago" +%s)
+
+          # Erst alle Kandidaten einsammeln, dann loeschen — wer waehrend des
+          # Paginierens loescht, verschiebt sich die Seiten unter den Fuessen.
+          candidates=()
+          page=1
+          while :; do
+            resp=$(curl -sf "${auth[@]}" "${base}?page=${page}&per_page=25")
+            count=$(jq '.result | length' <<<"$resp")
+            [ "$count" -eq 0 ] && break
+
+            while IFS=$'\t' read -r id environment created branch; do
+              created_s=$(date -u -d "$created" +%s)
+              if [ "$environment" = "preview" ] && [ "$created_s" -lt "$cutoff" ]; then
+                candidates+=("${id}	${branch}	${created}")
+              fi
+            done < <(jq -r '.result[]
+              | [.id, .environment, .created_on, (.deployment_trigger.metadata.branch // "?")]
+              | @tsv' <<<"$resp")
+
+            page=$((page + 1))
+          done
+
+          if [ "${#candidates[@]}" -eq 0 ]; then
+            echo "Keine Preview-Deployments aelter als ${MAX_AGE_DAYS} Tage."
+            exit 0
+          fi
+
+          # force=true: loescht auch das juengste Deployment eines Branches,
+          # an dem noch der Preview-Alias haengt.
+          for entry in "${candidates[@]}"; do
+            IFS=$'\t' read -r id branch created <<<"$entry"
+            echo "Loesche ${id} (Branch ${branch}, erstellt ${created})"
+            curl -sf "${auth[@]}" -X DELETE "${base}/${id}?force=true" >/dev/null
+          done
+
+          echo "${#candidates[@]} Deployment(s) geloescht."
