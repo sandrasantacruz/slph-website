@@ -13,17 +13,21 @@ const links = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="relative">
+<!-- isolate + explizite z-Stufen: iOS Safari hebt backdrop-filter-Layer
+     sonst ueber den nachfolgenden Inhalt, sobald darunter ein Video
+     kompositiert wird — das Logo verschwand hinter dem Blur-Verlauf.
+     z-40 haelt den Header zudem ueber dem Hero-Video der Startseite. -->
+<header class="relative isolate z-40">
   <div
-    class="pointer-events-none absolute inset-x-0 top-0 h-40 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_45%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_45%,transparent)]"
+    class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_45%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_45%,transparent)]"
     aria-hidden="true"
   ></div>
   <div
-    class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-azul/85 via-azul/45 to-transparent"
+    class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-azul/85 via-azul/45 to-transparent"
     aria-hidden="true"
   ></div>
 
-  <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2">
+  <div class="relative z-10 mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2">
     <a href="/" class="flex items-center gap-3" aria-label="Si los peces hablaran — Inicio">
       <img src="/assets/logo.png" alt="Si los peces hablaran" width="2072" height="1492" class="h-20 w-auto" />
     </a>
