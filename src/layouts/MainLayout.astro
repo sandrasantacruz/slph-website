@@ -1,11 +1,11 @@
 ---
-import '../styles/global.css';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import Bubbles from '../components/Bubbles.astro';
-import WaterLine from '../components/WaterLine.astro';
-import BackToTop from '../components/BackToTop.astro';
-import Seo from '../components/Seo.astro';
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Bubbles from "../components/Bubbles.astro";
+import WaterLine from "../components/WaterLine.astro";
+import BackToTop from "../components/BackToTop.astro";
+import Seo from "../components/Seo.astro";
 import {
   SITE_NAME,
   SITE_LANG,
@@ -13,7 +13,7 @@ import {
   websiteSchema,
   siteNavigationSchema,
   type JsonLd,
-} from '../lib/seo';
+} from "../lib/seo";
 
 interface Props {
   title?: string;
@@ -23,7 +23,7 @@ interface Props {
   imageAlt?: string;
   imageWidth?: number;
   imageHeight?: number;
-  type?: 'website' | 'article' | 'book' | 'profile';
+  type?: "website" | "article" | "book" | "profile";
   noindex?: boolean;
   canonical?: string;
   jsonLd?: JsonLd[];
@@ -39,7 +39,7 @@ const {
   imageAlt,
   imageWidth,
   imageHeight,
-  type = 'website',
+  type = "website",
   noindex = false,
   canonical,
   jsonLd = [],
@@ -85,7 +85,7 @@ const seoTitle = title ?? SITE_NAME;
       import.meta.env.PROD && (
         <script
           is:inline
-          defer
+          async
           src="https://analytics.pulpo.cloud/script.js"
           data-website-id="5f08da51-f10e-4bf9-bacd-43e78bc882e5"
         />
