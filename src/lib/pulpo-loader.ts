@@ -146,6 +146,38 @@ function resolveInlineImages(
   });
 }
 
+/**
+ * Ein Absatz, der nur aus einem Instagram-Link besteht:
+ *
+ *   <p><a href="https://www.instagram.com/reel/CODE/?igsh=…">…</a></p>
+ *
+ * Im CMS wird genau das eingefügt, hier wird daraus der Embed-Platzhalter.
+ * Der iframe entsteht erst im Browser, nachdem der Besucher zugestimmt hat
+ * (siehe `components/InstagramEmbeds.astro`) — deshalb steht hier nur der
+ * Link, der ohne JavaScript als Fallback stehenbleibt.
+ *
+ * Erlaubt sind `reel`, `p` (Foto/Video-Post) und `tv`. Query-Parameter wie
+ * `igsh` fliegen raus: sie sind Tracking-Anhängsel aus der Teilen-Funktion
+ * und haben im Embed nichts zu suchen.
+ */
+const IG_PARAGRAPH_RE =
+  /<p>\s*<a\b[^>]*href="https?:\/\/(?:www\.)?instagram\.com\/(reel|reels|p|tv)\/([A-Za-z0-9_-]+)\/?[^"]*"[^>]*>.*?<\/a>\s*<\/p>/gi;
+
+function resolveInstagramEmbeds(html: string): string {
+  return html.replace(IG_PARAGRAPH_RE, (_whole, kind: string, code: string) => {
+    // `reels/` (Plural) ist die Listen-URL derselben Sache, `/reel/` die, die
+    // sich einbetten lässt.
+    const type = kind.toLowerCase() === 'reels' ? 'reel' : kind.toLowerCase();
+    const url = `https://www.instagram.com/${type}/${code}/`;
+    return (
+      `<figure class="ig-embed" data-ig data-ig-src="${url}embed/" data-ig-url="${url}">` +
+      `<a class="ig-embed-fallback" href="${url}" target="_blank" rel="noopener noreferrer">` +
+      `Ver esta publicación en Instagram</a>` +
+      `</figure>`
+    );
+  });
+}
+
 export function pulpoPosts(options: PulpoPostsOptions = {}): Loader {
   const url = (options.url ?? pulpo.url).replace(/\/+$/, '');
   const publicUrl = (options.publicUrl ?? pulpo.publicUrl).replace(/\/+$/, '') || url;
@@ -228,11 +260,13 @@ export function pulpoPosts(options: PulpoPostsOptions = {}): Loader {
 
         const cover = rec.coverImage ? media.get(rec.coverImage as string) : undefined;
         const title = localized(rec.title, contentLang);
-        const html = resolveInlineImages(
-          localized(rec.publishedBody, contentLang) || localized(rec.body, contentLang),
-          media,
-          publicUrl,
-          (id) => missingMedia.add(id),
+        const html = resolveInstagramEmbeds(
+          resolveInlineImages(
+            localized(rec.publishedBody, contentLang) || localized(rec.body, contentLang),
+            media,
+            publicUrl,
+            (id) => missingMedia.add(id),
+          ),
         );
 
         const data = await parseData({

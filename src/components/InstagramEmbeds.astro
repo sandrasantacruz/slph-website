@@ -1,0 +1,106 @@
+---
+// Verdrahtet die Instagram-Embeds im Artikelkörper.
+//
+// Das Markup dazu kommt aus dem Loader (`resolveInstagramEmbeds` in
+// `lib/pulpo-loader.ts`): ein `<figure data-ig>` mit dem Link darin. Ohne
+// JavaScript bleibt genau dieser Link stehen, mit JavaScript wird daraus
+// die Consent-Karte und nach Zustimmung der iframe.
+//
+// Gleiche Mechanik und derselbe `slph:consent-changed`-Kanal wie `MapEmbed`,
+// aber ein eigener Schlüssel: wer Google Maps erlaubt, hat damit noch lange
+// nicht Meta erlaubt.
+---
+
+<script>
+  const CONSENT_KEY = 'slph:consent:instagram';
+
+  function granted(): boolean {
+    try {
+      return localStorage.getItem(CONSENT_KEY) === 'granted';
+    } catch {
+      // Privates Fenster oder blockierte Site-Daten: dann eben kein Embed.
+      return false;
+    }
+  }
+
+  function activate(fig: HTMLElement) {
+    const src = fig.dataset.igSrc;
+    if (!src) return;
+    if (fig.querySelector('iframe')) return;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = 'Publicación de Instagram';
+    iframe.loading = 'lazy';
+    iframe.allowFullscreen = true;
+    // Instagram liefert die Karte in genau der Höhe aus, die das CSS vorgibt;
+    // eine eigene Scrollleiste im iframe wäre nur störend.
+    iframe.setAttribute('scrolling', 'no');
+    fig.replaceChildren(iframe);
+  }
+
+  function renderCard(fig: HTMLElement) {
+    const url = fig.dataset.igUrl ?? 'https://www.instagram.com/silospeceshablaran/';
+
+    const card = document.createElement('div');
+    card.className = 'ig-consent';
+
+    const note = document.createElement('p');
+    note.className = 'ig-consent-note';
+    note.append('Para mostrar este vídeo cargamos contenido de ');
+    const brand = document.createElement('strong');
+    brand.textContent = 'Instagram';
+    note.append(brand);
+    note.append(
+      '. Al activarlo, Meta podrá recibir datos sobre tu visita y podría instalar cookies en tu navegador.',
+    );
+
+    const actions = document.createElement('div');
+    actions.className = 'ig-consent-actions';
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'ig-consent-button';
+    btn.textContent = 'Activar el vídeo';
+    btn.addEventListener('click', () => {
+      try {
+        localStorage.setItem(CONSENT_KEY, 'granted');
+      } catch {
+        // Kein Speicher, kein Merken: dieses eine Video trotzdem zeigen.
+      }
+      document.querySelectorAll<HTMLElement>('[data-ig]').forEach(activate);
+    });
+
+    const open = document.createElement('a');
+    open.className = 'ig-consent-link';
+    open.href = url;
+    open.target = '_blank';
+    open.rel = 'noopener noreferrer';
+    open.textContent = 'O abrir en Instagram ↗';
+
+    actions.append(btn, open);
+
+    const hint = document.createElement('p');
+    hint.className = 'ig-consent-hint';
+    hint.append('Puedes cambiar tu decisión en ');
+    const prefs = document.createElement('a');
+    prefs.href = '/politica-de-cookies#preferencias';
+    prefs.textContent = 'Preferencias de privacidad';
+    hint.append(prefs, '.');
+
+    card.append(note, actions, hint);
+    fig.replaceChildren(card);
+  }
+
+  function wire() {
+    const ok = granted();
+    document.querySelectorAll<HTMLElement>('[data-ig]').forEach((fig) => {
+      if (ok) activate(fig);
+      else renderCard(fig);
+    });
+  }
+
+  wire();
+  // Widerruf in den Präferenzen baut die Karte wieder auf.
+  window.addEventListener('slph:consent-changed', wire);
+</script>
