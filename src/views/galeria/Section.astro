@@ -1,5 +1,5 @@
 ---
-type Image = { src: string; alt: string; caption: string };
+type Image = { src: string; alt: string; caption: string; story?: string };
 
 interface Props {
   id: string;
@@ -45,6 +45,7 @@ const { id, title, eyebrow, intro, images } = Astro.props;
             data-lightbox
             data-gallery={id}
             data-caption={img.caption}
+            data-story={img.story}
             class:list={[
               'reveal group relative block aspect-[3/2] overflow-hidden rounded-xl bg-azul-deep ring-1 ring-caparol/10 transition duration-300',
               'hover:-translate-y-1 hover:ring-arena/70 hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)]',
@@ -63,6 +64,21 @@ const { id, title, eyebrow, intro, images } = Astro.props;
               aria-hidden="true"
               class="pointer-events-none absolute inset-0 bg-gradient-to-t from-azul/55 via-transparent to-transparent opacity-0 transition group-hover:opacity-100"
             />
+            {/* Marker fuer Bilder mit Langtext. Anders als die Lupe unten
+                rechts ist er dauerhaft sichtbar: auf dem Handy gibt es kein
+                Hover, hinter dem sich der Hinweis zeigen koennte. */}
+            {img.story && (
+              <span
+                aria-hidden="true"
+                class="pointer-events-none absolute top-2 left-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-azul/70 text-arena ring-1 ring-arena/60 backdrop-blur-sm transition group-hover:bg-arena group-hover:text-azul sm:top-3 sm:left-3 sm:h-8 sm:w-8"
+              >
+                <svg viewBox="0 0 24 24" class="h-4 w-4 sm:h-[1.1rem] sm:w-[1.1rem]" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 11.5v4.5" />
+                  <path d="M12 7.75h.01" />
+                </svg>
+              </span>
+            )}
             <span
               aria-hidden="true"
               class="pointer-events-none absolute right-2 bottom-2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-arena text-azul opacity-0 shadow-md transition group-hover:opacity-100 sm:right-3 sm:bottom-3"

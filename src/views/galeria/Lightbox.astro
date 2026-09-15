@@ -1,7 +1,8 @@
 ---
 // Self-contained lightbox: any <a data-lightbox> on the page opens it.
 // Grouped navigation via data-gallery (only triggers sharing the same key
-// participate in the prev/next loop). Caption text comes from data-caption.
+// participate in the prev/next loop). Caption text comes from data-caption,
+// an optional longer paragraph from data-story.
 ---
 
 <dialog id="galeria-lightbox" class="gx-lightbox" aria-label="Imagen ampliada">
@@ -22,7 +23,10 @@
   </button>
   <figure class="gx-lightbox-figure">
     <img class="gx-lightbox-image" alt="" />
-    <figcaption class="gx-lightbox-caption font-hand"></figcaption>
+    <figcaption class="gx-lightbox-caption">
+      <span class="gx-lightbox-title font-hand"></span>
+      <span class="gx-lightbox-story" hidden></span>
+    </figcaption>
   </figure>
 </dialog>
 
@@ -60,11 +64,18 @@
     gap: 0.75rem;
     width: 100dvw;
     height: 100dvh;
+    /* Oben mehr Luft: dort sitzt der Schliessen-Button. */
+    padding: 4rem 1rem 1.25rem;
+    box-sizing: border-box;
   }
   .gx-lightbox-image {
     display: block;
+    /* Startwerte fuer den Moment vor dem `load`; danach setzt applySizing()
+       exakte Pixelmasse, die den tatsaechlichen Textblock einrechnen. */
     max-width: 96vw;
     max-height: calc(92dvh - 3.5rem);
+    flex: 0 1 auto;
+    min-height: 0;
     width: auto;
     height: auto;
     border-radius: 10px;
@@ -77,11 +88,34 @@
   }
   .gx-lightbox.is-loading .gx-lightbox-image { opacity: 0.4; }
   .gx-lightbox-caption {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    /* ~68 Zeichen ist die Breite, ab der Fliesstext schwer zu lesen wird; auf
+       schmalen Schirmen greift stattdessen der vw-Wert. */
+    max-width: min(68ch, 90vw);
+    /* Ein sehr langer Text frisst sonst das Bild auf. Danach wird gescrollt. */
+    max-height: 38dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .gx-lightbox-title {
     color: var(--color-arena);
     font-size: 1.25rem;
     line-height: 1.2;
-    text-align: center;
-    max-width: 80vw;
+  }
+  .gx-lightbox-story {
+    color: rgba(248, 248, 252, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+    white-space: pre-line;
+  }
+  @media (min-width: 768px) {
+    .gx-lightbox-title { font-size: 1.5rem; }
+    .gx-lightbox-story { font-size: 1rem; }
   }
   .gx-lightbox-close,
   .gx-lightbox-nav {
@@ -137,6 +171,8 @@
     const dlg = dialog;
     const img = dlg.querySelector<HTMLImageElement>('.gx-lightbox-image');
     const caption = dlg.querySelector<HTMLElement>('.gx-lightbox-caption');
+    const title = dlg.querySelector<HTMLElement>('.gx-lightbox-title');
+    const story = dlg.querySelector<HTMLElement>('.gx-lightbox-story');
     const closeBtn = dlg.querySelector<HTMLButtonElement>('.gx-lightbox-close');
     const prevBtn = dlg.querySelector<HTMLButtonElement>('.gx-lightbox-prev');
     const nextBtn = dlg.querySelector<HTMLButtonElement>('.gx-lightbox-next');
@@ -153,19 +189,28 @@
       const nh = img.naturalHeight;
       const vw = window.innerWidth;
       const vh = window.innerHeight;
+      // Der Textblock ist mal eine Zeile, mal ein Absatz. Statt eines festen
+      // Abzugs messen wir ihn: sonst schiebt ein langer Text das Bild aus dem
+      // Bild, gerade auf dem Handy.
+      const capH = caption ? Math.ceil(caption.getBoundingClientRect().height) : 0;
+      // 4rem Padding oben + 1.25rem unten + 0.75rem gap, grosszuegig gerundet.
+      const chrome = capH + 112;
       const maxW = Math.min(vw * 0.92, nw * 2);
-      const maxH = Math.min(vh - 96, nh * 2);
+      // Unter 30% Viewporthoehe darf das Bild nicht gedrueckt werden; dann
+      // scrollt lieber der Text in seinem eigenen Kasten.
+      const maxH = Math.min(Math.max(vh - chrome, vh * 0.3), nh * 2);
       const scale = Math.min(maxW / nw, maxH / nh, 2);
       img.style.width = `${Math.round(nw * scale)}px`;
       img.style.height = `${Math.round(nh * scale)}px`;
     }
 
     function show(index: number) {
-      if (!img || !caption || activeSet.length === 0) return;
+      if (!img || !title || activeSet.length === 0) return;
       const len = activeSet.length;
       currentIndex = ((index % len) + len) % len;
       const trigger = activeSet[currentIndex];
       const label = trigger.dataset.caption ?? '';
+      const text = trigger.dataset.story ?? '';
 
       img.style.visibility = 'hidden';
       img.style.width = '';
@@ -181,9 +226,16 @@
         img.style.visibility = 'visible';
         dlg.classList.remove('is-loading');
       };
+      // Erst den Text setzen, dann laden: applySizing() misst den Kasten, der
+      // Reihenfolge wegen muss er da schon stehen.
+      title.textContent = label;
+      if (story) {
+        story.textContent = text;
+        story.hidden = text === '';
+      }
+      if (caption) caption.scrollTop = 0;
       img.src = trigger.href;
       img.alt = label;
-      caption.textContent = label;
 
       const preload = (i: number) => {
         const next = activeSet[((i % len) + len) % len];
@@ -243,7 +295,11 @@
 
     dialog.addEventListener('close', () => {
       if (img) img.src = '';
-      if (caption) caption.textContent = '';
+      if (title) title.textContent = '';
+      if (story) {
+        story.textContent = '';
+        story.hidden = true;
+      }
       currentIndex = -1;
       activeSet = [];
     });

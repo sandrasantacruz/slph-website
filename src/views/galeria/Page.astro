@@ -18,6 +18,13 @@ type SectionDef = {
    * Bild erscheint also auch ohne Code-Edit, nur eben mit gröberem Text.
    */
   captions?: Record<string, string>;
+  /**
+   * Optionaler Langtext zu einzelnen Bildern, gekeyed wie `captions`. Er
+   * erscheint nur in der Lightbox unter der Bildunterschrift, nicht auf der
+   * Kachel: im 3:2-Raster waere dafuer kein Platz, und auf dem Handy gibt es
+   * kein Hover, hinter dem man ihn verstecken koennte.
+   */
+  stories?: Record<string, string>;
 };
 
 const sectionDefs: SectionDef[] = [
@@ -56,6 +63,10 @@ const sectionDefs: SectionDef[] = [
       "05-victoria-galvan-perez-galdos":
         "Victoria Galván, directora de la Casa Museo Pérez Galdós",
       "06-alicia-herrera-microtropic": "Alicia Herrera, Proyecto Microtropic",
+    },
+    stories: {
+      "01-olaia-moran-cabildo":
+        "Con Olaia Morán ampliamos la dimensión educativa de Si los peces hablaran…, acercando la conciencia ambiental a los centros escolares a través del musical y de los Talleres SLPH. Una colaboración institucional que nos permitió llevar el arte y la educación ambiental a las aulas.",
     },
   },
   {
@@ -136,7 +147,8 @@ const sectionDefs: SectionDef[] = [
     captions: {
       "01-museo-tomas-morales": "Museo Tomás Morales, 2025",
       "02-biblioteca-insular": "Biblioteca Insular",
-      "03-casa-de-colon": "Casa de Colón",
+      "03-museo-perez-galdos-taller":
+        "Taller SLPH en la Casa Museo Pérez Galdós",
       "04-museo-perez-galdos": "Casa Museo Pérez Galdós",
       "05-feria-del-atun-mogan":
         "Feria del Atún 2023, Concejalía de Cultura de Mogán",
@@ -258,6 +270,7 @@ const sections = sectionDefs.map((def) => {
       src: `/assets/galeria/${def.id}/${file}`,
       alt: `${def.title}: ${caption}`,
       caption,
+      story: def.stories?.[stem],
     };
   });
   return { ...def, images };
