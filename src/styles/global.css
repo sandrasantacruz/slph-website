@@ -356,6 +356,28 @@
   overflow: hidden;
   background: rgb(0 0 0 / 0.4);
 }
+/* YouTube-Shorts sind hochformatig. Volle Breite waere hier absurd hoch. */
+.prose-slph .video-embed.is-vertical {
+  aspect-ratio: 9 / 16;
+  max-width: 22rem;
+  margin-inline: auto;
+}
+/* Der 16:9-Kasten hat eine feste Hoehe, deshalb liegen Platzhalter und Karte
+   darin absolut. Beim Instagram-Embed bestimmt der Inhalt die Hoehe, dort
+   bleiben beide im Fluss. */
+.prose-slph .video-embed .embed-fallback,
+.prose-slph .video-embed .embed-consent {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  margin: 0;
+}
+.prose-slph .video-embed .embed-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
 .prose-slph .video-embed iframe {
   position: absolute;
   inset: 0;
@@ -386,7 +408,7 @@
   background: rgb(0 0 0 / 0.4);
 }
 /* Ohne JavaScript bleibt nur dieser Link stehen. */
-.prose-slph .ig-embed-fallback {
+.prose-slph .embed-fallback {
   display: inline-block;
   padding: 0.75em 1.25em;
   border: 1px solid rgb(from var(--color-caparol) r g b / 0.2);
@@ -397,7 +419,7 @@
 /* Zustimmungskarte vor dem Laden, gebaut in `components/InstagramEmbeds.astro`.
    Optisch dieselbe Sprache wie der Maps-Platzhalter, nur ohne Tailwind: das
    Markup entsteht zur Laufzeit und wird vom Tailwind-Scan nicht erfasst. */
-.prose-slph .ig-consent {
+.prose-slph .embed-consent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -412,21 +434,21 @@
     rgb(from var(--color-azul) r g b / 0.4);
   text-align: center;
 }
-.prose-slph .ig-consent-note {
+.prose-slph .embed-consent-note {
   margin: 0;
   max-width: 34rem;
   font-size: 0.95rem;
   line-height: 1.6;
   color: rgb(from var(--color-caparol) r g b / 0.85);
 }
-.prose-slph .ig-consent-actions {
+.prose-slph .embed-consent-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
 }
-.prose-slph .ig-consent-button {
+.prose-slph .embed-consent-button {
   border: 0;
   border-radius: 999px;
   padding: 0.5rem 1.25rem;
@@ -437,22 +459,22 @@
   letter-spacing: 0.02em;
   cursor: pointer;
 }
-.prose-slph .ig-consent-button:hover {
+.prose-slph .embed-consent-button:hover {
   filter: brightness(1.1);
 }
-.prose-slph .ig-consent-link {
+.prose-slph .embed-consent-link {
   color: var(--color-arena);
   font-size: 0.9rem;
   text-decoration: none;
 }
-.prose-slph .ig-consent-link:hover {
+.prose-slph .embed-consent-link:hover {
   text-decoration: underline;
 }
-.prose-slph .ig-consent-hint {
+.prose-slph .embed-consent-hint {
   margin: 0;
   font-size: 0.75rem;
   color: rgb(from var(--color-caparol) r g b / 0.55);
 }
-.prose-slph .ig-consent-hint a {
+.prose-slph .embed-consent-hint a {
   color: var(--color-arena);
 }

@@ -4,7 +4,7 @@ import { render } from 'astro:content';
 
 import MainLayout from '../../layouts/MainLayout.astro';
 import MapEmbed from '../../components/MapEmbed.astro';
-import InstagramEmbeds from '../../components/InstagramEmbeds.astro';
+import MediaEmbeds from '../../components/MediaEmbeds.astro';
 import { coverBox, postPath, type Post } from '../../lib/posts';
 import {
   absoluteUrl,
@@ -210,7 +210,7 @@ const itemSchema = isEvent
     <div class="prose-slph mx-auto mt-10 max-w-3xl px-4">
       <Content />
     </div>
-    <InstagramEmbeds />
+    <MediaEmbeds />
 
     {isEvent && location && (
       <section class="mx-auto mt-16 max-w-3xl px-4">

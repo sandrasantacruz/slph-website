@@ -1,0 +1,146 @@
+---
+// Verdrahtet die Video-Embeds im Artikelkörper (Instagram, YouTube).
+//
+// Das Markup dazu kommt aus dem Loader (`resolveEmbeds` in
+// `lib/pulpo-loader.ts`): ein `<figure data-embed>` mit dem Link darin. Ohne
+// JavaScript bleibt genau dieser Link stehen, mit JavaScript wird daraus die
+// Consent-Karte und nach Zustimmung der iframe.
+//
+// Gleiche Mechanik und derselbe `slph:consent-changed`-Kanal wie `MapEmbed`,
+// aber je Anbieter ein eigener Schlüssel: wer Google Maps erlaubt, hat damit
+// noch lange nicht Meta erlaubt.
+---
+
+<script>
+  type Provider = {
+    key: string;
+    brand: string;
+    /** Wer die Daten bekommt. Bei YouTube ist das nicht YouTube, sondern Google. */
+    processor: string;
+    title: string;
+    open: string;
+  };
+
+  const PROVIDERS: Record<string, Provider> = {
+    instagram: {
+      key: 'slph:consent:instagram',
+      brand: 'Instagram',
+      processor: 'Meta',
+      title: 'Publicación de Instagram',
+      open: 'O abrir en Instagram ↗',
+    },
+    youtube: {
+      key: 'slph:consent:youtube',
+      brand: 'YouTube',
+      processor: 'Google',
+      title: 'Vídeo de YouTube',
+      open: 'O abrir en YouTube ↗',
+    },
+  };
+
+  function providerOf(fig: HTMLElement): Provider | null {
+    return PROVIDERS[fig.dataset.embedProvider ?? ''] ?? null;
+  }
+
+  function granted(key: string): boolean {
+    try {
+      return localStorage.getItem(key) === 'granted';
+    } catch {
+      // Privates Fenster oder blockierte Site-Daten: dann eben kein Embed.
+      return false;
+    }
+  }
+
+  function activate(fig: HTMLElement) {
+    const provider = providerOf(fig);
+    const src = fig.dataset.embedSrc;
+    if (!provider || !src) return;
+    if (fig.querySelector('iframe')) return;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = provider.title;
+    iframe.loading = 'lazy';
+    iframe.allowFullscreen = true;
+    // Die Karte kommt in genau der Höhe, die das CSS vorgibt; eine eigene
+    // Scrollleiste im iframe wäre nur störend.
+    iframe.setAttribute('scrolling', 'no');
+    if (fig.dataset.embedProvider === 'youtube') {
+      iframe.setAttribute(
+        'allow',
+        'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share',
+      );
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    }
+    fig.replaceChildren(iframe);
+  }
+
+  function renderCard(fig: HTMLElement) {
+    const provider = providerOf(fig);
+    if (!provider) return;
+    const url = fig.dataset.embedUrl ?? '#';
+
+    const card = document.createElement('div');
+    card.className = 'embed-consent';
+
+    const note = document.createElement('p');
+    note.className = 'embed-consent-note';
+    note.append('Para mostrar este vídeo cargamos contenido de ');
+    const brand = document.createElement('strong');
+    brand.textContent = provider.brand;
+    note.append(brand);
+    note.append(
+      `. Al activarlo, ${provider.processor} podrá recibir datos sobre tu visita ` +
+        'y podría instalar cookies en tu navegador.',
+    );
+
+    const actions = document.createElement('div');
+    actions.className = 'embed-consent-actions';
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'embed-consent-button';
+    btn.textContent = 'Activar el vídeo';
+    btn.addEventListener('click', () => {
+      try {
+        localStorage.setItem(provider.key, 'granted');
+      } catch {
+        // Kein Speicher, kein Merken: dieses eine Video trotzdem zeigen.
+      }
+      wire();
+    });
+
+    const open = document.createElement('a');
+    open.className = 'embed-consent-link';
+    open.href = url;
+    open.target = '_blank';
+    open.rel = 'noopener noreferrer';
+    open.textContent = provider.open;
+
+    actions.append(btn, open);
+
+    const hint = document.createElement('p');
+    hint.className = 'embed-consent-hint';
+    hint.append('Puedes cambiar tu decisión en ');
+    const prefs = document.createElement('a');
+    prefs.href = '/politica-de-cookies#preferencias';
+    prefs.textContent = 'Preferencias de privacidad';
+    hint.append(prefs, '.');
+
+    card.append(note, actions, hint);
+    fig.replaceChildren(card);
+  }
+
+  function wire() {
+    document.querySelectorAll<HTMLElement>('[data-embed]').forEach((fig) => {
+      const provider = providerOf(fig);
+      if (!provider) return;
+      if (granted(provider.key)) activate(fig);
+      else renderCard(fig);
+    });
+  }
+
+  wire();
+  // Widerruf in den Präferenzen baut die Karte wieder auf.
+  window.addEventListener('slph:consent-changed', wire);
+</script>

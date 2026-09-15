@@ -147,34 +147,79 @@ function resolveInlineImages(
 }
 
 /**
- * Ein Absatz, der nur aus einem Instagram-Link besteht:
+ * Ein Absatz, der nur aus einem Link besteht:
  *
- *   <p><a href="https://www.instagram.com/reel/CODE/?igsh=…">…</a></p>
+ *   <p><a href="https://youtu.be/ID?si=…">…</a></p>
  *
- * Im CMS wird genau das eingefügt, hier wird daraus der Embed-Platzhalter.
- * Der iframe entsteht erst im Browser, nachdem der Besucher zugestimmt hat
- * (siehe `components/InstagramEmbeds.astro`) — deshalb steht hier nur der
- * Link, der ohne JavaScript als Fallback stehenbleibt.
+ * Genau das fügt man im CMS ein, wenn man ein Video zeigen will. Hier wird
+ * daraus der Embed-Platzhalter. Der iframe entsteht erst im Browser, nachdem
+ * der Besucher zugestimmt hat (siehe `components/MediaEmbeds.astro`) —
+ * deshalb steht hier nur der Link, der ohne JavaScript als Fallback
+ * stehenbleibt.
  *
- * Erlaubt sind `reel`, `p` (Foto/Video-Post) und `tv`. Query-Parameter wie
- * `igsh` fliegen raus: sie sind Tracking-Anhängsel aus der Teilen-Funktion
- * und haben im Embed nichts zu suchen.
+ * Links mitten im Fließtext bleiben Links: nur ein Absatz, der aus nichts
+ * anderem besteht, ist erkennbar als Einbettung gemeint.
  */
-const IG_PARAGRAPH_RE =
-  /<p>\s*<a\b[^>]*href="https?:\/\/(?:www\.)?instagram\.com\/(reel|reels|p|tv)\/([A-Za-z0-9_-]+)\/?[^"]*"[^>]*>.*?<\/a>\s*<\/p>/gi;
+const LINK_PARAGRAPH_RE = /<p>\s*<a\b([^>]*)>.*?<\/a>\s*<\/p>/gi;
 
-function resolveInstagramEmbeds(html: string): string {
-  return html.replace(IG_PARAGRAPH_RE, (_whole, kind: string, code: string) => {
-    // `reels/` (Plural) ist die Listen-URL derselben Sache, `/reel/` die, die
-    // sich einbetten lässt.
-    const type = kind.toLowerCase() === 'reels' ? 'reel' : kind.toLowerCase();
-    const url = `https://www.instagram.com/${type}/${code}/`;
-    return (
-      `<figure class="ig-embed" data-ig data-ig-src="${url}embed/" data-ig-url="${url}">` +
-      `<a class="ig-embed-fallback" href="${url}" target="_blank" rel="noopener noreferrer">` +
-      `Ver esta publicación en Instagram</a>` +
-      `</figure>`
-    );
+/** `reel`, `p` (Foto/Video-Post) und `tv` lassen sich einbetten. */
+const IG_RE =
+  /^https?:\/\/(?:www\.)?instagram\.com\/(reel|reels|p|tv)\/([A-Za-z0-9_-]+)/i;
+
+/** Alle Spielarten, in denen YouTube seine IDs verteilt. */
+const YT_RE =
+  /^https?:\/\/(?:www\.|m\.)?(?:youtube\.com\/(?:watch\?(?:[^"#]*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i;
+const YT_SHORTS_RE = /youtube\.com\/shorts\//i;
+/** `?t=90` oder `?t=90s` aus der Teilen-Funktion, in Sekunden. */
+const YT_START_RE = /[?&](?:t|start)=(\d+)s?(?:&|$)/i;
+
+function instagramFigure(url: string): string | null {
+  const m = IG_RE.exec(url);
+  if (!m) return null;
+  // `reels/` (Plural) ist die Listen-URL derselben Sache, `/reel/` die, die
+  // sich einbetten lässt.
+  const type = m[1].toLowerCase() === 'reels' ? 'reel' : m[1].toLowerCase();
+  // Query-Parameter wie `igsh` fliegen raus: Tracking-Anhängsel aus der
+  // Teilen-Funktion, im Embed haben sie nichts zu suchen.
+  const clean = `https://www.instagram.com/${type}/${m[2]}/`;
+  return (
+    `<figure class="ig-embed" data-embed data-embed-provider="instagram"` +
+    ` data-embed-src="${clean}embed/" data-embed-url="${clean}">` +
+    `<a class="embed-fallback" href="${clean}" target="_blank" rel="noopener noreferrer">` +
+    `Ver esta publicación en Instagram</a>` +
+    `</figure>`
+  );
+}
+
+function youtubeFigure(url: string): string | null {
+  const m = YT_RE.exec(url);
+  if (!m) return null;
+  const id = m[1];
+  // Shorts sind hochformatig, im 16:9-Kasten wären sie von zwei schwarzen
+  // Balken eingerahmt.
+  const vertical = YT_SHORTS_RE.test(url);
+  const start = YT_START_RE.exec(url)?.[1];
+  // `youtube-nocookie.com` ist YouTubes eigene Variante ohne Werbe-Cookies.
+  // Zustimmungspflichtig bleibt sie trotzdem, sie setzt weiter Cookies.
+  const src =
+    `https://www.youtube-nocookie.com/embed/${id}?rel=0` +
+    (start ? `&amp;start=${start}` : '');
+  const watch =
+    `https://www.youtube.com/watch?v=${id}` + (start ? `&amp;t=${start}s` : '');
+  return (
+    `<figure class="video-embed${vertical ? ' is-vertical' : ''}" data-embed` +
+    ` data-embed-provider="youtube" data-embed-src="${src}" data-embed-url="${watch}">` +
+    `<a class="embed-fallback" href="${watch}" target="_blank" rel="noopener noreferrer">` +
+    `Ver este vídeo en YouTube</a>` +
+    `</figure>`
+  );
+}
+
+function resolveEmbeds(html: string): string {
+  return html.replace(LINK_PARAGRAPH_RE, (whole, raw: string) => {
+    const href = attr(raw, 'href');
+    if (!href) return whole;
+    return instagramFigure(href) ?? youtubeFigure(href) ?? whole;
   });
 }
 
@@ -260,7 +305,7 @@ export function pulpoPosts(options: PulpoPostsOptions = {}): Loader {
 
         const cover = rec.coverImage ? media.get(rec.coverImage as string) : undefined;
         const title = localized(rec.title, contentLang);
-        const html = resolveInstagramEmbeds(
+        const html = resolveEmbeds(
           resolveInlineImages(
             localized(rec.publishedBody, contentLang) || localized(rec.body, contentLang),
             media,
