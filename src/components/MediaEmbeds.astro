@@ -9,6 +9,10 @@
 // Gleiche Mechanik und derselbe `slph:consent-changed`-Kanal wie `MapEmbed`,
 // aber je Anbieter ein eigener Schlüssel: wer Google Maps erlaubt, hat damit
 // noch lange nicht Meta erlaubt.
+//
+// Die Consent-Karte bietet bewusst keinen "abrir en …"-Ausstieg zum Anbieter:
+// das Video soll hier laufen, nicht drüben. Ohne JavaScript bleibt der Link
+// aus dem Loader-Markup als einziger Weg zum Inhalt stehen.
 ---
 
 <script>
@@ -18,7 +22,6 @@
     /** Wer die Daten bekommt. Bei YouTube ist das nicht YouTube, sondern Google. */
     processor: string;
     title: string;
-    open: string;
   };
 
   const PROVIDERS: Record<string, Provider> = {
@@ -27,14 +30,12 @@
       brand: 'Instagram',
       processor: 'Meta',
       title: 'Publicación de Instagram',
-      open: 'O abrir en Instagram ↗',
     },
     youtube: {
       key: 'slph:consent:youtube',
       brand: 'YouTube',
       processor: 'Google',
       title: 'Vídeo de YouTube',
-      open: 'O abrir en YouTube ↗',
     },
   };
 
@@ -78,7 +79,6 @@
   function renderCard(fig: HTMLElement) {
     const provider = providerOf(fig);
     if (!provider) return;
-    const url = fig.dataset.embedUrl ?? '#';
 
     const card = document.createElement('div');
     card.className = 'embed-consent';
@@ -110,14 +110,7 @@
       wire();
     });
 
-    const open = document.createElement('a');
-    open.className = 'embed-consent-link';
-    open.href = url;
-    open.target = '_blank';
-    open.rel = 'noopener noreferrer';
-    open.textContent = provider.open;
-
-    actions.append(btn, open);
+    actions.append(btn);
 
     const hint = document.createElement('p');
     hint.className = 'embed-consent-hint';

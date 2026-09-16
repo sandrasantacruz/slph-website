@@ -5,7 +5,7 @@ import { render } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 import MapEmbed from '../../components/MapEmbed.astro';
 import MediaEmbeds from '../../components/MediaEmbeds.astro';
-import { coverBox, postPath, type Post } from '../../lib/posts';
+import { coverBox, isPastEvent, postPath, type Post } from '../../lib/posts';
 import {
   absoluteUrl,
   articleSchema,
@@ -32,6 +32,10 @@ const {
 } = post.data;
 
 const isEvent = kind === 'event';
+// Zur Build-Zeit ausgewertet, wie in `NovedadCard`. Bei einer vergangenen
+// Veranstaltung ist die Anfahrt gegenstandslos: Karte und Maps-Link fallen
+// weg, der Ortsname bleibt als Angabe stehen.
+const isPast = isPastEvent(post);
 
 // Der Seitenkopf zeigt das Cover **vollständig**, in seinem eigenen Format:
 // keine feste 3:2-Box, kein object-cover. Begrenzt wird nur die Breite, und
@@ -71,7 +75,7 @@ const newsDate = !isEvent && publishedAt ? fullFmt.format(publishedAt) : '';
 // `mapEmbed` ist im Ziel geprüft und immer eine reine Embed-URL. Für den Link
 // im Kopf wollen wir aber eine vollwertige Maps-Ansicht, also eine Suche nach
 // dem Ortsnamen.
-const addressLink = location
+const addressLink = location && !isPast
   ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
   : null;
 
@@ -212,7 +216,7 @@ const itemSchema = isEvent
     </div>
     <MediaEmbeds />
 
-    {isEvent && location && (
+    {isEvent && location && !isPast && (
       <section class="mx-auto mt-16 max-w-3xl px-4">
         <h2 class="mb-4 font-display text-2xl text-arena sm:text-3xl">
           Cómo llegar

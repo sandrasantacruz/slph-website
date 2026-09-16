@@ -462,14 +462,6 @@
 .prose-slph .embed-consent-button:hover {
   filter: brightness(1.1);
 }
-.prose-slph .embed-consent-link {
-  color: var(--color-arena);
-  font-size: 0.9rem;
-  text-decoration: none;
-}
-.prose-slph .embed-consent-link:hover {
-  text-decoration: underline;
-}
 .prose-slph .embed-consent-hint {
   margin: 0;
   font-size: 0.75rem;
