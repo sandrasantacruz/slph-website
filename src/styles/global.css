@@ -391,21 +391,47 @@
    deshalb ueber `cqw` aus der eigenen Breite; Browser ohne Container-Queries
    behalten den festen Wert darueber. 540px ist Instagrams Kartenbreite, alles
    darueber wuerde nur hochskaliert aussehen. */
+/* Vom Instagram-Embed interessiert nur die Medienfläche. Kopfzeile (Avatar,
+   Name, "View profile") und Fußzeile (Likes, Kommentare) liegen außerhalb des
+   sichtbaren Ausschnitts: der iframe ist volle Höhe, ragt aber oben und unten
+   unter den `overflow: hidden`-Rand der figure hinaus.
+
+   Die beiden Maße sind bei Instagram fest und unabhängig von der Breite, die
+   Medienfläche dazwischen nicht: die hat das Seitenverhältnis des Beitrags
+   (quadratisch, 4:5, 16:9, bei Reels immer 4:5). Deshalb wird nicht gerechnet,
+   sondern gemessen: `MediaEmbeds.astro` leitet `--ig-ratio` aus der Höhe ab,
+   die der iframe selbst per `postMessage` meldet. Bis dahin gilt 4:5.
+
+   Warum ein Verhältnis und keine fertige Höhe: Instagram misst genau einmal,
+   beim Laden. Wird es danach schmaler, etwa wenn jemand sein Telefon dreht,
+   kommt keine zweite Meldung. Eine gespeicherte Pixelhöhe wäre dann falsch,
+   ein Verhältnis rechnet über `cqw` von selbst mit. */
 .prose-slph .ig-embed {
+  --ig-head: 54px;
+  --ig-foot: 154px;
   container-type: inline-size;
   width: 100%;
   max-width: 540px;
   margin: 2em auto;
+  overflow: hidden;
+  border-radius: 1rem;
+  /* Steht das Video nicht formatfüllend in seiner Box, rahmt Instagram es
+     schwarz. Diese Balken sind nicht wegzuschneiden: ihre Breite hängt am
+     Seitenverhältnis des Videos, und das gibt der fremde iframe nicht preis.
+     Also wird die Fläche selbst schwarz und trägt eine eigene Kante: dann
+     liest sich der Rand als gesetzter Rahmen und nicht als Panne. */
+  background: var(--color-negro);
+  box-shadow:
+    0 0 0 1px rgb(from var(--color-caparol) r g b / 0.12),
+    0 18px 40px -24px rgb(0 0 0 / 0.8);
 }
 .prose-slph .ig-embed iframe {
   display: block;
   width: 100%;
-  height: 760px;
-  height: calc(125cqw + 210px);
+  height: calc(var(--ig-ratio, 1.25) * 100cqw + var(--ig-head) + var(--ig-foot));
+  margin-top: calc(-1 * var(--ig-head));
+  margin-bottom: calc(-1 * var(--ig-foot));
   border: 0;
-  border-radius: 1rem;
-  overflow: hidden;
-  background: rgb(0 0 0 / 0.4);
 }
 /* Ohne JavaScript bleibt nur dieser Link stehen. */
 .prose-slph .embed-fallback {

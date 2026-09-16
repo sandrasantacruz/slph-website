@@ -63,9 +63,23 @@
     iframe.title = provider.title;
     iframe.loading = 'lazy';
     iframe.allowFullscreen = true;
-    // Die Karte kommt in genau der Höhe, die das CSS vorgibt; eine eigene
-    // Scrollleiste im iframe wäre nur störend.
-    iframe.setAttribute('scrolling', 'no');
+    // Kein `scrolling="no"`: das sperrt im iframe auch die Wischgeste, mit der
+    // sich ein Instagram-Karussell am Touchscreen weiterblättern lässt. Eine
+    // Scrollleiste droht ohnehin nicht, die Höhe sitzt auf der gemeldeten.
+    if (fig.dataset.embedProvider === 'instagram') {
+      // Instagram legt über die Medienfläche einen Link auf den Beitrag: ein
+      // Klick aufs Bild führt aus der Seite heraus in den Feed. Unterbinden
+      // lässt sich das nur von außen, denn der iframe gehört uns nicht.
+      //
+      // `sandbox` entzieht dem Rahmen dafür genau zwei Rechte, die es ohne das
+      // Attribut automatisch hätte: die Elternseite umzuleiten
+      // (`allow-top-navigation`) und ein neues Fenster zu öffnen
+      // (`allow-popups`). Skripte und der eigene Origin bleiben erlaubt, sonst
+      // liefe das Karussell nicht mehr. Die Kombination ist hier unbedenklich:
+      // gefährlich wäre sie nur bei Inhalten vom eigenen Origin, die sich die
+      // Beschränkung dann selbst wieder abnehmen könnten.
+      iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+    }
     if (fig.dataset.embedProvider === 'youtube') {
       iframe.setAttribute(
         'allow',
@@ -79,6 +93,8 @@
   function renderCard(fig: HTMLElement) {
     const provider = providerOf(fig);
     if (!provider) return;
+
+    fig.style.removeProperty('--ig-ratio');
 
     const card = document.createElement('div');
     card.className = 'embed-consent';
@@ -123,6 +139,45 @@
     card.append(note, actions, hint);
     fig.replaceChildren(card);
   }
+
+  // Der Instagram-iframe meldet seine Gesamthöhe an die Elternseite
+  // (`{"type":"MEASURE","details":{"height":883}}`). Die braucht der Zuschnitt
+  // in `global.css`: Kopf- und Fußzeile sind fest, die Medienfläche dazwischen
+  // hat das Seitenverhältnis des Beitrags und ist damit nur so zu erfahren.
+  //
+  // Zuordnung über `event.source`, nicht über "der erste iframe": auf einer
+  // Seite können mehrere Beiträge stehen, und sie melden sich in beliebiger
+  // Reihenfolge.
+  // Feste Maße des Instagram-Embeds, unabhängig von der Breite nachgemessen.
+  // Dieselben Werte stehen als `--ig-head` / `--ig-foot` in `global.css`.
+  const HEAD = 54;
+  const FOOT = 154;
+
+  window.addEventListener('message', (ev: MessageEvent) => {
+    if (ev.origin !== 'https://www.instagram.com') return;
+    let payload: { type?: string; details?: { height?: number } };
+    try {
+      payload = JSON.parse(String(ev.data));
+    } catch {
+      return;
+    }
+    const height = payload?.details?.height;
+    if (payload?.type !== 'MEASURE' || typeof height !== 'number' || height <= 0) return;
+
+    for (const fig of document.querySelectorAll<HTMLElement>('.ig-embed')) {
+      if (fig.querySelector('iframe')?.contentWindow !== ev.source) continue;
+
+      // Gemerkt wird das Seitenverhältnis der Medienfläche, nicht ihre Höhe:
+      // Instagram meldet nur einmal, beim Laden. Nach einer Drehung des Geräts
+      // wäre eine gespeicherte Pixelhöhe falsch, das Verhältnis bleibt richtig.
+      const width = fig.clientWidth;
+      const media = height - HEAD - FOOT;
+      if (width > 0 && media > 0) {
+        fig.style.setProperty('--ig-ratio', String(media / width));
+      }
+      return;
+    }
+  });
 
   function wire() {
     document.querySelectorAll<HTMLElement>('[data-embed]').forEach((fig) => {

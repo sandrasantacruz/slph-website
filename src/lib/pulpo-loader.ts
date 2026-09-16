@@ -159,8 +159,15 @@ function resolveInlineImages(
  *
  * Links mitten im Fließtext bleiben Links: nur ein Absatz, der aus nichts
  * anderem besteht, ist erkennbar als Einbettung gemeint.
+ *
+ * Geduldet wird hinter dem Link ein einzelnes Satzzeichen und ein `<br>`.
+ * Beides entsteht beim Schreiben im Back Office von selbst, wenn jemand eine
+ * Aufzählung tippt oder eine Zeile abschließt, und ändert nichts daran, dass
+ * der Absatz als Einbettung gemeint ist. Ohne diese Nachsicht blieb ein Reel
+ * wegen eines angehängten Kommas als nackte URL stehen.
  */
-const LINK_PARAGRAPH_RE = /<p>\s*<a\b([^>]*)>.*?<\/a>\s*<\/p>/gi;
+const LINK_PARAGRAPH_RE =
+  /<p>\s*<a\b([^>]*)>.*?<\/a>\s*[.,;:]?\s*(?:<br\s*\/?>)?\s*<\/p>/gi;
 
 /** `reel`, `p` (Foto/Video-Post) und `tv` lassen sich einbetten. */
 const IG_RE =
