@@ -99,6 +99,10 @@
     /* Ein sehr langer Text frisst sonst das Bild auf. Danach wird gescrollt. */
     max-height: 38dvh;
     overflow-y: auto;
+    /* overflow-y erzwingt auch waagerecht einen Clip, und Caveat zeichnet
+       Anfuehrungszeichen breiter als ihre Vorschubbreite. Ohne das Polster
+       schneidet der Kasten den zweiten Strich von ” ab. */
+    padding-inline: 0.6em;
     overscroll-behavior: contain;
   }
   .gx-lightbox-title {
