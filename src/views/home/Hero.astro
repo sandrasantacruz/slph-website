@@ -1,29 +1,40 @@
 ---
 import { Icon } from 'astro-icon/components';
-import fishes from './img/fishes.webp?url';
-import dreizack from './img/dreizack.webp?url';
 import Ola from '../../components/Ola.astro';
 ---
 
-<section class="relative isolate flex h-[calc(100svh-6rem)] flex-col overflow-hidden">
-  <!-- Floating character — drifts behind the headline -->
-  <img
-    src={fishes}
-    alt=""
+<section class="relative isolate flex h-[calc(100svh-6rem)] flex-col overflow-hidden bg-azul">
+  <!-- Hintergrundvideo. Läuft einmal durch und bleibt auf dem letzten Bild
+       stehen (kein loop). Die Quelle setzt das Skript weiter unten, weil
+       Chrome das media-Attribut an <source> ignoriert und sonst jedes Handy
+       die 1080p-Fassung zöge. -->
+  <video
+    id="hero-bg-video"
+    class="absolute inset-0 -z-20 h-full w-full object-cover"
+    poster="/videos/hero-bg-poster.webp"
+    data-src-sm="/videos/hero-bg-720.mp4"
+    data-src-lg="/videos/hero-bg.mp4"
+    autoplay
+    muted
+    playsinline
+    preload="auto"
     aria-hidden="true"
-    class="anim-float pointer-events-none absolute right-4 top-10 -z-10 w-[14rem] opacity-25 sm:w-[18rem] md:w-[22rem] md:opacity-30 lg:w-[28rem] lg:opacity-40"
-    loading="eager"
-  />
+    tabindex="-1"
+  ></video>
 
-  <!-- Dreizack — zentral, gespiegelt -->
-  <img
-    src={dreizack}
-    alt=""
+  <!-- Lesbarkeits-Layer. Mobil liegt der Text über der ganzen Breite, da
+       deckt eine gleichmässige Schicht ab; ab md zieht der Text nach links,
+       da darf rechts das Bild durch. -->
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-azul/85 via-azul/80 to-azul/80 md:bg-gradient-to-r md:from-azul/95 md:via-azul/80 md:to-azul/40"
     aria-hidden="true"
-    class="anim-float pointer-events-none absolute left-1/2 top-10 -z-10 hidden w-[14rem] -translate-x-1/2 -scale-x-100 opacity-30 lg:block"
-    style="animation-delay: -2.5s;"
-    loading="eager"
-  />
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-azul"
+    aria-hidden="true"
+  >
+  </div>
 
   <div class="mx-auto flex h-full w-full max-w-6xl flex-col justify-center gap-4 px-6 py-4 sm:gap-5 sm:py-6">
     <!-- Headline -->
@@ -85,6 +96,36 @@ import Ola from '../../components/Ola.astro';
     </svg>
   </a>
 </section>
+
+<script is:inline>
+  (() => {
+    const video = document.getElementById('hero-bg-video');
+    if (!video) return;
+
+    // Bei reduzierter Bewegung bleibt es beim Poster: keine Quelle, kein Play.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const small = window.matchMedia('(max-width: 767px)').matches;
+    video.src = small ? video.dataset.srcSm : video.dataset.srcLg;
+
+    // Safari startet nicht immer von allein, wenn src erst per Skript kommt.
+    const play = () => video.play().catch(() => {});
+    play();
+
+    // Ausserhalb des Viewports pausieren, damit ein weggescrolltes Video
+    // keine Rechenzeit verbrennt. Nach dem Ende bleibt es stehen.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(
+        ([entry]) => {
+          if (video.ended) return;
+          if (entry.isIntersecting) play();
+          else video.pause();
+        },
+        { threshold: 0 },
+      ).observe(video);
+    }
+  })();
+</script>
 
 <style>
   .hero-wave svg { animation: hw-drift 18s ease-in-out infinite alternate; }
