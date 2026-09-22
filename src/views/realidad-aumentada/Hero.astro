@@ -43,21 +43,17 @@ import Ola from '../../components/Ola.astro';
       </div>
 
       <div class="reveal reveal-delay-2 order-1 col-span-12 flex justify-center lg:order-2 lg:col-span-5">
-        <div class="polaroid tilt-r1 w-full max-w-[min(100%,52vh)] transition duration-500 hover:rotate-0" style="padding-bottom:3.25rem">
-          <img
-            src="/assets/animals/bella.webp"
-            alt="Ilustración de la Bella Azul, la sirena del cuento, nadando bajo el agua"
-            width="1000"
-            height="997"
-            class="block aspect-square w-full object-cover"
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          />
-          <p class="absolute bottom-1.5 left-0 right-0 px-2 text-center font-hand text-lg leading-tight text-azul sm:bottom-2 sm:text-2xl">
-            la Bella Azul, lista para salir
-          </p>
-        </div>
+        <!-- Freigestellt (PNG mit Alpha), deshalb ohne Polaroid-Rahmen -->
+        <img
+          src="/assets/ar/senor-tentaculus.webp"
+          alt="Ilustración del Señor Tentáculus, el pulpo del cuento, con los tentáculos abiertos"
+          width="1500"
+          height="1414"
+          class="anim-sway h-auto w-full max-w-[min(100%,56vh)] drop-shadow-[0_24px_40px_rgba(6,15,44,0.6)]"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
       </div>
     </div>
   </div>

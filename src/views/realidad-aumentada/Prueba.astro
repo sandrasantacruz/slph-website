@@ -1,0 +1,62 @@
+---
+import Ola from '../../components/Ola.astro';
+
+// Zielbild für die AR-App (Seite 80 des Buchs). Wird ungeschnitten gezeigt,
+// sonst erkennt die App das Motiv nicht.
+const target = '/assets/ar/pagina-80-pez-espada.webp';
+---
+
+<section id="prueba" class="relative isolate overflow-hidden py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal flex items-center gap-4">
+      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+        ¿Ya tienes la app?
+      </span>
+    </div>
+
+    <h2 class="reveal reveal-delay-1 mt-6 max-w-3xl font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] text-caparol">
+      Pruébala con
+      <Ola class="text-arena">esta imagen</Ola>
+    </h2>
+
+    <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-base leading-relaxed text-caparol/90 sm:text-lg">
+      Abre la app en tu teléfono y apunta la cámara a la ilustración, aquí en
+      la pantalla o impresa en papel. Es la página 80 del cuento: si tienes el
+      libro, también puedes probarla allí.
+    </p>
+
+    <figure class="reveal reveal-delay-2 mt-10">
+      <a
+        href={target}
+        target="_blank"
+        rel="noopener"
+        class="block overflow-hidden rounded-2xl border border-caparol/15 shadow-[0_24px_48px_-16px_rgba(6,15,44,0.75)] ring-1 ring-caparol/10"
+      >
+        <img
+          src={target}
+          alt="Ilustración de la página 80 del cuento: un pez espada y otros peces nadan entre botellas, latas, un neumático y otros residuos en el fondo del mar"
+          width="1500"
+          height="944"
+          class="block h-auto w-full"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <figcaption class="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-caparol/75 sm:text-base">
+        <span class="font-hand text-xl text-celeste sm:text-2xl">página 80, el pez espada</span>
+        <a
+          href={target}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 font-display text-xs tracking-[0.18em] text-arena uppercase transition hover:text-caparol sm:text-sm"
+        >
+          Ver a pantalla completa
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+          </svg>
+        </a>
+      </figcaption>
+    </figure>
+  </div>
+</section>
