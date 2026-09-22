@@ -1,0 +1,74 @@
+---
+import Ola from '../../components/Ola.astro';
+
+// Einstieg in die Unterseiten der Rubrik Programa (siehe SubNavPrograma).
+const cards = [
+  {
+    href: '/galeria',
+    eyebrow: 'vivencias',
+    title: 'Galería',
+    body: 'El musical, los espectáculos, los talleres, los centros escolares y los momentos que nos empujan a seguir.',
+    image: '/assets/cuento/vivencias.webp',
+    alt: 'Un grupo de personas sonrientes posa junto al personaje de Doña Paciencia, la tortuga, en la presentación del cuento en Poema del Mar',
+    cta: 'Recorrer la galería',
+    accent: 'text-celeste',
+  },
+  {
+    href: '/repercusion',
+    eyebrow: 'innegable',
+    title: 'Repercusión',
+    body: 'Nuestros mensajes calan en el corazón de todas las edades y dejan huella también en Televisión Canaria y en la prensa.',
+    image: '/assets/cuento/banner.webp',
+    alt: 'Ilustración de un pulpo en la orilla con una pancarta que dice "¡No a la basura! ¡El mar no se contamina!"',
+    cta: 'Ver la repercusión',
+    accent: 'text-arena',
+  },
+];
+---
+
+<section class="relative isolate overflow-hidden py-20 sm:py-28">
+  <div class="mx-auto max-w-5xl px-6">
+    <div class="reveal flex items-center gap-4">
+      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+        Sigue buceando
+      </span>
+    </div>
+
+    <h2 class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] text-caparol">
+      El programa, <Ola class="text-arena">en acción</Ola>
+    </h2>
+
+    <ul class="mt-12 grid gap-7 sm:grid-cols-2 md:gap-8">
+      {cards.map((card, i) => (
+        <li>
+          <a
+            href={card.href}
+            class={`reveal reveal-delay-${i + 1} group flex h-full flex-col overflow-hidden rounded-2xl border border-caparol/15 bg-azul/45 ring-1 ring-caparol/10 transition hover:border-arena/60 hover:bg-azul/65`}
+          >
+            <div class="p-3 sm:p-4">
+              <div class="aspect-[3/2] overflow-hidden rounded-xl">
+                <img
+                  src={card.image}
+                  alt={card.alt}
+                  class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+            <div class="flex flex-1 flex-col gap-3 p-7 pt-3 sm:p-8 sm:pt-4">
+              <p class={`font-hand text-2xl sm:text-3xl ${card.accent}`}>{card.eyebrow}</p>
+              <h3 class="font-display text-3xl leading-tight text-caparol sm:text-4xl">{card.title}</h3>
+              <p class="text-base leading-relaxed text-caparol/85">{card.body}</p>
+              <span class="mt-auto inline-flex items-center gap-2 pt-4 font-display text-base uppercase tracking-[0.22em] text-arena">
+                {card.cta}
+                <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

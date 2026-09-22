@@ -1,10 +1,11 @@
 ---
-const cuentoPaths = ['/sobre-el-cuento', '/lee-un-fragmento', '/autor', '/galeria'];
+const cuentoPaths = ['/sobre-el-cuento', '/lee-un-fragmento', '/cuadernillo', '/autor', '/ilustrador', '/realidad-aumentada'];
+const programaPaths = ['/programa', '/galeria', '/repercusion'];
 
 const links = [
   { href: '/', label: 'Inicio' },
   { href: '/sobre-el-cuento', label: 'El cuento', match: cuentoPaths },
-  { href: '/programa', label: 'Programa' },
+  { href: '/programa', label: 'Programa', match: programaPaths },
   { href: '/noticias', label: 'Noticias' },
   { href: '/colabora', label: 'Colabora' },
   { href: '/contacto', label: 'Contacto' },

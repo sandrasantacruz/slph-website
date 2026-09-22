@@ -5,7 +5,7 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import Hero from "./Hero.astro";
 import Section from "./Section.astro";
 import Lightbox from "./Lightbox.astro";
-import SubNavCuento from "../../components/SubNavCuento.astro";
+import SubNavPrograma from "../../components/SubNavPrograma.astro";
 
 type SectionDef = {
   id: string;
@@ -354,7 +354,7 @@ const sections = sectionDefs.map((def) => {
     },
   ]}
 >
-  <SubNavCuento current="galeria" />
+  <SubNavPrograma current="galeria" />
   <Hero />
   {
     sections.map((section) => (

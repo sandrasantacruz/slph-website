@@ -1,0 +1,57 @@
+---
+// Unternavigation einer Rubrik: Link zurück zur Übersichtsseite (hub) plus
+// die Unterseiten als Pills. Die Übersichtsseite selbst zeigt keine SubNav.
+export interface SubNavItem {
+  id: string;
+  href: string;
+  label: string;
+}
+
+interface Props {
+  hub: { href: string; label: string };
+  items: readonly SubNavItem[];
+  current: string;
+}
+
+const { hub, items, current } = Astro.props;
+---
+
+
+<nav
+  aria-label={hub.label}
+  class="relative isolate border-y border-caparol/10 bg-azul/40 backdrop-blur-sm"
+>
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-4 sm:flex-row sm:gap-6 sm:py-5">
+    <a
+      href={hub.href}
+      class="group inline-flex items-center gap-2 font-display text-xs tracking-[0.32em] text-arena uppercase transition hover:text-caparol sm:text-sm sm:tracking-[0.4em]"
+    >
+      <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5M11 18l-6-6 6-6"/>
+      </svg>
+      {hub.label}
+    </a>
+
+    <ul class="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+      {items.map((item) => {
+        const active = item.id === current;
+        return (
+          <li>
+            <a
+              href={item.href}
+              aria-current={active ? 'page' : undefined}
+              class:list={[
+                'inline-flex items-center rounded-full border px-4 py-2 font-display text-sm transition sm:text-base',
+                active
+                  ? 'border-arena bg-arena text-azul shadow-sm pointer-events-none'
+                  : 'border-caparol/25 text-caparol/85 hover:border-arena hover:text-arena',
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</nav>

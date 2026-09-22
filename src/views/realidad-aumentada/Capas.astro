@@ -1,0 +1,54 @@
+---
+import Ola from '../../components/Ola.astro';
+
+// Die digitalen Ebenen des Buchs. Die QR-Codes gibt es schon, die AR-App
+// ist in Entwicklung (Stand laut Bio von Carlos García in /colabora).
+const capas = [
+  {
+    eyebrow: 'ya en el libro',
+    titulo: 'Códigos QR',
+    texto:
+      'Los QR del cuento llevan a partes del musical. Así las personas invidentes y los más pequeños también disfrutan de la historia, e incluso hay fragmentos de animación que dan movimiento a los protagonistas.',
+    accent: 'text-celeste',
+  },
+  {
+    eyebrow: 'muy pronto',
+    titulo: 'Realidad aumentada',
+    texto:
+      'La app combina a cada personaje con su hábitat y liga el cuento con el mundo marino real. Una forma nueva de leer, mirar y entender el mar.',
+    accent: 'text-arena',
+  },
+];
+---
+
+<section class="relative isolate overflow-hidden py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal flex items-center gap-4">
+      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+        Un cuento con capas
+      </span>
+    </div>
+
+    <h2 class="reveal reveal-delay-1 mt-6 max-w-3xl font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] text-caparol">
+      El único cuento que te sumerge en un
+      <Ola class="text-arena">musical</Ola>
+    </h2>
+
+    <ul class="mt-12 grid gap-7 md:grid-cols-2 md:gap-8">
+      {capas.map((c, i) => (
+        <li class={`reveal reveal-delay-${i + 1} rounded-2xl border border-caparol/15 bg-azul/45 p-7 ring-1 ring-caparol/10 sm:p-9`}>
+          <p class={`font-hand text-2xl sm:text-3xl ${c.accent}`}>{c.eyebrow}</p>
+          <h3 class="mt-2 font-display text-3xl leading-tight text-caparol sm:text-4xl">{c.titulo}</h3>
+          <p class="mt-4 text-base leading-relaxed text-caparol/85 sm:text-lg">{c.texto}</p>
+        </li>
+      ))}
+    </ul>
+
+    <p class="reveal mt-12 text-base leading-relaxed text-caparol/85 sm:text-lg">
+      Los QR y la realidad aumentada son obra de
+      <a href="/colabora#equipo" class="text-arena underline decoration-arena/40 underline-offset-4 transition hover:decoration-arena">Carlos García</a>,
+      director técnico y autor de los audiovisuales de nuestros espectáculos.
+    </p>
+  </div>
+</section>

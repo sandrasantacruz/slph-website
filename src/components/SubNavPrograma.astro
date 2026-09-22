@@ -1,0 +1,14 @@
+---
+import SubNav from './SubNav.astro';
+
+interface Props {
+  current: 'galeria' | 'repercusion';
+}
+
+const items = [
+  { id: 'galeria', href: '/galeria', label: 'Galería' },
+  { id: 'repercusion', href: '/repercusion', label: 'Repercusión' },
+] as const;
+---
+
+<SubNav hub={{ href: '/programa', label: 'El programa' }} items={items} current={Astro.props.current} />

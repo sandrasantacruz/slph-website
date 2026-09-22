@@ -1,37 +1,26 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
-import Huella from './Huella.astro';
-import Medios from './Medios.astro';
-import Menores from './Menores.astro';
-import Anecdota from './Anecdota.astro';
-import Prensa from './Prensa.astro';
-import Origen from './Origen.astro';
-import SubNavPrograma from '../../components/SubNavPrograma.astro';
+import Capas from './Capas.astro';
+import SubNavCuento from '../../components/SubNavCuento.astro';
 import { breadcrumbSchema } from '../../lib/seo';
 
 const breadcrumb = breadcrumbSchema([
   { name: 'Inicio', url: '/' },
-  { name: 'El programa SLPH', url: '/programa' },
-  { name: 'Repercusión', url: '/repercusion' },
+  { name: 'Sobre el cuento', url: '/sobre-el-cuento' },
+  { name: 'Realidad aumentada', url: '/realidad-aumentada' },
 ]);
 ---
 
 <MainLayout
-  title="Repercusión · En los medios"
-  description="La repercusión de Si los peces hablaran: del papel al escenario y a Televisión Canaria. Un cuento que nace por la repercusión de su propio musical, supervisado por la Facultad de Ciencias del Mar de la ULPGC."
-  type="article"
+  title="Realidad aumentada · El cuento"
+  description="Si los peces hablaran sale del papel: con la app de realidad aumentada los personajes del cuento aparecen en su hábitat marino. La app está en desarrollo."
   hideWaterLine
   jsonLd={[breadcrumb]}
 >
-  <SubNavPrograma current="repercusion" />
+  <SubNavCuento current="realidad-aumentada" />
   <Hero />
-  <Medios />
-  <Menores />
-  <Anecdota />
-  <Prensa />
-  <Huella />
-  <Origen />
+  <Capas />
 </MainLayout>
 
 <script>

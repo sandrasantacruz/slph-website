@@ -24,6 +24,7 @@ const STATIC_URLS: UrlEntry[] = [
   { loc: '/cuadernillo', changefreq: 'monthly', priority: 0.7 },
   { loc: '/autor', changefreq: 'monthly', priority: 0.8 },
   { loc: '/ilustrador', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/realidad-aumentada', changefreq: 'monthly', priority: 0.6 },
   { loc: '/repercusion', changefreq: 'monthly', priority: 0.7 },
   { loc: '/galeria', changefreq: 'monthly', priority: 0.7 },
   { loc: '/comprar', changefreq: 'monthly', priority: 0.9 },
