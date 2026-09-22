@@ -242,8 +242,8 @@ const pageDescription =
       count.hidden = term === '';
       count.textContent =
         total === 0
-          ? `Sin resultados para «${term}».`
-          : `${total} ${total === 1 ? 'resultado' : 'resultados'} para «${term}»`;
+          ? `Sin resultados para "${term}".`
+          : `${total} ${total === 1 ? 'resultado' : 'resultados'} para "${term}"`;
       empty.hidden = term === '' || total > 0;
 
       // Die URL mitführen, damit ein Treffer teilbar bleibt.
