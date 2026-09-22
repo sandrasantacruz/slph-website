@@ -16,6 +16,8 @@ type Person = {
   bio: string[];
   links?: Link[];
   gallery?: string[];
+  /** Bildunterschriften zu `gallery`, gleicher Index. Ohne Eintrag: Name. */
+  captions?: string[];
 };
 
 type Group = {
@@ -48,6 +50,12 @@ const groups: Group[] = [
           '/assets/colaboradores/may-gomez/gallery-2.jpg',
           '/assets/colaboradores/may-gomez/gallery-3.jpg',
           '/assets/colaboradores/may-gomez/gallery-4.png',
+        ],
+        captions: [
+          'Laboratorio de análisis enzimáticos',
+          'Divulgación de la investigación en la Feria Internacional del Mar (FIMAR)',
+          'Campaña Oceanográfica para el estudio de la erupción del volcán submarino Tagoro en la Isla de El Hierro',
+          'Análisis de Microplásticos',
         ],
       },
       {
@@ -416,12 +424,12 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
                             rel="noopener noreferrer"
                             data-lightbox
                             data-gallery={`${gIdx}-${pIdx}`}
-                            data-caption={`${person.name} — imagen ${i + 1} de ${person.gallery!.length}`}
+                            data-caption={person.captions?.[i] ?? person.name}
                             class="gallery-item group relative block aspect-square overflow-hidden rounded-xl bg-azul/30 ring-1 ring-caparol/10 transition duration-300 hover:-translate-y-1 hover:ring-arena/70 hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-arena"
                           >
                             <img
                               src={src}
-                              alt={`${person.name} — imagen ${i + 1}`}
+                              alt={person.captions?.[i] ?? `${person.name}, imagen ${i + 1}`}
                               loading="lazy"
                               class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.06]"
                             />
