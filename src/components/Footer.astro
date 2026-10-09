@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { socials } from '../lib/social';
+import { APP_LINKS } from '../lib/app-links';
 
 const sections = [
   {
@@ -27,6 +28,11 @@ const legal = [
   { href: '/aviso-legal', label: 'Aviso legal' },
   { href: '/politica-de-privacidad', label: 'Política de privacidad' },
   { href: '/politica-de-cookies', label: 'Política de cookies' },
+];
+
+const stores = [
+  { href: APP_LINKS.android, icon: 'simple-icons:googleplay', kicker: 'disponible en', label: 'Google Play' },
+  { href: APP_LINKS.iosBeta, icon: 'simple-icons:apple', kicker: 'beta abierta', label: 'iPhone y iPad' },
 ];
 
 const year = new Date().getFullYear();
@@ -71,6 +77,28 @@ const year = new Date().getFullYear();
                   class="flex h-14 w-14 items-center justify-center rounded-full bg-caparol/10 text-caparol transition hover:bg-arena hover:text-negro"
                 >
                   <Icon name={icon} class="h-7 w-7" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h2 class="mt-6 font-display text-2xl text-caparol">Descarga la app</h2>
+        <ul class="flex flex-wrap gap-3">
+          {
+            stores.map(({ href, icon, kicker, label }) => (
+              <li>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener"
+                  class="flex items-center gap-2.5 rounded-xl bg-caparol/10 px-4 py-2 text-caparol transition hover:bg-arena hover:text-negro"
+                >
+                  <Icon name={icon} class="h-6 w-6" aria-hidden="true" />
+                  <span class="flex flex-col leading-tight">
+                    <span class="text-[0.65rem] tracking-wider uppercase opacity-70">{kicker}</span>
+                    <span class="font-display text-base">{label}</span>
+                  </span>
                 </a>
               </li>
             ))
