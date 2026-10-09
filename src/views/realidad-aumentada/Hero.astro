@@ -34,24 +34,35 @@ import { APP_LINKS } from '../../lib/app-links';
           <em class="not-italic text-arena">Si los peces hablaran</em>.
         </p>
 
-        <!-- Beta-Karte: gleiche Optik wie die App-Karte auf der Startseite
-             (CuentoFascina). Android-Knopf kommt hinzu, sobald der offene
-             Test bei Google Play freigegeben ist. -->
+        <!-- App-Karte: gleiche Optik wie auf der Startseite (CuentoFascina).
+             Android ist im Play Store, iOS vorerst öffentliche TestFlight-Beta. -->
         <div class="mt-8 max-w-xl rounded-2xl border border-celeste/30 bg-azul/40 p-5 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-6">
           <div class="flex items-center gap-3">
             <span aria-hidden="true" class="relative flex h-2.5 w-2.5">
               <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-arena opacity-60"></span>
               <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-arena"></span>
             </span>
-            <span class="font-display text-xs tracking-[0.3em] text-arena uppercase sm:text-sm">Beta abierta</span>
+            <span class="font-display text-xs tracking-[0.3em] text-arena uppercase sm:text-sm">Ya disponible</span>
           </div>
 
           <p class="mt-3 font-hand text-xl text-celeste sm:text-2xl">¡Pruébala ya!</p>
           <p class="font-display text-xl leading-tight text-balance text-caparol sm:text-2xl">
-            La app ya está disponible para iPhone y iPad
+            La app ya está disponible para Android, iPhone y iPad
           </p>
 
           <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a
+              href={APP_LINKS.android}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-3 rounded-xl bg-caparol px-5 py-3 text-azul shadow-md transition hover:-translate-y-0.5 hover:brightness-95"
+            >
+              <Icon name="simple-icons:googleplay" class="h-7 w-7" aria-hidden="true" />
+              <span class="flex flex-col leading-tight">
+                <span class="text-[0.7rem] tracking-wider text-azul/70 uppercase">disponible en</span>
+                <span class="font-display text-lg">Google Play</span>
+              </span>
+            </a>
             <a
               href={APP_LINKS.iosBeta}
               target="_blank"
@@ -64,17 +75,10 @@ import { APP_LINKS } from '../../lib/app-links';
                 <span class="font-display text-lg">iPhone y iPad</span>
               </span>
             </a>
-            <span class="inline-flex items-center gap-3 rounded-xl border border-dashed border-caparol/30 px-5 py-3 text-caparol/70">
-              <Icon name="simple-icons:android" class="h-7 w-7" aria-hidden="true" />
-              <span class="flex flex-col leading-tight">
-                <span class="text-[0.7rem] tracking-wider uppercase">muy pronto en</span>
-                <span class="font-display text-lg">Android</span>
-              </span>
-            </span>
           </div>
 
           <p class="mt-4 text-xs leading-relaxed text-caparol/60 sm:text-sm">
-            Se instala con TestFlight, la app gratuita de Apple para versiones de prueba.
+            En iPhone y iPad se instala con TestFlight, la app gratuita de Apple para versiones de prueba.
           </p>
         </div>
       </div>
