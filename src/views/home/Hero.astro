@@ -7,11 +7,27 @@ import Ola from '../../components/Ola.astro';
   <!-- Hintergrundvideo. Läuft einmal durch und bleibt auf dem letzten Bild
        stehen (kein loop). Die Quelle setzt das Skript weiter unten, weil
        Chrome das media-Attribut an <source> ignoriert und sonst jedes Handy
-       die 1080p-Fassung zöge. -->
+       die 1080p-Fassung zöge.
+       Das Poster liegt als <picture> darunter statt im poster-Attribut:
+       so wählt der Browser per media-Query selbst zwischen Hochkant- und
+       Querformat (gleiche Grenze wie das Skript, 767px), auch ohne JS und
+       bei reduzierter Bewegung. Ein <video> ohne poster ist bis zum ersten
+       Frame durchsichtig, man sieht also nahtlos das Bild darunter. -->
+  <picture>
+    <source media="(max-width: 767px)" srcset="/videos/hero-bg-720-poster.webp" width="720" height="1280" />
+    <img
+      src="/videos/hero-bg-poster.webp"
+      width="1920"
+      height="1080"
+      alt=""
+      aria-hidden="true"
+      fetchpriority="high"
+      class="absolute inset-0 -z-20 h-full w-full object-cover"
+    />
+  </picture>
   <video
     id="hero-bg-video"
     class="absolute inset-0 -z-20 h-full w-full object-cover"
-    poster="/videos/hero-bg-poster.webp"
     data-src-sm="/videos/hero-bg-720.mp4"
     data-src-lg="/videos/hero-bg.mp4"
     autoplay
