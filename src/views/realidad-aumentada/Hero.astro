@@ -75,15 +75,28 @@ import { APP_LINKS } from '../../lib/app-links';
       </div>
 
       <div class="reveal reveal-delay-2 order-1 col-span-12 flex justify-center lg:order-2 lg:col-span-5">
+        <!-- Standbild = erstes und letztes Bild des Loops (Higgsfield, nur die
+             Bläschen bewegen sich). Bei reduzierter Bewegung nur das Bild. -->
+        <video
+          src="/assets/ar/app-ar-slph-burbujas.mp4"
+          poster="/assets/ar/app-ar-slph.webp"
+          width="720"
+          height="720"
+          autoplay
+          muted
+          loop
+          playsinline
+          aria-label="La app AR-SLPH: Don Canino, el tiburón del cuento, saliendo de la pantalla de un teléfono mientras suben burbujas"
+          class="h-auto w-full max-w-[min(100%,52vh)] rounded-[14%] shadow-[0_30px_60px_-20px_rgba(3,10,35,0.85)] motion-reduce:hidden"
+        ></video>
         <img
           src="/assets/ar/app-ar-slph.webp"
           alt="La app AR-SLPH: Don Canino, el tiburón del cuento, saliendo de la pantalla de un teléfono"
           width="1200"
           height="1200"
-          class="anim-sway h-auto w-full max-w-[min(100%,52vh)] rounded-[14%] shadow-[0_30px_60px_-20px_rgba(3,10,35,0.85)]"
+          class="hidden h-auto w-full max-w-[min(100%,52vh)] rounded-[14%] shadow-[0_30px_60px_-20px_rgba(3,10,35,0.85)] motion-reduce:block"
           loading="eager"
           decoding="async"
-          fetchpriority="high"
         />
       </div>
     </div>
