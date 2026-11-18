@@ -3,6 +3,9 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Prueba from './Prueba.astro';
 import Capas from './Capas.astro';
+import Peques from './Peques.astro';
+import App from './App.astro';
+import Cuadernillo from './Cuadernillo.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
 import { breadcrumbSchema } from '../../lib/seo';
 
@@ -15,14 +18,17 @@ const breadcrumb = breadcrumbSchema([
 
 <MainLayout
   title="Realidad aumentada · El cuento"
-  description="Si los peces hablaran sale del papel: con la app de realidad aumentada los personajes del cuento aparecen en su hábitat marino. La app está en desarrollo."
+  description="Un cuento que se lee, se escucha y se baila: con la app AR-SLPH los personajes salen del libro y te muestran escenas del musical original. Para Android, iPhone y iPad."
   hideWaterLine
   jsonLd={[breadcrumb]}
 >
   <SubNavCuento current="realidad-aumentada" />
   <Hero />
   <Capas />
+  <Peques />
+  <App />
   <Prueba />
+  <Cuadernillo />
 </MainLayout>
 
 <script>

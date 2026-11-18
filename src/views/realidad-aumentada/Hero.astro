@@ -20,35 +20,26 @@ import { APP_LINKS } from '../../lib/app-links';
 
     <div class="mt-6 grid grid-cols-12 items-center gap-x-5 gap-y-8 sm:mt-8 sm:gap-x-10 lg:gap-x-14">
       <div class="reveal reveal-delay-1 order-2 col-span-12 lg:order-1 lg:col-span-7">
-        <p class="font-hand text-xl text-celeste sm:text-3xl lg:text-4xl">¡Salen del libro!</p>
+        <p class="font-hand text-xl text-celeste sm:text-3xl lg:text-4xl">páginas que esconden magia…</p>
 
-        <h1 class="mt-1 font-display text-[clamp(2.25rem,7.5vw,6rem)] leading-[0.9] tracking-tight text-caparol">
-          Los personajes,
-          <span class="mt-1 block text-arena">en su <Ola>hábitat</Ola></span>
+        <!-- Umbruch nur nach „se lee,“: der Rest bleibt zusammen -->
+        <h1 class="mt-1 font-display text-[clamp(2.1rem,6vw,4.6rem)] leading-[0.95] tracking-tight text-caparol">
+          Un cuento que se lee,
+          <span class="whitespace-nowrap">se escucha y se <Ola class="text-arena">baila</Ola></span>
         </h1>
 
         <p class="mt-6 max-w-xl text-base leading-relaxed text-caparol/90 sm:text-lg lg:text-xl">
-          Gracias a la Realidad Aumentada (AR), el cuento se transforma en una
-          experiencia inmersiva donde los personajes cobran vida y te invitan a
-          descubrir el universo de
-          <em class="not-italic text-arena">Si los peces hablaran</em>.
+          Gracias a su realidad aumentada (AR), el cuento se transforma y los
+          personajes salen del libro para mostrarte escenas del musical original
+          e invitarte a descubrir el universo de
+          <em class="not-italic text-arena">Si los peces hablaran…</em>
         </p>
 
-        <!-- App-Karte: gleiche Optik wie auf der Startseite (CuentoFascina).
-             Android ist im Play Store, iOS vorerst öffentliche TestFlight-Beta. -->
+        <!-- App-Karte. Android ist im Play Store, iOS vorerst öffentliche
+             TestFlight-Beta. -->
         <div class="mt-8 max-w-xl rounded-2xl border border-celeste/30 bg-azul/40 p-5 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-6">
-          <div class="flex items-center gap-3">
-            <span aria-hidden="true" class="relative flex h-2.5 w-2.5">
-              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-arena opacity-60"></span>
-              <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-arena"></span>
-            </span>
-            <span class="font-display text-xs tracking-[0.3em] text-arena uppercase sm:text-sm">Ya disponible</span>
-          </div>
-
-          <p class="mt-3 font-hand text-xl text-celeste sm:text-2xl">¡Pruébala ya!</p>
-          <p class="font-display text-xl leading-tight text-balance text-caparol sm:text-2xl">
-            La app ya está disponible para Android, iPhone y iPad
-          </p>
+          <p class="font-display text-2xl leading-tight text-arena sm:text-3xl">Tu viaje al musical empieza aquí</p>
+          <p class="mt-1 text-sm text-caparol/80 sm:text-base">Descarga la app AR-SLPH para Android, iPhone y iPad.</p>
 
           <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
@@ -84,13 +75,12 @@ import { APP_LINKS } from '../../lib/app-links';
       </div>
 
       <div class="reveal reveal-delay-2 order-1 col-span-12 flex justify-center lg:order-2 lg:col-span-5">
-        <!-- Freigestellt (PNG mit Alpha), deshalb ohne Polaroid-Rahmen -->
         <img
-          src="/assets/ar/senor-tentaculus.webp"
-          alt="Ilustración del Señor Tentáculus, el pulpo del cuento, con los tentáculos abiertos"
-          width="1500"
-          height="1414"
-          class="anim-sway h-auto w-full max-w-[min(100%,56vh)] drop-shadow-[0_24px_40px_rgba(6,15,44,0.6)]"
+          src="/assets/ar/app-ar-slph.webp"
+          alt="La app AR-SLPH: Don Canino, el tiburón del cuento, saliendo de la pantalla de un teléfono"
+          width="1200"
+          height="1200"
+          class="anim-sway h-auto w-full max-w-[min(100%,52vh)] rounded-[14%] shadow-[0_30px_60px_-20px_rgba(3,10,35,0.85)]"
           loading="eager"
           decoding="async"
           fetchpriority="high"
