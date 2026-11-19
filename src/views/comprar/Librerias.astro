@@ -9,6 +9,10 @@ type Shop = {
   href?: string;
   /** true = href points straight at the book's product page, not just the shop. */
   direct?: boolean;
+  /** Optional button text when the link is not a shop website (e.g. Facebook). */
+  label?: string;
+  /** true = also sells the activity booklet (cuadernillo): shows a handwritten tag. */
+  cuadernillo?: boolean;
 };
 
 type Region = {
@@ -27,6 +31,7 @@ const regions: Region[] = [
         city: 'Las Palmas de Gran Canaria',
         address: 'Av. de Escaleritas, 56, 35011',
         href: 'https://www.muchomasquedanza.com',
+        cuadernillo: true,
       },
       {
         name: 'Librería Canaima',
@@ -47,6 +52,7 @@ const regions: Region[] = [
         city: 'Teror',
         address: 'C. Real de la Pl., 7, 35330',
         href: 'https://trebol.shop/',
+        cuadernillo: true,
       },
       {
         name: 'La Librería del Cabildo',
@@ -60,9 +66,11 @@ const regions: Region[] = [
         city: 'Teror',
         address: 'Plaza del Pino, 1, 35330',
         href: 'https://www.facebook.com/libreriagredacanarias/',
+        label: 'Facebook',
+        cuadernillo: true,
       },
       {
-        name: 'Museo Casa de Colón',
+        name: 'Casa-Museo de Colón',
         city: 'Las Palmas de Gran Canaria',
         address: 'C. Colón, 1, 35001',
         href: 'https://casadecolon.grancanaria.com/',
@@ -218,6 +226,11 @@ const mapsHref = (s: Shop) =>
             {region.shops.map((shop) => (
               <li class="reveal">
                 <article class="group relative flex h-full flex-col gap-4 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-6 transition hover:-translate-y-0.5 hover:border-arena hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)]">
+                  {shop.cuadernillo && (
+                    <span class="absolute -top-[0.85rem] right-4 z-10 -rotate-[4deg] rounded-full bg-arena px-[0.7rem] pt-[0.35rem] pb-[0.4rem] font-hand text-[1.15rem] leading-none whitespace-nowrap text-azul shadow-[0_6px_14px_rgba(0,0,0,0.35)]">
+                      también el cuadernillo
+                    </span>
+                  )}
                   <header class="flex items-start gap-4">
                     <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-arena/10 text-arena transition group-hover:bg-arena group-hover:text-azul">
                       <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -258,7 +271,7 @@ const mapsHref = (s: Shop) =>
                         rel="noopener noreferrer"
                         class="inline-flex items-center gap-2 rounded-full border border-caparol/20 px-3 py-1.5 font-display text-xs tracking-[0.2em] text-caparol/85 uppercase transition group-hover:border-celeste group-hover:text-celeste focus:outline-none focus-visible:border-celeste focus-visible:text-celeste"
                       >
-                        {shop.direct ? 'Comprar online' : 'Web'}
+                        {shop.label ?? (shop.direct ? 'Comprar online' : 'Web')}
                         <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                           <circle cx="12" cy="12" r="9" />
                           <path d="M3 12h18" />
