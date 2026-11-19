@@ -1,4 +1,5 @@
 ---
+import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 import NovedadCard from './NovedadCard.astro';
 import { byDateDesc, type Post } from '../../lib/posts';
 
@@ -28,6 +29,9 @@ const sorted = [...items].sort(byDateDesc);
           aria-hidden="true"
         ></div>
       )}
+      <div class="mt-16 flex justify-center">
+        <EnlaceFlecha href="/galeria#eventos">Ver todas las fotos en la Galería</EnlaceFlecha>
+      </div>
     </>
   )}
 </section>

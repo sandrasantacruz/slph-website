@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
 import FichaLibro from '../../components/FichaLibro.astro';
+import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 ---
 
 <section class="relative isolate overflow-hidden pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -86,5 +87,8 @@ import FichaLibro from '../../components/FichaLibro.astro';
     </div>
 
     <FichaLibro venta={false} class="reveal reveal-delay-4 mt-12" />
+    <div class="reveal reveal-delay-4 mt-6 flex justify-end">
+      <EnlaceFlecha href="/repercusion#menores">Lo que dicen del cuento</EnlaceFlecha>
+    </div>
   </div>
 </section>

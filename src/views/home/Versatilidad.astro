@@ -34,6 +34,8 @@ const columnas = [
     tilt: 'tilt-l2',
     ctaTexto: 'Ver la galería',
     ctaHref: '/galeria',
+    cta2Texto: 'Ver la repercusión',
+    cta2Href: '/repercusion',
   },
 ];
 ---
@@ -79,7 +81,7 @@ const columnas = [
 
     <div class="mt-16 grid gap-12 sm:gap-8 md:grid-cols-3 md:gap-6">
       {
-        columnas.map(({ titulo, imagen, alt, texto, tilt, ctaTexto, ctaHref }, i) => (
+        columnas.map(({ titulo, imagen, alt, texto, tilt, ctaTexto, ctaHref, cta2Texto, cta2Href }, i) => (
           <article
             class:list={[
               'reveal group polaroid flex flex-col gap-3 transition duration-500 hover:rotate-0 hover:shadow-2xl',
@@ -101,24 +103,46 @@ const columnas = [
                 {titulo}
               </h3>
               <p class="mt-2 text-sm leading-relaxed text-azul/80 sm:text-base">{texto}</p>
-              <a
-                href={ctaHref}
-                class="mt-auto inline-flex items-center gap-2 pt-4 font-display text-sm tracking-[0.2em] uppercase text-azul transition hover:text-arena"
-              >
-                {ctaTexto}
-                <svg
-                  viewBox="0 0 24 24"
-                  class="h-4 w-4 transition-transform group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
+              <div class="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-4">
+                <a
+                  href={ctaHref}
+                  class="inline-flex items-center gap-2 font-display text-sm tracking-[0.2em] uppercase text-azul transition hover:text-arena"
                 >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </a>
+                  {ctaTexto}
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+                {cta2Href && (
+                  <a
+                    href={cta2Href}
+                    class="inline-flex items-center gap-2 font-display text-sm tracking-[0.2em] uppercase text-azul transition hover:text-arena"
+                  >
+                    {cta2Texto}
+                    <svg
+                      viewBox="0 0 24 24"
+                      class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                )}
+              </div>
             </div>
           </article>
         ))

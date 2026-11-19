@@ -2,10 +2,29 @@
 const cuentoPaths = ['/sobre-el-cuento', '/lee-un-fragmento', '/cuadernillo', '/autor', '/ilustrador', '/realidad-aumentada'];
 const programaPaths = ['/programa', '/galeria', '/repercusion'];
 
-const links = [
+type NavLink = {
+  href: string;
+  label: string;
+  match?: string[];
+  /** Unterpunkte: Desktop als Dropdown (Hover/Fokus), mobil eingerückt darunter. */
+  children?: { href: string; label: string }[];
+};
+
+const links: NavLink[] = [
   { href: '/', label: 'Inicio' },
   { href: '/sobre-el-cuento', label: 'El cuento', match: cuentoPaths },
-  { href: '/programa', label: 'Programa', match: programaPaths },
+  {
+    href: '/programa',
+    label: 'Programa',
+    match: programaPaths,
+    // Galería und Repercusión hängen hier statt als eigene Menüpunkte: auf dem
+    // Tablet passt die Leiste sonst nicht mehr in eine Zeile.
+    children: [
+      { href: '/programa', label: 'El programa' },
+      { href: '/galeria', label: 'Galería' },
+      { href: '/repercusion', label: 'Repercusión' },
+    ],
+  },
   { href: '/noticias', label: 'Noticias' },
   { href: '/colabora', label: 'Colabora' },
   { href: '/contacto', label: 'Contacto' },
@@ -29,25 +48,47 @@ const currentPath = Astro.url.pathname;
       <img src="/assets/logo.png" alt="Si los peces hablaran" width="2072" height="1492" class="h-20 w-auto" />
     </a>
 
-    <nav class="hidden items-center gap-6 md:flex" aria-label="Principal">
+    <nav class="hidden items-center gap-4 md:flex lg:gap-6" aria-label="Principal">
       {
-        links.map(({ href, label, match }) => {
+        links.map(({ href, label, match, children }) => {
           const active =
             href === '/'
               ? currentPath === '/'
               : match
                 ? match.some((p) => currentPath.startsWith(p))
                 : currentPath.startsWith(href);
+          const linkClass = [
+            'text-base whitespace-nowrap text-caparol/90 transition-colors hover:text-caparol',
+            active && 'text-caparol underline underline-offset-4 decoration-arena',
+          ];
+          if (!children) {
+            return <a href={href} class:list={linkClass}>{label}</a>;
+          }
           return (
-            <a
-              href={href}
-              class:list={[
-                'text-base text-caparol/90 transition-colors hover:text-caparol',
-                active && 'text-caparol underline underline-offset-4 decoration-arena',
-              ]}
-            >
-              {label}
-            </a>
+            <div class="group relative">
+              <a href={href} class:list={[linkClass, 'inline-flex items-center gap-1']} aria-haspopup="true">
+                {label}
+                <svg viewBox="0 0 24 24" class="h-3 w-3 opacity-70 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              </a>
+              <!-- pt-3 überbrückt die Lücke, damit das Menü beim Hinüberfahren offen bleibt -->
+              <div class="invisible absolute top-full left-1/2 z-50 -translate-x-1/2 pt-3 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                <ul class="min-w-44 rounded-xl border border-caparol/15 bg-azul/95 p-2 shadow-xl ring-1 ring-caparol/10 backdrop-blur">
+                  {children.map((c) => (
+                    <li>
+                      <a
+                        href={c.href}
+                        class:list={[
+                          'block rounded-lg px-4 py-2 text-base whitespace-nowrap transition hover:bg-caparol/10 hover:text-arena',
+                          currentPath.startsWith(c.href) ? 'text-arena' : 'text-caparol/90',
+                        ]}
+                      >
+                        {c.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           );
         })
       }
@@ -98,10 +139,21 @@ const currentPath = Astro.url.pathname;
 
     <nav class="flex flex-col items-center gap-6 px-6 pt-16" aria-label="Principal móvil">
       {
-        links.map(({ href, label }) => (
-          <a href={href} class="font-display text-4xl text-caparol hover:text-arena">
-            {label}
-          </a>
+        links.map(({ href, label, children }) => (
+          <div class="flex flex-col items-center gap-3">
+            <a href={href} class="font-display text-4xl text-caparol hover:text-arena">
+              {label}
+            </a>
+            {children && (
+              <ul class="flex flex-col items-center gap-2">
+                {children.slice(1).map((c) => (
+                  <li>
+                    <a href={c.href} class="font-display text-2xl text-celeste hover:text-arena">{c.label}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         ))
       }
       <a

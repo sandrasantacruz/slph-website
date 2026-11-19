@@ -1,4 +1,5 @@
 ---
+import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 const fundacionCentro = 1989;
 const aniosCentro = new Date().getFullYear() - fundacionCentro;
 
@@ -113,5 +114,8 @@ const hitos = [
         </li>
       ))}
     </ol>
+    <div class="reveal mt-14 flex justify-center">
+      <EnlaceFlecha href="/galeria#musical">Su trayectoria en imágenes</EnlaceFlecha>
+    </div>
   </div>
 </section>

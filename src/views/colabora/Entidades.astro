@@ -1,4 +1,5 @@
 ---
+import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 const aliados = [
   'Consejería de Cultura del Cabildo de Gran Canaria',
   'Consejería de Educación del Cabildo de Gran Canaria',
@@ -144,6 +145,7 @@ const centros = [
         <ul class="mt-5 grid grid-cols-1 gap-x-6 gap-y-2.5 text-sm leading-relaxed text-caparol/85 sm:grid-cols-2 lg:grid-cols-1">
           {centros.map((c) => <li class="flex gap-2"><span aria-hidden="true" class="mt-1.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-arena/70"></span>{c}</li>)}
         </ul>
+        <EnlaceFlecha href="/galeria#centros-escolares" class="mt-6">Nuestras visitas a los colegios</EnlaceFlecha>
       </div>
     </div>
   </div>

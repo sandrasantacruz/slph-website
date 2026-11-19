@@ -1,4 +1,5 @@
 ---
+import Cierre from './Cierre.astro';
 import fs from "node:fs";
 import path from "node:path";
 import MainLayout from "../../layouts/MainLayout.astro";
@@ -33,7 +34,7 @@ const sectionDefs: SectionDef[] = [
     title: "Origen del proyecto",
     eyebrow: "10 Años moviendo las aletas",
     intro:
-      "Un musical nacido en el Centro de Danza Sandra Santa Cruz que, desde 2016, mantiene vivo su compromiso con la divulgación y la protección del medio marino a través de Si los peces hablaran....",
+      "Un musical nacido en el Centro de Danza Sandra Santa Cruz que, desde 2016, mantiene vivo su compromiso con la divulgación y la protección del medio marino a través de Si los peces hablaran…",
     captions: {
       "01-los-peces-del-arrecife": "Centro de Danza Sandra Santa Cruz · Los peces del arrecife · 2016",
       "02-danza-del-oxigeno": "Centro de Danza Sandra Santa Cruz · Danza del Oxígeno · 2016",
@@ -42,7 +43,7 @@ const sectionDefs: SectionDef[] = [
       "05-concejalia-de-cultura-distrito-v":
         "Día Mundial de los Océanos · Ayuntamiento de LPGC · 2024",
       "06-dia-mundial-de-las-tortugas":
-        "Día Mundial de las Tortugas · Casa de Colón · 2021",
+        "Día Mundial de las Tortugas · Casa-Museo de Colón · 2021",
     },
   },
   {
@@ -57,7 +58,7 @@ const sectionDefs: SectionDef[] = [
       "02-may-gomez-eomar":
         "May Gómez · Catedrática de Zoología y directora de EOMAR",
       "03-guacimara-medina-cabildo":
-        "Guacimara Medina · Consejera de Educación del Cabildo de Gran Canaria",
+        "Guacimara Medina · Consejera de Cultura del Cabildo de Gran Canaria",
       "04-josue-iniguez-ayuntamiento":
         "Josué Íñiguez · Concejal de Cultura del Ayuntamiento de Las Palmas de Gran Canaria",
       "05-victoria-galvan-perez-galdos":
@@ -86,7 +87,7 @@ const sectionDefs: SectionDef[] = [
     intro:
       "Historias que salen de las páginas para encontrarse con sus lectores. Presentaciones escenificadas, firmas de libros y encuentros con la autora en ferias, bibliotecas y museos.",
     captions: {
-      "01-nuestros-librupeces": "Nuestros librupeces",
+      "01-nuestros-librupeces": "La 3.ª edición y su compañero de viaje, el cuadernillo de actividades",
       "02-el-cuento": "El cuento que habla por el mar",
       "03-cuadernillo-de-actividades": "Aprender haciendo",
       "04-el-cuento-junto-al-mar": "Una historia que nace junto al mar",
@@ -102,7 +103,7 @@ const sectionDefs: SectionDef[] = [
       "Atípica presentación de Si los peces hablaran… en Poema del Mar: ciencia, danza y emoción para sumergirse en el cuento y vivirlo desde dentro.\n\nFotografías: Ethel Bartrán",
     captions: {
       "01-danza-de-las-aletas": "Danza de las Aletas · Poema del Mar",
-      "02-presentacion-del-cuento": "El cuento llega a Poema del Mar",
+      "02-presentacion-del-cuento": "La autora firma ejemplares · Poema del Mar",
       "03-guacimara-medina-poema-del-mar":
         "Guacimara Medina · Consejera de Cultura del Cabildo de Gran Canaria",
       "04-el-deep-sea":
@@ -120,7 +121,7 @@ const sectionDefs: SectionDef[] = [
     intro:
       "Diversos formatos para llevar los mensajes de nuestra obra allá donde se necesiten. Desde propuestas escénicas para público familiar y escolar hasta un formato sinfónico creado especialmente para la OFGC.",
     captions: {
-      "01-ofgc-2020": "Si los peces hablaran… sinfónico con la OFGC · 2020",
+      "01-ofgc-2020": "Si los peces hablaran… sinfónico con la OFGC · 2021",
       "02-suma-festival-tenerife-2025":
         "Día Mundial de los Océanos · Suma Festival · Tenerife · 2025",
       "03-dmo-2024": "Día Mundial de los Océanos · Ayuntamiento de LPGC · 2024",
@@ -146,7 +147,7 @@ const sectionDefs: SectionDef[] = [
       "03-aniversario-ciencias-del-mar":
         "XXXVII Aniversario de la Facultad de Ciencias del Mar · ULPGC",
       "04-biblioteca-dolores-campos-herrera":
-        "Biblioteca Dolores Campos-Herrera · 2023",
+        "Biblioteca Dolores Campos-Herrero · 2023",
       "05-colegio-dominicas-las-palmas":
         "Día Mundial del Libro · Colegio Dominicas Las Palmas · 2025",
       "06-dia-mundial-de-los-oceanos":
@@ -163,7 +164,7 @@ const sectionDefs: SectionDef[] = [
       "01-museo-tomas-morales": "Museo Tomás Morales · 2024",
       "02-biblioteca-insular": "Biblioteca Insular · 2021",
       "03-museo-perez-galdos-taller": "Casa-Museo Pérez Galdós · 2023",
-      "04-museo-perez-galdos": "Casa de Colón  · 2025",
+      "04-museo-perez-galdos": "Casa-Museo de Colón · 2021",
       "05-feria-del-atun-mogan": "Feria del Atún · Mogán · 2023",
       "06-proyecto-tac-lpgc-2031":
         "Proyecto TAC · Candidatura de LPGC a Capital Europea de la Cultura 2031",
@@ -197,7 +198,7 @@ const sectionDefs: SectionDef[] = [
         "CEIP César Manrique Cabrera · Lanzarote",
       "05-ceip-monsenor-lantigua-socorro":
         "CEIP Monseñor Socorro Lantigua · Teror",
-      "06-ceo-tejeda": "CEO Tejeda ·Tejeda",
+      "06-ceo-tejeda": "CEO Tejeda · Tejeda",
     },
   },
   {
@@ -367,6 +368,7 @@ const sections = sectionDefs.map((def) => {
       />
     ))
   }
+  <Cierre />
   <Lightbox />
 </MainLayout>
 
