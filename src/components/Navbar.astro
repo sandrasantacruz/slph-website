@@ -12,7 +12,21 @@ type NavLink = {
 
 const links: NavLink[] = [
   { href: '/', label: 'Inicio' },
-  { href: '/sobre-el-cuento', label: 'El cuento', match: cuentoPaths },
+  {
+    href: '/sobre-el-cuento',
+    label: 'El cuento',
+    match: cuentoPaths,
+    // Dieselben Ziele wie die Karten auf «Sobre el cuento», ohne «Dónde comprar»
+    // (dafür gibt es den Button «Comprar libro» direkt daneben).
+    children: [
+      { href: '/sobre-el-cuento', label: 'Sobre el cuento' },
+      { href: '/lee-un-fragmento', label: 'Lee un fragmento' },
+      { href: '/realidad-aumentada', label: 'Realidad aumentada' },
+      { href: '/autor', label: 'La autora' },
+      { href: '/ilustrador', label: 'El ilustrador' },
+      { href: '/cuadernillo', label: 'Cuadernillo' },
+    ],
+  },
   {
     href: '/programa',
     label: 'Programa',
@@ -137,7 +151,7 @@ const currentPath = Astro.url.pathname;
       </button>
     </div>
 
-    <nav class="flex flex-col items-center gap-6 px-6 pt-16" aria-label="Principal móvil">
+    <nav class="flex max-h-[calc(100svh-7.5rem)] flex-col items-center gap-6 overflow-y-auto px-6 pt-10 pb-10" aria-label="Principal móvil">
       {
         links.map(({ href, label, children }) => (
           <div class="flex flex-col items-center gap-3">
