@@ -20,7 +20,7 @@ export const socials: SocialLink[] = [
   },
   {
     label: 'YouTube',
-    href: 'https://www.youtube.com/@silospeceshablaran5076',
+    href: 'https://www.youtube.com/@silospeceshablaran',
     icon: 'simple-icons:youtube',
     handle: 'Si los peces hablaran',
   },
