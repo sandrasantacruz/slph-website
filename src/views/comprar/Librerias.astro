@@ -13,6 +13,8 @@ type Shop = {
   label?: string;
   /** true = also sells the activity booklet (cuadernillo): shows a handwritten tag. */
   cuadernillo?: boolean;
+  /** true = la escuela: el botón lleva al bloque «¡El nuestro!» (#escuela) y la etiqueta dice que va dedicado. */
+  escuela?: boolean;
 };
 
 type Region = {
@@ -30,7 +32,9 @@ const regions: Region[] = [
         name: 'Centro de Danza Sandra Santa Cruz',
         city: 'Las Palmas de Gran Canaria',
         address: 'Av. de Escaleritas, 56, 35011',
-        href: 'https://www.muchomasquedanza.com',
+        href: '#escuela',
+        label: 'Reserva tu dedicatoria',
+        escuela: true,
         cuadernillo: true,
       },
       {
@@ -228,7 +232,7 @@ const mapsHref = (s: Shop) =>
                 <article class="group relative flex h-full flex-col gap-4 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-6 transition hover:-translate-y-0.5 hover:border-arena hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)]">
                   {shop.cuadernillo && (
                     <span class="absolute -top-[0.85rem] right-4 z-10 -rotate-[4deg] rounded-full bg-arena px-[0.7rem] pt-[0.35rem] pb-[0.4rem] font-hand text-[1.15rem] leading-none whitespace-nowrap text-azul shadow-[0_6px_14px_rgba(0,0,0,0.35)]">
-                      también el cuadernillo
+                      {shop.escuela ? 'dedicado y con cuadernillo' : 'también el cuadernillo'}
                     </span>
                   )}
                   <header class="flex items-start gap-4">
@@ -267,16 +271,24 @@ const mapsHref = (s: Shop) =>
                     {shop.href && (
                       <a
                         href={shop.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 rounded-full border border-caparol/20 px-3 py-1.5 font-display text-xs tracking-[0.2em] text-caparol/85 uppercase transition group-hover:border-celeste group-hover:text-celeste focus:outline-none focus-visible:border-celeste focus-visible:text-celeste"
+                        target={shop.escuela ? undefined : '_blank'}
+                        rel={shop.escuela ? undefined : 'noopener noreferrer'}
+                        class:list={[shop.escuela
+                          ? 'inline-flex items-center gap-2 rounded-full bg-arena px-3 py-1.5 font-display text-xs tracking-[0.2em] text-azul uppercase transition hover:bg-caparol focus:outline-none focus-visible:ring-2 focus-visible:ring-arena'
+                          : 'inline-flex items-center gap-2 rounded-full border border-caparol/20 px-3 py-1.5 font-display text-xs tracking-[0.2em] text-caparol/85 uppercase transition group-hover:border-celeste group-hover:text-celeste focus:outline-none focus-visible:border-celeste focus-visible:text-celeste']}
                       >
                         {shop.label ?? (shop.direct ? 'Comprar online' : 'Web')}
-                        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                          <circle cx="12" cy="12" r="9" />
-                          <path d="M3 12h18" />
-                          <path d="M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18" />
-                        </svg>
+                        {shop.escuela ? (
+                          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M12 19V5M6 11l6-6 6 6" />
+                          </svg>
+                        ) : (
+                          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M3 12h18" />
+                            <path d="M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18" />
+                          </svg>
+                        )}
                       </a>
                     )}
                   </div>
