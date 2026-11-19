@@ -51,6 +51,7 @@ const cards = [
     image: '/assets/cuento/cuadernillo.webp',
     alt: 'Portada del cuadernillo de actividades y personajes para colorear',
     cta: 'Ver el cuadernillo',
+    stamp: '¡novedad de la 3.ª edición!',
     accent: 'arena',
   },
   {
@@ -88,7 +89,12 @@ const cards = [
             class={`reveal reveal-delay-${Math.min(i + 1, 4)} group relative flex h-full flex-col overflow-hidden rounded-2xl border border-caparol/15 bg-azul/45 ring-1 ring-caparol/10 transition hover:border-arena/60 hover:bg-azul/65`}
           >
             <div class="relative p-3 sm:p-4">
-              <div class="aspect-square overflow-hidden rounded-xl">
+              <div class="@container relative aspect-square overflow-hidden rounded-xl">
+                {'stamp' in card && (
+                  <span class="stamp-cuadernillo pointer-events-none absolute z-10 rounded-full bg-arena font-hand leading-none whitespace-nowrap text-azul shadow-[0_6px_16px_rgba(0,0,0,0.35)]">
+                    {card.stamp}
+                  </span>
+                )}
                 <img
                   src={card.image}
                   alt={card.alt}
@@ -120,3 +126,16 @@ const cards = [
     </ul>
   </div>
 </section>
+
+<style>
+  /* Sello sobre la rueda del cuadernillo. Maße in cqw (Bildbreite), damit
+     Lage und Größe auf jeder Kartenbreite gleich bleiben: unten links auf
+     dem Reifen, frei vom blauen Fisch und von «Sandra Santa Cruz». */
+  .stamp-cuadernillo {
+    left: 3.5%;
+    bottom: 7%;
+    font-size: 5.4cqw;
+    padding: 0.35em 0.6em 0.4em;
+    transform: rotate(-13deg);
+  }
+</style>
