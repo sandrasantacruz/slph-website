@@ -1,0 +1,60 @@
+---
+/**
+ * Separador de Programa: en el centro, las conchas con el alga de «Otra curiosidad»
+ * (Sobre el cuento) o, encima de los ODS, el globo «Save the planet»; a cada lado,
+ * nuestras dos líneas de ola en arena (la de la izquierda en espejo), a la altura
+ * de las conchas o a media altura del globo. Va encima de los ODS y antes de
+ * «nuestros formatos».
+ */
+interface Props {
+  class?: string;
+  /** 'globo': la bola del mundo «Save the planet» en lugar de las conchas (encima de los ODS). */
+  motivo?: 'caracola' | 'globo';
+}
+const { class: className, motivo = 'caracola' } = Astro.props;
+const globo = motivo === 'globo';
+---
+
+<div class:list={['sep-caracola reveal', globo && 'sep-globo', className]} aria-hidden="true">
+  <span class="ola ola-izq"></span>
+  {globo ? (
+    <img src="/assets/programa/planet.webp" alt="" width="799" height="800" loading="lazy" decoding="async" />
+  ) : (
+    <img src="/assets/programa/caracola-separador.webp" alt="" width="247" height="160" loading="lazy" decoding="async" />
+  )}
+  <span class="ola"></span>
+</div>
+
+<style>
+  .sep-caracola {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+  .sep-caracola img {
+    height: 90px;
+    width: auto;
+    filter: drop-shadow(0 0 10px rgba(110, 200, 255, 0.25));
+  }
+  /* Nuestra ola doble (la misma que subraya los títulos), en arena */
+  .ola {
+    align-self: flex-end;
+    margin-bottom: 22px;
+    height: 13px;
+    width: 5.5rem;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 17.54' preserveAspectRatio='none' fill='%23fadeaa'><path d='M0 5.45Q10.33 3.07 16.42 2.15Q22.52 1.23 28.87 0.74Q35.23 0.24 42.12 0.12Q49.01 0 58.54 0.52Q68.08 1.04 89.54 3.97Q110.99 6.89 123.44 7.89Q135.89 8.9 145.83 9.06Q155.76 9.22 163.84 8.85Q171.92 8.48 179.07 7.74Q186.23 7.01 193.11 5.81L200 4.6L200 4.9Q190.99 7.17 183.31 8.43Q175.63 9.7 169.4 10.29Q163.18 10.88 154.7 11.23Q146.23 11.58 136.69 11.32Q127.15 11.06 120.79 10.58Q114.44 10.11 107.02 9.26Q99.6 8.42 83.18 5.98Q66.75 3.53 58.28 2.88Q49.8 2.24 42.78 2.14Q35.76 2.04 28.87 2.38Q21.99 2.71 16.29 3.31Q10.6 3.9 5.3 4.81L0 5.72Z'/><path d='M25.7 10.15Q32.32 9.22 37.48 8.82Q42.65 8.43 48.48 8.37Q54.3 8.31 58.81 8.5Q63.31 8.69 70.6 9.46Q77.88 10.23 94.7 13.01Q111.52 15.78 119.74 16.46L127.95 17.13L127.95 17.24Q118.68 17.52 111.66 17.04Q104.64 16.57 99.47 15.86Q94.3 15.14 84.37 13.39Q74.44 11.63 66.23 10.77Q58.01 9.9 49.67 9.68Q41.32 9.45 33.51 9.89L25.7 10.34Z'/></svg>")
+      center / 100% 100% no-repeat;
+  }
+  .ola-izq {
+    transform: scaleX(-1);
+  }
+  /* El globo es redondo: las olas van a media altura, no a la de las conchas */
+  .sep-globo img {
+    height: 104px;
+  }
+  .sep-globo .ola {
+    align-self: center;
+    margin-bottom: 0;
+  }
+</style>

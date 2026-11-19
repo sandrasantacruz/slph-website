@@ -1,36 +1,50 @@
 ---
-const ods = ['3', '4', '8', '12', '13', '14', '17'];
+/**
+ * ODS con los que trabaja SLPH: los iconos oficiales de la ONU en español, con el
+ * nombre de cada objetivo como texto alternativo. La ONU permite usarlos en webs
+ * informativas siempre que no parezca que patrocina. Sin recuadro: en el móvil
+ * quedan 4 + 3. Encima, el separador con el globo «Save the planet», para que no se lea como
+ * continuación de «Mira quién ya cuenta con nosotros».
+ */
+import SeparadorCaracola from './SeparadorCaracola.astro';
+
+const ods = [
+  { n: 3, nombre: 'Salud y bienestar' },
+  { n: 4, nombre: 'Educación de calidad' },
+  { n: 8, nombre: 'Trabajo decente y crecimiento económico' },
+  { n: 12, nombre: 'Producción y consumo responsables' },
+  { n: 13, nombre: 'Acción por el clima' },
+  { n: 14, nombre: 'Vida submarina' },
+  { n: 17, nombre: 'Alianzas para lograr los objetivos' },
+];
 ---
 
-<section class="relative isolate py-10 sm:py-14">
-  <div class="reveal mx-auto max-w-3xl px-6 text-center">
+<!-- Espacios: ~80 px desde «Mira quién ya cuenta con nosotros» hasta el separador (la sección
+     anterior ya deja 80/112 px), ~52 px hasta el título, ~36 px hasta los iconos. -->
+<section id="ods" class="relative isolate sm:-mt-8">
+  <SeparadorCaracola motivo="globo" />
+  <div class="reveal mx-auto mt-[3.25rem] max-w-3xl px-6 text-center">
     <p class="font-hand text-3xl leading-none text-celeste sm:text-4xl">
-      Trabajamos en favor de los ODS:
+      Trabajamos en favor de <span class="whitespace-nowrap">los ODS:</span>
     </p>
 
-    <p class="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 font-display text-2xl leading-none text-arena sm:gap-x-4 sm:text-3xl">
-      <img
-        src="/assets/programa/planet.webp"
-        alt=""
-        aria-hidden="true"
-        width="799"
-        height="800"
-        loading="lazy"
-        decoding="async"
-        class="h-[4.5em] w-auto shrink-0"
-      />
+    <ul class="mx-auto mt-9 flex max-w-[318px] flex-wrap justify-center gap-2.5 sm:max-w-[46rem]">
       {
-        ods.map((n, i) => (
-          <>
-            {i > 0 && (
-              <span aria-hidden="true" class="text-caparol/40">
-                ·
-              </span>
-            )}
-            <span>{n}</span>
-          </>
+        ods.map(({ n, nombre }) => (
+          <li>
+            <img
+              src={`/assets/programa/ods/ods-${n}.webp`}
+              alt={`ODS ${n}: ${nombre}`}
+              title={`ODS ${n}: ${nombre}`}
+              width="240"
+              height="240"
+              loading="lazy"
+              decoding="async"
+              class="block h-[72px] w-[72px] rounded-md shadow-[0_6px_14px_rgba(3,10,35,0.35)] transition-transform duration-300 hover:-translate-y-[3px] sm:h-[88px] sm:w-[88px]"
+            />
+          </li>
         ))
       }
-    </p>
+    </ul>
   </div>
 </section>
