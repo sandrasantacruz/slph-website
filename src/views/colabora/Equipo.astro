@@ -281,7 +281,7 @@ const peopleParity: boolean[][] = groups.map((g) =>
 const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
 ---
 
-<section id="equipo" class="relative isolate overflow-hidden pt-8 pb-24 sm:pt-12 sm:pb-32">
+<section id="equipo" class="relative isolate overflow-clip pt-8 pb-24 sm:pt-12 sm:pb-32">
   <!-- Atmosphere: soft glow + faint horizontal wave -->
   <div
     aria-hidden="true"
@@ -339,11 +339,11 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
                   <div class="grid gap-8 md:grid-cols-12 md:gap-12">
                     <!-- Portrait column: polaroid with handwritten name -->
                     <div class:list={[
-                      'order-1 md:col-span-5 flex justify-center',
+                      'order-1 md:col-span-5 flex items-start justify-center',
                       imageLeft ? 'md:order-1' : 'md:order-2',
                     ]}>
                       <figure class:list={[
-                        'polaroid w-full max-w-[280px] sm:max-w-[340px]',
+                        'polaroid foto-ficha w-full max-w-[280px] sm:max-w-[340px]',
                         tilt,
                       ]}>
                         <img
@@ -493,6 +493,14 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
 
 <style>
   /* Polished open/close UI for native <details> bio expanders */
+  /* Al abrir «Leer más», la foto no se estira: mantiene su tamaño y baja con el texto.
+     Hace falta esta regla propia: la clase general .polaroid fija position: relative. */
+  @media (min-width: 768px) {
+    .polaroid.foto-ficha {
+      position: sticky;
+      top: 7rem;
+    }
+  }
   .bio-details > .bio-summary::-webkit-details-marker { display: none; }
   .bio-details .bio-summary-close { display: none; }
   .bio-details[open] .bio-summary-open { display: none; }
