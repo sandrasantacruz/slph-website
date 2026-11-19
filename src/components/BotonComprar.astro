@@ -1,0 +1,189 @@
+---
+/**
+ * Botón «Comprar» de la cabecera: el «Banner de gel acuático brillante» de fondo,
+ * Alegría (la del cuento) saltando por la izquierda y nuestras burbujas.
+ * Es el único botón de la web con ilustración, para que destaque; los demás
+ * se quedan sencillos. Prototipo: TOBÍAS/«BOTÓN COMPRAR ALEGRÍA (prototipo)»/
+ * «boton-comprar-gel.html».
+ *
+ * El agua «respira» y ondula suave (filtro SVG #ondas); al pasar el ratón se
+ * mueve más. Al pulsar, Alegría salta y se mete en el agua, el gel hace «plof» y suben burbujas;
+ * después se abre /comprar. Con «reducir movimiento» todo queda quieto y el
+ * enlace se abre al momento.
+ *
+ * Solo una vez por página (el id del filtro SVG tiene que ser único).
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<!-- ondas del borde del agua (solo para el gel, no para el texto) -->
+<svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
+  <filter id="ondas" x="-10%" y="-30%" width="120%" height="160%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.035" numOctaves="2" seed="3" result="ruido">
+      <animate attributeName="baseFrequency" dur="12s" values="0.012 0.035;0.016 0.03;0.012 0.035" repeatCount="indefinite" />
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" in2="ruido" scale="5" xChannelSelector="R" yChannelSelector="G" />
+  </filter>
+</svg>
+
+<a href="/comprar" class:list={['burbuja-comprar', className]} data-boton-comprar>
+  <span class="agua" aria-hidden="true"></span>
+  <img class="alegria" src="/assets/boton-comprar/alegria.webp" alt="" width="317" height="360" decoding="async" />
+  <img class="grupo" src="/assets/boton-comprar/grupo-burbujas.webp" alt="" width="94" height="240" decoding="async" />
+  <span class="texto">Comprar</span>
+  <img class="tres" src="/assets/boton-comprar/tres-burbujas.webp" alt="" width="102" height="160" decoding="async" />
+</a>
+
+<style>
+  .burbuja-comprar {
+    --alto: 38px;
+    position: relative;
+    z-index: 30; /* la cola de Alegría asoma bajo la cabecera: que no la tape la sección siguiente */
+    isolation: isolate;
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--alto);
+    width: calc(var(--alto) * 3.2);
+    padding: 0 calc(var(--alto) * 0.4) 0 calc(var(--alto) * 0.55);
+    margin-left: calc(var(--alto) * 1.1);
+    margin-right: calc(var(--alto) * 0.3); /* sitio para las tres burbujas, que asoman por la derecha */
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: calc(var(--alto) * 0.7);
+    line-height: 0.95;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(6, 30, 90, 0.6), 0 0 12px rgba(10, 60, 150, 0.6);
+    white-space: nowrap;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* tableta: el menú completo va al lado, el botón tiene que ser más pequeño */
+  @media (min-width: 768px) {
+    .burbuja-comprar { --alto: 40px; }
+  }
+  @media (min-width: 1024px) {
+    .burbuja-comprar { --alto: 52px; }
+  }
+
+  /* el agua: el banner de gel acuático, más grande que el texto */
+  .agua {
+    position: absolute;
+    inset: calc(var(--alto) * -0.16) calc(var(--alto) * -0.18);
+    z-index: -1;
+    background: url('/assets/boton-comprar/gel.webp') center / 100% 100% no-repeat;
+    /* casi el color original (es el botón de compra); a Alegría la separan su
+       contorno blanco y su halo arena, no un gel apagado */
+    filter: url(#ondas) saturate(0.95) drop-shadow(0 8px 14px rgba(3, 10, 35, 0.45)) drop-shadow(0 0 14px rgba(110, 200, 255, 0.32));
+    animation: bc-respira 6s ease-in-out infinite;
+  }
+  /* sube un poco para que la «p» quede dentro del agua */
+  .texto {
+    transform: translateY(-0.15em);
+  }
+  .alegria {
+    position: absolute;
+    left: calc(var(--alto) * -1.15);
+    bottom: calc(var(--alto) * -0.6); /* cuelga un poco por debajo: arriba la cabecera la cortaría */
+    width: auto;
+    height: calc(var(--alto) * 1.8);
+    pointer-events: none;
+    /* contorno blanco y halo cálido (arena): así se separa del azul del gel */
+    filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 1px #fff) drop-shadow(0 0 10px rgba(250, 222, 170, 0.6)) drop-shadow(0 4px 6px rgba(4, 14, 44, 0.4));
+    transform: scaleX(-1); /* en espejo: mira hacia el botón y salta hacia delante */
+    transform-origin: 50% 60%;
+  }
+  .tres {
+    position: absolute;
+    right: calc(var(--alto) * -0.36);
+    top: calc(var(--alto) * -0.4); /* más abajo que en el prototipo: arriba la cabecera las cortaba */
+    width: auto;
+    height: calc(var(--alto) * 1.1);
+    pointer-events: none;
+    animation: bc-flota 4s ease-in-out infinite;
+  }
+  .grupo {
+    position: absolute;
+    left: calc(var(--alto) * 0.1);
+    bottom: calc(var(--alto) * 0.75);
+    width: auto;
+    height: calc(var(--alto) * 1.7);
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* al pasar el ratón: el agua se mueve más */
+  .burbuja-comprar:hover .agua,
+  .burbuja-comprar:focus-visible .agua {
+    animation-duration: 2.2s;
+  }
+  .burbuja-comprar:focus-visible {
+    outline: none;
+  }
+  .burbuja-comprar:focus-visible .agua {
+    border-radius: 999px;
+    box-shadow: 0 0 0 4px rgba(250, 222, 170, 0.8), 0 0 22px rgba(110, 200, 255, 0.5);
+  }
+
+  /* al pulsar: Alegría se eleva con calma, se curva y se mete en el agua;
+     justo cuando entra, el gel hace «plof» y suben burbujas */
+  .burbuja-comprar.salta .alegria { animation: bc-salto 1s cubic-bezier(0.45, 0, 0.35, 1) forwards; }
+  .burbuja-comprar.salta .grupo { animation: bc-subir 1s ease-out 0.55s; }
+  .burbuja-comprar.salta .agua { animation: bc-plof 0.6s ease-out 0.55s, bc-respira 2.2s ease-in-out infinite; }
+
+  @keyframes bc-respira {
+    0%, 100% { transform: scale(1, 1); }
+    33% { transform: scale(1.012, 0.982); }
+    66% { transform: scale(0.992, 1.016); }
+  }
+  @keyframes bc-flota { 50% { transform: translateY(-6px); } }
+  @keyframes bc-salto {
+    0% { transform: scaleX(-1); opacity: 1; }
+    30% { transform: translate(6%, -12%) rotate(-6deg) scaleX(-1); opacity: 1; }
+    62% { transform: translate(36%, -4%) rotate(45deg) scaleX(-1); opacity: 1; }
+    100% { transform: translate(64%, 18%) rotate(100deg) scaleX(-1) scale(0.8); opacity: 0; }
+  }
+
+  @keyframes bc-subir {
+    0% { opacity: 0; transform: translateY(8px); }
+    20% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-46px); }
+  }
+  @keyframes bc-plof {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.06, 0.94); }
+    100% { transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .burbuja-comprar * { animation: none !important; transition: none !important; }
+    .agua { filter: drop-shadow(0 8px 14px rgba(3, 10, 35, 0.45)) drop-shadow(0 0 16px rgba(110, 200, 255, 0.4)); }
+  }
+</style>
+
+<script>
+  // Al pulsar: primero el salto y las burbujas, luego la página de compra.
+  // Cmd/Ctrl/Mayús-clic (nueva pestaña) se deja al navegador.
+  // Al volver con «atrás» la página puede salir de la caché con Alegría ya
+  // sumergida: la devolvemos a su sitio.
+  addEventListener('pageshow', () => {
+    document.querySelectorAll('[data-boton-comprar]').forEach((b) => b.classList.remove('salta'));
+  });
+  document.querySelectorAll<HTMLAnchorElement>('[data-boton-comprar]').forEach((b) => {
+    b.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      e.preventDefault();
+      b.classList.remove('salta');
+      void b.offsetWidth;
+      b.classList.add('salta');
+      setTimeout(() => {
+        location.href = b.href;
+      }, 950);
+    });
+  });
+</script>

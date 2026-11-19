@@ -1,4 +1,6 @@
 ---
+import BotonComprar from './BotonComprar.astro';
+
 const cuentoPaths = ['/sobre-el-cuento', '/lee-un-fragmento', '/cuadernillo', '/autor', '/ilustrador', '/realidad-aumentada'];
 const programaPaths = ['/programa', '/galeria', '/repercusion'];
 
@@ -62,7 +64,7 @@ const currentPath = Astro.url.pathname;
       <img src="/assets/logo.png" alt="Si los peces hablaran" width="2072" height="1492" class="h-20 w-auto" />
     </a>
 
-    <nav class="hidden items-center gap-4 md:flex lg:gap-6" aria-label="Principal">
+    <nav class="hidden items-center gap-3 md:flex lg:gap-6" aria-label="Principal">
       {
         links.map(({ href, label, match, children }) => {
           const active =
@@ -72,7 +74,7 @@ const currentPath = Astro.url.pathname;
                 ? match.some((p) => currentPath.startsWith(p))
                 : currentPath.startsWith(href);
           const linkClass = [
-            'text-base whitespace-nowrap text-caparol/90 transition-colors hover:text-caparol',
+            'text-[15px] lg:text-base whitespace-nowrap text-caparol/90 transition-colors hover:text-caparol',
             active && 'text-caparol underline underline-offset-4 decoration-arena',
           ];
           if (!children) {
@@ -109,12 +111,7 @@ const currentPath = Astro.url.pathname;
     </nav>
 
     <div class="flex items-center gap-2">
-      <a
-        href="/comprar"
-        class="rounded-lg bg-arena px-4 py-2 font-display text-lg text-negro transition hover:brightness-95 md:px-5 md:text-2xl"
-      >
-        Comprar libro
-      </a>
+      <BotonComprar />
 
       <button
         type="button"
