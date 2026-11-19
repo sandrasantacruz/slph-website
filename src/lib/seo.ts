@@ -140,7 +140,7 @@ export function personSandraSchema(): JsonLd {
       name: 'Centro de Danza Sandra Santa Cruz',
     },
     description:
-      'Bailarina, profesora y coreógrafa canaria, licenciada en danza. Lleva más de tres décadas al frente del Centro de Danza Sandra Santa Cruz en Gran Canaria y es la autora del cuento Si los peces hablaran…',
+      'Bailarina, profesora y coreógrafa canaria, licenciada en danza. Lleva casi cuatro décadas al frente del Centro de Danza Sandra Santa Cruz en Gran Canaria y es la autora del cuento Si los peces hablaran…',
     sameAs: socials.map((s) => s.href),
   };
 }
