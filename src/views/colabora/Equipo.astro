@@ -18,6 +18,8 @@ type Person = {
   gallery?: string[];
   /** Bildunterschriften zu `gallery`, gleicher Index. Ohne Eintrag: Name. */
   captions?: string[];
+  /** Entradilla: eigene Zeile vor dem Text, kursiv und in Arena. */
+  lead?: string;
 };
 
 type Group = {
@@ -155,7 +157,7 @@ const groups: Group[] = [
         image: '/assets/colaboradores/dunia-santana/portrait.jpg',
         alt: 'Retrato de Dunia Santana',
         bio: [
-          'Licenciada en Filología Hispánica por la Universidad de la Laguna. Por lo que siempre se ha dedicado a lo mucho que ama: su lengua y su literatura. Su profesión es la docencia y se involucra para transmitir a su alumnado su pasión por la lectura y el interés por la cultura canaria.',
+          'Licenciada en Filología Hispánica por la Universidad de La Laguna. Por eso, siempre se ha dedicado a lo mucho que ama: su lengua y su literatura. Su profesión es la docencia y se involucra para transmitir a su alumnado su pasión por la lectura y el interés por la cultura canaria.',
           'Dunia Santana Hernández ha colaborado en el programa SLPH compartiendo la ilusión con su autora. Como filóloga se ha encargado de la expresión y el vocabulario. Comparte con Sandra el interés, la ilusión y el compromiso puestos en "Si los peces hablaran…"',
         ],
         gallery: [
@@ -197,8 +199,9 @@ const groups: Group[] = [
         role: 'Convierte material reutilizado en personajes llenos de vida',
         image: '/assets/colaboradores/juani-santana/portrait.webp',
         alt: 'Retrato de Juani Santana',
+        lead: '¡Nuestra querida Dña. Paciencia!',
         bio: [
-          '¡Nuestra querida doña Paciencia!\n\nDoña Paciencia es la tortuga más sabia de Si los peces hablaran…. Por eso, es prácticamente imposible que falte a alguno de nuestros eventos, ya que siempre tiene mucho que aportar. Su entrañable carisma y su tranquila personalidad conquistan tanto a niños como a adultos.',
+          'Dña. Paciencia es la tortuga más sabia de Si los peces hablaran… Por eso, es prácticamente imposible que falte a alguno de nuestros eventos, ya que siempre tiene mucho que aportar. Su entrañable carisma y su tranquila personalidad conquistan tanto a niños como a adultos.',
           'De manera autodidacta, Juani da rienda suelta a su creatividad y convierte materiales reutilizados en personajes llenos de vida. Responsable, introvertida, trabajadora y muy perfeccionista, fue quien hizo realidad los maravillosos personajes que dieron vida a nuestro musical en 2016.',
         ],
         gallery: [
@@ -369,7 +372,12 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
                         {person.name}
                       </h4>
 
-                      <p class="mt-5 text-base leading-relaxed whitespace-pre-line text-caparol/90 sm:text-lg">
+                      {person.lead && (
+                        <p class="mt-5 text-lg leading-snug italic text-arena sm:text-xl">
+                          {person.lead}
+                        </p>
+                      )}
+                      <p class:list={[person.lead ? 'mt-2' : 'mt-5', 'text-base leading-relaxed whitespace-pre-line text-caparol/90 sm:text-lg']}>
                         {visibleBio}
                       </p>
 
