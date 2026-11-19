@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
+import FichaLibro from '../../components/FichaLibro.astro';
 ---
 
 <section class="relative isolate overflow-hidden pt-14 pb-12 sm:pt-20 sm:pb-16">
@@ -52,7 +53,7 @@ import Ola from '../../components/Ola.astro';
       Puedes encontrar ejemplares de
       <em class="not-italic text-arena">Si los peces hablaran…</em>
       <span class="text-caparol">online</span> y en estas librerías y tiendas
-      <Ola>repartidas por Canarias</Ola>.
+      <Ola>repartidas por Gran Canaria</Ola>.
     </p>
 
     <!-- Quick anchors / counts -->
@@ -83,5 +84,7 @@ import Ola from '../../components/Ola.astro';
         </svg>
       </a>
     </div>
+
+    <FichaLibro venta={false} class="reveal reveal-delay-4 mt-12" />
   </div>
 </section>

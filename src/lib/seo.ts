@@ -152,7 +152,10 @@ export function bookSchema(): JsonLd {
     '@id': `${SITE_URL}/#book`,
     name: BOOK_TITLE,
     inLanguage: BOOK_LANGUAGE,
-    bookFormat: 'https://schema.org/Hardcover',
+    bookFormat: 'https://schema.org/Paperback',
+    bookEdition: '3.ª edición',
+    numberOfPages: 146,
+    illustrator: { '@type': 'Person', name: 'Pablo Tribiño' },
     genre: BOOK_GENRE,
     audience: {
       '@type': 'PeopleAudience',
