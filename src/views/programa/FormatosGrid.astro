@@ -37,6 +37,7 @@ const formatos = [
     nota: 'de actividades',
     img: '/assets/programa/formatos/cuadernillo.webp',
     alt: 'El cuadernillo de actividades para colorear junto al cuento y el logo del programa',
+    sello: '¡novedad de la 3.ª edición!',
   },
   {
     titulo: 'Conferencias',
@@ -68,14 +69,21 @@ const formatos = [
             class="reveal group"
             style={`transition-delay:${Math.min(i * 60, 480)}ms`}
           >
-            <div class="overflow-hidden rounded-sm shadow-[0_20px_40px_-16px_rgba(6,15,44,0.65)] ring-1 ring-caparol/10">
-              <img
-                src={f.img}
-                alt={f.alt}
-                class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                loading="lazy"
-                decoding="async"
-              />
+            <div class="relative">
+              <div class="overflow-hidden rounded-sm shadow-[0_20px_40px_-16px_rgba(6,15,44,0.65)] ring-1 ring-caparol/10">
+                <img
+                  src={f.img}
+                  alt={f.alt}
+                  class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              {'sello' in f && (
+                <span class="pointer-events-none absolute bottom-[1.65rem] left-[0.9rem] z-[2] -rotate-[13deg] rounded-full bg-arena px-[0.78rem] pt-[0.43rem] pb-[0.48rem] font-hand text-[1.3rem] leading-none whitespace-nowrap text-azul shadow-[0_6px_16px_rgba(0,0,0,0.35)]">
+                  {f.sello}
+                </span>
+              )}
             </div>
 
             <h3 class="mt-5 font-display text-lg tracking-[0.18em] text-caparol uppercase sm:text-xl">

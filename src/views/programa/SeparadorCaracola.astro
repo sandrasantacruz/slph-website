@@ -18,7 +18,7 @@ const globo = motivo === 'globo';
 <div class:list={['sep-caracola reveal', globo && 'sep-globo', className]} aria-hidden="true">
   <span class="ola ola-izq"></span>
   {globo ? (
-    <img src="/assets/programa/planet.webp" alt="" width="799" height="800" loading="lazy" decoding="async" />
+    <img src="/assets/programa/planet-ods.webp" alt="" width="400" height="400" loading="lazy" decoding="async" />
   ) : (
     <img src="/assets/programa/caracola-separador.webp" alt="" width="247" height="160" loading="lazy" decoding="async" />
   )}
@@ -51,7 +51,7 @@ const globo = motivo === 'globo';
   }
   /* El globo es redondo: las olas van a media altura, no a la de las conchas */
   .sep-globo img {
-    height: 104px;
+    height: 160px;   /* versión con las letras rellenas en blanco: el original las tiene huecas y no se leían */
   }
   .sep-globo .ola {
     align-self: center;
