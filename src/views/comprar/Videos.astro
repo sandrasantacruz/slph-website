@@ -4,14 +4,6 @@ import Ola from '../../components/Ola.astro';
 
 const videos = [
   {
-    src: '/videos/tercera-edicion.mp4',
-    poster: '/videos/tercera-edicion-poster.webp',
-    title: 'Si los peces hablaran… 3.ª edición',
-    caption: '¡Ya está aquí la 3.ª edición!',
-    tilt: 'rotate-0',
-    featured: true,
-  },
-  {
     src: '/videos/musical-estreno.mp4',
     poster: '/videos/musical-estreno-poster.webp',
     title: 'Si los peces hablaran… estrena musical',
@@ -54,19 +46,19 @@ const videos = [
       </h2>
 
       <p class="reveal reveal-delay-1 mx-auto mt-6 max-w-xl text-base text-caparol/80 sm:text-lg">
-        El cuento saltó del papel al escenario. Estos vídeos te dan un
+        El cuento saltó del papel al escenario. Estos dos vídeos te dan un
         primer vistazo.
       </p>
     </div>
 
-    <!-- 3.ª edición destacada a todo el ancho, debajo los otros dos -->
+    <!-- Video pair -->
     <div class="mt-14 grid gap-12 sm:mt-20 sm:gap-10 lg:grid-cols-2 lg:gap-12">
       {
         videos.map((video, i) => (
-          <figure class={`clip-frame reveal reveal-delay-${i + 1} ${video.tilt} ${video.featured ? 'lg:col-span-2 lg:mx-auto lg:w-4/5' : ''}`}>
+          <figure class={`clip-frame reveal reveal-delay-${i + 1} ${video.tilt}`}>
             <div class="player-wrap relative overflow-hidden bg-azul-deep">
               <media-player
-                class={`comprar-player ${video.featured ? 'comprar-player--destacado' : ''}`}
+                class="comprar-player"
                 title={video.title}
                 src={video.src}
                 poster={video.poster}
@@ -160,7 +152,7 @@ const videos = [
     background: var(--color-caparol);
   }
 
-  /* 3.ª edición: en la portada la cara de la niña está en el centro; el botón baja
+  /* 3.ª edición (bloque Escuela): en la portada la cara de la niña está en el centro; el botón baja
      hasta el maillot, entre el cuento y el cuadernillo, para no taparla. */
   .player-wrap .comprar-player--destacado .comprar-play-circle {
     position: absolute;
