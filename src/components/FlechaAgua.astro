@@ -1,0 +1,32 @@
+---
+/**
+ * «Flecha de agua azul brillante», versión gruesa. Solo para enlaces especiales
+ * (de momento «Descubre el proyecto» y «Más sobre Sandra Santa Cruz» en Inicio),
+ * para que no le quite protagonismo al botón Comprar. El enlace que la contiene
+ * necesita la clase `group`: al pasar el ratón la flecha avanza un poco.
+ */
+---
+
+<img
+  src="/assets/inicio/flecha-agua-gruesa.webp"
+  alt=""
+  aria-hidden="true"
+  width="463"
+  height="191"
+  decoding="async"
+  class="flecha-agua transition-transform duration-300 group-hover:translate-x-[5px]"
+/>
+
+<style>
+  .flecha-agua {
+    display: inline-block;
+    flex: none;
+    height: 1.45em;
+    width: auto;
+    /* más alta que la línea: sin este margen negativo agrandaría el botón */
+    margin-block: -0.25em;
+    /* algo más luminosa y con halo azul claro, sin llegar a neón */
+    filter: brightness(1.12) drop-shadow(0 0 1px rgba(6, 30, 90, 0.55))
+      drop-shadow(0 0 4px rgba(255, 255, 255, 0.55)) drop-shadow(0 0 10px rgba(110, 200, 255, 0.7));
+  }
+</style>

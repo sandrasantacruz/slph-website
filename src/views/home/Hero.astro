@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
+import FlechaAgua from '../../components/FlechaAgua.astro';
 ---
 
 <section class="relative isolate flex h-[calc(100svh-6rem)] flex-col overflow-hidden bg-azul">
@@ -84,9 +85,7 @@ import Ola from '../../components/Ola.astro';
         class="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-caparol px-5 py-2.5 font-display text-lg text-caparol transition hover:bg-caparol hover:text-azul sm:px-6 sm:py-3 sm:text-xl"
       >
         Descubre el proyecto
-        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
+        <FlechaAgua />
       </a>
       <a
         href="/comprar"
