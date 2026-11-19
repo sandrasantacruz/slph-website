@@ -10,24 +10,28 @@ const imagenes = [
     src: cueva,
     alt: "SLPH en la Cueva Pintada",
     label: "Eventos de concienciación",
+    href: "/galeria#eventos",
     tilt: "tilt-l1",
   },
   {
     src: obertura,
     alt: "Obertura con la OFGC",
     label: "Formato sinfónico · OFGC",
+    href: "/galeria#espectaculos",
     tilt: "tilt-r2",
   },
   {
     src: danzaAcuario,
     alt: "Escena de danza del musical SLPH ante el gran acuario",
     label: "Musical con diversos formatos",
+    href: "/galeria#musical",
     tilt: "tilt-l2",
   },
   {
     src: casaDeColon,
     alt: "Taller familiar de manualidades con plástico reciclado en la Casa-Museo de Colón",
     label: "Talleres SLPH",
+    href: "/galeria#talleres",
     tilt: "tilt-r1",
   },
 ];
@@ -49,13 +53,14 @@ const imagenes = [
       class="mt-14 grid grid-cols-1 gap-10 sm:gap-12 md:grid-cols-2 md:gap-10"
     >
       {
-        imagenes.map(({ src, alt, label, tilt }, i) => (
+        imagenes.map(({ src, alt, label, href, tilt }, i) => (
           <figure
             class:list={[
               "reveal group relative mx-auto w-full max-w-md",
               `reveal-delay-${(i % 4) + 1}`,
             ]}
           >
+            <a href={href} class="block rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-arena focus-visible:ring-offset-4 focus-visible:ring-offset-azul">
             <div
               class:list={[
                 "polaroid transition duration-500 hover:rotate-0 hover:!scale-[1.03] hover:shadow-2xl",
@@ -72,18 +77,38 @@ const imagenes = [
                 {label}
               </figcaption>
             </div>
+            <span class="mt-4 flex items-center justify-center gap-1.5 font-display text-xs tracking-[0.2em] text-arena uppercase transition group-hover:text-caparol sm:text-sm">
+              Ver fotos
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </span>
+            </a>
           </figure>
         ))
       }
     </div>
 
-    <div class="reveal mt-14 flex flex-col items-center gap-3 text-center">
-      <p class="text-base sm:text-lg">No te pierdas nuestra</p>
+    <div class="reveal mt-14 flex flex-wrap items-center justify-center gap-3 text-center sm:gap-4">
       <a
-        href="/noticias"
+        href="/galeria"
         class="group inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95 sm:text-2xl"
       >
         Galería de eventos
+        <svg
+          viewBox="0 0 24 24"
+          class="h-5 w-5 transition-transform group-hover:translate-x-1"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6"></path>
+        </svg>
+      </a>
+      <a
+        href="/noticias"
+        class="group inline-flex items-center gap-3 rounded-full border-2 border-arena/70 px-7 py-[0.625rem] font-display text-xl text-arena transition hover:border-arena hover:bg-arena hover:text-azul sm:text-2xl"
+      >
+        Últimas noticias
         <svg
           viewBox="0 0 24 24"
           class="h-5 w-5 transition-transform group-hover:translate-x-1"
