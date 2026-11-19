@@ -223,14 +223,34 @@
 }
 
 /* Ola, die erst beim Hover über der umgebenden .group erscheint und sich
-   von links nach rechts zeichnet (Karten auf /sobre-el-cuento). */
+   von links nach rechts zeichnet (Karten-Links auf /sobre-el-cuento).
+   Die Welle liegt auf ::after und wird per clip-path aufgedeckt, nicht über
+   background-size: so wird sie beim Zeichnen nie gestaucht. Etwas höher als
+   der Default, weil der Link lang und die Schrift klein ist — bei 0.42em
+   wird die Welle zum Haarstrich. */
 .ola-hover {
-  background-size: 0% var(--ola-height, 0.42em);
-  transition: background-size 0.45s ease;
+  --ola-height: 0.8em;
+  --ola-gap: 0.55em;
+  position: relative;
+  background-size: 0 0;
 }
-.group:hover .ola-hover,
-.group:focus-visible .ola-hover {
-  background-size: 100% var(--ola-height, 0.42em);
+.ola-hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--ola-height);
+  background-image: inherit;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.45s ease;
+  pointer-events: none;
+}
+.group:hover .ola-hover::after,
+.group:focus-visible .ola-hover::after {
+  clip-path: inset(0 0 0 0);
 }
 
 /* Dotted "schoolbook" rule — for QueEs / page-margins feel. */
