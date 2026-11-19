@@ -1,9 +1,8 @@
 ---
 /**
- * EnlaceFlecha — dezenter Textlink in Versalien mit Pfeil (Stil wie
- * «Ver la galería» auf der Startseite). Für Querverweise zwischen Seiten,
- * bewusst keine großen Buttons, damit «Comprar libro» das einzige ist, das
- * ins Auge springt.
+ * EnlaceFlecha — Querverweis zwischen Seiten als Pille mit Rand (wie
+ * «Visitar tienda» auf /comprar). Sichtbarer als ein reiner Textlink, aber
+ * ohne Füllung, damit gefüllte Buttons («Comprar libro») vorne bleiben.
  *
  *   <EnlaceFlecha href="/galeria#cuento">Ver la presentación del cuento</EnlaceFlecha>
  */
@@ -20,8 +19,10 @@ const { href, tono = 'arena', class: className } = Astro.props;
 <a
   href={href}
   class:list={[
-    'group inline-flex items-center gap-2 font-display text-sm tracking-[0.2em] uppercase transition',
-    tono === 'arena' ? 'text-arena hover:text-caparol' : 'text-azul hover:text-arena',
+    'group inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-display text-base tracking-[0.18em] uppercase transition',
+    tono === 'arena'
+      ? 'border-arena/60 text-arena hover:border-arena hover:bg-arena hover:text-azul'
+      : 'border-azul/40 text-azul hover:border-azul hover:bg-azul hover:text-caparol',
     className,
   ]}
 >
