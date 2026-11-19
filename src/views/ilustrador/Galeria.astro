@@ -1,21 +1,50 @@
 ---
-const nombre = 'Pablo Tribiño';
+// Drei Reihen à drei, helle und dunkle Motive gemischt, damit jede Reihe Licht hat.
 const imagenes = [
   {
     src: '/assets/colaboradores/pablo-tribino/el-coronel-espada-afilada-si-los-peces-hablaran.jpg',
     nombre: 'El coronel Espada Afilada',
+    pie: 'El coronel Espada Afilada, el pez espada más valeroso',
   },
   {
-    src: '/assets/colaboradores/pablo-tribino/gusshy-si-los-peces-hablaran.jpg',
-    nombre: 'Gusshy',
+    src: '/assets/colaboradores/pablo-tribino/dina-la-voladora-si-los-peces-hablaran.jpg',
+    nombre: 'Dina la Voladora',
+    pie: 'Dina la Voladora, la gran amiga de Bella Azul',
   },
   {
     src: '/assets/colaboradores/pablo-tribino/el-sr-tentaculus-si-los-peces-hablaran.jpg',
     nombre: 'El Sr. Tentáculus',
+    pie: 'El Sr. Tentáculus, el pulpo encargado de una gran misión…',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/gusshy-si-los-peces-hablaran.jpg',
+    nombre: 'Gusshy',
+    pie: 'Gusshy, el primero que coge un tridente para…',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/bubli-si-los-peces-hablaran.jpg',
+    nombre: 'Bubli',
+    pie: 'Bubli, un caballito de mar muy curioso',
   },
   {
     src: '/assets/colaboradores/pablo-tribino/don-canino-si-los-peces-hablaran.jpg',
     nombre: 'Don Canino',
+    pie: 'Don Canino, el tiburón más fuerte del arrecife, capaz de sacar un neumático del mar',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/nela-la-irritable-si-los-peces-hablaran.jpg',
+    nombre: 'Nela la Irritable',
+    pie: 'Nela la Irritable, que solo se irrita cuando las cosas no se hacen bien',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/erizoquetepincho-si-los-peces-hablaran.jpg',
+    nombre: 'Erizoquetepincho',
+    pie: 'Erizoquetepincho, un excelente cantante y primo de Erikoquetepico',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/david-si-los-peces-hablaran.jpg',
+    nombre: 'David',
+    pie: 'David, el más trasto de los amigos de Lorena',
   },
 ];
 ---
@@ -23,14 +52,14 @@ const imagenes = [
 <section id="trabajo" class="relative isolate overflow-hidden pb-24 sm:pb-32">
   <div class="mx-auto max-w-6xl px-6">
     <!-- Section header -->
-    <div class="reveal mb-8 flex items-center gap-3 sm:gap-4">
+    <div class="reveal mx-auto mb-8 flex max-w-3xl items-center gap-3 sm:gap-4">
       <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
         De su mano
       </span>
       <span class="dotted-rule flex-1 text-arena/40"></span>
     </div>
 
-    <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+    <div class="mx-auto grid max-w-3xl grid-cols-3 gap-3 sm:gap-4">
       {imagenes.map((imagen) => (
         <a
           href={imagen.src}
@@ -38,12 +67,12 @@ const imagenes = [
           rel="noopener noreferrer"
           data-lightbox
           data-gallery="pablo-tribino"
-          data-caption={`${imagen.nombre}, de Si los peces hablaran`}
+          data-caption={imagen.pie}
           class="reveal gallery-item group relative block aspect-square overflow-hidden rounded-xl bg-azul/30 ring-1 ring-caparol/10 transition duration-300 hover:-translate-y-1 hover:ring-arena/70 hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-arena"
         >
           <img
             src={imagen.src}
-            alt={`${imagen.nombre}, personaje de Si los peces hablaran ilustrado por ${nombre}`}
+            alt={`${imagen.nombre}, personaje de Si los peces hablaran`}
             loading="lazy"
             class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.06]"
           />
