@@ -1,5 +1,4 @@
 ---
-import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 import NovedadCard from './NovedadCard.astro';
 import { byDateDesc, type Post } from '../../lib/posts';
 
@@ -29,8 +28,18 @@ const sorted = [...items].sort(byDateDesc);
           aria-hidden="true"
         ></div>
       )}
-      <div class="mt-16 flex justify-center">
-        <EnlaceFlecha href="/galeria#eventos">Ver todas las fotos en la Galería</EnlaceFlecha>
+      <!-- Rückweg zur Galerie, gleicher Stil wie «Últimas noticias» am Ende der Galería -->
+      <div class="mt-20 flex flex-col items-center gap-3 text-center">
+        <p class="font-hand text-2xl text-celeste sm:text-3xl">¿Te quedas con ganas de más?</p>
+        <a
+          href="/galeria"
+          class="group inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95 sm:text-2xl"
+        >
+          Bucea en nuestra Galería
+          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6"></path>
+          </svg>
+        </a>
       </div>
     </>
   )}
