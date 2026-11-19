@@ -1,24 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
+import { socials } from '../../lib/social';
 
-const socials = [
-  {
-    label: 'Facebook',
-    href: 'https://www.facebook.com/silospeceshablaran/',
-    icon: 'simple-icons:facebook',
-  },
-  {
-    label: 'Instagram',
-    href: 'https://www.instagram.com/silospeceshablaran/',
-    icon: 'simple-icons:instagram',
-  },
-  {
-    label: 'YouTube',
-    href: 'https://youtube.com/channel/UCjGxWnleLDsYbm7rSkopmFw',
-    icon: 'simple-icons:youtube',
-  },
-];
+// Dieselbe Liste wie im Footer, damit die Adressen nicht auseinanderlaufen.
 ---
 
 <section class="relative isolate overflow-hidden">
