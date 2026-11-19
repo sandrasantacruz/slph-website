@@ -94,11 +94,11 @@ const siglas = [
 
       <!-- Las siglas, leídas de otra manera -->
       <div class="reveal mt-16 sm:mt-20">
-        <p class="mx-auto max-w-2xl text-center text-base text-caparol/90 sm:text-lg">
-          Nuestras siglas significan <strong class="font-normal text-arena">mucho más</strong> que <em class="not-italic font-hand text-2xl text-celeste sm:text-3xl">si los peces hablaran:</em>
+        <p class="mx-auto text-center text-[clamp(1.05rem,2vw,1.4rem)] leading-[1.4] text-caparol/90">
+          Nuestras siglas significan <strong class="font-normal text-arena">mucho más</strong> que <em class="not-italic font-hand text-[1.6em] whitespace-nowrap text-celeste">Si los peces hablaran…</em>
         </p>
 
-        <dl class="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 sm:gap-x-4">
+        <dl class="mx-auto mt-11 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 sm:gap-x-4">
           {
             siglas.map((s, i) => (
               <div class={`reveal reveal-delay-${i + 1} text-center`}>
