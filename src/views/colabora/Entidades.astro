@@ -8,9 +8,9 @@ const citas = [
     cargo: 'Director de la Casa-Museo León y Castillo',
   },
   {
-    texto: 'A raíz de la lectura del libro… de una botella de un solo uso a una reutilizable…',
-    nombre: 'Isabel Martín',
-    cargo: 'Jefa de estudios del Colegio Alfredo Kraus',
+    texto: 'Conecta fácilmente tanto con niños como con adultos. Sin duda, es un programa innovador en defensa de los ecosistemas marinos que involucra en la protección del planeta.',
+    nombre: 'Manuel Benítez',
+    cargo: 'Gerente de la Fundación Orquesta Filarmónica de Gran Canaria',
   },
   {
     texto: 'Esta maravillosa interpretación ha conseguido que nuestro alumnado tome conciencia sobre la gravedad de la contaminación y, además, adquiera estrategias encaminadas a la protección de nuestros océanos.',
@@ -120,10 +120,10 @@ const centros = [
       </h2>
     </div>
 
-    <!-- Lo que dicen: en móvil se desliza de lado; desde md, rejilla de 2 -->
-    <ul class="reveal reveal-delay-1 -mx-6 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-3 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
+    <!-- Lo que dicen: en móvil una debajo de otra; desde md, rejilla de 2 -->
+    <ul class="reveal reveal-delay-1 mt-12 grid gap-4 md:grid-cols-2 md:gap-6">
       {citas.map((c) => (
-        <li class="w-[85%] shrink-0 snap-center md:w-auto">
+        <li>
           <figure class="flex h-full flex-col rounded-2xl border border-caparol/15 bg-azul/40 p-6 sm:p-7">
             <span aria-hidden="true" class="font-display text-5xl leading-none text-arena/60">«</span>
             <blockquote class="-mt-3 flex-1 font-hand text-2xl leading-snug text-caparol sm:text-[1.65rem]">
