@@ -22,7 +22,6 @@ const sections = [
       { href: '/noticias', label: 'Noticias' },
       { href: '/colabora', label: 'Colabora' },
       { href: '/contacto', label: 'Contacto' },
-      { href: '/buscar', label: 'Buscar' },
     ],
   },
 ];
@@ -67,6 +66,21 @@ const year = new Date().getFullYear();
       }
 
       <div class="flex flex-col gap-4">
+        <!-- Buscador: envía a /buscar?q=…, que filtra al cargar -->
+        <form action="/buscar" method="get" role="search" class="mb-4 flex max-w-sm items-center gap-2 rounded-full border border-caparol/40 bg-azul py-1.5 pr-1.5 pl-5 shadow-lg transition focus-within:border-arena">
+          <label for="footer-q" class="sr-only">Buscar en la web</label>
+          <input
+            id="footer-q"
+            name="q"
+            type="search"
+            placeholder="¿Qué quieres encontrar?"
+            class="min-w-0 flex-1 bg-transparent text-base text-caparol placeholder:text-caparol/85 focus:outline-none"
+          />
+          <button type="submit" aria-label="Buscar" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-arena text-azul transition hover:brightness-95">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+          </button>
+        </form>
+
         <h2 class="font-display text-2xl text-caparol">¡Síguenos!</h2>
         <ul class="flex gap-3">
           {

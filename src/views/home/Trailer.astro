@@ -82,8 +82,12 @@ import Ola from '../../components/Ola.astro';
   }
 
   /* Hide vidstack's own centered play/pause button — we provide our own. */
-  .trailer-player .vds-play-button {
-    display: none !important;
+  /* Solo con ratón: ahí se pausa haciendo clic en el vídeo. En el móvil el
+     botón central de vidstack es la única forma de pausar, así que se queda. */
+  @media (hover: hover) and (pointer: fine) {
+    .trailer-player .vds-play-button {
+      display: none !important;
+    }
   }
 
   /* Custom centered play overlay */

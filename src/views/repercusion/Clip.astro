@@ -71,8 +71,12 @@ const {
   /* Hide vidstack's own centered play/pause button — we bring our own overlay
      and rely on click-to-toggle for pausing. vidstack sets display via
      !important, so we must override it. */
-  .menores-player .vds-play-button {
-    display: none !important;
+  /* Solo con ratón: ahí se pausa haciendo clic en el vídeo. En el móvil el
+     botón central de vidstack es la única forma de pausar, así que se queda. */
+  @media (hover: hover) and (pointer: fine) {
+    .menores-player .vds-play-button {
+      display: none !important;
+    }
   }
 
   .menores-wrap .menores-play-overlay {

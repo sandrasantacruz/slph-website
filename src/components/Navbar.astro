@@ -19,7 +19,7 @@ const links: NavLink[] = [
     label: 'El cuento',
     match: cuentoPaths,
     // Dieselben Ziele wie die Karten auf «Sobre el cuento», ohne «Dónde comprar»
-    // (dafür gibt es den Button «Comprar libro» direkt daneben).
+    // (dafür gibt es den Button «Comprar» direkt daneben).
     children: [
       { href: '/sobre-el-cuento', label: 'Sobre el cuento' },
       { href: '/lee-un-fragmento', label: 'Lee un fragmento' },
@@ -184,12 +184,8 @@ const currentPath = Astro.url.pathname;
         <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
         Buscar
       </a>
-      <a
-        href="/comprar"
-        class="mt-6 rounded-lg bg-arena px-6 py-3 font-display text-3xl text-negro transition hover:brightness-95"
-      >
-        Comprar libro
-      </a>
+      <!-- el mismo botón de la cabecera: lleva a cuento y cuadernillo -->
+      <BotonComprar filtro={false} class="mt-8 mb-6" />
     </nav>
   </div>
 </header>

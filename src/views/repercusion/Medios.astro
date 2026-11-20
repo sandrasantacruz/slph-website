@@ -118,8 +118,12 @@ const videos = [
   /* Hide vidstack's own centered play/pause button (the dark dot) —
      we provide our own overlay and rely on click-to-toggle for pausing.
      vidstack sets display via !important, so we must override it. */
-  .medios-player .vds-play-button {
-    display: none !important;
+  /* Solo con ratón: ahí se pausa haciendo clic en el vídeo. En el móvil el
+     botón central de vidstack es la única forma de pausar, así que se queda. */
+  @media (hover: hover) and (pointer: fine) {
+    .medios-player .vds-play-button {
+      display: none !important;
+    }
   }
 
   /* Custom centered play overlay */

@@ -11,15 +11,18 @@
  * después se abre /comprar. Con «reducir movimiento» todo queda quieto y el
  * enlace se abre al momento.
  *
- * Solo una vez por página (el id del filtro SVG tiene que ser único).
+ * El filtro SVG #ondas va solo en la primera copia de la página (cabecera);
+ * las demás (menú del móvil) pasan filtro={false} y lo reutilizan.
  */
 interface Props {
   class?: string;
+  filtro?: boolean;
 }
-const { class: className } = Astro.props;
+const { class: className, filtro = true } = Astro.props;
 ---
 
 <!-- ondas del borde del agua (solo para el gel, no para el texto) -->
+{filtro && (
 <svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
   <filter id="ondas" x="-10%" y="-30%" width="120%" height="160%">
     <feTurbulence type="fractalNoise" baseFrequency="0.012 0.035" numOctaves="2" seed="3" result="ruido">
@@ -28,6 +31,7 @@ const { class: className } = Astro.props;
     <feDisplacementMap in="SourceGraphic" in2="ruido" scale="5" xChannelSelector="R" yChannelSelector="G" />
   </filter>
 </svg>
+)}
 
 <a href="/comprar" class:list={['burbuja-comprar', className]} data-boton-comprar>
   <span class="agua" aria-hidden="true"></span>
