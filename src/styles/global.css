@@ -135,6 +135,44 @@
 .anim-drift   { animation: drift 10s ease-in-out infinite; }
 .anim-pulse   { animation: pulse-glow 2.4s ease-out infinite; }
 
+/* Cada personaje con su forma de moverse (sutil). Sustituyen a .anim-float-soft
+   en los personajes; el resto de elementos flotantes siguen como estaban. */
+@keyframes nada-delfin {          /* Alegría: nada en ondas, morro arriba y abajo */
+  0%, 100% { transform: translate(0, 0) rotate(-3deg); }
+  25%      { transform: translate(3px, -6px) rotate(2deg); }
+  50%      { transform: translate(0, -9px) rotate(-1deg); }
+  75%      { transform: translate(-3px, -4px) rotate(-5deg); }
+}
+@keyframes planea {               /* Dina la Voladora: planeo de lado a lado */
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  30%      { transform: translate(-10px, -5px) rotate(-3deg); }
+  65%      { transform: translate(6px, -8px) rotate(2deg); }
+}
+@keyframes nervio {               /* Nela la Irritable: avances cortos y un temblor */
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20%      { transform: translate(-6px, -2px) rotate(-2deg); }
+  24%      { transform: translate(-5px, -2px) rotate(1deg); }
+  28%      { transform: translate(-6px, -2px) rotate(-2deg); }
+  55%      { transform: translate(-2px, -6px) rotate(0deg); }
+  80%      { transform: translate(3px, -3px) rotate(1deg); }
+}
+@keyframes sirena {               /* Bella Azul: ondulación lenta y elegante */
+  0%, 100% { transform: translate(0, 0) rotate(-1.5deg) skewX(0deg); }
+  33%      { transform: translate(6px, -7px) rotate(1deg) skewX(-1.5deg); }
+  66%      { transform: translate(-4px, -10px) rotate(2deg) skewX(1deg); }
+}
+@keyframes medusa {               /* la medusa: se contrae y se expande al subir */
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  20%      { transform: translateY(2px) scale(1.06, 0.92); }
+  45%      { transform: translateY(-10px) scale(0.95, 1.06); }
+  70%      { transform: translateY(-6px) scale(1, 1); }
+}
+.anim-delfin { animation: nada-delfin 6s ease-in-out infinite; }
+.anim-planeo { animation: planea 8s ease-in-out infinite; }
+.anim-nervio { animation: nervio 5s ease-in-out infinite; }
+.anim-sirena { animation: sirena 9s ease-in-out infinite; transform-origin: 40% 50%; }
+.anim-medusa { animation: medusa 4.5s ease-in-out infinite; transform-origin: 50% 20%; }
+
 /* Reveal-on-scroll. JS toggles .is-visible. */
 .reveal {
   opacity: 0;
@@ -302,7 +340,8 @@
 
 /* Reduced motion respect. */
 @media (prefers-reduced-motion: reduce) {
-  .anim-float, .anim-float-soft, .anim-sway, .anim-drift, .anim-pulse {
+  .anim-float, .anim-float-soft, .anim-sway, .anim-drift, .anim-pulse,
+  .anim-delfin, .anim-planeo, .anim-nervio, .anim-sirena, .anim-medusa {
     animation: none !important;
   }
   .reveal { transition: none !important; opacity: 1; transform: none; }
