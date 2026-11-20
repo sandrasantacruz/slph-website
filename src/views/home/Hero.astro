@@ -190,12 +190,20 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
     display: block;
     border-radius: 50%;
     background: radial-gradient(circle at 32% 30%, rgba(255,255,255,.95) 0 14%, rgba(255,240,210,.18) 32%, rgba(250,222,170,.16) 60%, rgba(250,222,170,.6) 100%);
-    box-shadow: inset 0 0 0 1.5px rgba(250,222,170,.95), 0 0 7px rgba(250,222,170,.45);
+    /* borde y halo algo más marcados: sobre la foto de fondo se perdían */
+    box-shadow: inset 0 0 0 1.5px rgba(250,222,170,1), 0 0 0 0.5px rgba(250,222,170,.6), 0 0 9px rgba(250,222,170,.6);
     animation: pb-mece 3.2s ease-in-out infinite;
   }
   .puntos-burbuja i:nth-child(1) { width: .15em; height: .15em; margin-bottom: .02em; }
   .puntos-burbuja i:nth-child(2) { width: .19em; height: .19em; margin-bottom: .12em; animation-delay: .4s; }
   .puntos-burbuja i:nth-child(3) { width: .24em; height: .24em; margin-bottom: .26em; animation-delay: .8s; }
+  /* móvil: el título es más pequeño y las burbujas apenas se distinguían */
+  @media (max-width: 767px) {
+    .puntos-burbuja { gap: 0.07em; margin-left: 0.07em; }
+    .puntos-burbuja i:nth-child(1) { width: .19em; height: .19em; }
+    .puntos-burbuja i:nth-child(2) { width: .24em; height: .24em; margin-bottom: .14em; }
+    .puntos-burbuja i:nth-child(3) { width: .3em; height: .3em; margin-bottom: .3em; }
+  }
   @keyframes pb-mece { 50% { transform: translateY(-.06em); } }
 
   @media (prefers-reduced-motion: reduce) {
