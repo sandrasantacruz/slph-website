@@ -172,7 +172,7 @@ const currentPath = Astro.url.pathname;
               <ul class="flex flex-col items-center gap-2">
                 {children.slice(1).map((c) => (
                   <li>
-                    <a href={c.href} class="font-display text-2xl text-celeste hover:text-arena">{c.label}</a>
+                    <a href={c.href} class="font-sans text-xl text-celeste hover:text-arena">{c.label}</a>
                   </li>
                 ))}
               </ul>
@@ -180,7 +180,7 @@ const currentPath = Astro.url.pathname;
           </div>
         ))
       }
-      <a href="/buscar" class="inline-flex items-center gap-2 font-display text-2xl text-celeste hover:text-arena">
+      <a href="/buscar" class="inline-flex items-center gap-2 font-sans text-xl text-celeste hover:text-arena">
         <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
         Buscar
       </a>
