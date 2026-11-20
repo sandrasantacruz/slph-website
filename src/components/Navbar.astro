@@ -60,11 +60,13 @@ const currentPath = Astro.url.pathname;
   ></div>
 
   <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2">
-    <a href="/" class="flex items-center gap-3" aria-label="Si los peces hablaran — Inicio">
+    <a href="/" class="flex shrink-0 items-center gap-3" aria-label="Si los peces hablaran — Inicio">
       <img src="/assets/logo.png" alt="Si los peces hablaran" width="2072" height="1492" class="h-20 w-auto" />
     </a>
 
-    <nav class="hidden items-center gap-3 md:flex lg:gap-6" aria-label="Principal">
+    <!-- Menú completo desde xl (1280 px): por debajo, con el logo, el menú, la lupa
+         y el botón «Comprar» no cabe todo y el logo se encogía. -->
+    <nav class="hidden items-center gap-5 xl:flex xl:gap-6" aria-label="Principal">
       {
         links.map(({ href, label, match, children }) => {
           const active =
@@ -74,7 +76,7 @@ const currentPath = Astro.url.pathname;
                 ? match.some((p) => currentPath.startsWith(p))
                 : currentPath.startsWith(href);
           const linkClass = [
-            'text-[15px] lg:text-base whitespace-nowrap text-caparol/90 transition-colors hover:text-caparol',
+            'text-base whitespace-nowrap text-caparol/90 transition-colors hover:text-caparol',
             active && 'text-caparol underline underline-offset-4 decoration-arena',
           ];
           if (!children) {
@@ -108,6 +110,17 @@ const currentPath = Astro.url.pathname;
           );
         })
       }
+      <a
+        href="/buscar"
+        aria-label="Buscar en la web"
+        title="Buscar"
+        class:list={[
+          'rounded-full p-1.5 transition-colors hover:bg-caparol/10 hover:text-arena',
+          currentPath.startsWith('/buscar') ? 'text-arena' : 'text-caparol/90',
+        ]}
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+      </a>
     </nav>
 
     <div class="flex items-center gap-2">
@@ -115,7 +128,7 @@ const currentPath = Astro.url.pathname;
 
       <button
         type="button"
-        class="md:hidden rounded p-2 text-caparol"
+        class="xl:hidden rounded p-2 text-caparol"
         aria-label="Abrir menú"
         aria-controls="mobile-nav"
         aria-expanded="false"
@@ -128,7 +141,7 @@ const currentPath = Astro.url.pathname;
 
   <div
     id="mobile-nav"
-    class="fixed inset-0 z-50 hidden bg-azul md:hidden"
+    class="fixed inset-0 z-50 hidden bg-azul xl:hidden"
     role="dialog"
     aria-modal="true"
     aria-label="Menú principal"
@@ -167,6 +180,10 @@ const currentPath = Astro.url.pathname;
           </div>
         ))
       }
+      <a href="/buscar" class="inline-flex items-center gap-2 font-display text-2xl text-celeste hover:text-arena">
+        <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+        Buscar
+      </a>
       <a
         href="/comprar"
         class="mt-6 rounded-lg bg-arena px-6 py-3 font-display text-3xl text-negro transition hover:brightness-95"
