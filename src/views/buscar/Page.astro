@@ -135,7 +135,18 @@ const pageDescription =
 ---
 
 <MainLayout title={pageTitle} description={pageDescription} noindex jsonLd={[breadcrumb]}>
-  <section class="mx-auto max-w-4xl px-6 py-20 sm:py-28" data-search-root>
+  <section class="relative mx-auto max-w-4xl px-6 py-20 sm:py-28" data-search-root>
+    <!-- la medusa, a la deriva junto al título; en móvil no hay sitio -->
+    <img
+      src="/assets/animals/medusa.webp"
+      alt=""
+      aria-hidden="true"
+      class="anim-medusa pointer-events-none absolute top-16 right-6 hidden w-24 md:block lg:w-28"
+      width="528"
+      height="588"
+      loading="lazy"
+      decoding="async"
+    />
     <p class="font-hand text-3xl text-celeste sm:text-4xl">a la deriva</p>
     <h1 class="mt-4 font-display text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] text-caparol">
       Buscar en la web
