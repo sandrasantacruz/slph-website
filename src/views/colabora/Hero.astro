@@ -83,6 +83,19 @@ import Ola from '../../components/Ola.astro';
       </a>
     </div>
 
+    <!-- Índice de la página (es larga): baja directo a cada parte, como en Comprar -->
+    <nav aria-label="En esta página" class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-caparol/10 pt-6 text-sm">
+      <a href="#equipo" class="group inline-flex items-center gap-2 font-display tracking-wide text-arena uppercase transition hover:text-caparol">
+        Nuestro equipo
+        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+      <span aria-hidden="true" class="hidden h-4 w-px bg-caparol/25 sm:inline-block"></span>
+      <a href="#aliados" class="group inline-flex items-center gap-2 font-display tracking-wide text-celeste uppercase transition hover:text-caparol">
+        Red de aliados
+        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+    </nav>
+
     <!-- Delfín. Das Asset ist hochformatig (604x1000): die Blasenspur nimmt die
          obere Hälfte ein, der Körper die untere.
          Mobil steht er im Fluss unter dem CTA-Strip, rechtsbündig bis an den
