@@ -101,5 +101,20 @@ const seoTitle = title ?? SITE_NAME;
     </main>
     <Footer />
     <BackToTop />
-  </body>
+      <script>
+      // Un solo vídeo con sonido a la vez: al reproducir uno, se pausan los demás.
+      // Los vídeos de fondo (silenciados, en bucle) no se tocan.
+      document.addEventListener(
+        'play',
+        (e) => {
+          const actual = e.target;
+          if (!(actual instanceof HTMLMediaElement) || actual.muted) return;
+          document.querySelectorAll<HTMLMediaElement>('video, audio').forEach((m) => {
+            if (m !== actual && !m.muted && !m.paused) m.pause();
+          });
+        },
+        true,
+      );
+    </script>
+</body>
 </html>

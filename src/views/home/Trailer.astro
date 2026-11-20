@@ -89,6 +89,10 @@ import Ola from '../../components/Ola.astro';
       display: none !important;
     }
   }
+  /* En pausa se ve solo nuestro círculo: el de vidstack, fuera (si no, salen dos «play»). */
+  .trailer-player[data-paused] .vds-play-button {
+    display: none !important;
+  }
 
   /* Custom centered play overlay */
   .player-wrap .trailer-play-overlay {

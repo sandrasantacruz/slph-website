@@ -125,6 +125,10 @@ const videos = [
       display: none !important;
     }
   }
+  /* En pausa se ve solo nuestro círculo: el de vidstack, fuera (si no, salen dos «play»). */
+  .medios-player[data-paused] .vds-play-button {
+    display: none !important;
+  }
 
   /* Custom centered play overlay */
   .player-wrap .medios-play-overlay {
