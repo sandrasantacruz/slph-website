@@ -204,7 +204,9 @@ const currentPath = Astro.url.pathname;
 
   toggle?.addEventListener('click', () => setOpen(mobile?.classList.contains('hidden') ?? false));
   close?.addEventListener('click', () => setOpen(false));
-  mobile?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  // Al pulsar un enlace se cierra el menú; el botón «Comprar» no, para que se
+  // vea a Alegría meterse en el agua antes de ir a la página de compra.
+  mobile?.querySelectorAll('a:not([data-boton-comprar])').forEach((a) => a.addEventListener('click', () => setOpen(false)));
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') setOpen(false);
   });

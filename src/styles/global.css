@@ -566,3 +566,16 @@
 .prose-slph .embed-consent-hint a {
   color: var(--color-arena);
 }
+
+/* Reproductores de vídeo (vidstack): en el móvil, sus controles táctiles piden
+   un ancho mínimo y empujaban la tarjeta blanca (polaroid) fuera de la
+   pantalla, por la derecha. Que nunca pasen del ancho disponible. */
+media-player {
+  min-width: 0;
+  max-width: 100%;
+}
+:where(.grid, .flex) > :has(media-player),
+figure:has(media-player) {
+  min-width: 0;
+  max-width: 100%;
+}
