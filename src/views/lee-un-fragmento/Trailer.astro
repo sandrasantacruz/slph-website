@@ -1,5 +1,6 @@
 ---
 import Ola from '../../components/Ola.astro';
+import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 
 ---
 
@@ -73,11 +74,12 @@ import Ola from '../../components/Ola.astro';
         </div>
 
         <!-- Caption under the window -->
-        <p
-          class="reveal reveal-delay-2 mt-6 px-6 text-center font-hand text-2xl text-caparol sm:text-3xl md:px-0"
-        >
-          ¡Noa es quien interpreta a la pequeña Betta!
-        </p>
+        <div class="reveal reveal-delay-2 mt-6 flex flex-col items-center gap-4 px-6 text-center md:px-0">
+          <p class="font-hand text-2xl text-caparol sm:text-3xl">
+            Noa, nuestra pequeña Betta en el musical, te lee el cuento
+          </p>
+          <EnlaceFlecha href="/repercusion#menores">Conoce a Noa</EnlaceFlecha>
+        </div>
       </div>
     </div>
   </div>
