@@ -55,13 +55,13 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
 
   <div class="mx-auto flex h-full w-full max-w-6xl flex-col justify-center gap-4 px-6 py-4 sm:gap-5 sm:py-6">
     <!-- Headline -->
-    <h1 class="reveal reveal-delay-1 font-display text-[clamp(2.25rem,7vw,5rem)] leading-[0.92] tracking-tight">
-      <!-- Ab 768 px steht der Buchtitel in einer Zeile, «te dirían» darunter.
-           Die Auslassungspunkte sind drei Blasen; für Google und Screenreader
-           bleibt das «…» als versteckter Text stehen. -->
-      <span class="block md:inline md:whitespace-nowrap">Si los peces</span>
-      <span class="block md:inline md:whitespace-nowrap">hablaran<span class="sr-only">…</span><span class="puntos-burbuja" aria-hidden="true"><i></i><i></i><i></i></span></span>
-      <span class="mt-1 block text-arena md:mt-[0.12em]">
+    <h1 class="reveal reveal-delay-1 font-display text-[clamp(1.75rem,9.6vw,5rem)] leading-[0.92] tracking-tight">
+      <!-- «Si los peces hablaran…» (el título del cuento) siempre en una línea,
+           también en el móvil: la letra baja lo justo para que quepa; «te dirían»
+           debajo. Los puntos suspensivos son tres burbujas; para Google y los
+           lectores de pantalla queda el «…» como texto oculto. -->
+      <span class="block whitespace-nowrap">Si los peces hablaran<span class="sr-only">…</span><span class="puntos-burbuja" aria-hidden="true"><i></i><i></i><i></i></span></span>
+      <span class="mt-[0.12em] block text-arena">
         <Ola>te dirían</Ola>
       </span>
     </h1>
@@ -210,5 +210,14 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
     .hero-wave svg, .hw-back, .hw-mid, .hw-front, .hw-crest, .hw-sparks circle, .puntos-burbuja i {
       animation: none !important;
     }
+  }
+
+  /* iPhone en modo de ahorro de energía: no reproduce el vídeo de fondo y pinta
+     su botón de play encima. Fuera: se queda el póster, sin botón. */
+  #hero-bg-video::-webkit-media-controls,
+  #hero-bg-video::-webkit-media-controls-start-playback-button,
+  #hero-bg-video::-webkit-media-controls-overlay-play-button {
+    display: none !important;
+    -webkit-appearance: none;
   }
 </style>

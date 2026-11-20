@@ -11,8 +11,8 @@
   src="/assets/inicio/flecha-agua-gruesa.webp"
   alt=""
   aria-hidden="true"
-  width="463"
-  height="191"
+  width="543"
+  height="271"
   decoding="async"
   class="flecha-agua transition-transform duration-300 group-hover:translate-x-[5px]"
 />
@@ -21,12 +21,12 @@
   .flecha-agua {
     display: inline-block;
     flex: none;
-    height: 1.45em;
+    /* La imagen lleva el brillo y el halo ya pintados (antes con CSS filter,
+       que en el iPhone dibujaba un recuadro oscuro detrás). Incluye 40 px de
+       margen para el halo: la flecha en sí mide lo mismo que antes (1,45em). */
+    height: 2.06em;
     width: auto;
-    /* más alta que la línea: sin este margen negativo agrandaría el botón */
-    margin-block: -0.25em;
-    /* algo más luminosa y con halo azul claro, sin llegar a neón */
-    filter: brightness(1.12) drop-shadow(0 0 1px rgba(6, 30, 90, 0.55))
-      drop-shadow(0 0 4px rgba(255, 255, 255, 0.55)) drop-shadow(0 0 10px rgba(110, 200, 255, 0.7));
+    margin-block: -0.555em;
+    margin-inline: -0.3em;
   }
 </style>
