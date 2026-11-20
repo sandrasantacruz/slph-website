@@ -2,8 +2,9 @@
 const bubbles = Array.from({ length: 10 }, (_, i) => i + 1);
 ---
 
+<!-- Nuestra burbuja (Material SLPH, «burbujas 3»), en lugar de esferas hechas con código -->
 <div class="bubbles" aria-hidden="true">
-  {bubbles.map((n) => <div class={`bubble bubble-${n}`}></div>)}
+  {bubbles.map((n) => <img class={`bubble bubble-${n}`} src="/assets/burbuja.webp" alt="" width="240" height="237" decoding="async" />)}
 </div>
 
 <style is:global>
@@ -11,32 +12,14 @@ const bubbles = Array.from({ length: 10 }, (_, i) => i + 1);
     position: fixed;
     inset: 0;
     z-index: -1;
-    opacity: 0.22;
+    opacity: 0.35;
     pointer-events: none;
     overflow: hidden;
   }
   .bubble {
     position: absolute;
     width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    box-shadow:
-      0 20px 30px rgba(0, 0, 0, 0.1),
-      inset 0 10px 30px 5px rgba(255, 255, 255, 0.55);
-  }
-  .bubble::after {
-    content: "";
-    position: absolute;
-    left: 10px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.28) 0%,
-      rgba(255, 255, 255, 0) 70%
-    );
-    box-shadow: inset 0 20px 30px rgba(255, 255, 255, 0.18);
+    height: auto;
   }
 
   .bubble-1  { left: -5%; top:  5%; transform: scale(0.6); animation: bubble-up 25s linear infinite, bubble-side 2s ease-in-out infinite alternate; }
