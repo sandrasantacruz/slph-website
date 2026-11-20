@@ -1,8 +1,8 @@
 ---
 // Decorative water surface. Sits between the navbar and the page body
 // so the eye reads the navbar as the boat above and the rest of the
-// site as the ocean below. Hand-drawn-ish wave with arena highlights,
-// celeste caustics shimmering down into the dark.
+// site as the ocean below. Hand-drawn-ish wave with arena highlights.
+// (Die vier dünnen «Caustics»-Linien darunter sind raus: kein eigenes Motiv.)
 ---
 
 <div class="waterline" aria-hidden="true">
@@ -75,32 +75,6 @@
     </g>
   </svg>
 
-  <!-- Caustic shimmer fading into the deep -->
-  <svg
-    class="waterline__caustics"
-    viewBox="0 0 1440 160"
-    preserveAspectRatio="none"
-    role="presentation"
-  >
-    <defs>
-      <linearGradient id="wl-caustic" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stop-color="#fadeaa" stop-opacity="0.32"/>
-        <stop offset="30%"  stop-color="#64aad2" stop-opacity="0.45"/>
-        <stop offset="100%" stop-color="#64aad2" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <g
-      stroke="url(#wl-caustic)"
-      stroke-width="1.1"
-      stroke-linecap="round"
-      fill="none"
-    >
-      <path d="M-40,14 Q 90,4 200,18 T 420,18 T 640,18 T 860,18 T 1080,18 T 1300,18 T 1480,18"/>
-      <path d="M-40,46 Q 110,36 220,52 T 460,52 T 700,52 T 940,52 T 1180,52 T 1480,52"/>
-      <path d="M-40,86 Q 120,72 240,92 T 480,92 T 720,92 T 960,92 T 1200,92 T 1480,92"/>
-      <path d="M-40,128 Q 140,112 260,134 T 520,134 T 780,134 T 1040,134 T 1300,134 T 1480,134"/>
-    </g>
-  </svg>
 </div>
 
 <style>
@@ -124,17 +98,6 @@
     animation: wl-drift 16s ease-in-out infinite alternate;
   }
 
-  .waterline__caustics {
-    position: absolute;
-    left: -2%;
-    right: -2%;
-    top: 3rem;                /* overlap slightly under the crest */
-    width: 104%;
-    height: 8rem;
-    opacity: 0.55;
-    mix-blend-mode: screen;
-    animation: wl-drift-slow 26s ease-in-out infinite alternate;
-  }
 
   .wl-back  { animation: wl-bob 9s ease-in-out infinite; }
   .wl-front { animation: wl-bob 7s ease-in-out -1.2s infinite; }
@@ -156,10 +119,6 @@
     0%   { transform: translate3d(-0.6%, 0, 0); }
     100% { transform: translate3d(0.6%, 0, 0); }
   }
-  @keyframes wl-drift-slow {
-    0%   { transform: translate3d(-1.6%, 0, 0); }
-    100% { transform: translate3d(1.6%, 0, 0); }
-  }
   @keyframes wl-bob {
     0%, 100% { transform: translateY(0); }
     50%      { transform: translateY(-1.5px); }
@@ -171,7 +130,6 @@
 
   @media (prefers-reduced-motion: reduce) {
     .waterline__wave,
-    .waterline__caustics,
     .wl-back, .wl-front, .wl-crest,
     .wl-sparks circle {
       animation: none !important;
