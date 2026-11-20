@@ -1,5 +1,29 @@
 ---
 import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
+// Lo que dicen: una fila de citas cortas, antes de las listas.
+const citas = [
+  {
+    texto: 'Esta experiencia trasladada al museo es maravillosa… no solo conciencia a los niños que han participado, sino también a todos los visitantes.',
+    nombre: 'José Alejandro Díaz Hernández',
+    cargo: 'Director de la Casa-Museo León y Castillo',
+  },
+  {
+    texto: 'A raíz de la lectura del libro… de una botella de un solo uso a una reutilizable…',
+    nombre: 'Isabel Martín',
+    cargo: 'Jefa de estudios del Colegio Alfredo Kraus',
+  },
+  {
+    texto: 'Esta maravillosa interpretación ha conseguido que nuestro alumnado tome conciencia sobre la gravedad de la contaminación y, además, adquiera estrategias encaminadas a la protección de nuestros océanos.',
+    nombre: 'Equipo docente',
+    cargo: 'CEIP Pepe Dámaso',
+  },
+  {
+    texto: 'Es un regalo a la naturaleza y a las nuevas generaciones… desde el arte, una forma tan sensible de llegar.',
+    nombre: 'Público',
+    cargo: 'Biblioteca Municipal Dolores Campos-Herrero',
+  },
+];
+
 const aliados = [
   'Consejería de Cultura del Cabildo de Gran Canaria',
   'Consejería de Educación del Cabildo de Gran Canaria',
@@ -96,7 +120,63 @@ const centros = [
       </h2>
     </div>
 
-    <div class="reveal reveal-delay-1 mt-14 grid gap-10 lg:grid-cols-3 lg:gap-12">
+    <!-- Lo que dicen: en móvil se desliza de lado; desde md, rejilla de 2 -->
+    <ul class="reveal reveal-delay-1 -mx-6 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-3 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
+      {citas.map((c) => (
+        <li class="w-[85%] shrink-0 snap-center md:w-auto">
+          <figure class="flex h-full flex-col rounded-2xl border border-caparol/15 bg-azul/40 p-6 sm:p-7">
+            <span aria-hidden="true" class="font-display text-5xl leading-none text-arena/60">«</span>
+            <blockquote class="-mt-3 flex-1 font-hand text-2xl leading-snug text-caparol sm:text-[1.65rem]">
+              {c.texto}
+            </blockquote>
+            <figcaption class="mt-5 border-t border-caparol/10 pt-4 text-sm leading-snug">
+              <span class="block font-display text-base tracking-wide text-arena">{c.nombre}</span>
+              <span class="text-caparol/70">{c.cargo}</span>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Abre aquí mismo el vídeo de las opiniones de los niños (Casa-Museo Pérez Galdós) -->
+    <div class="reveal mt-10 flex justify-center">
+      <button
+        type="button"
+        data-abrir-opiniones
+        class="group inline-flex items-center gap-2 rounded-full border border-arena/60 px-5 py-2.5 font-display text-base tracking-[0.18em] text-arena uppercase transition hover:border-arena hover:bg-arena hover:text-azul"
+      >
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+        Lo que opinan los niños
+      </button>
+    </div>
+
+    <dialog
+      data-dialogo-opiniones
+      aria-label="Opiniones de los niños en la Casa-Museo Pérez Galdós"
+      class="m-auto w-[min(92vw,60rem)] overflow-visible bg-transparent p-0 backdrop:bg-azul-deep/85 backdrop:backdrop-blur-sm"
+    >
+      <div class="relative">
+        <button
+          type="button"
+          data-cerrar-opiniones
+          aria-label="Cerrar vídeo"
+          class="absolute -top-12 right-0 rounded-full p-2 text-caparol transition hover:text-arena"
+        >
+          <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <video
+          src="/videos/menores-opiniones.mp4"
+          poster="/videos/menores-opiniones-poster.webp"
+          controls
+          playsinline
+          preload="none"
+          class="block w-full rounded-2xl shadow-2xl"
+        ></video>
+        <p class="mt-3 text-center font-hand text-2xl text-arena">lo que opinan los niños · Casa-Museo Pérez Galdós</p>
+      </div>
+    </dialog>
+
+    <div class="reveal reveal-delay-1 mt-16 grid gap-10 lg:grid-cols-3 lg:gap-12">
       <div class="lg:col-span-1">
         <h3 class="font-display text-xl tracking-wide text-arena uppercase">
           Administraciones, cultura y patrimonio
@@ -150,3 +230,17 @@ const centros = [
     </div>
   </div>
 </section>
+
+<script>
+  // «Lo que opinan los niños»: el vídeo se abre y empieza aquí, sin salir de Colabora.
+  const dlg = document.querySelector<HTMLDialogElement>('[data-dialogo-opiniones]');
+  const vid = dlg?.querySelector('video');
+  document.querySelector('[data-abrir-opiniones]')?.addEventListener('click', () => {
+    dlg?.showModal();
+    vid?.play().catch(() => {});
+  });
+  dlg?.querySelector('[data-cerrar-opiniones]')?.addEventListener('click', () => dlg.close());
+  // clic fuera del vídeo = cerrar
+  dlg?.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  dlg?.addEventListener('close', () => vid?.pause());
+</script>
