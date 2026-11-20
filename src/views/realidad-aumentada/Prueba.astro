@@ -1,5 +1,7 @@
 ---
+import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
+import { APP_LINKS } from '../../lib/app-links';
 
 // Zielbild für die AR-App (Seite 80 des Buchs). Wird ungeschnitten gezeigt,
 // sonst erkennt die App das Motiv nicht.
@@ -20,10 +22,41 @@ const target = '/assets/ar/pagina-80-pez-espada.webp';
       <Ola class="whitespace-nowrap text-arena">esta ilustración</Ola>
     </h2>
 
-    <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-base leading-relaxed text-caparol/90 sm:text-lg">
+    <!-- Zwei Fassungen: wer auf dem Handy liest, kann das Handy nicht auf den
+         eigenen Bildschirm richten. Umschalten per (pointer: coarse) + Breite,
+         nicht per JS, damit nichts springt. -->
+    <p class="prueba-escritorio reveal reveal-delay-2 mt-6 max-w-2xl text-base leading-relaxed text-caparol/90 sm:text-lg">
       Abre la app y apunta con el móvil a la ilustración de aquí abajo,
       directamente en la pantalla. ¿Tienes el libro? Búscala en la página 80
       y verás cómo, de repente, la escena se escapa… ¡y salta del libro!
+    </p>
+    <p class="prueba-movil reveal reveal-delay-2 mt-6 max-w-2xl text-base leading-relaxed text-caparol/90 sm:text-lg">
+      Abre esta página en un ordenador o una tableta y apunta con el móvil a la
+      ilustración de aquí abajo. ¿Tienes el libro? Búscala en la página 80
+      y verás cómo, de repente, la escena se escapa… ¡y salta del libro!
+    </p>
+
+    <!-- Für alle, die die App noch nicht haben -->
+    <p class="reveal reveal-delay-2 mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-caparol/75 sm:text-base">
+      <span>¿Aún no la tienes?</span>
+      <a
+        href={APP_LINKS.android}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 text-celeste underline decoration-celeste/40 underline-offset-4 transition hover:text-arena"
+      >
+        <Icon name="simple-icons:googleplay" class="h-4 w-4" aria-hidden="true" />
+        Google Play
+      </a>
+      <a
+        href={APP_LINKS.iosBeta}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 text-celeste underline decoration-celeste/40 underline-offset-4 transition hover:text-arena"
+      >
+        <Icon name="simple-icons:apple" class="h-4 w-4" aria-hidden="true" />
+        iPhone y iPad (TestFlight)
+      </a>
     </p>
 
     <div class="reveal reveal-delay-2 mt-10">
@@ -43,9 +76,18 @@ const target = '/assets/ar/pagina-80-pez-espada.webp';
           decoding="async"
         />
       </a>
-      <p class="mt-4 text-center font-hand text-2xl text-celeste sm:text-3xl">
-        apunta aquí… ¡y que empiece la función!
+      <p class="mt-4 text-center font-hand text-2xl text-arena sm:text-3xl">
+        Apunta aquí… ¡y verás al Coronel Espada Afilada en acción!
       </p>
     </div>
   </div>
 </section>
+
+<style>
+  /* Por defecto, ordenador/tableta. Teléfono = puntero táctil y pantalla estrecha. */
+  .prueba-movil { display: none; }
+  @media (pointer: coarse) and (max-width: 767px) {
+    .prueba-movil { display: block; }
+    .prueba-escritorio { display: none; }
+  }
+</style>
