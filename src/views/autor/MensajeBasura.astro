@@ -1,0 +1,177 @@
+---
+/**
+ * Recuadro «trascendente mensaje · ¡NO a la basura! ¡El mar NO se contamina!»
+ * con basura del cuento flotando a la deriva: la botella
+ * aplastada, la bolsa de plástico (la del pez, sin el pez), caída
+ * sobre «contamina!», inclinada hacia la palabra, y la rueda de la portada, medio escondida tras
+ * el recuadro. Se hunde primero la bolsa, para que la palabra quede limpia. Aquí la basura es el mensaje: al pasar el ratón se hunden (más azules,
+ * borrosas, con burbujas), una detrás de otra, y al final el borde se ilumina en celeste, como si el mar
+ * respirara. Al quitar el ratón vuelven despacio.
+ * La primera vez ocurre solo, unos segundos después de que el recuadro
+ * aparezca, para que se descubra el efecto (en táctil se queda limpio). Con «reducir movimiento», sin animación.
+ * Prototipo: TOBÍAS/«BOTÓN COMPRAR ALEGRÍA (prototipo)»/«prueba-basura-autor.html».
+ */
+---
+
+<!-- «reveal» va en un envoltorio: su transición no debe pisar la del brillo -->
+<div class="mar reveal reveal-delay-3 relative mt-12" data-mensaje-mar>
+  <!-- la rueda va detrás del recuadro: fuera de él (su backdrop-blur crea su propia capa) -->
+  <span class="basura rueda" style="--retraso: 0.6s" aria-hidden="true">
+    <span class="mece"><img src="/assets/autor/rueda.webp" alt="" width="260" height="209" loading="lazy" decoding="async" /></span>
+    <img class="burbujas" src="/assets/boton-comprar/tres-burbujas.webp" alt="" width="102" height="160" loading="lazy" decoding="async" />
+  </span>
+<div
+  class="mensaje-mar relative rounded-2xl border border-arena/30 bg-azul-deep/40 p-6 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-8"
+>
+  <p class="font-hand text-2xl text-celeste sm:text-3xl">trascendente mensaje</p>
+  <p class="mt-2 font-display text-3xl leading-tight text-caparol sm:text-4xl">
+    ¡<span class="text-arena">NO</span> a la basura!
+    <span class="block">¡El mar <span class="text-arena">NO</span> se <span class="relative inline-block">contamina!<span class="basura bolsa" style="--retraso: 0s" aria-hidden="true"><span class="mece"><img src="/assets/autor/bolsa.webp" alt="" width="160" height="212" loading="lazy" decoding="async" /></span><img class="burbujas" src="/assets/boton-comprar/tres-burbujas.webp" alt="" width="102" height="160" loading="lazy" decoding="async" /></span></span></span>
+  </p>
+
+  <span class="basura botella" style="--retraso: 0.3s" aria-hidden="true">
+    <span class="mece"><img src="/assets/autor/botella.webp" alt="" width="103" height="130" loading="lazy" decoding="async" /></span>
+    <img class="burbujas" src="/assets/boton-comprar/tres-burbujas.webp" alt="" width="102" height="160" loading="lazy" decoding="async" />
+  </span>
+</div>
+</div>
+
+<style>
+  .mensaje-mar {
+    /* vuelta lenta del brillo al quitar el ratón */
+    transition: border-color 1.5s ease, box-shadow 1.5s ease;
+  }
+
+  .basura {
+    position: absolute;
+    pointer-events: none;
+    filter: drop-shadow(0 6px 10px rgba(3, 10, 35, 0.55));
+    /* vuelta: despacio, a la deriva */
+    transition:
+      transform 3.5s cubic-bezier(0.3, 0, 0.3, 1),
+      opacity 3s ease,
+      filter 3s ease;
+  }
+  /* Todo en la mitad derecha, que es la que el texto deja vacía:
+     la botella sobre el borde de arriba, la rueda (la más grande)
+     abajo a la derecha, por delante del borde,
+     y la bolsa caída encima de «contamina!». */
+  /* móvil: el texto ocupa casi todo el ancho, así que van por los bordes */
+  .botella { width: 52px; right: 40px; top: -38px; }
+  .rueda { width: 78px; right: -14px; bottom: -26px; z-index: 1; }
+  /* al final de la palabra, casi tocando la «a» y la «!» */
+  .bolsa { width: 1.26em; right: -0.72em; top: -0.98em; }
+  @media (min-width: 640px) {
+    /* la botella, sobre el borde de arriba: separada de la bolsa y la rueda */
+    .botella { width: 70px; right: 12.5%; top: -40px; }
+    .rueda { width: 130px; right: -10px; bottom: -32px; }
+    .bolsa { width: 1.32em; right: -0.8em; top: -1.05em; }
+  }
+  /* ordenador: el recuadro va en columna y a la derecha hay sitio para que asome más */
+  @media (min-width: 1024px) {
+    .rueda { width: 140px; right: -34px; bottom: -32px; }
+  }
+
+  /* cada objeto se mece a su ritmo, con un vaivén de lado además de arriba y abajo */
+  .mece { display: block; }
+  .botella .mece { animation: mb-deriva-botella 6.5s ease-in-out infinite; }
+  .bolsa .mece { animation: mb-deriva-bolsa 7.5s ease-in-out infinite; }
+  .rueda .mece { animation: mb-deriva-rueda 8s ease-in-out infinite; }
+  .mece img {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* la parte de abajo, algo transparente: como sumergida en la línea del agua */
+    -webkit-mask-image: linear-gradient(to bottom, #000 62%, rgba(0, 0, 0, 0.45) 100%);
+    mask-image: linear-gradient(to bottom, #000 62%, rgba(0, 0, 0, 0.45) 100%);
+  }
+  /* la bolsa no va sumergida: que se vea su borde turquesa de abajo */
+  .bolsa .mece img { -webkit-mask-image: none; mask-image: none; }
+  @keyframes mb-deriva-botella {
+    0%, 100% { transform: translate(0, 0) rotate(38deg); }
+    50% { transform: translate(5px, 6px) rotate(46deg); }
+  }
+  /* la bolsa, más ligera: ondula despacio, inclinada hacia «contamina» */
+  @keyframes mb-deriva-bolsa {
+    0%, 100% { transform: translate(0, 0) rotate(16deg) scaleY(1); }
+    50% { transform: translate(-3px, -6px) rotate(10deg) scaleY(0.95); }
+  }
+  /* la rueda, pesada: apenas se mueve */
+  @keyframes mb-deriva-rueda {
+    0%, 100% { transform: translate(0, 0) rotate(-4deg); }
+    50% { transform: translate(3px, -3px) rotate(-1deg); }
+  }
+
+  /* burbujas: salen al hundirse */
+  .burbujas {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    width: 46%;
+    height: auto;
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+
+  /* el mar se limpia: hover en ordenador, .limpio en táctil */
+  .mar:hover .basura,
+  .mar.limpio .basura {
+    transform: translate(10px, 70px) rotate(25deg) scale(0.7);
+    opacity: 0;
+    /* hacia el fondo: más azul y borrosa */
+    filter: blur(2.5px) brightness(0.75) sepia(0.4) hue-rotate(170deg) saturate(1.6);
+    /* una detrás de otra (--retraso en cada objeto) */
+    transition:
+      transform 1.6s cubic-bezier(0.45, 0, 0.6, 1) var(--retraso, 0s),
+      opacity 1.4s ease calc(var(--retraso, 0s) + 0.2s),
+      filter 1.2s ease var(--retraso, 0s);
+  }
+  .mar:hover .burbujas,
+  .mar.limpio .burbujas {
+    animation: mb-burbujas 1.6s ease-out calc(var(--retraso, 0s) + 0.25s) both;
+  }
+  @keyframes mb-burbujas {
+    0% { opacity: 0; transform: translate(-50%, 20px); }
+    25% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -60px); }
+  }
+  /* recompensa: el borde se ilumina en celeste, como si el mar respirara */
+  .mar:hover .mensaje-mar,
+  .mar.limpio .mensaje-mar {
+    border-color: rgba(100, 170, 210, 0.6);
+    box-shadow: 0 0 28px rgba(100, 170, 210, 0.3), inset 0 0 18px rgba(100, 170, 210, 0.08);
+    /* cuando ya no queda basura */
+    transition: border-color 1.2s ease 1.7s, box-shadow 1.2s ease 1.7s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .basura, .mece, .burbujas, .mensaje-mar { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<script>
+  // Para que todo el mundo descubra el efecto, el mar se limpia solo una vez
+  // cuando el recuadro aparece en pantalla.
+  // - Táctil (no hay «pasar el ratón»): se queda limpio.
+  // - Con ratón: la basura vuelve despacio a la deriva, y a partir de ahí se
+  //   limpia cada vez que se pasa el ratón por encima.
+  const tactil = matchMedia('(hover: none)').matches;
+  document.querySelectorAll<HTMLElement>('[data-mensaje-mar]').forEach((box) => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        obs.disconnect();
+        setTimeout(
+          () => {
+            box.classList.add('limpio');
+            if (!tactil) setTimeout(() => box.classList.remove('limpio'), 4500);
+          },
+          tactil ? 2500 : 3000,
+        );
+      },
+      { threshold: 0.6 },
+    );
+    obs.observe(box);
+  });
+</script>
+

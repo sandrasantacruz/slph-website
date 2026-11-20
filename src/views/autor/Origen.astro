@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import Ola from '../../components/Ola.astro';
+import MensajeBasura from './MensajeBasura.astro';
 
 const sandraImg = "/assets/sandra-4.webp";
 ---
@@ -57,20 +58,8 @@ const sandraImg = "/assets/sandra-4.webp";
           </p>
         </div>
 
-        <!-- Mensaje / manifesto -->
-        <div
-          class="reveal reveal-delay-3 mt-12 rounded-2xl border border-arena/30 bg-azul-deep/40 p-6 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-8"
-        >
-          <p class="font-hand text-2xl text-celeste sm:text-3xl">trascendente mensaje</p>
-          <p
-            class="mt-2 font-display text-3xl leading-tight text-caparol sm:text-4xl"
-          >
-            ¡<span class="text-arena">NO</span> a la basura!
-            <span class="block"
-              >¡El mar <span class="text-arena">NO</span> se contamina!</span
-            >
-          </p>
-        </div>
+        <!-- Mensaje / manifesto, con la basura a la deriva -->
+        <MensajeBasura />
       </div>
 
       <!-- Image column -->
