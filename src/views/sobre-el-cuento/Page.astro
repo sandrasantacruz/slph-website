@@ -13,7 +13,7 @@ import CuentoGaleria from './CuentoGaleria.astro';
 import Cierre from './Cierre.astro';
 import LoQueDicen from './LoQueDicen.astro';
 import Lightbox from '../galeria/Lightbox.astro';
-import { bookSchema, breadcrumbSchema } from '../../lib/seo';
+import { bookSchema, breadcrumbSchema, cuadernilloSchema } from '../../lib/seo';
 
 const breadcrumb = breadcrumbSchema([
   { name: 'Inicio', url: '/' },
@@ -22,14 +22,14 @@ const breadcrumb = breadcrumbSchema([
 ---
 
 <MainLayout
-  title="Si los peces hablaran…: el cuento que nació de un musical | Sandra Santa Cruz"
-  description="Nació sobre un escenario y une literatura, música, ilustración, tecnología y educación ambiental. El cuento de Sandra Santa Cruz, ya en su 3.ª edición."
+  title="Si los peces hablaran…, el cuento que nació de un musical"
+  description="Cuento infantil de Sandra Santa Cruz que nació sobre un escenario: literatura, música, ilustración, realidad aumentada y educación ambiental. 3.ª edición."
   image="/assets/og-cuento.jpg"
   imageAlt="Portada de la 3.ª edición del cuento Si los peces hablaran…, de Sandra Santa Cruz"
   imageWidth={1200}
   imageHeight={630}
   type="book"
-  jsonLd={[bookSchema(), breadcrumb]}
+  jsonLd={[bookSchema({ precio: true }), cuadernilloSchema(), breadcrumb]}
 >
   <Hero />
   <!-- Los cinco lenguajes de la obra, cada uno con su página -->

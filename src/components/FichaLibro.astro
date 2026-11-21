@@ -62,8 +62,13 @@ const datos: { icon: string; valor: string; arriba?: string; abajo?: string; hre
       </li>
     ))}
   </ul>
+  <!-- Precio discreto (también lo lee Google en bookSchema/cuadernilloSchema): nunca en los botones -->
+  <p class="mt-5 text-sm text-caparol/70">
+    Precio: <strong class="font-display text-base text-caparol">18 €</strong>
+    · Cuadernillo de actividades: <strong class="font-display text-base text-caparol">5 €</strong>
+  </p>
   {venta && (
-    <p class="mt-5 text-base text-caparol/75">
+    <p class="mt-3 text-base text-caparol/75">
       Consigue tu ejemplar
       <a href="/comprar" class="text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">online, en el Centro de Danza Sandra Santa Cruz (con dedicatoria de la autora) o en librerías de Gran Canaria</a>.
     </p>

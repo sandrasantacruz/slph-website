@@ -145,7 +145,8 @@ export function personSandraSchema(): JsonLd {
   };
 }
 
-export function bookSchema(): JsonLd {
+/** `precio`: solo en páginas donde se ve el precio (las que muestran FichaLibro). */
+export function bookSchema({ precio = false }: { precio?: boolean } = {}): JsonLd {
   return {
     '@context': 'https://schema.org',
     '@type': 'Book',
@@ -183,6 +184,7 @@ export function bookSchema(): JsonLd {
       '@type': 'Offer',
       url: BOOK_BUY_URL,
       availability: 'https://schema.org/InStock',
+      ...(precio ? { price: '18.00' } : {}),
       priceCurrency: 'EUR',
       seller: {
         '@type': 'Organization',
@@ -308,4 +310,29 @@ export function eventSchema(input: EventSchemaInput): JsonLd {
     schema.eventStatus = 'https://schema.org/EventScheduled';
   }
   return schema;
+}
+
+/** Cuaderno de actividades (3.ª edición). Precio visible en la ficha del libro. */
+export function cuadernilloSchema(): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Book',
+    '@id': `${SITE_URL}/#cuadernillo`,
+    name: 'Si los peces hablaran… Actividades y personajes para colorear',
+    isbn: '978-84-09-80109-1',
+    inLanguage: BOOK_LANGUAGE,
+    bookFormat: 'https://schema.org/Paperback',
+    genre: 'Cuaderno de actividades',
+    author: { '@id': `${SITE_URL}/autor#person` },
+    illustrator: { '@type': 'Person', name: 'Pablo Tribiño' },
+    isRelatedTo: { '@id': `${SITE_URL}/#book` },
+    image: absoluteUrl('/assets/cuento/cuadernillo.webp'),
+    offers: {
+      '@type': 'Offer',
+      url: `${SITE_URL}/comprar`,
+      availability: 'https://schema.org/InStock',
+      price: '5.00',
+      priceCurrency: 'EUR',
+    },
+  };
 }
