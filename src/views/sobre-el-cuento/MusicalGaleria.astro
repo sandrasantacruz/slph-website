@@ -27,7 +27,7 @@ const imagenes = [
     </div>
 
     <div
-      class="mt-8 grid items-start gap-6 mx-auto max-w-xl lg:max-w-none lg:grid-cols-3"
+      class="carrusel -mx-6 mt-8 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-6 pb-2 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0"
     >
       {
         imagenes.map((img, i) => (
@@ -37,7 +37,7 @@ const imagenes = [
             data-gallery="musical-escena"
             data-caption={img.alt}
             aria-label="Ampliar imagen del musical"
-            class={`reveal reveal-delay-${i + 1} group block cursor-zoom-in overflow-hidden rounded-xl border border-caparol/15 bg-azul-deep/50 ring-1 ring-caparol/10 transition hover:border-arena/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arena`}
+            class={`reveal reveal-delay-${i + 1} group block w-[82%] shrink-0 snap-center sm:w-[60%] lg:w-auto cursor-zoom-in overflow-hidden rounded-xl border border-caparol/15 bg-azul-deep/50 ring-1 ring-caparol/10 transition hover:border-arena/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-arena`}
           >
             <img
               src={img.src}
@@ -52,6 +52,7 @@ const imagenes = [
         ))
       }
     </div>
+    <p class="mt-3 text-center font-hand text-xl text-celeste/80 lg:hidden" aria-hidden="true">desliza para ver más →</p>
     <div class="reveal mt-10 flex justify-center">
       <EnlaceFlecha href="/galeria#musical">Ver el musical original</EnlaceFlecha>
     </div>

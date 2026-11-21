@@ -579,3 +579,7 @@ figure:has(media-player) {
   min-width: 0;
   max-width: 100%;
 }
+
+/* Carrusel de fotos en móvil (Sobre el cuento): sin barra de desplazamiento visible */
+.carrusel { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.carrusel::-webkit-scrollbar { display: none; }
