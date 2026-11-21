@@ -1,4 +1,5 @@
 ---
+import { srcset } from '../../lib/srcset';
 /**
  * Cabecera de «Sobre el cuento»: qué es el libro, para quién y por qué es
  * distinto, con la portada de la 3.ª edición. Textos del «Dossier Bibliotecas
@@ -84,6 +85,8 @@ const datos = [
       <div class="polaroid tilt-r1 mx-auto max-w-[17rem] transition duration-500 hover:rotate-0 sm:max-w-xs lg:max-w-sm">
         <img
           src="/assets/cuento/familia-leyendo-el-cuento-vertical.webp"
+          srcset={srcset("/assets/cuento/familia-leyendo-el-cuento-vertical.webp", 1200)}
+          sizes="(min-width: 1024px) 384px, 300px"
           alt="Un padre con sus dos hijos, sonrientes en una terraza canaria con cactus, con la 3.ª edición de Si los peces hablaran…"
           width="1200"
           height="1500"

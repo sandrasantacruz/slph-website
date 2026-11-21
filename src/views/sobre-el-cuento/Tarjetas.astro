@@ -1,4 +1,5 @@
 ---
+import { srcset } from '../../lib/srcset';
 import Ola from '../../components/Ola.astro';
 
 /**
@@ -110,6 +111,8 @@ const cards = [
                 )}
                 <img
                   src={card.image}
+                  srcset={srcset(card.image, 1500)}
+                  sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 300px"
                   alt={card.alt}
                   width="600"
                   height="600"

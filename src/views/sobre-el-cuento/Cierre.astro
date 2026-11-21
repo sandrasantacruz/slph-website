@@ -1,4 +1,5 @@
 ---
+import { srcset } from '../../lib/srcset';
 import FichaLibro from '../../components/FichaLibro.astro';
 ---
 
@@ -11,6 +12,8 @@ import FichaLibro from '../../components/FichaLibro.astro';
         <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
           <img
             src="/assets/cuento/nina-cuento-y-cuadernillo.webp"
+            srcset={srcset("/assets/cuento/nina-cuento-y-cuadernillo.webp", 1500)}
+            sizes="(min-width: 1024px) 540px, (min-width: 640px) 90vw, 300px"
             alt="Vera Paisier, alumna del Centro de Danza Sandra Santa Cruz, muestra la 3.ª edición del cuento y el cuadernillo de actividades"
             width="1500"
             height="1006"

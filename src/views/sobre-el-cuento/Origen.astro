@@ -1,4 +1,5 @@
 ---
+import { srcset } from '../../lib/srcset';
 import { Icon } from "astro-icon/components";
 import Ola from '../../components/Ola.astro';
 
@@ -89,6 +90,8 @@ const estrenoImg = "/assets/cuento/pulpo.webp";
             <!-- Ungeschnitten: die Illustration trägt unten selbst Text. -->
             <img
               src={estrenoImg}
+              srcset={srcset("/assets/cuento/pulpo.webp", 843)}
+              sizes="(min-width: 1024px) 420px, 300px"
               alt="Ilustración del Sr. Tentáculus junto al libro Si los peces hablaran en la orilla del mar"
               class="block w-full"
               width="843"

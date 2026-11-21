@@ -1,4 +1,5 @@
 ---
+import { srcset } from '../../lib/srcset';
 import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 
 const imagenes = [
@@ -41,6 +42,8 @@ const imagenes = [
           >
             <img
               src={img.src}
+              srcset={srcset(img.src, 1500)}
+              sizes="(min-width: 1024px) 360px, (min-width: 640px) 60vw, 300px"
               alt={img.alt}
               width="1500"
               height="900"

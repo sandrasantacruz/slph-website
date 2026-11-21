@@ -1,4 +1,5 @@
 ---
+import { srcset } from '../../lib/srcset';
 /**
  * «Antes de decidirte, ábrelo»: la invitación a leer el fragmento. Es la única
  * franja clara de la página (como papel) y enseña dos páginas reales del libro
@@ -13,8 +14,8 @@ import Ola from '../../components/Ola.astro';
     <a href="/lee-un-fragmento" class="reveal group block lg:col-span-7" aria-label="Lee un fragmento del cuento">
       <!-- libro abierto: el comienzo del capítulo 1 -->
       <div class="relative flex rotate-[-1.5deg] shadow-[0_30px_60px_-20px_rgba(11,32,86,0.55)] transition duration-500 group-hover:rotate-0">
-        <img src="/assets/fragmento/05.webp" alt="Ilustración del capítulo 1: Lorena en la orilla del mar" width="1500" height="1500" class="w-1/2 rounded-l-md" loading="lazy" decoding="async" />
-        <img src="/assets/fragmento/07.webp" alt="Primera página del capítulo 1 de Si los peces hablaran…" width="1500" height="1500" class="w-1/2 rounded-r-md" loading="lazy" decoding="async" />
+        <img src="/assets/fragmento/05.webp" srcset={srcset("/assets/fragmento/05.webp", 1500)} sizes="(min-width: 1024px) 330px, (min-width: 640px) 45vw, 170px" alt="Ilustración del capítulo 1: Lorena en la orilla del mar" width="1500" height="1500" class="w-1/2 rounded-l-md" loading="lazy" decoding="async" />
+        <img src="/assets/fragmento/07.webp" srcset={srcset("/assets/fragmento/07.webp", 1500)} sizes="(min-width: 1024px) 330px, (min-width: 640px) 45vw, 170px" alt="Primera página del capítulo 1 de Si los peces hablaran…" width="1500" height="1500" class="w-1/2 rounded-r-md" loading="lazy" decoding="async" />
         <span aria-hidden="true" class="pointer-events-none absolute inset-y-0 left-1/2 w-10 -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgba(11,32,86,0.18),transparent)]"></span>
       </div>
     </a>

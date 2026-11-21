@@ -1,4 +1,5 @@
 ---
+import { srcset } from '../../lib/srcset';
 import Ola from '../../components/Ola.astro';
 const presentacion = "/assets/cuento/presentacion-oficial-poema-del-mar.webp";
 ---
@@ -20,6 +21,8 @@ const presentacion = "/assets/cuento/presentacion-oficial-poema-del-mar.webp";
           <div data-caracola class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
             <img
               src={presentacion}
+              srcset={srcset("/assets/cuento/presentacion-oficial-poema-del-mar.webp", 900)}
+              sizes="(min-width: 1024px) 420px, 300px"
               alt="Sandra Santa Cruz firma ejemplares en la presentación oficial del cuento en el acuario Poema del Mar"
               width="900"
               height="600"
@@ -44,6 +47,8 @@ const presentacion = "/assets/cuento/presentacion-oficial-poema-del-mar.webp";
               </div>
               <img
                 src="/assets/cuento/caracola.webp"
+                srcset={srcset("/assets/cuento/caracola.webp", 847)}
+                sizes="(min-width: 640px) 260px, 140px"
                 alt=""
                 width="847"
                 height="1000"

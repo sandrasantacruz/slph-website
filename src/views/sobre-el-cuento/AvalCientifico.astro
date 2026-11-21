@@ -1,4 +1,5 @@
 ---
+import { srcset } from '../../lib/srcset';
 /**
  * Aval científico: las dos investigadoras del Instituto ECOAQUA (ULPGC) que
  * supervisan el contenido. Texto del «Dossier Bibliotecas 2026-2027»; el vídeo
@@ -15,6 +16,8 @@ const VIDEO_ID = 'GkmiiCa8qCU';
       <div class="polaroid tilt-r1 transition duration-500 hover:rotate-0">
         <img
           src="/assets/galeria/cuento/05-may-gomez-gercende-courtois.webp"
+          srcset={srcset("/assets/galeria/cuento/05-may-gomez-gercende-courtois.webp", 1500)}
+          sizes="(min-width: 1024px) 540px, (min-width: 640px) 90vw, 300px"
           alt="Sandra Santa Cruz con las investigadoras May Gómez y Gercende Courtois ante el gran ventanal del Deep Sea, en la presentación del cuento"
           width="1500"
           height="1000"
