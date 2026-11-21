@@ -1,0 +1,43 @@
+---
+/**
+ * Botones de descarga de la app AR-SLPH, cada uno con su indicación debajo:
+ * Google Play se instala en un paso; en iPhone y iPad son dos (TestFlight y
+ * después la invitación). Se usa en Realidad aumentada y en Inicio.
+ */
+import { Icon } from 'astro-icon/components';
+import { APP_LINKS } from '../lib/app-links';
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const boton =
+  'inline-flex items-center gap-3 rounded-xl bg-caparol px-5 py-3 text-azul shadow-md transition hover:-translate-y-0.5 hover:brightness-95';
+---
+
+<div class:list={['grid gap-5 sm:grid-cols-2 sm:gap-4', className]}>
+  <div class="flex flex-col gap-2">
+    <a href={APP_LINKS.android} target="_blank" rel="noopener" class={boton}>
+      <Icon name="simple-icons:googleplay" class="h-7 w-7" aria-hidden="true" />
+      <span class="flex flex-col leading-tight">
+        <span class="text-[0.7rem] tracking-wider text-azul/70 uppercase">disponible en</span>
+        <span class="font-display text-lg">Google Play</span>
+      </span>
+    </a>
+    <p class="text-xs leading-snug text-caparol/70 sm:text-sm">Android · descarga gratuita</p>
+  </div>
+  <div class="flex flex-col gap-2">
+    <a href={APP_LINKS.iosBeta} target="_blank" rel="noopener" class={boton}>
+      <Icon name="simple-icons:apple" class="h-7 w-7" aria-hidden="true" />
+      <span class="flex flex-col leading-tight">
+        <span class="text-[0.7rem] tracking-wider text-azul/70 uppercase">versión de prueba en</span>
+        <span class="font-display text-lg">iPhone y iPad</span>
+      </span>
+    </a>
+    <p class="text-xs leading-snug text-caparol/70 sm:text-sm">
+      Versión de prueba gratuita: instala primero
+      <a href={APP_LINKS.testflight} target="_blank" rel="noopener" class="text-celeste underline decoration-celeste/40 underline-offset-2 hover:text-arena">TestFlight</a>,
+      la app de Apple, y después acepta la invitación.
+    </p>
+  </div>
+</div>

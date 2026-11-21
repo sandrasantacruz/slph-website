@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
-import { APP_LINKS } from '../../lib/app-links';
+import BotonesApp from '../../components/BotonesApp.astro';
 ---
 
 <section class="relative isolate flex min-h-[calc(100svh-6rem)] flex-col overflow-hidden">
@@ -40,36 +40,7 @@ import { APP_LINKS } from '../../lib/app-links';
           <p class="font-display text-2xl leading-tight text-arena sm:text-3xl">Descubre momentos del musical original</p>
           <p class="mt-1 text-sm text-caparol/80 sm:text-base">Descarga la app AR-SLPH para Android, iPhone y iPad.</p>
 
-          <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href={APP_LINKS.android}
-              target="_blank"
-              rel="noopener"
-              class="inline-flex items-center gap-3 rounded-xl bg-caparol px-5 py-3 text-azul shadow-md transition hover:-translate-y-0.5 hover:brightness-95"
-            >
-              <Icon name="simple-icons:googleplay" class="h-7 w-7" aria-hidden="true" />
-              <span class="flex flex-col leading-tight">
-                <span class="text-[0.7rem] tracking-wider text-azul/70 uppercase">disponible en</span>
-                <span class="font-display text-lg">Google Play</span>
-              </span>
-            </a>
-            <a
-              href={APP_LINKS.iosBeta}
-              target="_blank"
-              rel="noopener"
-              class="inline-flex items-center gap-3 rounded-xl bg-caparol px-5 py-3 text-azul shadow-md transition hover:-translate-y-0.5 hover:brightness-95"
-            >
-              <Icon name="simple-icons:apple" class="h-7 w-7" aria-hidden="true" />
-              <span class="flex flex-col leading-tight">
-                <span class="text-[0.7rem] tracking-wider text-azul/70 uppercase">prueba la beta en</span>
-                <span class="font-display text-lg">iPhone y iPad</span>
-              </span>
-            </a>
-          </div>
-
-          <p class="mt-4 text-xs leading-relaxed text-caparol/60 sm:text-sm">
-            En iPhone y iPad se instala con TestFlight, la app gratuita de Apple para versiones de prueba.
-          </p>
+          <BotonesApp class="mt-5" />
         </div>
       </div>
 

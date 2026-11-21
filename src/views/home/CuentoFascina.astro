@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 import bebe from "./img/bebe.webp?url";
 import Ola from '../../components/Ola.astro';
-import { APP_LINKS } from '../../lib/app-links';
+import BotonesApp from '../../components/BotonesApp.astro';
 ---
 
 <section id="la-historia" class="relative">
@@ -119,44 +119,7 @@ import { APP_LINKS } from '../../lib/app-links';
         >
           Descarga la app de realidad aumentada
         </p>
-        <div class="mt-4 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={APP_LINKS.android}
-            target="_blank"
-            rel="noopener"
-            class="group/store flex items-center gap-3 rounded-xl bg-caparol px-4 py-2.5 text-azul shadow-md transition hover:brightness-95"
-          >
-            <Icon
-              name="simple-icons:googleplay"
-              class="h-7 w-7"
-              aria-hidden="true"
-            />
-            <span class="flex flex-col leading-tight">
-              <span class="text-[0.7rem] uppercase tracking-wider text-azul/70"
-                >disponible en</span
-              >
-              <span class="font-display text-lg">Google Play</span>
-            </span>
-          </a>
-          <a
-            href={APP_LINKS.iosBeta}
-            target="_blank"
-            rel="noopener"
-            class="group/store flex items-center gap-3 rounded-xl bg-caparol px-4 py-2.5 text-azul shadow-md transition hover:brightness-95"
-          >
-            <Icon
-              name="simple-icons:apple"
-              class="h-7 w-7"
-              aria-hidden="true"
-            />
-            <span class="flex flex-col leading-tight">
-              <span class="text-[0.7rem] uppercase tracking-wider text-azul/70"
-                >beta abierta</span
-              >
-              <span class="font-display text-lg">iPhone y iPad</span>
-            </span>
-          </a>
-        </div>
+        <BotonesApp class="mt-4" />
       </div>
     </div>
   </div>
