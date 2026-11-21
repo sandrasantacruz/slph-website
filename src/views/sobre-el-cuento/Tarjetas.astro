@@ -55,7 +55,7 @@ const cards = [
     image: '/assets/cuento/cuadernillo.webp',
     alt: 'Portada del cuadernillo de actividades y personajes para colorear',
     cta: 'Ver el cuadernillo',
-    stamp: '¡novedad de la 3.ª edición!',
+    stamp: 'Novedad · 3.ª edición',
     accent: 'arena',
   },
   {
@@ -95,7 +95,7 @@ const cards = [
             <div class="relative p-3 sm:p-4">
               <div class="@container relative aspect-square overflow-hidden rounded-xl">
                 {'stamp' in card && (
-                  <span class="stamp-cuadernillo pointer-events-none absolute z-10 rounded-full bg-arena font-hand leading-none whitespace-nowrap text-azul shadow-[0_6px_16px_rgba(0,0,0,0.35)]">
+                  <span class="stamp-cuadernillo pointer-events-none absolute z-10 rounded-full bg-arena font-display leading-none tracking-[0.12em] whitespace-nowrap text-azul uppercase shadow-[0_6px_16px_rgba(0,0,0,0.35)]">
                     {card.stamp}
                   </span>
                 )}
@@ -140,8 +140,9 @@ const cards = [
   .stamp-cuadernillo {
     left: 3.5%;
     bottom: 7%;
-    font-size: 5.4cqw;
-    padding: 0.35em 0.6em 0.4em;
-    transform: rotate(-13deg);
+    /* etiqueta limpia (no manuscrita): así no compite con «aprender jugando» */
+    font-size: 4.2cqw;
+    padding: 0.5em 0.8em 0.45em;
+    transform: rotate(-8deg);
   }
 </style>
