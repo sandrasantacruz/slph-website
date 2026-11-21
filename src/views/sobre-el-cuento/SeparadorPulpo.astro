@@ -1,0 +1,33 @@
+---
+/**
+ * Separador entre «Cuando un cuento toca, los niños actúan» y las opiniones:
+ * el Sr. Tentáculus de la portada de la 3.ª edición, pasando a la acción
+ * (tridente clavado en el neumático). Flota con un vaivén suave.
+ */
+---
+
+<div class="relative flex justify-center py-2 sm:py-4" aria-hidden="true">
+  <img
+    src="/assets/animals/tentaculus-tridente.webp"
+    alt=""
+    width="500"
+    height="876"
+    class="pulpo-flota w-28 drop-shadow-[0_16px_24px_rgba(3,10,35,0.6)] sm:w-36 lg:w-48"
+    loading="lazy"
+    decoding="async"
+  />
+</div>
+
+<style>
+  .pulpo-flota {
+    transform-origin: 50% 20%;
+    animation: pulpo-flota 6s ease-in-out infinite;
+  }
+  @keyframes pulpo-flota {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pulpo-flota { animation: none; }
+  }
+</style>
