@@ -32,7 +32,8 @@ const citas: Cita[] = [
     texto: 'A raíz de la lectura del libro, del encuentro con la autora, de todo lo que hemos vivido, los niños han empezado a desarrollar acciones para mejorar: de traer una botella de un solo uso para beber agua en el recreo, ahora traen una rellenable; y reciclan la basura.',
     nombre: 'Isabel Martín',
     cargo: 'Jefa de estudios del Colegio Alfredo Kraus',
-    video: { src: '/videos/tvc-escolares.mp4', poster: '/videos/tvc-escolares-poster.webp', etiqueta: 'Entrevista en Televisión Canaria', pie: 'Si los peces hablaran en los centros escolares · Televisión Canaria' },
+    // Solo su parte del reportaje de Televisión Canaria (el completo está en Repercusión)
+    video: { src: '/videos/opinion-isabel.mp4', poster: '/videos/opinion-isabel-poster.webp', etiqueta: 'Escúchala en Televisión Canaria', pie: 'Isabel Martín · Televisión Canaria' },
   },
   {
     texto: 'Nos parece fundamental educar desde edades tempranas para conservar nuestros ecosistemas. Nos ha encantado el libro.',
@@ -44,7 +45,7 @@ const citas: Cita[] = [
     texto: 'Este tipo de iniciativa es un regalo a la naturaleza y a todos, a las nuevas generaciones. Una oportunidad para ayudar, para concienciarnos. Desde el arte, además, que es tan importante: una forma tan sensible de llegar.',
     nombre: 'María del Mar Vicente',
     cargo: 'Madre, con su hija, en la Biblioteca Municipal Dolores Campos-Herrero',
-    video: { src: '/videos/opinion-madre-dolores-campos.mp4', poster: '/videos/opinion-madre-dolores-campos-poster.webp', etiqueta: 'Escúchala', pie: 'Biblioteca Municipal Dolores Campos-Herrero' },
+    video: { src: '/videos/opinion-madre-dolores-campos.mp4', poster: '/videos/opinion-madre-dolores-campos-poster.webp', etiqueta: 'Escúchala', pie: 'María del Mar Vicente · Biblioteca Municipal Dolores Campos-Herrero' },
   },
 ];
 ---
@@ -73,7 +74,7 @@ const citas: Cita[] = [
                 type="button"
                 data-abrir-video={escuchar(l.nombre, l.video).src}
                 data-poster={escuchar(l.nombre, l.video).poster}
-                data-pie={l.nombre}
+                data-pie={l.edad ? `${l.nombre}, ${l.edad}` : l.nombre}
                 class="mt-3 flex items-center gap-2 font-display text-xs tracking-[0.18em] text-arena uppercase transition hover:text-caparol"
               >
                 <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
