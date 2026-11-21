@@ -24,7 +24,10 @@ const cards = [
     body: 'La Orquesta Filarmónica de Gran Canaria puso música a nuestro «No, no, no a la contaminación».',
     image: '/assets/galeria/espectaculos/01-ofgc-2020.webp',
     alt: 'Dos bailarines en la versión sinfónica de Si los peces hablaran… con la Orquesta Filarmónica de Gran Canaria',
-    cta: 'Descubre el programa',
+    cta: 'Escúchalo',
+    // En vez de llevar a otra página, abre aquí el concierto con la OFGC
+    youtube: 'P46l0TgWoKE',
+    youtubeTitulo: 'Si los peces hablaran… en concierto con la Orquesta Filarmónica de Gran Canaria',
     accent: 'celeste',
   },
   {
@@ -86,11 +89,16 @@ const cards = [
     </h2>
 
     <ul class="mt-12 grid gap-7 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
-      {cards.map((card, i) => (
+      {cards.map((card, i) => {
+        const Tag = 'youtube' in card ? 'button' : 'a';
+        const props = 'youtube' in card
+          ? { type: 'button', 'data-abrir-youtube': card.youtube, 'data-titulo': card.youtubeTitulo }
+          : { href: card.href };
+        return (
         <li>
-          <a
-            href={card.href}
-            class={`reveal reveal-delay-${Math.min(i + 1, 4)} group relative flex h-full flex-col overflow-hidden rounded-2xl border border-caparol/15 bg-azul/45 ring-1 ring-caparol/10 transition hover:border-arena/60 hover:bg-azul/65`}
+          <Tag
+            {...props}
+            class={`reveal w-full text-left cursor-pointer reveal-delay-${Math.min(i + 1, 4)} group relative flex h-full flex-col overflow-hidden rounded-2xl border border-caparol/15 bg-azul/45 ring-1 ring-caparol/10 transition hover:border-arena/60 hover:bg-azul/65`}
           >
             <div class="relative p-3 sm:p-4">
               <div class="@container relative aspect-square overflow-hidden rounded-xl">
@@ -122,13 +130,16 @@ const cards = [
               </p>
               <span class="ola-underline ola-hover mt-auto inline-flex items-center gap-2 self-start pt-4 font-display text-base uppercase tracking-[0.22em] text-arena">
                 {card.cta}
-                <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                {'youtube' in card
+                  ? <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+                  : <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>}
               </span>
             </div>
 
-          </a>
+          </Tag>
         </li>
-      ))}
+        );
+      })}
     </ul>
   </div>
 </section>

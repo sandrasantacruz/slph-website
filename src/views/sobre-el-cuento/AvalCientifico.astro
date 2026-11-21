@@ -61,7 +61,7 @@ const VIDEO_ID = 'GkmiiCa8qCU';
 
   <dialog
     data-dialogo-youtube
-    aria-label="Vídeo: las investigadoras lo explican"
+    aria-label="Vídeo"
     class="m-auto w-[min(94vw,60rem)] overflow-visible bg-transparent p-0 backdrop:bg-azul-deep/85 backdrop:backdrop-blur-sm"
   >
     <div class="relative">
@@ -83,7 +83,7 @@ const VIDEO_ID = 'GkmiiCa8qCU';
       if (!dlg || !marco) return;
       const iframe = document.createElement('iframe');
       iframe.src = `https://www.youtube-nocookie.com/embed/${b.dataset.abrirYoutube}?autoplay=1&rel=0`;
-      iframe.title = 'Las investigadoras lo explican';
+      iframe.title = b.dataset.titulo ?? 'Las investigadoras lo explican';
       iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       iframe.className = 'h-full w-full';
       marco.replaceChildren(iframe);
