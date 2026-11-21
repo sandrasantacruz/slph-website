@@ -1,42 +1,40 @@
 ---
 /**
- * «Antes de llevártelo, ábrelo»: el paso comercial antes de comprar, destacado
- * y a lo ancho, justo después de los cinco lenguajes.
+ * «Antes de decidirte, ábrelo»: la invitación a leer el fragmento. Es la única
+ * franja clara de la página (como papel) y enseña dos páginas reales del libro
+ * abiertas, para que no pase desapercibida entre tanto azul. Va justo después
+ * de las opiniones: «compruébalo tú».
  */
 import Ola from '../../components/Ola.astro';
-import cover from '../home/img/cover-cuento.webp?url';
 ---
 
-<section class="relative isolate overflow-hidden pb-8 sm:pb-12">
-  <div class="mx-auto max-w-6xl px-6">
-    <a
-      href="/lee-un-fragmento"
-      class="reveal group grid items-center gap-8 rounded-3xl border border-arena/30 bg-azul-deep/50 p-6 ring-1 ring-caparol/10 transition hover:border-arena/70 sm:p-10 md:grid-cols-12 md:gap-12"
-    >
-      <div class="mx-auto w-full max-w-[15rem] md:col-span-4 md:max-w-none">
-        <img
-          src={cover}
-          alt="Portada de la 3.ª edición de Si los peces hablaran…"
-          width="1250"
-          height="1250"
-          class="w-full -rotate-2 rounded-md shadow-[0_25px_50px_-15px_rgba(3,10,35,0.9)] transition duration-500 group-hover:rotate-0"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div class="text-center md:col-span-8 md:text-left">
-        <h2 class="font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[0.95] text-caparol">
-          Antes de decidirte,
-          <Ola class="text-arena">ábrelo</Ola>
-        </h2>
-        <p class="mt-5 max-w-xl text-lg leading-relaxed text-caparol/85 md:mx-0 mx-auto">
-          Lee las primeras líneas y asómate a la aventura de Lorena antes de que sea tuya.
-        </p>
-        <span class="mt-7 inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition group-hover:brightness-95">
-          Lee un fragmento
-          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-        </span>
+<section class="relative isolate my-10 overflow-hidden bg-caparol py-16 text-azul sm:my-16 sm:py-20">
+  <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-12 lg:gap-14">
+    <a href="/lee-un-fragmento" class="reveal group block lg:col-span-7" aria-label="Lee un fragmento del cuento">
+      <!-- libro abierto: el comienzo del capítulo 1 -->
+      <div class="relative flex rotate-[-1.5deg] shadow-[0_30px_60px_-20px_rgba(11,32,86,0.55)] transition duration-500 group-hover:rotate-0">
+        <img src="/assets/fragmento/05.webp" alt="Ilustración del capítulo 1: Lorena en la orilla del mar" width="1500" height="1500" class="w-1/2 rounded-l-md" loading="lazy" decoding="async" />
+        <img src="/assets/fragmento/07.webp" alt="Primera página del capítulo 1 de Si los peces hablaran…" width="1500" height="1500" class="w-1/2 rounded-r-md" loading="lazy" decoding="async" />
+        <span aria-hidden="true" class="pointer-events-none absolute inset-y-0 left-1/2 w-10 -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgba(11,32,86,0.18),transparent)]"></span>
       </div>
     </a>
+
+    <div class="reveal reveal-delay-1 text-center lg:col-span-5 lg:text-left">
+      <p class="font-hand text-2xl text-azul/70 sm:text-3xl">pasa la página</p>
+      <h2 class="mt-1 font-display text-[clamp(2.2rem,5vw,3.5rem)] leading-[0.95]">
+        Antes de decidirte,
+        <Ola class="text-azul">ábrelo</Ola>
+      </h2>
+      <p class="mx-auto mt-5 max-w-md text-lg leading-relaxed text-azul/80 lg:mx-0">
+        Lee las primeras líneas y asómate a la aventura de Lorena antes de que sea tuya.
+      </p>
+      <a
+        href="/lee-un-fragmento"
+        class="group mt-7 inline-flex items-center gap-3 rounded-full bg-azul px-8 py-3.5 font-display text-xl text-caparol shadow-lg transition hover:bg-azul-deep"
+      >
+        Lee un fragmento
+        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
   </div>
 </section>
