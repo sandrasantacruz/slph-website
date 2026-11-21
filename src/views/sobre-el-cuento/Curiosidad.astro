@@ -17,7 +17,7 @@ const presentacion = "/assets/cuento/presentacion-oficial-poema-del-mar.webp";
         class="reveal reveal-delay-1 relative z-10 order-last lg:order-first lg:col-span-5"
       >
         <div class="relative mx-auto max-w-xs sm:max-w-sm lg:max-w-none">
-          <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
+          <div data-caracola class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
             <img
               src={presentacion}
               alt="Presentación oficial del cuento Si los peces hablaran en el Acuario Poema del Mar"
@@ -47,6 +47,28 @@ const presentacion = "/assets/cuento/presentacion-oficial-poema-del-mar.webp";
                 loading="lazy"
                 decoding="async"
               />
+              <!-- Burbujas que salen de las algas y de la caracola al acercarse
+                   (ratón sobre la foto) o, en táctil, al aparecer en pantalla -->
+              <div class="burbujas-caracola">
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:31%;--t:9px;--d:0.16s;--dur:4.2s;--dx:-14px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:31%;--t:7px;--d:0.96s;--dur:4.4s;--dx:-14px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:32%;--t:13px;--d:1.23s;--dur:4.3s;--dx:12px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:26%;--t:7px;--d:2.18s;--dur:4.8s;--dx:-14px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:35%;--t:13px;--d:2.42s;--dur:4.4s;--dx:-10px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:30%;--t:13px;--d:3.06s;--dur:4.3s;--dx:8px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:67%;--t:18px;--d:0.05s;--dur:4.7s;--dx:18px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:56%;--t:10px;--d:0.38s;--dur:4.9s;--dx:12px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:51%;--t:15px;--d:0.76s;--dur:4.9s;--dx:8px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:74%;--t:10px;--d:1.19s;--dur:5.3s;--dx:-8px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:59%;--t:8px;--d:1.64s;--dur:4.9s;--dx:-12px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:52%;--t:15px;--d:1.84s;--dur:4.6s;--dx:-8px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:73%;--t:12px;--d:2.19s;--dur:5.4s;--dx:-18px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:66%;--t:12px;--d:2.5s;--dur:4.3s;--dx:8px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:63%;--t:6px;--d:3.09s;--dur:3.9s;--dx:12px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:68%;--t:10px;--d:3.25s;--dur:4.4s;--dx:8px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:68%;--t:12px;--d:3.52s;--dur:3.9s;--dx:-8px" />
+                <img src="/assets/burbuja.webp" alt="" width="240" height="237" loading="lazy" decoding="async" style="--x:65%;--t:18px;--d:4.05s;--dur:3.9s;--dx:18px" />
+              </div>
             </div>
           </div>
         </div>
@@ -76,7 +98,7 @@ const presentacion = "/assets/cuento/presentacion-oficial-poema-del-mar.webp";
           <p>
             ¿Qué mejor lugar para presentar nuestro cuento que Poema del Mar?
             Allí, frente al Deep Sea, los más pequeños vieron nadar tiburones,
-            rayas y bancos de peces, y se enamoraron de las especies que el
+            rayas y bancos de peces y, tal como buscábamos, se enamoraron de las especies que el
             cuento nos invita a cuidar.
           </p>
         </div>
@@ -103,3 +125,53 @@ const presentacion = "/assets/cuento/presentacion-oficial-poema-del-mar.webp";
     </div>
   </div>
 </section>
+
+<style>
+  .burbujas-caracola {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .burbujas-caracola img {
+    position: absolute;
+    left: var(--x);
+    bottom: 22%;
+    width: var(--t);
+    height: auto;
+    opacity: 0;
+  }
+  /* mientras el ratón está sobre la foto siguen saliendo; en táctil, unas cuantas tandas */
+  .polaroid:hover .burbujas-caracola img,
+  .soltando .burbujas-caracola img {
+    animation: sube-burbuja var(--dur) ease-in var(--d) infinite;
+  }
+  @keyframes sube-burbuja {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
+    12% { opacity: 0.85; }
+    50% { transform: translate(var(--dx), -220px) scale(1); }
+    85% { opacity: 0.7; }
+    100% { opacity: 0; transform: translate(calc(var(--dx) * -0.5), -460px) scale(1.15); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .burbujas-caracola { display: none; }
+  }
+</style>
+
+<script>
+  // En táctil no hay «pasar el ratón»: las burbujas salen solas un rato cuando
+  // la foto aparece en pantalla.
+  if (matchMedia('(hover: none)').matches) {
+    document.querySelectorAll<HTMLElement>('[data-caracola]').forEach((el) => {
+      const obs = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((e) => e.isIntersecting)) return;
+          obs.disconnect();
+          el.classList.add('soltando');
+          setTimeout(() => el.classList.remove('soltando'), 9000);
+        },
+        { threshold: 0.5 },
+      );
+      obs.observe(el);
+    });
+  }
+</script>
