@@ -10,7 +10,7 @@
 import { Icon } from 'astro-icon/components';
 
 interface Props {
-  /** Zeile «A la venta en Entintadas Editorial y librerías de Gran Canaria» */
+  /** Zeile «A la venta online, en el Centro de Danza … y en librerías de Gran Canaria» */
   venta?: boolean;
   class?: string;
 }
@@ -22,11 +22,14 @@ const datos: { icon: string; valor: string; arriba?: string; abajo?: string; hre
   // Zwei Reihen à drei, spaltenweise gedacht: Spalte 1 das Buch selbst
   // (Seiten, Format), Spalte 2 App und Papier, Spalte 3 die Menschen dahinter
   // (Ilustrador, Save the Children). Wichtigeres in der oberen Reihe.
+  // Ab sm vier Spalten: oben das Buch für den Leser, unten die Eckdaten.
   { icon: 'game-icons:open-book', valor: '146 páginas', abajo: 'a todo color' },
+  { icon: 'game-icons:three-friends', arriba: 'Lectura autónoma', valor: 'Desde 6 años', abajo: 'ideal en familia' },
   { icon: 'game-icons:vibrating-smartphone', arriba: 'Realidad aumentada', valor: 'App AR-SLPH', abajo: 'para las tres ediciones', href: '/realidad-aumentada' },
   { icon: 'game-icons:paint-brush', arriba: 'Ilustraciones de', valor: 'Pablo Tribiño' },
-  { icon: 'game-icons:resize', valor: '210 × 210 mm' },
+  { icon: 'game-icons:resize', valor: '210 × 210 mm', abajo: 'tapa blanda' },
   { icon: 'game-icons:pine-tree', valor: 'Papel FSC' },
+  { icon: 'game-icons:id-card', arriba: 'ISBN', valor: '978-84-09-16706-7' },
   { icon: 'game-icons:shaking-hands', arriba: 'Colabora con', valor: 'Save the Children' },
 ];
 ---
@@ -40,7 +43,7 @@ const datos: { icon: string; valor: string; arriba?: string; abajo?: string; hre
   <p class="font-hand text-2xl text-arena sm:text-3xl">
     Ya va por su 3.ª edición, ahora en tapa blanda
   </p>
-  <ul class="mt-4 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 sm:gap-x-8">
+  <ul class="mt-4 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4 sm:gap-x-8">
     {datos.map((d) => (
       <li class="flex items-center gap-3">
         <Icon name={d.icon} class="h-6 w-6 shrink-0 text-celeste" aria-hidden="true" />
@@ -61,8 +64,8 @@ const datos: { icon: string; valor: string; arriba?: string; abajo?: string; hre
   </ul>
   {venta && (
     <p class="mt-5 text-base text-caparol/75">
-      A la venta en
-      <a href="/comprar" class="text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">Entintadas Editorial y librerías de Gran Canaria</a>.
+      A la venta
+      <a href="/comprar" class="text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">online, en el Centro de Danza Sandra Santa Cruz (con dedicatoria de la autora) y en librerías de Gran Canaria</a>.
     </p>
   )}
 </div>

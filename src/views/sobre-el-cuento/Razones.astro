@@ -1,0 +1,53 @@
+---
+/**
+ * «Cuando los peces hablan, los niños actúan»: por qué funciona el cuento.
+ * Las cuatro razones vienen del «Dossier Bibliotecas 2026-2027».
+ */
+import { Icon } from 'astro-icon/components';
+import Ola from '../../components/Ola.astro';
+
+const razones = [
+  {
+    icon: 'game-icons:heart-inside',
+    titulo: 'Empatía',
+    texto: 'Cada personaje tiene carácter propio. Los niños se identifican enseguida con Lorena, nuestra pequeña heroína, y quieren ayudar como ella.',
+  },
+  {
+    icon: 'game-icons:paint-brush',
+    titulo: 'Ilustraciones de calidad',
+    texto: 'Porque los más pequeños merecen lo mejor: firmadas por Pablo Tribiño. La 3.ª edición trae aún más ilustraciones en color.',
+  },
+  {
+    icon: 'game-icons:sunrise',
+    titulo: 'Mensaje positivo',
+    texto: 'No asusta: enseña que cada uno es capaz de cuidar el mar, porque para querer proteger algo, primero hay que conocerlo.',
+  },
+  {
+    icon: 'game-icons:microscope',
+    titulo: 'Rigor científico',
+    texto: 'La realidad del mar, llevada a cuento. Todo lo que cuenta sobre el mar y la basura es cierto.',
+  },
+];
+---
+
+<section class="relative isolate overflow-hidden py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal mx-auto max-w-3xl text-center">
+      <p class="font-hand text-2xl text-celeste sm:text-3xl">el libro no da lecciones: hace sentir</p>
+      <h2 class="mt-2 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+        Cuando los peces hablan,
+        <span class="whitespace-nowrap">los niños <Ola class="text-arena">actúan</Ola></span>
+      </h2>
+    </div>
+
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+      {razones.map((r, i) => (
+        <li class={`reveal reveal-delay-${i + 1} flex flex-col rounded-2xl border border-caparol/15 bg-azul/40 p-6 ring-1 ring-caparol/10`}>
+          <Icon name={r.icon} class="h-10 w-10 text-arena" aria-hidden="true" />
+          <h3 class="mt-4 font-display text-2xl leading-tight text-caparol">{r.titulo}</h3>
+          <p class="mt-2 text-base leading-relaxed text-caparol/80">{r.texto}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

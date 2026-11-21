@@ -4,15 +4,15 @@ import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 const imagenes = [
   {
     src: "/assets/musical/danza-del-arrecife-de-coral.webp",
-    alt: "Danza del arrecife de coral, musical Si los peces hablaran",
+    alt: "Danza del arrecife de coral, en el musical Si los peces hablaran…",
   },
   {
     src: "/assets/musical/danza-de-las-espadas.webp",
-    alt: "Danza de las Espadas, musical Si los peces hablaran",
+    alt: "Danza de las Espadas, en el musical Si los peces hablaran…",
   },
   {
     src: "/assets/musical/don-canino-llega-al-arrecife.webp",
-    alt: "Don Canino llega al arrecife, musical Si los peces hablaran",
+    alt: "Don Canino llega al arrecife, en el musical Si los peces hablaran…",
   },
 ] as const;
 ---
@@ -42,6 +42,8 @@ const imagenes = [
             <img
               src={img.src}
               alt={img.alt}
+              width="1500"
+              height="900"
               class="block aspect-[5/3] w-full object-cover transition duration-500 group-hover:brightness-110"
               loading="lazy"
               decoding="async"

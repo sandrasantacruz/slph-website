@@ -17,11 +17,6 @@ const citas = [
     nombre: 'Inmaculada García Expósito',
     cargo: 'Vicedirectora del CEIP Playa de Arguineguín',
   },
-  {
-    texto: 'Es un regalo a la naturaleza y a las nuevas generaciones… desde el arte, una forma tan sensible de llegar.',
-    nombre: 'Público',
-    cargo: 'Biblioteca Municipal Dolores Campos-Herrero',
-  },
 ];
 
 const aliados = [
@@ -123,7 +118,7 @@ const centros = [
     </div>
 
     <!-- Lo que dicen: en móvil una debajo de otra; desde md, rejilla de 2 -->
-    <ul class="reveal reveal-delay-1 mt-12 grid gap-4 md:grid-cols-2 md:gap-6">
+    <ul class="reveal reveal-delay-1 mt-12 grid gap-4 md:grid-cols-3 md:gap-6">
       {citas.map((c) => (
         <li>
           <figure class="flex h-full flex-col rounded-2xl border border-caparol/15 bg-azul/40 p-6 sm:p-7">

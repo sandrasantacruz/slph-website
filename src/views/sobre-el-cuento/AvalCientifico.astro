@@ -1,0 +1,97 @@
+---
+/**
+ * Aval científico: las dos investigadoras del Instituto ECOAQUA (ULPGC) que
+ * supervisan el contenido. Texto del «Dossier Bibliotecas 2026-2027»; el vídeo
+ * («Las investigadoras lo explican») se abre aquí mismo, sin salir de la página.
+ */
+import Ola from '../../components/Ola.astro';
+
+const VIDEO_ID = 'GkmiiCa8qCU';
+---
+
+<section class="relative isolate overflow-hidden py-16 sm:py-24">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-12 lg:gap-16">
+    <div class="reveal reveal-delay-1 lg:col-span-6">
+      <div class="polaroid tilt-r1 transition duration-500 hover:rotate-0">
+        <img
+          src="/assets/galeria/cuento/05-may-gomez-gercende-courtois.webp"
+          alt="Sandra Santa Cruz con las investigadoras May Gómez y Gercende Courtois ante el gran ventanal del Deep Sea, en la presentación del cuento"
+          width="1500"
+          height="1000"
+          class="block aspect-[3/2] w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+        <p class="absolute bottom-2 left-0 right-0 text-center font-hand text-2xl leading-none text-azul sm:text-3xl">
+          la ciencia que avala el cuento
+        </p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-6">
+      <div class="reveal flex items-center gap-5">
+        <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+        <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">Aval científico</span>
+      </div>
+      <h2 class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+        La realidad del mar,
+        <span class="whitespace-nowrap">llevada a <Ola class="text-celeste">cuento</Ola></span>
+      </h2>
+      <div class="reveal reveal-delay-2 mt-6 space-y-4 text-lg leading-relaxed text-caparol/90">
+        <p>
+          El contenido está supervisado por dos investigadoras del Instituto ECOAQUA de la
+          Universidad de Las Palmas de Gran Canaria: la catedrática de Zoología
+          <strong class="font-display text-xl text-arena">May Gómez</strong>, directora del grupo
+          EOMAR, y la doctora <strong class="font-display text-xl text-arena">Gercende Courtois</strong>,
+          investigadora en Ciencias Marinas.
+        </p>
+        <p class="font-display text-2xl leading-snug text-caparol">
+          Todo lo que cuenta el libro sobre el mar y la basura es cierto.
+        </p>
+      </div>
+      <button
+        type="button"
+        data-abrir-youtube={VIDEO_ID}
+        class="reveal reveal-delay-3 group mt-8 inline-flex items-center gap-3 rounded-full border border-arena/60 px-5 py-2.5 font-display text-base tracking-[0.18em] text-arena uppercase transition hover:border-arena hover:bg-arena hover:text-azul"
+      >
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
+        Las investigadoras lo explican
+      </button>
+    </div>
+  </div>
+
+  <dialog
+    data-dialogo-youtube
+    aria-label="Vídeo: las investigadoras lo explican"
+    class="m-auto w-[min(94vw,60rem)] overflow-visible bg-transparent p-0 backdrop:bg-azul-deep/85 backdrop:backdrop-blur-sm"
+  >
+    <div class="relative">
+      <button type="button" data-cerrar-youtube aria-label="Cerrar vídeo" class="absolute -top-12 right-0 rounded-full p-2 text-caparol transition hover:text-arena">
+        <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <div class="aspect-video w-full overflow-hidden rounded-2xl bg-azul-deep shadow-2xl" data-marco-youtube></div>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  // El reproductor de YouTube solo se carga al pulsar (y se quita al cerrar,
+  // para que el vídeo deje de sonar).
+  const dlg = document.querySelector<HTMLDialogElement>('[data-dialogo-youtube]');
+  const marco = dlg?.querySelector<HTMLElement>('[data-marco-youtube]');
+  document.querySelectorAll<HTMLButtonElement>('[data-abrir-youtube]').forEach((b) =>
+    b.addEventListener('click', () => {
+      if (!dlg || !marco) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${b.dataset.abrirYoutube}?autoplay=1&rel=0`;
+      iframe.title = 'Las investigadoras lo explican';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      iframe.className = 'h-full w-full';
+      marco.replaceChildren(iframe);
+      dlg.showModal();
+    }),
+  );
+  dlg?.querySelector('[data-cerrar-youtube]')?.addEventListener('click', () => dlg.close());
+  dlg?.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  dlg?.addEventListener('close', () => marco?.replaceChildren());
+</script>

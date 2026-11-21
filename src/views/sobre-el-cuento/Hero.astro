@@ -1,0 +1,89 @@
+---
+/**
+ * Cabecera de «Sobre el cuento»: qué es el libro, para quién y por qué es
+ * distinto, con la portada de la 3.ª edición. Textos del «Dossier Bibliotecas
+ * 2026-2027». Sin precio a propósito (varía según la tienda).
+ */
+import { Icon } from 'astro-icon/components';
+import Ola from '../../components/Ola.astro';
+import cover from '../home/img/cover-cuento.webp?url';
+
+const datos = [
+  { icon: 'game-icons:three-friends', texto: 'Desde 6 años, ideal para leer en familia' },
+  { icon: 'game-icons:vibrating-smartphone', texto: 'Con realidad aumentada gratuita' },
+  { icon: 'game-icons:microscope', texto: 'Supervisado por científicas de la ULPGC' },
+];
+---
+
+<section class="relative isolate overflow-hidden">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_45%_at_78%_45%,rgba(100,170,210,0.16),transparent_70%)]"
+  ></div>
+
+  <div class="mx-auto grid max-w-6xl items-center gap-x-14 gap-y-10 px-6 pt-10 pb-16 sm:pt-16 sm:pb-20 lg:min-h-[calc(100svh-6rem)] lg:grid-cols-12 lg:py-12">
+    <div class="lg:col-span-7">
+      <div class="reveal flex items-center gap-4">
+        <span aria-hidden="true" class="h-[2px] w-12 bg-arena sm:w-20"></span>
+        <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">El cuento · 3.ª edición</span>
+      </div>
+
+      <h1 class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2.4rem,6.5vw,4.8rem)] leading-[0.95] tracking-tight text-caparol">
+        Un océano que por fin
+        <span class="whitespace-nowrap">encuentra <Ola class="text-arena">su voz</Ola></span>
+      </h1>
+
+      <p class="reveal reveal-delay-2 mt-6 max-w-2xl font-hand text-2xl leading-snug text-celeste sm:text-3xl">
+        ¿Cuántos cuentos nacen de su propio musical, tienen aval científico,
+        realidad aumentada y su propio programa de concienciación?
+      </p>
+
+      <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-lg leading-relaxed text-caparol/90">
+        En <em class="not-italic text-arena">Si los peces hablaran…</em>, Lorena descubre a los
+        habitantes del mar (Nela la Irritable, Dina la Voladora, Don Canino, Doña Paciencia, el
+        Sr. Tentáculus…) y entiende cómo les afecta la basura y de dónde viene. Una historia que
+        no solo se lee: deja huella.
+      </p>
+
+      <ul class="reveal reveal-delay-3 mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-6">
+        {datos.map((d) => (
+          <li class="flex items-center gap-2.5 text-base text-caparol/85">
+            <Icon name={d.icon} class="h-6 w-6 shrink-0 text-celeste" aria-hidden="true" />
+            {d.texto}
+          </li>
+        ))}
+      </ul>
+
+      <div class="reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-4">
+        <a
+          href="/lee-un-fragmento"
+          class="group inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95"
+        >
+          Lee un fragmento
+          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+        <a
+          href="/comprar"
+          class="inline-flex items-center gap-3 rounded-full border-2 border-caparol/70 px-7 py-2.5 font-display text-xl text-caparol transition hover:border-caparol hover:bg-caparol hover:text-azul"
+        >
+          Cómpralo
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-2 order-first mx-auto w-full max-w-md sm:max-w-lg lg:order-none lg:col-span-5 lg:max-w-none">
+      <!-- Prueba: foto en familia (IMG_1802). Alternativas: la niña del Centro de Danza
+           (nina-cuento-y-cuadernillo.webp) o la portada sola (cover, 1250×1250). -->
+      <img
+        src="/assets/cuento/familia-leyendo-el-cuento.webp"
+        alt="Un padre con sus dos hijos, sonrientes en una terraza canaria con cactus, con la 3.ª edición de Si los peces hablaran…"
+        width="1500"
+        height="1000"
+        class="w-full rotate-2 rounded-xl shadow-[0_35px_70px_-20px_rgba(3,10,35,0.9)] transition duration-500 hover:rotate-0"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>

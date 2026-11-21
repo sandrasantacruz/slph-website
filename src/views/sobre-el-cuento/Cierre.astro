@@ -5,7 +5,43 @@ import FichaLibro from '../../components/FichaLibro.astro';
 <section class="relative isolate overflow-hidden pb-24 pt-4 sm:pb-32">
   <div class="mx-auto max-w-6xl px-6">
     <FichaLibro class="reveal mb-14 sm:mb-16" />
-    <div class="reveal flex flex-col items-center gap-3 text-center">
+    <!-- Vera (IMG_2280, Centro de Danza) con la frase de su vídeo «Con el cuento he aprendido» -->
+    <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+      <div class="reveal reveal-delay-1 lg:col-span-6">
+        <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0">
+          <img
+            src="/assets/cuento/nina-cuento-y-cuadernillo.webp"
+            alt="Vera Paisier, alumna del Centro de Danza Sandra Santa Cruz, muestra la 3.ª edición del cuento y el cuadernillo de actividades"
+            width="1500"
+            height="1006"
+            class="block aspect-[3/2] w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+          <p class="absolute bottom-2 left-0 right-0 text-center font-hand text-2xl leading-none text-azul sm:text-3xl">
+            ¡con dedicatoria de la autora!
+          </p>
+        </div>
+      </div>
+      <div class="reveal flex flex-col items-center gap-3 text-center lg:col-span-6">
+        <figure class="mb-6">
+          <blockquote class="font-hand text-[clamp(2rem,4.5vw,3rem)] leading-tight text-arena">
+            «Es un cuento que te va a cambiar parte de tu vida».
+          </blockquote>
+          <figcaption class="mt-3 text-base text-caparol/70">
+            <span class="font-display tracking-wide text-caparol">Vera Paisier</span>, 11 años
+            <button
+              type="button"
+              data-abrir-video="/videos/opinion-vera-cambiar.mp4"
+              data-poster="/videos/opinion-vera-cambiar-poster.webp"
+              data-pie="Vera Paisier"
+              class="mx-auto mt-3 flex items-center gap-2 font-display text-xs tracking-[0.18em] text-arena uppercase transition hover:text-caparol"
+            >
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+              Escúchala
+            </button>
+          </figcaption>
+        </figure>
       <p class="font-hand text-2xl text-celeste sm:text-3xl">
         ¿Ya te conquistó?
       </p>
@@ -25,6 +61,7 @@ import FichaLibro from '../../components/FichaLibro.astro';
           <path d="M5 12h14M13 6l6 6-6 6"></path>
         </svg>
       </a>
+      </div>
     </div>
   </div>
 </section>

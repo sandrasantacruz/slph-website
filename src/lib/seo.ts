@@ -154,13 +154,14 @@ export function bookSchema(): JsonLd {
     inLanguage: BOOK_LANGUAGE,
     bookFormat: 'https://schema.org/Paperback',
     bookEdition: '3.ª edición',
+    isbn: '978-84-09-16706-7',
     numberOfPages: 146,
     illustrator: { '@type': 'Person', name: 'Pablo Tribiño' },
     genre: BOOK_GENRE,
     audience: {
       '@type': 'PeopleAudience',
       suggestedMinAge: 6,
-      audienceType: 'Niños y familias',
+      audienceType: 'Niños y familias (lectura autónoma desde 6 años, ideal para leer en familia)',
     },
     author: { '@id': `${SITE_URL}/autor#person` },
     publisher: {
@@ -173,7 +174,7 @@ export function bookSchema(): JsonLd {
       'Ecosistemas marinos',
       'Protección del océano',
     ],
-    image: absoluteUrl('/assets/sandra.webp'),
+    image: absoluteUrl('/assets/og-cuento.jpg'),
     offers: {
       '@type': 'Offer',
       url: BOOK_BUY_URL,

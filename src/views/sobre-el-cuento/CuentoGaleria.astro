@@ -3,15 +3,15 @@ import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 const imagenes = [
   {
     src: "/assets/cuento/danza-de-las-aletas-poema-del-mar.webp",
-    alt: "Danza de las Aletas de SLPH en Poema del Mar",
+    alt: "Danza de las Aletas ante el gran ventanal del Deep Sea, en la presentación del cuento en Poema del Mar",
   },
   {
     src: "/assets/cuento/dona-paciencia-poema-del-mar.webp",
-    alt: "Si los peces hablaran: Dña. Paciencia en Poema del Mar",
+    alt: "Doña Paciencia, personaje del cuento, en la presentación en Poema del Mar",
   },
   {
-    src: "/assets/cuento/may-gomez-gercende-courtois-poema-del-mar.webp",
-    alt: "May Gómez y Gercende Courtois en Poema del Mar",
+    src: "/assets/galeria/cuento/03-guacimara-medina-poema-del-mar.webp",
+    alt: "El público, con Guacimara Medina, consejera de Cultura del Cabildo de Gran Canaria, en la presentación del cuento en Poema del Mar",
   },
 ] as const;
 ---
@@ -41,6 +41,8 @@ const imagenes = [
             <img
               src={img.src}
               alt={img.alt}
+              width="1500"
+              height="1000"
               class="block aspect-[3/2] w-full object-cover transition duration-500 group-hover:brightness-110"
               loading="lazy"
               decoding="async"
