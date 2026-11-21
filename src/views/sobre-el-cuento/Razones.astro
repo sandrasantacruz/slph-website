@@ -44,9 +44,9 @@ const razones = [
       </h2>
     </div>
 
-    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+    <ul class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-10">
       {razones.map((r, i) => (
-        <li class={`reveal reveal-delay-${i + 1} flex flex-col rounded-2xl border border-caparol/15 bg-azul/40 p-6 ring-1 ring-caparol/10`}>
+        <li class={`reveal reveal-delay-${i + 1} flex flex-col border-t-2 border-arena/50 pt-6`}>
           <Icon name={r.icon} class="h-10 w-10 text-arena" aria-hidden="true" />
           <h3 class="mt-4 font-display text-2xl leading-tight text-caparol">{r.titulo}</h3>
           <p class="mt-2 text-base leading-relaxed text-caparol/80">{r.texto}</p>

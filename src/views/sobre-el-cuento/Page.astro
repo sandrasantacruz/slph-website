@@ -32,19 +32,19 @@ const breadcrumb = breadcrumbSchema([
   jsonLd={[bookSchema({ precio: true }), cuadernilloSchema(), breadcrumb]}
 >
   <Hero />
-  <!-- Los cinco lenguajes de la obra, cada uno con su página -->
+  <!-- Primera mitad: lo que quiere saber quien compra -->
   <Tarjetas />
-  <!-- Cómo nació (bailando) y cómo ha crecido: parte de la identidad del proyecto -->
-  <Origen />
-  <MusicalGaleria />
-  <Trayectoria />
   <Razones />
   <LoQueDicen />
   <!-- después de las opiniones: «compruébalo tú» -->
   <Fragmento />
-  <AvalCientifico />
+  <!-- Segunda mitad: la historia (en orden) y la garantía antes de comprar -->
+  <Origen />
+  <MusicalGaleria />
   <Curiosidad />
   <CuentoGaleria />
+  <Trayectoria />
+  <AvalCientifico />
   <Cierre />
   <Lightbox />
 </MainLayout>
