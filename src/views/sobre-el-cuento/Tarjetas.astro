@@ -1,53 +1,57 @@
 ---
-import coverCuento from '../home/img/cover-cuento.webp?url';
 import Ola from '../../components/Ola.astro';
 
+/**
+ * «Una obra, muchos lenguajes»: cada tarjeta es una parte de la obra y lleva a
+ * la página que la desarrolla. «Lee un fragmento» y «Dónde comprar» están en
+ * los botones de la cabecera y del cierre.
+ */
 const cards = [
   {
-    href: '/lee-un-fragmento',
-    eyebrow: 'el libro',
-    title: 'Lee un fragmento',
-    body: 'Hojea las primeras páginas del cuento ilustrado y conoce a Lorena, Nela la Irritable y compañía antes de llevártelo a casa.',
-    image: coverCuento,
-    alt: 'Portada del cuento Si los peces hablaran…',
-    cta: 'Bucea en el cuento',
+    href: '/autor',
+    eyebrow: 'literatura',
+    title: 'Sandra Santa Cruz',
+    body: 'Bailarina, coreógrafa y autora canaria, responsable del programa SLPH. Casi cuatro décadas aportando mucho más que danza.',
+    image: '/assets/sandra-2.webp',
+    alt: 'Retrato de Sandra Santa Cruz, autora del cuento',
+    cta: 'Conoce a la autora',
+    accent: 'arena',
+  },
+  {
+    href: '/programa',
+    eyebrow: 'música',
+    title: 'Del musical a la sinfónica',
+    body: 'Música original de Juan Ramos Barrionuevo y letras de Juan Luis Santa Cruz. En 2021, la Orquesta Filarmónica de Gran Canaria la llevó a versión sinfónica.',
+    image: '/assets/galeria/espectaculos/01-ofgc-2020.webp',
+    alt: 'Dos bailarines en la versión sinfónica de Si los peces hablaran… con la Orquesta Filarmónica de Gran Canaria',
+    cta: 'Descubre el programa',
+    accent: 'celeste',
+  },
+  {
+    href: '/ilustrador',
+    eyebrow: 'ilustración',
+    title: 'Pablo Tribiño',
+    body: 'Ilustrador y diseñador gráfico. Suyos son los personajes y las viñetas que dan vida al mundo marino de Si los peces hablaran…',
+    image: '/assets/colaboradores/pablo-tribino/portrait.jpg',
+    alt: 'Retrato de Pablo Tribiño, ilustrador del cuento',
+    cta: 'Conoce a Pablo',
     accent: 'arena',
   },
   {
     href: '/realidad-aumentada',
-    eyebrow: '¡salen del libro!',
+    eyebrow: 'tecnología',
     title: 'Realidad aumentada',
-    body: 'Descubre momentos del musical original con nuestra app. En Google Play y en prueba para iPhone y iPad.',
+    body: 'Con la app gratuita AR-SLPH, los personajes salen del libro con momentos del musical original. En Google Play y en prueba para iPhone y iPad.',
     image: '/assets/ar/app-ar-slph.webp',
     alt: 'La app AR-SLPH: Don Canino, el tiburón del cuento, saliendo de la pantalla de un teléfono',
     cta: 'Descubre la app',
     accent: 'celeste',
   },
   {
-    href: '/autor',
-    eyebrow: 'la autora',
-    title: 'Sandra Santa Cruz',
-    body: 'Bailarina, coreógrafa y autora canaria, responsable del programa SLPH. Casi cuatro décadas aportando mucho más que danza.',
-    image: '/assets/sandra-2.webp',
-    alt: 'Retrato de Sandra Santa Cruz',
-    cta: 'Conoce a Sandra',
-    accent: 'arena',
-  },
-  {
-    href: '/ilustrador',
-    eyebrow: 'el ilustrador',
-    title: 'Pablo Tribiño',
-    body: 'Ilustrador y diseñador gráfico. Suyos son los personajes y las viñetas que dan vida al mundo marino de Si los peces hablaran…',
-    image: '/assets/colaboradores/pablo-tribino/portrait.jpg',
-    alt: 'Retrato de Pablo Tribiño',
-    cta: 'Conoce a Pablo',
-    accent: 'celeste',
-  },
-  {
     href: '/cuadernillo',
-    eyebrow: 'para aprender jugando',
+    eyebrow: 'aprender jugando',
     title: 'Cuadernillo de actividades',
-    body: 'Juegos y actividades para prolongar la aventura del cuento y conectar con el mar, pensados para acompañar a diversas edades.',
+    body: 'Juegos y personajes para colorear que alargan la aventura del cuento y convierten su mensaje en hábitos, en casa y en el aula.',
     image: '/assets/cuento/cuadernillo.webp',
     alt: 'Portada del cuadernillo de actividades y personajes para colorear',
     cta: 'Ver el cuadernillo',
@@ -55,13 +59,13 @@ const cards = [
     accent: 'arena',
   },
   {
-    href: '/comprar',
-    eyebrow: 'llévatelo a casa',
-    title: 'Dónde comprar',
-    body: 'Pídelo online y te llega a casa, o búscalo en librerías de Gran Canaria. Y en el Centro de Danza Sandra Santa Cruz, ¡lo tendrás con dedicatoria de la autora!',
-    image: '/assets/comprar/nina-leyendo-en-la-orilla.webp',
-    alt: 'Una niña con sombrero lee Si los peces hablaran sentada en una roca junto al mar',
-    cta: 'Encuentra tu librería',
+    href: '/programa#talleres',
+    eyebrow: 'educación ambiental',
+    title: 'Talleres SLPH',
+    body: 'Nacieron del cuento: con la autora y una actriz, convierten bibliotecas, museos y colegios en un fondo marino donde aprender a cuidar el mar.',
+    image: '/assets/galeria/talleres/02-biblioteca-insular.webp',
+    alt: 'Taller SLPH en la Biblioteca Insular de Gran Canaria, con el cartel del cuento',
+    cta: 'Ver los talleres',
     accent: 'celeste',
   },
 ] as const;
@@ -72,7 +76,7 @@ const cards = [
     <div class="reveal flex items-center gap-5">
       <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
       <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
-        Explora el universo del cuento
+        Una obra, muchos lenguajes
       </span>
     </div>
 

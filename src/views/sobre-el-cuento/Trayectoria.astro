@@ -1,0 +1,43 @@
+---
+/**
+ * «Diez años creciendo»: del musical al programa. Hitos del «Dossier
+ * Bibliotecas 2026-2027»; las ediciones del libro están en la ficha.
+ */
+import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
+import Ola from '../../components/Ola.astro';
+
+const hitos = [
+  { anio: '2016', texto: 'Estreno del musical en el Centro de Danza Sandra Santa Cruz.' },
+  { anio: '2018', texto: 'Nace el cuento: presentación en el acuario Poema del Mar.' },
+  { anio: '2019', texto: 'Llega a las aulas: colegios como el CEIP Alfredo Kraus lo trabajan con su alumnado.' },
+  { anio: '2021', texto: 'Versión sinfónica con la Orquesta Filarmónica de Gran Canaria. El cuento cruza el Atlántico hasta Colombia.' },
+  { anio: '2022', texto: 'Con la Consejería de Educación del Cabildo: más de 500 escolares de 12 colegios.' },
+  { anio: '2026', texto: '3.ª edición, cuadernillo de actividades y edición para Oncología Infantil.' },
+];
+---
+
+<section class="relative isolate overflow-hidden py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal flex items-center gap-5">
+      <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
+      <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">De 2016 a hoy</span>
+    </div>
+    <h2 class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+      Diez años
+      <Ola class="text-celeste">creciendo</Ola>
+    </h2>
+
+    <ol class="relative mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
+      {hitos.map((h, i) => (
+        <li class={`reveal reveal-delay-${Math.min(i + 1, 4)} border-l-2 border-arena/40 pl-5`}>
+          <p class="font-display text-4xl leading-none text-arena">{h.anio}</p>
+          <p class="mt-2 text-base leading-relaxed text-caparol/85 sm:text-lg">{h.texto}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="reveal mt-12">
+      <EnlaceFlecha href="/programa">Conoce el Programa SLPH</EnlaceFlecha>
+    </div>
+  </div>
+</section>

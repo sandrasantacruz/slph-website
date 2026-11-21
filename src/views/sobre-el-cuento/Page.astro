@@ -4,6 +4,8 @@ import Hero from './Hero.astro';
 import Razones from './Razones.astro';
 import AvalCientifico from './AvalCientifico.astro';
 import Tarjetas from './Tarjetas.astro';
+import Trayectoria from './Trayectoria.astro';
+import Fragmento from './Fragmento.astro';
 import Origen from './Origen.astro';
 import MusicalGaleria from './MusicalGaleria.astro';
 import Curiosidad from './Curiosidad.astro';
@@ -20,8 +22,8 @@ const breadcrumb = breadcrumbSchema([
 ---
 
 <MainLayout
-  title="Si los peces hablaran…: cuento infantil sobre el mar | Sandra Santa Cruz"
-  description="Cuento infantil de Sandra Santa Cruz con realidad aumentada, supervisado por investigadoras de la ULPGC. Desde 6 años. Nace de su propio musical. 3.ª edición."
+  title="Si los peces hablaran…: el cuento que nació de un musical | Sandra Santa Cruz"
+  description="Nació sobre un escenario y une literatura, música, ilustración, tecnología y educación ambiental. El cuento de Sandra Santa Cruz, ya en su 3.ª edición."
   image="/assets/og-cuento.jpg"
   imageAlt="Portada de la 3.ª edición del cuento Si los peces hablaran…, de Sandra Santa Cruz"
   imageWidth={1200}
@@ -30,13 +32,16 @@ const breadcrumb = breadcrumbSchema([
   jsonLd={[bookSchema(), breadcrumb]}
 >
   <Hero />
-  <!-- Primero cómo nació (bailando): es parte de la identidad del proyecto -->
+  <!-- Los cinco lenguajes de la obra, cada uno con su página -->
+  <Tarjetas />
+  <Fragmento />
+  <!-- Cómo nació (bailando) y cómo ha crecido: parte de la identidad del proyecto -->
   <Origen />
   <MusicalGaleria />
+  <Trayectoria />
   <Razones />
   <LoQueDicen />
   <AvalCientifico />
-  <Tarjetas />
   <Curiosidad />
   <CuentoGaleria />
   <Cierre />

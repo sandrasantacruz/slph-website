@@ -1,0 +1,43 @@
+---
+/**
+ * «Antes de llevártelo, ábrelo»: el paso comercial antes de comprar, destacado
+ * y a lo ancho, justo después de los cinco lenguajes.
+ */
+import Ola from '../../components/Ola.astro';
+import cover from '../home/img/cover-cuento.webp?url';
+---
+
+<section class="relative isolate overflow-hidden pb-8 sm:pb-12">
+  <div class="mx-auto max-w-6xl px-6">
+    <a
+      href="/lee-un-fragmento"
+      class="reveal group grid items-center gap-8 rounded-3xl border border-arena/30 bg-azul-deep/50 p-6 ring-1 ring-caparol/10 transition hover:border-arena/70 sm:p-10 md:grid-cols-12 md:gap-12"
+    >
+      <div class="mx-auto w-full max-w-[15rem] md:col-span-4 md:max-w-none">
+        <img
+          src={cover}
+          alt="Portada de la 3.ª edición de Si los peces hablaran…"
+          width="1250"
+          height="1250"
+          class="w-full -rotate-2 rounded-md shadow-[0_25px_50px_-15px_rgba(3,10,35,0.9)] transition duration-500 group-hover:rotate-0"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="text-center md:col-span-8 md:text-left">
+        <h2 class="font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[0.95] text-caparol">
+          Antes de llevártelo,
+          <Ola class="text-arena">ábrelo</Ola>
+        </h2>
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-caparol/85 md:mx-0 mx-auto">
+          Hojea las primeras páginas del cuento ilustrado y conoce a Lorena, Nela la Irritable y
+          compañía.
+        </p>
+        <span class="mt-7 inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition group-hover:brightness-95">
+          Lee un fragmento
+          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </span>
+      </div>
+    </a>
+  </div>
+</section>

@@ -9,10 +9,10 @@ import Ola from '../../components/Ola.astro';
 import cover from '../home/img/cover-cuento.webp?url';
 
 const datos = [
+  // Datos de valor, no de ficha: la edad y la app están en la ficha del libro.
   { icon: 'game-icons:ballerina-shoes', texto: 'Nacido de un musical del Centro de Danza Sandra Santa Cruz' },
-  { icon: 'game-icons:three-friends', texto: 'Desde 6 años, ideal para leer en familia' },
-  { icon: 'game-icons:vibrating-smartphone', texto: 'Con realidad aumentada gratuita' },
   { icon: 'game-icons:microscope', texto: 'Supervisado por investigadoras del ECOAQUA (ULPGC)' },
+  { icon: 'game-icons:big-wave', texto: 'Parte del Programa SLPH de concienciación marina', href: '/programa' },
 ];
 ---
 
@@ -30,13 +30,14 @@ const datos = [
       </div>
 
       <h1 class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2.4rem,6.5vw,4.8rem)] leading-[0.95] tracking-tight text-caparol">
-        Un océano que por fin
+        El océano por fin
         <span class="whitespace-nowrap">encuentra <Ola class="text-arena">su voz</Ola></span>
       </h1>
 
-      <p class="reveal reveal-delay-2 mt-6 max-w-2xl font-hand text-2xl leading-snug text-celeste sm:text-3xl">
-        ¿Conoces otro cuento que nazca de su propio musical, con aval científico
-        y realidad aumentada?
+      <!-- El posicionamiento: una obra, no «un cuento infantil con realidad aumentada» -->
+      <p class="reveal reveal-delay-2 mt-6 max-w-2xl font-display text-[clamp(1.35rem,2.6vw,1.9rem)] leading-snug text-celeste">
+        Nació sobre un escenario y une literatura, música, ilustración, tecnología y
+        educación ambiental.
       </p>
 
       <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-lg leading-relaxed text-caparol/90">
@@ -50,7 +51,7 @@ const datos = [
         {datos.map((d) => (
           <li class="flex items-center gap-2.5 text-base text-caparol/85">
             <Icon name={d.icon} class="h-6 w-6 shrink-0 text-celeste" aria-hidden="true" />
-            {d.texto}
+            {d.href ? <a href={d.href} class="underline decoration-celeste/40 underline-offset-4 hover:text-arena hover:decoration-arena">{d.texto}</a> : d.texto}
           </li>
         ))}
       </ul>
