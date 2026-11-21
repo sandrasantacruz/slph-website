@@ -3,6 +3,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Biografia from './Biografia.astro';
 import Galeria from './Galeria.astro';
+import Julieta from './Julieta.astro';
 import Lightbox from '../galeria/Lightbox.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
 import { breadcrumbSchema } from '../../lib/seo';
@@ -24,6 +25,7 @@ const breadcrumb = breadcrumbSchema([
   <SubNavCuento current="ilustrador" />
   <Hero />
   <Biografia />
+  <Julieta />
   <Galeria />
   <Lightbox />
 </MainLayout>

@@ -1,43 +1,39 @@
 ---
 /**
- * «Diez años creciendo»: del musical al programa. Hitos del «Dossier
- * Bibliotecas 2026-2027»; las ediciones del libro están en la ficha.
+ * «Diez años creciendo» en cifras (Dossier Bibliotecas 2026-2027). La línea de
+ * tiempo completa está en La autora (#trayectoria): aquí no se repite.
  */
 import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 import Ola from '../../components/Ola.astro';
 
-const hitos = [
-  { anio: '2016', texto: 'Estreno del musical en el Centro de Danza Sandra Santa Cruz.' },
-  { anio: '2018', texto: 'Nace el cuento: presentación en el acuario Poema del Mar.' },
-  { anio: '2019', texto: 'Llega a las aulas: colegios como el CEIP Alfredo Kraus lo trabajan con su alumnado.' },
-  { anio: '2021', texto: 'Versión sinfónica con la Orquesta Filarmónica de Gran Canaria. El cuento cruza el Atlántico hasta Colombia.' },
-  { anio: '2022', texto: 'Con la Consejería de Educación del Cabildo: más de 500 escolares de 12 colegios.' },
-  { anio: '2026', texto: '3.ª edición, cuadernillo de actividades y edición para Oncología Infantil.' },
+const cifras = [
+  { valor: '10', texto: 'años dando voz al mar' },
+  { valor: '+70', texto: 'actividades' },
+  { valor: '+3.000', texto: 'escolares en el musical' },
+  { valor: '4', texto: 'islas… ¡y hasta Colombia!' },
 ];
 ---
 
 <section class="relative isolate overflow-hidden py-16 sm:py-24">
-  <div class="mx-auto max-w-6xl px-6">
-    <div class="reveal flex items-center gap-5">
-      <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
-      <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">De 2016 a hoy</span>
-    </div>
-    <h2 class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+  <div class="mx-auto max-w-6xl px-6 text-center">
+    <p class="reveal font-hand text-2xl text-celeste sm:text-3xl">de 2016 a hoy</p>
+    <h2 class="reveal reveal-delay-1 mt-2 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] text-caparol">
       Diez años
-      <Ola class="text-celeste">creciendo</Ola>
+      <Ola class="text-arena">creciendo</Ola>
     </h2>
 
-    <ol class="relative mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
-      {hitos.map((h, i) => (
-        <li class={`reveal reveal-delay-${Math.min(i + 1, 4)} border-l-2 border-arena/40 pl-5`}>
-          <p class="font-display text-4xl leading-none text-arena">{h.anio}</p>
-          <p class="mt-2 text-base leading-relaxed text-caparol/85 sm:text-lg">{h.texto}</p>
+    <ul class="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
+      {cifras.map((c, i) => (
+        <li class={`reveal reveal-delay-${i + 1}`}>
+          <p class="font-display text-[clamp(2.75rem,7vw,4.5rem)] leading-none text-arena">{c.valor}</p>
+          <p class="mt-2 text-base text-caparol/85 sm:text-lg">{c.texto}</p>
         </li>
       ))}
-    </ol>
+    </ul>
 
-    <div class="reveal mt-12">
-      <EnlaceFlecha href="/programa">Conoce el Programa SLPH</EnlaceFlecha>
+    <div class="reveal mt-12 flex flex-wrap justify-center gap-4">
+      <EnlaceFlecha href="/autor#trayectoria">Conoce su historia</EnlaceFlecha>
+      <EnlaceFlecha href="/programa">Programa SLPH</EnlaceFlecha>
     </div>
   </div>
 </section>

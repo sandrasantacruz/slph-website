@@ -36,7 +36,7 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿En qué consiste el programa SLPH?",
     answer:
-      "El programa Si los peces hablaran… (SLPH) utiliza las artes plásticas, las artes escénicas, la educación y las ciencias del mar como herramientas para fomentar la protección y conservación de los ecosistemas marinos.\nTodos sus contenidos cuentan con la supervisión científica de investigadoras de la Facultad de Ciencias del Mar de la Universidad de Las Palmas de Gran Canaria, garantizando el rigor de los mensajes que transmite.\nEl programa incluye talleres educativos, exposiciones, espectáculos, materiales didácticos y otras acciones de sensibilización dirigidas a centros escolares, familias e instituciones.",
+      "El programa Si los peces hablaran… (SLPH) utiliza las artes plásticas, las artes escénicas, la educación y las ciencias del mar como herramientas para fomentar la protección y conservación de los ecosistemas marinos.\nTodos sus contenidos cuentan con la supervisión científica de investigadoras del Instituto ECOAQUA de la Universidad de Las Palmas de Gran Canaria, garantizando el rigor de los mensajes que transmite.\nEl programa incluye talleres educativos, exposiciones, espectáculos, materiales didácticos y otras acciones de sensibilización dirigidas a centros escolares, familias e instituciones.",
   },
   {
     question: "¿Cómo se puede colaborar?",
