@@ -14,8 +14,11 @@ const razones = [
   },
   {
     icon: 'game-icons:paint-brush',
-    titulo: 'Ilustraciones de calidad',
-    texto: 'Porque los más pequeños merecen lo mejor: firmadas por Pablo Tribiño. La 3.ª edición trae aún más ilustraciones en color.',
+    titulo: 'Ilustraciones cuidadas al detalle',
+    texto: 'Cada personaje y cada fondo marino se han trabajado con mimo, sin simplificar: atrapan la mirada de los más pequeños, ¡incluso la de los bebés! Firmadas por Pablo Tribiño, con aún más color en la 3.ª edición.',
+    // Vídeo de la bebé («SLPH Nieta de Elizete», public/videos/bebe-leyendo.mp4, sin subir):
+    // pendiente de la autorización de su familia. Para activarlo, descomentar:
+    // video: { src: '/videos/bebe-leyendo.mp4', poster: '/videos/bebe-leyendo-poster.webp', pie: 'Una lectora muy pequeña' },
   },
   {
     icon: 'game-icons:sunrise',
@@ -46,6 +49,18 @@ const razones = [
           <Icon name={r.icon} class="h-10 w-10 text-arena" aria-hidden="true" />
           <h3 class="mt-4 font-display text-2xl leading-tight text-caparol">{r.titulo}</h3>
           <p class="mt-2 text-base leading-relaxed text-caparol/80">{r.texto}</p>
+          {'video' in r && r.video && (
+            <button
+              type="button"
+              data-abrir-video={r.video.src}
+              data-poster={r.video.poster}
+              data-pie={r.video.pie}
+              class="mt-4 flex items-center gap-2 self-start font-display text-xs tracking-[0.18em] text-arena uppercase transition hover:text-caparol"
+            >
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+              Míralo
+            </button>
+          )}
         </li>
       ))}
     </ul>
