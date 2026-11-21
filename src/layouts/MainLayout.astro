@@ -102,6 +102,28 @@ const seoTitle = title ?? SITE_NAME;
     <Footer />
     <BackToTop />
       <script>
+      // Ventanas (vídeos, galería): al abrir una se añade un paso al historial,
+      // así el botón «atrás» del móvil la cierra en lugar de salir de la página.
+      type ConHistorial = HTMLDialogElement & { porAtras?: boolean };
+      const abrirOriginal = HTMLDialogElement.prototype.showModal;
+      HTMLDialogElement.prototype.showModal = function (this: ConHistorial) {
+        abrirOriginal.call(this);
+        if (!this.dataset.historial) {
+          this.dataset.historial = '1';
+          this.addEventListener('close', () => {
+            if (this.porAtras) { this.porAtras = false; return; }
+            if (history.state?.ventana) history.back();
+          });
+        }
+        history.pushState({ ventana: true }, '');
+      };
+      window.addEventListener('popstate', () => {
+        document.querySelectorAll<ConHistorial>('dialog[open]').forEach((d) => {
+          d.porAtras = true;
+          d.close();
+        });
+      });
+
       // Un solo vídeo con sonido a la vez: al reproducir uno, se pausan los demás.
       // Los vídeos de fondo (silenciados, en bucle) no se tocan.
       document.addEventListener(

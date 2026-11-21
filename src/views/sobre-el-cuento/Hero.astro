@@ -35,7 +35,7 @@ const datos = [
       </h1>
 
       <!-- El posicionamiento: una obra, no «un cuento infantil con realidad aumentada» -->
-      <p class="reveal reveal-delay-2 mt-6 max-w-2xl font-display text-[clamp(1.35rem,2.6vw,1.9rem)] leading-snug text-celeste">
+      <p class="reveal reveal-delay-2 mt-6 max-w-2xl font-hand text-2xl leading-snug text-celeste sm:text-3xl">
         Nació sobre un escenario y une literatura, música, ilustración, tecnología y
         educación ambiental.
       </p>
@@ -73,19 +73,25 @@ const datos = [
       </div>
     </div>
 
-    <div class="reveal reveal-delay-2 order-first mx-auto w-full max-w-md sm:max-w-lg lg:order-none lg:col-span-5 lg:max-w-none">
+    <div class="reveal reveal-delay-2 order-first mx-auto w-full lg:order-none lg:col-span-5 lg:max-w-none">
       <!-- Prueba: foto en familia (IMG_1802). Alternativas: la niña del Centro de Danza
            (nina-cuento-y-cuadernillo.webp) o la portada sola (cover, 1250×1250). -->
-      <img
-        src="/assets/cuento/familia-leyendo-el-cuento.webp"
-        alt="Un padre con sus dos hijos, sonrientes en una terraza canaria con cactus, con la 3.ª edición de Si los peces hablaran…"
-        width="1500"
-        height="1000"
-        class="w-full rotate-2 rounded-xl shadow-[0_35px_70px_-20px_rgba(3,10,35,0.9)] transition duration-500 hover:rotate-0"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-      />
+      <!-- Vertical y en marco de polaroid, como el resto de fotos de la página -->
+      <div class="polaroid tilt-r1 mx-auto max-w-[17rem] transition duration-500 hover:rotate-0 sm:max-w-xs lg:max-w-sm">
+        <img
+          src="/assets/cuento/familia-leyendo-el-cuento-vertical.webp"
+          alt="Un padre con sus dos hijos, sonrientes en una terraza canaria con cactus, con la 3.ª edición de Si los peces hablaran…"
+          width="1200"
+          height="1500"
+          class="block w-full"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <p class="absolute bottom-2 left-0 right-0 text-center font-hand text-2xl leading-none text-azul sm:text-3xl">
+          ¡a leer juntos!
+        </p>
+      </div>
     </div>
   </div>
 </section>
