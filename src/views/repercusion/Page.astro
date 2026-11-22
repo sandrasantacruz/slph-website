@@ -7,6 +7,7 @@ import Menores from './Menores.astro';
 import Anecdota from './Anecdota.astro';
 import Prensa from './Prensa.astro';
 import Origen from './Origen.astro';
+import WaterLine from '../../components/WaterLine.astro';
 import SubNavPrograma from '../../components/SubNavPrograma.astro';
 import { breadcrumbSchema } from '../../lib/seo';
 
@@ -27,7 +28,10 @@ const breadcrumb = breadcrumbSchema([
   <SubNavPrograma current="repercusion" />
   <Hero />
   <Medios />
+  <!-- Noa, como Izzy en El ilustrador: entre dos líneas de agua -->
+  <WaterLine separador clave="-a" />
   <Menores />
+  <WaterLine separador clave="-b" />
   <Anecdota />
   <Prensa />
   <Huella />

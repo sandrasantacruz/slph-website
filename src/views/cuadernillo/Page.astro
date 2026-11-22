@@ -4,6 +4,7 @@ import Hero from './Hero.astro';
 import Contenido from './Contenido.astro';
 import Foto from './Foto.astro';
 import Homenaje from './Homenaje.astro';
+import WaterLine from '../../components/WaterLine.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
 import { breadcrumbSchema } from '../../lib/seo';
 
@@ -25,6 +26,8 @@ const breadcrumb = breadcrumbSchema([
   <Hero />
   <Contenido />
   <Foto />
+  <!-- la parte más emotiva: oncología infantil -->
+  <WaterLine separador />
   <Homenaje />
 </MainLayout>
 

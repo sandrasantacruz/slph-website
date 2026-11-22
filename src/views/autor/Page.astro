@@ -5,6 +5,7 @@ import Biografia from './Biografia.astro';
 import Hitos from './Hitos.astro';
 import Origen from './Origen.astro';
 import Manifest from './Manifest.astro';
+import WaterLine from '../../components/WaterLine.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
 import { personSandraSchema, breadcrumbSchema } from '../../lib/seo';
 
@@ -27,6 +28,8 @@ const breadcrumb = breadcrumbSchema([
   <Biografia />
   <Hitos />
   <Origen />
+  <!-- el lema, cierre emocional de la página -->
+  <WaterLine separador />
   <Manifest />
 </MainLayout>
 

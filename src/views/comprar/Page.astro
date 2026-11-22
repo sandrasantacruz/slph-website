@@ -5,6 +5,7 @@ import Videos from './Videos.astro';
 import Escuela from './Escuela.astro';
 import Librerias from './Librerias.astro';
 import CTA from './CTA.astro';
+import WaterLine from '../../components/WaterLine.astro';
 import { bookSchema, cuadernilloSchema, breadcrumbSchema } from '../../lib/seo';
 
 const breadcrumb = breadcrumbSchema([
@@ -23,6 +24,8 @@ const breadcrumb = breadcrumbSchema([
   <Escuela />
   <Librerias />
   <Videos />
+  <!-- la segunda vía: pedidos al por mayor y dudas -->
+  <WaterLine separador />
   <CTA />
 </MainLayout>
 
