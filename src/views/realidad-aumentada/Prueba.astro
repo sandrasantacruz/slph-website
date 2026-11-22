@@ -6,65 +6,69 @@ import { APP_LINKS } from '../../lib/app-links';
 // Zielbild für die AR-App (Seite 80 des Buchs). Wird ungeschnitten gezeigt,
 // sonst erkennt die App das Motiv nicht.
 const target = '/assets/ar/pagina-80-pez-espada.webp';
+const enlace =
+  'inline-flex items-center gap-2 text-celeste underline decoration-celeste/40 underline-offset-4 transition hover:text-arena';
+const numero =
+  'flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-arena font-display text-2xl text-azul shadow-md sm:h-12 sm:w-12';
 ---
 
+<!-- Für alle, auch ohne Buch: die Demo ist das stärkste Verkaufsargument der Seite. -->
 <section id="prueba" class="relative isolate overflow-hidden py-16 sm:py-24">
   <div class="mx-auto max-w-6xl px-6">
     <div class="reveal flex items-center gap-4">
       <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
       <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
-        ¿Ya tienes la app?
+        ¿Aún no tienes el cuento? ¡No te quedes con las ganas!
       </span>
     </div>
 
     <h2 class="reveal reveal-delay-1 mt-6 max-w-3xl font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] text-caparol">
-      Pruébala en
+      Pruébalo en
       <Ola class="whitespace-nowrap text-arena">esta ilustración</Ola>
     </h2>
 
-    <!-- Zwei Fassungen: wer auf dem Handy liest, kann das Handy nicht auf den
-         eigenen Bildschirm richten. Umschalten per (pointer: coarse) + Breite,
-         nicht per JS, damit nichts springt. -->
-    <p class="prueba-escritorio reveal reveal-delay-2 mt-6 max-w-2xl text-base leading-relaxed text-caparol/90 sm:text-lg">
-      Abre la app y apunta con el móvil a la ilustración de aquí abajo,
-      directamente en la pantalla. ¿Tienes el libro? Búscala en la página 80
-      y verás cómo, de repente, la escena se escapa… ¡y salta del libro!
-    </p>
-    <p class="prueba-movil reveal reveal-delay-2 mt-6 max-w-2xl text-base leading-relaxed text-caparol/90 sm:text-lg">
-      Abre esta página en un ordenador o una tableta y apunta con el móvil a la
-      ilustración de aquí abajo. ¿Tienes el libro? Búscala en la página 80
-      y verás cómo, de repente, la escena se escapa… ¡y salta del libro!
-    </p>
+    <ol class="reveal reveal-delay-2 mt-10 grid gap-8 md:grid-cols-3 md:gap-6">
+      <li class="flex gap-4">
+        <span class={numero} aria-hidden="true">1</span>
+        <div>
+          <p class="font-display text-xl leading-tight text-caparol sm:text-2xl">Descarga la app AR-SLPH en tu móvil</p>
+          <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm sm:text-base">
+            <a href={APP_LINKS.android} target="_blank" rel="noopener" class={enlace}>
+              <Icon name="simple-icons:googleplay" class="h-4 w-4" aria-hidden="true" />
+              Google Play
+            </a>
+            <a href={APP_LINKS.iosBeta} target="_blank" rel="noopener" class={enlace}>
+              <Icon name="simple-icons:apple" class="h-4 w-4" aria-hidden="true" />
+              iPhone y iPad
+            </a>
+          </p>
+          <p class="mt-2 text-xs leading-snug text-caparol/60 sm:text-sm">
+            En iPhone y iPad, instala primero
+            <a href={APP_LINKS.testflight} target="_blank" rel="noopener" class="text-celeste underline decoration-celeste/40 underline-offset-2 hover:text-arena">TestFlight</a>
+            y después acepta la invitación.
+          </p>
+        </div>
+      </li>
+      <li class="flex gap-4">
+        <span class={numero} aria-hidden="true">2</span>
+        <div>
+          <!-- Wer auf dem Handy liest, kann das Handy nicht auf den eigenen Bildschirm
+               richten. Umschalten per (pointer: coarse) + Breite, nicht per JS. -->
+          <p class="prueba-movil font-display text-xl leading-tight text-caparol sm:text-2xl">Abre esta página en un ordenador o una tableta</p>
+          <p class="prueba-escritorio font-display text-xl leading-tight text-caparol sm:text-2xl">Deja esta página abierta en la pantalla</p>
+          <p class="prueba-escritorio mt-2 text-sm text-caparol/75 sm:text-base">Ya estás en el sitio correcto: la ilustración está aquí abajo.</p>
+        </div>
+      </li>
+      <li class="flex gap-4">
+        <span class={numero} aria-hidden="true">3</span>
+        <div>
+          <p class="font-display text-xl leading-tight text-caparol sm:text-2xl">Abre la app y apunta a la ilustración</p>
+          <p class="mt-2 text-sm text-caparol/75 sm:text-base">…y verás cómo la escena se escapa ¡y salta de la pantalla!</p>
+        </div>
+      </li>
+    </ol>
 
-    <!-- Für alle, die die App noch nicht haben -->
-    <p class="reveal reveal-delay-2 mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-caparol/75 sm:text-base">
-      <span>¿Aún no la tienes?</span>
-      <a
-        href={APP_LINKS.android}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center gap-2 text-celeste underline decoration-celeste/40 underline-offset-4 transition hover:text-arena"
-      >
-        <Icon name="simple-icons:googleplay" class="h-4 w-4" aria-hidden="true" />
-        Google Play
-      </a>
-      <a
-        href={APP_LINKS.iosBeta}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center gap-2 text-celeste underline decoration-celeste/40 underline-offset-4 transition hover:text-arena"
-      >
-        <Icon name="simple-icons:apple" class="h-4 w-4" aria-hidden="true" />
-        iPhone y iPad (TestFlight)
-      </a>
-      <span class="basis-full text-xs text-caparol/60 sm:text-sm">
-        En iPhone y iPad, instala primero
-        <a href={APP_LINKS.testflight} target="_blank" rel="noopener" class="text-celeste underline decoration-celeste/40 underline-offset-2 hover:text-arena">TestFlight</a>
-        y después acepta la invitación.
-      </span>
-    </p>
-
-    <div class="reveal reveal-delay-2 mt-10">
+    <div class="reveal reveal-delay-2 mt-12">
       <a
         href={target}
         target="_blank"
@@ -84,6 +88,7 @@ const target = '/assets/ar/pagina-80-pez-espada.webp';
       <p class="mt-4 text-center font-hand text-2xl text-arena sm:text-3xl">
         ¡Apunta aquí para ver al Coronel Espada Afilada en acción!
       </p>
+      <p class="mt-2 text-center text-sm text-caparol/70 sm:text-base">Si tienes el libro, la encontrarás en la página 80.</p>
     </div>
   </div>
 </section>

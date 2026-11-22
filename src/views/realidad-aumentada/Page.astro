@@ -7,6 +7,7 @@ import Capas from './Capas.astro';
 import Peques from './Peques.astro';
 import App from './App.astro';
 import Cuadernillo from './Cuadernillo.astro';
+import Compra from './Compra.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
 import { breadcrumbSchema } from '../../lib/seo';
 
@@ -30,8 +31,10 @@ const breadcrumb = breadcrumbSchema([
   <Capas />
   <Peques />
   <App />
-  <Prueba />
   <Cuadernillo />
+  <!-- la demo, y justo después el libro -->
+  <Prueba />
+  <Compra />
 </MainLayout>
 
 <script>
