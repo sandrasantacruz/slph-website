@@ -1,5 +1,8 @@
 ---
 // Die QR-Codes sind mit der 3. Auflage ins Cuadernillo umgezogen.
+// Echter QR aus dem Cuadernillo («QR_TALLERES SLPH», Drive «QR en PNG»):
+// führt zum Video von Don Canino im Museo-Casa Colón.
+const QR_VIDEO = 'https://www.youtube.com/watch?v=AphhZ4KFlas';
 ---
 
 <section class="relative isolate overflow-hidden border-t border-caparol/10 py-16 sm:py-24">
@@ -23,7 +26,9 @@
       </span>
     </h2>
 
-    <p class="reveal reveal-delay-2 mt-6 max-w-3xl text-base leading-relaxed text-caparol/90 sm:text-lg">
+    <div class="mt-6 grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+    <div class="lg:col-span-8">
+    <p class="reveal reveal-delay-2 max-w-3xl text-base leading-relaxed text-caparol/90 sm:text-lg">
       Con la 3.ª edición nace un nuevo compañero de viaje para el cuento: el
       cuadernillo de actividades. Sus códigos QR no sacan escenas del cuento:
       te abren la puerta a los eventos SLPH, para que veas cómo acercamos el
@@ -42,6 +47,26 @@
     >
       Conoce el cuadernillo <span aria-hidden="true">→</span>
     </a>
+    </div>
+
+    <!-- El QR real, idéntico al del papel. En el móvil no se puede escanear la
+         propia pantalla: ahí funciona como enlace. -->
+    <figure class="reveal reveal-delay-2 mx-auto lg:col-span-4">
+      <a
+        href={QR_VIDEO}
+        target="_blank"
+        rel="noopener"
+        class="block w-52 rotate-[2deg] rounded-2xl bg-white p-4 shadow-[0_20px_40px_-16px_rgba(3,10,35,0.8)] transition duration-500 hover:rotate-0 sm:w-60"
+        aria-label="Vídeo: Don Canino visita el Museo-Casa Colón por el Día Mundial del Libro (YouTube)"
+      >
+        <img src="/assets/ar/qr-talleres-slph.png" alt="Código QR del cuadernillo" width="400" height="400" class="block h-auto w-full [image-rendering:pixelated]" loading="lazy" decoding="async" />
+      </a>
+      <figcaption class="mt-4 max-w-60 text-center font-hand text-xl leading-snug text-celeste sm:text-2xl">
+        <span class="qr-escritorio">escanéalo y verás uno de nuestros eventos</span>
+        <span class="qr-movil">tócalo y verás uno de nuestros eventos</span>
+      </figcaption>
+    </figure>
+    </div>
 
     <p class="reveal mt-12 border-t border-caparol/10 pt-6 text-sm leading-relaxed text-caparol/70 sm:text-base">
       Los QR y la realidad aumentada son obra de
@@ -50,3 +75,11 @@
     </p>
   </div>
 </section>
+
+<style>
+  .qr-movil { display: none; }
+  @media (pointer: coarse) and (max-width: 767px) {
+    .qr-movil { display: inline; }
+    .qr-escritorio { display: none; }
+  }
+</style>
