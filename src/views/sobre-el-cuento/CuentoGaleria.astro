@@ -17,17 +17,14 @@ const imagenes = [
 ] as const;
 ---
 
-<section class="relative isolate overflow-hidden pt-6 pb-16 sm:pt-8 sm:pb-20">
-  <div class="mx-auto max-w-6xl px-6">
-    <div class="reveal flex items-center gap-5">
-      <span aria-hidden="true" class="h-0.5 w-16 bg-arena sm:w-24"></span>
-      <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
-        Así fue nuestra presentación
-      </span>
-    </div>
+<!-- Parte del bloque anterior (no es una sección aparte): solo la etiqueta
+     manuscrita, el carrusel y el enlace a la galería. -->
+<div class="mt-16 sm:mt-20">
+  <div>
+    <p class="reveal font-hand text-2xl text-celeste sm:text-3xl">así fue nuestra presentación</p>
 
     <div
-      class="carrusel -mx-6 mt-8 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-6 pb-2 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0"
+      class="carrusel -mx-6 mt-5 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto px-6 pb-2 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0"
     >
       {
         imagenes.map((img, i) => (
@@ -59,4 +56,4 @@ const imagenes = [
       <EnlaceFlecha href="/galeria#cuento">Revívela en la galería</EnlaceFlecha>
     </div>
   </div>
-</section>
+</div>
