@@ -1,0 +1,84 @@
+---
+import { Icon } from 'astro-icon/components';
+/**
+ * Respuesta a la pregunta del bloque de Julieta («¿Quién mejor que una niña
+ * para saber si un dibujo engancha a los niños?»): Izzy, con 16 meses, pasa
+ * las páginas sola mirando los dibujos. Autorizado por su familia; solo el
+ * nombre, sin apellidos. En bucle y sin sonido al empezar; el botón «¡Sube el volumen!» lo activa
+ * (sin el fundido final del original). El tramo de la
+ * sirena (11,6–15 s del original) va a cámara lenta, para que se vea bien.
+ */
+---
+
+<section class="relative isolate overflow-hidden pt-8 pb-12 sm:pt-12 sm:pb-16">
+  <div class="mx-auto flex max-w-4xl flex-col items-center px-6 text-center">
+    <!-- No es exageración: lo demuestra quien aún no sabe leer -->
+    <p class="reveal font-hand text-2xl text-celeste sm:text-3xl">¿crees que exageramos?</p>
+    <p class="reveal reveal-delay-1 mt-2 max-w-3xl font-display text-[clamp(1.6rem,4vw,2.4rem)] leading-tight text-caparol">
+      Todavía no sabe leer… <span class="whitespace-nowrap text-arena">y no le hace falta</span>.
+    </p>
+
+    <figure class="reveal reveal-delay-2 mt-8 w-full max-w-[17rem] sm:max-w-xs">
+      <div class="polaroid tilt-r1 transition duration-500 hover:rotate-0">
+        <video
+          src="/assets/ilustrador/izzy-16-meses.mp4"
+          poster="/assets/ilustrador/izzy-16-meses.webp"
+          width="540"
+          height="720"
+          autoplay
+          muted
+          loop
+          playsinline
+          aria-label="Izzy, de 16 meses, pasa sola las páginas del cuento mirando las ilustraciones"
+          class="block aspect-[3/4] w-full object-cover"
+        ></video>
+        <figcaption class="absolute bottom-2 left-0 right-0 text-center font-hand text-2xl leading-none text-azul sm:text-3xl">
+          Izzy, 16 meses
+        </figcaption>
+      </div>
+    </figure>
+
+    <!-- El vídeo arranca sin sonido (los navegadores no dejan otra cosa): este
+         botón lo activa y lo vuelve a empezar, para oír su «opinión» entera -->
+    <button
+      type="button"
+      data-sonido-izzy
+      aria-pressed="false"
+      class="reveal reveal-delay-3 group mt-8 inline-flex items-center gap-3 rounded-full border-2 border-arena/60 px-5 py-2.5 text-left text-caparol transition hover:border-arena hover:bg-arena hover:text-azul"
+    >
+      <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-arena text-azul">
+        <Icon name="game-icons:speaker" class="icono-on h-5 w-5" aria-hidden="true" />
+        <Icon name="game-icons:speaker-off" class="icono-off hidden h-5 w-5" aria-hidden="true" />
+      </span>
+      <span class="texto-on font-hand text-xl leading-tight sm:text-2xl">¿Quieres conocer su opinión? ¡Sube el volumen!</span>
+      <span class="texto-off hidden font-hand text-xl leading-tight sm:text-2xl">Quitar el sonido</span>
+      <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-arena transition group-hover:text-azul" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.5.8-1.3 2.3-2.5 4.4-2.5 3.7 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg>
+    </button>
+  </div>
+</section>
+
+<script>
+  const video = document.querySelector<HTMLVideoElement>('video[src*="izzy"]');
+  const boton = document.querySelector<HTMLButtonElement>('[data-sonido-izzy]');
+  boton?.addEventListener('click', () => {
+    if (!video) return;
+    const activar = video.muted;
+    video.muted = !activar;
+    if (activar) {
+      video.currentTime = 0;
+      video.play();
+    }
+    boton.setAttribute('aria-pressed', String(activar));
+    boton.querySelectorAll('.icono-on, .texto-on').forEach((el) => el.classList.toggle('hidden', activar));
+    boton.querySelectorAll('.icono-off, .texto-off').forEach((el) => el.classList.toggle('hidden', !activar));
+  });
+
+  // «Reducir movimiento»: el vídeo se queda quieto en su portada.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLVideoElement>('video[src*="izzy"]').forEach((v) => {
+      v.autoplay = false;
+      v.pause();
+      v.currentTime = 0;
+    });
+  }
+</script>

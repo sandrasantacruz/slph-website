@@ -4,6 +4,8 @@ import Hero from './Hero.astro';
 import Biografia from './Biografia.astro';
 import Galeria from './Galeria.astro';
 import Julieta from './Julieta.astro';
+import Izzy from './Izzy.astro';
+import WaterLine from '../../components/WaterLine.astro';
 import Lightbox from '../galeria/Lightbox.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
 import { breadcrumbSchema } from '../../lib/seo';
@@ -26,6 +28,10 @@ const breadcrumb = breadcrumbSchema([
   <Hero />
   <Biografia />
   <Julieta />
+  <!-- la respuesta a «¿Quién mejor que una niña…?», entre dos líneas de agua -->
+  <WaterLine separador clave="-a" />
+  <Izzy />
+  <WaterLine separador clave="-b" />
   <Galeria />
   <Lightbox />
 </MainLayout>
