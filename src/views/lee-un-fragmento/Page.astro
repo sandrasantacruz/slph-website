@@ -5,6 +5,7 @@ import Trailer from './Trailer.astro';
 import Sumergete from './Sumergete.astro';
 import Flipbook from './Flipbook.astro';
 import CTA from './CTA.astro';
+import WaterLine from '../../components/WaterLine.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
 import { bookSchema, breadcrumbSchema } from '../../lib/seo';
 
@@ -33,6 +34,8 @@ const breadcrumb = breadcrumbSchema([
   <Flipbook />
   <Sumergete />
   <Trailer />
+  <!-- la línea de agua de la cabecera separa el recorrido del cierre (compra) -->
+  <WaterLine separador />
   <CTA />
 </MainLayout>
 
