@@ -6,14 +6,17 @@
 //
 // `separador`: dieselbe Wasserlinie als Trenner zwischen zwei Abschnitten
 // (im Fluss statt absolut unter der Navbar), mit eigenen SVG-IDs.
+// `subnav`: unter der Unternavigation der Unterseiten (dort fehlt die Linie
+// unter der Navbar, weil die SubNav an ihrer Stelle sitzt).
 interface Props {
   separador?: boolean;
+  subnav?: boolean;
 }
-const { separador = false } = Astro.props;
-const id = (n: string) => (separador ? `${n}-sep` : n);
+const { separador = false, subnav = false } = Astro.props;
+const id = (n: string) => (separador ? `${n}-sep` : subnav ? `${n}-sub` : n);
 ---
 
-<div class:list={["waterline", separador && "waterline--separador"]} aria-hidden="true">
+<div class:list={["waterline", separador && "waterline--separador", subnav && "waterline--subnav"]} aria-hidden="true">
   <!-- Surface wave with crest highlight + light sparks -->
   <svg
     class="waterline__wave"
@@ -101,6 +104,11 @@ const id = (n: string) => (separador ? `${n}-sep` : n);
     inset: auto;
     height: 3.75rem;
     z-index: auto;
+  }
+
+  .waterline--subnav {
+    inset: calc(100% - 0.95rem) 0 auto 0;
+    height: 3.75rem;
   }
 
   .waterline__wave {

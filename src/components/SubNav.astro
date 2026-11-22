@@ -14,12 +14,13 @@ interface Props {
 }
 
 const { hub, items, current } = Astro.props;
+import WaterLine from './WaterLine.astro';
 ---
 
 
 <nav
   aria-label={hub.label}
-  class="relative isolate border-y border-caparol/10 bg-azul/40 backdrop-blur-sm"
+  class="relative isolate z-10 border-t border-caparol/10 bg-azul/40 backdrop-blur-sm"
 >
   <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-4 sm:flex-row sm:gap-6 sm:py-5">
     <a
@@ -54,4 +55,6 @@ const { hub, items, current } = Astro.props;
       })}
     </ul>
   </div>
+  <!-- La misma línea de agua que lleva la cabecera en las páginas principales -->
+  <WaterLine subnav />
 </nav>
