@@ -7,9 +7,7 @@ import Ola from '../../components/Ola.astro';
     <div class="reveal flex items-center gap-4">
       <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
       <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
-        <!-- Das letzte „l“ ohne Laufweite, sonst klafft vor den Bläschen eine Lücke.
-             Die Auslassungspunkte sind drei Bläschen; Screenreader lesen „…“. -->
-        Del escenario al pape<span class="tracking-normal">l</span><span class="puntos"><span class="sr-only">…</span><span aria-hidden="true"><i></i><i></i><i></i></span></span> ¡y de vuelta!
+        Del escenario al papel, y del papel al escenario
       </span>
     </div>
 
@@ -29,42 +27,3 @@ import Ola from '../../components/Ola.astro';
   </div>
 </section>
 
-<style>
-  /* Drei Bläschen als Auslassungspunkte, wie im Prototyp für den Titel der Startseite */
-  .puntos {
-    display: inline-block;
-    margin: 0 0.55em 0 0.35em;
-  }
-  .puntos > span[aria-hidden] {
-    display: inline-flex;
-    align-items: flex-end;
-    gap: 0.22em;
-    vertical-align: baseline;
-  }
-  .puntos i {
-    display: block;
-    width: 0.46em;
-    height: 0.46em;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle at 32% 30%,
-      rgba(255, 255, 255, 0.95) 0 14%,
-      rgba(255, 240, 210, 0.18) 32%,
-      rgba(250, 222, 170, 0.16) 60%,
-      rgba(250, 222, 170, 0.6) 100%
-    );
-    box-shadow:
-      inset 0 0 0 1.2px rgba(250, 222, 170, 0.95),
-      0 0 5px rgba(250, 222, 170, 0.45);
-    animation: sube 3.2s ease-in-out infinite;
-  }
-  .puntos i:nth-child(2) { animation-delay: 0.4s; }
-  .puntos i:nth-child(3) { animation-delay: 0.8s; }
-
-  @keyframes sube {
-    50% { transform: translateY(-0.08em); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .puntos i { animation: none; }
-  }
-</style>
