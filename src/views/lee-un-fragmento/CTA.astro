@@ -1,50 +1,71 @@
 ---
 /**
- * Final del recorrido: aprovecha la intriga del capítulo I («¿qué será del
- * arrecife?») y lleva a la compra. Datos iguales que en el resto de la web.
+ * Final del recorrido: aprovecha las ganas que deja el capítulo I y ofrece dos
+ * vías claras, cada una para su público: comprar el cuento (familias y
+ * lectores) o pedidos en lote (colegios, bibliotecas y organizaciones).
  */
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
+
+const via =
+  'group flex h-full flex-col gap-4 rounded-2xl border-2 bg-azul/40 p-6 transition focus:outline-none sm:p-7';
 ---
 
 <section class="relative isolate overflow-hidden pb-24 sm:pb-32">
   <div class="mx-auto max-w-6xl px-6">
-    <div class="reveal relative grid items-center gap-10 overflow-hidden rounded-3xl border border-caparol/15 bg-azul/30 p-8 sm:p-12 md:grid-cols-12">
-
-      <div class="md:col-span-8">
+    <div class="reveal relative overflow-hidden rounded-3xl border border-caparol/15 bg-azul/30 p-8 sm:p-12">
+      <div class="max-w-2xl">
         <p class="font-hand text-2xl leading-none text-celeste sm:text-3xl">
-          ¿quieres saber cómo sigue?
+          ¿te has quedado con ganas de más?
         </p>
         <h2 class="mt-3 font-display text-[clamp(1.9rem,4.5vw,3rem)] leading-[0.95] text-caparol">
-          ¿Qué será del <Ola class="text-arena">arrecife</Ola>?
+          Descubre qué será del <Ola class="text-arena">arrecife</Ola>
         </h2>
-        <p class="mt-5 max-w-xl text-base text-caparol/85 sm:text-lg">
-          Lorena y sus amigas acaban de empezar. Consigue el cuento online, en el
-          Centro de Danza Sandra Santa Cruz (con dedicatoria de la autora) o en
-          librerías de Gran Canaria.
+        <p class="mt-5 text-base text-caparol/85 sm:text-lg">
+          Lorena y sus amigas acaban de empezar.
         </p>
-        <a
-          href="/comprar"
-          class="group mt-7 inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95"
-        >
-          Quiero el mío
-          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-        </a>
       </div>
 
-      <!-- Para centros: secundario -->
-      <a
-        href="/contacto"
-        class="group flex h-full flex-col items-start gap-3 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-5 transition hover:border-celeste focus:outline-none focus-visible:border-celeste md:col-span-4"
-      >
-        <span class="flex h-11 w-11 items-center justify-center rounded-full bg-celeste/15 text-celeste transition group-hover:bg-celeste group-hover:text-azul">
-          <Icon name="game-icons:fishing-net" class="h-5 w-5" aria-hidden="true" />
-        </span>
-        <span class="flex flex-col gap-0.5">
-          <span class="font-display text-lg text-caparol">Pedidos en lote</span>
-          <span class="text-sm text-caparol/70">Colegios, bibliotecas y ONG</span>
-        </span>
-      </a>
+      <ul class="mt-8 grid gap-4 md:grid-cols-2 md:gap-6">
+        <!-- Vía 1: familias y lectores -->
+        <li>
+          <a href="/comprar" class={`${via} border-arena/40 hover:border-arena focus-visible:border-arena`}>
+            <span class="flex items-center gap-3">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-arena/15 text-arena transition group-hover:bg-arena group-hover:text-azul">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18l-2 13H5z" /><path d="M8 7V5a4 4 0 0 1 8 0v2" /></svg>
+              </span>
+              <span class="font-hand text-xl text-celeste sm:text-2xl">para familias y lectores</span>
+            </span>
+            <span class="text-base text-caparol/85 sm:text-lg">
+              Online, en el Centro de Danza Sandra Santa Cruz (con dedicatoria de la autora)
+              o en librerías de Gran Canaria.
+            </span>
+            <span class="mt-auto inline-flex items-center gap-3 self-start rounded-full bg-arena px-6 py-2.5 font-display text-lg text-azul shadow-lg transition group-hover:brightness-95">
+              Quiero el mío
+              <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </span>
+          </a>
+        </li>
+
+        <!-- Vía 2: centros y organizaciones -->
+        <li>
+          <a href="/contacto" class={`${via} border-celeste/30 hover:border-celeste focus-visible:border-celeste`}>
+            <span class="flex items-center gap-3">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-celeste/15 text-celeste transition group-hover:bg-celeste group-hover:text-azul">
+                <Icon name="game-icons:fishing-net" class="h-5 w-5" aria-hidden="true" />
+              </span>
+              <span class="font-hand text-xl text-celeste sm:text-2xl">para colegios, bibliotecas y organizaciones</span>
+            </span>
+            <span class="text-base text-caparol/85 sm:text-lg">
+              ¿Necesitas varios ejemplares? Escríbenos y preparamos tu pedido.
+            </span>
+            <span class="mt-auto inline-flex items-center gap-3 self-start rounded-full border-2 border-celeste/60 px-6 py-2 font-display text-lg text-caparol transition group-hover:border-celeste group-hover:bg-celeste group-hover:text-azul">
+              Pedidos en lote
+              <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </span>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
