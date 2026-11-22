@@ -20,8 +20,9 @@ import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
   </div>
 
   <div class="mx-auto max-w-6xl px-6">
+    <p class="reveal text-center font-hand text-3xl leading-none text-celeste sm:text-4xl">¿te lo leemos?</p>
     <h2
-      class="reveal mx-auto max-w-3xl text-center font-display text-[clamp(2rem,5vw,3.25rem)] leading-[0.95] text-caparol"
+      class="reveal mx-auto mt-3 max-w-3xl text-center font-display text-[clamp(2rem,5vw,3.25rem)] leading-[0.95] text-caparol"
     >
       El mar tiene voz
       <span class="block">
@@ -45,12 +46,7 @@ import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
           >
           </div>
 
-          <!-- Scrim so the quote stays legible over the poster; clears on play -->
-          <div
-            aria-hidden="true"
-            class="scrim pointer-events-none absolute inset-0 z-10 hidden md:block"
-          >
-          </div>
+
 
           <media-player
             data-player
@@ -61,22 +57,25 @@ import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
             crossorigin
             playsinline
           >
-            <media-provider></media-provider>
+            <media-provider>
+              <!-- La portada (Noa mirando a cámara, sin subtítulos); sin esto se ve negro -->
+              <media-poster class="vds-poster" alt="Noa, con el cuento abierto, mira a cámara"></media-poster>
+            </media-provider>
             <media-video-layout></media-video-layout>
           </media-player>
 
           <span
             aria-hidden="true"
-            class="play-hint pointer-events-none absolute right-5 bottom-12 z-20 -rotate-3 font-hand text-2xl text-arena/95 transition-opacity duration-300 select-none sm:right-8 sm:bottom-14 sm:text-3xl"
+            class="play-hint pointer-events-none absolute right-5 bottom-20 z-20 -rotate-3 font-hand text-2xl text-arena/95 transition-opacity duration-300 select-none sm:right-8 sm:bottom-24 sm:text-3xl"
           >
-            dale al play…
+            shhh… empieza la lectura
           </span>
         </div>
 
         <!-- Caption under the window -->
         <div class="reveal reveal-delay-2 mt-6 flex flex-col items-center gap-4 px-6 text-center md:px-0">
           <p class="font-hand text-2xl text-caparol sm:text-3xl">
-            Noa, nuestra pequeña Betta en el musical, te lee el cuento
+            Escucha a Noa, nuestra pequeña Betta en el musical, dando voz a un fragmento del cuento
           </p>
           <EnlaceFlecha href="/repercusion#menores">Conoce a Noa</EnlaceFlecha>
         </div>
@@ -96,6 +95,14 @@ import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
     --media-menu-bg: rgb(11 32 86 / 0.95);
     border-radius: 0;
     background: var(--color-azul-deep);
+  }
+
+  /* El título del reproductor se montaba sobre la portada: fuera (sigue
+     disponible para lectores de pantalla como título del vídeo) */
+  .window-frame .vds-title,
+  .window-frame .vds-chapter-title {
+    /* oculto pero ocupando su sitio: hace de separador entre los botones */
+    visibility: hidden;
   }
 
   .window-frame:has(media-player[data-started]) .play-hint {

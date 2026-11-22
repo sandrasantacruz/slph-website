@@ -11,28 +11,28 @@ type Char = {
 const characters: Char[] = [
   {
     name: 'Dña. Teresa',
-    claim: 'Su experiencia es clave',
-    hint: 'La abuela de Lorena es quien escribe Si los peces hablaran',
+    claim: 'La que cuenta la historia',
+    hint: 'La abuela de Lorena escribe Si los peces hablaran…',
     img: '/assets/animals/abuela.webp',
     alt: 'Dña. Teresa, la abuela de Lorena',
   },
   {
     name: 'Dña. Paciencia',
-    claim: 'Su veteranía es crucial',
+    claim: 'La voz de la experiencia',
     hint: 'Es la tortuga maaás sabia de nuestro arrecife',
     img: '/assets/animals/dona.webp',
     alt: 'Dña. Paciencia, la tortuga',
   },
   {
     name: 'La Bella Azul',
-    claim: 'Su creatividad es vital',
+    claim: 'Ideas que salvan el mar',
     hint: 'A esta ingeniosa sirena le encanta ayudar',
     img: '/assets/animals/bella.webp',
     alt: 'La Bella Azul, la sirena',
   },
   {
     name: 'Lorena',
-    claim: 'Su valentía es admirable',
+    claim: 'Valiente de verdad',
     hint: 'La nieta de Dña. Teresa es la fundadora del Club SLPH',
     img: '/assets/animals/lorena.webp',
     alt: 'Lorena, la nieta de Dña. Teresa',
@@ -50,7 +50,7 @@ const characters: Char[] = [
   <div class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
     <div class="max-w-3xl">
       <p class="reveal font-hand text-3xl leading-none text-celeste sm:text-4xl">
-        antes de pasar página
+        ya conoces a Lorena…
       </p>
 
       <h2 class="reveal reveal-delay-1 mt-3 font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95]">
@@ -60,20 +60,17 @@ const characters: Char[] = [
         </span>
       </h2>
 
+      <!-- Sin volver a contar la historia: se acaba de leer en el capítulo I -->
       <p class="reveal reveal-delay-2 mt-8 text-lg leading-relaxed sm:text-xl">
-        Lorena, sentada junto a su abuela Dña. Teresa, escucha entusiasmada Si los peces hablaran. En el cuento que ha escrito su abuela, los habitantes del mar descubren que su hogar corre un grave peligro y se embarcan en 
-        <strong class="text-arena">una aventura para defenderlo</strong>.
+        Estas son quienes la acompañan. Humanas y marinas, todas comparten un mismo
+        propósito: <strong class="font-normal text-arena">proteger el océano</strong>. Con
+        ellas rendimos homenaje a mujeres valientes que, desde la ciencia, la educación,
+        el arte o el propio mar, nos inspiran cada día.
       </p>
-
-      <p class="reveal reveal-delay-3 mt-4 text-lg leading-relaxed sm:text-xl">
-Te presentamos a algunas de nuestras intrépidas heroínas. Humanas y marinas, todas comparten un
-mismo propósito: proteger el océano. Con ellas rendimos homenaje a mujeres valientes que, desde
-la ciencia, la educación, el arte o el propio mar, nos inspiran cada día y nos recuerdan que cada
-acción cuenta para salvar nuestro planeta.</p>
     </div>
 
     <!-- Characters strip -->
-    <ul class="reveal reveal-delay-3 mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="reveal reveal-delay-3 mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {characters.map((c) => (
         <li class="group relative flex flex-col overflow-hidden rounded-2xl border border-caparol/15 bg-azul/30 transition hover:border-arena/60">
           <!-- Character card, name is part of the artwork -->
@@ -85,11 +82,11 @@ acción cuenta para salvar nuestro planeta.</p>
             draggable="false"
             class="block aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
-          <div class="flex flex-1 flex-col p-5">
-            <p class="text-center font-display text-sm tracking-[0.18em] text-arena uppercase sm:text-base">
+          <div class="flex flex-1 flex-col p-3 sm:p-5">
+            <p class="text-center font-display text-xs tracking-[0.12em] text-arena uppercase sm:text-base sm:tracking-[0.18em]">
               {c.claim}
             </p>
-            <p class="mt-3 text-center text-sm leading-snug text-caparol/85">
+            <p class="mt-2 text-center text-xs leading-snug text-caparol/85 sm:mt-3 sm:text-sm">
               {c.hint}
             </p>
           </div>

@@ -16,17 +16,23 @@ const breadcrumb = breadcrumbSchema([
 ---
 
 <MainLayout
-  title="Lee un fragmento"
-  description="Lee un fragmento del cuento Si los peces hablaran de Sandra Santa Cruz: asómate al mundo submarino del libro antes de comprarlo."
+  title="Lee un fragmento del cuento infantil Si los peces hablaran…"
+  description="Lee gratis las primeras páginas de Si los peces hablaran…, el cuento infantil de Sandra Santa Cruz sobre el mar y la contaminación marina."
+  image="/assets/og-fragmento.jpg"
+  imageAlt="El cuento Si los peces hablaran… abierto por el capítulo 1"
+  imageWidth={1200}
+  imageHeight={630}
   type="book"
   hideWaterLine
   jsonLd={[bookSchema(), breadcrumb]}
 >
   <SubNavCuento current="fragmento" />
+  <!-- Un recorrido, no apartados sueltos: curiosidad (cabecera) → leer (capítulo I)
+       → conocer a las heroínas → escuchar a Noa → querer el libro -->
   <Hero />
-  <Trailer />
-  <Sumergete />
   <Flipbook />
+  <Sumergete />
+  <Trailer />
   <CTA />
 </MainLayout>
 

@@ -1,4 +1,8 @@
 ---
+/**
+ * Final del recorrido: aprovecha la intriga del capítulo I («¿qué será del
+ * arrecife?») y lleva a la compra. Datos iguales que en el resto de la web.
+ */
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
 ---
@@ -7,54 +11,40 @@ import Ola from '../../components/Ola.astro';
   <div class="mx-auto max-w-6xl px-6">
     <div class="reveal relative grid items-center gap-10 overflow-hidden rounded-3xl border border-caparol/15 bg-azul/30 p-8 sm:p-12 md:grid-cols-12">
 
-      <div class="md:col-span-7">
+      <div class="md:col-span-8">
         <p class="font-hand text-2xl leading-none text-celeste sm:text-3xl">
-          ¿quieres leerlo entero?
+          ¿quieres saber cómo sigue?
         </p>
-        <h2 class="mt-3 font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-[0.95] text-caparol">
-          Lleva el cuento
-          <span class="block"><Ola class="text-arena">a casa</Ola></span>
+        <h2 class="mt-3 font-display text-[clamp(1.9rem,4.5vw,3rem)] leading-[0.95] text-caparol">
+          ¿Qué será del <Ola class="text-arena">arrecife</Ola>?
         </h2>
         <p class="mt-5 max-w-xl text-base text-caparol/85 sm:text-lg">
-          Vive la historia completa y descubre la realidad aumentada que
-          solo funciona con el cuento en formato físico. Los protagonistas
-          salen de las páginas para nadar contigo.
+          Lorena y sus amigas acaban de empezar. Consigue el cuento online, en el
+          Centro de Danza Sandra Santa Cruz (con dedicatoria de la autora) o en
+          librerías de Gran Canaria.
         </p>
+        <a
+          href="/comprar"
+          class="group mt-7 inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95"
+        >
+          Quiero el mío
+          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
       </div>
 
-      <ul class="grid gap-3 sm:grid-cols-2 md:col-span-5">
-        <li>
-          <a
-            href="/comprar"
-            class="group flex h-full flex-col items-start gap-3 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-5 transition hover:border-arena focus:outline-none focus-visible:border-arena"
-          >
-            <span class="flex h-11 w-11 items-center justify-center rounded-full bg-arena/10 text-arena transition group-hover:bg-arena group-hover:text-azul">
-              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M3 7h18l-2 13H5z" />
-                <path d="M8 7V5a4 4 0 0 1 8 0v2" />
-              </svg>
-            </span>
-            <div class="flex flex-col gap-0.5">
-              <span class="font-display text-lg text-caparol">Dónde comprarlo</span>
-              <span class="text-sm text-caparol/70">Online y librerías de Canarias</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a
-            href="/contacto"
-            class="group flex h-full flex-col items-start gap-3 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-5 transition hover:border-celeste focus:outline-none focus-visible:border-celeste"
-          >
-            <span class="flex h-11 w-11 items-center justify-center rounded-full bg-celeste/15 text-celeste transition group-hover:bg-celeste group-hover:text-azul">
-              <Icon name="game-icons:fishing-net" class="h-5 w-5" aria-hidden="true" />
-            </span>
-            <div class="flex flex-col gap-0.5">
-              <span class="font-display text-lg text-caparol">Pedidos en lote</span>
-              <span class="text-sm text-caparol/70">Colegios, bibliotecas, ONGs</span>
-            </div>
-          </a>
-        </li>
-      </ul>
+      <!-- Para centros: secundario -->
+      <a
+        href="/contacto"
+        class="group flex h-full flex-col items-start gap-3 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-5 transition hover:border-celeste focus:outline-none focus-visible:border-celeste md:col-span-4"
+      >
+        <span class="flex h-11 w-11 items-center justify-center rounded-full bg-celeste/15 text-celeste transition group-hover:bg-celeste group-hover:text-azul">
+          <Icon name="game-icons:fishing-net" class="h-5 w-5" aria-hidden="true" />
+        </span>
+        <span class="flex flex-col gap-0.5">
+          <span class="font-display text-lg text-caparol">Pedidos en lote</span>
+          <span class="text-sm text-caparol/70">Colegios, bibliotecas y ONG</span>
+        </span>
+      </a>
     </div>
   </div>
 </section>

@@ -42,82 +42,22 @@ import Ola from '../../components/Ola.astro';
       </span>
     </h1>
 
-    <!-- Lead -->
+    <!-- Lead: «cuento infantil», que es lo que se busca en Google -->
     <p
       class="reveal reveal-delay-2 mt-8 max-w-3xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl"
     >
-      Un pequeño esbozo del mundo marino donde se desarrolla
-      <em class="not-italic text-arena">Si los peces hablaran…</em> Sumérgete
-      en la aventura antes de decidirte a comprar el libro.
+      Lee las primeras páginas de
+      <em class="not-italic text-arena">Si los peces hablaran…</em>, un cuento infantil
+      donde el océano tiene mucho que contar. Conoce a sus protagonistas y escúchalo en la voz de la pequeña Betta.
     </p>
 
-    <!-- Quick anchors -->
-    <div
-      class="reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm"
+    <!-- Un solo paso: abrir el libro (la compra llega al final del recorrido) -->
+    <a
+      href="#fragmento"
+      class="reveal reveal-delay-3 group mt-10 inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95"
     >
-      <a
-        href="#fragmento"
-        class="group inline-flex items-center gap-2 font-display tracking-wide text-celeste uppercase transition hover:text-caparol"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-          <path d="M20 4h-7a4 4 0 0 0-4 4v12"></path>
-        </svg>
-        Abrir el fragmento
-        <svg
-          viewBox="0 0 24 24"
-          class="h-4 w-4 transition-transform group-hover:translate-y-0.5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          aria-hidden="true"
-        >
-          <path d="M12 5v14M6 13l6 6 6-6"></path>
-        </svg>
-      </a>
-      <span
-        aria-hidden="true"
-        class="hidden h-4 w-px bg-caparol/25 sm:inline-block"></span>
-      <a
-        href="/comprar"
-        class="group inline-flex items-center gap-2 font-display tracking-wide text-arena uppercase transition hover:text-caparol"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M3 7h18l-2 13H5z"></path>
-          <path d="M8 7V5a4 4 0 0 1 8 0v2"></path>
-        </svg>
-        Dónde comprarlo
-        <svg
-          viewBox="0 0 24 24"
-          class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          aria-hidden="true"
-        >
-          <path d="M5 12h14M13 6l6 6-6 6"></path>
-        </svg>
-      </a>
-    </div>
+      Abre el libro
+      <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
+    </a>
   </div>
 </section>
