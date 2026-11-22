@@ -7,7 +7,9 @@ import path from "node:path";
 const BASE = path.resolve(process.cwd(), "public/assets/fragmento");
 const pages = fs
   .readdirSync(BASE)
-  .filter((f) => /\.webp$/i.test(f))
+  // Solo las páginas (01.webp, 02.webp…): las versiones ligeras «-640/-960»
+  // que usa Sobre el cuento no son páginas.
+  .filter((f) => /^\d+\.webp$/i.test(f))
   .sort()
   .map((file, i) => ({ n: i + 1, src: `/assets/fragmento/${file}` }));
 const totalPages = pages.length;
