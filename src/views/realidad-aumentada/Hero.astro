@@ -1,7 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
-import BotonesApp from '../../components/BotonesApp.astro';
 import { srcset } from '../../lib/srcset';
 ---
 
@@ -31,17 +29,17 @@ import { srcset } from '../../lib/srcset';
 
         <p class="mt-6 max-w-xl text-base leading-relaxed text-caparol/90 sm:text-lg lg:text-xl">
           Algunas de sus ilustraciones guardan escenas, diálogos y canciones del
-          musical, que reviven en tu móvil gracias a la realidad aumentada.
+          musical. Gracias a la realidad aumentada, puedes verlas y oírlas en tu móvil.
         </p>
 
-        <!-- App-Karte. Android ist im Play Store, iOS vorerst öffentliche
-             TestFlight-Beta. -->
-        <div class="mt-8 max-w-xl rounded-2xl border border-celeste/30 bg-azul/40 p-5 ring-1 ring-caparol/10 backdrop-blur-sm sm:p-6">
-          <p class="font-display text-2xl leading-tight text-arena sm:text-3xl">Descubre momentos del musical original</p>
-          <p class="mt-1 text-sm text-caparol/80 sm:text-base">Descarga la app AR-SLPH para Android, iPhone y iPad.</p>
-
-          <BotonesApp class="mt-5" />
-        </div>
+        <!-- La descarga va abajo, en la demostración (paso 1): aquí solo el atajo -->
+        <a
+          href="#prueba"
+          class="group mt-8 inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95"
+        >
+          Pruébalo ahora
+          <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
+        </a>
       </div>
 
       <div class="reveal reveal-delay-2 order-1 col-span-12 flex justify-center lg:order-2 lg:col-span-5">

@@ -1,13 +1,11 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
-import { APP_LINKS } from '../../lib/app-links';
+import BotonesApp from '../../components/BotonesApp.astro';
 
 // Zielbild für die AR-App (Seite 80 des Buchs). Wird ungeschnitten gezeigt,
 // sonst erkennt die App das Motiv nicht.
 const target = '/assets/ar/pagina-80-pez-espada.webp';
-const enlace =
-  'inline-flex items-center gap-2 text-celeste underline decoration-celeste/40 underline-offset-4 transition hover:text-arena';
 const numero =
   'flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-arena font-display text-2xl text-azul shadow-md sm:h-12 sm:w-12';
 ---
@@ -27,26 +25,12 @@ const numero =
       <Ola class="whitespace-nowrap text-arena">esta ilustración</Ola>
     </h2>
 
-    <ol class="reveal reveal-delay-2 mt-10 grid gap-8 md:grid-cols-3 md:gap-6">
-      <li class="flex gap-4">
+    <ol class="reveal reveal-delay-2 mt-10 grid gap-x-6 gap-y-10 md:grid-cols-2">
+      <li class="flex gap-4 md:col-span-2">
         <span class={numero} aria-hidden="true">1</span>
-        <div>
+        <div class="w-full max-w-2xl">
           <p class="font-display text-xl leading-tight text-caparol sm:text-2xl">Descarga la app AR-SLPH en tu móvil</p>
-          <p class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm sm:text-base">
-            <a href={APP_LINKS.android} target="_blank" rel="noopener" class={enlace}>
-              <Icon name="simple-icons:googleplay" class="h-4 w-4" aria-hidden="true" />
-              Google Play
-            </a>
-            <a href={APP_LINKS.iosBeta} target="_blank" rel="noopener" class={enlace}>
-              <Icon name="simple-icons:apple" class="h-4 w-4" aria-hidden="true" />
-              iPhone y iPad
-            </a>
-          </p>
-          <p class="mt-2 text-xs leading-snug text-caparol/60 sm:text-sm">
-            En iPhone y iPad, instala primero
-            <a href={APP_LINKS.testflight} target="_blank" rel="noopener" class="text-celeste underline decoration-celeste/40 underline-offset-2 hover:text-arena">TestFlight</a>
-            y después acepta la invitación.
-          </p>
+          <BotonesApp class="mt-5" />
         </div>
       </li>
       <li class="flex gap-4">
@@ -71,6 +55,18 @@ const numero =
       </li>
     </ol>
 
+    <!-- Aviso de sonido, en su propia línea para que no se pierda -->
+    <p class="reveal mt-10 flex items-center gap-3 text-base text-caparol/90 sm:text-lg">
+      <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-arena/50 text-arena sm:h-12 sm:w-12">
+        <Icon name="game-icons:speaker" class="h-6 w-6" aria-hidden="true" />
+      </span>
+      <span>
+        <span class="text-arena">Sube el volumen:</span> las escenas tienen sonido… y te avisamos:
+        ¡prepárate para contagiarte de una samba divertidísima!
+        <Icon name="game-icons:musical-notes" class="ml-1 inline-block h-5 w-5 align-[-0.2em] text-celeste" aria-hidden="true" />
+      </span>
+    </p>
+
     <div class="reveal reveal-delay-2 mt-12">
       <a
         href={target}
@@ -91,7 +87,18 @@ const numero =
       <p class="mt-4 text-center font-hand text-2xl text-arena sm:text-3xl">
         ¡Apunta aquí para ver al Coronel Espada Afilada en acción!
       </p>
-      <p class="mt-2 text-center text-sm text-caparol/70 sm:text-base">Si tienes el libro, la encontrarás en la página 80.</p>
+      <!-- Para quien ya tiene el libro (antes, bloque aparte «App») -->
+      <div class="mx-auto mt-8 max-w-3xl rounded-2xl border border-arena/30 bg-azul/30 p-6 text-base leading-relaxed text-caparol/85 sm:p-8 sm:text-lg">
+        <p>
+          <span class="text-arena">Si tienes el libro, la encontrarás en la página 80.</span>
+          Y no es la única: apunta con el móvil a todas las ilustraciones que llevan este símbolo
+          <img src="/assets/ar/simbolo-ar.webp" alt="símbolo de realidad aumentada, un móvil azul con una R" class="ml-1 inline-block h-[2em] w-auto align-middle" loading="lazy" decoding="async" />
+        </p>
+        <p class="mt-3 text-sm text-caparol/70 sm:text-base">
+          La nueva app AR-SLPH funciona con las tres ediciones del cuento. ¿Tienes la versión
+          anterior? Te recomendamos descargar esta… ¡y a disfrutar!
+        </p>
+      </div>
     </div>
   </div>
 </section>
