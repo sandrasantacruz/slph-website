@@ -9,20 +9,40 @@ import Cuadernillo from './Cuadernillo.astro';
 import Compra from './Compra.astro';
 import WaterLine from '../../components/WaterLine.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
-import { breadcrumbSchema } from '../../lib/seo';
+import { breadcrumbSchema, absoluteUrl } from '../../lib/seo';
+import { APP_LINKS } from '../../lib/app-links';
 
 const breadcrumb = breadcrumbSchema([
   { name: 'Inicio', url: '/' },
   { name: 'Sobre el cuento', url: '/sobre-el-cuento' },
   { name: 'Realidad aumentada', url: '/realidad-aumentada' },
 ]);
+
+// Ficha de la app para Google: gratuita, Android e iOS (iOS de momento en TestFlight).
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: 'AR-SLPH',
+  description: 'App de realidad aumentada del cuento Si los peces hablaran…: al apuntar a sus ilustraciones aparecen escenas, diálogos y canciones del musical.',
+  operatingSystem: 'Android, iOS',
+  applicationCategory: 'EducationalApplication',
+  inLanguage: 'es',
+  image: absoluteUrl('/assets/og-realidad-aumentada.jpg'),
+  downloadUrl: APP_LINKS.android,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  author: { '@type': 'Organization', name: 'Si los peces hablaran' },
+};
 ---
 
 <MainLayout
   title="Realidad aumentada · El cuento"
   description="Un cuento que se lee, se escucha y se baila: con la app AR-SLPH los personajes salen del libro y te muestran escenas del musical original. Para Android, iPhone y iPad."
   hideWaterLine
-  jsonLd={[breadcrumb]}
+  image="/assets/og-realidad-aumentada.jpg"
+  imageAlt="Don Canino, el tiburón del cuento, saliendo de la pantalla de un móvil: la app de realidad aumentada AR-SLPH"
+  imageWidth={1200}
+  imageHeight={630}
+  jsonLd={[appSchema, breadcrumb]}
 >
   <SubNavCuento current="realidad-aumentada" />
   <Hero />

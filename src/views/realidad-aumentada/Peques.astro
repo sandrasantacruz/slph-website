@@ -20,9 +20,9 @@ const secundario = {
 const marco = 'overflow-hidden rounded-3xl shadow-[0_30px_60px_-20px_rgba(3,10,35,0.9)] ring-1 ring-caparol/15';
 ---
 
-<!-- Bei reduzierter Bewegung blendet sich der ganze Abschnitt aus: ohne Videos
-     stünden nur Titel und Bildunterschriften da. -->
-<section class="relative isolate my-8 overflow-hidden py-20 motion-reduce:hidden sm:my-12 sm:py-28">
+<!-- Bei reduzierter Bewegung bleiben die Videos stehen (Posterbild), statt dass
+     der ganze Abschnitt verschwindet: so bleibt auch der Satz aus dem Buch. -->
+<section id="miradas" class="relative isolate my-8 scroll-mt-24 overflow-hidden py-20 sm:my-12 sm:py-28">
   <!-- Franja propia: más profunda y con un halo de luz, para marcar el momento -->
   <div
     aria-hidden="true"
@@ -94,3 +94,14 @@ const marco = 'overflow-hidden rounded-3xl shadow-[0_30px_60px_-20px_rgba(3,10,3
     </figure>
   </div>
 </section>
+
+<script>
+  // «Reducir movimiento»: los vídeos se quedan quietos, con su imagen fija.
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLVideoElement>('#miradas video').forEach((v) => {
+      v.autoplay = false;
+      v.pause();
+      v.currentTime = 0;
+    });
+  }
+</script>
