@@ -96,22 +96,28 @@ import Ola from '../../components/Ola.astro';
       </a>
     </nav>
 
-    <!-- Delfín. Das Asset ist hochformatig (604x1000): die Blasenspur nimmt die
-         obere Hälfte ein, der Körper die untere.
-         Mobil steht er im Fluss unter dem CTA-Strip, rechtsbündig bis an den
-         Viewport-Rand (mr-8 lässt ihn etwas vom Rand abrücken) und ragt unten
-         ins Section-Padding.
-         Ab lg verlässt er den Fluss und sitzt rechts neben dem Text; der Anker
-         liegt weit oben, damit der Delfín selbst auf Höhe des Leads landet und
-         die Blasen an der Headline vorbeisteigen. -->
+    <!-- El Sr. Tentáculus con el tridente clavado en el neumático: limpiando el mar,
+         que es lo que pide esta página. Alegría (el delfín) ya está en el botón
+         «Comprar» de la barra en todas las páginas, por eso aquí no.
+         Móvil: en el flujo, a la derecha bajo el índice. Desde lg, fuera del flujo,
+         grande, a la derecha del texto y por detrás. -->
     <img
-      src="/assets/animals/dolphin.webp"
+      src="/assets/animals/tentaculus-tridente.webp"
       alt=""
       aria-hidden="true"
-      class="anim-delfin pointer-events-none -mt-2 mr-8 -mb-10 ml-auto block w-40 drop-shadow-[0_18px_28px_rgba(6,15,44,0.45)] sm:-mb-16 sm:w-52 md:w-64 lg:absolute lg:top-6 lg:right-10 lg:-z-10 lg:m-0 lg:w-52 xl:right-[6.5rem] xl:w-72"
-      width="604"
-      height="1000"
+      class="anim-pulpo pointer-events-none -mt-2 mr-6 -mb-10 ml-auto block w-48 drop-shadow-[0_18px_28px_rgba(6,15,44,0.5)] sm:-mb-16 sm:w-60 md:w-72 lg:absolute lg:top-20 lg:right-4 lg:-z-10 lg:m-0 lg:w-80 xl:right-16 xl:w-[23rem]"
+      width="500"
+      height="876"
       loading="lazy"
     />
   </div>
 </section>
+
+<style>
+  .anim-pulpo { transform-origin: 50% 20%; animation: colabora-pulpo 6s ease-in-out infinite; }
+  @keyframes colabora-pulpo {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-12px) rotate(3deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .anim-pulpo { animation: none; } }
+</style>
