@@ -3,9 +3,17 @@
 // so the eye reads the navbar as the boat above and the rest of the
 // site as the ocean below. Hand-drawn-ish wave with arena highlights.
 // (Die vier dünnen «Caustics»-Linien darunter sind raus: kein eigenes Motiv.)
+//
+// `separador`: dieselbe Wasserlinie als Trenner zwischen zwei Abschnitten
+// (im Fluss statt absolut unter der Navbar), mit eigenen SVG-IDs.
+interface Props {
+  separador?: boolean;
+}
+const { separador = false } = Astro.props;
+const id = (n: string) => (separador ? `${n}-sep` : n);
 ---
 
-<div class="waterline" aria-hidden="true">
+<div class:list={["waterline", separador && "waterline--separador"]} aria-hidden="true">
   <!-- Surface wave with crest highlight + light sparks -->
   <svg
     class="waterline__wave"
@@ -14,17 +22,17 @@
     role="presentation"
   >
     <defs>
-      <linearGradient id="wl-body" x1="0" y1="0" x2="0" y2="1">
+      <linearGradient id={id("wl-body")} x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%"   stop-color="#64aad2" stop-opacity="0"/>
         <stop offset="35%"  stop-color="#64aad2" stop-opacity="0.32"/>
         <stop offset="100%" stop-color="#0b2056" stop-opacity="0"/>
       </linearGradient>
-      <linearGradient id="wl-crest" x1="0" y1="0" x2="0" y2="1">
+      <linearGradient id={id("wl-crest")} x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%"   stop-color="#fadeaa" stop-opacity="0"/>
         <stop offset="55%"  stop-color="#fadeaa" stop-opacity="0.95"/>
         <stop offset="100%" stop-color="#fadeaa" stop-opacity="0"/>
       </linearGradient>
-      <filter id="wl-glow" x="-10%" y="-50%" width="120%" height="200%">
+      <filter id={id("wl-glow")} x="-10%" y="-50%" width="120%" height="200%">
         <feGaussianBlur stdDeviation="1.4" />
       </filter>
     </defs>
@@ -33,14 +41,14 @@
     <path
       class="wl-back"
       d="M0,50 C 180,66 320,32 500,50 C 680,68 820,36 1000,52 C 1180,68 1320,38 1440,50 L1440,90 L0,90 Z"
-      fill="url(#wl-body)"
+      fill={`url(#${id("wl-body")})`}
       opacity="0.55"
     />
     <!-- Front wave — sharper -->
     <path
       class="wl-front"
       d="M0,32 C 160,18 300,48 480,32 C 660,16 800,46 980,32 C 1160,18 1300,42 1440,32 L1440,90 L0,90 Z"
-      fill="url(#wl-body)"
+      fill={`url(#${id("wl-body")})`}
       opacity="0.85"
     />
 
@@ -53,14 +61,14 @@
       stroke-opacity="0.45"
       stroke-width="4"
       stroke-linecap="round"
-      filter="url(#wl-glow)"
+      filter={`url(#${id("wl-glow")})`}
     />
     <!-- Crest highlight: crisp top line -->
     <path
       class="wl-crest"
       d="M0,24 C 160,10 300,40 480,24 C 660,8 800,38 980,24 C 1160,10 1300,36 1440,24"
       fill="none"
-      stroke="url(#wl-crest)"
+      stroke={`url(#${id("wl-crest")})`}
       stroke-width="1.4"
       stroke-linecap="round"
     />
@@ -86,6 +94,13 @@
     overflow: hidden;
     z-index: 5;
     isolation: isolate;
+  }
+
+  .waterline--separador {
+    position: relative;
+    inset: auto;
+    height: 3.75rem;
+    z-index: auto;
   }
 
   .waterline__wave {

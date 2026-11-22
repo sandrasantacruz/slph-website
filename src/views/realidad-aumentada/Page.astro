@@ -7,6 +7,7 @@ import Capas from './Capas.astro';
 import Peques from './Peques.astro';
 import Cuadernillo from './Cuadernillo.astro';
 import Compra from './Compra.astro';
+import WaterLine from '../../components/WaterLine.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
 import { breadcrumbSchema } from '../../lib/seo';
 
@@ -33,6 +34,8 @@ const breadcrumb = breadcrumbSchema([
        para que no se confundan con la realidad aumentada -->
   <Prueba />
   <Compra />
+  <!-- la línea de agua de la cabecera separa los QR del resto -->
+  <WaterLine separador />
   <Cuadernillo />
 </MainLayout>
 
