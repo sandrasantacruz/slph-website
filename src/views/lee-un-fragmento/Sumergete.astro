@@ -1,9 +1,11 @@
 ---
 import Ola from '../../components/Ola.astro';
+// Cada tarjeta: quién es, qué papel tiene y una frase que invita a seguir leyendo
+// (textos de Sandra, fieles al cuento).
 type Char = {
   name: string;
-  claim: string;
-  hint: string;
+  rol: string;
+  gancho: string;
   img: string;
   alt: string;
 };
@@ -11,29 +13,29 @@ type Char = {
 const characters: Char[] = [
   {
     name: 'Dña. Teresa',
-    claim: 'La que cuenta la historia',
-    hint: 'La abuela de Lorena escribe Si los peces hablaran…',
+    rol: 'la abuela de Lorena',
+    gancho: 'Su cuento y su querida nieta están a punto de cambiarlo todo.',
     img: '/assets/animals/abuela.webp',
     alt: 'Dña. Teresa, la abuela de Lorena',
   },
   {
     name: 'Dña. Paciencia',
-    claim: 'La voz de la experiencia',
-    hint: 'Es la tortuga maaás sabia de nuestro arrecife',
+    rol: 'la tortuga más sabia',
+    gancho: 'Lidera una importante misión para comunicarse con los humanos.',
     img: '/assets/animals/dona.webp',
     alt: 'Dña. Paciencia, la tortuga',
   },
   {
     name: 'La Bella Azul',
-    claim: 'Ideas que salvan el mar',
-    hint: 'A esta ingeniosa sirena le encanta ayudar',
+    rol: 'la sirena más ingeniosa',
+    gancho: 'Siempre encuentra la manera de ayudar a los demás.',
     img: '/assets/animals/bella.webp',
     alt: 'La Bella Azul, la sirena',
   },
   {
     name: 'Lorena',
-    claim: 'Valiente de verdad',
-    hint: 'La nieta de Dña. Teresa es la fundadora del Club SLPH',
+    rol: 'una gran personalidad',
+    gancho: 'Funda el Club SLPH para demostrar que los niños pueden cuidar el mar.',
     img: '/assets/animals/lorena.webp',
     alt: 'Lorena, la nieta de Dña. Teresa',
   },
@@ -73,7 +75,6 @@ const characters: Char[] = [
     <ul class="reveal reveal-delay-3 mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {characters.map((c) => (
         <li class="group relative flex flex-col overflow-hidden rounded-2xl border border-caparol/15 bg-azul/30 transition hover:border-arena/60">
-          <!-- Character card, name is part of the artwork -->
           <img
             src={c.img}
             alt={c.alt}
@@ -82,13 +83,10 @@ const characters: Char[] = [
             draggable="false"
             class="block aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
-          <div class="flex flex-1 flex-col p-3 sm:p-5">
-            <p class="text-center font-display text-xs tracking-[0.12em] text-arena uppercase sm:text-base sm:tracking-[0.18em]">
-              {c.claim}
-            </p>
-            <p class="mt-2 text-center text-xs leading-snug text-caparol/85 sm:mt-3 sm:text-sm">
-              {c.hint}
-            </p>
+          <div class="flex flex-1 flex-col p-3 text-center sm:p-5">
+            <h3 class="font-display text-lg leading-tight text-arena sm:text-2xl">{c.name}</h3>
+            <p class="font-hand text-base leading-tight text-celeste sm:text-xl">{c.rol}</p>
+            <p class="mt-2 text-xs leading-snug text-caparol/85 sm:mt-3 sm:text-sm">{c.gancho}</p>
           </div>
         </li>
       ))}
