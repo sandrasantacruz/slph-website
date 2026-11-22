@@ -5,17 +5,17 @@ import Ola from '../../components/Ola.astro';
 // Schleife. Der Block ist der emotionale Höhepunkt der Seite: echte Reaktionen,
 // die jeder sieht, ohne die App zu laden. Deshalb breit und groß; die Quellen
 // sind 720 px breit, daher nicht breiter als max-w-6xl.
+// Ohne Bildunterschriften: die Gesichter sprechen für sich («Miradas que lo
+// dicen todo»), und die Zeile aus dem Buch darunter bekommt das Gewicht.
 const principal = {
   src: '/assets/ar/peques-sorpresa.mp4',
   poster: '/assets/ar/peques-sorpresa.webp',
   label: 'Dos niñas se ríen y sonríen a cámara al ver la realidad aumentada del cuento',
-  pie: 'cuando la escena sale del libro…',
 };
 const secundario = {
   src: '/assets/ar/peques-movil.mp4',
   poster: '/assets/ar/peques-movil.webp',
   label: 'Un móvil apunta al cuento y en la pantalla se mueve la escena',
-  pie: '¡nuestro arrecife cabe en sus manos!',
 };
 const marco = 'overflow-hidden rounded-3xl shadow-[0_30px_60px_-20px_rgba(3,10,35,0.9)] ring-1 ring-caparol/15';
 ---
@@ -59,11 +59,10 @@ const marco = 'overflow-hidden rounded-3xl shadow-[0_30px_60px_-20px_rgba(3,10,3
             class="block aspect-video w-full object-cover"
           ></video>
         </div>
-        <figcaption class="mt-4 text-center font-hand text-2xl text-celeste sm:text-3xl">{principal.pie}</figcaption>
       </figure>
 
       <figure class="reveal reveal-delay-2">
-        <div class={marco}>
+        <div class:list={[marco, 'relative']}>
           <video
             src={secundario.src}
             poster={secundario.poster}
@@ -76,8 +75,10 @@ const marco = 'overflow-hidden rounded-3xl shadow-[0_30px_60px_-20px_rgba(3,10,3
             aria-label={secundario.label}
             class="block aspect-video w-full object-cover lg:aspect-[8/9] lg:object-[42%_50%]"
           ></video>
+          <!-- La única leyenda: dentro del vídeo, sobre un degradado, para que las
+               dos piezas queden a la misma altura -->
+          <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-azul-deep/90 via-azul-deep/50 to-transparent px-4 pt-14 pb-4 text-center font-hand text-2xl leading-tight text-caparol sm:text-3xl">nuestro arrecife<span class="block">¡en sus manos!</span></figcaption>
         </div>
-        <figcaption class="mt-4 text-center font-hand text-2xl text-celeste sm:text-3xl">{secundario.pie}</figcaption>
       </figure>
     </div>
 
