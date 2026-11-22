@@ -20,13 +20,13 @@ const numero =
       </span>
     </div>
 
-    <h2 class="reveal reveal-delay-1 mt-6 max-w-3xl font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] text-caparol">
-      Pruébalo en
-      <Ola class="whitespace-nowrap text-arena">esta ilustración</Ola>
+    <h2 class="reveal reveal-delay-1 mt-6 max-w-4xl font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] text-caparol">
+      ¿Quieres probarlo?
+      <span class="block">Despierta a los <Ola class="text-arena">peces espada</Ola></span>
     </h2>
 
-    <ol class="reveal reveal-delay-2 mt-10 grid gap-x-6 gap-y-10 md:grid-cols-2">
-      <li class="flex gap-4 md:col-span-2">
+    <ol class="reveal reveal-delay-2 mt-10 grid gap-y-10">
+      <li class="flex gap-4">
         <span class={numero} aria-hidden="true">1</span>
         <div class="w-full max-w-2xl">
           <p class="font-display text-xl leading-tight text-caparol sm:text-2xl">Descarga la app AR-SLPH en tu móvil</p>
@@ -35,22 +35,19 @@ const numero =
       </li>
       <li class="flex gap-4">
         <span class={numero} aria-hidden="true">2</span>
-        <div>
+        <div class="max-w-2xl">
+          <p class="font-display text-xl leading-tight text-caparol sm:text-2xl">Abre la aplicación y apunta a la ilustración… ¡y observa lo que sucede!</p>
           <!-- Wer auf dem Handy liest, kann das Handy nicht auf den eigenen Bildschirm
-               richten. Umschalten per (pointer: coarse) + Breite, nicht per JS. -->
-          <p class="prueba-movil font-display text-xl leading-tight text-caparol sm:text-2xl">Abre esta página en un ordenador o una tableta</p>
-          <p class="prueba-escritorio font-display text-xl leading-tight text-caparol sm:text-2xl">Deja esta página abierta en la pantalla</p>
+               richten: dort die Alternativen Buch oder zweiter Bildschirm.
+               Umschalten per (pointer: coarse) + Breite, nicht per JS. -->
+          <p class="prueba-movil mt-2 text-sm text-caparol/75 sm:text-base">
+            ¿Estás en el móvil? Busca la ilustración en la página 80 del libro, o abre esta
+            página en otra pantalla: un ordenador o una tableta.
+          </p>
           <p class="prueba-escritorio mt-2 text-sm text-caparol/75 sm:text-base">
             Ya estás en el sitio correcto: te la hemos dejado aquí abajo
             <svg viewBox="0 0 24 24" class="flecha ml-1 inline-block h-5 w-5 align-[-0.3em] text-arena" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"></path></svg>
           </p>
-        </div>
-      </li>
-      <li class="flex gap-4">
-        <span class={numero} aria-hidden="true">3</span>
-        <div>
-          <p class="font-display text-xl leading-tight text-caparol sm:text-2xl">Abre la app y apunta a la ilustración</p>
-          <p class="mt-2 text-sm text-caparol/75 sm:text-base">…y verás cómo la escena se escapa ¡y salta de la pantalla!</p>
         </div>
       </li>
     </ol>
@@ -85,18 +82,21 @@ const numero =
         />
       </a>
       <p class="mt-4 text-center font-hand text-2xl text-arena sm:text-3xl">
-        ¡Apunta aquí para ver al Coronel Espada Afilada en acción!
+        ¡apunta aquí! ¿No ves al Coronel Espada Afilada? Te espera en el libro…
       </p>
       <!-- Para quien ya tiene el libro (antes, bloque aparte «App») -->
       <div class="mx-auto mt-8 max-w-3xl rounded-2xl border border-arena/30 bg-azul/30 p-6 text-base leading-relaxed text-caparol/85 sm:p-8 sm:text-lg">
-        <p>
-          <span class="text-arena">Si tienes el libro, la encontrarás en la página 80.</span>
-          Y no es la única: apunta con el móvil a todas las ilustraciones que llevan este símbolo
+        <p class="font-display text-xs tracking-[0.3em] text-arena uppercase sm:text-sm">Una sola app · las tres ediciones</p>
+        <p class="mt-3">
+          <!-- En el móvil la página 80 ya sale en el paso 2: aquí no se repite -->
+          <span class="solo-escritorio"><span class="text-arena">Si tienes el libro, la encontrarás en la página 80.</span> Y no es la única: apunta</span>
+          <span class="solo-movil">Y no es la única: apunta</span>
+          con el móvil a todas las ilustraciones del libro que llevan este símbolo
           <img src="/assets/ar/simbolo-ar.webp" alt="símbolo de realidad aumentada, un móvil azul con una R" class="ml-1 inline-block h-[2em] w-auto align-middle" loading="lazy" decoding="async" />
         </p>
-        <p class="mt-3 text-sm text-caparol/70 sm:text-base">
-          La nueva app AR-SLPH funciona con las tres ediciones del cuento. ¿Tienes la versión
-          anterior? Te recomendamos descargar esta… ¡y a disfrutar!
+        <p class="mt-3">
+          Si tienes una edición anterior, también puedes disfrutar de la experiencia de
+          realidad aumentada.
         </p>
       </div>
     </div>
@@ -105,13 +105,14 @@ const numero =
 
 <style>
   /* Por defecto, ordenador/tableta. Teléfono = puntero táctil y pantalla estrecha. */
-  .prueba-movil { display: none; }
+  .prueba-movil, .solo-movil { display: none; }
   /* La flecha baja y sube despacio, para guiar la mirada hacia la ilustración */
   .flecha { animation: baja 1.6s ease-in-out infinite; }
   @keyframes baja { 50% { transform: translateY(0.2em); } }
   @media (prefers-reduced-motion: reduce) { .flecha { animation: none; } }
   @media (pointer: coarse) and (max-width: 767px) {
     .prueba-movil { display: block; }
-    .prueba-escritorio { display: none; }
+    .solo-movil { display: inline; }
+    .prueba-escritorio, .solo-escritorio { display: none; }
   }
 </style>
