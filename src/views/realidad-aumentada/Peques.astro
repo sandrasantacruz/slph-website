@@ -2,59 +2,83 @@
 import Ola from '../../components/Ola.astro';
 
 // Zwei kurze Schnitte aus MVI_2218_AR (s 41–49,5 und 150–158), stumm und in
-// Schleife. Die beiden Bildunterschriften lesen sich als ein Satz.
-const videos = [
-  {
-    src: '/assets/ar/peques-sorpresa.mp4',
-    poster: '/assets/ar/peques-sorpresa.webp',
-    label: 'Dos niñas se ríen y sonríen a cámara al ver la realidad aumentada del cuento',
-    pie: 'cuando la escena sale del libro…',
-  },
-  {
-    src: '/assets/ar/peques-movil.mp4',
-    poster: '/assets/ar/peques-movil.webp',
-    label: 'Un móvil apunta al cuento y en la pantalla se mueve la escena',
-    pie: '¡nuestro arrecife cabe en sus manos!',
-  },
-];
+// Schleife. Der Block ist der emotionale Höhepunkt der Seite: echte Reaktionen,
+// die jeder sieht, ohne die App zu laden. Deshalb breit und groß; die Quellen
+// sind 720 px breit, daher nicht breiter als max-w-6xl.
+const principal = {
+  src: '/assets/ar/peques-sorpresa.mp4',
+  poster: '/assets/ar/peques-sorpresa.webp',
+  label: 'Dos niñas se ríen y sonríen a cámara al ver la realidad aumentada del cuento',
+  pie: 'cuando la escena sale del libro…',
+};
+const secundario = {
+  src: '/assets/ar/peques-movil.mp4',
+  poster: '/assets/ar/peques-movil.webp',
+  label: 'Un móvil apunta al cuento y en la pantalla se mueve la escena',
+  pie: '¡nuestro arrecife cabe en sus manos!',
+};
+const marco = 'overflow-hidden rounded-3xl shadow-[0_30px_60px_-20px_rgba(3,10,35,0.9)] ring-1 ring-caparol/15';
 ---
 
 <!-- Bei reduzierter Bewegung blendet sich der ganze Abschnitt aus: ohne Videos
      stünden nur Titel und Bildunterschriften da. -->
-<section class="relative isolate overflow-hidden pb-16 motion-reduce:hidden sm:pb-20">
+<section class="relative isolate my-8 overflow-hidden py-20 motion-reduce:hidden sm:my-12 sm:py-28">
+  <!-- Franja propia: más profunda y con un halo de luz, para marcar el momento -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_55%_at_50%_55%,rgba(100,170,210,0.22),transparent_70%),linear-gradient(180deg,transparent,rgba(5,16,48,0.75)_18%,rgba(5,16,48,0.75)_82%,transparent)]"
+  ></div>
+
   <div class="mx-auto max-w-6xl px-6">
-    <div class="reveal flex items-center gap-4">
+    <div class="reveal flex items-center justify-center gap-4">
       <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
       <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
         Miradas que lo dicen todo
       </span>
+      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
     </div>
 
-    <h2 class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2rem,5vw,3.4rem)] leading-[0.95] text-caparol">
+    <h2 class="reveal reveal-delay-1 mx-auto mt-6 max-w-4xl text-center font-display text-[clamp(2.4rem,6.5vw,5rem)] leading-[0.95] text-caparol">
       Abren el cuento…
-      <span class="whitespace-nowrap">¡y el mar <Ola class="text-arena">cobra vida</Ola>!</span>
+      <span class="block">¡y el mar <Ola class="text-arena">cobra vida</Ola>!</span>
     </h2>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-2 md:gap-8">
-      {videos.map((v, i) => (
-        <figure class={`reveal reveal-delay-${i + 1}`}>
-          <div class="overflow-hidden rounded-2xl shadow-[0_20px_40px_-16px_rgba(3,10,35,0.8)] ring-1 ring-caparol/15">
-            <video
-              src={v.src}
-              poster={v.poster}
-              width="720"
-              height="406"
-              autoplay
-              muted
-              loop
-              playsinline
-              aria-label={v.label}
-              class="block aspect-video w-full object-cover"
-            ></video>
-          </div>
-          <figcaption class="mt-3 text-center font-hand text-2xl text-celeste">{v.pie}</figcaption>
-        </figure>
-      ))}
+    <div class="mt-12 grid items-center gap-8 sm:mt-16 lg:grid-cols-3 lg:gap-8">
+      <figure class="reveal reveal-delay-1 lg:col-span-2">
+        <div class={marco}>
+          <video
+            src={principal.src}
+            poster={principal.poster}
+            width="720"
+            height="406"
+            autoplay
+            muted
+            loop
+            playsinline
+            aria-label={principal.label}
+            class="block aspect-video w-full object-cover"
+          ></video>
+        </div>
+        <figcaption class="mt-4 text-center font-hand text-2xl text-celeste sm:text-3xl">{principal.pie}</figcaption>
+      </figure>
+
+      <figure class="reveal reveal-delay-2">
+        <div class={marco}>
+          <video
+            src={secundario.src}
+            poster={secundario.poster}
+            width="720"
+            height="406"
+            autoplay
+            muted
+            loop
+            playsinline
+            aria-label={secundario.label}
+            class="block aspect-video w-full object-cover lg:aspect-[8/9] lg:object-[42%_50%]"
+          ></video>
+        </div>
+        <figcaption class="mt-4 text-center font-hand text-2xl text-celeste sm:text-3xl">{secundario.pie}</figcaption>
+      </figure>
     </div>
   </div>
 </section>
