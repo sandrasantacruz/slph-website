@@ -11,9 +11,9 @@ import Ola from '../../components/Ola.astro';
 
 const P = '/assets/ilustrador/proceso';
 const identidad = [
-  { nombre: 'Bubli', antes: 'bubli-antes', despues: 'bubli-despues', altA: 'Primera versión de Bubli, personaje del cuento: un caballito de mar morado', altD: 'Versión final de Bubli, el caballito de mar azul de Si los peces hablaran…' },
-  { nombre: 'Marla la Tinta Negra', antes: 'marla-antes', despues: 'marla-despues', altA: 'Primera versión de Marla la Tinta Negra, personaje del cuento: un calamar turquesa y redondeado', altD: 'Versión final de Marla la Tinta Negra, el calamar naranja de Si los peces hablaran…' },
-  { nombre: 'Bella Azul', antes: 'bella-antes', despues: 'bella-despues', altA: 'Primera versión de Bella Azul, la sirena del cuento, con el pelo como una silueta plana', altD: 'Versión final de Bella Azul, con el pelo en mechones que flotan en el agua' },
+  { nombre: 'Bubli', nota: 'de su primera versión a la definitiva', antes: 'bubli-antes', despues: 'bubli-despues', altA: 'Primera versión de Bubli, personaje del cuento: un caballito de mar morado', altD: 'Versión final de Bubli, el caballito de mar azul de Si los peces hablaran…' },
+  { nombre: 'Marla la Tinta Negra', nota: 'ya naranja, pero aún no acababa de convencernos', antes: 'marla-antes', despues: 'marla-despues', altA: 'Primera versión de Marla la Tinta Negra, personaje del cuento: un calamar turquesa y redondeado', altD: 'Una versión posterior de Marla la Tinta Negra, ya como calamar naranja, camino de su diseño definitivo en Si los peces hablaran…' },
+  { nombre: 'Bella Azul', nota: 'más cerca del personaje, pero necesitaba brillar más', antes: 'bella-antes', despues: 'bella-despues', altA: 'Primera versión de Bella Azul, la sirena del cuento, con el pelo como una silueta plana', altD: 'Una versión posterior de Bella Azul, con el pelo en mechones que flotan en el agua' },
 ];
 const biblia = [
   { f: 'biblia-1-abuelita', t: 'Doña Teresa, la abuela' },
@@ -100,7 +100,7 @@ const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,3
       <div class="reveal text-center">
         <h3 class="font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-tight text-caparol">Hasta encontrar su <span class="text-arena">identidad</span></h3>
         <p class="mx-auto mt-3 max-w-2xl text-lg text-caparol/85">
-          Cada personaje pasó por varias versiones antes de que su aspecto reflejara de verdad cómo es por dentro.
+          Cada personaje pasó por muchas versiones antes de dar con la definitiva. Aquí van algunos pasos de ese camino.
         </p>
       </div>
       <ul class="mt-10 grid gap-10 md:grid-cols-3 md:gap-6">
@@ -112,6 +112,7 @@ const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,3
               <img src={`${P}/${p.despues}.webp`} alt={p.altD} loading="lazy" decoding="async" class="aspect-square w-[44%] rounded-xl object-cover ring-2 ring-arena/60" />
             </div>
             <p class="mt-3 text-center font-display text-lg text-arena">{p.nombre}</p>
+            <p class="mt-0.5 text-center font-hand text-xl leading-tight text-celeste">{p.nota}</p>
           </li>
         ))}
       </ul>
