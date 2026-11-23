@@ -3,11 +3,22 @@ import { srcset } from '../../lib/srcset';
 import Ola from '../../components/Ola.astro';
 
 /**
- * «Una obra, muchos lenguajes»: cada tarjeta es una parte de la obra y lleva a
- * la página que la desarrolla. «Lee un fragmento» y «Dónde comprar» están en
+ * «Una obra, muchos lenguajes»: cada tarjeta es una parte del libro y lleva a
+ * la página que la desarrolla. Música (OFGC) y Talleres se quitaron el 23 nov 2026
+ * (son del Programa, no del libro); el concierto está ahora en Origen. «Lee un fragmento» y «Dónde comprar» están en
  * los botones de la cabecera y del cierre.
  */
 const cards = [
+  {
+    href: '/realidad-aumentada',
+    eyebrow: 'tecnología',
+    title: 'Realidad aumentada',
+    body: '¿Conoces otro cuento que te lleve hasta su musical? Busca el símbolo AR y apunta con el móvil. App gratuita AR-SLPH.',
+    image: '/assets/ar/app-ar-slph.webp',
+    alt: 'La app AR-SLPH: Don Canino, el tiburón del cuento, saliendo de la pantalla de un teléfono',
+    cta: 'Descubre la app',
+    accent: 'celeste',
+  },
   {
     href: '/autor',
     eyebrow: 'literatura',
@@ -19,20 +30,6 @@ const cards = [
     accent: 'arena',
   },
   {
-    href: '/programa',
-    eyebrow: 'música',
-    title: 'Un cuento con banda sonora',
-    body: 'La Orquesta Filarmónica de Gran Canaria puso música a nuestro «No, no, no a la contaminación».',
-    // Foto propia (SLPH FOTOS/SLPH_OFGC_…_o.jpg): la de los bailarines ya está en la Galería
-    image: '/assets/cuento/ofgc-concierto.webp',
-    alt: 'En escena, la tijera corta una cuerda de mascarillas que sujeta el abuelo, con la Orquesta Filarmónica de Gran Canaria y su directora al fondo',
-    cta: 'Escúchalo',
-    // En vez de llevar a otra página, abre aquí el concierto con la OFGC
-    youtube: 'P46l0TgWoKE',
-    youtubeTitulo: 'Si los peces hablaran… en concierto con la Orquesta Filarmónica de Gran Canaria',
-    accent: 'celeste',
-  },
-  {
     href: '/ilustrador#julieta',
     eyebrow: 'ilustración',
     title: 'Pablo Tribiño',
@@ -40,16 +37,6 @@ const cards = [
     image: '/assets/colaboradores/pablo-tribino/portrait.jpg',
     alt: 'Retrato de Pablo Tribiño, ilustrador del cuento',
     cta: 'Nuestro ilustrador',
-    accent: 'arena',
-  },
-  {
-    href: '/realidad-aumentada',
-    eyebrow: 'tecnología',
-    title: 'Realidad aumentada',
-    body: '¿Conoces otro cuento que te lleve hasta su musical? Busca el símbolo AR y apunta con el móvil. App gratuita AR-SLPH.',
-    image: '/assets/ar/app-ar-slph.webp',
-    alt: 'La app AR-SLPH: Don Canino, el tiburón del cuento, saliendo de la pantalla de un teléfono',
-    cta: 'Descubre la app',
     accent: 'celeste',
   },
   {
@@ -62,16 +49,6 @@ const cards = [
     cta: 'Ver el cuadernillo',
     stamp: 'Novedad · 3.ª edición',
     accent: 'arena',
-  },
-  {
-    href: '/programa#talleres',
-    eyebrow: 'educación ambiental',
-    title: 'Talleres SLPH',
-    body: 'Nacieron del cuento: transformamos bibliotecas, museos y colegios en un fondo marino donde los niños dan una segunda vida a materiales que iban a la basura.',
-    image: '/assets/cuento/taller-tomas-morales.webp',
-    alt: 'Una niña, muy concentrada, en un Taller SLPH del Museo Tomás Morales con cartón y tubos azules reutilizados',
-    cta: 'Ver los talleres',
-    accent: 'celeste',
   },
 ] as const;
 ---
@@ -90,8 +67,8 @@ const cards = [
       <span class="whitespace-nowrap">en sus <Ola class="text-arena">páginas</Ola></span>
     </h2>
 
-    <!-- Móvil: carrusel deslizable (6 tarjetas apiladas eran ~6 pantallas). Desde sm: rejilla como antes -->
-    <ul class="carrusel -mx-6 mt-12 flex snap-x snap-mandatory items-stretch gap-4 overflow-x-auto px-6 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-7 sm:overflow-visible sm:px-0 sm:pb-0 md:gap-8 lg:grid-cols-3">
+    <!-- Móvil: carrusel deslizable. Desde sm: 2 columnas; en escritorio, las 4 en una fila -->
+    <ul class="carrusel -mx-6 mt-12 flex snap-x snap-mandatory items-stretch gap-4 overflow-x-auto px-6 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-7 sm:overflow-visible sm:px-0 sm:pb-0 md:gap-8 lg:grid-cols-4 lg:gap-6">
       {cards.map((card, i) => {
         const Tag = 'youtube' in card ? 'button' : 'a';
         const props = 'youtube' in card
@@ -113,7 +90,7 @@ const cards = [
                 <img
                   src={card.image}
                   srcset={srcset(card.image, 1000)}
-                  sizes="(min-width: 1024px) 340px, (min-width: 640px) 45vw, 300px"
+                  sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 300px"
                   alt={card.alt}
                   width="600"
                   height="600"
@@ -123,17 +100,17 @@ const cards = [
               </div>
             </div>
 
-            <div class="flex flex-1 flex-col gap-3 p-7 sm:p-8">
+            <div class="flex flex-1 flex-col gap-3 p-7 sm:p-8 lg:p-6">
               <p class={`font-hand text-2xl sm:text-3xl ${card.accent === 'arena' ? 'text-arena' : 'text-celeste'}`}>
                 {card.eyebrow}
               </p>
-              <h3 class="font-display text-3xl leading-tight text-caparol sm:text-4xl">
+              <h3 class="font-display text-3xl leading-tight text-caparol sm:text-4xl lg:text-[1.7rem]">
                 {card.title}
               </h3>
               <p class="text-base leading-relaxed text-caparol/85">
                 {card.body}
               </p>
-              <span class="ola-underline ola-hover mt-auto inline-flex items-center gap-2 self-start pt-4 font-display text-base uppercase tracking-[0.22em] text-arena">
+              <span class="ola-underline ola-hover mt-auto inline-flex items-center gap-2 self-start pt-4 font-display text-base uppercase tracking-[0.22em] text-arena lg:text-sm lg:tracking-[0.16em]">
                 {card.cta}
                 {'youtube' in card
                   ? <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
