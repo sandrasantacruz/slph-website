@@ -11,9 +11,9 @@ import Ola from '../../components/Ola.astro';
 
 const P = '/assets/ilustrador/proceso';
 const identidad = [
-  { nombre: 'Bubli', antes: 'bubli-antes', despues: 'bubli-despues', altA: 'Primera versión de Bubli: un caballito de mar morado', altD: 'Bubli, el caballito de mar azul del cuento' },
-  { nombre: 'Marla la Tinta Negra', antes: 'marla-antes', despues: 'marla-despues', altA: 'Primera versión de Marla: un calamar turquesa y redondeado', altD: 'Marla la Tinta Negra, el calamar naranja del cuento' },
-  { nombre: 'Bella Azul', antes: 'bella-antes', despues: 'bella-despues', altA: 'Bella Azul con el pelo como una silueta plana', altD: 'Bella Azul con el pelo en mechones que flotan en el agua' },
+  { nombre: 'Bubli', antes: 'bubli-antes', despues: 'bubli-despues', altA: 'Primera versión de Bubli, personaje del cuento: un caballito de mar morado', altD: 'Versión final de Bubli, el caballito de mar azul de Si los peces hablaran…' },
+  { nombre: 'Marla la Tinta Negra', antes: 'marla-antes', despues: 'marla-despues', altA: 'Primera versión de Marla la Tinta Negra, personaje del cuento: un calamar turquesa y redondeado', altD: 'Versión final de Marla la Tinta Negra, el calamar naranja de Si los peces hablaran…' },
+  { nombre: 'Bella Azul', antes: 'bella-antes', despues: 'bella-despues', altA: 'Primera versión de Bella Azul, la sirena del cuento, con el pelo como una silueta plana', altD: 'Versión final de Bella Azul, con el pelo en mechones que flotan en el agua' },
 ];
 const biblia = [
   { f: 'biblia-1-abuelita', t: 'Doña Teresa, la abuela' },
@@ -61,7 +61,7 @@ const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,3
           muted
           loop
           playsinline
-          aria-label="Pablo Tribiño ilustrando el fondo del mar del cuento: dibuja con detalle una colilla y termina la escena con el Sr. Tentáculus"
+          aria-label="Proceso de ilustración de un cuento infantil: Pablo Tribiño dibuja el fondo del mar con detalle, desde una colilla hasta el Sr. Tentáculus"
           class="block aspect-video w-full object-cover"
         ></video>
       </div>
@@ -76,8 +76,8 @@ const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,3
     <div>
       <p class="reveal text-center font-hand text-2xl text-celeste sm:text-3xl">de la línea al color</p>
       <div class="mx-auto mt-6 grid max-w-3xl grid-cols-2 items-center gap-4 sm:gap-6">
-        <img src={`${P}/david-boceto.webp`} alt="Boceto a línea de David, el amigo más trasto de Lorena, con su tubo y sus aletas" width="570" height="680" loading="lazy" decoding="async" class={`reveal aspect-square w-full object-cover object-top ${marco}`} />
-        <img src={`${P}/david-color.webp`} alt="Ilustración infantil de David, el amigo más trasto de Lorena, terminada a color" width="500" height="500" loading="lazy" decoding="async" class={`reveal reveal-delay-1 aspect-square w-full object-cover ${marco}`} />
+        <img src={`${P}/david-boceto.webp`} alt="Boceto a línea de David, personaje del cuento infantil Si los peces hablaran…, con su tubo y sus aletas" width="570" height="680" loading="lazy" decoding="async" class={`reveal aspect-square w-full object-cover object-top ${marco}`} />
+        <img src={`${P}/david-color.webp`} alt="Ilustración infantil de David terminada a color, por Pablo Tribiño" width="500" height="500" loading="lazy" decoding="async" class={`reveal reveal-delay-1 aspect-square w-full object-cover ${marco}`} />
       </div>
       <p class="reveal mt-3 text-center font-display text-lg text-arena">David, el amigo más trasto de Lorena</p>
       <p class="reveal mx-auto mt-1 max-w-md text-center text-sm leading-snug text-caparol/75 sm:text-base">Inseparable de Guille, superinquieto y siempre dispuesto a comprobarlo todo por sí mismo.</p>
@@ -85,7 +85,7 @@ const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,3
 
     <!-- Una ilustración por dentro -->
     <figure class="mx-auto grid max-w-4xl items-center gap-8 sm:grid-cols-12">
-      <img src={`${P}/capas.webp`} alt="Una ilustración abierta en el programa de diseño en modo esquema: cientos de capas y contornos superpuestos" width="800" height="867" loading="lazy" decoding="async" class={`reveal w-full sm:col-span-5 ${marco}`} />
+      <img src={`${P}/capas.webp`} alt="Proceso de ilustración digital: una escena del cuento abierta en el programa de diseño, con cientos de capas y contornos superpuestos" width="800" height="867" loading="lazy" decoding="async" class={`reveal w-full sm:col-span-5 ${marco}`} />
       <figcaption class="reveal reveal-delay-1 text-center sm:col-span-7 sm:text-left">
         <p class="font-hand text-2xl text-celeste sm:text-3xl">así se ve una ilustración por dentro</p>
         <p class="mt-3 text-lg leading-relaxed text-caparol/90">
@@ -127,7 +127,7 @@ const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,3
         class="group relative block cursor-zoom-in"
         aria-label="Ver la biblia de personajes completa"
       >
-        <img src={`${P}/ficha-lorena.webp`} alt="Ficha de personaje de Lorena: sus poses de cuerpo entero y sus expresiones, a línea, y la versión a color" width="1400" height="990" loading="lazy" decoding="async" class={`reveal w-full bg-white transition group-hover:brightness-95 ${marco}`} />
+        <img src={`${P}/ficha-lorena.webp`} alt="Diseño de personajes: ficha de Lorena, protagonista de Si los peces hablaran…, con sus poses, sus expresiones y la versión a color" width="1400" height="990" loading="lazy" decoding="async" class={`reveal w-full bg-white transition group-hover:brightness-95 ${marco}`} />
         <span class="pointer-events-none absolute right-3 bottom-3 inline-flex items-center gap-2 rounded-full bg-azul/90 px-4 py-2 font-display text-xs tracking-[0.2em] text-caparol uppercase shadow-lg">
           <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path></svg>
           Ver las fichas
