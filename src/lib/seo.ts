@@ -156,7 +156,7 @@ export function bookSchema({ precio = false }: { precio?: boolean } = {}): JsonL
     bookFormat: 'https://schema.org/Paperback',
     bookEdition: '3.ª edición',
     isbn: '978-84-09-16706-7',
-    numberOfPages: 146,
+    numberOfPages: 147,
     illustrator: { '@type': 'Person', name: 'Pablo Tribiño' },
     genre: BOOK_GENRE,
     audience: {
