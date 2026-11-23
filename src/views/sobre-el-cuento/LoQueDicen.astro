@@ -31,9 +31,9 @@ const citas: Cita[] = [
   {
     texto: 'A raíz de la lectura del libro, del encuentro con la autora, de todo lo que hemos vivido, los niños han empezado a desarrollar acciones para mejorar: de traer una botella de un solo uso para beber agua en el recreo, ahora traen una rellenable; y reciclan la basura.',
     nombre: 'Isabel Martín',
-    cargo: 'Jefa de estudios del Colegio Alfredo Kraus',
+    cargo: 'Jefa de estudios del Colegio Alfredo Kraus, en «Canarias es Cultura»',
     // Solo su parte del reportaje de Televisión Canaria (el completo está en Repercusión)
-    video: { src: '/videos/opinion-isabel.mp4', poster: '/videos/opinion-isabel-poster.webp', etiqueta: 'Escúchala en Televisión Canaria', pie: 'Isabel Martín · Televisión Canaria' },
+    video: { src: '/videos/opinion-isabel.mp4', poster: '/videos/opinion-isabel-poster.webp', etiqueta: 'Escúchala en Televisión Canaria', pie: 'Isabel Martín · «Canarias es Cultura», Televisión Canaria' },
   },
   {
     texto: 'Nos parece fundamental educar desde edades tempranas para conservar nuestros ecosistemas. Nos ha encantado el libro.',
@@ -45,7 +45,7 @@ const citas: Cita[] = [
     // Antes estaba en Colabora como «Público»; ahora solo aquí.
     texto: 'Este tipo de iniciativa es un regalo a la naturaleza y a todos, a las nuevas generaciones. Una oportunidad para ayudar, para concienciarnos. Desde el arte, además, que es tan importante: una forma tan sensible de llegar.',
     nombre: 'María del Mar Vicente',
-    cargo: 'Asistente a la presentación del cuento en la Biblioteca Municipal Dolores Campos-Herrero',
+    cargo: 'Asistente a la presentación en la Biblioteca Municipal Dolores Campos‑Herrero', // guion que no se parte
     video: { src: '/videos/opinion-madre-dolores-campos.mp4', poster: '/videos/opinion-madre-dolores-campos-poster.webp', etiqueta: 'Escúchala', pie: 'María del Mar Vicente · Biblioteca Municipal Dolores Campos-Herrero' },
   },
 ];
@@ -98,7 +98,7 @@ const citas: Cita[] = [
             </blockquote>
             <figcaption class="mt-5 border-t border-caparol/10 pt-4 text-sm leading-snug">
               <span class="block font-display text-base tracking-wide text-arena">{c.nombre}</span>
-              <span class="text-caparol/70">{c.cargo}</span>
+              <span class="block text-caparol/70">{c.cargo}</span>
               {c.video && (
                 <button
                   type="button"
@@ -110,6 +110,13 @@ const citas: Cita[] = [
                   {c.video.etiqueta}
                   <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
                 </button>
+              )}
+              {!c.video && (
+                <!-- Hueco invisible del botón: así la raya y el nombre quedan a la misma altura que en las demás tarjetas -->
+                <span aria-hidden="true" class="invisible mt-3 inline-flex items-center gap-2 font-display text-xs tracking-[0.18em] uppercase">
+                  Escúchala
+                  <svg viewBox="0 0 24 24" class="h-3.5 w-3.5"><path d="M8 5.5v13l11-6.5z"/></svg>
+                </span>
               )}
             </figcaption>
           </figure>
