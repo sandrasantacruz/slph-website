@@ -307,6 +307,12 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
         — científicas, ilustradores, cantantes, fotógrafos, docentes y nuestra colaboradora
         más joven.
       </p>
+      <!-- Pablo tiene página propia: aquí solo el enlace, sin repetir su ficha -->
+      <p class="mt-4 max-w-2xl text-base text-caparol/85 sm:text-lg">
+        Y Pablo Tribiño, nuestro ilustrador, da forma al universo de
+        <em class="not-italic font-display text-arena">Si los peces hablaran…</em>.
+        <a href="/ilustrador" class="group inline-flex items-center gap-1 whitespace-nowrap font-display text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">Conoce a Pablo<svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      </p>
     </header>
 
     <!-- Groups -->
@@ -334,8 +340,10 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
               const visibleBio = person.bio[0];
               const rest = person.bio.slice(1);
               const detailsId = `bio-${gIdx}-${pIdx}`;
+              // ancla por persona (p. ej. #lorena-santa-cruz), para enlazar desde otras páginas
+              const ancla = person.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
               return (
-                <article class="reveal">
+                <article id={ancla} class="reveal scroll-mt-28">
                   <div class="grid gap-8 md:grid-cols-12 md:gap-12">
                     <!-- Portrait column: polaroid with handwritten name -->
                     <div class:list={[
