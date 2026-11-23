@@ -4,7 +4,7 @@ import Ola from '../../components/Ola.astro';
 // Zwei kurze Schnitte aus MVI_2218_AR (s 41–49,5 und 150–158), stumm und in
 // Schleife. Der Block ist der emotionale Höhepunkt der Seite: echte Reaktionen,
 // die jeder sieht, ohne die App zu laden. Deshalb breit und groß; die Quellen
-// sind 720 px breit, daher nicht breiter als max-w-6xl.
+// jetzt 1280×720 aus dem Original (Kamerakarte), vorher 720 px.
 // Ohne Bildunterschriften: die Gesichter sprechen für sich («Miradas que lo
 // dicen todo»), und die Zeile aus dem Buch darunter bekommt das Gewicht.
 const principal = {
@@ -49,8 +49,8 @@ const marco = 'overflow-hidden rounded-3xl shadow-[0_30px_60px_-20px_rgba(3,10,3
           <video
             src={principal.src}
             poster={principal.poster}
-            width="720"
-            height="406"
+            width="1280"
+            height="720"
             autoplay
             muted
             loop
@@ -66,8 +66,8 @@ const marco = 'overflow-hidden rounded-3xl shadow-[0_30px_60px_-20px_rgba(3,10,3
           <video
             src={secundario.src}
             poster={secundario.poster}
-            width="720"
-            height="406"
+            width="1280"
+            height="720"
             autoplay
             muted
             loop
