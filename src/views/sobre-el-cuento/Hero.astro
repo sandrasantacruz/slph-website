@@ -76,6 +76,22 @@ const datos = [
           Quiero el mío
         </a>
       </div>
+
+      <!-- Índice (la página es larga): discreto, debajo de los botones para no quitarles protagonismo -->
+      <nav aria-label="En esta página" class="reveal reveal-delay-3 mt-8 flex flex-wrap items-center gap-x-3.5 gap-y-2.5 border-t border-caparol/10 pt-5">
+        {[
+          { href: '#unico', texto: 'Qué lo hace único' },
+          { href: '#por-que-leerlo', texto: 'Por qué leerlo' },
+          { href: '#lo-que-dicen', texto: 'Lo que dicen' },
+          { href: '#escenario', texto: 'Su origen' },
+          { href: '#diez-anos', texto: 'Diez años' },
+        ].map((l) => (
+          <a href={l.href} class="group inline-flex items-center gap-1.5 font-display text-[0.7rem] tracking-[0.12em] text-caparol/75 uppercase transition hover:text-arena sm:text-xs">
+            {l.texto}
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          </a>
+        ))}
+      </nav>
     </div>
 
     <div class="reveal reveal-delay-2 order-first mx-auto w-full lg:order-none lg:col-span-5 lg:max-w-none">

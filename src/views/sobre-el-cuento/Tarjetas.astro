@@ -76,7 +76,7 @@ const cards = [
 ] as const;
 ---
 
-<section class="relative isolate overflow-hidden pt-14 pb-12 sm:pt-20 sm:pb-16">
+<section id="unico" class="relative isolate scroll-mt-24 overflow-hidden pt-14 pb-12 sm:pt-20 sm:pb-16">
   <div class="mx-auto max-w-6xl px-6">
     <div class="reveal flex items-center gap-5">
       <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
@@ -90,14 +90,15 @@ const cards = [
       <span class="whitespace-nowrap">en sus <Ola class="text-arena">páginas</Ola></span>
     </h2>
 
-    <ul class="mt-12 grid gap-7 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
+    <!-- Móvil: carrusel deslizable (6 tarjetas apiladas eran ~6 pantallas). Desde sm: rejilla como antes -->
+    <ul class="carrusel -mx-6 mt-12 flex snap-x snap-mandatory items-stretch gap-4 overflow-x-auto px-6 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-7 sm:overflow-visible sm:px-0 sm:pb-0 md:gap-8 lg:grid-cols-3">
       {cards.map((card, i) => {
         const Tag = 'youtube' in card ? 'button' : 'a';
         const props = 'youtube' in card
           ? { type: 'button', 'data-abrir-youtube': card.youtube, 'data-titulo': card.youtubeTitulo }
           : { href: card.href };
         return (
-        <li>
+        <li class="w-[84%] shrink-0 snap-center sm:w-auto">
           <Tag
             {...props}
             class={`reveal w-full text-left cursor-pointer reveal-delay-${Math.min(i + 1, 4)} group relative flex h-full flex-col overflow-hidden rounded-2xl border border-caparol/15 bg-azul/45 ring-1 ring-caparol/10 transition hover:border-arena/60 hover:bg-azul/65`}
@@ -145,6 +146,7 @@ const cards = [
         );
       })}
     </ul>
+    <p class="mt-3 text-center font-hand text-xl text-celeste/80 sm:hidden" aria-hidden="true">desliza para ver más →</p>
   </div>
 </section>
 
