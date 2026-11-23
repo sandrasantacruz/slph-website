@@ -39,14 +39,16 @@ import Ola from '../../components/Ola.astro';
         </p>
 
         <!-- Índice de la página (es larga): baja directo a cada parte, como en Colabora -->
-        <nav aria-label="En esta página" class="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-caparol/10 pt-5 sm:mt-8">
+        <nav aria-label="En esta página" class="mt-7 flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-caparol/10 pt-5 sm:mt-8">
           {[
             { href: '#trabajo', texto: 'Los personajes' },
             { href: '#proceso', texto: 'El proceso' },
             { href: '#con-los-ninos', texto: 'Con los niños' },
+            { href: '#izzy', texto: 'Izzy', corazon: true, label: 'La reacción de Izzy' },
             { href: '#universo', texto: 'Un universo que viaja' },
           ].map((l) => (
-            <a href={l.href} class="group inline-flex items-center gap-1.5 font-display text-xs tracking-[0.18em] text-arena uppercase transition hover:text-caparol sm:text-sm">
+            <a href={l.href} aria-label={l.label} class="group inline-flex items-center gap-1.5 font-display text-xs tracking-[0.15em] text-arena uppercase transition hover:text-caparol sm:text-sm">
+              {l.corazon && <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.5.8-1.3 2.3-2.5 4.4-2.5 3.7 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg>}
               {l.texto}
               <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
             </a>
