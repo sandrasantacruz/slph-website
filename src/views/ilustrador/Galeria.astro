@@ -1,4 +1,5 @@
 ---
+import Ola from '../../components/Ola.astro';
 // Drei Reihen à drei, helle und dunkle Motive gemischt, damit jede Reihe Licht hat.
 const imagenes = [
   {
@@ -49,16 +50,19 @@ const imagenes = [
 ];
 ---
 
-<section id="trabajo" class="relative isolate overflow-hidden pt-10 pb-24 sm:pt-14 sm:pb-32">
+<section id="trabajo" class="relative isolate overflow-hidden py-16 sm:py-24">
   <div class="mx-auto max-w-6xl px-6">
-    <!-- Section header -->
-    <div class="reveal mx-auto mb-8 flex max-w-3xl items-center gap-3 sm:gap-4">
-      <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
-        De su mano
-      </span>
-      <span class="dotted-rule flex-1 text-arena/40"></span>
+    <!-- 1 · El resultado, nada más empezar -->
+    <div class="reveal mx-auto mb-10 max-w-3xl text-center">
+      <p class="font-hand text-2xl text-celeste sm:text-3xl">de su mano</p>
+      <h2 class="mt-2 font-display text-[clamp(2.1rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+        Un universo marino
+        <span class="block">creado <Ola class="text-arena">trazo a trazo</Ola></span>
+      </h2>
+      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-caparol/85">
+        Así son hoy sus habitantes. Pero su historia empezó mucho antes del color.
+      </p>
     </div>
-
     <div class="mx-auto grid max-w-3xl grid-cols-3 gap-3 sm:gap-4">
       {imagenes.map((imagen) => (
         <a
@@ -72,7 +76,7 @@ const imagenes = [
         >
           <img
             src={imagen.src}
-            alt={`${imagen.nombre}, personaje de Si los peces hablaran`}
+            alt={`Ilustración infantil de ${imagen.nombre}, personaje del cuento Si los peces hablaran…, por Pablo Tribiño`}
             loading="lazy"
             class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.06]"
           />
@@ -81,17 +85,5 @@ const imagenes = [
       ))}
     </div>
 
-    <!-- Back link to the collaborators register -->
-    <div class="reveal mt-14 flex justify-center">
-      <a
-        href="/colabora"
-        class="group inline-flex items-center gap-2 font-display text-sm tracking-[0.3em] text-arena uppercase transition hover:text-caparol"
-      >
-        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M19 12H5M11 18l-6-6 6-6"/>
-        </svg>
-        Ver a todo el equipo
-      </a>
-    </div>
   </div>
 </section>

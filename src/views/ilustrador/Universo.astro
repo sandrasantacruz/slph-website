@@ -1,0 +1,46 @@
+---
+/**
+ * «Un universo que viaja»: la prueba de la idea central de la página. Los mismos
+ * personajes viven fuera del libro. Cada uno enlaza a su página.
+ */
+import { Icon } from 'astro-icon/components';
+import Ola from '../../components/Ola.astro';
+
+const lugares = [
+  { icon: 'game-icons:open-book', nombre: 'el libro', texto: 'tres ediciones', href: '/sobre-el-cuento' },
+  { icon: 'game-icons:notebook', nombre: 'el cuadernillo', texto: 'para aprender jugando', href: '/cuadernillo' },
+  { icon: 'game-icons:smartphone', nombre: 'la realidad aumentada', texto: 'escenas que salen del papel', href: '/realidad-aumentada' },
+  { icon: 'game-icons:scissors', nombre: 'los talleres', texto: 'en colegios y bibliotecas', href: '/programa#talleres' },
+  { icon: 'game-icons:ballerina-shoes', nombre: 'el musical', texto: 'sobre el escenario', href: '/galeria#musical' },
+  { icon: 'game-icons:greek-temple', nombre: 'los museos', texto: 'como la Casa-Museo León y Castillo', href: '/repercusion' },
+];
+---
+
+<section class="relative isolate overflow-hidden py-16 sm:py-24">
+  <div class="mx-auto max-w-6xl px-6 text-center">
+    <p class="reveal font-hand text-2xl text-celeste sm:text-3xl">y no se quedó en el libro</p>
+    <h2 class="reveal reveal-delay-1 mt-2 font-display text-[clamp(2.1rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+      Un universo <Ola class="text-arena">que viaja</Ola>
+    </h2>
+    <p class="reveal reveal-delay-2 mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-caparol/85">
+      Los mismos personajes salen de las páginas y llevan su mensaje allí donde hay alguien dispuesto a escucharlo.
+    </p>
+
+    <ul class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      {lugares.map((l, i) => (
+        <li class={`reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+          <a
+            href={l.href}
+            class="group flex h-full flex-col items-center gap-3 rounded-2xl border border-caparol/15 bg-azul/30 px-3 py-6 transition hover:-translate-y-1 hover:border-arena/60"
+          >
+            <span class="flex h-14 w-14 items-center justify-center rounded-full bg-arena/10 text-arena transition group-hover:bg-arena group-hover:text-azul">
+              <Icon name={l.icon} class="h-7 w-7" aria-hidden="true" />
+            </span>
+            <span class="font-display text-lg leading-tight text-caparol">{l.nombre}</span>
+            <span class="text-sm leading-snug text-caparol/70">{l.texto}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

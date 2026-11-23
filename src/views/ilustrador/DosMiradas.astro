@@ -1,0 +1,69 @@
+---
+/**
+ * 3 · «Dos miradas, un mismo propósito»: Sandra y Pablo, con un océano de por
+ * medio. Textos de Sandra (23 nov 2026), en tercera persona. Imagen: la escena de
+ * los León y Castillo a medio ilustrar (estilo original de Lorena y la abuela).
+ */
+import Ola from '../../components/Ola.astro';
+---
+
+<section class="relative isolate overflow-hidden py-16 sm:py-24">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-12 lg:gap-16">
+    <figure class="reveal order-2 mx-auto w-full max-w-xl lg:order-1 lg:col-span-6 lg:max-w-none">
+      <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0" style="padding-bottom:0.75rem">
+        <img
+          src="/assets/ilustrador/proceso/leon-y-castillo-a-medias.webp"
+          alt="Escena a medio ilustrar: Lorena y su abuela en el salón con Juan y Fernando León y Castillo; uno de los hermanos aún está a línea, sin color"
+          width="1200"
+          height="669"
+          class="block w-full"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mt-2 px-2 pb-1 text-center font-hand text-xl leading-tight text-azul sm:text-2xl">
+          los León y Castillo, de visita en el salón de Lorena… uno de ellos, aún a medio dibujar
+        </figcaption>
+      </div>
+      <!-- Detalle en movimiento: Juan de León y Castillo con su plano (solo él: Lorena
+           y la abuela aparecen después con el estilo nuevo, que no se continúa) -->
+      <div class="mt-6 overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15">
+        <video src="/assets/ilustrador/proceso/juan-leon-y-castillo.mp4" poster="/assets/ilustrador/proceso/juan-leon-y-castillo.webp" width="610" height="418" autoplay muted loop playsinline aria-label="Pablo Tribiño perfila a Juan de León y Castillo, que lee un gran plano junto a la ventana con la luna llena" class="block w-full"></video>
+      </div>
+      <p class="mt-3 text-center font-hand text-xl text-celeste sm:text-2xl">Juan de León y Castillo, en pleno proceso</p>
+    </figure>
+
+    <div class="order-1 lg:order-2 lg:col-span-6">
+      <p class="reveal font-hand text-2xl text-celeste sm:text-3xl">con un océano de por medio</p>
+      <h2 class="reveal reveal-delay-1 mt-2 font-display text-[clamp(2.1rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+        Dos miradas,
+        <span class="block">un mismo <Ola class="text-arena">propósito</Ola></span>
+      </h2>
+      <div class="reveal reveal-delay-2 mt-6 space-y-4 text-lg leading-relaxed text-caparol/90">
+        <p>
+          Aquel año de trabajo tuvo dos protagonistas: Pablo en Argentina y Sandra en Gran Canaria. El universo de
+          <em class="not-italic text-arena">Si los peces hablaran…</em> se creó a miles de
+          kilómetros. Casi todo se hablaba por WhatsApp y por correo, y para cerrar los
+          detalles importantes robaban horas al sueño hasta coincidir en la misma franja
+          horaria.
+        </p>
+        <p>
+          Desde el primer momento hubo una complicidad absoluta. Los dos sabían que no
+          estaban haciendo solo un cuento, sino una herramienta para acercar a los niños al
+          mundo marino y transmitirles una idea fundamental:
+          <strong class="font-normal text-arena">ellos también son necesarios para impulsar el
+          cambio que nuestro planeta necesita</strong>. Una herramienta que siguiera funcionando
+          cuando ellos ya no estuvieran.
+        </p>
+        <p>
+          Por eso el proyecto acabó siendo parte de su familia, y por eso Pablo ha seguido a su lado en la segunda y la
+          tercera edición, en el
+          <a href="/cuadernillo" class="text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">cuadernillo</a>
+          y en encargos para instituciones. El más reciente, para la Casa-Museo León y
+          Castillo de Telde: Juan y Fernando León y Castillo, sentados en el salón con Lorena y
+          su abuela. Todos comparten algo: fueron visionarios en su época y pusieron su
+          creatividad al servicio de un futuro mejor para Gran Canaria.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,9 +1,11 @@
 ---
 import Ola from '../../components/Ola.astro';
+// 7 · Breve y verificable: respalda, no protagoniza (la historia va antes).
+// Breve y verificable: respalda la historia, no la protagoniza.
 const parrafos = [
-  'Ilustrador y diseñador gráfico, nace en Buenos Aires, Argentina, en 1977. Especializado en el desarrollo de ilustración y de viñetas para aplicar en packaging de diversos formatos (en principio para la industria alimenticia), así como en el retoque digital fotográfico y la ilustración de personajes de todo tipo, clasificación y rubros, con el objetivo de responder a diferentes temáticas dirigidas a públicos de diversas características. Trabaja también el armado de originales en grafito.',
-  'Lleva años trabajando para editoriales infantiles, como ediciones infantil.com, de editorial Sin Fin, Nova Rhoman y Duendes del Sur entre otras. Un mundo que le apasiona, y en el que se vuelca día a día poniendo todo su empeño en perfeccionarse y ampliar conocimientos. Su estilo propio y su gran versatilidad para combinar diversos estilos ilustrativos le afianzan como un ilustrador más amplio, para el público más pequeño.',
-  'En diseño ha trabajado en el armado de originales de diferentes formatos y soportes para diversas marcas. Imagen institucional y corporativa, desarrollo de marca, catálogos, infografías, avisos, eventos, renders, gráficas de stand (en ferias como expo Presentes, expo Juguetería y expo Papelería).',
+  'Ilustrador y diseñador gráfico nacido en Buenos Aires en 1977, Pablo tiene una larga experiencia en ilustración infantil: ha trabajado para editoriales como Ediciones Infantil.com, Editorial Sin Fin, Nova Rhoman y Duendes del Sur.',
+  'Su trayectoria combina la ilustración de personajes, la creación de imágenes para distintos soportes y el diseño gráfico.',
+  'En Si los peces hablaran…, toda esa experiencia se puso al servicio de un proyecto que le permitió crear un mundo con personalidad propia.',
 ];
 ---
 
@@ -20,7 +22,7 @@ const parrafos = [
     <div class="reveal flex items-center gap-5">
       <span aria-hidden="true" class="h-[2px] w-16 bg-arena sm:w-24"></span>
       <span class="font-display text-sm tracking-[0.4em] text-arena uppercase">
-        Su recorrido
+        Su trayectoria
       </span>
     </div>
 
@@ -28,9 +30,10 @@ const parrafos = [
     <h2
       class="reveal reveal-delay-1 mt-8 max-w-4xl font-display text-[clamp(2.5rem,7vw,5.25rem)] leading-[0.92] text-caparol"
     >
-      Dar rostro a
+      Pablo Tribiño:
+      <span class="block">experiencia en</span>
       <span class="block">
-        <Ola class="text-arena">cada personaje</Ola>
+        <Ola class="text-arena">ilustración infantil</Ola>
       </span>
     </h2>
 
@@ -43,12 +46,12 @@ const parrafos = [
             su especialidad
           </p>
           <p class="mt-2 font-display text-2xl leading-tight text-arena sm:text-3xl">
-            Ilustración infantil
+            Dar rostro a cada personaje
           </p>
-          <p class="mt-4 max-w-xs text-sm leading-relaxed text-caparol/70">
-            Un estilo propio y una gran versatilidad para combinar registros
-            ilustrativos, siempre pensando en el público más pequeño.
-          </p>
+          <a href="https://www.linkedin.com/in/pablo-tribi%C3%B1o-805396b/" target="_blank" rel="noopener noreferrer" class="group mt-6 inline-flex items-center gap-2 font-display text-xs tracking-[0.3em] text-arena uppercase transition hover:text-caparol">
+            Su LinkedIn
+            <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
         </div>
       </aside>
 

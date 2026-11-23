@@ -1,0 +1,153 @@
+---
+/**
+ * 2 · «Mucho más que ilustrar un cuento»: el proceso. Time-lapse (×2, mudo, en
+ * bucle) de una grabación de pantalla de 2018: Pablo detallando una colilla en
+ * el fondo del mar. Debajo: la portada del boceto al color, una ilustración
+ * «por dentro» (sus capas), «Hasta encontrar su identidad» (Bubli, Marla y
+ * Bella Azul, antes y después) y la ficha de personaje de Lorena. Material del
+ * WhatsApp de Sandra con Pablo (2018).
+ */
+import Ola from '../../components/Ola.astro';
+
+const P = '/assets/ilustrador/proceso';
+const identidad = [
+  { nombre: 'Bubli', antes: 'bubli-antes', despues: 'bubli-despues', altA: 'Primera versión de Bubli: un caballito de mar morado', altD: 'Bubli, el caballito de mar azul del cuento' },
+  { nombre: 'Marla la Tinta Negra', antes: 'marla-antes', despues: 'marla-despues', altA: 'Primera versión de Marla: un calamar turquesa y redondeado', altD: 'Marla la Tinta Negra, el calamar naranja del cuento' },
+  { nombre: 'Bella Azul', antes: 'bella-antes', despues: 'bella-despues', altA: 'Bella Azul con el pelo como una silueta plana', altD: 'Bella Azul con el pelo en mechones que flotan en el agua' },
+];
+const biblia = [
+  { f: 'biblia-1-abuelita', t: 'Doña Teresa, la abuela' },
+  { f: 'biblia-2-lorena', t: 'Lorena' },
+  { f: 'biblia-3-tentaculus', t: 'El Sr. Tentáculus' },
+  { f: 'biblia-4-malenocetus', t: 'Malenocetus, el pez abisal' },
+  { f: 'biblia-5-ola', t: 'La ola, el pergamino y la basura del fondo' },
+];
+const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15';
+---
+
+<section id="proceso" class="relative isolate overflow-hidden py-16 sm:py-24">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-5">
+      <div class="reveal flex items-center gap-4">
+        <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+        <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">Detrás de cada personaje</span>
+      </div>
+      <h2 class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2.1rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+        Mucho más que
+        <span class="block"><Ola class="text-arena">ilustrar un cuento</Ola></span>
+      </h2>
+      <div class="reveal reveal-delay-2 mt-6 space-y-4 text-lg leading-relaxed text-caparol/90">
+        <p>
+          La primera edición fue más de un año de trabajo. No bastaba con ilustrar una
+          historia: había que dar vida al mundo marino, cuidar las sombras, los reflejos,
+          los colores y esos rayos de luz que se adentran en el océano, para que el lector
+          pudiera sumergirse en él.
+        </p>
+        <p>
+          Se hizo sin prisas y con muchísimo mimo. Hasta la basura del fondo del mar se
+          dibujó con cuidado, porque también ella cuenta la historia.
+        </p>
+      </div>
+    </div>
+
+    <figure class="reveal reveal-delay-2 lg:col-span-7">
+      <div class="overflow-hidden rounded-2xl shadow-[0_30px_60px_-20px_rgba(3,10,35,0.9)] ring-1 ring-caparol/15">
+        <video
+          src="/assets/ilustrador/proceso-2018.mp4"
+          poster="/assets/ilustrador/proceso-2018.webp"
+          width="960"
+          height="540"
+          autoplay
+          muted
+          loop
+          playsinline
+          aria-label="Pablo Tribiño ilustrando el fondo del mar del cuento: dibuja con detalle una colilla y termina la escena con el Sr. Tentáculus"
+          class="block aspect-video w-full object-cover"
+        ></video>
+      </div>
+      <figcaption class="mt-4 text-center font-hand text-xl text-celeste sm:text-2xl">
+        Pablo, mimando cada detalle del fondo del mar… porque hasta una colilla habla (2018)
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="mx-auto mt-20 max-w-6xl space-y-20 px-6 sm:mt-24 sm:space-y-24">
+    <!-- Del boceto al color: un personaje (David). La portada ya sale en toda la web -->
+    <div>
+      <p class="reveal text-center font-hand text-2xl text-celeste sm:text-3xl">del boceto al color</p>
+      <div class="mx-auto mt-6 grid max-w-3xl grid-cols-2 items-center gap-4 sm:gap-6">
+        <img src={`${P}/david-boceto.webp`} alt="Boceto a línea de David, el amigo buceador de Lorena, con su tubo y sus aletas" width="570" height="680" loading="lazy" decoding="async" class={`reveal aspect-square w-full object-cover object-top ${marco}`} />
+        <img src={`${P}/david-color.webp`} alt="Ilustración infantil de David, el amigo buceador de Lorena, terminada a color" width="500" height="500" loading="lazy" decoding="async" class={`reveal reveal-delay-1 aspect-square w-full object-cover ${marco}`} />
+      </div>
+      <p class="reveal mt-3 text-center font-display text-lg text-arena">David, el amigo buceador de Lorena</p>
+    </div>
+
+    <!-- Una ilustración por dentro -->
+    <figure class="mx-auto grid max-w-4xl items-center gap-8 sm:grid-cols-12">
+      <img src={`${P}/capas.webp`} alt="Una ilustración abierta en el programa de diseño en modo esquema: cientos de capas y contornos superpuestos" width="800" height="867" loading="lazy" decoding="async" class={`reveal w-full sm:col-span-5 ${marco}`} />
+      <figcaption class="reveal reveal-delay-1 text-center sm:col-span-7 sm:text-left">
+        <p class="font-hand text-2xl text-celeste sm:text-3xl">así se ve una ilustración por dentro</p>
+        <p class="mt-3 text-lg leading-relaxed text-caparol/90">
+          Cientos de capas, una sobre otra: cada pez, cada burbuja, cada resto de basura es una
+          pieza aparte. Algunos archivos pesaban tanto que a veces costaba abrirlos.
+        </p>
+      </figcaption>
+    </figure>
+
+    <!-- Hasta encontrar su identidad -->
+    <div>
+      <div class="reveal text-center">
+        <h3 class="font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-tight text-caparol">Hasta encontrar su <span class="text-arena">identidad</span></h3>
+        <p class="mx-auto mt-3 max-w-2xl text-lg text-caparol/85">
+          Cada personaje pasó por varias versiones antes de que su aspecto reflejara de verdad cómo es por dentro.
+        </p>
+      </div>
+      <ul class="mt-10 grid gap-10 md:grid-cols-3 md:gap-6">
+        {identidad.map((p, i) => (
+          <li class={`reveal reveal-delay-${i + 1}`}>
+            <div class="flex items-center gap-2">
+              <img src={`${P}/${p.antes}.webp`} alt={p.altA} loading="lazy" decoding="async" class="aspect-square w-[44%] rounded-xl object-cover opacity-90 ring-1 ring-caparol/15" />
+              <svg viewBox="0 0 24 24" class="h-6 w-6 shrink-0 text-arena" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              <img src={`${P}/${p.despues}.webp`} alt={p.altD} loading="lazy" decoding="async" class="aspect-square w-[44%] rounded-xl object-cover ring-2 ring-arena/60" />
+            </div>
+            <p class="mt-3 text-center font-display text-lg text-arena">{p.nombre}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- La ficha de Lorena; al pulsar, la biblia de personajes entera (6 fichas) -->
+    <figure class="mx-auto max-w-4xl">
+      <a
+        href={`${P}/biblia-2-lorena.webp`}
+        data-lightbox
+        data-gallery="biblia-personajes"
+        data-caption="Biblia de personajes (2018) · Lorena"
+        class="group relative block cursor-zoom-in"
+        aria-label="Ver la biblia de personajes completa"
+      >
+        <img src={`${P}/ficha-lorena.webp`} alt="Ficha de personaje de Lorena: sus poses de cuerpo entero y sus expresiones, a línea, y la versión a color" width="1400" height="990" loading="lazy" decoding="async" class={`reveal w-full bg-white transition group-hover:brightness-95 ${marco}`} />
+        <span class="pointer-events-none absolute right-3 bottom-3 inline-flex items-center gap-2 rounded-full bg-azul/90 px-4 py-2 font-display text-xs tracking-[0.2em] text-caparol uppercase shadow-lg">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path></svg>
+          Ver las fichas
+        </span>
+      </a>
+      {biblia.filter((b) => b.f !== 'biblia-2-lorena').map((b) => (
+        <a href={`${P}/${b.f}.webp`} data-lightbox data-gallery="biblia-personajes" data-caption={`Biblia de personajes (2018) · ${b.t}`} class="hidden" tabindex="-1" aria-hidden="true"></a>
+      ))}
+      <figcaption class="reveal mt-4 text-center">
+        <span class="block font-hand text-xl text-celeste sm:text-2xl">la ficha de Lorena: sus poses y expresiones, para que sea siempre ella</span>
+        <span class="mt-1 block text-base text-caparol/75">Forma parte de la biblia de personajes que Pablo creó en 2018.</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<script>
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLVideoElement>('#proceso video').forEach((v) => {
+      v.autoplay = false;
+      v.pause();
+    });
+  }
+</script>

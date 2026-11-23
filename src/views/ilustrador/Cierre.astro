@@ -1,0 +1,34 @@
+---
+/**
+ * 8 · Cierre: después de conocer cómo nació el universo, a leerlo y tenerlo.
+ */
+import Ola from '../../components/Ola.astro';
+---
+
+<section class="relative isolate overflow-hidden pt-8 pb-24 sm:pt-12 sm:pb-32">
+  <div class="mx-auto max-w-3xl px-6 text-center">
+    <p class="reveal font-hand text-2xl text-celeste sm:text-3xl">ahora que conoces cómo nació este universo…</p>
+    <h2 class="reveal reveal-delay-1 mt-2 font-display text-[clamp(2.1rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+      Sumérgete en <Ola class="text-arena">sus páginas</Ola>
+    </h2>
+    <p class="reveal reveal-delay-1 mx-auto mt-4 max-w-xl text-lg text-caparol/85">
+      Ya sabes quién le dio forma y el propósito que hay detrás de cada página. Ábrelo por
+      dentro: unas pocas páginas bastan para enamorarte.
+    </p>
+    <div class="reveal reveal-delay-2 mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a
+        href="/lee-un-fragmento"
+        class="group inline-flex items-center gap-3 rounded-full border-2 border-caparol/60 px-7 py-2.5 font-display text-lg text-caparol transition hover:border-caparol hover:bg-caparol hover:text-azul"
+      >
+        Lee el capítulo I
+      </a>
+      <a
+        href="/comprar"
+        class="group inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-lg text-azul shadow-lg transition hover:brightness-95"
+      >
+        Quiero el mío
+        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+  </div>
+</section>

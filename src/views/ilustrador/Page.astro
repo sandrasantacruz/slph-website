@@ -3,36 +3,65 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Biografia from './Biografia.astro';
 import Galeria from './Galeria.astro';
+import Proceso from './Proceso.astro';
+import DosMiradas from './DosMiradas.astro';
+import ConLosNinos from './ConLosNinos.astro';
+import Cierre from './Cierre.astro';
+import Universo from './Universo.astro';
+import InvitanACrear from './InvitanACrear.astro';
 import Julieta from './Julieta.astro';
 import Izzy from './Izzy.astro';
 import WaterLine from '../../components/WaterLine.astro';
 import Lightbox from '../galeria/Lightbox.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
-import { breadcrumbSchema } from '../../lib/seo';
+import { breadcrumbSchema, SITE_URL } from '../../lib/seo';
 
 const breadcrumb = breadcrumbSchema([
   { name: 'Inicio', url: '/' },
   { name: 'Sobre el cuento', url: '/sobre-el-cuento' },
   { name: 'El ilustrador', url: '/ilustrador' },
 ]);
+
+// Google: quién es Pablo (prioridad SEO: ilustración infantil, después su nombre)
+const pablo = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE_URL}/ilustrador#person`,
+  name: 'Pablo Tribiño',
+  url: `${SITE_URL}/ilustrador`,
+  image: `${SITE_URL}/assets/colaboradores/pablo-tribino/portrait.jpg`,
+  jobTitle: 'Ilustrador de cuentos infantiles',
+  description:
+    'Ilustrador y diseñador gráfico especializado en ilustración infantil. Creó los personajes y el universo marino del cuento Si los peces hablaran…, de Sandra Santa Cruz.',
+  birthPlace: { '@type': 'Place', name: 'Buenos Aires, Argentina' },
+  knowsAbout: ['Ilustración infantil', 'Ilustración de cuentos', 'Diseño de personajes', 'Diseño gráfico'],
+  sameAs: ['https://www.linkedin.com/in/pablo-tribi%C3%B1o-805396b/'],
+  workExample: { '@id': `${SITE_URL}/#book` },
+};
 ---
 
 <MainLayout
-  title="Pablo Tribiño · El ilustrador"
-  description="Pablo Tribiño es ilustrador y diseñador gráfico argentino. Suyos son los personajes, las viñetas y el color que dan vida al mundo marino del cuento Si los peces hablaran."
+  title="Ilustrador de cuentos infantiles · Pablo Tribiño"
+  description="Ilustración infantil con propósito: así nació el universo marino de Si los peces hablaran…, el cuento de Sandra Santa Cruz ilustrado por Pablo Tribiño."
   type="profile"
   hideWaterLine
-  jsonLd={[breadcrumb]}
+  jsonLd={[pablo, breadcrumb]}
 >
   <SubNavCuento current="ilustrador" />
+  <!-- La historia de dos creativos; la trayectoria de Pablo respalda, al final -->
   <Hero />
-  <Biografia />
+  <Galeria />
+  <Proceso />
+  <DosMiradas />
+  <ConLosNinos />
+  <InvitanACrear />
   <Julieta />
-  <!-- la respuesta a «¿Quién mejor que una niña…?», entre dos líneas de agua -->
   <WaterLine separador clave="-a" />
   <Izzy />
   <WaterLine separador clave="-b" />
-  <Galeria />
+  <Universo />
+  <Biografia />
+  <Cierre />
   <Lightbox />
 </MainLayout>
 
