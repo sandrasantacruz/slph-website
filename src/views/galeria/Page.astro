@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import MainLayout from "../../layouts/MainLayout.astro";
 import Hero from "./Hero.astro";
+import HiloDelTiempo from "./HiloDelTiempo.astro";
 import Section from "./Section.astro";
 import Lightbox from "./Lightbox.astro";
 import SubNavPrograma from "../../components/SubNavPrograma.astro";
@@ -365,6 +366,7 @@ const sections = sectionDefs.map((def) => {
 >
   <SubNavPrograma current="galeria" />
   <Hero />
+  <HiloDelTiempo />
   {
     sections.map((section) => (
       <Section
