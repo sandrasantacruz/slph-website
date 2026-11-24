@@ -15,13 +15,6 @@ const identidad = [
   { nombre: 'Marla la Tinta Negra', nota: 'ya naranja, pero aún no acababa de convencernos', antes: 'marla-antes', despues: 'marla-sin-sonrisa', altA: 'Primera versión de Marla la Tinta Negra, personaje del cuento: un calamar turquesa y redondeado', altD: 'Una versión posterior de Marla la Tinta Negra: ya es un calamar naranja, aún sin boca, camino de su diseño definitivo' },
   { nombre: 'Bella Azul', nota: 'más cerca del personaje, pero necesitaba brillar más', antes: 'bella-antes', despues: 'bella-despues', altA: 'Primera versión de Bella Azul, la sirena del cuento, con el pelo como una silueta plana', altD: 'Una versión posterior de Bella Azul, con el pelo en mechones que flotan en el agua' },
 ];
-const biblia = [
-  { f: 'biblia-1-abuelita', t: 'Doña Teresa, la abuela' },
-  { f: 'biblia-2-lorena', t: 'Lorena' },
-  { f: 'biblia-3-tentaculus', t: 'El Sr. Tentáculus' },
-  { f: 'biblia-4-malenocetus', t: 'Malenocetus, el pez abisal' },
-  { f: 'biblia-5-ola', t: 'La ola, el pergamino y la basura del fondo' },
-];
 const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15';
 ---
 
@@ -107,25 +100,10 @@ const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,3
       </ul>
     </div>
 
-    <!-- La ficha de Lorena; al pulsar, la biblia de personajes entera (6 fichas) -->
+    <!-- La ficha de Lorena (sola, a 1000 px y con ©). Las otras fichas de la biblia no se publican
+         para no exponer el diseño de los personajes; originales en _originals/retirados/biblia -->
     <figure class="mx-auto max-w-4xl">
-      <a
-        href={`${P}/biblia-2-lorena.webp`}
-        data-lightbox
-        data-gallery="biblia-personajes"
-        data-caption="Biblia de personajes (2018) · Lorena"
-        class="group relative block cursor-zoom-in"
-        aria-label="Ver más fichas de la biblia de personajes"
-      >
-        <img src={`${P}/ficha-lorena.webp`} alt="Diseño de personajes: ficha de Lorena, protagonista de Si los peces hablaran…, con sus poses, sus expresiones y la versión a color" width="1400" height="990" loading="lazy" decoding="async" class={`reveal w-full bg-white transition group-hover:brightness-95 ${marco}`} />
-        <span class="pointer-events-none absolute right-3 bottom-3 inline-flex items-center gap-2 rounded-full bg-azul/90 px-4 py-2 font-display text-xs tracking-[0.2em] text-caparol uppercase shadow-lg">
-          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path></svg>
-          Ver más fichas
-        </span>
-      </a>
-      {biblia.filter((b) => b.f !== 'biblia-2-lorena').map((b) => (
-        <a href={`${P}/${b.f}.webp`} data-lightbox data-gallery="biblia-personajes" data-caption={`Biblia de personajes (2018) · ${b.t}`} class="hidden" tabindex="-1" aria-hidden="true"></a>
-      ))}
+      <img src={`${P}/ficha-lorena.webp`} alt="Diseño de personajes: ficha de Lorena, protagonista de Si los peces hablaran…, con sus poses, sus expresiones y la versión a color" width="1000" height="707" loading="lazy" decoding="async" class={`reveal w-full bg-white ${marco}`} />
       <figcaption class="reveal mt-7 text-center">
         <span class="block font-hand text-xl text-celeste sm:text-2xl">el ADN de Lorena: sus poses y expresiones, para que sea siempre ella</span>
         <span class="mt-2 block text-base text-caparol/75">Forma parte de la biblia de personajes que Pablo creó en 2018.</span>
