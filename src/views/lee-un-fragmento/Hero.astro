@@ -19,18 +19,19 @@ import Ola from '../../components/Ola.astro';
   </div>
 
   <div class="mx-auto max-w-6xl px-6">
-    <!-- Eyebrow -->
-    <div class="reveal flex items-center gap-3 sm:gap-4">
-      <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+    <!-- h1 para Google: lo que se busca («leer el primer capítulo de un cuento infantil online»).
+         «Asómate a la aventura» sigue siendo el titular grande, con el mismo aspecto. -->
+    <h1 class="reveal flex items-center gap-3 sm:gap-4">
+      <span aria-hidden="true" class="h-px w-10 shrink-0 bg-arena sm:w-16"></span>
       <span
-        class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm"
+        class="font-display text-xs leading-snug tracking-[0.3em] text-arena uppercase sm:text-sm sm:tracking-[0.35em]"
       >
-        Lee el capítulo I
+        Lee gratis el primer capítulo · cuento infantil online
       </span>
-    </div>
+    </h1>
 
     <!-- Headline -->
-    <h1
+    <p
       class="reveal reveal-delay-1 mt-6 max-w-4xl font-display text-[clamp(2.5rem,7.5vw,5rem)] leading-[0.95] tracking-tight text-caparol"
     >
       Asómate
@@ -40,7 +41,7 @@ import Ola from '../../components/Ola.astro';
           aventura
         </Ola>
       </span>
-    </h1>
+    </p>
 
     <!-- Lead: «cuento infantil», que es lo que se busca en Google -->
     <p
