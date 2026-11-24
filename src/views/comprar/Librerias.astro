@@ -33,7 +33,7 @@ const regions: Region[] = [
         city: 'Las Palmas de Gran Canaria',
         address: 'Av. de Escaleritas, 56, 35011',
         href: '#escuela',
-        label: 'Reserva tu dedicatoria',
+        label: 'Reserva tu cita',
         escuela: true,
         cuadernillo: true,
       },
@@ -230,11 +230,6 @@ const mapsHref = (s: Shop) =>
             {region.shops.map((shop) => (
               <li class="reveal">
                 <article class="group relative flex h-full flex-col gap-4 rounded-2xl border-2 border-caparol/15 bg-azul/40 p-6 transition hover:-translate-y-0.5 hover:border-arena hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)]">
-                  {shop.cuadernillo && (
-                    <span class="absolute -top-[0.85rem] right-4 z-10 -rotate-[4deg] rounded-full bg-arena px-[0.7rem] pt-[0.35rem] pb-[0.4rem] font-hand text-[1.15rem] leading-none whitespace-nowrap text-azul shadow-[0_6px_14px_rgba(0,0,0,0.35)]">
-                      {shop.escuela ? 'dedicado y con cuadernillo' : 'también el cuadernillo'}
-                    </span>
-                  )}
                   <header class="flex items-start gap-4">
                     <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-arena/10 text-arena transition group-hover:bg-arena group-hover:text-azul">
                       <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -254,6 +249,12 @@ const mapsHref = (s: Shop) =>
 
                   <p class="text-sm leading-relaxed text-caparol/85 sm:text-base">
                     {shop.address}
+                  </p>
+
+                  <!-- Qué se vende aquí (en vez de la etiqueta «también el cuadernillo») -->
+                  <p class="flex items-center gap-2 font-display text-xs tracking-[0.16em] text-arena uppercase sm:text-sm">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
+                    {shop.cuadernillo ? 'Cuento y cuadernillo' : 'Cuento'}
                   </p>
 
                   <div class="mt-auto flex flex-wrap items-center gap-2">
