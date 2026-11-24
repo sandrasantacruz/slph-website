@@ -109,17 +109,17 @@ const onlineShops = [
   },
   {
     name: 'El Libro Técnico',
-    description: 'La tienda online de El Libro Técnico – Casa del Lector.',
+    description: 'Librería del Paseo de Tomás Morales, en Las Palmas.',
     href: 'https://www.ellibrotecnico.com/libro/si-los-peces-hablaran-2-edicion_588987',
   },
   {
     name: 'Librería Canaima',
-    description: 'La tienda online de Canaima, en el centro de Las Palmas.',
+    description: 'Librería en pleno centro de Las Palmas.',
     href: 'https://www.libreriacanaima.com/libro/si-los-peces-hablaran_592328',
   },
   {
     name: 'La Librería del Cabildo',
-    description: 'Tienda online de libros canarios del Cabildo de Gran Canaria.',
+    description: 'Libros canarios, de la mano del Cabildo de Gran Canaria.',
     href: 'https://libroscanarios.org/titulo/si-los-peces-hablaran/',
   },
 ];
@@ -251,7 +251,7 @@ const mapsHref = (s: Shop) =>
                     {shop.address}
                   </p>
 
-                  <!-- Qué se vende aquí (en vez de la etiqueta «también el cuadernillo») -->
+                  {/* Qué se vende aquí (en vez de la etiqueta «también el cuadernillo») */}
                   <p class="flex items-center gap-2 font-display text-xs tracking-[0.16em] text-arena uppercase sm:text-sm">
                     <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
                     {shop.cuadernillo ? 'Cuento y cuadernillo' : 'Cuento'}
