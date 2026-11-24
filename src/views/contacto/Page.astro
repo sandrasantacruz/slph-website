@@ -11,17 +11,22 @@ const breadcrumb = breadcrumbSchema([
   { name: 'Contacto', url: '/contacto' },
 ]);
 
-const contactPoints = [
-  ...(settings.whatsapp
-    ? [{ '@type': 'ContactPoint', contactType: 'customer support', telephone: settings.whatsapp, contactOption: 'TollFree', availableLanguage: ['Spanish'] }]
-    : []),
-  ...(settings.phone
-    ? [{ '@type': 'ContactPoint', contactType: 'customer service', telephone: settings.phone, availableLanguage: ['Spanish'] }]
-    : []),
-  ...(settings.email
-    ? [{ '@type': 'ContactPoint', contactType: 'customer service', email: settings.email, availableLanguage: ['Spanish'] }]
-    : []),
-];
+// Ein Kontaktpunkt reicht: WhatsApp und Telefon sind dieselbe Nummer.
+// Kein «TollFree» — die Nummer ist eine normale Mobilnummer.
+const telefono = (settings.phone || settings.whatsapp).trim();
+const contactPoints =
+  telefono || settings.email
+    ? [
+        {
+          '@type': 'ContactPoint',
+          contactType: 'customer service',
+          ...(telefono ? { telephone: telefono.startsWith('+') ? telefono : `+34 ${telefono}` } : {}),
+          ...(settings.email ? { email: settings.email } : {}),
+          areaServed: 'Islas Canarias',
+          availableLanguage: ['Spanish'],
+        },
+      ]
+    : [];
 
 const contactPage = {
   '@context': 'https://schema.org',
@@ -29,7 +34,7 @@ const contactPage = {
   url: `${SITE_URL}/contacto`,
   name: 'Contacto · Si los peces hablaran',
   description:
-    'Canales directos de contacto del proyecto Si los peces hablaran: WhatsApp, correo electrónico y teléfono.',
+    'Contacto de Si los peces hablaran: WhatsApp, teléfono y correo para familias, centros educativos, instituciones, empresas y profesionales.',
   about: { '@id': `${SITE_URL}/#organization` },
   ...(contactPoints.length ? { mainEntity: { '@id': `${SITE_URL}/#organization`, contactPoint: contactPoints } } : {}),
 };
@@ -38,6 +43,10 @@ const contactPage = {
 <MainLayout
   title="Contacto"
   description="Contacta con Si los peces hablaran por WhatsApp, teléfono o correo electrónico. Centros educativos, instituciones, empresas y profesionales: hablemos de lo que podemos hacer juntos."
+  image="/assets/og-contacto-playa.jpg"
+  imageAlt="Sandra Santa Cruz sentada en la playa de Patalavaca junto a «Si los peces hablaran» escrito en la arena"
+  imageWidth={1200}
+  imageHeight={630}
   jsonLd={[contactPage, breadcrumb]}
 >
   <Canales settings={settings} />

@@ -18,7 +18,8 @@ const channels = [
     label: 'WhatsApp',
     verb: 'Escríbenos al',
     value: settings.whatsapp,
-    href: whatsappHref(settings.whatsapp),
+    // Mensaje ya escrito: así se sabe que el contacto llega desde la web.
+    href: `${whatsappHref(settings.whatsapp)}?text=${encodeURIComponent('¡Blu, blu…! Aleteamos desde la web de Si los peces hablaran…')}`,
     icon: 'whatsapp' as IconKind,
     accent: 'arena',
     hint: 'Respuesta más rápida',
