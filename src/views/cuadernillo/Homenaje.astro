@@ -13,7 +13,7 @@ import Ola from '../../components/Ola.astro';
         class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_60%_at_85%_15%,rgba(250,222,170,0.10),transparent_70%)]"
       ></div>
 
-      <p class="font-hand text-2xl text-celeste sm:text-3xl">un cuaderno que también sana</p>
+      <p class="font-hand text-2xl text-celeste sm:text-3xl">un proyecto con alma</p>
 
       <h2 class="mt-3 max-w-3xl font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] text-caparol">
         Para oxigenar
@@ -22,31 +22,31 @@ import Ola from '../../components/Ola.astro';
 
       <div class="mt-6 max-w-3xl space-y-5 text-lg leading-relaxed text-caparol/90 sm:text-xl">
         <p>
-          Hemos diseñado un cuadernillo de actividades pensado para Oncología
-          Infantil, porque proyectos de esta índole, ¡sanan el alma!
+          Hay una edición del cuadernillo pensada para Oncología Infantil. Lorena, Bubli,
+          el Sr. Tentáculus, Dormilona, el delfín Alegría y sus amigos llegan a las plantas
+          del hospital para regalar un rato de juego y de calma a los niños ingresados, y
+          también a las familias que no se separan de ellos.
         </p>
-        <p>
-          Es un homenaje a pequeños y grandes valientes a los que queremos
-          alegrar con nuestros personajes.
+        <p class="font-display text-2xl text-arena sm:text-3xl">
+          Cada página es una forma de decirles que no están solos.
         </p>
       </div>
 
-      <!-- Una página del cuadernillo de Oncología por dentro (Illustrator, modo esquema). Vino de /ilustrador -->
-      <figure class="mt-10 grid max-w-4xl items-center gap-6 sm:grid-cols-12 sm:gap-8">
-        <a href="/assets/ilustrador/proceso/capas.webp" data-lightbox data-gallery="cuadernillo-capas" data-caption="Una página del cuadernillo para Oncología Infantil, por dentro (2026)" class="block cursor-zoom-in sm:col-span-4">
-          <img src="/assets/ilustrador/proceso/capas.webp" alt="Una página del cuadernillo para Oncología Infantil abierta en el programa de diseño en modo esquema, con cientos de trazados superpuestos" width="800" height="867" loading="lazy" decoding="async" class="w-full overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15" />
-        </a>
-        <figcaption class="sm:col-span-8">
-          <p class="font-hand text-2xl text-celeste sm:text-3xl">todo el trabajo que no se ve</p>
-          <p class="mt-3 text-lg leading-relaxed text-caparol/90">
-            Cientos de trazados, uno sobre otro: así se ve por dentro una página de este
-            cuadernillo, ilustrada por
-            <a href="/ilustrador" class="text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">Pablo Tribiño</a>
-            en 2026. Todo, en el cuento y en el cuadernillo, se trabaja por capas para
-            controlarlo al milímetro, y algunos archivos pesaban tanto que costaba abrirlos.
-          </p>
-        </figcaption>
-      </figure>
+      <!-- Las dos fotos del hospital (antes, sección «Llevando el arte donde más se necesita») -->
+      <ul class="mt-10 grid max-w-4xl grid-cols-1 justify-items-center gap-y-10 sm:grid-cols-2 sm:items-start sm:gap-x-10">
+        {[
+          { src: '/assets/cuento/oncologia-infantil-slph.webp', alt: 'Los personajes de Si los peces hablaran visitando la planta de Oncología Infantil de un hospital', caption: 'visitando Oncología Infantil', tilt: 'tilt-l1' },
+          { src: '/assets/cuento/oncologia-infantil-slph-2.webp', alt: 'Niñas de la compañía leyendo el cuento con una pequeña paciente en la sala de juegos del hospital', caption: 'esperanza y alegría', tilt: 'tilt-r1' },
+        ].map((foto) => (
+          <li class="w-full max-w-[20rem] sm:max-w-none">
+            <div class={`polaroid ${foto.tilt} w-full transition duration-500 hover:rotate-0`}>
+              <img src={foto.src} alt={foto.alt} class="block w-full object-cover" style="aspect-ratio:3/4" width="750" height="1000" loading="lazy" decoding="async" />
+              <p class="absolute right-0 bottom-2 left-0 px-3 text-center font-hand text-xl leading-tight text-azul sm:text-2xl">{foto.caption}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
 
       <!-- Weiterführende Links zum Oncología-Projekt -->
       <div class="mt-10 max-w-3xl">

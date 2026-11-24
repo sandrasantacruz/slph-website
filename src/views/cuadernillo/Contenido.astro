@@ -3,22 +3,29 @@ import Ola from '../../components/Ola.astro';
 const features = [
   {
     title: 'Juegos y pasatiempos',
-    body: 'Actividades para resolver, colorear y descubrir que llevan la historia del cuento más allá de sus páginas.',
+    body: 'Laberintos, personajes para colorear, diferencias, sombras por descubrir y dibujos que aparecen al unir los números. La historia sigue más allá de sus páginas.',
     accent: 'arena',
   },
   {
-    title: 'Para todas las edades',
-    body: 'Propuestas pensadas para conectar tanto con los más pequeños como con quienes leen en familia o en el aula.',
+    title: 'En casa o en el aula',
+    body: 'Pensado para los más pequeños, para jugar en familia o con todo el grupo en clase.',
     accent: 'celeste',
   },
   {
     title: 'Con códigos QR',
-    body: 'Códigos QR que te permitirán ser espectador de eventos y espectáculos de Si los peces hablaran…',
+    body: 'En la contraportada, siete códigos QR te llevan al origen del proyecto, a las investigadoras marinas, a los talleres, a la pequeña Betta… Del musical al programa, en tu móvil.',
     accent: 'arena',
   },
 ];
+const paginas = [
+  { f: 'pagina-4', w: 800, h: 800, t: 'agudiza la vista…', alt: 'Página 4 del cuadernillo: «Encuentra las cinco diferencias…», con el Sr. Tentáculus' },
+  { f: 'pagina-5', w: 800, h: 800, t: '¿las encontraste?', alt: 'Página 5 del cuadernillo: «…del Sr. Tentáculus», el mismo dibujo con cinco diferencias' },
+  { f: 'pagina-12', w: 800, h: 800, t: 'Lorena también lleva pañuelo', alt: 'Página 12 del cuadernillo, para colorear: Doña Teresa de la mano de Julieta y de Lorena, que lleva pañuelo' },
+  { f: 'pagina-9', w: 800, h: 800, t: '¿quién dirige la coral? D…', alt: 'Página 9 del cuadernillo: une los números para descubrir un personaje del cuento' },
+  { f: 'pagina-10', w: 800, h: 800, t: '¡uy, el laberinto de la basura!', alt: 'Página 10 del cuadernillo: laberinto para descubrir qué se degrada más lento, una botella de plástico, una caja de cartón o una lata' },
+  { f: 'pagina-16', w: 800, h: 800, t: '¡escanéame!', alt: 'Contraportada del cuadernillo: siete códigos QR con el origen del proyecto, las investigadoras marinas, los talleres SLPH, la pequeña Betta, colaboraciones y testimonios' },
+];
 ---
-
 <section id="contenido" class="relative isolate overflow-hidden py-20 sm:py-28">
   <!-- Subtle seabed glow -->
   <div
@@ -65,5 +72,51 @@ const features = [
         </li>
       ))}
     </ul>
+
+    <!-- Alumnas del Centro de Danza con el cuadernillo (MVI_0385): 14–22 s a velocidad normal, 23–90 s a ×3 y 131,5–141,3 s normal (cierran el cuadernillo); sin sonido -->
+    <figure class="reveal mx-auto mt-16 max-w-4xl sm:mt-20">
+      <div class="overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15">
+        <video src="/assets/cuadernillo/alumnas-cuadernillo.mp4" poster="/assets/cuadernillo/alumnas-cuadernillo-poster.jpg" width="960" height="540" autoplay muted loop playsinline aria-label="Tres alumnas del Centro de Danza Sandra Santa Cruz, sentadas en el suelo, hacen juntas las actividades del cuadernillo" class="block aspect-video w-full object-cover"></video>
+      </div>
+      <figcaption class="mt-3 text-center font-hand text-xl text-celeste sm:text-2xl">así lo viven nuestras alumnas del Centro de Danza</figcaption>
+    </figure>
+
+    <!-- Un vistazo por dentro: páginas definitivas del cuadernillo (PDF de la 3.ª edición) -->
+    <div class="mt-16 sm:mt-20">
+      <p class="reveal text-center font-hand text-2xl text-celeste sm:text-3xl">un vistazo por dentro</p>
+      <ul class="carrusel -mx-6 mt-6 flex snap-x snap-mandatory items-end gap-4 overflow-x-auto px-6 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-5 lg:grid-cols-6 sm:overflow-visible sm:px-0 sm:pb-0">
+        {paginas.map((p, i) => (
+          <li class={`reveal reveal-delay-${Math.min(i + 1, 4)} w-[62%] shrink-0 snap-center sm:w-auto`}>
+            <a href={`/assets/cuadernillo/${p.f}.jpg`} data-lightbox data-gallery="cuadernillo-paginas" data-caption={p.t} class="block cursor-zoom-in">
+              <img src={`/assets/cuadernillo/${p.f}.jpg`} alt={p.alt} width={p.w} height={p.h} loading="lazy" decoding="async" class="aspect-square w-full rounded-2xl object-cover shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15" />
+            </a>
+            <p class="mt-2 text-center font-hand text-xl text-celeste">{p.t}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-3 text-center font-hand text-xl text-celeste/80 sm:hidden" aria-hidden="true">desliza para ver más →</p>
+    </div>
+
+    <!-- Todo el trabajo que no se ve: Pablo en su tableta (2019) y el vídeo de las capas de una página -->
+    <div class="mt-16 grid items-center gap-8 sm:mt-20 lg:grid-cols-12 lg:gap-12">
+      <div class="reveal grid grid-cols-2 gap-4 lg:order-2 lg:col-span-6">
+        <div class="overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15">
+          <video src="/assets/cuadernillo/capas-cuadernillo.mp4" poster="/assets/cuadernillo/capas-cuadernillo-poster.jpg" width="474" height="850" autoplay muted loop playsinline aria-label="Una página del cuadernillo en el programa de diseño, en modo esquema: cientos de trazados y capas superpuestos" class="block aspect-[4/5] w-full object-cover"></video>
+        </div>
+        <a href="/assets/cuadernillo/pablo-tableta.jpg" data-lightbox data-gallery="cuadernillo-trabajo" data-caption="Pablo Tribiño, ilustrando en su tableta (2019)" class="block cursor-zoom-in">
+          <img src="/assets/cuadernillo/pablo-tableta.jpg" alt="Tableta gráfica de Pablo Tribiño con el Sr. Tentáculus a medio colorear en pantalla" width="1280" height="960" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-2xl object-cover shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15" />
+        </a>
+      </div>
+      <div class="reveal reveal-delay-1 lg:order-1 lg:col-span-6">
+        <p class="font-hand text-2xl text-celeste sm:text-3xl">todo el trabajo que no se ve</p>
+        <p class="mt-3 text-lg leading-relaxed text-caparol/90 sm:text-xl">
+          Cientos de trazados, uno sobre otro: así se ve por dentro una página de este
+          cuadernillo, ilustrada por
+          <a href="/ilustrador" class="text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">Pablo Tribiño</a>.
+          Todo, en el cuento y en el cuadernillo, se trabaja por capas para controlarlo
+          al milímetro, y algunos archivos pesaban tanto que costaba abrirlos.
+        </p>
+      </div>
+    </div>
   </div>
 </section>

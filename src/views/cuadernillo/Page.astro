@@ -2,7 +2,6 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Contenido from './Contenido.astro';
-import Foto from './Foto.astro';
 import Homenaje from './Homenaje.astro';
 import WaterLine from '../../components/WaterLine.astro';
 import Lightbox from '../galeria/Lightbox.astro';
@@ -17,8 +16,8 @@ const breadcrumb = breadcrumbSchema([
 ---
 
 <MainLayout
-  title="El cuadernillo · Cuaderno de actividades"
-  description="El cuaderno de actividades de Si los peces hablaran: juegos y actividades para prolongar la aventura del cuento y conectar con el mar, para todas las edades. Con una edición pensada para Oncología Infantil."
+  title="Cuadernillo de actividades para niños · Si los peces hablaran…"
+  description="15 páginas de laberintos, colorear, diferencias y unir números con los personajes de Si los peces hablaran… Con una edición para Oncología Infantil."
   image="/assets/og-cuadernillo.jpg"
   imageAlt="Portada del cuadernillo de actividades y personajes para colorear de Si los peces hablaran…"
   imageWidth={1200}
@@ -30,7 +29,6 @@ const breadcrumb = breadcrumbSchema([
   <SubNavCuento current="cuadernillo" />
   <Hero />
   <Contenido />
-  <Foto />
   <!-- la parte más emotiva: oncología infantil -->
   <WaterLine separador />
   <Homenaje />
