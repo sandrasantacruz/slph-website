@@ -79,8 +79,8 @@ const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,3
         <img src={`${P}/david-boceto.webp`} alt="Boceto a línea de David, personaje del cuento infantil Si los peces hablaran…, con su tubo y sus aletas" width="570" height="680" loading="lazy" decoding="async" class={`reveal aspect-square w-full object-cover object-top ${marco}`} />
         <img src={`${P}/david-color.webp`} alt="Ilustración infantil de David terminada a color, por Pablo Tribiño" width="500" height="500" loading="lazy" decoding="async" class={`reveal reveal-delay-1 aspect-square w-full object-cover ${marco}`} />
       </div>
-      <p class="reveal mt-3 text-center font-display text-lg text-arena">David, el amigo más trasto de Lorena</p>
-      <p class="reveal mx-auto mt-1 max-w-md text-center text-sm leading-snug text-caparol/75 sm:text-base">Inseparable de Guille, superinquieto y siempre dispuesto a comprobarlo todo por sí mismo.</p>
+      <p class="reveal mt-6 text-center font-display text-lg text-arena">David, el amigo más trasto de Lorena</p>
+      <p class="reveal mx-auto mt-2 max-w-md text-center text-sm leading-relaxed text-caparol/75 sm:text-base">Inseparable de Guille, superinquieto y siempre dispuesto a comprobarlo todo por sí mismo.</p>
     </div>
 
 
@@ -100,8 +100,8 @@ const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,3
               <svg viewBox="0 0 24 24" class="h-6 w-6 shrink-0 text-arena" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
               <img src={`${P}/${p.despues}.webp`} alt={p.altD} loading="lazy" decoding="async" class="aspect-square w-[44%] rounded-xl object-cover ring-2 ring-arena/60" />
             </div>
-            <p class="mt-3 text-center font-display text-lg text-arena">{p.nombre}</p>
-            <p class="mt-0.5 text-center font-hand text-xl leading-tight text-celeste">{p.nota}</p>
+            <p class="mt-4 text-center font-display text-lg text-arena">{p.nombre}</p>
+            <p class="mt-1.5 text-center font-hand text-xl leading-snug text-celeste">{p.nota}</p>
           </li>
         ))}
       </ul>
@@ -126,9 +126,9 @@ const marco = 'overflow-hidden rounded-2xl shadow-[0_24px_48px_-18px_rgba(3,10,3
       {biblia.filter((b) => b.f !== 'biblia-2-lorena').map((b) => (
         <a href={`${P}/${b.f}.webp`} data-lightbox data-gallery="biblia-personajes" data-caption={`Biblia de personajes (2018) · ${b.t}`} class="hidden" tabindex="-1" aria-hidden="true"></a>
       ))}
-      <figcaption class="reveal mt-4 text-center">
+      <figcaption class="reveal mt-7 text-center">
         <span class="block font-hand text-xl text-celeste sm:text-2xl">el ADN de Lorena: sus poses y expresiones, para que sea siempre ella</span>
-        <span class="mt-1 block text-base text-caparol/75">Forma parte de la biblia de personajes que Pablo creó en 2018.</span>
+        <span class="mt-2 block text-base text-caparol/75">Forma parte de la biblia de personajes que Pablo creó en 2018.</span>
       </figcaption>
     </figure>
   </div>
