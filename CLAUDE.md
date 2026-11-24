@@ -79,7 +79,10 @@ verlinkt. Die ausgelieferte Seite braucht das CMS zur Laufzeit nicht.
   (alphabetische Sortierung), der Slug ist ASCII-kleingeschrieben. Werden in
   `src/views/galeria/Page.astro` zur Build-Zeit via `fs.readdirSync`
   eingelesen — neue Bilder einfach in den jeweiligen Section-Ordner kopieren,
-  kein Code-Edit nötig. Die Bildunterschrift kommt aus der `captions`-Map der
+  kein Code-Edit nötig. Danach `pnpm galeria:variantes` laufen lassen: das
+  legt `-640.webp`/`-960.webp` daneben, die die Kachel per `srcset` lädt
+  (ohne sie zieht das Handy das 1500-px-Original). Die Varianten tauchen
+  nicht als eigene Bilder auf. Die Bildunterschrift kommt aus der `captions`-Map der
   Section (Key = Dateiname ohne `.webp`); ohne Eintrag wird sie aus dem
   Dateinamen abgeleitet, dann aber ohne Akzente. Sektion-IDs: `musical`,
   `transformacion`, `librupeces`, `cuento`, `espectaculos`, `eventos`,

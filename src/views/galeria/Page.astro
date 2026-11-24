@@ -41,7 +41,7 @@ const sectionDefs: SectionDef[] = [
       "03-el-rey-neptuno": "Centro de Danza Sandra Santa Cruz · El rey Neptuno · 2016",
       "04-arucas-y-el-mar": "Arucas y el mar · 2018",
       "05-concejalia-de-cultura-distrito-v":
-        "Día Mundial de los Océanos · Ayuntamiento de LPGC · 2024",
+        "Función especial para escolares · Día Mundial de los Océanos · Ayuntamiento de LPGC · 2024",
       "06-dia-mundial-de-las-tortugas":
         "Día Mundial de las Tortugas · Casa-Museo de Colón · 2021",
     },
@@ -105,7 +105,7 @@ const sectionDefs: SectionDef[] = [
       "01-danza-de-las-aletas": "Danza de las Aletas · Poema del Mar",
       "02-presentacion-del-cuento": "La autora firma ejemplares · Poema del Mar",
       "03-guacimara-medina-poema-del-mar":
-        "Guacimara Medina · Consejera de Cultura del Cabildo de Gran Canaria",
+        "Guacimara Medina, en la presentación del cuento",
       "04-el-deep-sea":
         "Deep Sea · Una experiencia para sentir el mundo marino",
       "05-may-gomez-gercende-courtois":
@@ -121,7 +121,7 @@ const sectionDefs: SectionDef[] = [
     intro:
       "Diversos formatos para llevar los mensajes de nuestra obra allá donde se necesiten. Desde propuestas escénicas para público familiar y escolar hasta un formato sinfónico creado especialmente para la OFGC.",
     captions: {
-      "01-ofgc-2020": "Si los peces hablaran… sinfónico con la OFGC · 2021",
+      "01-ofgc-2021": "Si los peces hablaran… sinfónico con la OFGC · 2021",
       "02-suma-festival-tenerife-2025":
         "Día Mundial de los Océanos · Suma Festival · Tenerife · 2025",
       "03-dmo-2024": "Día Mundial de los Océanos · Ayuntamiento de LPGC · 2024",
@@ -145,7 +145,7 @@ const sectionDefs: SectionDef[] = [
       "02-feria-del-libro-mogan":
         "Feria del Libro de Mogán · Onalia Bueno, concejala de Cultura · 2023",
       "03-aniversario-ciencias-del-mar":
-        "XXXVII Aniversario de la Facultad de Ciencias del Mar · ULPGC",
+        "Exposición de Si los peces hablaran… · XXXVII Aniversario de la Facultad de Ciencias del Mar",
       "04-biblioteca-dolores-campos-herrera":
         "Biblioteca Dolores Campos-Herrero · 2023",
       "05-colegio-dominicas-las-palmas":
@@ -164,7 +164,7 @@ const sectionDefs: SectionDef[] = [
       "01-museo-tomas-morales": "Museo Tomás Morales · 2024",
       "02-biblioteca-insular": "Biblioteca Insular · 2021",
       "03-museo-perez-galdos-taller": "Casa-Museo Pérez Galdós · 2023",
-      "04-museo-perez-galdos": "Casa-Museo de Colón · 2021",
+      "04-casa-museo-de-colon": "Casa-Museo de Colón · 2021",
       "05-feria-del-atun-mogan": "Feria del Atún · Mogán · 2023",
       "06-proyecto-tac-lpgc-2031":
         "Proyecto TAC · Candidatura de LPGC a Capital Europea de la Cultura 2031",
@@ -174,7 +174,7 @@ const sectionDefs: SectionDef[] = [
       "02-biblioteca-insular": 'Taller familiar: "Tres en raya SLPH"',
       "03-museo-perez-galdos-taller":
         'Taller escolar: "Pérez Galdós, un aliado del mar"',
-      "04-museo-perez-galdos":
+      "04-casa-museo-de-colon":
         'Taller familiar: "La pancarta para concienciar"',
       "05-feria-del-atun-mogan":
         'Performance con taller familiar: "Tres en raya SLPH"',
@@ -212,14 +212,14 @@ const sectionDefs: SectionDef[] = [
         "Biblioteca Pública del Estado · 2019",
       "02-biblioteca-de-arucas":
         "Biblioteca de Arucas · Henoc Acosta, concejal de Cultura · 2018",
-      "03-may-gomez-gercende-courtois":
-        "May Gómez y Gercende Courtois · Investigadoras marinas · 2018",
+      "03-gercende-sandra-may-poema-del-mar":
+        "Gercende Courtois, Sandra Santa Cruz y May Gómez · Poema del Mar · 2018",
       "04-desplastificate-huertas-del-palmar":
         "Desplastifícate · Colegio Huertas del Palmar · 2019",
       "05-cc-el-muelle":
         "Charla de concienciación y performance · C.C. El Muelle · 2020",
       "06-aniversario-ciencias-del-mar":
-        "XXXVII Aniversario de la Facultad de Ciencias del Mar · ULPGC",
+        "Conferencia en el XXXVII Aniversario · Facultad de Ciencias del Mar",
     },
   },
   {
@@ -295,7 +295,9 @@ const sections = sectionDefs.map((def) => {
   const files = fs.existsSync(dir)
     ? fs
         .readdirSync(dir)
-        .filter((f) => /\.webp$/i.test(f))
+        // Die leichten Varianten «-640/-960» (pnpm galeria:variantes) sind
+        // keine eigenen Bilder, sondern Futter fuer das srcset der Kachel.
+        .filter((f) => /\.webp$/i.test(f) && !/-(640|960)\.webp$/i.test(f))
         .sort()
     : [];
   const images = files.map((file) => {

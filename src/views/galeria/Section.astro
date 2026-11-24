@@ -1,4 +1,6 @@
 ---
+import { srcset } from '../../lib/srcset';
+
 type Image = { src: string; alt: string; caption: string; story?: string };
 
 interface Props {
@@ -55,6 +57,8 @@ const { id, title, eyebrow, intro, images } = Astro.props;
           >
             <img
               src={img.src}
+              srcset={srcset(img.src, 1500)}
+              sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 300px"
               alt={img.alt}
               loading="lazy"
               decoding="async"

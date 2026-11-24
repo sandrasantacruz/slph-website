@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "migrate:pulpo": "node scripts/migrate-to-pulpo.mjs"
+    "migrate:pulpo": "node scripts/migrate-to-pulpo.mjs",
+    "galeria:variantes": "node scripts/galeria-variantes.mjs"
   },
   "dependencies": {
     "@fontsource-variable/caveat": "^5.2.8",
