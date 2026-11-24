@@ -95,6 +95,24 @@ const paginas = [
         ))}
       </ul>
       <p class="mt-3 text-center font-hand text-xl text-celeste/80 sm:hidden" aria-hidden="true">desliza para ver más →</p>
+
+      <!-- Uno de los siete QR de la contraportada («Origen del proyecto»), idéntico al del papel.
+           En el móvil no se puede escanear la propia pantalla: ahí funciona como enlace. -->
+      <figure class="reveal mt-12 flex flex-col items-center">
+        <a
+          href="https://youtu.be/YM4q_VqACh4"
+          target="_blank"
+          rel="noopener"
+          class="block w-44 rotate-[2deg] rounded-2xl bg-white p-3 shadow-[0_20px_40px_-16px_rgba(3,10,35,0.8)] transition duration-500 hover:rotate-0 sm:w-52"
+          aria-label="Vídeo: el origen del proyecto Si los peces hablaran… (YouTube)"
+        >
+          <img src="/assets/cuadernillo/qr-origen-del-proyecto.png" alt="Código QR «Origen del proyecto» de la contraportada del cuadernillo" width="400" height="400" class="block h-auto w-full [image-rendering:pixelated]" loading="lazy" decoding="async" />
+        </a>
+        <figcaption class="mt-4 max-w-64 text-center font-hand text-xl leading-snug text-celeste sm:text-2xl">
+          <span class="qr-escritorio">escanéame y verás el origen del proyecto</span>
+          <span class="qr-movil">púlsame y verás el origen del proyecto</span>
+        </figcaption>
+      </figure>
     </div>
 
     <!-- Todo el trabajo que no se ve: Pablo en su tableta (2019) y el vídeo de las capas de una página -->
@@ -120,3 +138,11 @@ const paginas = [
     </div>
   </div>
 </section>
+
+<style>
+  .qr-movil { display: none; }
+  @media (pointer: coarse) and (max-width: 767px) {
+    .qr-movil { display: inline; }
+    .qr-escritorio { display: none; }
+  }
+</style>
