@@ -1,5 +1,6 @@
 ---
 import { srcset } from '../../lib/srcset';
+import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 
 type Image = { src: string; alt: string; caption: string; story?: string };
 
@@ -9,9 +10,10 @@ interface Props {
   eyebrow: string;
   intro: string;
   images: Image[];
+  enlaces?: { href: string; texto: string }[];
 }
 
-const { id, title, eyebrow, intro, images } = Astro.props;
+const { id, title, eyebrow, intro, images, enlaces } = Astro.props;
 ---
 
 <section id={id} class="relative scroll-mt-24 py-16 sm:py-24">
@@ -29,6 +31,11 @@ const { id, title, eyebrow, intro, images } = Astro.props;
       <p class="mt-4 max-w-2xl text-base whitespace-pre-line text-caparol/85 sm:text-lg">
         {intro}
       </p>
+      {enlaces && enlaces.length > 0 && (
+        <div class="mt-5 flex flex-wrap gap-3">
+          {enlaces.map((e) => <EnlaceFlecha href={e.href}>{e.texto}</EnlaceFlecha>)}
+        </div>
+      )}
     </header>
 
     <div

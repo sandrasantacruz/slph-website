@@ -27,15 +27,18 @@ type SectionDef = {
    * kein Hover, hinter dem man ihn verstecken koennte.
    */
   stories?: Record<string, string>;
+  /** Enlaces discretos a la página que amplía la sección (debajo de la intro). */
+  enlaces?: { href: string; texto: string }[];
 };
 
 const sectionDefs: SectionDef[] = [
   {
     id: "musical",
     title: "Origen del proyecto",
-    eyebrow: "10 Años moviendo las aletas",
+    eyebrow: "10 años moviendo las aletas",
     intro:
       "Un musical nacido en el Centro de Danza Sandra Santa Cruz que, desde 2016, mantiene vivo su compromiso con la divulgación y la protección del medio marino a través de Si los peces hablaran…",
+    enlaces: [{ href: "/sobre-el-cuento#escenario", texto: "Del musical al cuento" }],
     captions: {
       "01-los-peces-del-arrecife": "Centro de Danza Sandra Santa Cruz · Los peces del arrecife · 2016",
       "02-danza-del-oxigeno": "Centro de Danza Sandra Santa Cruz · Danza del Oxígeno · 2016",
@@ -53,6 +56,7 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "El camino recorrido",
     intro:
       "De un musical a un programa multidisciplinar de sensibilización medioambiental, con respaldo institucional y científico.",
+    enlaces: [{ href: "/colabora", texto: "Quiénes nos acompañan" }],
     captions: {
       "01-olaia-moran-cabildo":
         "Olaia Morán, consejera de Educación del Cabildo de Gran Canaria",
@@ -87,6 +91,10 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "Fuera de la estantería",
     intro:
       "El cuento infantil y su cuadernillo salen de las páginas para encontrarse con sus lectores: presentaciones escenificadas, firmas de libros y encuentros literarios con la autora en ferias, bibliotecas y museos.",
+    enlaces: [
+      { href: "/sobre-el-cuento", texto: "El cuento" },
+      { href: "/cuadernillo", texto: "El cuadernillo" },
+    ],
     captions: {
       "01-nuestros-librupeces": "La 3.ª edición y su compañero de viaje, el cuadernillo de actividades",
       "02-el-cuento": "El cuento que habla por el mar",
@@ -121,6 +129,7 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "En cualquier escenario",
     intro:
       "Diversos formatos para llevar los mensajes de nuestra obra allá donde se necesiten. Desde propuestas escénicas para público familiar y escolar hasta un formato sinfónico creado especialmente para la OFGC.",
+    enlaces: [{ href: "/programa", texto: "Formatos del Programa SLPH" }],
     captions: {
       "01-ofgc-2021": "Si los peces hablaran… sinfónico con la OFGC · 2021",
       "02-suma-festival-tenerife-2025":
@@ -161,6 +170,7 @@ const sectionDefs: SectionDef[] = [
     eyebrow: "Aletas a la obra",
     intro:
       "Talleres con identidad propia, creados a partir de nuestro relato y diseñados para aprender haciendo. Materiales reutilizados, recursos audiovisuales y una metodología que convierte cada experiencia en una forma diferente de cuidar el mar.",
+    enlaces: [{ href: "/programa#talleres", texto: "Los Talleres SLPH" }],
     captions: {
       "01-museo-tomas-morales": "Museo Tomás Morales · 2024",
       "02-biblioteca-insular": "Biblioteca Insular · 2021",
@@ -320,8 +330,8 @@ const sections = sectionDefs.map((def) => {
 ---
 
 <MainLayout
-  title="Galería"
-  description="Imágenes del musical, el cuento, los eventos y los momentos del proyecto Si los peces hablaran. Material visual organizado por secciones: musical, transformación, cuento, espectáculos, librupeces, eventos de concienciación, talleres, centros escolares, conferencias, momentos y contaminación marina."
+  title="Galería de fotos: musical, cuento y talleres sobre el mar"
+  description="Fotos de Si los peces hablaran… desde 2016: el musical, el cuento infantil, espectáculos, talleres en museos y colegios, conferencias con investigadoras marinas y momentos con el público por toda Canarias."
   image="/assets/og-galeria.jpg"
   imageAlt="Bailarinas en escena en el musical Si los peces hablaran…"
   imageWidth={1200}
@@ -333,7 +343,7 @@ const sections = sectionDefs.map((def) => {
       "@type": "ImageGallery",
       name: "Galería · Si los peces hablaran",
       description:
-        "Imágenes del musical, el cuento, los eventos y los momentos del proyecto Si los peces hablaran.",
+        "Fotos de Si los peces hablaran… desde 2016: musical, cuento infantil, espectáculos, talleres, conferencias y momentos con el público en Canarias.",
       url: "https://silospeceshablaran.com/galeria",
       hasPart: sections.map((s) => ({
         "@type": "ImageGallery",
@@ -355,8 +365,8 @@ const sections = sectionDefs.map((def) => {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Sobre el cuento",
-          item: "https://silospeceshablaran.com/sobre-el-cuento",
+          name: "El programa",
+          item: "https://silospeceshablaran.com/programa",
         },
         {
           "@type": "ListItem",
@@ -378,6 +388,7 @@ const sections = sectionDefs.map((def) => {
         title={section.title}
         eyebrow={section.eyebrow}
         intro={section.intro}
+        enlaces={section.enlaces}
         images={section.images}
       />
     ))
