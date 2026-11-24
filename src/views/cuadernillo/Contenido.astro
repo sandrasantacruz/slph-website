@@ -23,7 +23,6 @@ const paginas = [
   { f: 'pagina-12', w: 800, h: 800, t: 'Lorena también lleva pañuelo', alt: 'Página 12 del cuadernillo, para colorear: Doña Teresa de la mano de Julieta y de Lorena, que lleva pañuelo' },
   { f: 'pagina-9', w: 800, h: 800, t: '¿quién dirige la coral? D…', alt: 'Página 9 del cuadernillo: une los números para descubrir un personaje del cuento' },
   { f: 'pagina-10', w: 800, h: 800, t: '¡uy, el laberinto de la basura!', alt: 'Página 10 del cuadernillo: laberinto para descubrir qué se degrada más lento, una botella de plástico, una caja de cartón o una lata' },
-  { f: 'pagina-16', w: 800, h: 800, t: '¡escanéame!', alt: 'Contraportada del cuadernillo: siete códigos QR con el origen del proyecto, las investigadoras marinas, los talleres SLPH, la pequeña Betta, colaboraciones y testimonios' },
 ];
 ---
 <section id="contenido" class="relative isolate overflow-hidden py-20 sm:py-28">
@@ -84,7 +83,7 @@ const paginas = [
     <!-- Un vistazo por dentro: páginas definitivas del cuadernillo (PDF de la 3.ª edición) -->
     <div class="mt-16 sm:mt-20">
       <p class="reveal text-center font-hand text-2xl text-celeste sm:text-3xl">un vistazo por dentro</p>
-      <ul class="carrusel -mx-6 mt-6 flex snap-x snap-mandatory items-end gap-4 overflow-x-auto px-6 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-5 lg:grid-cols-6 sm:overflow-visible sm:px-0 sm:pb-0">
+      <ul class="carrusel -mx-6 mt-6 flex snap-x snap-mandatory items-end gap-4 overflow-x-auto px-6 pb-2 sm:mx-0 sm:grid sm:grid-cols-5 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0">
         {paginas.map((p, i) => (
           <li class={`reveal reveal-delay-${Math.min(i + 1, 4)} w-[62%] shrink-0 snap-center sm:w-auto`}>
             <a href={`/assets/cuadernillo/${p.f}.jpg`} data-lightbox data-gallery="cuadernillo-paginas" data-caption={p.t} class="block cursor-zoom-in">
@@ -98,7 +97,15 @@ const paginas = [
 
       <!-- Uno de los siete QR de la contraportada («Origen del proyecto»), idéntico al del papel.
            En el móvil no se puede escanear la propia pantalla: ahí funciona como enlace. -->
-      <figure class="reveal mt-12 flex flex-col items-center">
+      <div class="mt-20 flex flex-wrap items-start justify-center gap-x-12 gap-y-10 sm:mt-24">
+      <!-- La contraportada con los siete QR -->
+      <figure class="reveal flex w-44 flex-col items-center sm:w-52">
+        <a href="/assets/cuadernillo/pagina-16.jpg" data-lightbox data-gallery="cuadernillo-paginas" data-caption="La contraportada, con siete códigos QR" class="block w-full -rotate-[2deg] cursor-zoom-in transition duration-500 hover:rotate-0">
+          <img src="/assets/cuadernillo/pagina-16.jpg" alt="Contraportada del cuadernillo: siete códigos QR con el origen del proyecto, las investigadoras marinas, los talleres SLPH, la pequeña Betta, colaboraciones y testimonios" width="800" height="800" loading="lazy" decoding="async" class="aspect-square w-full rounded-2xl object-cover shadow-[0_20px_40px_-16px_rgba(3,10,35,0.8)] ring-1 ring-caparol/15" />
+        </a>
+        <figcaption class="mt-4 text-center font-hand text-xl leading-snug text-celeste sm:text-2xl">¿adónde te llevará cada uno?</figcaption>
+      </figure>
+      <figure class="reveal reveal-delay-1 flex flex-col items-center">
         <a
           href="https://youtu.be/YM4q_VqACh4"
           target="_blank"
@@ -108,11 +115,12 @@ const paginas = [
         >
           <img src="/assets/cuadernillo/qr-origen-del-proyecto.png" alt="Código QR «Origen del proyecto» de la contraportada del cuadernillo" width="400" height="400" class="block h-auto w-full [image-rendering:pixelated]" loading="lazy" decoding="async" />
         </a>
-        <figcaption class="mt-4 max-w-64 text-center font-hand text-xl leading-snug text-celeste sm:text-2xl">
+        <figcaption class="mt-4 w-44 text-center font-hand sm:w-52 text-xl leading-snug text-celeste sm:text-2xl">
           <span class="qr-escritorio">escanéame y verás el origen del proyecto</span>
           <span class="qr-movil">púlsame y verás el origen del proyecto</span>
         </figcaption>
       </figure>
+      </div>
     </div>
 
     <!-- Todo el trabajo que no se ve: Pablo en su tableta (2019) y el vídeo de las capas de una página -->
@@ -128,8 +136,8 @@ const paginas = [
       <div class="reveal reveal-delay-1 lg:order-1 lg:col-span-6">
         <p class="font-hand text-2xl text-celeste sm:text-3xl">todo el trabajo que no se ve</p>
         <p class="mt-3 text-lg leading-relaxed text-caparol/90 sm:text-xl">
-          Cientos de trazados, uno sobre otro: así se ve por dentro una página de este
-          cuadernillo, ilustrada por
+          Cientos de trazados, uno sobre otro: así se ve en el programa de diseño una
+          página de este cuadernillo, ilustrada por
           <a href="/ilustrador" class="text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">Pablo Tribiño</a>.
           Todo, en el cuento y en el cuadernillo, se trabaja por capas para controlarlo
           al milímetro, y algunos archivos pesaban tanto que costaba abrirlos.
