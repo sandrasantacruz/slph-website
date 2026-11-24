@@ -2,6 +2,7 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Canales from './Canales.astro';
 import Sigue from './Sigue.astro';
+import Entidades from './Entidades.astro';
 import { SETTINGS as settings } from '../../lib/settings';
 import { breadcrumbSchema, SITE_URL } from '../../lib/seo';
 
@@ -36,10 +37,11 @@ const contactPage = {
 
 <MainLayout
   title="Contacto"
-  description="Contacta con Si los peces hablaran por WhatsApp, correo electrónico o teléfono. Sin formularios intermedios. Respondemos en horario habitual desde Gran Canaria."
+  description="Contacta con Si los peces hablaran por WhatsApp, teléfono o correo electrónico. Centros educativos, instituciones, empresas y profesionales: hablemos de lo que podemos hacer juntos."
   jsonLd={[contactPage, breadcrumb]}
 >
   <Canales settings={settings} />
+  <Entidades />
   <Sigue />
 </MainLayout>
 

@@ -16,7 +16,7 @@ const channels = [
   settings.whatsapp && {
     key: 'whatsapp',
     label: 'WhatsApp',
-    verb: 'Escríbenos por',
+    verb: 'Escríbenos al',
     value: settings.whatsapp,
     href: whatsappHref(settings.whatsapp),
     icon: 'whatsapp' as IconKind,
@@ -32,7 +32,7 @@ const channels = [
     href: telHref(settings.phone),
     icon: 'phone' as IconKind,
     accent: 'caparol',
-    hint: 'Cuando lo necesites, a viva voz',
+    hint: 'Si prefieres que hablemos directamente',
     external: false,
   },
   settings.email && {
@@ -43,7 +43,7 @@ const channels = [
     href: mailHref(settings.email),
     icon: 'mail' as IconKind,
     accent: 'celeste',
-    hint: 'Para textos más largos',
+    hint: 'Para consultas y proyectos',
     external: false,
   },
 ].filter(Boolean) as Array<{
@@ -94,8 +94,9 @@ const accentClasses: Record<'arena' | 'celeste' | 'caparol', { ring: string; tex
         <Ola class="text-arena">con la duda</Ola>!
       </h1>
       <p class="mt-4 max-w-2xl text-base text-caparol/90 sm:text-lg">
-        Dinos qué necesitas o qué quieres saber y
-        <span class="text-celeste">Dina la Voladora</span> te responderá enseguida.
+        Dinos qué necesitas o qué quieres saber. Estaremos encantados de escucharte.
+        ¡Y quién sabe si se nos adelanta
+        <span class="whitespace-nowrap text-celeste">Dina la Voladora</span>!
       </p>
     </div>
 
