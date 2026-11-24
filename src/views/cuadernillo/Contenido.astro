@@ -108,7 +108,7 @@ import { Icon } from 'astro-icon/components';
         {paginas.map((p, i) => (
           <li class={`reveal reveal-delay-${Math.min(i + 1, 4)} w-[62%] shrink-0 snap-center sm:w-auto`}>
             <a href={`/assets/cuadernillo/${p.f}.jpg`} data-lightbox data-gallery="cuadernillo-paginas" data-caption={p.t} class="block cursor-zoom-in">
-              <img src={`/assets/cuadernillo/${p.f}.jpg`} alt={p.alt} width={p.w} height={p.h} loading="lazy" decoding="async" class="aspect-square w-full rounded-2xl object-cover shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15" />
+              <img src={`/assets/cuadernillo/${p.f}.jpg`} alt={p.alt} width="600" height="600" loading="lazy" decoding="async" class="aspect-square w-full rounded-2xl object-cover shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15" />
             </a>
             <p class="mt-2 text-center font-hand text-xl text-celeste">{p.t}</p>
           </li>
