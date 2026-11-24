@@ -1,6 +1,16 @@
 ---
 import Ola from '../../components/Ola.astro';
+import { Icon } from 'astro-icon/components';
+import { SETTINGS, whatsappHref } from '../../lib/settings';
 
+// Dónde comprar el cuadernillo (mismos datos que /comprar, etiqueta «también el cuadernillo»)
+const mapa = (q: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+const reserva = `${whatsappHref(SETTINGS.whatsapp)}?text=${encodeURIComponent('Hola, quiero reservar el cuadernillo de actividades de Si los peces hablaran…')}`;
+const puntos = [
+  { name: 'Centro de Danza Sandra Santa Cruz', city: 'Las Palmas de Gran Canaria', address: 'Av. de Escaleritas, 56, 35011', reserva: true },
+  { name: 'Librería Trébol', city: 'Teror', address: 'C. Real de la Pl., 7, 35330' },
+  { name: 'Librería Greda Canarias', city: 'Teror', address: 'Plaza del Pino, 1, 35330' },
+];
 ---
 
 <section class="relative isolate overflow-hidden pb-24 sm:pb-32">
@@ -103,32 +113,48 @@ import Ola from '../../components/Ola.astro';
       </div>
     </div>
 
-    <!-- Closing CTA -->
-    <div class="reveal reveal-delay-1 mt-14 flex flex-col items-center gap-6 text-center sm:mt-16">
-      <p class="max-w-xl text-lg leading-relaxed text-caparol/90 sm:text-xl">
-        ¿Quieres el cuadernillo para tu aula o tu centro?
-        Escríbenos y te contamos cómo llevarlo contigo.
-      </p>
-      <div class="flex flex-wrap items-center justify-center gap-4">
-        <a
-          href="/contacto"
-          class="inline-flex items-center gap-2 rounded-full bg-arena px-6 py-3 font-display text-sm uppercase tracking-[0.2em] text-azul shadow-sm transition hover:brightness-105"
-        >
-          Contáctanos
-          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h14M13 6l6 6-6 6"/>
-          </svg>
-        </a>
-        <a
-          href="/sobre-el-cuento"
-          class="group inline-flex items-center gap-2 font-display text-sm tracking-[0.3em] text-arena uppercase transition hover:text-caparol"
-        >
-          <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M19 12H5M11 18l-6-6 6-6"/>
-          </svg>
-          Volver a Sobre el cuento
-        </a>
+    <!-- Consigue tu cuadernillo: el recorrido de compra (familias y, al final, colegios) -->
+    <div id="consiguelo" class="reveal mt-16 scroll-mt-28 rounded-3xl border border-arena/30 bg-azul/40 p-7 ring-1 ring-caparol/10 sm:mt-20 sm:p-10">
+      <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+        <div>
+          <p class="font-hand text-2xl text-celeste sm:text-3xl">¿navegas con nosotros?</p>
+          <h2 class="mt-1 font-display text-[clamp(1.9rem,4.5vw,3rem)] leading-[0.95] text-caparol">
+            Consigue tu <Ola class="text-arena">cuadernillo</Ola>
+          </h2>
+        </div>
+        <p class="font-display text-3xl text-arena sm:text-4xl">5 €</p>
       </div>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-caparol/85">
+        Juegos, actividades y personajes para seguir descubriendo el mundo marino. Se vende
+        por separado o con el
+        <a href="/sobre-el-cuento" class="text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">cuento</a>.
+      </p>
+      <ul class="mt-6 divide-y divide-caparol/10 border-y border-caparol/10">
+        {puntos.map((p) => (
+          <li class="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-4">
+            <p class="flex items-start gap-2">
+              <Icon name="game-icons:position-marker" class="mt-0.5 h-5 w-5 shrink-0 text-arena" aria-hidden="true" />
+              <span>
+                <span class="font-display text-lg text-caparol">{p.name}</span>
+                <span class="text-caparol/70"> · {p.city}</span>
+              </span>
+            </p>
+            <span class="flex flex-wrap items-center gap-x-5 gap-y-2 pl-7 sm:pl-0">
+              <a href={mapa(`${p.name}, ${p.address} ${p.city}`)} target="_blank" rel="noopener noreferrer" class="font-display text-xs tracking-[0.16em] text-arena uppercase transition hover:text-caparol">Cómo llegar</a>
+              {p.reserva && (
+                <a href={reserva} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-display text-xs tracking-[0.16em] text-arena uppercase transition hover:text-caparol">
+                  <Icon name="simple-icons:whatsapp" class="h-4 w-4" aria-hidden="true" />
+                  Resérvalo
+                </a>
+              )}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <a href="/contacto" class="group mt-6 inline-flex items-center gap-2 text-base text-caparol/85 transition hover:text-arena sm:text-lg">
+        Para colegios y proyectos, <span class="text-arena underline decoration-arena/40 underline-offset-4 group-hover:decoration-arena">consulta las posibilidades de colaboración</span>
+        <svg viewBox="0 0 24 24" class="h-4 w-4 text-arena transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
     </div>
   </div>
 </section>
