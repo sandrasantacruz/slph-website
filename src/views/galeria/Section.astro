@@ -49,6 +49,7 @@ const { id, title, eyebrow, intro, images, enlaces } = Astro.props;
     >
       {
         images.map((img, i) => (
+          <figure class:list={['reveal', `reveal-delay-${(i % 3) + 1}`]}>
           <a
             href={img.src}
             data-lightbox
@@ -56,10 +57,9 @@ const { id, title, eyebrow, intro, images, enlaces } = Astro.props;
             data-caption={img.caption}
             data-story={img.story}
             class:list={[
-              'reveal group relative block aspect-[3/2] overflow-hidden rounded-xl bg-azul-deep ring-1 ring-caparol/10 transition duration-300',
+              'group relative block aspect-[3/2] overflow-hidden rounded-xl bg-azul-deep ring-1 ring-caparol/10 transition duration-300',
               'hover:-translate-y-1 hover:ring-arena/70 hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)]',
               'focus:outline-none focus-visible:ring-2 focus-visible:ring-arena',
-              `reveal-delay-${(i % 3) + 1}`,
             ]}
           >
             <img
@@ -101,6 +101,10 @@ const { id, title, eyebrow, intro, images, enlaces } = Astro.props;
               </svg>
             </span>
           </a>
+          {/* Pie visible: en el móvil no hay hover, y sin él nadie sabe dónde ni cuándo
+              se hizo la foto sin abrirla. El texto largo («story») sigue solo en el visor. */}
+          <figcaption class="mt-2 min-h-[2.75em] px-1 text-sm leading-snug text-caparol/70">{img.caption}</figcaption>
+          </figure>
         ))
       }
     </div>
