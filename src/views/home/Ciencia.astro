@@ -1,0 +1,60 @@
+---
+// «La ciencia nos avala» (análisis de Inicio, nov. 2026): el aval científico es una
+// garantía de todo el programa, no una curiosidad del cuento. Solo se afirma lo que es
+// cierto: la supervisión es de los contenidos científicos.
+const investigadoras = [
+  {
+    nombre: 'May Gómez',
+    cargo: 'Catedrática de Zoología · Directora del grupo EOMAR',
+    foto: '/assets/colaboradores/may-gomez/portrait.png',
+  },
+  {
+    nombre: 'Dra. Gercende Courtois',
+    cargo: 'Investigadora en Ciencias Marinas y Acuicultura',
+    foto: '/assets/colaboradores/gercende-courtois/portrait.webp',
+  },
+];
+---
+
+<section id="ciencia" class="relative isolate">
+  <div class="mx-auto max-w-5xl px-6 py-16 text-center sm:py-24">
+    <p class="reveal font-hand text-3xl text-arena sm:text-4xl">rigor científico</p>
+    <h2 class="reveal reveal-delay-1 mt-2 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95]">
+      La ciencia <span class="text-arena">nos avala</span>
+    </h2>
+    <p class="reveal reveal-delay-2 mx-auto mt-6 max-w-3xl text-base leading-relaxed text-caparol/90 sm:text-lg">
+      Los contenidos científicos de SLPH cuentan con la supervisión de investigadoras del
+      <strong class="text-arena">Instituto ECOAQUA</strong> y de su grupo
+      <strong class="text-arena">EOMAR</strong>, de la Universidad de Las Palmas de
+      Gran Canaria. Cada mensaje que llega a un aula, a un escenario o a las
+      páginas del cuento está contrastado.
+    </p>
+
+    <ul class="reveal reveal-delay-3 mx-auto mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
+      {investigadoras.map(({ nombre, cargo, foto }) => (
+        <li class="flex items-center gap-4 rounded-3xl bg-azul/65 p-5 text-left ring-1 ring-caparol/15 backdrop-blur-sm">
+          <img
+            src={foto}
+            alt={`Retrato de ${nombre}`}
+            width="96"
+            height="96"
+            class="h-20 w-20 shrink-0 rounded-full object-cover ring-2 ring-arena/60 sm:h-24 sm:w-24"
+            loading="lazy"
+          />
+          <div>
+            <p class="font-display text-2xl leading-tight text-caparol sm:text-3xl">{nombre}</p>
+            <p class="mt-1 text-sm leading-snug text-caparol/80 sm:text-base">{cargo}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <a
+      href="/colabora#equipo"
+      class="reveal group mt-8 inline-flex items-center gap-2 font-display text-lg text-celeste underline decoration-arena decoration-2 underline-offset-4 hover:text-arena sm:text-xl"
+    >
+      Conoce a nuestras investigadoras
+      <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+    </a>
+  </div>
+</section>
