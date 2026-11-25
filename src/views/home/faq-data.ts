@@ -14,12 +14,16 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿Qué es Si los peces hablaran…?",
     answer:
-      "Si los peces hablaran… (SLPH) es un programa de concienciación medioambiental creado en Gran Canaria por Sandra Santa Cruz. Su misión es promover la protección y conservación de los ecosistemas marinos a través de la unión de tres ámbitos complementarios: las artes plásticas y escénicas, las ciencias del mar y la educación.\nEl proyecto nació como un musical y, con el paso del tiempo, ha evolucionado hasta convertirse en un programa multidisciplinar que incluye un cuento ilustrado, talleres educativos, performances, acciones culturales y eventos de sensibilización dirigidos a todos los públicos.",
+      "Si los peces hablaran… (SLPH) es un programa multidisciplinar de concienciación marina creado en Gran Canaria por Sandra Santa Cruz. Une las artes plásticas y escénicas, las ciencias del mar y la educación para proteger los ecosistemas marinos.\nNació en 2016 como un musical en el Centro de Danza Sandra Santa Cruz y, gracias a su repercusión, se convirtió en un programa con cuento ilustrado, talleres, espectáculos y acciones culturales para todos los públicos.",
+    answerHtml:
+      `Si los peces hablaran… (SLPH) es un programa multidisciplinar de concienciación marina creado en Gran Canaria por Sandra Santa Cruz. Une las artes plásticas y escénicas, las ciencias del mar y la educación para proteger los ecosistemas marinos.\nNació en 2016 como ${link("/galeria#musical", "un musical")} en el Centro de Danza Sandra Santa Cruz y, gracias a su repercusión, se convirtió en un programa con cuento ilustrado, talleres, espectáculos y acciones culturales para todos los públicos.`,
   },
   {
     question: "¿Quién es la autora?",
     answer:
-      "Sandra Santa Cruz es bailarina, coreógrafa, profesora y licenciada en danza. Desde hace casi cuatro décadas dirige el Centro de Danza Sandra Santa Cruz, en Gran Canaria, donde promueve la danza como herramienta educativa, artística y de desarrollo personal.\nEs la autora del cuento Si los peces hablaran… y la creadora e impulsora del Programa SLPH, un programa que une artes escénicas, educación y ciencia del mar para fomentar el respeto y la conservación del mundo marino.",
+      "Sandra Santa Cruz es bailarina, coreógrafa, profesora y licenciada en danza. Desde hace casi cuatro décadas dirige el Centro de Danza Sandra Santa Cruz, en Gran Canaria, donde promueve la danza como herramienta educativa, artística y de desarrollo personal.\nEscribió el cuento Si los peces hablaran… y dirige el Programa SLPH desde que se estrenó como musical en 2016.",
+    answerHtml:
+      `Sandra Santa Cruz es bailarina, coreógrafa, profesora y licenciada en danza. Desde hace casi cuatro décadas dirige el Centro de Danza Sandra Santa Cruz, en Gran Canaria, donde promueve la danza como herramienta educativa, artística y de desarrollo personal.\nEscribió el cuento Si los peces hablaran… y dirige el Programa SLPH desde que se estrenó como musical en 2016. Conoce su trayectoria en ${link("/autor", "La autora")}.`,
   },
   {
     question: "¿Dónde se puede comprar el cuento?",
@@ -31,12 +35,16 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿A qué edad va dirigido el cuento?",
     answer:
-      "El cuento Si los peces hablaran… está dirigido a todas las edades. Puede leerse de forma autónoma a partir de los 6 años, aunque también es una excelente herramienta de sensibilización para familias, centros educativos y público adulto.\nSu lenguaje emotivo y sus ilustraciones permiten que cada lector descubra la historia desde una perspectiva diferente, adaptándose a su edad y nivel de comprensión.",
+      "El cuento Si los peces hablaran… está dirigido a todas las edades. Puede leerse de forma autónoma a partir de los 6 años, aunque también es una excelente herramienta de sensibilización para familias, centros educativos y público adulto.\nSu lenguaje emotivo y sus ilustraciones permiten que cada lector descubra la historia desde una perspectiva diferente, adaptándose a su edad y nivel de comprensión. Puedes leer gratis el primer capítulo en Lee un fragmento.",
+    answerHtml:
+      `El cuento Si los peces hablaran… está dirigido a todas las edades. Puede leerse de forma autónoma a partir de los 6 años, aunque también es una excelente herramienta de sensibilización para familias, centros educativos y público adulto.\nSu lenguaje emotivo y sus ilustraciones permiten que cada lector descubra la historia desde una perspectiva diferente, adaptándose a su edad y nivel de comprensión. Puedes leer gratis el primer capítulo en ${link("/lee-un-fragmento", "Lee un fragmento")}.`,
   },
   {
     question: "¿En qué consiste el programa SLPH?",
     answer:
-      "El programa Si los peces hablaran… (SLPH) utiliza las artes plásticas, las artes escénicas, la educación y las ciencias del mar como herramientas para fomentar la protección y conservación de los ecosistemas marinos.\nTodos sus contenidos cuentan con la supervisión científica de investigadoras del Instituto ECOAQUA de la Universidad de Las Palmas de Gran Canaria, garantizando el rigor de los mensajes que transmite.\nEl programa incluye talleres educativos, exposiciones, espectáculos, materiales didácticos y otras acciones de sensibilización dirigidas a centros escolares, familias e instituciones.",
+      "Funciona a través de distintos formatos que se adaptan a cada público: talleres en museos, bibliotecas y colegios; musicales y espectáculos; conferencias con investigadoras marinas; exposiciones, y materiales didácticos como el cuento y su cuadernillo de actividades.\nSus contenidos científicos cuentan con la supervisión de investigadoras del Instituto ECOAQUA de la Universidad de Las Palmas de Gran Canaria, lo que garantiza el rigor de sus mensajes.",
+    answerHtml:
+      `Funciona a través de distintos formatos que se adaptan a cada público: talleres en museos, bibliotecas y colegios; musicales y espectáculos; conferencias con investigadoras marinas; exposiciones, y materiales didácticos como el cuento y su cuadernillo de actividades.\nSus contenidos científicos cuentan con la supervisión de investigadoras del Instituto ECOAQUA de la Universidad de Las Palmas de Gran Canaria, lo que garantiza el rigor de sus mensajes. Descubre todos los formatos en ${link("/programa", "El programa")}.`,
   },
   {
     question: "¿Cómo se puede colaborar?",
@@ -48,8 +56,8 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿Dónde se desarrolla el proyecto?",
     answer:
-      "El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en el archipiélago canario y con proyección al territorio nacional.\nTodas las actividades, eventos, colaboraciones y apariciones en los medios de comunicación se publican en la sección Noticias de nuestra web.",
+      "Tiene su sede en Gran Canaria (España) y sus actividades han llegado también a Fuerteventura, Tenerife y La Palma, con proyección a todo el territorio nacional. Las fotos de cada lugar están en la Galería.\nTodas las actividades, eventos, colaboraciones y apariciones en los medios de comunicación se publican en la sección Noticias de nuestra web.",
     answerHtml:
-      `El proyecto se desarrolla principalmente en Gran Canaria (España), con presencia en el archipiélago canario y con proyección al territorio nacional.\nTodas las actividades, eventos, colaboraciones y apariciones en los medios de comunicación se publican en la sección ${link("/noticias", "Noticias")} de nuestra web.`,
+      `Tiene su sede en Gran Canaria (España) y sus actividades han llegado también a Fuerteventura, Tenerife y La Palma, con proyección a todo el territorio nacional. Las fotos de cada lugar están en la ${link("/galeria", "Galería")}.\nTodas las actividades, eventos, colaboraciones y apariciones en los medios de comunicación se publican en la sección ${link("/noticias", "Noticias")} de nuestra web.`,
   },
 ];
