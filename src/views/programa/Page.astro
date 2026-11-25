@@ -1,4 +1,5 @@
 ---
+import WaterLine from '../../components/WaterLine.astro';
 import MainLayout from "../../layouts/MainLayout.astro";
 import Hero from "./Hero.astro";
 import Talleres from "./Talleres.astro";
@@ -32,9 +33,11 @@ const breadcrumb = breadcrumbSchema([
   <Video />
   <Principios />
   <Explora />
+  <WaterLine separador clave="-acciones" />
   <Talleres />
   <Destacan />
   <Ods />
+  <WaterLine separador clave="-formatos" />
   <Formatos />
   <FormatosGrid />
   <Diferencia />

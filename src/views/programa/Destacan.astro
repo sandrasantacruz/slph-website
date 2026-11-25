@@ -3,7 +3,7 @@ const items = [
   {
     titulo: 'Nuestros talleres',
     cuerpo:
-      'Reciclar y reutilizar forman parte de la esencia de nuestros talleres. Contamos con material audiovisual para visibilizar el problema de la contaminación marina. Nuestros contenidos se alinean con diferentes Objetivos de Desarrollo Sostenible (ODS) de la Agenda 2030 de las Naciones Unidas y contemplan los principios de la LOMLOE y el Diseño Universal para el Aprendizaje (DUA), favoreciendo un aprendizaje significativo e inclusivo. Y, por supuesto, ¡también contamos con talleres para disfrutar en familia!',
+      'Reciclar y reutilizar forman parte de la esencia de nuestros talleres. Contamos con material audiovisual para visibilizar el problema de la contaminación marina.\nNuestros contenidos se alinean con diferentes Objetivos de Desarrollo Sostenible (ODS) de la Agenda 2030 de las Naciones Unidas y contemplan los principios de la LOMLOE y el Diseño Universal para el Aprendizaje (DUA), favoreciendo un aprendizaje significativo e inclusivo.\nY, por supuesto, ¡también contamos con talleres para disfrutar en familia!',
     img: '/assets/programa/pancarta.webp',
     // Querformat: 4:3-Crop schneidet seitlich. Anker nach rechts, sonst
     // fehlt der rechte Rand der Pancarta.
@@ -14,7 +14,7 @@ const items = [
   {
     titulo: 'Nuestros eventos',
     cuerpo:
-      'Diseñamos eventos y performances a medida para dar respuesta a objetivos específicos. La experiencia adquirida en nuestros proyectos con organismos oficiales nos permite crear propuestas creativas, versátiles y comprometidas, adaptadas a las necesidades de cada organización. Porque proteger el planeta exige actuar, este equipo está siempre "aletas a la obra".\n¿Qué necesitas?',
+      'Diseñamos eventos y performances a medida para dar respuesta a objetivos específicos. La experiencia adquirida en nuestros proyectos con organismos oficiales nos permite crear propuestas creativas, versátiles y comprometidas, adaptadas a las necesidades de cada organización.\nPorque proteger el planeta exige actuar, este equipo está siempre «aletas a la obra». ¿Qué necesitas?',
     img: '/assets/programa/casa-colon.webp',
     // Hochformat: 4:3-Crop zeigt nur ~56 % der Höhe. Anker nach oben, damit
     // die Schilder "NO SE CONTAMINA" komplett im Bild bleiben.
@@ -79,13 +79,14 @@ const items = [
     <!-- Ein gemeinsamer Link für beide Karten: Talleres wie Eventos entstehen
          mit denselben Partnern, zwei identische Links nebeneinander wären
          redundant. -->
-    <div class="reveal reveal-delay-2 mt-14 text-center">
-      <p class="font-hand text-2xl leading-none text-celeste sm:text-3xl">
-        colegios, museos, bibliotecas, ayuntamientos
+    <div class="reveal reveal-delay-2 mt-20 text-center sm:mt-24">
+      <p class="font-hand text-3xl leading-tight text-celeste sm:text-4xl">
+        <span class="whitespace-nowrap">colegios, museos,</span>
+        <span class="whitespace-nowrap">bibliotecas, ayuntamientos</span>
       </p>
       <a
         href="/colabora#aliados"
-        class="group mt-3 inline-flex items-center gap-2 font-display text-2xl text-arena underline decoration-arena/40 decoration-2 underline-offset-8 transition hover:decoration-arena sm:text-3xl"
+        class="group mt-5 inline-flex items-center gap-2 font-display text-2xl text-arena underline decoration-arena/40 decoration-2 underline-offset-8 transition hover:decoration-arena sm:text-4xl"
       >
         Mira quién ya cuenta con nosotros
         <svg
