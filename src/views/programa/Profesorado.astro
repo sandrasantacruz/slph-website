@@ -1,0 +1,47 @@
+---
+// «Lo que dice el profesorado»: citas literales del dossier para entidades (págs. 16-17).
+// No se retocan: son palabras de los centros. «Mamá, tenemos que cambiar el mundo» ya está en
+// Repercusión (Anecdota.astro): aquí no se repite.
+const citas = [
+  {
+    texto: 'Esta maravillosa interpretación ha conseguido que nuestro alumnado tome conciencia sobre la gravedad de la contaminación y, además, adquiera estrategias encaminadas a la protección de nuestros océanos.',
+    centro: 'CEIP Pepe Dámaso',
+  },
+  {
+    texto: 'Espectáculo muy relacionado con el ODS 14. Se ha vinculado con las áreas de Conocimiento del Medio Natural, Social y Cultural y de Educación Artística.',
+    centro: 'CEIP 7 Palmas',
+  },
+  {
+    texto: 'Potencia la consolidación de las competencias ambientales en los currículos y proporciona recursos y metodologías novedosas y motivadoras, ancladas en el conocimiento privilegiado de nuestro contexto más cercano.',
+    centro: 'CEIP Las Rehoyas',
+  },
+  {
+    texto: 'Este proyecto ayuda en el logro de las competencias ambientales de los currículos de Infantil y Primaria, con recursos y metodologías novedosas, variadas y motivadoras.',
+    centro: 'CEIP Cataluña',
+  },
+];
+---
+
+<section id="profesorado" class="relative isolate scroll-mt-28 pb-24 sm:pb-32">
+  <div class="mx-auto max-w-5xl px-6">
+    <div class="reveal text-center">
+      <p class="font-hand text-3xl text-celeste sm:text-4xl">en sus propias palabras</p>
+      <h2 class="mt-2 font-display text-[clamp(2.25rem,6vw,4.25rem)] leading-[0.95]">
+        Lo que dice <span class="text-arena">el profesorado</span>
+      </h2>
+    </div>
+
+    <ul class="mt-12 grid gap-6 sm:mt-14 md:grid-cols-2">
+      {citas.map(({ texto, centro }, i) => (
+        <li class:list={['reveal', `reveal-delay-${(i % 4) + 1}`]}>
+          <figure class="flex h-full flex-col rounded-3xl bg-azul/65 p-7 ring-1 ring-caparol/15 backdrop-blur-sm">
+            <span aria-hidden="true" class="font-display text-6xl leading-none text-arena/60">«</span>
+            <blockquote class="-mt-4 flex-1 text-base leading-relaxed text-caparol/90 sm:text-lg">{texto}</blockquote>
+            <figcaption class="mt-5 font-display text-sm tracking-[0.25em] text-arena uppercase sm:text-base">{centro}</figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</section>
