@@ -7,6 +7,7 @@ import Menores from './Menores.astro';
 import Anecdota from './Anecdota.astro';
 import Prensa from './Prensa.astro';
 import Origen from './Origen.astro';
+import Cifras from './Cifras.astro';
 import WaterLine from '../../components/WaterLine.astro';
 import SubNavPrograma from '../../components/SubNavPrograma.astro';
 import { breadcrumbSchema } from '../../lib/seo';
@@ -19,8 +20,8 @@ const breadcrumb = breadcrumbSchema([
 ---
 
 <MainLayout
-  title="Repercusión · En los medios"
-  description="Cuando el mar habla, la prensa también escucha: periódicos, radio y Televisión Canaria cuentan cómo un musical se convirtió en cuento."
+  title="Repercusión · En las aulas, las familias y los medios"
+  description="La huella de Si los peces hablaran…: lo que dicen los más pequeños, la frase de un niño de cuatro años, los reportajes de Televisión Canaria y la prensa."
   image="/assets/og-repercusion.jpg"
   imageAlt="Escolares leyendo el cuento Si los peces hablaran… en un reportaje de Televisión Canaria"
   imageWidth={1200}
@@ -31,13 +32,15 @@ const breadcrumb = breadcrumbSchema([
 >
   <SubNavPrograma current="repercusion" />
   <Hero />
+  <Cifras />
+  <!-- Tres bloques: los medios (tele + prensa, la confianza), los más pequeños (la emoción),
+       la huella y la ciencia -->
   <Medios />
-  <!-- Noa, como Izzy en El ilustrador: entre dos líneas de agua -->
+  <Prensa />
   <WaterLine separador clave="-a" />
   <Menores />
-  <WaterLine separador clave="-b" />
   <Anecdota />
-  <Prensa />
+  <WaterLine separador clave="-b" />
   <Huella />
   <Origen />
 </MainLayout>
