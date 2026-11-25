@@ -1,49 +1,53 @@
 ---
 import Ola from '../../components/Ola.astro';
-// Drei Reihen à drei, helle und dunkle Motive gemischt, damit jede Reihe Licht hat.
+import { srcset } from '../../lib/srcset';
+// Drei Reihen à drei wie ein Schachbrett: schwere, dunkle Figuren in Ecken und Mitte (Don Canino als Blickfang), leichte dazwischen.
 const imagenes = [
   {
-    src: '/assets/colaboradores/pablo-tribino/el-coronel-espada-afilada-si-los-peces-hablaran.jpg',
+    src: '/assets/colaboradores/pablo-tribino/el-coronel-espada-afilada-si-los-peces-hablaran.webp',
     nombre: 'El coronel Espada Afilada',
+    zoom: 'group-hover:scale-[1.01]',
     pie: 'El coronel Espada Afilada, el pez espada más valeroso',
   },
   {
-    src: '/assets/colaboradores/pablo-tribino/dina-la-voladora-si-los-peces-hablaran.jpg',
+    src: '/assets/colaboradores/pablo-tribino/dina-la-voladora-si-los-peces-hablaran.webp',
     nombre: 'Dina la Voladora',
     pie: 'Dina la Voladora, la gran amiga de Bella Azul',
   },
   {
-    src: '/assets/colaboradores/pablo-tribino/el-sr-tentaculus-si-los-peces-hablaran.jpg',
+    src: '/assets/colaboradores/pablo-tribino/el-sr-tentaculus-si-los-peces-hablaran.webp',
     nombre: 'El Sr. Tentáculus',
     pie: 'El Sr. Tentáculus, el pulpo encargado de una gran misión…',
   },
   {
-    src: '/assets/colaboradores/pablo-tribino/gusshy-si-los-peces-hablaran.jpg',
-    nombre: 'Gusshy',
-    pie: 'Gusshy, el primero que coge un tridente para…',
-  },
-  {
-    src: '/assets/colaboradores/pablo-tribino/bubli-si-los-peces-hablaran.jpg',
-    nombre: 'Bubli',
-    pie: 'Bubli, un caballito de mar muy curioso',
-  },
-  {
-    src: '/assets/colaboradores/pablo-tribino/don-canino-si-los-peces-hablaran.jpg',
-    nombre: 'Don Canino',
-    pie: 'Don Canino, el tiburón más fuerte del arrecife, capaz de sacar un neumático del mar',
-  },
-  {
-    src: '/assets/colaboradores/pablo-tribino/nela-la-irritable-si-los-peces-hablaran.jpg',
+    src: '/assets/colaboradores/pablo-tribino/nela-la-irritable-si-los-peces-hablaran.webp',
     nombre: 'Nela la Irritable',
     pie: 'Nela la Irritable, que solo se irrita cuando las cosas no se hacen bien',
   },
   {
-    src: '/assets/colaboradores/pablo-tribino/erizoquetepincho-si-los-peces-hablaran.jpg',
-    nombre: 'Erizoquetepincho',
+    src: '/assets/colaboradores/pablo-tribino/don-canino-si-los-peces-hablaran.webp',
+    nombre: 'Don Canino',
+    zoom: 'group-hover:scale-[1.08]',
+    pie: 'Don Canino, el tiburón más fuerte del arrecife, capaz de sacar un neumático del mar',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/bubli-si-los-peces-hablaran.webp',
+    nombre: 'Bubli',
+    pie: 'Bubli, un caballito de mar muy curioso',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/gusshy-si-los-peces-hablaran.webp',
+    nombre: 'Gusshy',
+    zoom: 'group-hover:scale-[1.01]',
+    pie: 'Gusshy, el primero que coge un tridente para…',
+  },
+  {
+    src: '/assets/colaboradores/pablo-tribino/erizoquetepincho-si-los-peces-hablaran.webp',
+    nombre: 'Don Erizoquetepincho',
     pie: 'Erizoquetepincho, el gran cantante del arrecife, primo de Erikoquetepico',
   },
   {
-    src: '/assets/colaboradores/pablo-tribino/david-si-los-peces-hablaran.jpg',
+    src: '/assets/colaboradores/pablo-tribino/david-si-los-peces-hablaran.webp',
     nombre: 'David',
     pie: 'David, el más trasto de los amigos de Lorena',
   },
@@ -63,8 +67,9 @@ const imagenes = [
         Así los ves hoy, pero ninguno empezó de esta manera.
       </p>
     </div>
-    <div class="mx-auto grid max-w-3xl grid-cols-3 gap-3 sm:gap-4">
+    <div class="mx-auto grid max-w-5xl grid-cols-3 gap-3 sm:gap-4">
       {imagenes.map((imagen) => (
+        <figure class="reveal personaje-tarjeta">
         <a
           href={imagen.src}
           target="_blank"
@@ -72,18 +77,41 @@ const imagenes = [
           data-lightbox
           data-gallery="pablo-tribino"
           data-caption={imagen.pie}
-          class="reveal gallery-item group relative block aspect-square overflow-hidden rounded-xl bg-azul/30 ring-1 ring-caparol/10 transition duration-300 hover:-translate-y-1 hover:ring-arena/70 hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-arena"
+          class="gallery-item group relative block aspect-square overflow-hidden rounded-xl bg-azul/30 ring-1 ring-caparol/10 transition duration-300 hover:-translate-y-1 hover:ring-arena/70 hover:shadow-[0_18px_30px_-12px_rgba(6,15,44,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-arena"
         >
           <img
             src={imagen.src}
+            srcset={srcset(imagen.src, 800)}
+            sizes="(min-width: 1024px) 320px, 31vw"
+            width="800"
+            height="800"
             alt={`Ilustración infantil de ${imagen.nombre}, personaje del cuento Si los peces hablaran…, por Pablo Tribiño`}
             loading="lazy"
-            class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.06]"
+            class={`h-full w-full object-cover transition duration-500 ${imagen.zoom ?? 'group-hover:scale-[1.1]'}`}
           />
           <span aria-hidden="true" class="pointer-events-none absolute inset-0 bg-gradient-to-t from-azul/40 via-transparent to-transparent opacity-0 transition group-hover:opacity-100"></span>
         </a>
+        <figcaption class="mt-2 text-center font-display text-base tracking-wide text-caparol sm:mt-3 sm:text-xl">{imagen.nombre}</figcaption>
+        </figure>
       ))}
     </div>
 
   </div>
 </section>
+
+<style>
+  /* Al pasar el ratón, el personaje «nada»: sube y baja suavemente. La imagen va algo
+     ampliada para que el movimiento no deje ver los bordes de la tarjeta. */
+  @keyframes nadar-tarjeta {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -6px; }
+  }
+  .personaje-tarjeta a:hover img,
+  .personaje-tarjeta a:focus-visible img {
+    animation: nadar-tarjeta 4.8s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .personaje-tarjeta a:hover img,
+    .personaje-tarjeta a:focus-visible img { animation: none; }
+  }
+</style>
