@@ -54,15 +54,6 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
   </div>
 
   <div class="mx-auto flex h-full w-full max-w-6xl flex-col justify-center gap-4 px-6 py-4 sm:gap-5 sm:py-6">
-    <!-- Etiqueta: define el programa para instituciones sin quitarle el tono al titular.
-         Solo desde tableta: en el móvil ocupaba dos líneas y restaba fuerza al titular. -->
-    <div class="reveal hidden items-center gap-3 sm:flex sm:gap-4">
-      <span aria-hidden="true" class="h-px w-8 bg-arena sm:w-16"></span>
-      <span class="font-display text-[0.7rem] tracking-[0.3em] text-arena uppercase sm:text-sm sm:tracking-[0.38em]">
-        Programa de concienciación marina · arte, ciencia y educación
-      </span>
-    </div>
-
     <!-- Headline -->
     <h1 class="reveal reveal-delay-1 font-display text-[clamp(1.75rem,9.6vw,5rem)] leading-[0.92] tracking-tight">
       <!-- «Si los peces hablaran…» (el título del cuento) siempre en una línea,
@@ -86,6 +77,14 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
       grito es una llamada a&nbsp;la&nbsp;acción, porque salvar el mar
       <em class="not-italic text-arena">también nos salva a nosotros.</em>
     </p>
+
+    <!-- Etiqueta tras el texto (idea de Sandra): primero emociona, luego define y prepara «Descubre el programa» -->
+    <div class="reveal reveal-delay-3 flex items-center gap-3 sm:gap-4">
+      <span aria-hidden="true" class="h-px w-8 shrink-0 bg-arena sm:w-16"></span>
+      <span class="font-display text-[0.7rem] leading-snug tracking-[0.3em] text-arena uppercase sm:text-sm sm:tracking-[0.38em]">
+        Programa de concienciación marina · arte, ciencia y educación
+      </span>
+    </div>
 
     <!-- CTAs — always visible -->
     <div class="reveal reveal-delay-4 mt-1 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:gap-4">
