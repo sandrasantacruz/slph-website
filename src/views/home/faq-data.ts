@@ -24,9 +24,9 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿Dónde se puede comprar el cuento?",
     answer:
-      "El cuento Si los peces hablaran… está disponible en diferentes puntos de venta de Gran Canaria, entre ellos Librería Canaima, La Librería del Cabildo, Poema del Mar y El Libro Técnico.\nTambién puedes adquirirlo online con envío a domicilio a través de El Libro Técnico.\nEn la página Comprar de nuestra web encontrarás el listado actualizado de todos los puntos de venta, junto con su ubicación y la información necesaria para realizar tu compra.",
+      "Puedes comprarlo dedicado por su autora en el Centro de Danza Sandra Santa Cruz. También en librerías de Gran Canaria como Librería Canaima, La Librería del Cabildo o El Libro Técnico, y en Poema del Mar.\nY puedes adquirirlo online con envío a domicilio a través de El Libro Técnico.\nEn la página Comprar de nuestra web encontrarás el listado actualizado de todos los puntos de venta, junto con su ubicación y la información necesaria para realizar tu compra.",
     answerHtml:
-      `El cuento Si los peces hablaran… está disponible en diferentes puntos de venta de Gran Canaria, entre ellos Librería Canaima, La Librería del Cabildo, Poema del Mar y El Libro Técnico.\nTambién puedes adquirirlo online con envío a domicilio a través de El Libro Técnico.\nEn la página ${link("/comprar", "Comprar")} de nuestra web encontrarás el listado actualizado de todos los puntos de venta, junto con su ubicación y la información necesaria para realizar tu compra.`,
+      `Puedes comprarlo dedicado por su autora en el Centro de Danza Sandra Santa Cruz. También en librerías de Gran Canaria como Librería Canaima, La Librería del Cabildo o El Libro Técnico, y en Poema del Mar.\nY puedes adquirirlo online con envío a domicilio a través de El Libro Técnico.\nEn la página ${link("/comprar", "Comprar")} de nuestra web encontrarás el listado actualizado de todos los puntos de venta, junto con su ubicación y la información necesaria para realizar tu compra.`,
   },
   {
     question: "¿A qué edad va dirigido el cuento?",
@@ -41,9 +41,9 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿Cómo se puede colaborar?",
     answer:
-      "Puedes colaborar con Si los peces hablaran… de diferentes maneras: como voluntario, realizando una donación puntual o mediante acciones de mecenazgo y colaboración institucional.\nEn la página Colabora encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página Contacto.",
+      "Puedes colaborar con Si los peces hablaran… de diferentes maneras: haciendo voluntariado en nuestros eventos, realizando una donación puntual o mediante acciones de mecenazgo y colaboración institucional.\nEn la página Colabora encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página Contacto.",
     answerHtml:
-      `Puedes colaborar con Si los peces hablaran… de diferentes maneras: como voluntario, realizando una donación puntual o mediante acciones de mecenazgo y colaboración institucional.\nEn la página ${link("/colabora", "Colabora")} encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página ${link("/contacto", "Contacto")}.`,
+      `Puedes colaborar con Si los peces hablaran… de diferentes maneras: haciendo voluntariado en nuestros eventos, realizando una donación puntual o mediante acciones de mecenazgo y colaboración institucional.\nEn la página ${link("/colabora", "Colabora")} encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página ${link("/contacto", "Contacto")}.`,
   },
   {
     question: "¿Dónde se desarrolla el proyecto?",
