@@ -1,42 +1,54 @@
 ---
-import cueva from "./img/galeria-cueva.webp?url";
 import obertura from "./img/galeria-obertura.webp?url";
 import danzaAcuario from "./img/galeria-danza-acuario.webp?url";
-import casaDeColon from "./img/casa-de-colon.webp?url";
 import Ola from '../../components/Ola.astro';
+
+// «Diez años dando voz al océano» (análisis de Inicio, nov. 2026): antes repetía los
+// formatos de «Un programa, muchas formas de cuidar el mar»; ahora cuenta la trayectoria.
+// Hitos y títulos iguales que el hilo del tiempo de la Galería; cifras del dossier.
+const cifras = [
+  { n: '10', t: 'años' },
+  { n: '+3.000', t: 'escolares' },
+  { n: '+60', t: 'entidades' },
+  { n: '32', t: 'colegios' },
+];
 
 const imagenes = [
   {
-    src: cueva,
-    alt: "SLPH en la Cueva Pintada",
-    label: "Eventos de concienciación",
-    href: "/galeria#eventos",
-    mas: "Más eventos",
-    tilt: "tilt-l1",
-  },
-  {
-    src: obertura,
-    alt: "Obertura con la OFGC",
-    label: "Formato sinfónico · OFGC",
-    href: "/galeria#espectaculos",
-    mas: "Más espectáculos",
-    tilt: "tilt-r2",
+    src: '/assets/galeria/musical/01-los-peces-del-arrecife-960.webp',
+    alt: 'Bailarines con trajes de peces en el estreno del musical Si los peces hablaran… en el Teatro CICCA, en 2016',
+    anio: '2016',
+    label: 'Nace el musical',
+    href: '/galeria#musical',
+    mas: 'Origen del proyecto',
+    tilt: 'tilt-l1',
   },
   {
     src: danzaAcuario,
-    alt: "Escena de danza del musical SLPH ante el gran acuario",
-    label: "Musical con diversos formatos",
-    href: "/galeria#musical",
-    mas: "Más del musical",
-    tilt: "tilt-l2",
+    alt: 'Danza ante el gran acuario de Poema del Mar en la presentación del cuento, en 2018',
+    anio: '2018',
+    label: 'El cuento llega a Poema del Mar',
+    href: '/galeria#cuento',
+    mas: 'Rodeados de peces',
+    tilt: 'tilt-r2',
   },
   {
-    src: casaDeColon,
-    alt: "Taller familiar de manualidades con plástico reciclado en la Casa-Museo de Colón",
-    label: "Talleres SLPH",
-    href: "/galeria#talleres",
-    mas: "Más talleres",
-    tilt: "tilt-r1",
+    src: obertura,
+    alt: 'La Orquesta Filarmónica de Gran Canaria interpreta el formato sinfónico de Si los peces hablaran…, en 2021',
+    anio: '2021',
+    label: 'Le abren sus puertas',
+    href: '/galeria#espectaculos',
+    mas: 'Los espectáculos',
+    tilt: 'tilt-l2',
+  },
+  {
+    src: '/assets/galeria/espectaculos/05-puntallana-la-palma-960.webp',
+    alt: 'Público escolar ante el escenario de Si los peces hablaran… en Puntallana, La Palma, en 2025',
+    anio: '2025',
+    label: 'Cruza a otras islas',
+    href: '/galeria#espectaculos',
+    mas: 'Tenerife, La Palma y Fuerteventura',
+    tilt: 'tilt-r1',
   },
 ];
 ---
@@ -48,16 +60,25 @@ const imagenes = [
         SLPH ¡a toda vela!
       </p>
       <h3 class="mt-2 font-display text-[clamp(2rem,6vw,4.5rem)] leading-tight">
-        ¿Quieres
-        <Ola class="text-arena">ver más</Ola>?
+        Diez años dando voz
+        <Ola class="whitespace-nowrap text-arena">al océano</Ola>
       </h3>
     </div>
+
+    <ul class="reveal reveal-delay-1 mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-6 text-center sm:mt-12 sm:grid-cols-4">
+      {cifras.map(({ n, t }) => (
+        <li>
+          <p class="font-display text-5xl leading-none text-arena sm:text-6xl">{n}</p>
+          <p class="mt-2 font-display text-sm tracking-[0.25em] text-caparol/85 uppercase sm:text-base">{t}</p>
+        </li>
+      ))}
+    </ul>
 
     <div
       class="mt-14 grid grid-cols-1 gap-10 sm:gap-12 md:grid-cols-2 md:gap-10"
     >
       {
-        imagenes.map(({ src, alt, label, href, mas, tilt }, i) => (
+        imagenes.map(({ src, alt, anio, label, href, mas, tilt }, i) => (
           <figure
             class:list={[
               "reveal group relative mx-auto w-full max-w-md",
@@ -78,7 +99,7 @@ const imagenes = [
                 loading="lazy"
               />
               <figcaption class="mt-2 text-center font-hand text-2xl text-azul">
-                {label}
+                <span class="font-display text-xl text-arena-deep">{anio}</span> · {label}
               </figcaption>
             </div>
             <span class="mt-4 flex items-center justify-center gap-1.5 font-display text-xs tracking-[0.2em] text-arena uppercase transition group-hover:text-caparol sm:text-sm">
