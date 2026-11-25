@@ -29,6 +29,8 @@ type SectionDef = {
   stories?: Record<string, string>;
   /** Enlaces discretos a la página que amplía la sección (debajo de la intro). */
   enlaces?: { href: string; texto: string }[];
+  /** Opinión real bajo la intro (literal, de una noticia o del dossier). */
+  cita?: { texto: string; autor: string };
 };
 
 const sectionDefs: SectionDef[] = [
@@ -198,8 +200,10 @@ const sectionDefs: SectionDef[] = [
     id: "centros-escolares",
     title: "Centros escolares",
     eyebrow: "El aula se hace mar",
+    // La opinión del CEIP Pepe Dámaso (noticia del musical infantil para escolares) va dentro
+    // de la intro y no como cita aparte: así esta sección tiene el mismo formato que las demás.
     intro:
-      "Independientemente del formato, encuentros emocionantes con escolares que hacen suya nuestra preocupación por proteger el mundo marino.",
+      "«Un mensaje y un aprendizaje que caló de verdad: salieron concienciados y se lo pasaron súper bien». Así lo cuentan desde el CEIP Pepe Dámaso.",
     captions: {
       "01-ceip-santa-catalina":
         "Proyecto Barrios del CAAM: del aula a casa por la pandemia · CEIP Santa Catalina · 2020",
@@ -497,6 +501,7 @@ const sections = sectionDefs.map((def) => {
         eyebrow={section.eyebrow}
         intro={section.intro}
         enlaces={section.enlaces}
+        cita={section.cita}
         images={section.images}
       />
     ))

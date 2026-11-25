@@ -11,9 +11,10 @@ interface Props {
   intro: string;
   images: Image[];
   enlaces?: { href: string; texto: string }[];
+  cita?: { texto: string; autor: string };
 }
 
-const { id, title, eyebrow, intro, images, enlaces } = Astro.props;
+const { id, title, eyebrow, intro, images, enlaces, cita } = Astro.props;
 ---
 
 <section id={id} class="relative scroll-mt-24 py-16 sm:py-24">
@@ -31,6 +32,12 @@ const { id, title, eyebrow, intro, images, enlaces } = Astro.props;
       <p class="mt-4 max-w-2xl text-base whitespace-pre-line text-caparol/85 sm:text-lg">
         {intro}
       </p>
+      {cita && (
+        <figure class="mt-5 max-w-2xl border-l-2 border-arena/60 pl-4">
+          <blockquote class="font-hand text-2xl leading-snug text-arena sm:text-3xl">«{cita.texto}»</blockquote>
+          <figcaption class="mt-1 font-display text-xs tracking-[0.25em] text-caparol/70 uppercase sm:text-sm">{cita.autor}</figcaption>
+        </figure>
+      )}
       {enlaces && enlaces.length > 0 && (
         <div class="mt-5 flex flex-wrap gap-3">
           {enlaces.map((e) => <EnlaceFlecha href={e.href}>{e.texto}</EnlaceFlecha>)}
