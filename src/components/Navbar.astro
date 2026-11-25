@@ -124,8 +124,9 @@ const currentPath = Astro.url.pathname;
       </a>
     </nav>
 
-    <div class="flex items-center gap-2 sm:gap-3">
-      <BotonComprar />
+    <!-- Tableta en vertical (768–1023 px): «Comprar» centrado en el hueco entre el logo y ☰ -->
+    <div class="flex items-center gap-2 sm:gap-3 md:max-lg:flex-1">
+      <div class="md:max-lg:mx-auto"><BotonComprar /></div>
 
       <button
         type="button"
