@@ -54,6 +54,14 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
   </div>
 
   <div class="mx-auto flex h-full w-full max-w-6xl flex-col justify-center gap-4 px-6 py-4 sm:gap-5 sm:py-6">
+    <!-- Etiqueta: define el programa para instituciones sin quitarle el tono al titular -->
+    <div class="reveal flex items-center gap-3 sm:gap-4">
+      <span aria-hidden="true" class="h-px w-8 bg-arena sm:w-16"></span>
+      <span class="font-display text-[0.7rem] tracking-[0.3em] text-arena uppercase sm:text-sm sm:tracking-[0.38em]">
+        Programa de concienciación marina · arte, ciencia y educación
+      </span>
+    </div>
+
     <!-- Headline -->
     <h1 class="reveal reveal-delay-1 font-display text-[clamp(1.75rem,9.6vw,5rem)] leading-[0.92] tracking-tight">
       <!-- «Si los peces hablaran…» (el título del cuento) siempre en una línea,
@@ -74,7 +82,7 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
     <!-- Body -->
     <p class="reveal reveal-delay-3 max-w-2xl text-sm leading-snug text-caparol/90 sm:text-base">
       Hace años, un océano en peligro inspiró un musical. Hoy, ese
-      grito es una llamada a la acción, porque salvar el mar
+      grito es una llamada a&nbsp;la&nbsp;acción, porque salvar el mar
       <em class="not-italic text-arena">también nos salva a nosotros.</em>
     </p>
 
@@ -84,7 +92,7 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
         href="/programa"
         class="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-caparol px-5 py-2.5 font-display text-lg text-caparol transition hover:bg-caparol hover:text-azul sm:px-6 sm:py-3 sm:text-xl"
       >
-        Descubre el proyecto
+        Descubre el programa
         <FlechaAgua />
       </a>
       <a
