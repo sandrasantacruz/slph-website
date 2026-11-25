@@ -1,39 +1,52 @@
 ---
-import cuentoImg from './img/cover-1.webp?url';
 import centrosImg from './img/cover-2.webp?url';
 import escenarioImg from './img/cover-3.webp?url';
+import culturaImg from './img/cover-cultura.webp?url';
+import socialImg from './img/cover-social.webp?url';
 import Ola from '../../components/Ola.astro';
 
+// Las cuatro líneas del Programa SLPH (análisis de Inicio, nov. 2026): así se ve que
+// el cuento, los talleres, los espectáculos y la acción social son un mismo programa.
 const columnas = [
   {
-    titulo: 'Librupeces',
-    imagen: cuentoImg,
-    alt: 'El cuento Si los peces hablaran',
-    texto:
-      'Cuento ilustrado lleno de personajes entrañables y aventuras emocionantes. Y, como novedad, un cuadernillo de actividades.',
-    tilt: 'tilt-l1',
-    ctaTexto: 'Descubre el cuento',
-    ctaHref: '/sobre-el-cuento',
-  },
-  {
-    titulo: 'Centros educativos',
-    imagen: centrosImg,
-    alt: 'Niñas y niños participando en un taller SLPH',
-    texto:
-      'Talleres y materiales didácticos diseñados con docentes para llevar la educación marina a todas las aulas.',
-    tilt: 'tilt-r1',
-    ctaTexto: 'Ver el programa',
-    ctaHref: '/programa',
-  },
-  {
-    titulo: 'En el escenario',
+    titulo: 'Artes escénicas',
     imagen: escenarioImg,
     alt: 'Actuación del musical Si los peces hablaran',
     texto:
-      'Musical, conciertos y performances que convierten la concienciación en una experiencia colectiva inolvidable.',
+      'El musical, el formato sinfónico y las performances que convierten la concienciación en una experiencia colectiva inolvidable.',
+    tilt: 'tilt-l1',
+    ctaTexto: 'Los espectáculos',
+    ctaHref: '/galeria#espectaculos',
+  },
+  {
+    titulo: 'Educación',
+    imagen: centrosImg,
+    alt: 'Alumnado del CEIP Alfredo Kraus trabajando en el aula con el cuento Si los peces hablaran…',
+    texto:
+      'El cuento, su cuadernillo de actividades y material didáctico para docentes: una herramienta educativa que colegios como el CEIP Alfredo Kraus usan en el aula desde 2019.',
+    tilt: 'tilt-r1',
+    ctaTexto: 'Centros escolares',
+    ctaHref: '/galeria#centros-escolares',
+  },
+  {
+    titulo: 'Cultura y divulgación',
+    imagen: culturaImg,
+    alt: 'Gercende Courtois, Sandra Santa Cruz y May Gómez hablan ante el gran acuario de Poema del Mar',
+    texto:
+      'Talleres, exposiciones, conferencias con investigadoras marinas y eventos en museos, bibliotecas y ferias de toda Canarias.',
     tilt: 'tilt-l2',
-    ctaTexto: 'Ver la repercusión',
-    ctaHref: '/repercusion',
+    ctaTexto: 'Los talleres',
+    ctaHref: '/programa#talleres',
+  },
+  {
+    titulo: 'Acción social',
+    imagen: socialImg,
+    alt: 'Bella Azul visita la planta de Oncología Infantil de un hospital mientras una niña sostiene el cuento',
+    texto:
+      'Proyectos con alma, como acompañar con el cuento y el cuadernillo «Actividades y personajes para colorear» a los niños de Oncología Infantil y a sus familias.',
+    tilt: 'tilt-r2',
+    ctaTexto: 'Oncología Infantil',
+    ctaHref: '/cuadernillo#oncologia',
   },
 ];
 ---
@@ -78,7 +91,7 @@ const columnas = [
       </p>
     </div>
 
-    <div class="mt-16 grid gap-12 sm:gap-8 md:grid-cols-3 md:gap-6">
+    <div class="mt-16 grid gap-12 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-6">
       {
         columnas.map(({ titulo, imagen, alt, texto, tilt, ctaTexto, ctaHref, cta2Texto, cta2Href }, i) => (
           <article
@@ -146,6 +159,16 @@ const columnas = [
           </article>
         ))
       }
+    </div>
+
+    <div class="reveal mt-12 flex justify-center sm:mt-14">
+      <a
+        href="/programa#formatos"
+        class="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-caparol px-6 py-3 font-display text-lg text-caparol transition hover:bg-caparol hover:text-azul sm:text-xl"
+      >
+        Descubre todos los formatos
+        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </a>
     </div>
   </div>
 </section>
