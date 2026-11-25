@@ -54,8 +54,9 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
   </div>
 
   <div class="mx-auto flex h-full w-full max-w-6xl flex-col justify-center gap-4 px-6 py-4 sm:gap-5 sm:py-6">
-    <!-- Etiqueta: define el programa para instituciones sin quitarle el tono al titular -->
-    <div class="reveal flex items-center gap-3 sm:gap-4">
+    <!-- Etiqueta: define el programa para instituciones sin quitarle el tono al titular.
+         Solo desde tableta: en el móvil ocupaba dos líneas y restaba fuerza al titular. -->
+    <div class="reveal hidden items-center gap-3 sm:flex sm:gap-4">
       <span aria-hidden="true" class="h-px w-8 bg-arena sm:w-16"></span>
       <span class="font-display text-[0.7rem] tracking-[0.3em] text-arena uppercase sm:text-sm sm:tracking-[0.38em]">
         Programa de concienciación marina · arte, ciencia y educación
