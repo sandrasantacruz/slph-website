@@ -3,6 +3,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Equipo from './Equipo.astro';
 import Entidades from './Entidades.astro';
+import Colaborar from './Colaborar.astro';
+import WaterLine from '../../components/WaterLine.astro';
 import { breadcrumbSchema } from '../../lib/seo';
 
 const breadcrumb = breadcrumbSchema([
@@ -12,8 +14,8 @@ const breadcrumb = breadcrumbSchema([
 ---
 
 <MainLayout
-  title="Colabora"
-  description="¿Nos echas una aleta? Voluntariado, donaciones o mecenazgo institucional para proteger el mar a través de las artes y la educación."
+  title="Colabora con Si los peces hablaran… · Lleva el mar a tu entidad"
+  description="¿Nos echas una aleta? Lleva Si los peces hablaran… a tu colegio, biblioteca, museo o municipio, impulsa un proyecto o únete a la Red de Puntos Azules."
   image="/assets/og-colabora.jpg"
   imageAlt="El Sr. Tentáculus, personaje del cuento, con su tridente"
   imageWidth={1200}
@@ -21,8 +23,13 @@ const breadcrumb = breadcrumbSchema([
   jsonLd={[breadcrumb]}
 >
   <Hero />
-  <Equipo />
+  <!-- Colabora (26 nov 2026): primero cómo sumarse y qué gana una entidad; después la
+       confianza (red de aliados) y, al final, el equipo -->
+  <Colaborar />
+  <WaterLine separador clave="-aliados" />
   <Entidades />
+  <WaterLine separador clave="-equipo" />
+  <Equipo />
 </MainLayout>
 
 <script>

@@ -1,0 +1,139 @@
+---
+import { Icon } from 'astro-icon/components';
+import Ola from '../../components/Ola.astro';
+// Colabora, rehecha el 26 nov 2026: solo lo que es real (Sandra). No ha habido voluntariado
+// ni donaciones; la colaboración real es la de las entidades que programan SLPH, y la de
+// la Asociación AL TRES (subvención) y el Cabildo (1.ª edición). La Red de Puntos Azules es
+// una propuesta nueva para bibliotecas.
+
+const formas = [
+  {
+    icon: 'game-icons:theater',
+    para: 'para colegios, bibliotecas, museos, ayuntamientos y empresas',
+    titulo: 'Lleva SLPH a tu espacio',
+    texto: 'Talleres, espectáculos, conferencias o un evento a medida para tu público. Más de 60 entidades ya lo han hecho.',
+    enlaces: [
+      { href: '/programa#formatos', label: 'Ver los formatos' },
+      { href: '/contacto', label: 'Escríbenos' },
+    ],
+  },
+  {
+    icon: 'game-icons:megaphone',
+    para: 'para ti',
+    titulo: 'Comparte el mensaje',
+    texto: 'Síguenos, comparte nuestras noticias y lleva el mar a casa con el cuento. Y en el día a día, gestos sencillos: reciclar y reutilizar.',
+    enlaces: [
+      { href: 'https://www.instagram.com/silospeceshablaran', label: 'Instagram', externo: true },
+      { href: '/noticias', label: 'Noticias' },
+      { href: '/comprar', label: 'El cuento' },
+    ],
+  },
+  {
+    icon: 'game-icons:shaking-hands',
+    para: 'para asociaciones, fundaciones e instituciones',
+    titulo: 'Impulsa un proyecto',
+    texto: 'El Cabildo de Gran Canaria hizo posible la 1.ª edición del cuento. La 3.ª y su cuadernillo, el patrocinio de la Candidatura LPGC 2031, con la ayuda de Sagulpa (a través de la asociación ALTRES) y del Centro de Danza Sandra Santa Cruz.',
+    enlaces: [{ href: '/contacto', label: '¿Tienes una idea? Escríbenos' }],
+  },
+];
+
+const ventajas = [
+  { icon: 'game-icons:microscope', titulo: 'Rigor científico', texto: 'Contenidos supervisados por investigadoras del Instituto ECOAQUA de la ULPGC.' },
+  { icon: 'game-icons:puzzle', titulo: 'A tu medida', texto: 'Se adapta a cualquier espacio, público y presupuesto.' },
+  { icon: 'game-icons:podium', titulo: 'Impacto demostrado', texto: 'Más de 3.000 escolares, más de 60 entidades y 32 colegios.' },
+  { icon: 'game-icons:radar-sweep', titulo: 'Visibilidad', texto: 'Televisión Canaria, la prensa y la radio se han hecho eco del programa.' },
+  { icon: 'game-icons:calendar', titulo: 'Fechas señaladas', texto: 'El Día Mundial de los Océanos, del Libro o de las Bibliotecas, con una propuesta con sentido.' },
+  { icon: 'game-icons:graduate-cap', titulo: 'Valor educativo', texto: 'Alineado con los ODS, la LOMLOE y el DUA, y avalado por el profesorado.' },
+  { icon: 'game-icons:family-house', titulo: 'Llega a las familias', texto: 'Los peques se llevan el mensaje a casa y lo contagian.' },
+  { icon: 'game-icons:heart-inside', titulo: 'Proyectos con alma', texto: 'Como el de Oncología Infantil: cultura y compromiso social de la mano.' },
+];
+---
+
+<section id="colaborar" class="relative isolate scroll-mt-28 overflow-hidden py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal mx-auto max-w-3xl text-center">
+      <p class="font-hand text-3xl leading-none text-celeste sm:text-4xl">nadie es pequeño para cuidar el mar</p>
+      <h2 class="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+        Cómo puedes <Ola class="text-arena">colaborar</Ola>
+      </h2>
+    </div>
+
+    <ul class="mt-14 grid gap-6 md:grid-cols-3">
+      {formas.map((f, i) => (
+        <li class={`reveal reveal-delay-${i + 1} flex flex-col rounded-3xl border border-caparol/15 bg-azul/45 p-7 ring-1 ring-caparol/10 sm:p-8`}>
+          <span class="flex h-14 w-14 items-center justify-center rounded-full bg-arena/15 text-arena">
+            <Icon name={f.icon} class="h-8 w-8" aria-hidden="true" />
+          </span>
+          <p class="mt-5 font-hand text-xl leading-tight text-celeste sm:text-2xl">{f.para}</p>
+          <h3 class="mt-2 font-display text-2xl leading-tight text-caparol sm:text-3xl">{f.titulo}</h3>
+          <p class="mt-3 flex-1 text-base leading-relaxed text-caparol/85">{f.texto}</p>
+          <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+            {f.enlaces.map((e) => (
+              <a
+                href={e.href}
+                {...(e.externo ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                class="group inline-flex items-center gap-1.5 font-display text-xs tracking-[0.15em] text-arena uppercase transition hover:text-caparol sm:text-sm"
+              >
+                {e.label}
+                <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            ))}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section id="entidades" class="relative isolate scroll-mt-28 overflow-hidden pb-20 sm:pb-28">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal max-w-3xl">
+      <p class="font-hand text-3xl leading-none text-celeste sm:text-4xl">para entidades</p>
+      <h2 class="mt-3 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+        Qué gana <Ola class="text-arena">tu entidad</Ola>
+      </h2>
+    </div>
+
+    <ul class="mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+      {ventajas.map((v, i) => (
+        <li class={`reveal reveal-delay-${(i % 4) + 1} border-t-2 border-arena/50 pt-5`}>
+          <Icon name={v.icon} class="h-9 w-9 text-arena" aria-hidden="true" />
+          <h3 class="mt-3 font-display text-xl leading-tight text-caparol">{v.titulo}</h3>
+          <p class="mt-2 text-base leading-relaxed text-caparol/80">{v.texto}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="reveal mt-12 text-center">
+      <a href="/contacto" class="inline-flex items-center gap-2 rounded-full bg-arena px-7 py-3 font-display text-lg text-azul shadow-lg transition hover:brightness-95">
+        Cuéntanos tu idea
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Red de Puntos Azules: proyecto nuevo, sin lista de miembros todavía -->
+<section id="puntos-azules" class="relative isolate scroll-mt-28 overflow-hidden pb-20 sm:pb-28">
+  <div class="mx-auto max-w-5xl px-6">
+    <div class="reveal relative overflow-hidden rounded-3xl border border-celeste/30 bg-azul/50 p-8 ring-1 ring-caparol/10 sm:p-12">
+      <span class="inline-flex items-center rounded-full bg-celeste/20 px-3 py-1 font-display text-xs tracking-[0.2em] text-celeste uppercase">nuevo</span>
+      <p class="mt-4 font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">Red de Puntos Azules</p>
+      <h2 class="mt-3 font-display text-[clamp(1.8rem,4.5vw,3rem)] leading-[1] text-caparol">
+        ¿Quieres que tu biblioteca sea un <Ola class="whitespace-nowrap text-arena">Punto Azul</Ola>?
+      </h2>
+      <p class="mt-5 max-w-2xl text-base leading-relaxed text-caparol/85 sm:text-lg">
+        Un Punto Azul es una biblioteca que se convierte en referencia en su comunidad para
+        contagiar el amor por el mar. Solo hacen falta dos cosas:
+      </p>
+      <ul class="mt-5 grid max-w-2xl gap-3 text-base leading-relaxed text-caparol/90 sm:text-lg">
+        <li class="flex gap-3"><Icon name="game-icons:bookshelf" class="mt-0.5 h-6 w-6 shrink-0 text-arena" aria-hidden="true" /><span>Tener <em class="not-italic text-arena">Si los peces hablaran…</em> en sus estanterías, al alcance de sus lectores.</span></li>
+        <li class="flex gap-3"><Icon name="game-icons:calendar" class="mt-0.5 h-6 w-6 shrink-0 text-arena" aria-hidden="true" /><span>Organizar con nosotros una actividad al año: un taller, una lectura, una presentación…</span></li>
+      </ul>
+      <a href="/contacto" class="mt-8 inline-flex items-center gap-3 font-hand text-2xl text-celeste transition hover:text-arena sm:text-3xl">
+        «¿Buceamos juntos?»
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>

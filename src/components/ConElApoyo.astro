@@ -1,0 +1,32 @@
+---
+// «Con el apoyo de»: quienes hicieron posible la 3.ª edición y el cuadernillo (Sandra, 26 nov 2026).
+// Candidatura LPGC 2031: patrocinio. Centro de Danza Sandra Santa Cruz: pagó parte. El Cabildo NO
+// va aquí: su subvención fue para la 1.ª edición (se cuenta en Colabora). Sagulpa (a través de la asociación ALTRES): ayuda de su
+// Convocatoria de Acción Social 2025 para el área de Oncología Infantil. Sus logotipos están en
+// el cuento y en el cuadernillo. Mismo estilo blanco que el muro de logotipos de Inicio.
+import centroDanza from '../views/home/img/col/centro-de-danza.webp?url';
+import candidata from '../views/home/img/col/candidata.webp?url';
+import sagulpa from '../views/home/img/col/sagulpa.webp?url';
+import altres from '../views/home/img/col/altres.webp?url';
+
+interface Props { class?: string }
+const { class: className } = Astro.props;
+
+const logos = [
+  { src: candidata, alt: 'Candidatura de Las Palmas de Gran Canaria a Capital Europea de la Cultura 2031', h: 'h-12 sm:h-14' },
+  { src: sagulpa, alt: 'Sagulpa', h: 'h-9 sm:h-11' },
+  { src: altres, alt: 'Asociación ALTRES', h: 'h-8 sm:h-10' },
+  { src: centroDanza, alt: 'Centro de Danza Sandra Santa Cruz', h: 'h-14 sm:h-16' },
+];
+---
+
+<div class:list={['text-center', className]}>
+  <p class="font-display text-xs tracking-[0.35em] text-caparol/70 uppercase sm:text-sm">La 3.ª edición y el cuadernillo,<br class="sm:hidden" /> con el apoyo de</p>
+  <ul class="mt-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 sm:gap-x-12">
+    {logos.map((l) => (
+      <li>
+        <img src={l.src} alt={l.alt} class:list={['w-auto object-contain opacity-85 brightness-0 invert', l.h]} loading="lazy" decoding="async" />
+      </li>
+    ))}
+  </ul>
+</div>

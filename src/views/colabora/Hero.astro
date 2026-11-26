@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
+import IndicePagina from '../../components/IndicePagina.astro';
 ---
 
 <section class="relative isolate overflow-hidden pt-14 pb-16 sm:pt-20 sm:pb-24">
@@ -34,67 +35,29 @@ import Ola from '../../components/Ola.astro';
       <Ola class="text-arena">¡nuestra supervivencia depende de ello!</Ola>
     </p>
 
-    <!-- Body paragraphs -->
-    <div class="reveal reveal-delay-3 mt-10 grid max-w-3xl gap-5 text-base leading-relaxed text-caparol/90 sm:text-lg">
-      <p>
-        Por esa razón <em class="not-italic font-display text-arena">Si los peces hablaran…</em>
-        busca promover conciencia en la protección del medioambiente
-        en <span class="text-celeste">todas las edades</span>, tanto de forma particular
-        como de la mano de instituciones y empresas.
-      </p>
-      <p>
-        Si quieres ayudar a nuestros mares y eres una persona particular,
-        puedes empezar con labores sencillas:
-        <span class="font-display text-arena">reciclar y reutilizar</span>.
-        En nuestro blog y redes sociales solemos proponer ideas para reducir tu huella ecológica,
-        <Ola>¡así que no dejes de seguirnos!</Ola>
-      </p>
-    </div>
+    <!-- Texto breve: las formas de sumarse van justo debajo (Colaborar.astro) -->
+    <p class="reveal reveal-delay-3 mt-10 max-w-3xl text-base leading-relaxed text-caparol/90 sm:text-lg">
+      Desde hace diez años, <em class="not-italic font-display text-arena">Si los peces hablaran…</em>
+      contagia el amor por el mar en <span class="text-celeste">todas las edades</span>, de la mano de
+      colegios, bibliotecas, museos, instituciones y personas como tú. Hay muchas formas de
+      sumarse: elige la tuya.
+    </p>
 
-    <!-- Cierre de la introducción: habla a quien lee -->
     <p class="reveal reveal-delay-3 mt-8 max-w-3xl font-hand text-3xl leading-tight text-arena sm:text-4xl">
       ¡Tú puedes ser protagonista del cambio!
     </p>
 
-    <!-- Quick CTA strip toward socials / blog -->
-    <div class="reveal reveal-delay-4 mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-caparol/80">
-      <a
-        href="/noticias"
-        class="group inline-flex items-center gap-2 font-display tracking-wide text-arena uppercase transition hover:text-caparol"
-      >
-        <Icon name="game-icons:newspaper" class="h-5 w-5" aria-hidden="true" />
-        Lee el blog
-        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-      </a>
-      <span aria-hidden="true" class="hidden h-4 w-px bg-caparol/25 sm:inline-block"></span>
-      <a
-        href="https://www.instagram.com/silospeceshablaran"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="group inline-flex items-center gap-2 font-display tracking-wide text-celeste uppercase transition hover:text-caparol"
-      >
-        <Icon name="simple-icons:instagram" class="h-5 w-5" aria-hidden="true" />
-        Síguenos en Instagram
-        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-      </a>
-    </div>
-
-    <!-- Índice de la página (es larga): baja directo a cada parte, como en Comprar -->
-    <nav aria-label="En esta página" class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-caparol/10 pt-6 text-sm">
-      <a href="#equipo" class="group inline-flex items-center gap-2 font-display tracking-wide text-arena uppercase transition hover:text-caparol">
-        Nuestro equipo
-        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-      </a>
-      <span aria-hidden="true" class="hidden h-4 w-px bg-caparol/25 sm:inline-block"></span>
-      <a href="#aliados" class="group inline-flex items-center gap-2 font-display tracking-wide text-celeste uppercase transition hover:text-caparol">
-        Red de aliados
-        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
-      </a>
-    </nav>
+    <!-- Índice de la página, como en Programa y Repercusión -->
+    <IndicePagina
+      class="reveal reveal-delay-4 mt-8 max-w-3xl border-t border-caparol/10 pt-5"
+      enlaces={[
+        { href: '#colaborar', texto: 'Cómo colaborar' },
+        { href: '#entidades', texto: 'Para entidades' },
+        { href: '#puntos-azules', texto: 'Puntos Azules' },
+        { href: '#aliados', texto: 'Red de aliados' },
+        { href: '#equipo', texto: 'Nuestro equipo', corazon: true },
+      ]}
+    />
 
     <!-- El Sr. Tentáculus con el tridente clavado en el neumático: limpiando el mar,
          que es lo que pide esta página. Alegría (el delfín) ya está en el botón

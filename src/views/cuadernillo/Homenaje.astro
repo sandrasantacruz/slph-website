@@ -1,4 +1,5 @@
 ---
+import ConElApoyo from '../../components/ConElApoyo.astro';
 import Ola from '../../components/Ola.astro';
 import { Icon } from 'astro-icon/components';
 import { SETTINGS, whatsappHref } from '../../lib/settings';
@@ -160,5 +161,8 @@ const puntos = [
         <a href="/programa#talleres" class="text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">Talleres SLPH</a>.
       </p>
     </div>
+
+    <!-- Quienes hicieron posible el cuadernillo -->
+    <ConElApoyo class="reveal mx-auto mt-16 max-w-3xl border-t border-caparol/10 pt-8" />
   </div>
 </section>

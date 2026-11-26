@@ -1,4 +1,5 @@
 ---
+import ConElApoyo from './ConElApoyo.astro';
 /**
  * FichaLibro — Eckdaten der aktuellen Ausgabe des Buchs.
  * Genutzt auf /sobre-el-cuento und /comprar; bei einer neuen Auflage nur
@@ -73,4 +74,5 @@ const datos: { icon: string; valor: string; arriba?: string; abajo?: string; hre
       <a href="/comprar" class="text-arena underline decoration-arena/40 underline-offset-4 hover:decoration-arena">online, en el Centro de Danza Sandra Santa Cruz (con dedicatoria de la autora) o en librerías de Gran Canaria</a>.
     </p>
   )}
+  <ConElApoyo class="mt-8 border-t border-caparol/10 pt-6" />
 </div>
