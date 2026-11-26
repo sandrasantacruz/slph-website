@@ -1,0 +1,34 @@
+---
+// Índice de una página larga: baja directo a cada parte. Mismo estilo que el de
+// El ilustrador (texto con flechita, sin pastillas: a Sandra le gusta más), pero un
+// poco más grande, porque aquel se veía demasiado pequeño (26 nov 2026).
+// En el móvil, py-2/-my-2: zona de toque más alta sin mover nada.
+// `corazon`: lo más emocionante de la página (como Izzy en El ilustrador).
+interface Enlace {
+  href: string;
+  texto: string;
+  corazon?: boolean;
+  label?: string;
+}
+interface Props {
+  enlaces: Enlace[];
+  class?: string;
+}
+const { enlaces, class: className } = Astro.props;
+---
+
+<nav aria-label="En esta página" class:list={['flex flex-wrap items-center gap-x-5 gap-y-3 sm:gap-x-6', className]}>
+  {enlaces.map((l) => (
+    <a
+      href={l.href}
+      aria-label={l.label}
+      class="group -my-2 inline-flex items-center gap-1.5 py-2 font-display text-sm tracking-[0.15em] text-arena uppercase transition hover:text-caparol sm:text-base"
+    >
+      {l.corazon && (
+        <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 sm:h-5 sm:w-5" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.5.8-1.3 2.3-2.5 4.4-2.5 3.7 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg>
+      )}
+      {l.texto}
+      <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+    </a>
+  ))}
+</nav>

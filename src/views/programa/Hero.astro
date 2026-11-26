@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
+import IndicePagina from '../../components/IndicePagina.astro';
 ---
 
 <section class="relative isolate flex min-h-[calc(100svh-6rem)] flex-col overflow-hidden">
@@ -39,6 +40,17 @@ import Ola from '../../components/Ola.astro';
         <span class="text-arena">emocionar a pequeños y mayores</span>, con contenidos
         supervisados por investigadoras del <em class="not-italic text-arena">Instituto ECOAQUA de la ULPGC</em>.
       </p>
+
+      <!-- Índice de la página (es la más larga del programa) -->
+      <IndicePagina
+        class="reveal reveal-delay-3 mt-1 border-t border-caparol/10 pt-5"
+        enlaces={[
+          { href: '#talleres-y-eventos', texto: 'Talleres y eventos' },
+          { href: '#formatos', texto: 'Formatos' },
+          { href: '#diferencia', texto: 'Qué nos diferencia' },
+          { href: '#profesorado', texto: 'El profesorado', corazon: true, label: 'Lo que dice el profesorado' },
+        ]}
+      />
     </div>
 
     <!-- Polaroid: Doña Paciencia ante el acuario -->
