@@ -120,11 +120,16 @@ Alle Videos mit Sprache bekommen **eingebrannte** Untertitel in genau diesem Sti
 - **nichts über dem Bild**: kein Player-Titel (in `global.css` ausgeblendet), keine Badges;
   unter dem Video steht die handschriftliche Bildunterschrift im weißen Rahmen
 
-Keine WebVTT-Spuren im Player: die sahen je nach Gerät anders aus. Der Text bleibt als
-`.vtt` neben dem Video liegen (z. B. `public/videos/museo-leon-y-castillo.vtt`), damit
-man neu einbrennen kann. Vorgehen: Cues mit `sharp` als PNG rendern (Text +
-Band) und mit `ffmpeg … overlay=…:enable='between(t,a,z)'` einbrennen (dieses ffmpeg hat
-weder `drawtext` noch `subtitles`).
+Keine WebVTT-Spuren im Player: die sahen je nach Gerät anders aus. Der korrigierte Text
+jedes Videos liegt als `.vtt` in `public/videos/subtitulos/`, damit man neu einbrennen kann:
+
+```sh
+node scripts/subtitular.mjs entrada-sin-subtitulos.mp4 public/videos/subtitulos/X.vtt salida.mp4
+# SUB_DERECHA=190 … wenn unten rechts etwas im Bild ist (Kreis bei menores-noa)
+```
+
+Immer vom Video **ohne** Untertitel ausgehen (sonst doppelt). `menores-noa-playa` ohne
+Untertitel: `git show d020179:public/videos/menores-noa-playa.mp4`.
 
 ## Datenmodell
 

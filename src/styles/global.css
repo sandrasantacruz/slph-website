@@ -590,3 +590,21 @@ figure:has(media-player) {
 media-player .vds-chapter-title {
   display: none !important;
 }
+
+/* Sin barra de tiempo ni contador abajo: al tocar el vídeo tapaban el principio de los
+   subtítulos (Sandra, 26 nov 2026). La pantalla completa sube arriba a la derecha,
+   junto al volumen. */
+media-player .vds-time-slider,
+media-player .vds-time-group {
+  display: none !important;
+}
+media-player .vds-controls-group:has(> .vds-fullscreen-button) {
+  order: -1;
+  justify-content: flex-end;
+  margin-bottom: -50px;
+  padding-right: 84px;
+  pointer-events: none;
+}
+media-player .vds-controls-group:has(> .vds-fullscreen-button) > .vds-fullscreen-button {
+  pointer-events: auto;
+}
