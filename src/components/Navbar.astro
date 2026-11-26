@@ -59,10 +59,10 @@ const currentPath = Astro.url.pathname;
     aria-hidden="true"
   ></div>
 
-  <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2">
+  <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-2 sm:gap-4 sm:px-4">
     <!-- Móvil y tableta: logo · «Comprar» · ☰ al final, donde se busca el menú y cae el pulgar -->
     <a href="/" class="flex shrink-0 items-center gap-3" aria-label="Si los peces hablaran — Inicio">
-      <img src="/assets/logo-borde.webp" alt="Si los peces hablaran" width="600" height="436" class="h-16 w-auto sm:h-20" />
+      <img src="/assets/logo-borde.webp" alt="Si los peces hablaran" width="600" height="436" class="h-12 w-auto min-[360px]:h-14 min-[380px]:h-16 sm:h-20" />
     </a>
 
     <!-- Menú completo desde xl (1280 px): por debajo, con el logo, el menú, la lupa
@@ -125,12 +125,27 @@ const currentPath = Astro.url.pathname;
     </nav>
 
     <!-- Tableta en vertical (768–1023 px): «Comprar» centrado en el hueco entre el logo y ☰ -->
-    <div class="flex items-center gap-2 sm:gap-3 md:max-lg:flex-1">
-      <div class="md:max-lg:mx-auto"><BotonComprar /></div>
+    <div class="flex items-center gap-0 sm:gap-3 md:max-lg:flex-1">
+      <!-- Móviles muy estrechos (iPhone SE de 1.ª generación, 320 px): «Comprar» un poco más pequeño para que quepa el ☰ -->
+      <div class="max-[359px]:[zoom:0.85] md:max-lg:mx-auto"><BotonComprar /></div>
+
+      <!-- Lupa también en móvil y tableta: buscar con un toque desde cualquier página
+           (antes solo al final del menú ☰ y en el pie; idea de Sandra, 26 nov 2026) -->
+      <a
+        href="/buscar"
+        aria-label="Buscar en la web"
+        title="Buscar"
+        class:list={[
+          'rounded-full p-1.5 transition-colors hover:text-arena sm:p-2 lg:hidden',
+          currentPath.startsWith('/buscar') ? 'text-arena' : 'text-caparol',
+        ]}
+      >
+        <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+      </a>
 
       <button
         type="button"
-        class="rounded p-2 text-caparol lg:hidden"
+        class="rounded p-1.5 text-caparol sm:p-2 lg:hidden"
         aria-label="Abrir menú"
         aria-controls="mobile-nav"
         aria-expanded="false"

@@ -51,9 +51,9 @@ const year = new Date().getFullYear();
   ></div>
 
   <div class="mx-auto max-w-6xl px-4 pt-48 pb-12">
-    <!-- iPad (vertical y horizontal): el buscador va arriba, en su propia línea, y las tres
+    <!-- Móvil e iPad (vertical y horizontal): el buscador va arriba, en su propia línea, y las tres
          columnas empiezan a la misma altura (idea de Sandra, 26 nov 2026) -->
-        <form action="/buscar" method="get" role="search" class="mb-12 hidden max-w-sm md:max-xl:flex items-center gap-2 rounded-full border border-caparol/40 bg-azul py-1.5 pr-1.5 pl-5 shadow-lg transition focus-within:border-arena">
+        <form action="/buscar" method="get" role="search" class="mb-12 flex max-w-sm items-center xl:hidden gap-2 rounded-full border border-caparol/40 bg-azul py-1.5 pr-1.5 pl-5 shadow-lg transition focus-within:border-arena">
           <label for="footer-q-ipad" class="sr-only">Buscar en la web</label>
           <input
             id="footer-q-ipad"
@@ -87,7 +87,7 @@ const year = new Date().getFullYear();
 
       <div class="flex flex-col gap-4 md:max-xl:gap-3">
         <!-- Buscador: envía a /buscar?q=…, que filtra al cargar -->
-        <form action="/buscar" method="get" role="search" class="mb-4 flex max-w-sm md:max-xl:hidden items-center gap-2 rounded-full border border-caparol/40 bg-azul py-1.5 pr-1.5 pl-5 shadow-lg transition focus-within:border-arena">
+        <form action="/buscar" method="get" role="search" class="mb-4 hidden max-w-sm xl:flex items-center gap-2 rounded-full border border-caparol/40 bg-azul py-1.5 pr-1.5 pl-5 shadow-lg transition focus-within:border-arena">
           <label for="footer-q" class="sr-only">Buscar en la web</label>
           <input
             id="footer-q"
