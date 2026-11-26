@@ -12,7 +12,7 @@ const formas = [
     icon: 'game-icons:theater',
     para: 'para entidades',
     titulo: 'Lleva SLPH a tu espacio',
-    texto: 'Colegios, bibliotecas, museos, ayuntamientos o empresas: llevamos a tu espacio talleres, espectáculos, conferencias o un evento a medida para tu público. Más de 60 entidades ya lo han hecho. ¿Te subes a bordo de esta travesía?',
+    texto: 'Colegios, bibliotecas, museos, ayuntamientos o empresas: llevamos a tu espacio talleres, espectáculos, conferencias o un evento a medida. Lo diseñamos contigo, pensando en tu público, tu espacio y tu presupuesto, y también para fechas señaladas como el Día Mundial de los Océanos, del Libro o de las Bibliotecas. Más de 60 entidades ya lo han hecho.\n¿Te subes a bordo de esta travesía?',
     enlaces: [
       { href: '/programa#formatos', label: 'Ver los formatos' },
       { href: '/contacto', label: 'Escríbenos' },
@@ -69,7 +69,9 @@ const ventajas = [
           </span>
           <p class="mt-5 font-hand text-xl leading-tight text-celeste sm:text-2xl">{f.para}</p>
           <h3 class="mt-2 font-display text-2xl leading-tight text-caparol sm:text-3xl">{f.titulo}</h3>
-          <p class:list={['mt-3 text-base leading-relaxed text-caparol/85', !f.video && 'flex-1']}>{f.texto}</p>
+          <div class:list={['mt-3 space-y-3 text-base leading-relaxed text-caparol/85', !f.video && 'flex-1']}>
+            {f.texto.split('\n').map((t, k) => <p class={k > 0 ? 'font-hand text-xl leading-snug text-arena sm:text-2xl' : undefined}>{t}</p>)}
+          </div>
           {f.video && (
             <figure class="mt-5 flex-1">
               <div class="polaroid tilt-r1 mx-auto max-w-[17rem] transition duration-500 hover:rotate-0" style="padding-bottom:2.4rem">
