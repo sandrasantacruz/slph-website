@@ -27,7 +27,7 @@ import Ola from '../../components/Ola.astro';
        Polaroid framing returns at md+. -->
   <div class="reveal reveal-delay-2 relative mt-16">
     <figure class="video-frame relative">
-      <div class="player-wrap relative overflow-hidden bg-azul-deep">
+      <div class="player-wrap relative overflow-hidden">
         <media-player
           data-player
           title="El programa SLPH"
@@ -83,7 +83,10 @@ import Ola from '../../components/Ola.astro';
     --media-tooltip-bg: rgb(11 32 86 / 0.95);
     --media-menu-bg: rgb(11 32 86 / 0.95);
     border-radius: 0;
-    background: var(--color-azul-deep);
+    background: transparent;
+    /* block y sin borde: si no, salía un filito oscuro arriba y abajo del vídeo */
+    display: block;
+    border: 0 !important;
   }
 
   /* Hide the hand-script hint once Vidstack flags the first play */

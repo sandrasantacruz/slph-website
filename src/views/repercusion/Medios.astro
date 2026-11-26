@@ -67,7 +67,7 @@ const videos = [
           <figure
             class={`clip-frame reveal reveal-delay-${i + 1} ${video.tilt}`}
           >
-            <div class="player-wrap relative overflow-hidden bg-azul-deep">
+            <div class="player-wrap relative overflow-hidden">
               <media-player
                 class="medios-player"
                 title={video.title}
@@ -103,7 +103,10 @@ const videos = [
 </section>
 
 <style is:global>
+  /* block y sin borde: si no, salía un filito oscuro arriba y abajo del vídeo */
   .player-wrap .medios-player {
+    display: block;
+    border: 0 !important;
     --video-brand: var(--color-arena);
     --media-brand: var(--color-arena);
     --media-focus-ring-color: var(--color-arena-deep);
@@ -111,8 +114,8 @@ const videos = [
     --video-controls-color: var(--color-caparol);
     --media-tooltip-bg: rgb(11 32 86 / 0.95);
     --media-menu-bg: rgb(11 32 86 / 0.95);
-    border-radius: 3px;
-    background: var(--color-azul-deep);
+    border-radius: 0;
+    background: transparent;
   }
 
   /* Hide vidstack's own centered play/pause button (the dark dot) —

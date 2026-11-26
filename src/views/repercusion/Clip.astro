@@ -76,6 +76,20 @@ const {
     --media-menu-bg: rgb(11 32 86 / 0.95);
     border-radius: 0;
     background: transparent;
+    /* subtítulos como los de los vídeos ya montados: franja gris translúcida,
+       letra de la web, sin esquinas redondeadas */
+    --media-cue-bg: rgb(70 70 70 / 0.78);
+    --media-cue-color: #fff;
+    --media-cue-border-radius: 0;
+    --media-cue-padding-x: 0.9em;
+    --media-cue-padding-y: 0.25em;
+    --media-cue-line-height: 1.35;
+  }
+  .menores-wrap .menores-player [data-part='cue'],
+  .menores-wrap .menores-player .vds-captions [data-part='cue'] {
+    font-family: var(--font-sans);
+    font-size: clamp(0.72rem, 1.9vw, 1.05rem);
+    text-shadow: none;
   }
 
   /* Hide vidstack's own centered play/pause button — we bring our own overlay

@@ -106,6 +106,26 @@ magick input.jpg -resize '1500x1000^' -gravity center -extent 1500x1000 \
   -strip -quality 85 out.webp
 ```
 
+## Vídeos: Untertitel-Stil (Sandra, 26 nov 2026)
+
+Alle Videos mit Sprache bekommen **eingebrannte** Untertitel in genau diesem Stil
+(wie «DIRECTORES DE MUSEOS HD» und die meisten Videos der Seite):
+
+- **eine Zeile**, max. ~45 Zeichen; längere Sätze auf mehrere Cues verteilen
+- Schrift **Varela Round** (`node_modules/@fontsource/varela-round/files/…woff`), weiß
+- **graues, halbtransparentes Band** fast über die volle Breite (≈3 % Rand links/rechts),
+  ≈ `rgb(35 35 35 / 0.55)`, eckig
+- **unten**, wenige Pixel über dem Bildrand (bei 1280×720: Band 50 px hoch, y = 645)
+- Videos nur mit Musik brauchen keine Untertitel
+- **nichts über dem Bild**: kein Player-Titel (in `global.css` ausgeblendet), keine Badges;
+  unter dem Video steht die handschriftliche Bildunterschrift im weißen Rahmen
+
+Keine WebVTT-Spuren im Player: die sahen je nach Gerät anders aus. Der Text bleibt als
+`.vtt` neben dem Video liegen (z. B. `public/videos/museo-leon-y-castillo.vtt`), damit
+man neu einbrennen kann. Vorgehen: Cues mit `sharp` als PNG rendern (Text +
+Band) und mit `ffmpeg … overlay=…:enable='between(t,a,z)'` einbrennen (dieses ffmpeg hat
+weder `drawtext` noch `subtitles`).
+
 ## Datenmodell
 
 Inhalte liegen im Multi-Tenant-CMS **pulpo** und werden ausschließlich zur

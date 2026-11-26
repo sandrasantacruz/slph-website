@@ -583,3 +583,10 @@ figure:has(media-player) {
 /* Carrusel de fotos en móvil (Sobre el cuento): sin barra de desplazamiento visible */
 .carrusel { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .carrusel::-webkit-scrollbar { display: none; }
+
+/* Reproductor de vídeo (vidstack): sin el título encima de la imagen al reproducir
+   («… · Si los peces hablaran»). El pie de cada vídeo ya dice qué es, y el título se
+   sigue usando para los lectores de pantalla (Sandra, 26 nov 2026). */
+media-player .vds-chapter-title {
+  display: none !important;
+}
