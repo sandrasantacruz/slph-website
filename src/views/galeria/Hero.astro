@@ -1,6 +1,7 @@
 ---
 import Ola from '../../components/Ola.astro';
 import { Icon } from 'astro-icon/components';
+import IndicePagina from '../../components/IndicePagina.astro';
 ---
 
 <section class="relative isolate flex min-h-[calc(100svh-6rem)] flex-col overflow-hidden">
@@ -29,7 +30,7 @@ import { Icon } from 'astro-icon/components';
     <div class="reveal flex items-center gap-3 sm:gap-4">
       <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
       <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
-        Galería SLPH · imágenes del programa SLPH
+        Programa SLPH · la galería
       </span>
     </div>
 
@@ -40,19 +41,24 @@ import { Icon } from 'astro-icon/components';
       <span class="block">nuestra historia</span>
     </h1>
 
-    <!-- Display tagline -->
-    <p class="reveal reveal-delay-2 max-w-3xl font-display text-xl leading-tight text-celeste sm:text-2xl md:text-3xl">
-      Musical <span class="text-caparol">·</span>
-      cuento <span class="text-caparol">·</span>
-      eventos <span class="text-caparol">·</span>
-      momentos
-    </p>
-
     <!-- Body -->
     <p class="reveal reveal-delay-3 max-w-2xl text-sm leading-snug text-caparol/90 sm:text-base">
       Cada imagen, una historia: funciones, presentaciones, encuentros y la realidad
       que nos recuerda <span class="text-arena">por qué empezamos</span>.
     </p>
+
+    <!-- Índice de la página (11 secciones agrupadas en 6), como en Programa y Repercusión -->
+    <IndicePagina
+      class="reveal reveal-delay-3 max-w-3xl border-t border-caparol/10 pt-5"
+      enlaces={[
+        { href: '#musical', texto: 'El origen' },
+        { href: '#librupeces', texto: 'El cuento' },
+        { href: '#espectaculos', texto: 'Espectáculos y eventos' },
+        { href: '#talleres', texto: 'En las aulas' },
+        { href: '#contaminacion', texto: 'La contaminación' },
+        { href: '#momentos', texto: 'Momentos entrañables', corazon: true },
+      ]}
+    />
   </div>
 
   <!-- Scroll cue -->
