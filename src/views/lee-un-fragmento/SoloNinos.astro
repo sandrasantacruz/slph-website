@@ -1,0 +1,47 @@
+---
+import Ola from '../../components/Ola.astro';
+// «¿Crees que es solo un cuento para niños?» (idea de Sandra, 26 nov 2026): Olga Ortega,
+// mayor de edad y con autorización, leyendo el cuento absorta. 15 s en bucle, sin sonido.
+// Último empujón antes de la compra: el cuento también engancha a los mayores.
+---
+
+<section id="para-todos" class="relative isolate scroll-mt-28 overflow-hidden py-16 sm:py-24">
+  <div class="mx-auto grid max-w-5xl items-center gap-10 px-6 md:grid-cols-12 md:gap-14">
+    <div class="reveal text-center md:col-span-7 md:text-left">
+      <p class="font-hand text-2xl leading-none text-celeste sm:text-3xl">una pregunta…</p>
+      <h2 class="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] text-caparol">
+        ¿Crees que es solo un cuento
+        <Ola class="whitespace-nowrap text-arena">para niños?</Ola>
+      </h2>
+      <p class="mt-6 text-base leading-relaxed text-caparol/90 sm:text-lg">
+        Sus ilustraciones y su mensaje atrapan a lectores de todas las edades.
+      </p>
+      <!-- Real, no un montaje (Sandra, 26 nov 2026): la reacción de Olga al recibir el cuento -->
+      <p class="mt-4 text-base leading-relaxed text-caparol/75 sm:text-lg">
+        Así reaccionó Olga la primera vez que tuvo el cuento en sus manos.
+        <span class="text-arena">Sin guion y sin ensayos:</span> la grabamos tal cual.
+      </p>
+    </div>
+
+    <figure class="reveal reveal-delay-1 mx-auto w-full max-w-[16rem] sm:max-w-[18rem] md:col-span-5">
+      <div class="polaroid tilt-r1 transition duration-500 hover:rotate-0" style="padding-bottom:2.8rem">
+        <video
+          src="/assets/cuento/olga-leyendo.mp4"
+          poster="/assets/cuento/olga-leyendo.webp"
+          width="640"
+          height="800"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-label="Una joven lee el cuento Si los peces hablaran…, absorta en sus ilustraciones"
+          class="block w-full"
+        ></video>
+        <figcaption class="absolute right-0 bottom-1.5 left-0 px-2 text-center font-hand text-lg leading-tight text-azul sm:text-xl">
+          Olga, sin poder dejar de leerlo
+        </figcaption>
+      </div>
+    </figure>
+  </div>
+</section>

@@ -5,6 +5,7 @@ import Trailer from './Trailer.astro';
 import Sumergete from './Sumergete.astro';
 import Flipbook from './Flipbook.astro';
 import CTA from './CTA.astro';
+import SoloNinos from './SoloNinos.astro';
 import WaterLine from '../../components/WaterLine.astro';
 import SubNavCuento from '../../components/SubNavCuento.astro';
 import { bookSchema, breadcrumbSchema } from '../../lib/seo';
@@ -34,6 +35,10 @@ const breadcrumb = breadcrumbSchema([
   <Flipbook />
   <Sumergete />
   <Trailer />
+  <!-- «¿Crees que es solo un cuento para niños?»: Olga leyendo, antes de la compra,
+       entre dos líneas de agua (como Izzy en El ilustrador) -->
+  <WaterLine separador clave="-olga" />
+  <SoloNinos />
   <!-- la línea de agua de la cabecera separa el recorrido del cierre (compra) -->
   <WaterLine separador />
   <CTA />
