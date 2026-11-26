@@ -31,6 +31,8 @@ type SectionDef = {
   enlaces?: { href: string; texto: string }[];
   /** Opinión real bajo la intro (literal, de una noticia o del dossier). */
   cita?: { texto: string; autor: string };
+  /** Encuadre de la miniatura 3:2 (object-position), p. ej. para fotos verticales. */
+  encuadres?: Record<string, string>;
 };
 
 const sectionDefs: SectionDef[] = [
@@ -211,10 +213,14 @@ const sectionDefs: SectionDef[] = [
       "03-ceip-alfredo-kraus":
         "Trabajan con el cuento en clase desde el curso 2019/2020 · CEIP Alfredo Kraus",
       "04-ceip-cesar-manrique-cabrera":
-        "Bella Azul cruza el mar por videollamada · CEIP César Manrique Cabrera · Lanzarote · 2021",
+        "Un abrazo por videollamada a Bella Azul · CEIP César Manrique Cabrera · Lanzarote · 2022",
       "05-ceip-monsenor-lantigua-socorro":
         "«¿Por qué hay que cuidar el mar?», preguntó un alumno · CEIP Monseñor Socorro Lantigua · 2022",
       "06-ceo-tejeda": "El océano llega al aula, de la mano de la Reserva de la Biosfera · CEO Tejeda · 2024",
+    },
+    // Foto vertical (el abrazo a Bella Azul): la miniatura enseña de su cara a los abrazos
+    encuadres: {
+      "04-ceip-cesar-manrique-cabrera": "50% 22%",
     },
     stories: {
       "02-ceip-huertas-del-palmar":
@@ -365,7 +371,7 @@ const ALTS: Record<string, Record<string, string>> = {
     "01-ceip-santa-catalina": "Alumnado del CEIP Santa Catalina en clase durante una actividad de Si los peces hablaran…",
     "02-ceip-huertas-del-palmar": "Bella Azul baila con el alumnado del CEIP Huertas del Palmar, que sostiene peces de papel",
     "03-ceip-alfredo-kraus": "Alumnado sentado en el suelo de la biblioteca escucha una charla junto a la tortuga",
-    "04-ceip-cesar-manrique-cabrera": "Niños de infantil sentados ante la pantalla con el logo de Si los peces hablaran… en su aula",
+    "04-ceip-cesar-manrique-cabrera": "Peques de infantil abrazan la pizarra digital en la que aparece Bella Azul por videollamada",
     "05-ceip-monsenor-lantigua-socorro": "Alumnado sentado ante una proyección con el logo del proyecto en el salón del colegio",
     "06-ceo-tejeda": "Redes, carteles y la pancarta «¡No a la basura, el mar no se contamina!» decoran el CEO Tejeda",
   },
@@ -435,6 +441,7 @@ const sections = sectionDefs.map((def) => {
       alt: ALTS[def.id]?.[stem] ?? `${def.title}: ${caption}`,
       caption,
       story: def.stories?.[stem],
+      encuadre: def.encuadres?.[stem],
     };
   });
   return { ...def, images };
