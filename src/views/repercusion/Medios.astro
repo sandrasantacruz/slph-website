@@ -9,6 +9,8 @@ const videos = [
     title: "Si los peces hablaran en los centros escolares · Televisión Canaria",
     caption: "centros escolares",
     tilt: "-rotate-1",
+    // vídeo completo en nuestro canal («Repercusión en colegios»)
+    completo: "https://www.youtube.com/watch?v=sLhA88EUVDU",
   },
   {
     src: "/videos/tvc-investigadoras.mp4",
@@ -16,6 +18,8 @@ const videos = [
     title: "Las investigadoras marinas · Televisión Canaria",
     caption: "investigadoras marinas",
     tilt: "rotate-1",
+    // vídeo completo en nuestro canal («¿Sabes quién avala el cuento?»)
+    completo: "https://www.youtube.com/watch?v=GkmiiCa8qCU",
   },
 ];
 ---
@@ -63,6 +67,7 @@ const videos = [
     <div class="mt-14 grid gap-12 sm:mt-20 sm:gap-10 lg:grid-cols-2 lg:gap-12">
       {
         videos.map((video, i) => (
+          <div class="flex flex-col">
           <figure
             class={`clip-frame reveal reveal-delay-${i + 1} ${video.tilt}`}
           >
@@ -95,9 +100,21 @@ const videos = [
               {video.caption}
             </figcaption>
           </figure>
+            <!-- El vídeo es un fragmento: quien quiera seguir viéndolo va al completo -->
+            <a
+              href={video.completo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="reveal group mt-5 inline-flex items-center gap-2 self-center font-display text-xs tracking-[0.2em] text-arena uppercase transition hover:text-caparol sm:text-sm"
+            >
+              Ver completo en YouTube
+              <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+            </a>
+          </div>
         ))
       }
     </div>
+
   </div>
 </section>
 
