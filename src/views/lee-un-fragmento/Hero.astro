@@ -18,7 +18,8 @@ import Ola from '../../components/Ola.astro';
   >
   </div>
 
-  <div class="mx-auto max-w-6xl px-6">
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 md:grid-cols-12">
+    <div class="md:col-span-7">
     <!-- h1 corto, con nuestra voz y el nombre del menú (Sandra, 26 nov 2026). Las palabras de
          búsqueda («lee gratis el primer capítulo · cuento infantil») siguen en el <title> y la
          descripción; «gratis» pasa al texto de abajo. -->
@@ -62,5 +63,25 @@ import Ola from '../../components/Ola.astro';
       Abre el libro
       <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
     </a>
+    </div>
+
+    <!-- La primera ilustración del capítulo I (llenaba el hueco de la derecha; idea de Sandra,
+         26 nov 2026). Solo desde tableta: en el móvil el libro está justo debajo. -->
+    <figure class="reveal reveal-delay-2 hidden md:col-span-5 md:block">
+      <div class="polaroid tilt-r1 mx-auto w-full max-w-[22rem] transition duration-500 hover:rotate-0" style="padding-bottom:3.25rem">
+        <img
+          src="/assets/fragmento/portada-capitulo-1.webp"
+          alt="Ilustración del capítulo I: Lorena y su abuela, Dña. Teresa, en la orilla del mar"
+          width="760"
+          height="760"
+          class="block w-full"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="absolute right-0 bottom-2 left-0 px-3 text-center font-hand text-xl leading-tight text-azul sm:text-2xl">
+          Lorena y su abuela, frente al mar
+        </figcaption>
+      </div>
+    </figure>
   </div>
 </section>
