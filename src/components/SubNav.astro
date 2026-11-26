@@ -34,7 +34,8 @@ import WaterLine from './WaterLine.astro';
     </a>
 
     <ul class="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-      {items.map((item) => {
+      {/* Solo las otras páginas: la actual no sale (parecía un botón que no hacía nada; Sandra, 26 nov 2026) */}
+      {items.filter((item) => item.id !== current).map((item) => {
         const active = item.id === current;
         return (
           <li>
