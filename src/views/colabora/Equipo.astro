@@ -63,7 +63,7 @@ const groups: Group[] = [
       {
         name: 'Dra. Gercende Courtois de Viçose',
         role: 'Investigadora · Ciencias Marinas y Acuicultura',
-        image: '/assets/colaboradores/gercende-courtois/portrait.webp',
+        image: '/assets/colaboradores/gercende-courtois/portrait-hd.webp',
         alt: 'Retrato de Gercende Courtois de Viçose',
         bio: [
           'Investigadora sénior con más de 25 años de trayectoria profesional y científica en el ámbito de las ciencias marinas y la acuicultura. Doctora en Biología, es responsable de la línea de investigación centrada en invertebrados y en el desarrollo de sistemas de acuicultura multitrófica integrada y sostenible del Grupo de Investigación en Acuicultura del Instituto Universitario de Investigación en Acuicultura Sostenible y Ecosistemas Marinos (Instituto ECOAQUA) de la Universidad de Las Palmas de Gran Canaria.\n\nAsimismo, ejerce como Representante Europea de la International Abalone Society (IAS), participando en la promoción y coordinación de actividades científicas relacionadas con el estudio y desarrollo de la acuicultura del abalón.',
@@ -176,7 +176,7 @@ const groups: Group[] = [
       {
         name: 'Lorena Santa Cruz',
         role: 'Colaboradora más joven · perspectiva infantil',
-        image: '/assets/colaboradores/lorena-santa-cruz/portrait.jpg',
+        image: '/assets/colaboradores/lorena-santa-cruz/portrait-hd.webp',
         alt: 'Retrato de Lorena Santa Cruz',
         bio: [
           'Lorena Santa Cruz es nuestra colaboradora más joven, y no por ello la menos importante. Bailó en nuestro musical en 2016, siendo una niña, y se comprometió enseguida a transmitir su mensaje. Hoy estudia Ingeniería Mecánica en la Universidad Politécnica de Madrid y sigue cultivando su pasión por las artes escénicas a través del piano y del dibujo. ¡Su energía se contagia!',
@@ -219,7 +219,7 @@ const groups: Group[] = [
       {
         name: 'Ethel Bartrán',
         role: 'Fotógrafa · "Vigilia al Océano"',
-        image: '/assets/colaboradores/ethel-bartran/portrait.png',
+        image: '/assets/colaboradores/ethel-bartran/portrait-hd.webp',
         alt: 'Retrato de Ethel Bartrán',
         bio: [
           'Ethel Bartrán, nacida en Uruguay y enamorada de las islas desde el año 2000. En 2015 dio sus primeros pasos en el mundo de la fotografía, en el que no deja de redescubrirse e involucrarse día a día, marcando su propio camino. Tras cursar un taller de proyecto personal y mantener una conversación con Sandra Santa Cruz, siente la profundidad y labor educativa que conlleva "Si los peces hablaran…" e inmediatamente decide ponerse en la piel del mundo marino. Así nace Vigilia al Océano, una manera de agradecer y aportar a la vez su granito de arena por mejorar nuestro planeta.',
@@ -239,7 +239,7 @@ const groups: Group[] = [
       {
         name: 'Francis Pérez',
         role: 'Fotógrafo submarino · World Press Photo 2017',
-        image: '/assets/colaboradores/francis-perez/portrait.png',
+        image: '/assets/colaboradores/francis-perez/portrait-hd.webp',
         alt: 'Retrato de Francis Pérez',
         lead: 'Nos cedió una de sus espectaculares fotografías para el cuento.',
         bio: [
@@ -251,7 +251,7 @@ const groups: Group[] = [
           { url: 'https://www.facebook.com/FrancisPerezUnderwaterPhotography', label: 'Facebook', icon: 'facebook' },
         ],
         gallery: [
-          '/assets/colaboradores/francis-perez/gallery-1.jpg',
+          '/assets/colaboradores/francis-perez/gallery-1-hd.webp',
           '/assets/colaboradores/francis-perez/gallery-2.png',
           '/assets/colaboradores/francis-perez/gallery-3.png',
           '/assets/colaboradores/francis-perez/gallery-4.png',
@@ -438,15 +438,15 @@ const tiltClass = ['tilt-l1', 'tilt-r1', 'tilt-l2', 'tilt-r2'];
 
                   {person.gallery && person.gallery.length > 0 && (
                     <div class="mt-10 sm:mt-12">
-                      <div class="mb-4 flex items-center gap-3 sm:gap-4">
+                      <div class="mb-4 flex max-w-[33.5rem] items-center gap-3 sm:gap-4">
                         <span class="font-display text-sm tracking-[0.2em] text-arena uppercase sm:text-base">
                           De su mano
                         </span>
                         <span class="dotted-rule flex-1 text-arena/40"></span>
                       </div>
                       <!-- Compacto (26 nov 2026): cuatro miniaturas pequeñas en una fila. Las fotos de
-                           origen solo miden 250 px: más grandes se ven borrosas. -->
-                      <div class="grid max-w-[30rem] grid-cols-4 gap-2 sm:gap-3">
+                           origen miden 250 px: cada miniatura, como mucho 125 px (nítida en pantallas retina). -->
+                      <div class="grid max-w-[33.5rem] grid-cols-4 gap-2 sm:gap-3">
                         {person.gallery.map((src, i) => (
                           <a
                             href={src}
