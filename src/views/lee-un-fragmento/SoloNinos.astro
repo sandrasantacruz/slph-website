@@ -26,15 +26,15 @@ import Ola from '../../components/Ola.astro';
     <figure class="reveal reveal-delay-1 mx-auto w-full max-w-[16rem] sm:max-w-[18rem] md:col-span-5">
       <div class="polaroid tilt-r1 transition duration-500 hover:rotate-0" style="padding-bottom:2.8rem">
         <video
-          src="/assets/cuento/olga-leyendo.mp4"
+          data-src="/assets/cuento/olga-leyendo.mp4"
           poster="/assets/cuento/olga-leyendo.webp"
           width="640"
           height="800"
-          autoplay
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="none"
+          data-olga
           aria-label="Una joven lee el cuento Si los peces hablaran…, absorta en sus ilustraciones"
           class="block w-full"
         ></video>
@@ -45,3 +45,18 @@ import Ola from '../../components/Ola.astro';
     </figure>
   </div>
 </section>
+
+<script>
+  // El vídeo se descarga y arranca solo cuando se acerca a la pantalla (rapidez)
+  const v = document.querySelector<HTMLVideoElement>("[data-olga]");
+  if (v) {
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        if (v.dataset.src) { v.src = v.dataset.src; delete v.dataset.src; }
+        v.play().catch(() => {});
+        io.disconnect();
+      }
+    }, { rootMargin: "300px 0px" });
+    io.observe(v);
+  }
+</script>

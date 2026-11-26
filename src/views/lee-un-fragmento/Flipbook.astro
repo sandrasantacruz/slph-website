@@ -11,7 +11,10 @@ const pages = fs
   // que usa Sobre el cuento no son páginas.
   .filter((f) => /^\d+\.webp$/i.test(f))
   .sort()
-  .map((file, i) => ({ n: i + 1, src: `/assets/fragmento/${file}` }));
+  .map((file, i) => ({ n: i + 1, src: `/assets/fragmento/${file}`, src960: `/assets/fragmento/${file.replace(".webp", "-960.webp")}` }));
+// Rapidez (26 nov 2026): solo las 4 primeras páginas se descargan al abrir la página;
+// las demás, unas páginas por delante de la que se está leyendo. En el móvil, 960 px.
+const PRIMERAS = 4;
 const totalPages = pages.length;
 ---
 
@@ -76,11 +79,12 @@ const totalPages = pages.length;
           {
             pages.map((p, idx) => (
               <div class="page" data-density="soft">
-                {/* Alle Seiten werden eager geladen, damit beim Blättern nichts
-                    nachgeladen wird. Nur die ersten beiden konkurrieren mit dem
-                    initialen Rendering, der Rest läuft mit low priority. */}
                 <img
-                  src={p.src}
+                  src={idx < PRIMERAS ? p.src : undefined}
+                  srcset={idx < PRIMERAS ? `${p.src960} 960w, ${p.src} 1500w` : undefined}
+                  data-src={idx < PRIMERAS ? undefined : p.src}
+                  data-srcset={idx < PRIMERAS ? undefined : `${p.src960} 960w, ${p.src} 1500w`}
+                  sizes="(min-width: 768px) 720px, 96vw"
                   alt={`Página ${p.n} del prólogo y el capítulo I de Si los peces hablaran…`}
                   loading="eager"
                   fetchpriority={idx < 2 ? "high" : "low"}
@@ -228,7 +232,25 @@ const totalPages = pages.length;
     };
     updateUi(0);
 
-    pageFlip.on("flip", (e) => updateUi(Number(e.data)));
+    // Carga progresiva: siempre 4 páginas por delante de la actual
+    const imgs = Array.from(el.querySelectorAll<HTMLImageElement>("img[data-src]"));
+    const cargarHasta = (pagina: number) => {
+      for (const img of imgs) {
+        const n = Number(img.alt.match(/Página (\d+)/)?.[1] ?? 0) - 1;
+        if (n <= pagina + 4 && img.dataset.src) {
+          if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+          img.src = img.dataset.src;
+          delete img.dataset.src;
+          delete img.dataset.srcset;
+        }
+      }
+    };
+    pageFlip.on("flip", (e) => {
+      updateUi(Number(e.data));
+      cargarHasta(Number(e.data));
+    });
+    // en cuanto alguien toca el libro, adelantamos unas cuantas más
+    el.addEventListener("pointerdown", () => cargarHasta(4), { once: true });
 
     prevBtn?.addEventListener("click", () => pageFlip.flipPrev());
     nextBtn?.addEventListener("click", () => pageFlip.flipNext());
