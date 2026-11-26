@@ -24,19 +24,28 @@ for (const b of fs.readFileSync(vtt,'utf8').split(/\n\n+/).filter(b=>b.includes(
   const tot=parts.join('').length; let t=a;
   parts.forEach((p,i)=>{ const d=(z-a)*p.length/tot; cues.push({text:p,a:t,z:i===parts.length-1?z:t+d}); t+=d; });
 }
+// Sin parpadeo: si entre dos subtítulos hay menos de 1,2 s, el primero se queda hasta
+// que entra el siguiente. La franja gris es una sola mientras dura un bloque de habla
+// (solo cambia el texto), como en los vídeos montados a mano.
+cues.sort((x,y)=>x.a-y.a);
+for (let i=0;i<cues.length-1;i++) if (cues[i+1].a - cues[i].z < 1.2) cues[i].z = cues[i+1].a;
+const bloques=[]; for (const c of cues) { const l=bloques[bloques.length-1]; if (l && c.a - l.z < 0.01) l.z=c.z; else bloques.push({a:c.a,z:c.z}); }
 const dir = fs.mkdtempSync(path.join(os.tmpdir(),'subs-')); const ins=[];
 for (const [i,c] of cues.entries()) {
   const esc=c.text.replace(/&/g,'&amp;').replace(/</g,'&lt;');
   const txt = await sharp({ text:{ text:`<span foreground="white">${esc}</span>`, font:`Varela Round ${fs_}`, fontfile:FONT, rgba:true, dpi:72 } }).png().toBuffer();
   const m = await sharp(txt).metadata();
-  const bw=W-BX-BXR, band=Buffer.from(`<svg width="${bw}" height="${BH}"><rect width="${bw}" height="${BH}" fill="rgb(35,35,35)" fill-opacity="0.55"/></svg>`);
+  const bw=W-BX-BXR, band=Buffer.from(`<svg width="${bw}" height="${BH}"><rect width="${bw}" height="${BH}" fill-opacity="0"/></svg>`);
   const f=path.join(dir,`c${i}.png`);
   await sharp(band).composite([{input:txt,left:Math.max(0,Math.round((bw-m.width)/2)),top:Math.round((BH-m.height)/2)}]).png().toFile(f);
   ins.push({f,a:c.a,z:c.z});
 }
 const y = Math.round(H - BH - H*0.035);
-const args=['-v','error','-y','-i',src]; ins.forEach(c=>args.push('-i',c.f));
-let chain='[0:v]'; const fc=ins.map((c,i)=>{ const o=i<ins.length-1?`[v${i}]`:'[vout]'; const s=`${chain}[${i+1}:v]overlay=x=${BX}:y=${y}:enable='between(t,${c.a.toFixed(3)},${c.z.toFixed(3)})'${o}`; chain=o; return s; });
+const fband=path.join(dir,'franja.png'); const bwid=W-BX-BXR;
+await sharp(Buffer.from(`<svg width="${bwid}" height="${BH}"><rect width="${bwid}" height="${BH}" fill="rgb(35,35,35)" fill-opacity="0.55"/></svg>`)).png().toFile(fband);
+const capas=[...bloques.map(b=>({f:fband,a:b.a,z:b.z})), ...ins];
+const args=['-v','error','-y','-i',src]; capas.forEach(c=>args.push('-i',c.f));
+let chain='[0:v]'; const fc=capas.map((c,i)=>{ const o=i<capas.length-1?`[v${i}]`:'[vout]'; const s=`${chain}[${i+1}:v]overlay=x=${BX}:y=${y}:enable='between(t,${c.a.toFixed(3)},${c.z.toFixed(3)})'${o}`; chain=o; return s; });
 args.push('-filter_complex',fc.join(';'),'-map','[vout]','-map','0:a?','-c:v','libx264','-preset','slow','-crf','25','-pix_fmt','yuv420p','-c:a','copy','-movflags','+faststart',dst);
 execFileSync('ffmpeg',args,{stdio:'inherit'});
 console.log(path.basename(dst), `${cues.length} subtítulos, letra ${fs_}px, máx. ${MAX} caracteres`);

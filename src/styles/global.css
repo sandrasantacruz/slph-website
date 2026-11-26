@@ -608,3 +608,13 @@ media-player .vds-controls-group:has(> .vds-fullscreen-button) {
 media-player .vds-controls-group:has(> .vds-fullscreen-button) > .vds-fullscreen-button {
   pointer-events: auto;
 }
+
+/* Sin fondo negro en el reproductor: asomaba medio píxel por encima del vídeo
+   (el «filito»). Detrás queda el marco blanco. */
+media-player,
+media-player media-provider {
+  background-color: transparent !important;
+}
+media-player media-provider video {
+  object-fit: cover;
+}
