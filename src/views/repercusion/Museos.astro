@@ -1,0 +1,136 @@
+---
+import Clip from "./Clip.astro";
+import Ola from '../../components/Ola.astro';
+// Casa-Museo León y Castillo (Telde), junio de 2025. Montaje propio (26 nov 2026) a partir
+// de «SLPH museo león y castillo 03»: imágenes de la semana + Elisa (CEIP Príncipe de
+// Asturias) + el director. Subtítulos en .vtt, corregidos («Gran Canaria», no «Cararia»).
+---
+
+<section id="museos" class="relative isolate scroll-mt-28 overflow-hidden py-20 sm:py-28">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_45%_at_85%_30%,rgba(250,222,170,0.07),transparent_70%)]"
+  >
+  </div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
+      <div class="lg:col-span-5">
+        <div class="reveal flex items-center gap-4">
+          <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
+          <span class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+            Los museos
+          </span>
+        </div>
+
+        <h2 class="reveal reveal-delay-1 mt-6 font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[0.95] text-caparol">
+          Nos abren
+          <Ola class="whitespace-nowrap text-arena">sus puertas</Ola>
+        </h2>
+
+        <p class="reveal reveal-delay-2 mt-6 text-base leading-relaxed text-caparol/90 sm:text-lg">
+          Desde 2021 creamos proyectos para los museos de Gran Canaria: Cueva Pintada,
+          Casa de Colón, Casa-Museo Pérez Galdós, Casa-Museo Tomás Morales…
+        </p>
+        <p class="reveal reveal-delay-2 mt-4 text-base leading-relaxed text-caparol/90 sm:text-lg">
+          El más reciente fue para la Casa-Museo León y Castillo, en Telde, que en junio de
+          2025 se vistió de
+          <em class="not-italic text-arena">Si los peces hablaran…</em> Durante una semana,
+          su entrada y su patio impregnaron de mar a todos sus visitantes. Y, como broche
+          final, nuestro encuentro con el alumnado del CEIP Príncipe de Asturias.
+        </p>
+
+        <figure class="reveal reveal-delay-3 mt-8 border-l-2 border-arena/60 pl-5">
+          <blockquote class="font-display text-2xl leading-tight text-caparol sm:text-3xl">
+            «Esta experiencia trasladada al museo
+            <span class="text-arena">es maravillosa</span>»
+          </blockquote>
+          <figcaption class="mt-3 text-sm leading-snug text-caparol/75 sm:text-base">
+            José Alejandro Díaz Hernández, director de la Casa-Museo León y Castillo
+          </figcaption>
+        </figure>
+
+        <a
+          href="https://www.creativacanaria.com/la-casa-museo-leon-y-castillo-conciencia-a-la-juventud-sobre-el-cuidado-de-los-oceanos-a-traves-de-la-escritura/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="reveal reveal-delay-3 mt-8 inline-flex items-center gap-2 font-display text-xs tracking-[0.2em] text-arena uppercase transition hover:text-caparol sm:text-sm"
+        >
+          Lo contó Creativa Canaria
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+        </a>
+      </div>
+
+      <div class="lg:col-span-7 lg:translate-x-6">
+        <Clip
+          class="reveal reveal-delay-2 rotate-1"
+          src="/videos/museo-leon-y-castillo.mp4"
+          poster="/videos/museo-leon-y-castillo-poster.webp"
+          title="La Casa-Museo León y Castillo, vestida de mar · Si los peces hablaran"
+          caption="la Casa-Museo, vestida de mar"
+          subtitulos="/videos/museo-leon-y-castillo.vtt"
+        />
+      </div>
+    </div>
+
+    <!-- La escena que se creó para la Casa-Museo: Juan y Fernando León y Castillo con Lorena
+         y su abuela (Sandra, 26 nov 2026: aquí sí, porque fue un proyecto para el museo).
+         Fotograma de «4_Hermanos LC 4 y PLANOS», a 1000 px con ©. -->
+    <div class="mt-16 grid items-center gap-10 sm:mt-24 lg:grid-cols-12 lg:gap-20">
+      <figure class="reveal reveal-delay-1 lg:order-2 lg:col-span-7 lg:translate-x-6">
+        <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0" style="padding-bottom:3.25rem">
+          <img
+            src="/assets/repercusion/leon-y-castillo-con-lorena.webp"
+            alt="Ilustración: Juan y Fernando León y Castillo en un salón junto a Lorena y su abuela, con el mar y la luna al fondo"
+            width="1000"
+            height="547"
+            loading="lazy"
+            decoding="async"
+            class="block w-full"
+          />
+          <figcaption class="absolute right-0 bottom-2 left-0 px-3 text-center font-hand text-xl leading-tight text-azul sm:text-2xl">
+            los León y Castillo, con Lorena y su abuela
+          </figcaption>
+        </div>
+      </figure>
+
+      <div class="reveal reveal-delay-2 lg:order-1 lg:col-span-5">
+        <p class="font-display text-xs tracking-[0.4em] text-arena uppercase sm:text-sm">
+          Una escena para el museo
+        </p>
+        <h3 class="mt-4 font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-[1] text-caparol">
+          Visionarios de ayer,
+          <Ola class="whitespace-nowrap text-arena">guardianes de hoy</Ola>
+        </h3>
+        <p class="mt-5 text-base leading-relaxed text-caparol/90 sm:text-lg">
+          Para la Casa-Museo creamos una escena propia: Juan y Fernando León y Castillo,
+          sentados en el salón con Lorena y su abuela. Todos comparten algo:
+          fueron visionarios en su época y pusieron su creatividad
+          al servicio de un futuro mejor para Gran Canaria.
+        </p>
+
+        <!-- Cómo se hizo: Pablo Tribiño da color a Juan (clip de 5,6 s en bucle, el mismo
+             que estuvo en El ilustrador) -->
+        <figure class="mx-auto mt-8 w-full max-w-[16rem] sm:max-w-[19rem] lg:mx-0">
+          <div class="polaroid tilt-r1 transition duration-500 hover:rotate-0" style="padding-bottom:2.6rem">
+            <video
+              src="/assets/ilustrador/proceso/juan-leon-y-castillo.mp4"
+              poster="/assets/ilustrador/proceso/juan-leon-y-castillo.webp"
+              width="610"
+              height="418"
+              autoplay
+              muted
+              loop
+              playsinline
+              aria-label="Pablo Tribiño da color a Juan León y Castillo, que lee un gran plano junto a la ventana con la luna llena"
+              class="block w-full"
+            ></video>
+            <figcaption class="absolute right-0 bottom-1.5 left-0 px-2 text-center font-hand text-lg leading-tight text-azul sm:text-xl">
+              de la línea al color
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

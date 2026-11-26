@@ -8,6 +8,7 @@ import Anecdota from './Anecdota.astro';
 import Prensa from './Prensa.astro';
 import Origen from './Origen.astro';
 import Cifras from './Cifras.astro';
+import Museos from './Museos.astro';
 import WaterLine from '../../components/WaterLine.astro';
 import SubNavPrograma from '../../components/SubNavPrograma.astro';
 import { breadcrumbSchema } from '../../lib/seo';
@@ -41,6 +42,9 @@ const breadcrumb = breadcrumbSchema([
   <Menores />
   <Anecdota />
   <WaterLine separador clave="-b" />
+  <Museos />
+  <!-- la huella y la ciencia: el cierre, con su propia línea de agua -->
+  <WaterLine separador clave="-c" />
   <Huella />
   <Origen />
 </MainLayout>

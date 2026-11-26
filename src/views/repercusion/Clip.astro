@@ -8,6 +8,8 @@ interface Props {
   caption: string;
   /** CSS aspect ratio of the source file, e.g. "16/9" or "9/16". */
   aspect?: string;
+  /** Subtítulos WebVTT (se pueden activar y quitar; mejor que grabarlos en la imagen). */
+  subtitulos?: string;
   class?: string;
 }
 
@@ -17,12 +19,13 @@ const {
   title,
   caption,
   aspect = "16/9",
+  subtitulos,
   class: className = "",
 } = Astro.props;
 ---
 
 <figure class={`menores-clip ${className}`}>
-  <div class="menores-wrap relative overflow-hidden bg-azul-deep">
+  <div class="menores-wrap relative overflow-hidden">
     <media-player
       class="menores-player"
       title={title}
@@ -35,6 +38,7 @@ const {
     >
       <media-provider>
         <media-poster class="vds-poster" />
+        {subtitulos && <track src={subtitulos} kind="subtitles" srclang="es" label="Español" default />}
       </media-provider>
       <media-video-layout></media-video-layout>
       <media-play-button
@@ -56,7 +60,13 @@ const {
 </figure>
 
 <style is:global>
+  /* block: como elemento en línea dejaba debajo el hueco de la línea de texto,
+     que se veía como un filito negro bajo el vídeo */
   .menores-wrap .menores-player {
+    display: block;
+    /* sin el borde de 1 px del reproductor: era el filito oscuro de arriba */
+    border: 0 !important;
+    --video-border: 0;
     --video-brand: var(--color-arena);
     --media-brand: var(--color-arena);
     --media-focus-ring-color: var(--color-arena-deep);
@@ -64,8 +74,8 @@ const {
     --video-controls-color: var(--color-caparol);
     --media-tooltip-bg: rgb(11 32 86 / 0.95);
     --media-menu-bg: rgb(11 32 86 / 0.95);
-    border-radius: 3px;
-    background: var(--color-azul-deep);
+    border-radius: 0;
+    background: transparent;
   }
 
   /* Hide vidstack's own centered play/pause button — we bring our own overlay
