@@ -9,9 +9,9 @@ import Ola from '../../components/Ola.astro';
 const formas = [
   {
     icon: 'game-icons:theater',
-    para: 'para colegios, bibliotecas, museos, ayuntamientos y empresas',
+    para: 'para entidades',
     titulo: 'Lleva SLPH a tu espacio',
-    texto: 'Talleres, espectáculos, conferencias o un evento a medida para tu público. Más de 60 entidades ya lo han hecho.',
+    texto: 'Colegios, bibliotecas, museos, ayuntamientos o empresas: llevamos a tu espacio talleres, espectáculos, conferencias o un evento a medida para tu público. Más de 60 entidades ya lo han hecho. ¿Te subes a bordo de esta travesía?',
     enlaces: [
       { href: '/programa#formatos', label: 'Ver los formatos' },
       { href: '/contacto', label: 'Escríbenos' },
@@ -22,6 +22,9 @@ const formas = [
     para: 'para ti',
     titulo: 'Comparte el mensaje',
     texto: 'Síguenos, comparte nuestras noticias y lleva el mar a casa con el cuento. Y en el día a día, gestos sencillos: reciclar y reutilizar.',
+    // Gara (alumna del Centro de Danza; permiso de su familia, 26 nov 2026), en un trabajo
+    // del cole sobre Gran Canaria: «¡No, no, no a la contaminación!». 10 s, bucle, sin sonido.
+    video: { src: '/assets/colabora/gara-mensaje.mp4', poster: '/assets/colabora/gara-mensaje.webp', pie: 'Gara lo contó en un trabajo del cole' },
     enlaces: [
       { href: 'https://www.instagram.com/silospeceshablaran', label: 'Instagram', externo: true },
       { href: '/noticias', label: 'Noticias' },
@@ -30,10 +33,10 @@ const formas = [
   },
   {
     icon: 'game-icons:shaking-hands',
-    para: 'para asociaciones, fundaciones e instituciones',
+    para: 'para asociaciones y fundaciones',
     titulo: 'Impulsa un proyecto',
-    texto: 'El Cabildo de Gran Canaria hizo posible la 1.ª edición del cuento. La 3.ª y su cuadernillo, el patrocinio de la Candidatura LPGC 2031, con la ayuda de Sagulpa (a través de la asociación ALTRES) y del Centro de Danza Sandra Santa Cruz.',
-    enlaces: [{ href: '/contacto', label: '¿Tienes una idea? Escríbenos' }],
+    texto: 'SLPH crece gracias a quienes creen en él. El Cabildo de Gran Canaria hizo posible la 1.ª edición del cuento. La 3.ª y su cuadernillo, el patrocinio de la Candidatura LPGC 2031, con la ayuda de Sagulpa (a través de la asociación ALTRES) y del Centro de Danza Sandra Santa Cruz. Si tu asociación, fundación o institución quiere impulsar un nuevo proyecto, hablemos.',
+    enlaces: [{ href: '/contacto', label: 'Escríbenos' }],
   },
 ];
 
@@ -66,7 +69,39 @@ const ventajas = [
           </span>
           <p class="mt-5 font-hand text-xl leading-tight text-celeste sm:text-2xl">{f.para}</p>
           <h3 class="mt-2 font-display text-2xl leading-tight text-caparol sm:text-3xl">{f.titulo}</h3>
-          <p class="mt-3 flex-1 text-base leading-relaxed text-caparol/85">{f.texto}</p>
+          <p class:list={['mt-3 text-base leading-relaxed text-caparol/85', !f.video && 'flex-1']}>{f.texto}</p>
+          {f.video && (
+            <figure class="mt-5 flex-1">
+              <div class="polaroid tilt-r1 mx-auto max-w-[17rem] transition duration-500 hover:rotate-0" style="padding-bottom:2.4rem">
+                <video
+                  data-src={f.video.src}
+                  poster={f.video.poster}
+                  width="704"
+                  height="480"
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  data-gara
+                  aria-label="Una niña en un parque dice: «¡No, no, no a la contaminación! ¡Sí, sí, sí, lo vamos a conseguir!»"
+                  class="block w-full"
+                ></video>
+                <!-- Arranca sin sonido (los navegadores no dejan otra cosa); al pulsar, se oye su voz -->
+                <button
+                  type="button"
+                  data-gara-sonido
+                  aria-label="Escuchar a Gara"
+                  class="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-azul/80 px-3 py-1.5 font-display text-xs tracking-[0.12em] text-arena uppercase shadow-md backdrop-blur-sm transition hover:bg-azul"
+                >
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path data-onda d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+                  <span data-gara-etiqueta>Escúchala</span>
+                </button>
+                <figcaption class="absolute right-0 bottom-1 left-0 px-2 text-center font-hand text-base leading-tight text-azul sm:text-lg">
+                  {f.video.pie}
+                </figcaption>
+              </div>
+            </figure>
+          )}
           <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2">
             {f.enlaces.map((e) => (
               <a
@@ -137,3 +172,28 @@ const ventajas = [
     </div>
   </div>
 </section>
+
+<script>
+  // El vídeo de Gara se descarga y arranca solo al acercarse (rapidez)
+  const vg = document.querySelector<HTMLVideoElement>("[data-gara]");
+  if (vg) {
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        if (vg.dataset.src) { vg.src = vg.dataset.src; delete vg.dataset.src; }
+        vg.play().catch(() => {});
+        io.disconnect();
+      }
+    }, { rootMargin: "300px 0px" });
+    io.observe(vg);
+    const btn = document.querySelector<HTMLButtonElement>("[data-gara-sonido]");
+    const etiqueta = document.querySelector<HTMLElement>("[data-gara-etiqueta]");
+    btn?.addEventListener("click", () => {
+      if (vg.dataset.src) { vg.src = vg.dataset.src; delete vg.dataset.src; }
+      const activar = vg.muted;
+      vg.muted = !activar;
+      if (activar) { vg.currentTime = 0; vg.play().catch(() => {}); }
+      if (etiqueta) etiqueta.textContent = activar ? "Silenciar" : "Escúchala";
+      btn.setAttribute("aria-label", activar ? "Silenciar a Gara" : "Escuchar a Gara");
+    });
+  }
+</script>

@@ -9,7 +9,8 @@ const FONT = 'node_modules/@fontsource/varela-round/files/varela-round-latin-400
 const [W, H] = execFileSync('ffprobe', ['-v','error','-select_streams','v:0','-show_entries','stream=width,height','-of','csv=p=0', src]).toString().trim().split(',').map(Number);
 const k = W / 1280, vertical = H > W;
 // vídeos verticales: letra mayor, porque en la web se ven estrechos (unos 290 px)
-const fs_ = Math.round(vertical ? W/16 : 31*k), BH = Math.round(fs_*1.62), BX = Math.round(W*0.03);
+// SUB_LETRA=0.05 … tamaño de letra como fracción del ancho (vídeos pequeños dentro de tarjetas)
+const fs_ = Math.round(process.env.SUB_LETRA ? W*Number(process.env.SUB_LETRA) : (vertical ? W/16 : 31*k)), BH = Math.round(fs_*1.62), BX = Math.round(W*0.03);
 // SUB_DERECHA=px: margen derecho mayor si el vídeo trae algo abajo a la derecha (p. ej. el círculo de Noa en la radio)
 const BXR = Number(process.env.SUB_DERECHA || BX);
 const MAX = Math.floor((W - BX - BXR) * 0.9 / (fs_*0.56));
