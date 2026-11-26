@@ -11,9 +11,10 @@ import Ola from '../../components/Ola.astro';
   </div>
 
   <div class="mx-auto max-w-6xl px-6">
-    <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
-      <!-- Text column -->
-      <div class="lg:col-span-6">
+    <!-- La entrevista de Noa en la radio pasó a «En la prensa» (26 nov 2026): aquí quedan
+         dos vídeos, la playa y las opiniones de la Casa-Museo Pérez Galdós -->
+    <div class="max-w-3xl">
+      <div>
         <div class="reveal flex items-center gap-4">
           <span aria-hidden="true" class="h-px w-10 bg-arena sm:w-16"></span>
           <span
@@ -45,26 +46,11 @@ import Ola from '../../components/Ola.astro';
           </p>
         </div>
       </div>
-
-      <!-- Interview clip -->
-      <div class="lg:col-span-6">
-        <Clip
-          class="reveal reveal-delay-2 -rotate-1"
-          src="/videos/menores-noa.mp4"
-          poster="/videos/menores-noa-poster.webp"
-          title="La entrevista de Noa · Si los peces hablaran"
-          caption="la entrevista de Noa"
-        />
-        <!-- Quién es Noa: aquí llega el enlace «Conoce a Noa» de Lee un fragmento -->
-        <p class="reveal reveal-delay-3 mt-6 text-center font-hand text-2xl text-arena sm:text-3xl">
-          Noa Martín interpreta a la pequeña Betta
-        </p>
-      </div>
     </div>
 
     <!-- Beach clip + closing claim -->
     <div
-      class="mt-16 grid items-center gap-10 sm:mt-24 lg:grid-cols-12 lg:gap-14"
+      class="mt-12 grid items-center gap-10 sm:mt-16 lg:grid-cols-12 lg:gap-14"
     >
       <div class="flex justify-center lg:col-span-5">
         <Clip
