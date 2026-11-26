@@ -598,15 +598,18 @@ media-player .vds-time-slider,
 media-player .vds-time-group {
   display: none !important;
 }
-media-player .vds-controls-group:has(> .vds-fullscreen-button) {
-  order: -1;
-  justify-content: flex-end;
-  margin-bottom: -50px;
-  padding-right: 84px;
-  pointer-events: none;
+/* Pantalla completa arriba a la derecha, junto al volumen (Sandra, 26 nov 2026) */
+media-player .vds-controls-group:has(.vds-fullscreen-button) {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  width: auto !important;
+  padding: 0 84px 0 0 !important;
+  margin: 0 !important;
+  min-height: 0;
 }
-media-player .vds-controls-group:has(> .vds-fullscreen-button) > .vds-fullscreen-button {
-  pointer-events: auto;
+media-player .vds-controls-group:has(.vds-fullscreen-button) .vds-fullscreen-button {
+  margin-top: 11px;
 }
 
 /* Sin fondo negro en el reproductor: asomaba medio píxel por encima del vídeo
