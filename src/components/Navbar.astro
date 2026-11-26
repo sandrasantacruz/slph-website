@@ -47,6 +47,7 @@ const links: NavLink[] = [
 ];
 
 const currentPath = Astro.url.pathname;
+import Bubbles from './Bubbles.astro';
 ---
 
 <header class="relative">
@@ -164,6 +165,9 @@ const currentPath = Astro.url.pathname;
     aria-label="Menú principal"
     data-nav-mobile
   >
+    <!-- Las mismas burbujas del fondo de la web: sin ellas el menú abierto era un azul liso
+         (idea de Sandra, 26 nov 2026). Dentro del panel, z-index -1 queda sobre su fondo azul. -->
+    <Bubbles />
     <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
       <a href="/" class="flex items-center gap-3" aria-label="Si los peces hablaran — Inicio">
         <img src="/assets/logo-borde.webp" alt="Si los peces hablaran" width="600" height="436" class="h-20 w-auto" />
