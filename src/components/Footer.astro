@@ -51,6 +51,22 @@ const year = new Date().getFullYear();
   ></div>
 
   <div class="mx-auto max-w-6xl px-4 pt-48 pb-12">
+    <!-- iPad (vertical y horizontal): el buscador va arriba, en su propia línea, y las tres
+         columnas empiezan a la misma altura (idea de Sandra, 26 nov 2026) -->
+        <form action="/buscar" method="get" role="search" class="mb-12 hidden max-w-sm md:max-xl:flex items-center gap-2 rounded-full border border-caparol/40 bg-azul py-1.5 pr-1.5 pl-5 shadow-lg transition focus-within:border-arena">
+          <label for="footer-q-ipad" class="sr-only">Buscar en la web</label>
+          <input
+            id="footer-q-ipad"
+            name="q"
+            type="search"
+            placeholder="¿Qué quieres encontrar?"
+            class="min-w-0 flex-1 bg-transparent text-base text-caparol placeholder:text-caparol/85 focus:outline-none"
+          />
+          <button type="submit" aria-label="Buscar" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-arena text-azul transition hover:brightness-95">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+          </button>
+        </form>
+
     <div class="grid gap-10 md:grid-cols-3">
       {
         sections.map(({ title, links }) => (
@@ -69,9 +85,9 @@ const year = new Date().getFullYear();
         ))
       }
 
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 md:max-xl:gap-3">
         <!-- Buscador: envía a /buscar?q=…, que filtra al cargar -->
-        <form action="/buscar" method="get" role="search" class="mb-4 flex max-w-sm items-center gap-2 rounded-full border border-caparol/40 bg-azul py-1.5 pr-1.5 pl-5 shadow-lg transition focus-within:border-arena">
+        <form action="/buscar" method="get" role="search" class="mb-4 flex max-w-sm md:max-xl:hidden items-center gap-2 rounded-full border border-caparol/40 bg-azul py-1.5 pr-1.5 pl-5 shadow-lg transition focus-within:border-arena">
           <label for="footer-q" class="sr-only">Buscar en la web</label>
           <input
             id="footer-q"
@@ -95,7 +111,7 @@ const year = new Date().getFullYear();
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  class="flex h-14 w-14 items-center justify-center rounded-full bg-caparol/10 text-caparol transition hover:bg-arena hover:text-negro"
+                  class="flex h-14 w-14 items-center justify-center rounded-full bg-caparol/10 md:max-xl:h-12 md:max-xl:w-12 text-caparol transition hover:bg-arena hover:text-negro"
                 >
                   <Icon name={icon} class="h-7 w-7" />
                 </a>
@@ -104,8 +120,10 @@ const year = new Date().getFullYear();
           }
         </ul>
 
-        <h2 class="mt-6 font-display text-2xl text-caparol">Descarga la app</h2>
-        <ul class="flex flex-wrap gap-3">
+        <h2 class="mt-6 font-display text-2xl text-caparol md:max-xl:mt-2">Descarga la app</h2>
+        <!-- En el iPad (vertical y horizontal) la columna es estrecha y los botones van uno debajo
+             del otro: ahí ocupan el mismo ancho que el buscador, para que queden alineados -->
+        <ul class="flex flex-wrap gap-3 md:max-xl:max-w-sm md:max-xl:flex-col">
           {
             stores.map(({ href, icon, kicker, label }) => (
               <li>
@@ -113,7 +131,7 @@ const year = new Date().getFullYear();
                   href={href}
                   target="_blank"
                   rel="noopener"
-                  class="flex items-center gap-2.5 rounded-xl bg-caparol/10 px-4 py-2 text-caparol transition hover:bg-arena hover:text-negro"
+                  class="flex items-center gap-2.5 rounded-xl bg-caparol/10 px-4 py-2 text-caparol transition hover:bg-arena hover:text-negro md:max-xl:w-full"
                 >
                   <Icon name={icon} class="h-6 w-6" aria-hidden="true" />
                   <span class="flex flex-col leading-tight">
@@ -128,7 +146,7 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <div class="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-caparol/70 md:flex-row md:items-center md:justify-between">
+    <div class="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 pr-16 text-sm text-caparol/70 md:flex-row md:items-center md:justify-between md:pr-20">
       <p>© Si los peces hablaran, 2016 - {year}.</p>
       <ul class="flex flex-wrap gap-x-4 gap-y-2">
         {
