@@ -55,6 +55,32 @@ const sectionDefs: SectionDef[] = [
     },
   },
   {
+    id: "contaminacion",
+    title: "Contaminación",
+    eyebrow: "La realidad que nos empuja",
+    intro:
+      "Lo que ocurre cuando los peces ya no hablan: la urgencia que justifica todo lo demás.",
+    captions: {
+      "01-redes-entre-las-rocas": "Unas redes olvidadas entre las rocas… que, tarde o temprano, terminan en el mar",
+      "02-tortuga-atrapada-en-una-red":
+        "Tortuga enmallada · © Francis Pérez · Primer premio de Naturaleza, World Press Photo 2017",
+      "04-al-alcance-de-tus-manos":
+        "La contaminación marina, mucho más cerca de lo que quisiéramos: al alcance de tus manos",
+      "05-diseccion-de-un-delfin":
+        "Necropsia de un delfín: así estudia la ciencia lo que el mar devuelve",
+      "06-en-la-facultad-de-ciencias-del-mar":
+        "Con las investigadoras marinas May Gómez y Alicia Herrera · Facultad de Ciencias del Mar · ULPGC",
+      "07-el-mar-de-las-futuras-generaciones":
+        "El mar que merecen las futuras generaciones, y el que queremos dejarles como legado",
+    },
+    // Texto aprobado por la investigadora (27 nov 2026): prefiere que figure el
+    // instituto y no su nombre.
+    stories: {
+      "05-diseccion-de-un-delfin":
+        "Gracias al Instituto Universitario de Sanidad Animal y Seguridad Alimentaria (IUSA-ULPGC), que nos explicó cómo la ciencia estudia lo que el mar devuelve: cada animal varado nos cuenta qué está pasando en el océano.",
+    },
+  },
+  {
     id: "transformacion",
     title: "Evolución",
     eyebrow: "El camino recorrido",
@@ -90,25 +116,6 @@ const sectionDefs: SectionDef[] = [
     },
   },
   {
-    id: "librupeces",
-    title: "Nuestros librupeces",
-    eyebrow: "Fuera de la estantería",
-    intro:
-      "El cuento infantil y su cuadernillo salen de las páginas para encontrarse con sus lectores: presentaciones escenificadas, firmas de libros y encuentros literarios con la autora en ferias, bibliotecas y museos.",
-    enlaces: [
-      { href: "/sobre-el-cuento", texto: "El cuento" },
-      { href: "/cuadernillo", texto: "El cuadernillo" },
-    ],
-    captions: {
-      "01-nuestros-librupeces": "La 3.ª edición y su compañero de viaje, el cuadernillo de actividades",
-      "02-el-cuento": "Un cuento que pide ayuda a los niños… y los convierte en guardianes del mar",
-      "03-cuadernillo-de-actividades": "Un laberinto, dos miradas y un mismo mar por cuidar",
-      "04-el-cuento-junto-al-mar": "En la playa de Las Canteras, Lorena reúne a sus amigos para contarles el cuento de su abuela",
-      "05-cuadernillo-oncologia-infantil": "Un librupez que acompaña y enseña, también en el hospital, a los niños y a sus familias",
-      "06-el-cuento-en-poema-del-mar": "En el Deep Sea de Poema del Mar, el cuento pasa de manos de Bella Azul a los humanos",
-    },
-  },
-  {
     id: "cuento",
     title: "El cuento llega a Poema del Mar",
     eyebrow: "Presentación oficial",
@@ -125,6 +132,25 @@ const sectionDefs: SectionDef[] = [
         "May Gómez y Gercende Courtois · La ciencia que avala nuestro cuento",
       "06-una-tapa-convertida-en-sos":
         "Una tapa convertida en un SOS para cuidar el mar · Reutilizar forma parte de nuestra esencia",
+    },
+  },
+  {
+    id: "librupeces",
+    title: "Nuestros librupeces",
+    eyebrow: "Fuera de la estantería",
+    intro:
+      "El cuento infantil y su cuadernillo salen de las páginas para encontrarse con sus lectores: presentaciones escenificadas, firmas de libros y encuentros literarios con la autora en ferias, bibliotecas y museos.",
+    enlaces: [
+      { href: "/sobre-el-cuento", texto: "El cuento" },
+      { href: "/cuadernillo", texto: "El cuadernillo" },
+    ],
+    captions: {
+      "01-nuestros-librupeces": "La 3.ª edición y su compañero de viaje, el cuadernillo de actividades",
+      "02-el-cuento": "Un cuento que pide ayuda a los niños… y los convierte en guardianes del mar",
+      "03-cuadernillo-de-actividades": "Un laberinto, dos miradas y un mismo mar por cuidar",
+      "04-el-cuento-junto-al-mar": "En la playa de Las Canteras, Lorena reúne a sus amigos para contarles el cuento de su abuela",
+      "05-cuadernillo-oncologia-infantil": "Un librupez que acompaña y enseña, también en el hospital, a los niños y a sus familias",
+      "06-el-cuento-en-poema-del-mar": "En el Deep Sea de Poema del Mar, el cuento pasa de manos de Bella Azul a los humanos",
     },
   },
   {
@@ -250,32 +276,6 @@ const sectionDefs: SectionDef[] = [
         "Charla de concienciación y performance · C.C. El Muelle · 2020",
       "06-aniversario-ciencias-del-mar":
         "Conferencia en el XXXVII Aniversario · Facultad de Ciencias del Mar",
-    },
-  },
-  {
-    id: "contaminacion",
-    title: "Contaminación",
-    eyebrow: "La realidad que nos empuja",
-    intro:
-      "Lo que ocurre cuando los peces ya no hablan: la urgencia que justifica todo lo demás.",
-    captions: {
-      "01-redes-entre-las-rocas": "Unas redes olvidadas entre las rocas… que, tarde o temprano, terminan en el mar",
-      "02-tortuga-atrapada-en-una-red":
-        "Tortuga enmallada · © Francis Pérez · Primer premio de Naturaleza, World Press Photo 2017",
-      "04-al-alcance-de-tus-manos":
-        "La contaminación marina, mucho más cerca de lo que quisiéramos: al alcance de tus manos",
-      "05-diseccion-de-un-delfin":
-        "Necropsia de un delfín: así estudia la ciencia lo que el mar devuelve",
-      "06-en-la-facultad-de-ciencias-del-mar":
-        "Con las investigadoras marinas May Gómez y Alicia Herrera · Facultad de Ciencias del Mar · ULPGC",
-      "07-el-mar-de-las-futuras-generaciones":
-        "El mar que merecen las futuras generaciones, y el que queremos dejarles como legado",
-    },
-    // Texto aprobado por la investigadora (27 nov 2026): prefiere que figure el
-    // instituto y no su nombre.
-    stories: {
-      "05-diseccion-de-un-delfin":
-        "Gracias al Instituto Universitario de Sanidad Animal y Seguridad Alimentaria (IUSA-ULPGC), que nos explicó cómo la ciencia estudia lo que el mar devuelve: cada animal varado nos cuenta qué está pasando en el océano.",
     },
   },
   {
