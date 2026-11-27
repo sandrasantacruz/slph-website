@@ -1,0 +1,192 @@
+---
+/**
+ * La condición del Club SLPH, tal como la cuenta el cuento (27 nov 2026):
+ * para pertenecer al club hay que contar lo aprendido sobre el mar al menos a
+ * una persona y asegurarse de que esa persona se lo cuente a otra.
+ * Es el objetivo real del proyecto: crear conciencia, no vender. Por eso la
+ * llamada a la acción no pide comprar nada: empieza la cadena aquí mismo.
+ * El mensaje usa un dato del dossier (fuentes: UNESCO, UICN, IPCC).
+ */
+import { Icon } from 'astro-icon/components';
+import Ola from './Ola.astro';
+
+interface Props {
+  id?: string;
+  /** Cabecera: en Inicio invita a unirse; en /club habla a quien ha recibido el mensaje */
+  antetitulo?: string;
+  titulo?: string;
+  destacado?: string;
+  /** h1 en /club, h2 en Inicio */
+  nivel?: 'h1' | 'h2';
+}
+const {
+  id = 'club-slph',
+  antetitulo = '¿quieres ser como Lorena?',
+  titulo = 'Únete al',
+  destacado = 'Club SLPH',
+  nivel = 'h2',
+} = Astro.props;
+const Titulo = nivel;
+
+// El enlace lleva a /club: quien lo recibe llega directo al club (y la cadena sigue),
+// WhatsApp enseña la tarjeta de la página y cada visita cuenta en las estadísticas.
+const url = 'https://silospeceshablaran.com/club';
+const mensaje =
+  'Me he unido al Club SLPH. La condición es contarle a alguien lo que he aprendido sobre el mar, así que te lo cuento a ti: el mar nos da más de la mitad del oxígeno que respiramos, y cada vez hay más plástico en él. Ahora te toca a ti: cuéntaselo a otra persona. ' +
+  url;
+const whatsapp = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
+
+const pasos = [
+  // Solo la condición del cuento, en dos pasos (Sandra, 27 nov 2026)
+  { icono: 'game-icons:conversation', texto: 'Cuéntale a alguien lo que has aprendido sobre el mar.' },
+  { icono: 'game-icons:linked-rings', texto: 'Y asegúrate de que se lo cuente a otra persona.' },
+];
+const flecha = 'M5 12h14M13 6l6 6-6 6';
+---
+
+<section id={id} aria-labelledby={`${id}-titulo`} class="relative isolate scroll-mt-24 py-20 sm:py-28">
+  <div class="relative mx-auto max-w-5xl px-6">
+    <!-- Dña. Paciencia, la misma de la tarjeta de WhatsApp: quien llega por el mensaje la reconoce.
+         En el ordenador flota a un lado (no alarga la página); en el móvil, pequeña sobre el título. -->
+    <img
+      src="/assets/animals/dona-paciencia.webp"
+      alt=""
+      aria-hidden="true"
+      class="anim-float-soft pointer-events-none mx-auto mb-2 block w-32 drop-shadow-2xl sm:w-40 lg:absolute lg:top-0 lg:-right-10 lg:mb-0 lg:w-64 xl:-right-24 xl:w-72"
+      width="650"
+      height="553"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="font-hand text-2xl text-celeste sm:text-3xl">{antetitulo}</p>
+      <Titulo id={`${id}-titulo`} class="mt-2 font-display text-[clamp(2.25rem,6vw,4.25rem)] leading-[1] text-caparol">
+        {titulo}{' '}<Ola class="whitespace-nowrap text-arena">{destacado}</Ola>
+      </Titulo>
+      <!-- La frase de Vera, literal (clip /videos/opinion-vera.mp4, 9 s, del vídeo del 30/9/2026):
+           una niña tuvo una idea y la siguió mucha gente. Eso es la cadena del club. -->
+      <figure class="mx-auto mt-8 max-w-2xl">
+        <!-- Cita recortada con puntos suspensivos (idea de Sandra): el final se escucha en el vídeo -->
+        <blockquote class="font-hand text-2xl leading-snug text-caparol sm:text-3xl">
+          «…que una niña quisiera salvar el océano…»
+        </blockquote>
+        <figcaption class="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-caparol/65 sm:text-base">
+          <span>Vera Paisier, 11 años</span>
+          <button
+            type="button"
+            data-club-video="/videos/opinion-vera.mp4"
+            data-poster="/videos/opinion-vera-poster.webp"
+            class="inline-flex items-center gap-1.5 font-display text-xs tracking-[0.18em] text-arena uppercase transition hover:text-caparol sm:text-sm"
+          >
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+            Escúchala
+          </button>
+        </figcaption>
+      </figure>
+      <p class="mt-6 text-base leading-relaxed text-caparol/90 sm:text-lg">
+        Esa niña es <strong class="font-normal text-arena">Lorena, nuestra pequeña heroína</strong>. Para entrar en su club, solo pone una condición:
+      </p>
+    </div>
+
+    <!-- La cadena: tres eslabones unidos por una línea -->
+    <ol class="relative mx-auto mt-12 grid max-w-2xl gap-6 sm:grid-cols-2 sm:gap-5">
+      <span aria-hidden="true" class="absolute top-8 right-[25%] left-[25%] hidden h-px bg-gradient-to-r from-arena/0 via-arena/60 to-arena/0 sm:block"></span>
+      {
+        pasos.map((p, i) => (
+          <li class="relative flex items-start gap-4 sm:flex-col sm:items-center sm:text-center">
+            <span class="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-azul ring-2 ring-arena/70">
+              <Icon name={p.icono} class="h-8 w-8 text-arena" aria-hidden="true" />
+              <span class="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-arena font-display text-sm text-azul">{i + 1}</span>
+            </span>
+            <span class="pt-3 text-base leading-snug text-caparol/90 sm:pt-0 sm:text-lg">{p.texto}</span>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="mt-10 text-center font-display text-xl leading-snug text-arena sm:text-2xl">
+      Para cuidar el mar no hace falta comprar nada: basta con empezar la cadena.
+    </p>
+
+    <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <a
+        href={whatsapp}
+        data-umami-event="club-empieza-cadena"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95 sm:text-2xl"
+      >
+        <Icon name="simple-icons:whatsapp" class="h-6 w-6" aria-hidden="true" />
+        Empieza la cadena
+      </a>
+      <button
+        type="button"
+        data-club-compartir
+        data-umami-event="club-compartir"
+        data-texto={mensaje}
+        class="group inline-flex items-center gap-3 rounded-full px-7 py-3 font-display text-xl text-arena ring-2 ring-arena/60 transition hover:bg-arena/10 hover:ring-arena sm:text-2xl"
+      >
+        <span data-club-etiqueta>Compártelo de otra forma</span>
+        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d={flecha} /></svg>
+      </button>
+    </div>
+    <p class="mt-4 text-center text-sm text-caparol/60">Se abre con un mensaje ya escrito: puedes cambiarlo antes de enviarlo.</p>
+  </div>
+  <dialog
+    data-club-dialogo
+    aria-label="Vídeo de Vera Paisier"
+    class="m-auto w-[min(94vw,60rem)] overflow-visible bg-transparent p-0 backdrop:bg-azul-deep/85 backdrop:backdrop-blur-sm"
+  >
+    <div class="relative">
+      <button type="button" data-club-cerrar aria-label="Cerrar vídeo" class="absolute -top-12 right-0 rounded-full p-2 text-caparol transition hover:text-arena">
+        <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <video controls playsinline preload="none" class="block aspect-video w-full rounded-2xl bg-azul-deep object-contain shadow-2xl"></video>
+      <p class="mt-3 text-center font-hand text-2xl text-arena">Vera Paisier, 11 años</p>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  // Vídeo de Vera en un diálogo (mismo patrón que Sobre el cuento)
+  const clubDlg = document.querySelector<HTMLDialogElement>('[data-club-dialogo]');
+  const clubVid = clubDlg?.querySelector('video');
+  document.querySelectorAll<HTMLButtonElement>('[data-club-video]').forEach((b) =>
+    b.addEventListener('click', () => {
+      if (!clubDlg || !clubVid) return;
+      clubVid.src = b.dataset.clubVideo!;
+      clubVid.poster = b.dataset.poster ?? '';
+      clubDlg.showModal();
+      clubVid.play().catch(() => {});
+    }),
+  );
+  clubDlg?.querySelector('[data-club-cerrar]')?.addEventListener('click', () => clubDlg.close());
+  clubDlg?.addEventListener('click', (e) => { if (e.target === clubDlg) clubDlg.close(); });
+  clubDlg?.addEventListener('close', () => clubVid?.pause());
+
+  // Compartir con el menú del móvil; si no existe (ordenador), copia el mensaje.
+  document.querySelectorAll<HTMLButtonElement>('[data-club-compartir]').forEach((b) => {
+    b.addEventListener('click', async () => {
+      const texto = b.dataset.texto ?? '';
+      const etiqueta = b.querySelector<HTMLElement>('[data-club-etiqueta]');
+      if (navigator.share) {
+        try {
+          await navigator.share({ text: texto });
+        } catch {
+          /* el usuario cerró el menú */
+        }
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(texto);
+        if (etiqueta) {
+          const antes = etiqueta.textContent;
+          etiqueta.textContent = '¡Mensaje copiado!';
+          setTimeout(() => (etiqueta.textContent = antes), 2500);
+        }
+      } catch {
+        /* sin portapapeles: no hacemos nada */
+      }
+    });
+  });
+</script>

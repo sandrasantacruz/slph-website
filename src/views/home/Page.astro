@@ -1,4 +1,5 @@
 ---
+import ClubSLPH from '../../components/ClubSLPH.astro';
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Trailer from './Trailer.astro';
@@ -11,7 +12,6 @@ import CuentoFascina from './CuentoFascina.astro';
 import QuienDetras from './QuienDetras.astro';
 import Galeria from './Galeria.astro';
 import Faq from './Faq.astro';
-import NosEchasUnaAleta from './NosEchasUnaAleta.astro';
 import EquipoEntidad from './EquipoEntidad.astro';
 import Colaboran from './Colaboran.astro';
 import WaterLine from '../../components/WaterLine.astro';
@@ -38,6 +38,9 @@ import { HOME_FAQ } from './faq-data';
   <Versatilidad />
   <PorQueUrgente />
   <Ciencia />
+  <!-- la acción personal: después del problema y de la ciencia, lo que puede hacer cada uno -->
+  <WaterLine separador clave="-club" />
+  <ClubSLPH />
   <WaterLine separador clave="-cuento" />
   <SabiasQue />
   <CuentoFascina />
@@ -45,9 +48,9 @@ import { HOME_FAQ } from './faq-data';
   <QuienDetras />
   <Galeria />
   <Faq />
-  <!-- de contar el proyecto a pedir colaboración -->
+  <!-- de contar el proyecto a pedir colaboración. «¿Nos echas una aleta?» (la llamada a particulares)
+       la sustituye el Club SLPH, más arriba (27 nov 2026) -->
   <WaterLine separador />
-  <NosEchasUnaAleta />
   <EquipoEntidad />
   <Colaboran modo="compacto" />
 </MainLayout>

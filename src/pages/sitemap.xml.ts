@@ -27,6 +27,7 @@ const STATIC_URLS: UrlEntry[] = [
   { loc: '/realidad-aumentada', changefreq: 'monthly', priority: 0.6 },
   { loc: '/repercusion', changefreq: 'monthly', priority: 0.7 },
   { loc: '/galeria', changefreq: 'monthly', priority: 0.7 },
+  { loc: '/club', changefreq: 'monthly', priority: 0.6 },
   { loc: '/comprar', changefreq: 'monthly', priority: 0.9 },
   { loc: '/noticias', changefreq: 'weekly', priority: 0.8 },
   { loc: '/colabora', changefreq: 'monthly', priority: 0.7 },

@@ -1,0 +1,122 @@
+---
+/**
+ * /club — adonde llega quien recibe el mensaje del Club SLPH (27 nov 2026).
+ * La cadena no se corta: quien abre el enlace encuentra el club y el botón para
+ * seguirla. Cada visita a esta página es una persona más a la que ha llegado el
+ * mensaje (contador anónimo de Umami, sin cookies ni datos personales).
+ */
+import { Icon } from 'astro-icon/components';
+import MainLayout from '../../layouts/MainLayout.astro';
+import ClubSLPH from '../../components/ClubSLPH.astro';
+import WaterLine from '../../components/WaterLine.astro';
+import Ola from '../../components/Ola.astro';
+import { socials } from '../../lib/social';
+import { breadcrumbSchema } from '../../lib/seo';
+import { SETTINGS, whatsappHref, mailHref } from '../../lib/settings';
+
+const breadcrumb = breadcrumbSchema([
+  { name: 'Inicio', url: '/' },
+  { name: 'Club SLPH', url: '/club' },
+]);
+const flecha = 'M5 12h14M13 6l6 6-6 6';
+// «Danos tu idea» para el carné (Sandra): lo envía un adulto; no se publica nada sin permiso de la familia
+const ideaWa = SETTINGS.whatsapp ? `${whatsappHref(SETTINGS.whatsapp)}?text=${encodeURIComponent('Hola, tenemos una idea para el carné del Club SLPH:')}` : '';
+const ideaMail = SETTINGS.email ? `${mailHref(SETTINGS.email)}?subject=${encodeURIComponent('Idea para el carné del Club SLPH')}` : '';
+---
+
+<MainLayout
+  title="Únete al Club SLPH"
+  description="Alguien te ha contado lo que sabe del mar. Ahora te toca a ti: únete al Club SLPH de Si los peces hablaran… y cuéntaselo a otra persona."
+  image="/assets/og-club.jpg"
+  imageAlt="Dña. Paciencia, la tortuga del cuento Si los peces hablaran…, invita a unirse al Club SLPH"
+  imageWidth={1200}
+  imageHeight={630}
+  jsonLd={[breadcrumb]}
+>
+  <ClubSLPH id="club" antetitulo="alguien te lo ha contado…" titulo="Ahora te" destacado="toca a ti" nivel="h1" />
+
+  <WaterLine separador clave="-lorena" />
+  <!-- Las palabras de Lorena, como una página del cuento (pág. 22): papel claro, letra
+       manuscrita y la idea clave destacada. En letra de cartel pesaba demasiado (Sandra). -->
+  <section class="relative isolate py-16 sm:py-24">
+    <div class="mx-auto max-w-4xl px-6">
+      <p class="text-center font-hand text-2xl text-celeste sm:text-3xl">así lo cuenta nuestro cuento</p>
+      <figure class="relative mx-auto mt-6 -rotate-1 rounded-sm bg-caparol px-8 pt-10 pb-8 text-azul shadow-[0_30px_60px_-20px_rgba(3,10,35,0.9)] ring-1 ring-black/5 sm:px-12 sm:pt-12">
+        <blockquote class="font-hand text-[1.45rem] leading-snug sm:text-[1.65rem] lg:text-[1.75rem]">
+          <span class="block">—Tenemos que conseguir que</span>
+          <!-- la idea clave en su propia línea, con un trazo de arena como rotulador (en arena pura no se leería sobre el papel) -->
+          <span class="my-2 block">
+            <strong class="box-decoration-clone rounded-[0.35em] bg-[linear-gradient(transparent_42%,#fadeaa_42%,#fadeaa_90%,transparent_90%)] px-1 font-normal text-[1.02em] whitespace-nowrap text-azul sm:text-[1.3em]">cada persona se lo cuente a otra,</strong>
+          </span>
+          <span class="block">así no solo salvaremos la vida de los seres marinos, sino que, a la vez,</span>
+          <span class="mt-1 block">¡nos ayudaríamos a nosotros mismos!</span>
+        </blockquote>
+        <!-- Brand, el pez con gafas del índice del cuento, leyendo esta página («CONOCE NUESTRA WEB»,
+             Material SLPH). Fondo blanco: «multiply» lo funde con el papel. -->
+        <img
+          src="/assets/club/brand-leyendo.webp"
+          alt="Brand, el pez con gafas del cuento, leyendo un libro"
+          class="-mb-2 ml-auto mt-4 block w-40 mix-blend-multiply sm:w-52"
+          width="560"
+          height="272"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mt-2 flex items-end justify-between gap-4 text-sm text-azul/60">
+          <span>Lorena, en <em class="not-italic font-display text-azul/80">Si los peces hablaran…</em></span>
+          <span class="font-display text-base text-azul/50">22</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- El carné del club, aún en diseño: se crea con los niños, como el cuento -->
+  <section class="relative isolate pb-16 sm:pb-20">
+    <div class="mx-auto max-w-2xl px-6 text-center">
+      <h2 class="font-display text-[clamp(1.75rem,4.5vw,2.75rem)] leading-[1.05] text-caparol">
+        Estamos creando el carné del club: <Ola class="whitespace-nowrap text-arena">¡danos tu idea!</Ola>
+      </h2>
+      <p class="mt-4 text-base leading-relaxed text-caparol/85 sm:text-lg">
+        ¿Cómo te lo imaginas? Mándanos tu idea o tu dibujo. Igual que el cuento, queremos crearlo contigo.
+      </p>
+      <div class="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        {ideaWa && (
+          <a href={ideaWa} target="_blank" rel="noopener noreferrer" data-umami-event="club-idea-carne-whatsapp" class="inline-flex items-center gap-2.5 rounded-full bg-arena px-6 py-2.5 font-display text-lg text-azul shadow-lg transition hover:brightness-95">
+            <Icon name="simple-icons:whatsapp" class="h-5 w-5" aria-hidden="true" />
+            Por WhatsApp
+          </a>
+        )}
+        {ideaMail && (
+          <a href={ideaMail} data-umami-event="club-idea-carne-correo" class="inline-flex items-center gap-2.5 rounded-full px-6 py-2.5 font-display text-lg text-arena ring-2 ring-arena/60 transition hover:bg-arena/10 hover:ring-arena">
+            Por correo
+          </a>
+        )}
+      </div>
+      <p class="mt-4 text-sm text-caparol/60">Si eres menor, pídele a un adulto que nos lo envíe.</p>
+    </div>
+  </section>
+
+  <WaterLine separador clave="-redes" />
+  <!-- «¿Aleteas con nosotros?» (idea de Sandra): las redes, para quien llega por la cadena -->
+  <section class="relative isolate pt-16 pb-24 sm:pt-20 sm:pb-32">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <h2 class="font-display text-[clamp(2rem,5vw,3.25rem)] leading-[1.05] text-caparol">
+        ¿Aleteas <Ola class="whitespace-nowrap text-arena">con nosotros?</Ola>
+      </h2>
+      <p class="mt-4 text-base text-caparol/85 sm:text-lg">Síguenos y no te pierdas lo que hacemos por el mar.</p>
+      <ul class="mt-8 flex flex-wrap justify-center gap-4">
+        {socials.map(({ label, href, icon }) => (
+          <li>
+            <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} data-umami-event={`club-red-${label.toLowerCase()}`} class="flex h-14 w-14 items-center justify-center rounded-full border-2 border-caparol/40 text-caparol transition hover:scale-110 hover:border-arena hover:bg-arena hover:text-azul">
+              <Icon name={icon} class="h-6 w-6" aria-hidden="true" />
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a href="/" class="group mt-12 inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95 sm:text-2xl">
+        Descubre Si los peces hablaran…
+        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d={flecha} /></svg>
+      </a>
+    </div>
+  </section>
+</MainLayout>
