@@ -1,4 +1,5 @@
 ---
+import ParaTuCentro from "./ParaTuCentro.astro";
 import WaterLine from '../../components/WaterLine.astro';
 import MainLayout from "../../layouts/MainLayout.astro";
 import Hero from "./Hero.astro";
@@ -42,6 +43,8 @@ const breadcrumb = breadcrumbSchema([
   <FormatosGrid />
   <Diferencia />
   <Profesorado />
+  <WaterLine separador clave="-centro" />
+  <ParaTuCentro />
 </MainLayout>
 
 <script>
