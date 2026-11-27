@@ -1,5 +1,5 @@
 ---
-import Cierre from './Cierre.astro';
+import SiguientePaso from '../../components/SiguientePaso.astro';
 import fs from "node:fs";
 import path from "node:path";
 import MainLayout from "../../layouts/MainLayout.astro";
@@ -513,7 +513,14 @@ const sections = sectionDefs.map((def) => {
       />
     ))
   }
-  <Cierre />
+  <SiguientePaso
+    antetitulo="¿lo vivimos juntos?"
+    titulo="Llevamos el mar"
+    destacado="donde nos llames"
+    texto="Colegios, bibliotecas, museos, ayuntamientos y organismos oficiales: diseñamos contigo talleres, espectáculos y encuentros a medida."
+    principal={{ href: '/colabora', texto: 'Quiero colaborar' }}
+    secundario={{ href: '/noticias', texto: 'Últimas noticias' }}
+  />
   <Lightbox />
 </MainLayout>
 

@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
 import Hero from "./Hero.astro";
 import NovedadesList from "./NovedadesList.astro";
+import SiguientePaso from "../../components/SiguientePaso.astro";
 import { byDateDesc, postPath } from "../../lib/posts";
 import { breadcrumbSchema, SITE_URL, absoluteUrl } from "../../lib/seo";
 
@@ -47,4 +48,12 @@ const collectionPage = {
 >
   <Hero />
   <NovedadesList items={items} />
+  <SiguientePaso
+    antetitulo="¿la próxima noticia?"
+    titulo="La próxima aventura"
+    destacado="puede ser contigo"
+    texto="¿Quieres llevar Si los peces hablaran… a tu colegio, biblioteca o municipio? Cuéntanos tu idea."
+    principal={{ href: '/colabora', texto: 'Colabora con SLPH' }}
+    secundario={{ href: '/contacto', texto: 'Escríbenos' }}
+  />
 </MainLayout>

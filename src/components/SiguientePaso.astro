@@ -1,0 +1,58 @@
+---
+// Cierre de página con un siguiente paso (comprar, colaborar, contactar).
+// Análisis de contenido, 27 nov 2026: Repercusión, Galería, La autora y
+// Noticias terminaban sin invitar a nada; quien llega emocionado al final
+// tiene que encontrar qué hacer. Botón principal en arena (como «Últimas
+// noticias» en Galería), el secundario con borde.
+import Ola from './Ola.astro';
+import WaterLine from './WaterLine.astro';
+
+interface Boton {
+  href: string;
+  texto: string;
+}
+
+interface Props {
+  antetitulo: string;
+  titulo: string;
+  destacado: string; // va en arena con la ola, detrás de «titulo»
+  texto: string;
+  principal: Boton;
+  secundario?: Boton;
+}
+
+const { antetitulo, titulo, destacado, texto, principal, secundario } = Astro.props;
+const flecha = 'M5 12h14M13 6l6 6-6 6';
+---
+
+<!-- línea de agua propia: separa el cierre del último bloque de la página -->
+<WaterLine separador clave="-siguiente" />
+<section class="relative isolate pt-10 pb-24 sm:pt-14 sm:pb-32">
+  <div class="mx-auto flex max-w-3xl flex-col items-center px-6 text-center">
+    <p class="font-hand text-2xl text-celeste sm:text-3xl">{antetitulo}</p>
+    <h2 class="mt-2 font-display text-[clamp(2rem,5.5vw,3.75rem)] leading-[1.05] text-caparol">
+      {titulo} <Ola class="whitespace-nowrap text-arena">{destacado}</Ola>
+    </h2>
+    <p class="mt-6 max-w-2xl text-base leading-relaxed text-caparol/85 sm:text-lg">{texto}</p>
+    <div class="mt-9 flex flex-col items-center gap-4 sm:flex-row sm:gap-5">
+      <a
+        href={principal.href}
+        class="group inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95 sm:text-2xl"
+      >
+        {principal.texto}
+        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d={flecha}></path></svg>
+      </a>
+      {
+        secundario && (
+          <a
+            href={secundario.href}
+            class="group inline-flex items-center gap-3 rounded-full px-7 py-3 font-display text-xl text-arena ring-2 ring-arena/60 transition hover:bg-arena/10 hover:ring-arena sm:text-2xl"
+          >
+            {secundario.texto}
+            <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d={flecha}></path></svg>
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>
