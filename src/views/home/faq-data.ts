@@ -12,20 +12,6 @@ const link = (href: string, label: string): string =>
 
 export const HOME_FAQ: FaqEntry[] = [
   {
-    question: "¿Qué es Si los peces hablaran…?",
-    answer:
-      "Si los peces hablaran… (SLPH) es un programa multidisciplinar de concienciación marina creado en Gran Canaria por Sandra Santa Cruz. Une las artes plásticas y escénicas, las ciencias del mar y la educación para proteger los ecosistemas marinos.\nNació en 2016 como un musical en el Centro de Danza Sandra Santa Cruz y, gracias a su repercusión, se convirtió en un programa con cuento ilustrado, talleres, espectáculos y acciones culturales para todos los públicos.",
-    answerHtml:
-      `Si los peces hablaran… (SLPH) es un programa multidisciplinar de concienciación marina creado en Gran Canaria por Sandra Santa Cruz. Une las artes plásticas y escénicas, las ciencias del mar y la educación para proteger los ecosistemas marinos.\nNació en 2016 como ${link("/galeria#musical", "un musical")} en el Centro de Danza Sandra Santa Cruz y, gracias a su repercusión, se convirtió en un programa con cuento ilustrado, talleres, espectáculos y acciones culturales para todos los públicos.`,
-  },
-  {
-    question: "¿Quién es la autora?",
-    answer:
-      "Sandra Santa Cruz es bailarina, coreógrafa, profesora y licenciada en danza. Desde hace casi cuatro décadas dirige el Centro de Danza Sandra Santa Cruz, en Gran Canaria, donde promueve la danza como herramienta educativa, artística y de desarrollo personal.\nEscribió el cuento Si los peces hablaran… y dirige el Programa SLPH desde que se estrenó como musical en 2016.",
-    answerHtml:
-      `Sandra Santa Cruz es bailarina, coreógrafa, profesora y licenciada en danza. Desde hace casi cuatro décadas dirige el Centro de Danza Sandra Santa Cruz, en Gran Canaria, donde promueve la danza como herramienta educativa, artística y de desarrollo personal.\nEscribió el cuento Si los peces hablaran… y dirige el Programa SLPH desde que se estrenó como musical en 2016. Conoce su trayectoria en ${link("/autor", "La autora")}.`,
-  },
-  {
     question: "¿Dónde se puede comprar el cuento?",
     answer:
       "Puedes comprarlo dedicado por su autora en el Centro de Danza Sandra Santa Cruz. También en librerías de Gran Canaria como Librería Canaima, La Librería del Cabildo o El Libro Técnico, y en Poema del Mar.\nY puedes adquirirlo online con envío a domicilio a través de El Libro Técnico.\nEn la página Comprar de nuestra web encontrarás el listado actualizado de todos los puntos de venta, junto con su ubicación y la información necesaria para realizar tu compra.",
@@ -35,29 +21,36 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿A qué edad va dirigido el cuento?",
     answer:
-      "El cuento Si los peces hablaran… está dirigido a todas las edades. Puede leerse de forma autónoma a partir de los 6 años, aunque también es una excelente herramienta de sensibilización para familias, centros educativos y público adulto.\nSu lenguaje emotivo y sus ilustraciones permiten que cada lector descubra la historia desde una perspectiva diferente, adaptándose a su edad y nivel de comprensión. Puedes leer gratis el primer capítulo en Lee un fragmento.",
+      "El cuento Si los peces hablaran… está dirigido a todas las edades. Puede leerse de forma autónoma a partir de los 6 años, aunque también es una excelente herramienta de sensibilización para familias, centros educativos y público adulto.\nSu lenguaje emotivo y sus ilustraciones permiten que cada lector descubra la historia desde una perspectiva diferente, adaptándose a su edad y nivel de comprensión. Puedes leer gratis el primer capítulo en Lee el capítulo I.",
     answerHtml:
-      `El cuento Si los peces hablaran… está dirigido a todas las edades. Puede leerse de forma autónoma a partir de los 6 años, aunque también es una excelente herramienta de sensibilización para familias, centros educativos y público adulto.\nSu lenguaje emotivo y sus ilustraciones permiten que cada lector descubra la historia desde una perspectiva diferente, adaptándose a su edad y nivel de comprensión. Puedes leer gratis el primer capítulo en ${link("/lee-un-fragmento", "Lee un fragmento")}.`,
+      `El cuento Si los peces hablaran… está dirigido a todas las edades. Puede leerse de forma autónoma a partir de los 6 años, aunque también es una excelente herramienta de sensibilización para familias, centros educativos y público adulto.\nSu lenguaje emotivo y sus ilustraciones permiten que cada lector descubra la historia desde una perspectiva diferente, adaptándose a su edad y nivel de comprensión. Puedes leer gratis el primer capítulo en ${link("/lee-un-fragmento", "Lee el capítulo I")}.`,
   },
   {
-    question: "¿En qué consiste el programa SLPH?",
+    question: "¿Qué es el cuadernillo de actividades?",
     answer:
-      "Funciona a través de distintos formatos que se adaptan a cada público: talleres en museos, bibliotecas y colegios; musicales y espectáculos; conferencias con investigadoras marinas; exposiciones, y materiales didácticos como el cuento y su cuadernillo de actividades.\nSus contenidos científicos cuentan con la supervisión de investigadoras del Instituto ECOAQUA de la Universidad de Las Palmas de Gran Canaria, lo que garantiza el rigor de sus mensajes.",
+      "Es el compañero del cuento y la novedad de la 3.ª edición: 15 páginas de laberintos, personajes para colorear, diferencias y dibujos para unir con los animales marinos del cuento, para jugar en casa o en el aula. En la contraportada, siete códigos QR llevan al origen del proyecto, a las investigadoras marinas y a los talleres.\nNació pensando también en los niños de Oncología Infantil. Descúbrelo en El cuadernillo.",
     answerHtml:
-      `Funciona a través de distintos formatos que se adaptan a cada público: talleres en museos, bibliotecas y colegios; musicales y espectáculos; conferencias con investigadoras marinas; exposiciones, y materiales didácticos como el cuento y su cuadernillo de actividades.\nSus contenidos científicos cuentan con la supervisión de investigadoras del Instituto ECOAQUA de la Universidad de Las Palmas de Gran Canaria, lo que garantiza el rigor de sus mensajes. Descubre todos los formatos en ${link("/programa", "El programa")}.`,
+      `Es el compañero del cuento y la novedad de la 3.ª edición: 15 páginas de laberintos, personajes para colorear, diferencias y dibujos para unir con los animales marinos del cuento, para jugar en casa o en el aula. En la contraportada, siete códigos QR llevan al origen del proyecto, a las investigadoras marinas y a los talleres.\nNació pensando también en los niños de Oncología Infantil. Descúbrelo en ${link("/cuadernillo", "El cuadernillo")}.`,
+  },
+  {
+    question: "¿Puedo llevarlo a mi colegio o biblioteca?",
+    answer:
+      "Sí. A los colegios llevamos Talleres SLPH de aproximadamente una hora, de la mano de la autora del cuento, y espectáculos en el propio centro o reuniendo a varios centros en un recinto mayor: lo tienes en Lleva el mar a tu aula.\nA las bibliotecas, una presentación en la que los personajes del cuento cobran vida y la posibilidad de convertirse en Punto Azul. Escríbenos y te preparamos una propuesta a medida.",
+    answerHtml:
+      `Sí. A los colegios llevamos Talleres SLPH de aproximadamente una hora, de la mano de la autora del cuento, y espectáculos en el propio centro o reuniendo a varios centros en un recinto mayor: lo tienes en ${link("/programa#para-tu-centro", "Lleva el mar a tu aula")}.\nA las bibliotecas, una presentación en la que los personajes del cuento cobran vida y la posibilidad de convertirse en ${link("/colabora#puntos-azules", "Punto Azul")}. Escríbenos y te preparamos una propuesta a medida.`,
   },
   {
     question: "¿Cómo se puede colaborar?",
     answer:
-      "Si representas a un colegio, una biblioteca, un museo, un ayuntamiento o una empresa, puedes llevar nuestras actividades a tu espacio, patrocinar un proyecto o convertir tu biblioteca en Punto Azul. Diseñamos cada propuesta contigo.\nEn la página Colabora encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página Contacto.",
+      "Ayuntamientos, organismos, museos y empresas pueden programar nuestras actividades o patrocinar un proyecto: lo diseñamos contigo. Lo tienes todo en Colabora y puedes escribirnos desde Contacto.\nY cualquier persona puede ayudar de la forma más sencilla: contándole a alguien lo que ha aprendido sobre el mar.",
     answerHtml:
-      `Si representas a un colegio, una biblioteca, un museo, un ayuntamiento o una empresa, puedes llevar nuestras actividades a tu espacio, patrocinar un proyecto o convertir tu biblioteca en Punto Azul. Diseñamos cada propuesta contigo.\nEn la página ${link("/colabora", "Colabora")} encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página ${link("/contacto", "Contacto")}.`,
+      `Ayuntamientos, organismos, museos y empresas pueden programar nuestras actividades o patrocinar un proyecto: lo diseñamos contigo. Lo tienes todo en ${link("/colabora", "Colabora")} y puedes escribirnos desde ${link("/contacto", "Contacto")}.\nY cualquier persona puede ayudar de la forma más sencilla: contándole a alguien lo que ha aprendido sobre el mar.`,
   },
   {
     question: "¿Dónde se desarrolla el proyecto?",
     answer:
-      "Tiene su sede en Gran Canaria (España) y sus actividades han llegado también a Fuerteventura, Tenerife y La Palma, con proyección a todo el territorio nacional. Las fotos de cada lugar están en la Galería.\nTodas las actividades, eventos, colaboraciones y apariciones en los medios de comunicación se publican en la sección Noticias de nuestra web.",
+      "Tiene su sede en Gran Canaria y ha llegado a Tenerife, La Palma y Fuerteventura… y hasta Colombia. Las fotos de cada lugar están en la Galería.\nTodas las actividades, eventos, colaboraciones y apariciones en los medios de comunicación se publican en Noticias.",
     answerHtml:
-      `Tiene su sede en Gran Canaria (España) y sus actividades han llegado también a Fuerteventura, Tenerife y La Palma, con proyección a todo el territorio nacional. Las fotos de cada lugar están en la ${link("/galeria", "Galería")}.\nTodas las actividades, eventos, colaboraciones y apariciones en los medios de comunicación se publican en la sección ${link("/noticias", "Noticias")} de nuestra web.`,
+      `Tiene su sede en Gran Canaria y ha llegado a Tenerife, La Palma y Fuerteventura… y hasta Colombia. Las fotos de cada lugar están en la ${link("/galeria", "Galería")}.\nTodas las actividades, eventos, colaboraciones y apariciones en los medios de comunicación se publican en ${link("/noticias", "Noticias")}.`,
   },
 ];
