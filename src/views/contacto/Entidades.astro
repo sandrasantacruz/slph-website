@@ -1,52 +1,94 @@
 ---
 /**
- * Contacto profesional: centros educativos, instituciones, empresas y
- * profesionales. Va debajo de los canales generales, para que la familia
- * encuentre primero el WhatsApp y la entidad encuentre después su sitio.
- * El botón abre el correo con el asunto ya puesto.
+ * Contacto profesional con caminos claros (análisis de contenido, 27 nov 2026):
+ * antes era un único bloque genérico para «centros, instituciones y empresas».
+ * Ahora cada tipo de visitante encuentra su tarjeta: qué le ofrecemos, un
+ * correo con el asunto ya puesto (así sabemos de qué va antes de abrirlo) y
+ * la página de la web que le interesa. Va debajo de los canales generales,
+ * para que la familia encuentre primero el WhatsApp.
  */
+import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
-import EnlaceFlecha from '../../components/EnlaceFlecha.astro';
 import { SETTINGS, mailHref } from '../../lib/settings';
 
-const correo = SETTINGS.email
-  ? `${mailHref(SETTINGS.email)}?subject=${encodeURIComponent('Propuesta de colaboración con Si los peces hablaran…')}`
-  : '';
+const correo = (asunto: string) =>
+  SETTINGS.email ? `${mailHref(SETTINGS.email)}?subject=${encodeURIComponent(asunto)}` : '';
+
+const caminos = [
+  {
+    icono: 'game-icons:school-bag',
+    quien: 'Colegios y centros educativos',
+    texto: 'Talleres, espectáculos y conferencias para tu alumnado, también en fechas como el Día Mundial de los Océanos o del Libro.',
+    asunto: 'Actividad de Si los peces hablaran… para mi centro',
+    enlace: { href: '/programa#talleres', texto: 'Ver los talleres' },
+  },
+  {
+    icono: 'game-icons:bookshelf',
+    quien: 'Bibliotecas',
+    texto: 'Conviértete en Punto Azul: el cuento en tus estanterías y una actividad al año con nosotros, como un taller o un encuentro con la autora.',
+    asunto: 'Quiero que mi biblioteca sea Punto Azul',
+    enlace: { href: '/colabora#puntos-azules', texto: 'Qué es un Punto Azul' },
+  },
+  {
+    icono: 'game-icons:greek-temple',
+    quien: 'Ayuntamientos, organismos, museos y empresas',
+    texto: 'Diseñamos contigo un proyecto a medida: eventos, patrocinio o colaboración para cuidar el mar.',
+    asunto: 'Propuesta de colaboración con Si los peces hablaran…',
+    enlace: { href: '/colabora#colaborar', texto: 'Cómo colaborar' },
+  },
+  {
+    icono: 'game-icons:old-microphone',
+    quien: 'Medios de comunicación',
+    texto: 'Entrevistas, fotos e información del proyecto para tu programa o tu artículo.',
+    asunto: 'Medio de comunicación: entrevista o información sobre Si los peces hablaran…',
+    enlace: { href: '/repercusion', texto: 'Lo que se ha publicado' },
+  },
+];
+const flecha = 'M5 12h14M13 6l6 6-6 6';
 ---
 
 <section aria-labelledby="entidades-titulo" class="relative isolate pb-16 sm:pb-20">
   <div class="mx-auto max-w-6xl px-6">
-    <div class="reveal rounded-3xl border border-arena/25 bg-azul/30 p-8 sm:p-12">
-      <p class="font-hand text-2xl leading-none text-celeste sm:text-3xl">para centros, instituciones y empresas</p>
-      <h2
-        id="entidades-titulo"
-        class="mt-3 max-w-3xl font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-[1] text-caparol"
-      >
-        ¿Representas a una entidad o quieres
-        <Ola class="text-arena">colaborar con SLPH</Ola>?
+    <div class="reveal max-w-3xl">
+      <p class="font-hand text-2xl leading-none text-celeste sm:text-3xl">¿quién nos escribe?</p>
+      <h2 id="entidades-titulo" class="mt-3 font-display text-[clamp(1.75rem,4vw,2.75rem)] leading-[1] text-caparol">
+        Elige tu camino y
+        <Ola class="whitespace-nowrap text-arena">nadamos juntos</Ola>
       </h2>
-      <p class="mt-5 max-w-2xl text-base leading-relaxed text-caparol/85 sm:text-lg">
-        Si eres un centro educativo, una institución, una empresa o un profesional y quieres
-        conocer nuestras propuestas, estaremos encantados de escucharte.
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-caparol/85 sm:text-lg">
+        Cuéntanos quién eres y te respondemos con lo que mejor encaja contigo. Desde Gran Canaria,
+        llevamos el mar a todo el archipiélago.
       </p>
-      <p class="mt-3 font-display text-xl leading-tight text-celeste sm:text-2xl">
-        Hablemos de lo que podemos hacer juntos.
-      </p>
-      <p class="mt-2 text-sm text-caparol/70 sm:text-base">
-        Desde Gran Canaria, llevamos el mar a todo el archipiélago.
-      </p>
-      <div class="mt-8 flex flex-wrap items-center gap-4">
-        {correo && (
-          <a
-            href={correo}
-            class="group inline-flex items-center gap-3 rounded-full bg-arena px-7 py-3 font-display text-xl text-azul shadow-lg transition hover:brightness-95"
-          >
-            Cuéntanos tu idea
-            <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-          </a>
-        )}
-        <EnlaceFlecha href="/programa">El Programa SLPH</EnlaceFlecha>
-      </div>
     </div>
+
+    <ul class="reveal reveal-delay-1 mt-10 grid gap-5 sm:gap-6 md:grid-cols-2">
+      {
+        caminos.map((c) => (
+          <li class="flex flex-col rounded-3xl border border-arena/25 bg-azul/30 p-7 sm:p-8">
+            <div class="flex items-center gap-4">
+              <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-arena/10 text-arena">
+                <Icon name={c.icono} class="h-8 w-8" aria-hidden="true" />
+              </span>
+              <h3 class="font-display text-2xl leading-tight text-caparol sm:text-[1.7rem]">{c.quien}</h3>
+            </div>
+            <p class="mt-4 flex-1 text-base leading-relaxed text-caparol/85">{c.texto}</p>
+            <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+              {correo(c.asunto) && (
+                <a
+                  href={correo(c.asunto)}
+                  class="group inline-flex items-center gap-2.5 rounded-full bg-arena px-6 py-2.5 font-display text-lg text-azul shadow-lg transition hover:brightness-95"
+                >
+                  Escríbenos
+                  <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d={flecha} /></svg>
+                </a>
+              )}
+              <a href={c.enlace.href} class="font-display text-lg text-celeste underline decoration-celeste/40 underline-offset-4 transition hover:text-arena hover:decoration-arena">
+                {c.enlace.texto}
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
