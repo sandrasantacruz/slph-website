@@ -1,4 +1,5 @@
 ---
+import Colaboran from '../home/Colaboran.astro';
 import MainLayout from '../../layouts/MainLayout.astro';
 import Hero from './Hero.astro';
 import Huella from './Huella.astro';
@@ -48,6 +49,8 @@ const breadcrumb = breadcrumbSchema([
   <WaterLine separador clave="-c" />
   <Huella />
   <Origen />
+  <!-- todas las entidades que han confiado en SLPH: la prueba de la huella (antes en Inicio) -->
+  <Colaboran modo="completo" />
   <!-- siguiente paso: que quien llega emocionado al final sepa qué hacer -->
   <SiguientePaso
     antetitulo="¿la próxima huella?"
