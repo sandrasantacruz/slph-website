@@ -10,6 +10,7 @@ import disa from './img/col/disa.webp?url';
 import ecoaqua from './img/col/ecoaqua.webp?url';
 import entretiteres from './img/col/entretiteres.webp?url';
 import eomar from './img/col/eomar.webp?url';
+import iusa from './img/col/iusa.webp?url';
 import escolares from './img/col/escolares.webp?url';
 import fcm from './img/col/fcm.webp?url';
 import grancaeduca from './img/col/grancaeduca.webp?url';
@@ -56,6 +57,7 @@ const grupos = [
       { src: fcm, alt: 'Facultad de Ciencias del Mar · ULPGC' },
       { src: ecoaqua, alt: 'Instituto ECOAQUA · ULPGC' },
       { src: eomar, alt: 'EOMAR · Ecofisiología de Organismos Marinos · ULPGC' },
+      { src: iusa, alt: 'Instituto Universitario de Sanidad Animal y Seguridad Alimentaria (IUSA) · ULPGC', ancho: true },
     ],
   },
   {
@@ -158,8 +160,9 @@ const grupos = [
                   <span aria-hidden="true" class="h-px w-8 bg-arena/50 sm:w-12"></span>
                 </h4>
                 <ul class="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-8 sm:mt-8 sm:gap-x-10">
-                  {logos.map(({ src, alt }) => (
-                    <li class="flex w-[42%] items-center justify-center sm:w-[22%] lg:w-[17%]">
+                  {logos.map(({ src, alt, ancho }: { src: string; alt: string; ancho?: boolean }) => (
+                    <!-- «ancho»: logos apaisados con mucho texto (IUSA), con más sitio para que se lean -->
+                    <li class:list={['flex items-center justify-center', ancho ? 'w-[80%] sm:w-[34%] lg:w-[26%]' : 'w-[42%] sm:w-[22%] lg:w-[17%]']}>
                       <img
                         src={src}
                         alt={alt}
