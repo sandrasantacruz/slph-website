@@ -23,11 +23,13 @@ const propuestas = [
   {
     icono: 'game-icons:theater',
     titulo: 'Musical y espectáculos SLPH',
-    texto: 'En el propio colegio, si el espacio lo permite, o reuniendo a varios centros en un recinto mayor: en 2022 llevamos el musical a más de 500 escolares de 12 colegios.',
+    texto: 'En el propio colegio, si el espacio lo permite, o reuniendo a varios centros en un recinto mayor. En 2022 llegamos a más de 500 escolares de 12 colegios y, por la demanda de los propios centros, repetimos en el Día Mundial de los Océanos 2024.',
+    // la fecha enlaza con la noticia del evento
+    enlace: { frase: 'Día Mundial de los Océanos 2024', href: '/noticias/dia-mundial-de-los-oceanos-2024' },
   },
 ];
 
-const claves = ['Infantil y Primaria', 'ODS 14 y LOMLOE', 'Aval científico de la ULPGC', 'Material incluido'];
+const claves = ['Infantil y Primaria', 'ODS 14 y LOMLOE', 'Aval científico de la ULPGC', 'En todo el archipiélago'];
 
 const pasos = [
   'Escríbenos o llámanos.',
@@ -46,8 +48,8 @@ const flecha = 'M5 12h14M13 6l6 6-6 6';
       </h2>
       <p class="mt-5 text-base leading-relaxed text-caparol/85 sm:text-lg">
         Creamos experiencias artísticas, no hacemos actividades de ocio. Cada propuesta une arte, educación y
-        ciencia, con el aval de investigadoras marinas de la ULPGC. Cada centro es un mundo: por eso la diseñamos
-        contigo, a la medida de tu alumnado, de tu espacio y de tu presupuesto.
+        ciencia, con el aval de investigadoras marinas de la ULPGC. Cada centro es un mundo: por eso podemos
+        diseñarla contigo, a la medida de tu alumnado, de tu espacio y de tu presupuesto.
       </p>
     </div>
 
@@ -59,7 +61,13 @@ const flecha = 'M5 12h14M13 6l6 6-6 6';
               <Icon name={p.icono} class="h-8 w-8" aria-hidden="true" />
             </span>
             <h3 class="mt-4 font-display text-2xl leading-tight text-caparol">{p.titulo}</h3>
-            <p class="mt-3 text-base leading-relaxed text-caparol/85">{p.texto}</p>
+            <p class="mt-3 text-base leading-relaxed text-caparol/85">
+              {p.enlace ? (
+                <>{p.texto.split(p.enlace.frase)[0]}<a href={p.enlace.href} class="text-celeste underline decoration-celeste/40 underline-offset-4 transition hover:text-arena hover:decoration-arena">{p.enlace.frase}</a>{p.texto.split(p.enlace.frase)[1]}</>
+              ) : (
+                p.texto
+              )}
+            </p>
           </li>
         ))
       }
