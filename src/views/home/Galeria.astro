@@ -19,8 +19,8 @@ const imagenes = [
     alt: 'Bailarines con trajes de peces en el estreno del musical Si los peces hablaran… en el Teatro CICCA, en 2016',
     anio: '2016',
     label: 'Nace el musical',
-    href: '/galeria#musical',
-    mas: 'Origen del proyecto',
+    href: '/noticias/si-los-peces-hablaran-denuncia-la-contaminacion-del-medio-marino-la-provincia',
+    mas: 'El estreno',
     tilt: 'tilt-l1',
   },
   {
@@ -28,8 +28,8 @@ const imagenes = [
     alt: 'Danza ante el gran acuario de Poema del Mar en la presentación del cuento, en 2018',
     anio: '2018',
     label: 'El cuento llega a Poema del Mar',
-    href: '/galeria#cuento',
-    mas: 'Rodeados de peces',
+    href: '/noticias/poema-del-mar',
+    mas: 'En el Deep Sea',
     tilt: 'tilt-r2',
   },
   {
@@ -37,8 +37,8 @@ const imagenes = [
     alt: 'La Orquesta Filarmónica de Gran Canaria interpreta el formato sinfónico de Si los peces hablaran…, en 2021',
     anio: '2021',
     label: 'El mar suena en sinfónico',
-    href: '/galeria#espectaculos',
-    mas: 'Orquesta Filarmónica de Gran Canaria',
+    href: '/noticias/si-los-peces-hablaran-concierto-sinfonico-ofgc',
+    mas: 'Con la Filarmónica de Gran Canaria',
     tilt: 'tilt-l2',
   },
   {
@@ -104,7 +104,8 @@ const imagenes = [
                 <span class="font-display text-xl text-arena-deep">{anio}</span> · {label}
               </figcaption>
             </div>
-            <span class="mt-4 flex items-center justify-center gap-1.5 font-display text-xs tracking-[0.2em] text-arena uppercase transition group-hover:text-caparol sm:text-sm">
+            <!-- Enlace visible (crítica recibida, 27 nov 2026): cada hito dice adónde lleva, subrayado y con flecha -->
+            <span class="mt-4 flex items-center justify-center gap-1.5 font-display text-xs tracking-[0.2em] text-arena uppercase underline decoration-arena/40 underline-offset-4 transition group-hover:text-caparol sm:text-sm">
               {mas}
               <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
             </span>
