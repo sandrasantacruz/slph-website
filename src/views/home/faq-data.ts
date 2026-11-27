@@ -49,9 +49,9 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿Cómo se puede colaborar?",
     answer:
-      "Puedes colaborar con Si los peces hablaran… de diferentes maneras: haciendo voluntariado en nuestros eventos, realizando una donación puntual o mediante acciones de mecenazgo y colaboración institucional.\nEn la página Colabora encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página Contacto.",
+      "Si representas a un colegio, una biblioteca, un museo, un ayuntamiento o una empresa, puedes llevar nuestras actividades a tu espacio, patrocinar un proyecto o convertir tu biblioteca en Punto Azul. Diseñamos cada propuesta contigo.\nEn la página Colabora encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página Contacto.",
     answerHtml:
-      `Puedes colaborar con Si los peces hablaran… de diferentes maneras: haciendo voluntariado en nuestros eventos, realizando una donación puntual o mediante acciones de mecenazgo y colaboración institucional.\nEn la página ${link("/colabora", "Colabora")} encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página ${link("/contacto", "Contacto")}.`,
+      `Si representas a un colegio, una biblioteca, un museo, un ayuntamiento o una empresa, puedes llevar nuestras actividades a tu espacio, patrocinar un proyecto o convertir tu biblioteca en Punto Azul. Diseñamos cada propuesta contigo.\nEn la página ${link("/colabora", "Colabora")} encontrarás toda la información sobre las distintas formas de participar. Si deseas resolver alguna duda o proponer una colaboración, puedes contactar directamente con nosotros a través de WhatsApp, correo electrónico o teléfono, disponibles en la página ${link("/contacto", "Contacto")}.`,
   },
   {
     question: "¿Dónde se desarrolla el proyecto?",
