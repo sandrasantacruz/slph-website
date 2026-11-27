@@ -1,0 +1,182 @@
+---
+import { Icon } from "astro-icon/components";
+import Ola from '../../components/Ola.astro';
+---
+
+<!-- Tráiler del cuento (antes en Inicio, que ahora abre con el vídeo del Programa SLPH, 27 nov 2026) -->
+<section id="trailer" class="relative isolate overflow-hidden py-20 sm:py-28">
+  <div class="mx-auto max-w-5xl px-6">
+    <h2
+      class="reveal mx-auto max-w-3xl text-center font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.95] text-caparol"
+    >
+      El cuento,
+      <Ola class="text-arena">en movimiento</Ola>
+    </h2>
+
+    <p
+      class="reveal reveal-delay-1 mx-auto mt-6 max-w-xl text-center text-base text-caparol/80 sm:text-lg"
+    >
+      El tráiler de <em class="not-italic text-arena">Si los peces hablaran…</em>: un adelanto de la aventura de Lorena.
+    </p>
+  </div>
+
+  <!-- Stage area: edge-to-edge on mobile, polaroid frame from md+ -->
+  <div class="reveal reveal-delay-2 relative mt-12 md:mt-16">
+    <figure class="video-frame relative">
+      <div class="player-wrap relative overflow-hidden bg-azul-deep">
+        <media-player
+          class="trailer-player"
+          data-player
+          title="Tráiler · Si los peces hablaran"
+          src="/videos/trailer.mp4"
+          poster="/videos/trailer-poster.webp"
+          aspect-ratio="16/9"
+          crossorigin
+          playsinline
+        >
+          <media-provider>
+            <media-poster class="vds-poster"></media-poster>
+          </media-provider>
+          <media-video-layout></media-video-layout>
+          <media-play-button
+            class="trailer-play-overlay"
+            aria-label="Reproducir tráiler"
+          >
+            <span class="trailer-play-circle">
+              <Icon name="game-icons:play-button" aria-hidden="true" />
+            </span>
+          </media-play-button>
+        </media-player>
+
+        <span
+          aria-hidden="true"
+          class="play-hint pointer-events-none absolute right-5 bottom-12 z-10 -rotate-3 font-hand text-2xl text-arena/95 transition-opacity duration-300 select-none sm:right-8 sm:bottom-16 sm:text-3xl"
+        >
+          dale al play…
+        </span>
+      </div>
+
+      <figcaption
+        class="video-caption absolute right-0 bottom-2 left-0 px-6 text-center font-hand text-2xl text-azul sm:text-3xl"
+      >
+        No es una idea. Es una inquietud real
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style is:global>
+  .player-wrap media-player {
+    --video-brand: var(--color-arena);
+    --media-brand: var(--color-arena);
+    --media-focus-ring-color: var(--color-arena-deep);
+    --media-controls-color: var(--color-caparol);
+    --video-controls-color: var(--color-caparol);
+    --media-tooltip-bg: rgb(11 32 86 / 0.95);
+    --media-menu-bg: rgb(11 32 86 / 0.95);
+    border-radius: 0;
+    background: var(--color-azul-deep);
+  }
+
+  .player-wrap:has(media-player[data-started]) .play-hint {
+    opacity: 0;
+  }
+
+  /* Hide vidstack's own centered play/pause button — we provide our own. */
+  /* Solo con ratón: ahí se pausa haciendo clic en el vídeo. En el móvil el
+     botón central de vidstack es la única forma de pausar, así que se queda. */
+  @media (hover: hover) and (pointer: fine) {
+    .trailer-player .vds-play-button {
+      display: none !important;
+    }
+  }
+  /* En pausa se ve solo nuestro círculo: el de vidstack, fuera (si no, salen dos «play»). */
+  .trailer-player[data-paused] .vds-play-button {
+    display: none !important;
+  }
+
+  /* Custom centered play overlay */
+  .player-wrap .trailer-play-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .player-wrap media-player[data-paused] .trailer-play-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .player-wrap .trailer-play-circle {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 9999px;
+    background: var(--color-arena);
+    color: var(--color-azul);
+    box-shadow: 0 10px 30px -8px rgba(6, 15, 44, 0.7);
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      background 0.3s ease;
+  }
+  .player-wrap .trailer-play-circle svg {
+    width: 50%;
+    height: 50%;
+  }
+  .player-wrap .trailer-play-overlay:hover .trailer-play-circle,
+  .player-wrap .trailer-play-overlay:focus-visible .trailer-play-circle {
+    transform: scale(1.08);
+    background: var(--color-caparol);
+  }
+</style>
+
+<style>
+  .video-frame {
+    width: 100%;
+  }
+  .video-frame .player-wrap {
+    border-radius: 0;
+  }
+  .video-caption {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .video-frame {
+      position: relative;
+      background: var(--color-caparol);
+      padding: 0.875rem 0.875rem 3.75rem;
+      box-shadow:
+        0 18px 35px -10px rgba(6, 15, 44, 0.55),
+        0 6px 12px -4px rgba(6, 15, 44, 0.35);
+      border-radius: 6px;
+      max-width: 56rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .video-frame .player-wrap {
+      border-radius: 2px;
+    }
+    .video-caption {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  import "vidstack/player";
+  import "vidstack/player/ui";
+  import "vidstack/player/layouts/default";
+  import "vidstack/player/styles/default/theme.css";
+  import "vidstack/player/styles/default/poster.css";
+  import "vidstack/player/styles/default/layouts/video.css";
+</script>
