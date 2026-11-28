@@ -62,6 +62,9 @@ const seoTitle = title ?? SITE_NAME;
 <html lang={SITE_LANG}>
   <head>
     <meta charset="utf-8" />
+    <!-- El fondo del botón «Comprar» es lo más grande que se pinta en casi todas las páginas
+         del móvil: se pide enseguida, sin esperar a la hoja de estilos (28 nov 2026) -->
+    <link rel="preload" as="image" href="/assets/boton-comprar/gel.webp" fetchpriority="high" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />

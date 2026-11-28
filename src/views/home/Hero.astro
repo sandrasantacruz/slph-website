@@ -128,6 +128,11 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
     // Bei reduzierter Bewegung bleibt es beim Poster: keine Quelle, kein Play.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    // Datos móviles (28 nov 2026): con «ahorro de datos» activado o una conexión lenta
+    // (2G/3G) se queda la foto fija y no se descargan los 1,6 MB del vídeo.
+    const red = navigator.connection;
+    if (red && (red.saveData || /(^|-)2g|3g/.test(red.effectiveType || ''))) return;
+
     const small = window.matchMedia('(max-width: 767px)').matches;
     video.src = small ? video.dataset.srcSm : video.dataset.srcLg;
 

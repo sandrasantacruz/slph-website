@@ -24,24 +24,30 @@ const bubbles = Array.from({ length: 10 }, (_, i) => i + 1);
     height: auto;
   }
 
-  .bubble-1  { left: -5%; top: 5%; transform: scale(0.6); animation: bubble-up 25s linear -3s infinite, bubble-side 2s ease-in-out infinite alternate; }
-  .bubble-2  { left: 5%; top: 80%; transform: scale(0.4); animation: bubble-up 19s linear -11s infinite, bubble-side 4s ease-in-out infinite alternate; }
-  .bubble-3  { left: 10%; top: 40%; transform: scale(0.7); animation: bubble-up 28s linear -17s infinite, bubble-side 2.5s ease-in-out infinite alternate; }
-  .bubble-4  { left: 20%; top: 0; transform: scale(0.3); animation: bubble-up 23s linear -6s infinite, bubble-side 3s ease-in-out infinite alternate; }
-  .bubble-5  { left: 30%; top: 50%; transform: scale(0.5); animation: bubble-up 31s linear -21s infinite, bubble-side 3.5s ease-in-out infinite alternate; }
-  .bubble-6  { left: 50%; top: 0; transform: scale(0.8); animation: bubble-up 21s linear -9s infinite, bubble-side 2s ease-in-out infinite alternate; }
-  .bubble-7  { left: 65%; top: 70%; transform: scale(0.35); animation: bubble-up 24s linear -2s infinite, bubble-side 2.8s ease-in-out infinite alternate; }
-  .bubble-8  { left: 80%; top: 10%; transform: scale(0.25); animation: bubble-up 27s linear -14s infinite, bubble-side 3.6s ease-in-out infinite alternate; }
-  .bubble-9  { left: 90%; top: 50%; transform: scale(0.6); animation: bubble-up 33s linear -25s infinite, bubble-side 4.2s ease-in-out infinite alternate; }
-  .bubble-10 { left: 78%; top: 80%; transform: scale(0.3); animation: bubble-up 17s linear -8s infinite, bubble-side 2.2s ease-in-out infinite alternate; }
+  .bubble-1  { left: -5%; top: 5%; scale: 0.6; animation: bubble-up 25s linear -3s infinite, bubble-side 2s ease-in-out infinite alternate; }
+  .bubble-2  { left: 5%; top: 80%; scale: 0.4; animation: bubble-up 19s linear -11s infinite, bubble-side 4s ease-in-out infinite alternate; }
+  .bubble-3  { left: 10%; top: 40%; scale: 0.7; animation: bubble-up 28s linear -17s infinite, bubble-side 2.5s ease-in-out infinite alternate; }
+  .bubble-4  { left: 20%; top: 0; scale: 0.3; animation: bubble-up 23s linear -6s infinite, bubble-side 3s ease-in-out infinite alternate; }
+  .bubble-5  { left: 30%; top: 50%; scale: 0.5; animation: bubble-up 31s linear -21s infinite, bubble-side 3.5s ease-in-out infinite alternate; }
+  .bubble-6  { left: 50%; top: 0; scale: 0.8; animation: bubble-up 21s linear -9s infinite, bubble-side 2s ease-in-out infinite alternate; }
+  .bubble-7  { left: 65%; top: 70%; scale: 0.35; animation: bubble-up 24s linear -2s infinite, bubble-side 2.8s ease-in-out infinite alternate; }
+  .bubble-8  { left: 80%; top: 10%; scale: 0.25; animation: bubble-up 27s linear -14s infinite, bubble-side 3.6s ease-in-out infinite alternate; }
+  .bubble-9  { left: 90%; top: 50%; scale: 0.6; animation: bubble-up 33s linear -25s infinite, bubble-side 4.2s ease-in-out infinite alternate; }
+  .bubble-10 { left: 78%; top: 80%; scale: 0.3; animation: bubble-up 17s linear -8s infinite, bubble-side 2.2s ease-in-out infinite alternate; }
 
+  /* Velocidad (28 nov 2026): antes se animaban margin-top y margin-left, que obligan al
+     navegador a recolocar la página en cada fotograma y contaban como saltos de
+     contenido. Ahora se mueven con «translate» (variables animables), sin recolocar nada. */
+  @property --by { syntax: '<length>'; inherits: false; initial-value: 0px; }
+  @property --bx { syntax: '<length>'; inherits: false; initial-value: 0px; }
+  .bubble { translate: var(--bx) var(--by); will-change: translate; }
   @keyframes bubble-up {
-    0%   { margin-top: 1000px; }
-    100% { margin-top: -100%; }
+    0%   { --by: 1000px; }
+    100% { --by: -100vw; }
   }
   @keyframes bubble-side {
-    0%   { margin-left: 0; }
-    100% { margin-left: 50px; }
+    0%   { --bx: 0px; }
+    100% { --bx: 50px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
