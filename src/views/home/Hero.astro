@@ -75,36 +75,33 @@ import FlechaAgua from '../../components/FlechaAgua.astro';
     <p class="reveal reveal-delay-3 max-w-2xl text-sm leading-snug text-caparol/90 sm:text-base">
       En 2016, un océano en peligro inspiró un musical. Hoy, ese
       grito es una llamada a&nbsp;la&nbsp;acción, porque salvar el mar
-      <em class="not-italic text-arena">también nos salva a nosotros.</em>
+      <em class="not-italic font-semibold text-caparol">también nos salva a nosotros.</em>
     </p>
 
-    <!-- Etiqueta tras el texto (idea de Sandra): primero emociona, luego define y prepara «Descubre el programa» -->
+    <!-- Etiqueta tras el texto (idea de Sandra): primero emociona, luego define y prepara «Descubre el programa».
+         En celeste (28 nov 2026): el arena queda solo para «te dirían» y el botón, así destaca. -->
     <div class="reveal reveal-delay-3 flex items-center gap-3 sm:gap-4">
-      <span aria-hidden="true" class="h-px w-8 shrink-0 bg-arena sm:w-16"></span>
-      <span class="font-display text-[0.7rem] leading-snug tracking-[0.3em] text-arena uppercase sm:text-sm sm:tracking-[0.38em]">
+      <span aria-hidden="true" class="h-px w-8 shrink-0 bg-celeste sm:w-16"></span>
+      <span class="font-display text-[0.7rem] leading-snug tracking-[0.3em] text-celeste uppercase sm:text-sm sm:tracking-[0.38em]">
         Programa de concienciación marina · arte, ciencia y educación
       </span>
     </div>
 
-    <!-- CTAs — always visible -->
-    <div class="reveal reveal-delay-4 mt-1 flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:gap-4">
+    <!-- CTAs (28 nov 2026): un solo botón principal, conocer el proyecto; la compra sigue en el
+         «Comprar» del menú. El segundo gesto es actuar: el Club SLPH, más abajo en esta página. -->
+    <div class="reveal reveal-delay-4 mt-1 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-6">
       <a
         href="/programa"
-        class="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-caparol px-5 py-2.5 font-display text-lg text-caparol transition hover:bg-caparol hover:text-azul sm:px-6 sm:py-3 sm:text-xl"
+        class="group inline-flex items-center justify-center gap-2 rounded-full bg-arena px-6 py-3 font-display text-lg text-azul shadow-lg transition hover:brightness-95 sm:text-xl"
       >
         Descubre el programa
         <FlechaAgua />
       </a>
       <a
-        href="/comprar"
-        class="group inline-flex items-center justify-center gap-2 rounded-full bg-arena px-5 py-2.5 font-display text-lg text-negro transition hover:brightness-95 sm:px-6 sm:py-3 sm:text-xl"
+        href="#club-slph"
+        class="text-center font-display text-lg text-caparol underline decoration-arena/50 underline-offset-4 transition hover:text-arena hover:decoration-arena sm:text-left sm:text-xl"
       >
-        Quiero el mío
-        <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-          <path d="M3 7h2l2 11h11l2-8H6"/>
-          <circle cx="9" cy="21" r="1.4" fill="currentColor"/>
-          <circle cx="17" cy="21" r="1.4" fill="currentColor"/>
-        </svg>
+        o únete al Club SLPH ↓
       </a>
     </div>
   </div>
