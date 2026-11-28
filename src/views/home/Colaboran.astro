@@ -97,7 +97,7 @@ const total = grupos.reduce((n, g) => n + g.logos.length, 0);
 ---
 
 <section id={modo === 'completo' ? 'entidades' : undefined} class="relative scroll-mt-24">
-  <div class="mx-auto max-w-5xl px-6 pb-24 pt-32 sm:pb-32 sm:pt-40">
+  <div class:list={['mx-auto max-w-5xl px-6 pt-32 sm:pt-40', modo === 'compacto' ? 'pb-12 sm:pb-16' : 'pb-24 sm:pb-32']}>
     <div class="reveal relative">
       <!-- Anchor descending on a rope into the card -->
       <div class="pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-[58%]">
