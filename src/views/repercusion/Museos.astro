@@ -48,6 +48,16 @@ import Ola from '../../components/Ola.astro';
           </blockquote>
           <figcaption class="mt-3 text-sm leading-snug text-caparol/75 sm:text-base">
             José Alejandro Díaz Hernández, director de la Casa-Museo León y Castillo
+            <!-- Su testimonio está dentro del vídeo de al lado (desde 0:35, tras la profesora
+                 Elisa): el botón lo arranca justo ahí (Sandra, 28 nov 2026). -->
+            <button
+              type="button"
+              data-escuchar-director="35.5"
+              class="mt-2 flex items-center gap-1.5 font-display text-xs tracking-[0.18em] text-arena uppercase transition hover:text-caparol sm:text-sm"
+            >
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+              Escúchalo
+            </button>
           </figcaption>
         </figure>
 
@@ -134,3 +144,19 @@ import Ola from '../../components/Ola.astro';
     </div>
   </div>
 </section>
+
+<script>
+  // «Escúchalo»: lleva al vídeo del museo y lo reproduce desde que habla el director
+  document.querySelectorAll<HTMLButtonElement>('[data-escuchar-director]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const player = document.querySelector<HTMLElement & { currentTime: number; play: () => Promise<void>; muted: boolean }>(
+        'media-player[src="/videos/museo-leon-y-castillo.mp4"]',
+      );
+      if (!player) return;
+      player.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      player.muted = false;
+      player.currentTime = Number(b.dataset.escucharDirector);
+      player.play().catch(() => {});
+    }),
+  );
+</script>
