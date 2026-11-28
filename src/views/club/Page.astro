@@ -79,18 +79,21 @@ const ideaMail = SETTINGS.email ? `${mailHref(SETTINGS.email)}?subject=${encodeU
       <p class="mt-4 text-base leading-relaxed text-caparol/85 sm:text-lg">
         ¿Cómo te lo imaginas? Mándanos tu idea o tu dibujo. Igual que el cuento, queremos crearlo contigo.
       </p>
-      <!-- Prueba del carné: el de Sandra, con el salvavidas (Carnaval 2020), como punto de partida -->
+      <!-- Propuesta del carné (28 nov 2026): el salvavidas del Club, sin fotos; el niño se dibuja en el centro -->
       <figure class="mx-auto mt-8 max-w-md">
+        <!-- Al tocarlo se abre en grande (Sandra, 28 nov 2026): en el móvil la letra es pequeña -->
+        <button type="button" data-ver-carne class="block w-full cursor-zoom-in" aria-label="Ver el carné en grande">
         <img
-          src="/assets/club/carne-sandra.webp"
-          alt="Prueba del carné del Club SLPH: Sandra Santa Cruz, con el cuento en las manos, dentro de un salvavidas rojo y blanco sobre el mar"
+          src="/assets/club/carne-propuesta.webp"
+          alt="Propuesta del carné del Club SLPH: un salvavidas rojo y blanco con “SOS” y un hueco en el centro para dibujarse, huecos para el nombre y la fecha, el compromiso del club y Doña Paciencia"
           width="1000"
-          height="707"
-          class="w-full -rotate-1 rounded-xl shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15"
+          height="631"
+          class="w-full -rotate-1 rounded-[1.4rem] shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)]"
           loading="lazy"
           decoding="async"
         />
-        <figcaption class="mt-3 font-hand text-xl text-celeste sm:text-2xl">esta es una prueba: partimos de aquí</figcaption>
+        </button>
+        <figcaption class="mt-3 font-hand text-xl text-celeste sm:text-2xl">nuestra propuesta: ¿cómo la mejorarías?</figcaption>
       </figure>
       <div class="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         {ideaWa && (
@@ -133,3 +136,23 @@ const ideaMail = SETTINGS.email ? `${mailHref(SETTINGS.email)}?subject=${encodeU
     </div>
   </section>
 </MainLayout>
+
+<dialog
+  data-dialogo-carne
+  aria-label="El carné del Club SLPH"
+  class="m-auto w-[min(96vw,64rem)] overflow-visible bg-transparent p-0 backdrop:bg-azul-deep/90 backdrop:backdrop-blur-sm"
+>
+  <div class="relative">
+    <button type="button" data-cerrar-carne aria-label="Cerrar" class="absolute -top-12 right-0 rounded-full p-2 text-caparol transition hover:text-arena">
+      <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <img src="/assets/club/carne-propuesta-grande.webp" alt="El carné del Club SLPH en grande" width="1712" height="1080" class="block w-full rounded-[1.6rem] shadow-2xl" loading="lazy" decoding="async" />
+  </div>
+</dialog>
+
+<script>
+  const dlg = document.querySelector<HTMLDialogElement>('[data-dialogo-carne]');
+  document.querySelector('[data-ver-carne]')?.addEventListener('click', () => dlg?.showModal());
+  dlg?.querySelector('[data-cerrar-carne]')?.addEventListener('click', () => dlg.close());
+  dlg?.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+</script>
