@@ -13,7 +13,7 @@ type Shop = {
   label?: string;
   /** true = also sells the activity booklet (cuadernillo): shows a handwritten tag. */
   cuadernillo?: boolean;
-  /** true = la escuela: el botón lleva al bloque «¡El nuestro!» (#escuela) y la etiqueta dice que va dedicado. */
+  /** true = la escuela: el botón lleva al bloque “¡El nuestro!” (#escuela) y la etiqueta dice que va dedicado. */
   escuela?: boolean;
 };
 
@@ -251,7 +251,7 @@ const mapsHref = (s: Shop) =>
                     {shop.address}
                   </p>
 
-                  {/* Qué se vende aquí (en vez de la etiqueta «también el cuadernillo») */}
+                  {/* Qué se vende aquí (en vez de la etiqueta “también el cuadernillo”) */}
                   <p class="flex items-center gap-2 font-display text-xs tracking-[0.16em] text-arena uppercase sm:text-sm">
                     <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
                     {shop.cuadernillo ? 'Cuento y cuadernillo' : 'Cuento'}

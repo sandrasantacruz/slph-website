@@ -1,9 +1,9 @@
 ---
 import { srcset } from '../../lib/srcset';
 /**
- * Cabecera de «Sobre el cuento»: qué es el libro, para quién y por qué es
- * distinto, con la portada de la 3.ª edición. Textos del «Dossier Bibliotecas
- * 2026-2027». Sin precio a propósito (varía según la tienda).
+ * Cabecera de “Sobre el cuento”: qué es el libro, para quién y por qué es
+ * distinto, con la portada de la 3.ª edición. Textos del “Dossier Bibliotecas
+ * 2026-2027”. Sin precio a propósito (varía según la tienda).
  */
 import { Icon } from 'astro-icon/components';
 import Ola from '../../components/Ola.astro';
@@ -11,7 +11,7 @@ import cover from '../home/img/cover-cuento.webp?url';
 
 const datos = [
   // Datos de valor, no de ficha: la edad y la app están en la ficha del libro.
-  // «Nació sobre un escenario» ya lo dice la frase de arriba: sin dato repetido.
+  // “Nació sobre un escenario” ya lo dice la frase de arriba: sin dato repetido.
   { icon: 'game-icons:microscope', texto: 'Contenido supervisado por investigadoras del Instituto ECOAQUA (ULPGC)' },
 ];
 ---
@@ -24,7 +24,7 @@ const datos = [
 
   <div class="mx-auto grid max-w-6xl items-center gap-x-14 gap-y-10 px-6 pt-10 pb-16 sm:pt-16 sm:pb-20 lg:min-h-[calc(100svh-6rem)] lg:grid-cols-12 lg:py-12">
     <div class="lg:col-span-7">
-      <!-- h1 para Google: nombre + «cuento infantil ilustrado» (la búsqueda del título).
+      <!-- h1 para Google: nombre + “cuento infantil ilustrado” (la búsqueda del título).
            El eslogan va aparte, con el mismo aspecto de siempre. -->
       <h1 class="reveal flex items-center gap-3 sm:gap-4">
         <span aria-hidden="true" class="h-[2px] w-5 shrink-0 bg-arena sm:w-20"></span>
@@ -35,7 +35,7 @@ const datos = [
         <span class="whitespace-nowrap">encuentra <Ola class="text-arena">su voz</Ola></span>
       </p>
 
-      <!-- El posicionamiento: una obra, no «un cuento infantil con realidad aumentada» -->
+      <!-- El posicionamiento: una obra, no “un cuento infantil con realidad aumentada” -->
       <p class="reveal reveal-delay-2 mt-6 max-w-2xl font-hand text-2xl leading-snug text-celeste sm:text-3xl">
         Nació sobre un escenario y hoy forma parte del
         <a href="/programa" class="whitespace-nowrap underline decoration-celeste/40 underline-offset-4 hover:text-arena hover:decoration-arena">Programa SLPH</a>

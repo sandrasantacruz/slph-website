@@ -103,7 +103,7 @@ const seoTitle = title ?? SITE_NAME;
     <BackToTop />
       <script>
       // Ventanas (vídeos, galería): al abrir una se añade un paso al historial,
-      // así el botón «atrás» del móvil la cierra en lugar de salir de la página.
+      // así el botón “atrás” del móvil la cierra en lugar de salir de la página.
       type ConHistorial = HTMLDialogElement & { porAtras?: boolean };
       const abrirOriginal = HTMLDialogElement.prototype.showModal;
       HTMLDialogElement.prototype.showModal = function (this: ConHistorial) {
@@ -138,7 +138,7 @@ const seoTitle = title ?? SITE_NAME;
         true,
       );
 
-      // Sin «viudas» (28 nov 2026): une la última palabra de cada párrafo con la anterior
+      // Sin “viudas” (28 nov 2026): une la última palabra de cada párrafo con la anterior
       // mediante un espacio que no se parte, si las dos son cortas. Completa a
       // `text-wrap: pretty` (global.css) y funciona también donde no se admite.
       document.querySelectorAll<HTMLElement>('main p, main li, main figcaption, main blockquote, main dd').forEach((el) => {

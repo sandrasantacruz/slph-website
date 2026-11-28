@@ -34,7 +34,7 @@ const { id, title, eyebrow, intro, images, enlaces, cita } = Astro.props;
       </p>
       {cita && (
         <figure class="mt-5 max-w-2xl border-l-2 border-arena/60 pl-4">
-          <blockquote class="font-hand text-2xl leading-snug text-arena sm:text-3xl">«{cita.texto}»</blockquote>
+          <blockquote class="font-hand text-2xl leading-snug text-arena sm:text-3xl">“{cita.texto}”</blockquote>
           <figcaption class="mt-1 font-display text-xs tracking-[0.25em] text-caparol/70 uppercase sm:text-sm">{cita.autor}</figcaption>
         </figure>
       )}
@@ -110,7 +110,7 @@ const { id, title, eyebrow, intro, images, enlaces, cita } = Astro.props;
             </span>
           </a>
           {/* Pie visible: en el móvil no hay hover, y sin él nadie sabe dónde ni cuándo
-              se hizo la foto sin abrirla. El texto largo («story») sigue solo en el visor. */}
+              se hizo la foto sin abrirla. El texto largo (“story”) sigue solo en el visor. */}
           <figcaption class="mt-2 min-h-[2.75em] px-1 text-sm leading-snug text-caparol/70">{img.caption}</figcaption>
           </figure>
         ))

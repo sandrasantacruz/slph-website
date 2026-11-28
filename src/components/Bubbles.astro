@@ -2,7 +2,7 @@
 const bubbles = Array.from({ length: 10 }, (_, i) => i + 1);
 ---
 
-<!-- Nuestra burbuja (Material SLPH, «burbujas 3»), en lugar de esferas hechas con código -->
+<!-- Nuestra burbuja (Material SLPH, “burbujas 3”), en lugar de esferas hechas con código -->
 <div class="bubbles" aria-hidden="true">
   {bubbles.map((n) => <img class={`bubble bubble-${n}`} src="/assets/burbuja.webp" alt="" width="240" height="237" decoding="async" />)}
 </div>

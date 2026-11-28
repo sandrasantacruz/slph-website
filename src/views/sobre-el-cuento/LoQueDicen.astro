@@ -1,8 +1,8 @@
 ---
 /**
- * «Lo que dicen del cuento»: dos voces de aula sobre el libro, justo antes de
+ * “Lo que dicen del cuento”: dos voces de aula sobre el libro, justo antes de
  * la ficha y el botón de compra. Mismo estilo de tarjetas que las citas de
- * «Red de aliados» en Colabora.
+ * “Red de aliados” en Colabora.
  */
 type Cita = {
   texto: string;
@@ -11,16 +11,16 @@ type Cita = {
   /** Vídeo de la persona: se abre en grande en esta misma página. */
   video?: { src: string; poster: string; etiqueta: string; pie: string };
 };
-/** Lectoras del cuento (vídeos «Con el cuento he aprendido», tarjeta 100D5100;
+/** Lectoras del cuento (vídeos “Con el cuento he aprendido”, tarjeta 100D5100;
  *  autorización de las familias). */
 const lectoras = [
   // La del oxígeno ya sale en el vídeo de la 3.ª edición (Comprar): aquí no se repite.
-  // Vera ya cierra la página («Es un cuento que te va a cambiar parte de tu vida»): aquí no se repite.
+  // Vera ya cierra la página (“Es un cuento que te va a cambiar parte de tu vida”): aquí no se repite.
   { texto: 'Después del cuento fui a la playa, encontré un montón de latas y plásticos y los recogí.', nombre: 'Valentina Hernández', edad: '8 años', video: 'opinion-valentina' },
   { texto: 'Con el cuento he aprendido que no se puede tirar basura al mar.', nombre: 'Gara Corujo', edad: '7 años', video: 'opinion-gara' },
 ];
 
-/** Botón «Escúchala»: abre el trozo de su grabación en el diálogo de vídeo de abajo. */
+/** Botón “Escúchala”: abre el trozo de su grabación en el diálogo de vídeo de abajo. */
 const escuchar = (nombre: string, video: string) => ({
   src: `/videos/${video}.mp4`,
   poster: `/videos/${video}-poster.webp`,
@@ -31,9 +31,9 @@ const citas: Cita[] = [
   {
     texto: 'A raíz de la lectura del libro, del encuentro con la autora, de todo lo que hemos vivido, los niños han empezado a desarrollar acciones para mejorar: de traer una botella de un solo uso para beber agua en el recreo, ahora traen una rellenable; y reciclan la basura.',
     nombre: 'Isabel Martín',
-    cargo: 'Jefa de estudios del Colegio Alfredo Kraus, en «Canarias es Cultura»',
+    cargo: 'Jefa de estudios del Colegio Alfredo Kraus, en “Canarias es Cultura”',
     // Solo su parte del reportaje de Televisión Canaria (el completo está en Repercusión)
-    video: { src: '/videos/opinion-isabel.mp4', poster: '/videos/opinion-isabel-poster.webp', etiqueta: 'Escúchala en Televisión Canaria', pie: 'Isabel Martín · «Canarias es Cultura», Televisión Canaria' },
+    video: { src: '/videos/opinion-isabel.mp4', poster: '/videos/opinion-isabel-poster.webp', etiqueta: 'Escúchala en Televisión Canaria', pie: 'Isabel Martín · “Canarias es Cultura”, Televisión Canaria' },
   },
   {
     texto: 'Nos parece fundamental educar desde edades tempranas para conservar nuestros ecosistemas. Nos ha encantado el libro.',
@@ -42,7 +42,7 @@ const citas: Cita[] = [
     cargo: 'Profesora del CEIP Príncipe de Asturias, en la Casa-Museo León y Castillo',
   },
   {
-    // Antes estaba en Colabora como «Público»; ahora solo aquí.
+    // Antes estaba en Colabora como “Público”; ahora solo aquí.
     texto: 'Este tipo de iniciativa es un regalo a la naturaleza y a todos, a las nuevas generaciones. Una oportunidad para ayudar, para concienciarnos. Desde el arte, además, que es tan importante: una forma tan sensible de llegar.',
     nombre: 'María del Mar Vicente',
     cargo: 'Asistente a la presentación en la Biblioteca Municipal Dolores Campos‑Herrero', // guion que no se parte
@@ -60,14 +60,14 @@ const citas: Cita[] = [
       </h2>
     </div>
 
-    <!-- «Mamá, tenemos que cambiar el mundo» (CEIP Julio Coloma Gallegos, Sevilla) ya está
+    <!-- “Mamá, tenemos que cambiar el mundo” (CEIP Julio Coloma Gallegos, Sevilla) ya está
          en Repercusión y en Realidad aumentada: aquí no se repite. -->
     <p class="reveal mt-10 text-center font-hand text-2xl text-celeste sm:text-3xl">palabra de lectoras</p>
     <ul class="reveal reveal-delay-1 mx-auto mt-5 grid max-w-4xl gap-4 md:grid-cols-2 md:gap-6">
       {lectoras.map((l) => (
         <li>
           <figure class="flex h-full flex-col rounded-2xl border border-arena/25 bg-azul-deep/40 p-6">
-            <blockquote class="flex-1 font-hand text-2xl leading-snug text-caparol">«{l.texto}»</blockquote>
+            <blockquote class="flex-1 font-hand text-2xl leading-snug text-caparol">“{l.texto}”</blockquote>
             <figcaption class="mt-4 text-sm leading-snug">
               <span class="font-display text-base tracking-wide text-arena">{l.nombre}</span>
               {l.edad && <span class="text-caparol/70">, {l.edad}</span>}
@@ -92,7 +92,7 @@ const citas: Cita[] = [
       {citas.map((c) => (
         <li>
           <figure class="flex h-full flex-col rounded-2xl border border-caparol/15 bg-azul/40 p-6 sm:p-7">
-            <span aria-hidden="true" class="font-display text-5xl leading-none text-arena/60">«</span>
+            <span aria-hidden="true" class="font-display text-5xl leading-none text-arena/60">“</span>
             <blockquote class="-mt-3 flex-1 font-hand text-2xl leading-snug text-caparol sm:text-[1.65rem]">
               {c.texto}
             </blockquote>

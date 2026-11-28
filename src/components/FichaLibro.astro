@@ -11,7 +11,7 @@ import ConElApoyo from './ConElApoyo.astro';
 import { Icon } from 'astro-icon/components';
 
 interface Props {
-  /** Zeile «A la venta online, en el Centro de Danza … y en librerías de Gran Canaria» */
+  /** Zeile “A la venta online, en el Centro de Danza … y en librerías de Gran Canaria” */
   venta?: boolean;
   class?: string;
 }
@@ -51,7 +51,7 @@ const datos: { icon: string; valor: string; arriba?: string; abajo?: string; hre
         <span class="leading-tight">
           {d.arriba && <span class="block text-sm text-caparol/70">{d.arriba}</span>}
           <strong class:list={['block font-display text-lg', d.href ? 'text-arena' : 'text-caparol']}>
-            {/* Londrina Solid hat kein «×» — das Zeichen aus der Body-Schrift nehmen */}
+            {/* Londrina Solid hat kein “×” — das Zeichen aus der Body-Schrift nehmen */}
             {d.href ? (
               <a href={d.href} class="underline decoration-arena/40 underline-offset-4 hover:decoration-arena">{d.valor}</a>
             ) : (

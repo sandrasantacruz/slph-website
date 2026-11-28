@@ -1,6 +1,6 @@
 ---
-// «Lo que dice el profesorado»: citas literales del dossier para entidades (págs. 16-17).
-// No se retocan: son palabras de los centros. «Mamá, tenemos que cambiar el mundo» ya está en
+// “Lo que dice el profesorado”: citas literales del dossier para entidades (págs. 16-17).
+// No se retocan: son palabras de los centros. “Mamá, tenemos que cambiar el mundo” ya está en
 // Repercusión (Anecdota.astro): aquí no se repite.
 const citas = [
   {
@@ -35,7 +35,7 @@ const citas = [
       {citas.map(({ texto, centro }, i) => (
         <li class:list={['reveal', `reveal-delay-${(i % 4) + 1}`]}>
           <figure class="flex h-full flex-col rounded-3xl bg-azul/65 p-7 ring-1 ring-caparol/15 backdrop-blur-sm">
-            <span aria-hidden="true" class="font-display text-6xl leading-none text-arena/60">«</span>
+            <span aria-hidden="true" class="font-display text-6xl leading-none text-arena/60">“</span>
             <blockquote class="-mt-4 flex-1 text-base leading-relaxed text-caparol/90 sm:text-lg">{texto}</blockquote>
             <figcaption class="mt-5 font-display text-sm tracking-[0.25em] text-arena uppercase sm:text-base">{centro}</figcaption>
           </figure>

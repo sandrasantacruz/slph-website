@@ -30,8 +30,8 @@ import puntallana from './img/col/puntallana.webp?url';
 import altres from './img/col/altres.webp?url';
 
 interface Props {
-  /** «compacto» (Inicio): una franja con los más relevantes y enlace a todos.
-   *  «completo» (Repercusión): todos, por grupos desplegables. (27 nov 2026) */
+  /** “compacto” (Inicio): una franja con los más relevantes y enlace a todos.
+   *  “completo” (Repercusión): todos, por grupos desplegables. (27 nov 2026) */
   modo?: 'compacto' | 'completo';
 }
 const { modo = 'completo' } = Astro.props;
@@ -165,7 +165,7 @@ const total = grupos.reduce((n, g) => n + g.logos.length, 0);
           <ul class="relative mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-8 sm:gap-x-10">
             {destacados.map(({ src, alt, ancho, escala }) => (
               <li class:list={['flex items-center justify-center', ancho ? 'w-[80%] sm:w-[34%] lg:w-[26%]' : 'w-[42%] sm:w-[22%] lg:w-[17%]']}>
-                <!-- «escala»: logos con letra gruesa (MARES) que a todo el ancho pesan más que los demás -->
+                <!-- “escala”: logos con letra gruesa (MARES) que a todo el ancho pesan más que los demás -->
                 <img src={src} alt={alt} class:list={[escala, 'h-16 w-auto max-w-full object-contain opacity-90 brightness-0 invert transition duration-300 ease-out hover:-translate-y-0.5 hover:scale-105 hover:opacity-100 sm:h-20 lg:h-24']} loading="lazy" />
               </li>
             ))}

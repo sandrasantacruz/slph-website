@@ -12,7 +12,7 @@ const breadcrumb = breadcrumbSchema([
 ]);
 
 // Ein Kontaktpunkt reicht: WhatsApp und Telefon sind dieselbe Nummer.
-// Kein «TollFree» — die Nummer ist eine normale Mobilnummer.
+// Kein “TollFree” — die Nummer ist eine normale Mobilnummer.
 const telefono = (settings.phone || settings.whatsapp).trim();
 const contactPoints =
   telefono || settings.email
@@ -44,7 +44,7 @@ const contactPage = {
   title="Contacto"
   description="¿Nadamos juntos? Escríbenos por WhatsApp, teléfono o correo. Colegios, instituciones y empresas: hablemos de lo que podemos hacer por el mar."
   image="/assets/og-contacto-aletas.jpg"
-  imageAlt="Sandra Santa Cruz sentada en la playa de Patalavaca junto a «Si los peces hablaran» escrito en la arena"
+  imageAlt="Sandra Santa Cruz sentada en la playa de Patalavaca junto a “Si los peces hablaran” escrito en la arena"
   imageWidth={1200}
   imageHeight={630}
   jsonLd={[contactPage, breadcrumb]}

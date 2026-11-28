@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 /**
- * `srcset` con las versiones ligeras «-640.webp» y «-960.webp» (si existen en
+ * `srcset` con las versiones ligeras “-640.webp” y “-960.webp” (si existen en
  * public/) y la original. Así el móvil descarga una más pequeña y el ordenador
  * la grande. Las variantes se generan a mano (WebP Q80).
  */

@@ -1,14 +1,14 @@
 ---
 /**
- * Botón «Comprar» de la cabecera: el «Banner de gel acuático brillante» de fondo,
+ * Botón “Comprar” de la cabecera: el “Banner de gel acuático brillante” de fondo,
  * Alegría (la del cuento) saltando por la izquierda y nuestras burbujas.
  * Es el único botón de la web con ilustración, para que destaque; los demás
- * se quedan sencillos. Prototipo: TOBÍAS/«BOTÓN COMPRAR ALEGRÍA (prototipo)»/
- * «boton-comprar-gel.html».
+ * se quedan sencillos. Prototipo: TOBÍAS/“BOTÓN COMPRAR ALEGRÍA (prototipo)”/
+ * “boton-comprar-gel.html”.
  *
- * El agua «respira» y ondula suave (filtro SVG #ondas); al pasar el ratón se
- * mueve más. Al pulsar, Alegría salta y se mete en el agua, el gel hace «plof» y suben burbujas;
- * después se abre /comprar. Con «reducir movimiento» todo queda quieto y el
+ * El agua “respira” y ondula suave (filtro SVG #ondas); al pasar el ratón se
+ * mueve más. Al pulsar, Alegría salta y se mete en el agua, el gel hace “plof” y suben burbujas;
+ * después se abre /comprar. Con “reducir movimiento” todo queda quieto y el
  * enlace se abre al momento.
  *
  * El filtro SVG #ondas va solo en la primera copia de la página (cabecera);
@@ -85,7 +85,7 @@ const { class: className, filtro = true } = Astro.props;
     filter: url(#ondas) saturate(0.95) drop-shadow(0 8px 14px rgba(3, 10, 35, 0.45)) drop-shadow(0 0 14px rgba(110, 200, 255, 0.32));
     animation: bc-respira 6s ease-in-out infinite;
   }
-  /* sube un poco para que la «p» quede dentro del agua */
+  /* sube un poco para que la “p” quede dentro del agua */
   .texto {
     transform: translateY(-0.15em);
   }
@@ -134,7 +134,7 @@ const { class: className, filtro = true } = Astro.props;
   }
 
   /* al pulsar: Alegría se eleva con calma, se curva y se mete en el agua;
-     justo cuando entra, el gel hace «plof» y suben burbujas */
+     justo cuando entra, el gel hace “plof” y suben burbujas */
   .burbuja-comprar.salta .alegria { animation: bc-salto 1s cubic-bezier(0.45, 0, 0.35, 1) forwards; }
   .burbuja-comprar.salta .grupo { animation: bc-subir 1s ease-out 0.55s; }
   .burbuja-comprar.salta .agua { animation: bc-plof 0.6s ease-out 0.55s, bc-respira 2.2s ease-in-out infinite; }
@@ -172,7 +172,7 @@ const { class: className, filtro = true } = Astro.props;
 <script>
   // Al pulsar: primero el salto y las burbujas, luego la página de compra.
   // Cmd/Ctrl/Mayús-clic (nueva pestaña) se deja al navegador.
-  // Al volver con «atrás» la página puede salir de la caché con Alegría ya
+  // Al volver con “atrás” la página puede salir de la caché con Alegría ya
   // sumergida: la devolvemos a su sitio.
   addEventListener('pageshow', () => {
     document.querySelectorAll('[data-boton-comprar]').forEach((b) => b.classList.remove('salta'));

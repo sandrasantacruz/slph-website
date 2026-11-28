@@ -1,10 +1,10 @@
 ---
 import { Icon } from 'astro-icon/components';
 /**
- * Respuesta a la pregunta del bloque de Julieta («¿Quién mejor que una niña
- * para saber si un dibujo engancha a los niños?»): Izzy, con 16 meses, pasa
+ * Respuesta a la pregunta del bloque de Julieta (“¿Quién mejor que una niña
+ * para saber si un dibujo engancha a los niños?”): Izzy, con 16 meses, pasa
  * las páginas sola mirando los dibujos. Autorizado por su familia; solo el
- * nombre, sin apellidos. En bucle y sin sonido al empezar; el botón «¡Sube el volumen!» lo activa
+ * nombre, sin apellidos. En bucle y sin sonido al empezar; el botón “¡Sube el volumen!” lo activa
  * (sin el fundido final del original). El tramo de la
  * sirena (11,6–15 s del original) va a cámara lenta, para que se vea bien.
  */
@@ -42,7 +42,7 @@ import { Icon } from 'astro-icon/components';
     </figure>
 
     <!-- El vídeo arranca sin sonido (los navegadores no dejan otra cosa): este
-         botón lo activa y lo vuelve a empezar, para oír su «opinión» entera -->
+         botón lo activa y lo vuelve a empezar, para oír su “opinión” entera -->
     <button
       type="button"
       data-sonido-izzy
@@ -76,7 +76,7 @@ import { Icon } from 'astro-icon/components';
     boton.querySelectorAll('.icono-off, .texto-off').forEach((el) => el.classList.toggle('hidden', !activar));
   });
 
-  // «Reducir movimiento»: el vídeo se queda quieto en su portada.
+  // “Reducir movimiento”: el vídeo se queda quieto en su portada.
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll<HTMLVideoElement>('video[src*="izzy"]').forEach((v) => {
       v.autoplay = false;

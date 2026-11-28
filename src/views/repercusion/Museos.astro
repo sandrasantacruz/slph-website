@@ -2,9 +2,9 @@
 import Clip from "./Clip.astro";
 import Ola from '../../components/Ola.astro';
 // Casa-Museo León y Castillo (Telde), junio de 2025. Montaje propio (26 nov 2026) a partir
-// de «SLPH museo león y castillo 03»: imágenes de la semana + Elisa (CEIP Príncipe de
+// de “SLPH museo león y castillo 03”: imágenes de la semana + Elisa (CEIP Príncipe de
 // Asturias) + el director. Subtítulos grabados en la imagen con el estilo del vídeo de
-// las colillas (texto en museo-leon-y-castillo.vtt, corregido: «Gran Canaria», no «Cararia»).
+// las colillas (texto en museo-leon-y-castillo.vtt, corregido: “Gran Canaria”, no “Cararia”).
 ---
 
 <section id="museos" class="relative isolate scroll-mt-28 overflow-hidden py-20 sm:py-28">
@@ -43,8 +43,8 @@ import Ola from '../../components/Ola.astro';
 
         <figure class="reveal reveal-delay-3 mt-8 border-l-2 border-arena/60 pl-5">
           <blockquote class="font-display text-2xl leading-tight text-caparol sm:text-3xl">
-            «Esta experiencia trasladada al museo
-            <span class="text-arena">es maravillosa</span>»
+            “Esta experiencia trasladada al museo
+            <span class="text-arena">es maravillosa</span>”
           </blockquote>
           <figcaption class="mt-3 text-sm leading-snug text-caparol/75 sm:text-base">
             José Alejandro Díaz Hernández, director de la Casa-Museo León y Castillo
@@ -85,7 +85,7 @@ import Ola from '../../components/Ola.astro';
 
     <!-- La escena que se creó para la Casa-Museo: Juan y Fernando León y Castillo con Lorena
          y su abuela (Sandra, 26 nov 2026: aquí sí, porque fue un proyecto para el museo).
-         Fotograma de «4_Hermanos LC 4 y PLANOS», a 1000 px con ©. -->
+         Fotograma de “4_Hermanos LC 4 y PLANOS”, a 1000 px con ©. -->
     <div class="mt-16 grid items-center gap-10 sm:mt-24 lg:grid-cols-12 lg:gap-20">
       <figure class="reveal reveal-delay-1 lg:order-2 lg:col-span-7 lg:translate-x-6">
         <div class="polaroid tilt-l1 transition duration-500 hover:rotate-0" style="padding-bottom:3.25rem">
@@ -146,7 +146,7 @@ import Ola from '../../components/Ola.astro';
 </section>
 
 <script>
-  // «Escúchalo»: lleva al vídeo del museo y lo reproduce desde que habla el director
+  // “Escúchalo”: lleva al vídeo del museo y lo reproduce desde que habla el director
   document.querySelectorAll<HTMLButtonElement>('[data-escuchar-director]').forEach((b) =>
     b.addEventListener('click', () => {
       const player = document.querySelector<HTMLElement & { currentTime: number; play: () => Promise<void>; muted: boolean }>(

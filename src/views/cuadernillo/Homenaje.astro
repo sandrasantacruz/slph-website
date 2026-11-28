@@ -4,7 +4,7 @@ import Ola from '../../components/Ola.astro';
 import { Icon } from 'astro-icon/components';
 import { SETTINGS, whatsappHref } from '../../lib/settings';
 
-// Dónde comprar el cuadernillo (mismos datos que /comprar, etiqueta «también el cuadernillo»)
+// Dónde comprar el cuadernillo (mismos datos que /comprar, etiqueta “también el cuadernillo”)
 const mapa = (q: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 const reserva = `${whatsappHref(SETTINGS.whatsapp)}?text=${encodeURIComponent('Hola, quiero reservar el cuadernillo de actividades de Si los peces hablaran…')}`;
 const puntos = [
@@ -43,7 +43,7 @@ const puntos = [
         </p>
       </div>
 
-      <!-- Las dos fotos del hospital (antes, sección «Llevando el arte donde más se necesita») -->
+      <!-- Las dos fotos del hospital (antes, sección “Llevando el arte donde más se necesita”) -->
       <ul class="mt-10 grid max-w-4xl grid-cols-1 justify-items-center gap-y-10 sm:grid-cols-2 sm:items-start sm:gap-x-10">
         {[
           { src: '/assets/cuento/oncologia-infantil-slph.webp', alt: 'Los personajes de Si los peces hablaran visitando la planta de Oncología Infantil de un hospital', caption: 'visitando Oncología Infantil', tilt: 'tilt-l1' },

@@ -68,7 +68,7 @@ const flecha = 'M5 12h14M13 6l6 6-6 6';
       <figure class="mx-auto mt-8 max-w-2xl">
         <!-- Cita recortada con puntos suspensivos (idea de Sandra): el final se escucha en el vídeo -->
         <blockquote class="font-hand text-2xl leading-snug text-caparol sm:text-3xl">
-          «…que una niña quisiera salvar el océano…»
+          “…que una niña quisiera salvar el océano…”
         </blockquote>
         <figcaption class="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-caparol/65 sm:text-base">
           <span>Vera Paisier, 11 años</span>
@@ -99,7 +99,7 @@ const flecha = 'M5 12h14M13 6l6 6-6 6';
               <Icon name={p.icono} class="h-8 w-8 text-arena" aria-hidden="true" />
               <span class="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-arena font-display text-sm text-azul">{i + 1}</span>
             </span>
-            <!-- «|» marca el salto de línea: cada idea entera en su línea (Sandra) -->
+            <!-- “|” marca el salto de línea: cada idea entera en su línea (Sandra) -->
             <span class="min-w-0 pt-3 text-base leading-snug text-caparol/90 sm:pt-0 sm:text-lg">{p.texto.split('|').map((t) => <span class="block">{t.includes('~') ? t.split('~').map((u, j) => <>{j ? ' ' : ''}<span class="whitespace-nowrap">{u}</span></>) : t}</span>)}</span>
           </li>
         ))

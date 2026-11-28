@@ -1,19 +1,19 @@
 ---
 /**
- * Recuadro «trascendente mensaje · ¡NO a la basura! ¡El mar NO se contamina!»
+ * Recuadro “trascendente mensaje · ¡NO a la basura! ¡El mar NO se contamina!”
  * con basura del cuento flotando a la deriva: la botella
  * aplastada, la bolsa de plástico (la del pez, sin el pez), caída
- * sobre «contamina!», inclinada hacia la palabra, y la rueda de la portada, medio escondida tras
+ * sobre “contamina!”, inclinada hacia la palabra, y la rueda de la portada, medio escondida tras
  * el recuadro. Se hunde primero la bolsa, para que la palabra quede limpia. Aquí la basura es el mensaje: al pasar el ratón se hunden (más azules,
  * borrosas, con burbujas), una detrás de otra, y al final el borde se ilumina en celeste, como si el mar
  * respirara. Al quitar el ratón vuelven despacio.
  * La primera vez ocurre solo, unos segundos después de que el recuadro
- * aparezca, para que se descubra el efecto (en táctil se queda limpio). Con «reducir movimiento», sin animación.
- * Prototipo: TOBÍAS/«BOTÓN COMPRAR ALEGRÍA (prototipo)»/«prueba-basura-autor.html».
+ * aparezca, para que se descubra el efecto (en táctil se queda limpio). Con “reducir movimiento”, sin animación.
+ * Prototipo: TOBÍAS/“BOTÓN COMPRAR ALEGRÍA (prototipo)”/“prueba-basura-autor.html”.
  */
 ---
 
-<!-- «reveal» va en un envoltorio: su transición no debe pisar la del brillo -->
+<!-- “reveal” va en un envoltorio: su transición no debe pisar la del brillo -->
 <div class="mar reveal reveal-delay-3 relative mt-12" data-mensaje-mar>
   <!-- la rueda va detrás del recuadro: fuera de él (su backdrop-blur crea su propia capa) -->
   <span class="basura rueda" style="--retraso: 1s" aria-hidden="true">
@@ -55,11 +55,11 @@
   /* Todo en la mitad derecha, que es la que el texto deja vacía:
      la botella sobre el borde de arriba, la rueda (la más grande)
      abajo a la derecha, por delante del borde,
-     y la bolsa caída encima de «contamina!». */
+     y la bolsa caída encima de “contamina!”. */
   /* móvil: el texto ocupa casi todo el ancho, así que van por los bordes */
   .botella { width: 52px; right: 40px; top: -38px; }
   .rueda { width: 78px; right: -14px; bottom: -26px; z-index: 1; }
-  /* al final de la palabra, casi tocando la «a» y la «!» */
+  /* al final de la palabra, casi tocando la “a” y la “!” */
   .bolsa { width: 1.26em; right: -0.72em; top: -0.98em; }
   @media (min-width: 640px) {
     /* la botella, sobre el borde de arriba: separada de la bolsa y la rueda */
@@ -91,7 +91,7 @@
     0%, 100% { transform: translate(0, 0) rotate(38deg); }
     50% { transform: translate(5px, 6px) rotate(46deg); }
   }
-  /* la bolsa, más ligera: ondula despacio, inclinada hacia «contamina» */
+  /* la bolsa, más ligera: ondula despacio, inclinada hacia “contamina” */
   @keyframes mb-deriva-bolsa {
     0%, 100% { transform: translate(0, 0) rotate(16deg) scaleY(1); }
     50% { transform: translate(-3px, -6px) rotate(10deg) scaleY(0.95); }
@@ -152,7 +152,7 @@
 <script>
   // Para que todo el mundo descubra el efecto, el mar se limpia solo una vez
   // cuando el recuadro aparece en pantalla.
-  // - Táctil (no hay «pasar el ratón»): se queda limpio.
+  // - Táctil (no hay “pasar el ratón”): se queda limpio.
   // - Con ratón: la basura vuelve despacio a la deriva, y a partir de ahí se
   //   limpia cada vez que se pasa el ratón por encima.
   const tactil = matchMedia('(hover: none)').matches;

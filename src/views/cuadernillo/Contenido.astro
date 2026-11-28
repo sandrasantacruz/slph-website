@@ -19,8 +19,8 @@ const features = [
   },
 ];
 const paginas = [
-  { f: 'pagina-4', w: 800, h: 800, t: 'agudiza la vista…', alt: 'Página 4 del cuadernillo: «Encuentra las cinco diferencias…», con el Sr. Tentáculus' },
-  { f: 'pagina-5', w: 800, h: 800, t: '¿las encontraste?', alt: 'Página 5 del cuadernillo: «…del Sr. Tentáculus», el mismo dibujo con cinco diferencias' },
+  { f: 'pagina-4', w: 800, h: 800, t: 'agudiza la vista…', alt: 'Página 4 del cuadernillo: “Encuentra las cinco diferencias…”, con el Sr. Tentáculus' },
+  { f: 'pagina-5', w: 800, h: 800, t: '¿las encontraste?', alt: 'Página 5 del cuadernillo: “…del Sr. Tentáculus”, el mismo dibujo con cinco diferencias' },
   { f: 'pagina-12', w: 800, h: 800, t: 'Lorena también lleva pañuelo', alt: 'Página 12 del cuadernillo, para colorear: Doña Teresa de la mano de Julieta y de Lorena, que lleva pañuelo' },
   { f: 'pagina-9', w: 800, h: 800, t: '¿quién dirige la coral? D…', alt: 'Página 9 del cuadernillo: une los números para descubrir un personaje del cuento' },
   { f: 'pagina-10', w: 800, h: 800, t: '¡uy, el laberinto de la basura!', alt: 'Página 10 del cuadernillo: laberinto para descubrir qué se degrada más lento, una botella de plástico, una caja de cartón o una lata' },
@@ -82,7 +82,7 @@ import { Icon } from 'astro-icon/components';
         <video src="/assets/cuadernillo/alumnas-cuadernillo.mp4" poster="/assets/cuadernillo/alumnas-cuadernillo-poster.jpg" width="960" height="540" autoplay muted loop playsinline aria-label="Alumnado del Centro de Danza Sandra Santa Cruz, sentado en el suelo, haciendo en grupo las actividades del cuadernillo" class="block aspect-video w-full object-cover"></video>
       </div>
       <figcaption class="mt-3 text-center font-hand text-xl text-celeste sm:text-2xl">así lo vive el alumnado del Centro de Danza Sandra Santa Cruz</figcaption>
-      <!-- Música de fondo: «Danza de las Aletas» (OFGC), final del tema. Arranca en silencio;
+      <!-- Música de fondo: “Danza de las Aletas” (OFGC), final del tema. Arranca en silencio;
            el botón activa el sonido y vuelve a empezar para que suene entera hasta el acorde final -->
       <div class="mt-5 flex justify-center">
         <button
@@ -95,7 +95,7 @@ import { Icon } from 'astro-icon/components';
             <Icon name="game-icons:speaker" class="icono-on h-5 w-5" aria-hidden="true" />
             <Icon name="game-icons:speaker-off" class="icono-off hidden h-5 w-5" aria-hidden="true" />
           </span>
-          <span class="texto-on font-hand text-xl leading-tight sm:text-2xl">Sube el volumen, que suena la «Danza de las Aletas»</span>
+          <span class="texto-on font-hand text-xl leading-tight sm:text-2xl">Sube el volumen, que suena la “Danza de las Aletas”</span>
           <span class="texto-off hidden font-hand text-xl leading-tight sm:text-2xl">Quitar el sonido</span>
         </button>
       </div>
@@ -116,7 +116,7 @@ import { Icon } from 'astro-icon/components';
       </ul>
       <p class="mt-3 text-center font-hand text-xl text-celeste/80 sm:hidden" aria-hidden="true">desliza para ver más →</p>
 
-      <!-- Uno de los siete QR de la contraportada («Origen del proyecto»), idéntico al del papel.
+      <!-- Uno de los siete QR de la contraportada (“Origen del proyecto”), idéntico al del papel.
            En el móvil no se puede escanear la propia pantalla: ahí funciona como enlace. -->
       <div class="mt-20 flex flex-wrap items-start justify-center gap-x-12 gap-y-10 sm:mt-24">
       <!-- La contraportada con los siete QR -->
@@ -134,7 +134,7 @@ import { Icon } from 'astro-icon/components';
           class="block w-44 rotate-[2deg] rounded-2xl bg-white p-3 shadow-[0_20px_40px_-16px_rgba(3,10,35,0.8)] transition duration-500 hover:rotate-0 sm:w-52"
           aria-label="Vídeo: el origen del proyecto Si los peces hablaran… (YouTube)"
         >
-          <img src="/assets/cuadernillo/qr-origen-del-proyecto.png" alt="Código QR «Origen del proyecto» de la contraportada del cuadernillo" width="400" height="400" class="block h-auto w-full [image-rendering:pixelated]" loading="lazy" decoding="async" />
+          <img src="/assets/cuadernillo/qr-origen-del-proyecto.png" alt="Código QR “Origen del proyecto” de la contraportada del cuadernillo" width="400" height="400" class="block h-auto w-full [image-rendering:pixelated]" loading="lazy" decoding="async" />
         </a>
         <figcaption class="mt-4 w-44 text-center font-hand sm:w-52 text-xl leading-snug text-celeste sm:text-2xl">
           <span class="qr-escritorio">escanéame y verás el origen del proyecto</span>

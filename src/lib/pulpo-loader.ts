@@ -70,7 +70,15 @@ async function fetchAll(
  * nehmen wir den ersten belegten Wert — ein Beitrag ohne Übersetzung soll
  * lieber in der falschen Sprache erscheinen als gar nicht.
  */
+// Comillas inglesas en toda la web (Sandra, 28 nov 2026): los textos de pulpo pueden
+// traer «»; se cambian al construir la página, sin tocar el CMS.
+const comillas = (t: string): string => t.replace(/«/g, '“').replace(/»/g, '”');
+
 function localized(value: unknown, lang: string): string {
+  return comillas(localizedRaw(value, lang));
+}
+
+function localizedRaw(value: unknown, lang: string): string {
   if (typeof value === 'string') return value.trim();
   if (!value || typeof value !== 'object') return '';
   const map = value as Record<string, unknown>;

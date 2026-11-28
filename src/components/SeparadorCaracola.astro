@@ -1,16 +1,16 @@
 ---
 /**
- * Separador de Programa: en el centro, las conchas con el alga de «Otra curiosidad»
- * (Sobre el cuento) o, encima de los ODS, el globo «Save the planet»; a cada lado,
+ * Separador de Programa: en el centro, las conchas con el alga de “Otra curiosidad”
+ * (Sobre el cuento) o, encima de los ODS, el globo “Save the planet”; a cada lado,
  * nuestras dos líneas de ola en arena (la de la izquierda en espejo), a la altura
  * de las conchas o a media altura del globo. Va encima de los ODS y antes de
- * «nuestros formatos» (Programa).
+ * “nuestros formatos” (Programa).
  * 'botella': la botella de cristal con el mensaje dentro (pág. 49 del cuento),
  * en Contacto: un mensaje que viaja por el mar.
  */
 interface Props {
   class?: string;
-  /** 'globo': la bola del mundo «Save the planet» en lugar de las conchas (encima de los ODS). */
+  /** 'globo': la bola del mundo “Save the planet” en lugar de las conchas (encima de los ODS). */
   motivo?: 'caracola' | 'globo' | 'botella';
 }
 const { class: className, motivo = 'caracola' } = Astro.props;

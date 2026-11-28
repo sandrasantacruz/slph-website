@@ -18,8 +18,8 @@ const links: NavLink[] = [
     href: '/sobre-el-cuento',
     label: 'El cuento',
     match: cuentoPaths,
-    // Dieselben Ziele wie die Karten auf «Sobre el cuento», ohne «Dónde comprar»
-    // (dafür gibt es den Button «Comprar» direkt daneben).
+    // Dieselben Ziele wie die Karten auf “Sobre el cuento”, ohne “Dónde comprar”
+    // (dafür gibt es den Button “Comprar” direkt daneben).
     children: [
       { href: '/sobre-el-cuento', label: 'Sobre el cuento' },
       { href: '/lee-un-fragmento', label: 'Lee el capítulo I' },
@@ -61,13 +61,13 @@ import Bubbles from './Bubbles.astro';
   ></div>
 
   <div class="relative mx-auto flex max-w-6xl items-center justify-between gap-2 px-3 py-2 sm:gap-4 sm:px-4">
-    <!-- Móvil y tableta: logo · «Comprar» · ☰ al final, donde se busca el menú y cae el pulgar -->
+    <!-- Móvil y tableta: logo · “Comprar” · ☰ al final, donde se busca el menú y cae el pulgar -->
     <a href="/" class="flex shrink-0 items-center gap-3" aria-label="Si los peces hablaran — Inicio">
       <img src="/assets/logo-borde.webp" alt="Si los peces hablaran" width="600" height="436" class="h-12 w-auto min-[360px]:h-14 min-[380px]:h-16 sm:h-20" />
     </a>
 
     <!-- Menú completo desde xl (1280 px): por debajo, con el logo, el menú, la lupa
-         y el botón «Comprar» no cabe todo y el logo se encogía. -->
+         y el botón “Comprar” no cabe todo y el logo se encogía. -->
     <nav class="hidden items-center gap-4 lg:flex xl:gap-6" aria-label="Principal">
       {
         links.map(({ href, label, match, children }) => {
@@ -125,9 +125,9 @@ import Bubbles from './Bubbles.astro';
       </a>
     </nav>
 
-    <!-- Tableta en vertical (768–1023 px): «Comprar» centrado en el hueco entre el logo y ☰ -->
+    <!-- Tableta en vertical (768–1023 px): “Comprar” centrado en el hueco entre el logo y ☰ -->
     <div class="flex items-center gap-0 sm:gap-3 md:max-lg:flex-1">
-      <!-- Móviles muy estrechos (iPhone SE de 1.ª generación, 320 px): «Comprar» un poco más pequeño para que quepa el ☰ -->
+      <!-- Móviles muy estrechos (iPhone SE de 1.ª generación, 320 px): “Comprar” un poco más pequeño para que quepa el ☰ -->
       <div class="max-[359px]:[zoom:0.85] md:max-lg:mx-auto"><BotonComprar /></div>
 
       <!-- Lupa también en móvil y tableta: buscar con un toque desde cualquier página
@@ -225,7 +225,7 @@ import Bubbles from './Bubbles.astro';
 
   toggle?.addEventListener('click', () => setOpen(mobile?.classList.contains('hidden') ?? false));
   close?.addEventListener('click', () => setOpen(false));
-  // Al pulsar un enlace se cierra el menú; el botón «Comprar» no, para que se
+  // Al pulsar un enlace se cierra el menú; el botón “Comprar” no, para que se
   // vea a Alegría meterse en el agua antes de ir a la página de compra.
   mobile?.querySelectorAll('a:not([data-boton-comprar])').forEach((a) => a.addEventListener('click', () => setOpen(false)));
   document.addEventListener('keydown', (e) => {

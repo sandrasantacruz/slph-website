@@ -176,7 +176,7 @@ export function bookSchema({ precio = false }: { precio?: boolean } = {}): JsonL
       'Protección del océano',
       'Contaminación marina',
     ],
-    // «Cuento infantil sobre el mar» es lo que buscan las familias: aquí sigue
+    // “Cuento infantil sobre el mar” es lo que buscan las familias: aquí sigue
     // estando, aunque la página lo presente como una obra nacida de un musical.
     keywords: 'cuento infantil sobre el mar, cuento con realidad aumentada, cuento nacido de un musical, educación ambiental, contaminación marina, Gran Canaria',
     image: absoluteUrl('/assets/og-cuento.jpg'),
