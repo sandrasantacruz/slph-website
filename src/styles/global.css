@@ -602,7 +602,9 @@ media-player .vds-chapter-title {
    subtítulos (Sandra, 26 nov 2026). La pantalla completa sube arriba a la derecha,
    junto al volumen. */
 media-player .vds-time-slider,
-media-player .vds-time-group {
+media-player .vds-time-group,
+/* …ni la duración que vidstack enseña en el móvil antes de darle al play (28 nov 2026) */
+media-player .vds-start-duration {
   display: none !important;
 }
 /* Pantalla completa arriba a la derecha, junto al volumen (Sandra, 26 nov 2026) */
