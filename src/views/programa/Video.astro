@@ -64,9 +64,11 @@ import Ola from '../../components/Ola.astro';
       class="reveal reveal-delay-3 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-caparol/70"
     >
       <span aria-hidden="true" class="h-px w-8 bg-arena sm:w-12"></span>
-      <p class="text-center font-display text-2xl leading-tight text-caparol sm:text-3xl md:text-4xl">
+      <!-- Toda la frase es el enlace al Club, con flecha para que se vea que se puede pulsar -->
+      <a href="/club" class="group text-center font-display text-2xl leading-tight text-caparol transition hover:text-arena sm:text-3xl md:text-4xl">
         ¡Únete al <Ola class="text-arena">Club SLPH</Ola> y forma parte del cambio!
-      </p>
+        <svg viewBox="0 0 24 24" class="ml-1 inline h-[0.8em] w-[0.8em] align-[-0.05em] text-arena transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
       <span aria-hidden="true" class="h-px w-8 bg-arena sm:w-12"></span>
     </div>
   </div>
