@@ -137,6 +137,22 @@ const seoTitle = title ?? SITE_NAME;
         },
         true,
       );
+
+      // Sin «viudas» (28 nov 2026): une la última palabra de cada párrafo con la anterior
+      // mediante un espacio que no se parte, si las dos son cortas. Completa a
+      // `text-wrap: pretty` (global.css) y funciona también donde no se admite.
+      document.querySelectorAll<HTMLElement>('main p, main li, main figcaption, main blockquote, main dd').forEach((el) => {
+        const textos: Text[] = [];
+        const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        for (let n = w.nextNode(); n; n = w.nextNode()) if (n.textContent?.trim()) textos.push(n as Text);
+        const ultimo = textos.at(-1);
+        if (!ultimo || textos.length === 0) return;
+        const t = ultimo.textContent ?? '';
+        const m = t.match(/(\S+)\s+(\S+)\s*$/);
+        if (!m || m[1].length + m[2].length > 20) return;
+        const i = t.lastIndexOf(m[0]) + m[1].length;
+        ultimo.textContent = t.slice(0, i) + '\u00A0' + t.slice(i).replace(/^\s+/, '');
+      });
     </script>
 </body>
 </html>

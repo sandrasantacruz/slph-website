@@ -94,13 +94,13 @@ const flecha = 'M5 12h14M13 6l6 6-6 6';
       <span aria-hidden="true" class="absolute top-8 right-[25%] left-[25%] hidden h-px bg-gradient-to-r from-arena/0 via-arena/60 to-arena/0 sm:block"></span>
       {
         pasos.map((p, i) => (
-          <li class="relative flex items-start gap-4 sm:flex-col sm:items-center sm:text-center">
+          <li class="relative flex min-w-0 items-start gap-4 sm:flex-col sm:items-center sm:text-center">
             <span class="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-azul ring-2 ring-arena/70">
               <Icon name={p.icono} class="h-8 w-8 text-arena" aria-hidden="true" />
               <span class="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-arena font-display text-sm text-azul">{i + 1}</span>
             </span>
             <!-- «|» marca el salto de línea: cada idea entera en su línea (Sandra) -->
-            <span class="pt-3 text-base leading-snug text-caparol/90 sm:pt-0 sm:text-lg">{p.texto.split('|').map((t) => <span class="block">{t.split('~').map((u, j) => <>{j ? ' ' : ''}<span class="whitespace-nowrap">{u}</span></>)}</span>)}</span>
+            <span class="min-w-0 pt-3 text-base leading-snug text-caparol/90 sm:pt-0 sm:text-lg">{p.texto.split('|').map((t) => <span class="block">{t.includes('~') ? t.split('~').map((u, j) => <>{j ? ' ' : ''}<span class="whitespace-nowrap">{u}</span></>) : t}</span>)}</span>
           </li>
         ))
       }

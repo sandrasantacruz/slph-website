@@ -64,6 +64,13 @@
     font-weight: 400;
     line-height: 1.05;
     letter-spacing: 0.01em;
+    /* Títulos con líneas equilibradas: sin una palabra colgando (Chrome, Edge, Safari) */
+    text-wrap: balance;
+  }
+  /* Textos sin «viudas»: el navegador evita que la última línea quede con una sola
+     palabra (28 nov 2026, «buscamos élite»). Donde no se admite, no cambia nada. */
+  p, li, figcaption, blockquote, dd, dt, summary {
+    text-wrap: pretty;
   }
   ::selection {
     background: var(--color-arena);
