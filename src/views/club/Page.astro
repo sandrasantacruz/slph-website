@@ -79,6 +79,19 @@ const ideaMail = SETTINGS.email ? `${mailHref(SETTINGS.email)}?subject=${encodeU
       <p class="mt-4 text-base leading-relaxed text-caparol/85 sm:text-lg">
         ¿Cómo te lo imaginas? Mándanos tu idea o tu dibujo. Igual que el cuento, queremos crearlo contigo.
       </p>
+      <!-- Prueba del carné: el de Sandra, con el salvavidas (Carnaval 2020), como punto de partida -->
+      <figure class="mx-auto mt-8 max-w-md">
+        <img
+          src="/assets/club/carne-sandra.webp"
+          alt="Prueba del carné del Club SLPH: Sandra Santa Cruz, con el cuento en las manos, dentro de un salvavidas rojo y blanco sobre el mar"
+          width="1000"
+          height="707"
+          class="w-full -rotate-1 rounded-xl shadow-[0_24px_48px_-18px_rgba(3,10,35,0.85)] ring-1 ring-caparol/15"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mt-3 font-hand text-xl text-celeste sm:text-2xl">esta es una prueba: partimos de aquí</figcaption>
+      </figure>
       <div class="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         {ideaWa && (
           <a href={ideaWa} target="_blank" rel="noopener noreferrer" data-umami-event="club-idea-carne-whatsapp" class="inline-flex items-center gap-2.5 rounded-full bg-arena px-6 py-2.5 font-display text-lg text-azul shadow-lg transition hover:brightness-95">
