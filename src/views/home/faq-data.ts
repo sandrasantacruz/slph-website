@@ -28,9 +28,9 @@ export const HOME_FAQ: FaqEntry[] = [
   {
     question: "¿Qué es el cuadernillo de actividades?",
     answer:
-      "Es el compañero del cuento y la novedad de la 3.ª edición: 15 páginas de laberintos, personajes para colorear, diferencias y dibujos para unir con los animales marinos del cuento, para jugar en casa o en el aula. En la contraportada, siete códigos QR llevan al origen del proyecto, a las investigadoras marinas y a los talleres.\nNació pensando también en los niños de Oncología Infantil. Descúbrelo en El cuadernillo.",
+      "Es el compañero del cuento y la novedad de la 3.ª edición: 15 páginas de laberintos, personajes para colorear, diferencias y dibujos para unir con los animales marinos del cuento, para jugar en casa o en el aula. En la contraportada, siete códigos QR llevan al origen del proyecto, a las investigadoras marinas y a los talleres.\nEstá pensado también para los niños de Oncología Infantil. Descúbrelo en El cuadernillo.",
     answerHtml:
-      `Es el compañero del cuento y la novedad de la 3.ª edición: 15 páginas de laberintos, personajes para colorear, diferencias y dibujos para unir con los animales marinos del cuento, para jugar en casa o en el aula. En la contraportada, siete códigos QR llevan al origen del proyecto, a las investigadoras marinas y a los talleres.\nNació pensando también en los niños de Oncología Infantil. Descúbrelo en ${link("/cuadernillo", "El cuadernillo")}.`,
+      `Es el compañero del cuento y la novedad de la 3.ª edición: 15 páginas de laberintos, personajes para colorear, diferencias y dibujos para unir con los animales marinos del cuento, para jugar en casa o en el aula. En la contraportada, siete códigos QR llevan al origen del proyecto, a las investigadoras marinas y a los talleres.\nEstá pensado también para los niños de Oncología Infantil. Descúbrelo en ${link("/cuadernillo", "El cuadernillo")}.`,
   },
   {
     question: "¿Puedo llevarlo a mi colegio o biblioteca?",
