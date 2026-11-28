@@ -38,8 +38,8 @@ const whatsapp = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
 
 const pasos = [
   // Solo la condición del cuento, en dos pasos (Sandra, 27 nov 2026)
-  { icono: 'game-icons:conversation', texto: 'Cuéntale a alguien lo que has aprendido sobre el mar.' },
-  { icono: 'game-icons:linked-rings', texto: 'Y asegúrate de que se lo cuente a otra persona.' },
+  { icono: 'game-icons:conversation', texto: 'Cuéntale a alguien|lo que has aprendido~sobre el mar.' },
+  { icono: 'game-icons:linked-rings', texto: 'Y asegúrate de que|se lo cuente a otra persona.' },
 ];
 const flecha = 'M5 12h14M13 6l6 6-6 6';
 ---
@@ -84,8 +84,8 @@ const flecha = 'M5 12h14M13 6l6 6-6 6';
         </figcaption>
       </figure>
       <p class="mt-6 text-base leading-relaxed text-caparol/90 sm:text-lg">
-        <span class="block">Esa niña es <strong class="font-normal text-arena">Lorena, nuestra pequeña heroína</strong>.</span>
-        <span class="block">Para entrar en su club, solo pone una condición:</span>
+        <span class="block">Esa niña es <strong class="font-normal text-arena">Lorena, nuestra <span class="whitespace-nowrap">pequeña heroína</span></strong>.</span>
+        <span class="block">Para entrar en su club, solo pone <span class="whitespace-nowrap">una condición:</span></span>
       </p>
     </div>
 
@@ -99,7 +99,8 @@ const flecha = 'M5 12h14M13 6l6 6-6 6';
               <Icon name={p.icono} class="h-8 w-8 text-arena" aria-hidden="true" />
               <span class="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-arena font-display text-sm text-azul">{i + 1}</span>
             </span>
-            <span class="pt-3 text-base leading-snug text-caparol/90 sm:pt-0 sm:text-lg">{p.texto}</span>
+            <!-- «|» marca el salto de línea: cada idea entera en su línea (Sandra) -->
+            <span class="pt-3 text-base leading-snug text-caparol/90 sm:pt-0 sm:text-lg">{p.texto.split('|').map((t) => <span class="block">{t.split('~').map((u, j) => <>{j ? ' ' : ''}<span class="whitespace-nowrap">{u}</span></>)}</span>)}</span>
           </li>
         ))
       }
@@ -131,7 +132,7 @@ const flecha = 'M5 12h14M13 6l6 6-6 6';
         <svg viewBox="0 0 24 24" class="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d={flecha} /></svg>
       </button>
     </div>
-    <p class="mt-4 text-center text-sm text-caparol/60">Tienes un mensaje listo para enviar: cámbialo a tu gusto.</p>
+    <p class="mt-4 text-center text-sm text-caparol/60">Tienes un mensaje listo para enviar: <span class="whitespace-nowrap">cámbialo a tu gusto.</span></p>
   </div>
   <dialog
     data-club-dialogo
